@@ -72,8 +72,9 @@
     <Compile Include="Assets\HealthBar.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Rotator.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\CombatCharacter.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\NewBehaviourScript.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />
     <Compile Include="Assets\Utils\Billboard.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />

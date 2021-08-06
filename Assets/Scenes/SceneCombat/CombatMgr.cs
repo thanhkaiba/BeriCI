@@ -1,37 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
-
-public class CombatMgr : MonoBehaviour
-{
-    public Camera MainCamera;
-    public CombatState combatState;
-    private void Start()
-    {
-        /*for (int i = 0; i < 9; i++)
-        {
-            GameObject character2 = this.createCharacter(false, i);
-        }*/
-        combatState = new CombatState();
-        combatState.charactersTeamA.ForEach(delegate (CombatCharacter character)
-        {
-            this.createCharacter(Team.A, character);
-            this.createCharacter(Team.B, character);
-        });
-    }
-    public GameObject characterGO;
-    // create character on screen
-    GameObject createCharacter(Team t, CombatCharacter character)
-    {
-        UnityEngine.Vector3 p = GameObject.Find("slot_" + (t == Team.A ? "l" : "r") + "_" + character.position.ToString()).transform.position;
-        GameObject c = Instantiate(characterGO, p, Quaternion.identity);
-        GameObject child = c.transform.Find("sword_man").gameObject;
-        child.GetComponent<Billboard>().cam = MainCamera.transform;
-        child.transform.localScale = new Vector3(t == Team.A ? -100f : 100f, 100f, 100f);
-        return c;
-    }
-}
 
 public enum Team
 {
@@ -39,84 +11,96 @@ public enum Team
     B
 };
 
-public enum CombatStatus
+public class CombatMgr : MonoBehaviour
 {
-    PREPARING,
-    STARTED,
-    ENDED
-};
-
-public class CombatState
-{
-    public CombatStatus status;
-    public List<CombatCharacter> charactersTeamA = new List<CombatCharacter>();
-    public List<CombatCharacter> charactersTeamB = new List<CombatCharacter>();
-    public CombatState()
+    public Camera MainCamera;
+    public CombatState combatState;
+    public GameObject characterFrefab;
+    private void Start()
     {
-        status = CombatStatus.PREPARING;
-        this.createDemoTeam();
-    }
-    private void createDemoTeam ()
-    {
-        // test tao team
-        for (int i = 0; i < 5; i++)
+        combatState = new CombatState();
+        GetAllCombatCharacters().ForEach(delegate (CombatCharacter character)
         {
-            charactersTeamA.Add(new CombatCharacter("A " + i, 50, 500, 100, 10, CharacterType.SHIPWRIGHT, i));
-            charactersTeamB.Add(new CombatCharacter("A " + i, 50, 500, 100, 10, CharacterType.SHIPWRIGHT, i));
-        }
+            character.SetGameObject(CreateCharacter(Team.A, character));
+        });
+
+        StartCoroutine(StartGame());
+
     }
-
-};
-
-public enum CharacterType
-{
-    SHIPWRIGHT,
-    SNIPER,
-    ARCHER,
-    SWORD_MAN,
-    DOCTOR,
-    ENTERTAINER,
-    WIZARD,
-    ASSASSIN,
-    PET
-};
-
-public class CombatCharacter
-{
-    public string Name;
-
-    public int BASE_POWER;
-    public int CURRENT_POWER;
-
-    public int MAX_HEALTH;
-    public int CURRENT_HEALTH;
-
-    public int MAX_SPEED;
-    public int CURRENT_SPEED;
-
-    public int MAX_FURY;
-    public int START_FURY;
-    public int CURRENT_FURY;
-    public int MAX_FURY_IN_COMBAT;
-
-    public int LEVEL;
-
-    public CharacterType TYPE;
-
-    public int position;
-
-    public CombatCharacter(string name, int power, int health, int speed, int level, CharacterType type, int position)
+    IEnumerator StartGame()
     {
-        this.Name = name;
-        this.BASE_POWER = power;
-        this.CURRENT_POWER = power;
-        this.MAX_HEALTH = health;
-        this.CURRENT_HEALTH = health;
-        this.MAX_SPEED = speed;
-        this.CURRENT_SPEED = 0;
-        this.LEVEL = level;
-        this.TYPE = type;
-        this.position = position;
+        yield return new WaitForSeconds(3);
+        combatState.status = CombatStatus.STARTED;
+        Debug.Log(">>>>>>>>>>> Start Game <<<<<<<<<<<<");
+        CombatLoop();
+    }
+    void CombatLoop()
+    {
+        int speedAdd = CalculateSpeedAddThisLoop();
+        Debug.Log(" ----> speedAdd: " + speedAdd);
+        CombatCharacter actionChar = AddSpeedAndGetActionCharacter(speedAdd);
+        Debug.Log(
+            " ----> combat action character: " + actionChar.name
+            + " | team: " + (actionChar.team == Team.A ? "A" : "B")
+            + " | position: " + actionChar.position
+        );
+        actionChar.DoCombatAction(combatState);
     }
 
-};
+    int CalculateSpeedAddThisLoop()
+    {
+        int speedAdd = 9999;
+        GetAllCombatCharacters().ForEach(delegate (CombatCharacter character)
+        {
+            if (!character.IsDeath())
+            {
+                int speedNeed = character.GetSpeedNeeded();
+                speedAdd = Math.Min(speedNeed, speedAdd);
+            }
+        });
+
+        return Math.Max(speedAdd, 0);
+    }
+
+    CombatCharacter AddSpeedAndGetActionCharacter(int speedAdd)
+    {
+        List<CombatCharacter> listAvaiableCharacter = new List<CombatCharacter>();
+
+        GetAllCombatCharacters().ForEach(delegate (CombatCharacter character)
+        {
+            character.AddSpeed(speedAdd);
+            Debug.Log(character.current_speed);
+            if (character.IsEnoughSpeed()) listAvaiableCharacter.Add(character);
+        });
+
+        return RuleGetActionCharacter(listAvaiableCharacter);
+    }
+    CombatCharacter RuleGetActionCharacter(List<CombatCharacter> listAvaiableCharacter)
+    {
+        // dang lay phan tu dau tien, sau thay bang rule trong design
+        return listAvaiableCharacter.First();
+    }
+    List<CombatCharacter> GetAllCombatCharacters()
+    {
+        List<CombatCharacter> result = new List<CombatCharacter>();
+        combatState.charactersTeamA.ForEach(delegate (CombatCharacter character)
+        {
+            result.Add(character);
+        });
+        combatState.charactersTeamB.ForEach(delegate (CombatCharacter character)
+        {
+            result.Add(character);
+        });
+        return result;
+    }
+    // create character on screen
+    GameObject CreateCharacter(Team t, CombatCharacter character)
+    {
+        UnityEngine.Vector3 p = GameObject.Find("slot_" + (t == Team.A ? "l" : "r") + "_" + character.position.ToString()).transform.position;
+        GameObject c = Instantiate(characterFrefab, p, Quaternion.identity);
+        GameObject child = c.transform.Find("sword_man").gameObject;
+        child.GetComponent<Billboard>().cam = MainCamera.transform;
+        child.transform.localScale = new Vector3(t == Team.A ? -100f : 100f, 100f, 100f);
+        return c;
+    }
+}
