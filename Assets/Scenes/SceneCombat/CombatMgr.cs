@@ -21,7 +21,7 @@ public class CombatMgr : MonoBehaviour
         combatState = new CombatState();
         GetAllCombatCharacters().ForEach(delegate (CombatCharacter character)
         {
-            character.SetGameObject(CreateCharacter(Team.A, character));
+            character.SetGameObject(CreateCharacter(character));
         });
 
         StartCoroutine(StartGame());
@@ -94,13 +94,13 @@ public class CombatMgr : MonoBehaviour
         return result;
     }
     // create character on screen
-    GameObject CreateCharacter(Team t, CombatCharacter character)
+    GameObject CreateCharacter(CombatCharacter character)
     {
-        UnityEngine.Vector3 p = GameObject.Find("slot_" + (t == Team.A ? "l" : "r") + "_" + character.position.ToString()).transform.position;
+        UnityEngine.Vector3 p = GameObject.Find("slot_" + (character.team == Team.A ? "l" : "r") + "_" + character.position.ToString()).transform.position;
         GameObject c = Instantiate(characterFrefab, p, Quaternion.identity);
         GameObject child = c.transform.Find("sword_man").gameObject;
         child.GetComponent<Billboard>().cam = MainCamera.transform;
-        child.transform.localScale = new Vector3(t == Team.A ? -100f : 100f, 100f, 100f);
+        child.transform.localScale = new Vector3(character.team == Team.A ? -100f : 100f, 100f, 100f);
         return c;
     }
 }
