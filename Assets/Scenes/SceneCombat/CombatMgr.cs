@@ -13,9 +13,6 @@ public enum Team
 
 public class CombatMgr : MonoBehaviour
 {
-    public Camera MainCamera;
-    public GameObject combatStateObject;
-
     CombatState combatState;
     public GameObject characterFrefab;
     private void Start()
@@ -79,7 +76,6 @@ public class CombatMgr : MonoBehaviour
     }
     CombatCharacter RuleGetActionCharacter(List<CombatCharacter> listAvaiableCharacter)
     {
-        // dang lay phan tu dau tien, sau thay bang rule trong design
         listAvaiableCharacter.Sort(delegate (CombatCharacter c1, CombatCharacter c2)
         {
             if (c1.max_speed < c2.max_speed) return -1;
@@ -99,16 +95,5 @@ public class CombatMgr : MonoBehaviour
         ) targetList = teamB;
         Debug.Log("targetList" + targetList.Count);
         return targetList.First();
-    }
-    // create character on screen
-    GameObject CreateCharacter(CombatCharacter character)
-    {
-        UnityEngine.Vector3 p = GameObject.Find("slot_" + (character.team == Team.A ? "A" : "B") + character.position.x + character.position.y).transform.position;
-        GameObject c = Instantiate(characterFrefab, p, Quaternion.identity);
-        GameObject child = c.transform.Find("sword_man").gameObject;
-        c.GetComponent<Billboard>().cam = MainCamera.transform;
-        c.GetComponent<CharacterAnimatorCtrl>().SetHealthBar(character.max_health, character.current_health);
-        child.transform.localScale = new Vector3(character.team == Team.A ? -100f : 100f, 100f, 100f);
-        return c;
     }
 }
