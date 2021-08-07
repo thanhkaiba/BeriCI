@@ -35,9 +35,20 @@ public class CombatCharacterStatus
     }
 };
 
+public class Position
+{
+    public int x;
+    public int y;
+    public Position(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+    }
+}
+
 public class CombatCharacter
 {
-    public string name;
+    public string charName;
 
     public int base_power;
     public int current_power;
@@ -57,7 +68,7 @@ public class CombatCharacter
 
     public CharacterType type;
 
-    public int position;
+    public Position position;
 
     public List<CombatCharacterStatus> listStatus = new List<CombatCharacterStatus>();
 
@@ -65,9 +76,9 @@ public class CombatCharacter
 
     public Team team;
 
-    public CombatCharacter(string name, int power, int health, int speed, int level, CharacterType type, int position, Team team)
+    public CombatCharacter(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team)
     {
-        this.name = name;
+        this.charName = name;
         this.base_power = power;
         this.current_power = power;
         this.max_health = health;
@@ -121,13 +132,44 @@ public class CombatCharacter
     }
     void BaseAttack(CombatState combatState)
     {
+        current_speed -= max_speed;
         CombatCharacter target = GetBaseAttackTarget(combatState);
+        gameObject.GetComponent<CharacterAnimatorCtrl>().BaseAttack();
         if (target != null) DealDamage(target, current_power);
     }
     CombatCharacter GetBaseAttackTarget(CombatState combatState)
     {
-        // code cho nay nao =))))))
+        if (type == CharacterType.SHIPWRIGHT
+            || true)
+        {
+            return GetNearestTarget(
+                team == Team.A
+                ? combatState.GetAllTeamAliveCharacter(Team.B)
+                : combatState.GetAllTeamAliveCharacter(Team.A));
+        }
         return null;
+    }
+    CombatCharacter GetNearestTarget(List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (col < NR_col)
+                || (col == NR_col && row < NR_row)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = row;
+            }
+        });
+        return result;
     }
     void DealDamage(CombatCharacter target, int physicsDamage)
     {
@@ -135,12 +177,20 @@ public class CombatCharacter
     }
     public void TakeDamage(int physicsDamage)
     {
+        Debug.Log("-------> Take Damage" + team + position + current_health);
         current_health -= physicsDamage;
+        Debug.Log("-------> Take Damage" + team + position + current_health);
         if (current_health <= 0)
         {
             current_health = 0;
             AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.DEATH));
         }
+        UpdateGO();
+    }
+    void UpdateGO()
+    {
+        gameObject.GetComponent<CharacterAnimatorCtrl>().SetHealthBar(max_health, current_health);
+        if (IsDeath()) gameObject.GetComponent<CharacterAnimatorCtrl>().Death();
     }
     public void AddStatus (CombatCharacterStatus status)
     {
