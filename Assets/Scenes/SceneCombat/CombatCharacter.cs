@@ -46,7 +46,7 @@ public class Position
     }
 }
 
-public class CombatCharacter
+public class CombatCharacter: MonoBehaviour
 {
     public string charName;
 
@@ -72,11 +72,11 @@ public class CombatCharacter
 
     public List<CombatCharacterStatus> listStatus = new List<CombatCharacterStatus>();
 
-    public GameObject gameObject;
+    //public GameObject gameObject;
 
     public Team team;
 
-    public CombatCharacter(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team)
+    public void SetData(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team)
     {
         this.charName = name;
         this.base_power = power;
@@ -90,10 +90,10 @@ public class CombatCharacter
         this.position = position;
         this.team = team;
     }
-    public void SetGameObject(GameObject GO)
+    /*public void SetGameObject(GameObject GO)
     {
         gameObject = GO;
-    }
+    }*/
     public int GetSpeedNeeded()
     {
         return max_speed - current_speed;
@@ -134,8 +134,11 @@ public class CombatCharacter
     {
         current_speed -= max_speed;
         CombatCharacter target = GetBaseAttackTarget(combatState);
-        gameObject.GetComponent<CharacterAnimatorCtrl>().BaseAttack();
-        if (target != null) DealDamage(target, current_power);
+        if (target != null)
+        {
+            gameObject.GetComponent<CharacterAnimatorCtrl>().BaseAttack();
+            StartCoroutine(DealDamageDelay(target, current_power, 0.4f));
+        }
     }
     CombatCharacter GetBaseAttackTarget(CombatState combatState)
     {
@@ -152,6 +155,7 @@ public class CombatCharacter
     CombatCharacter GetNearestTarget(List<CombatCharacter> listTarget)
     {
         CombatCharacter result = null;
+        int myRow = position.y;
         int NR_col = 9999;
         int NR_row = 9999;
         listTarget.ForEach(delegate (CombatCharacter character)
@@ -161,12 +165,12 @@ public class CombatCharacter
             if (
                 (result == null)
                 || (col < NR_col)
-                || (col == NR_col && row < NR_row)
+                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
             )
             {
                 result = character;
                 NR_col = col;
-                NR_row = row;
+                NR_row = Math.Abs(myRow - row);
             }
         });
         return result;
@@ -174,6 +178,11 @@ public class CombatCharacter
     void DealDamage(CombatCharacter target, int physicsDamage)
     {
         target.TakeDamage(physicsDamage);
+    }
+    IEnumerator DealDamageDelay(CombatCharacter target, int current_power, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        DealDamage(target, current_power);
     }
     public void TakeDamage(int physicsDamage)
     {
@@ -195,5 +204,13 @@ public class CombatCharacter
     public void AddStatus (CombatCharacterStatus status)
     {
         listStatus.Add(status);
+    }
+    public void InitDisplayStatus()
+    {
+        UnityEngine.Vector3 p = GameObject.Find("slot_" + (team == Team.A ? "A" : "B") + position.x + position.y).transform.position;
+        transform.position = p;
+        GameObject child = transform.Find("sword_man").gameObject;
+        GetComponent<CharacterAnimatorCtrl>().SetHealthBar(max_health, current_health);
+        child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
     }
 };

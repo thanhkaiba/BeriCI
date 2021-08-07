@@ -14,18 +14,16 @@ public enum Team
 public class CombatMgr : MonoBehaviour
 {
     public Camera MainCamera;
-    public CombatState combatState;
+    public GameObject combatStateObject;
+
+    CombatState combatState;
     public GameObject characterFrefab;
     private void Start()
     {
-        combatState = new CombatState();
-        combatState.GetAllCombatCharacters().ForEach(delegate (CombatCharacter character)
-        {
-            character.SetGameObject(CreateCharacter(character));
-        });
+        combatState = GameObject.Find("CombatState").GetComponent<CombatState>();
+        combatState.CreateDemoTeam();
 
         StartCoroutine(StartGame());
-
     }
     IEnumerator StartGame()
     {
@@ -46,7 +44,7 @@ public class CombatMgr : MonoBehaviour
         );
         actionChar.DoCombatAction(combatState);
         combatState.lastTeamAction = actionChar.team;
-        StartCoroutine(NextLoop(1f));
+        StartCoroutine(NextLoop(0.8f));
     }
     IEnumerator NextLoop(float delay)
     {

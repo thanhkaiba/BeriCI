@@ -26,6 +26,6 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     public void SetHealthBar(int max, int min)
     {
         healthBar.value = (float) min / max;
-        healthText.text = min + "/" + max;
+        healthText.text = min.ToString();
     }
 }
