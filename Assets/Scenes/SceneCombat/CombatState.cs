@@ -33,20 +33,15 @@ public class CombatState : MonoBehaviour
             {
                 GameObject characterGO = CreateCharacter();
                 CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("A " + i, 250, 500, 100, 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.A);
-                character.InitDisplayStatus();
+                character.SetData("A " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.A, i == 0 ? new TakeRest() : null);
                 charactersTeamA.Add(character);
             }
             {
                 GameObject characterGO = CreateCharacter();
                 CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("B " + i, 50, 500, 100, 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B);
-                character.InitDisplayStatus();
+                character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, null);
                 charactersTeamB.Add(character);
             }
-
-            //charactersTeamB.Add(new CombatCharacter("A " + i, 50, 500, 100, 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B));
-            //CreateCharacter(a);
         }
     }
     public List<CombatCharacter> GetAllCombatCharacters()

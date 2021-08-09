@@ -66,6 +66,7 @@
     <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\CameraController.cs" />
     <Compile Include="Assets\Utils\UserData.cs" />
     <Compile Include="Assets\Zombie.cs" />
+    <Compile Include="Assets\Character\CharacterAnimatorCtrl.cs" />
     <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\GroundSensor.cs" />
     <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\Swordman.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />
@@ -74,7 +75,8 @@
     <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\Demo_GM.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Character\CharacterAnimatorCtrl.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\SkillMgr.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\TakeRest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

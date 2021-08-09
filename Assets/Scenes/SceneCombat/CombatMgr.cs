@@ -8,7 +8,9 @@ using UnityEngine.UIElements;
 public enum Team
 {
     A,
-    B
+    B,
+    NONE,
+    BOTH,
 };
 
 public class CombatMgr : MonoBehaviour
@@ -39,14 +41,22 @@ public class CombatMgr : MonoBehaviour
             + " | team: " + (actionChar.team == Team.A ? "A" : "B")
             + " | position: " + actionChar.position
         );
-        actionChar.DoCombatAction(combatState);
+        float delayTime = actionChar.DoCombatAction(combatState);
         combatState.lastTeamAction = actionChar.team;
-        StartCoroutine(NextLoop(0.8f));
+        StartCoroutine(NextLoop(delayTime));
     }
     IEnumerator NextLoop(float delay)
     {
         yield return new WaitForSeconds(delay);
-        CombatLoop();
+        Team winTeam = CheckTeamWin();
+        if (winTeam == Team.NONE) CombatLoop();
+        else GameOver(winTeam);
+    }
+
+    void GameOver(Team winTeam)
+    {
+        Debug.Log(">>>>>>> Game Over <<<<<<<<<");
+        Debug.Log("Team " + winTeam + " win");
     }
 
     int CalculateSpeedAddThisLoop()
@@ -95,5 +105,15 @@ public class CombatMgr : MonoBehaviour
         ) targetList = teamB;
         Debug.Log("targetList" + targetList.Count);
         return targetList.First();
+    }
+    public Team CheckTeamWin()
+    {
+        bool A_alive = combatState.GetAllTeamAliveCharacter(Team.A).Count() > 0;
+        bool B_alive = combatState.GetAllTeamAliveCharacter(Team.B).Count() > 0;
+
+        if (A_alive && !B_alive) return Team.A;
+        if (!A_alive && B_alive) return Team.B;
+        if (!A_alive && !B_alive) return Team.BOTH;
+        return Team.NONE;
     }
 }

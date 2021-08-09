@@ -59,10 +59,9 @@ public class CombatCharacter: MonoBehaviour
     public int max_speed;
     public int current_speed;
 
-    public int MAX_FURY;
-    public int START_FURY;
-    public int CURRENT_FURY;
-    public int MAX_FURY_IN_COMBAT;
+    public int max_fury;
+    public int current_fury;
+    public int current_max_fury = 0;
 
     public int level;
 
@@ -72,11 +71,17 @@ public class CombatCharacter: MonoBehaviour
 
     public List<CombatCharacterStatus> listStatus = new List<CombatCharacterStatus>();
 
-    //public GameObject gameObject;
+    public Skill skill = null;
 
     public Team team;
 
-    public void SetData(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team)
+    public CharacterAnimatorCtrl display;
+    private void Start()
+    {
+        display = GetComponent<CharacterAnimatorCtrl>();
+        InitDisplayStatus();
+    }
+    public void SetData(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
     {
         this.charName = name;
         this.base_power = power;
@@ -89,23 +94,18 @@ public class CombatCharacter: MonoBehaviour
         this.type = type;
         this.position = position;
         this.team = team;
+        this.skill = skill;
+        if (skill != null)
+        {
+            max_fury = skill.MAX_FURY;
+            current_fury = skill.START_FURY;
+            current_max_fury = skill.MAX_FURY;
+        }
     }
     /*public void SetGameObject(GameObject GO)
     {
         gameObject = GO;
     }*/
-    public int GetSpeedNeeded()
-    {
-        return max_speed - current_speed;
-    }
-    public void AddSpeed(int speedAdd)
-    {
-        current_speed += speedAdd;
-    }
-    public bool IsEnoughSpeed()
-    {
-        return GetSpeedNeeded() <= 0;
-    }
     public bool HaveStatus(CombatCharacterStatusName name)
     {
         bool result = false;
@@ -120,25 +120,37 @@ public class CombatCharacter: MonoBehaviour
         return HaveStatus(CombatCharacterStatusName.DEATH);
     }
 
-    public void DoCombatAction(CombatState combatState)
+    public float DoCombatAction(CombatState combatState)
     {
-        bool useSkillCondition = false;
-        if (useSkillCondition) UseSkill();
-        else BaseAttack(combatState);
+        bool useSkillCondition = UseSkillCondition();
+        if (useSkillCondition) return UseSkill(combatState);
+        else return BaseAttack(combatState);
     }
-    void UseSkill ()
+    bool UseSkillCondition ()
     {
-
+        return skill != null && current_fury >= current_max_fury;
     }
-    void BaseAttack(CombatState combatState)
+    float UseSkill (CombatState combatState)
     {
         current_speed -= max_speed;
+        current_fury = 0;
+        Debug.Log("Use skill now " + skill.name);
+        display.SetSpeedBar(max_speed, current_speed);
+        display.SetFuryBar(current_max_fury, current_fury);
+        return skill.CastSkill(this, combatState);
+    }
+    float BaseAttack(CombatState combatState)
+    {
+        current_speed -= max_speed;
+        display.SetSpeedBar(max_speed, current_speed);
+        GainFury(10);
         CombatCharacter target = GetBaseAttackTarget(combatState);
         if (target != null)
         {
-            gameObject.GetComponent<CharacterAnimatorCtrl>().BaseAttack();
+            display.BaseAttack();
             StartCoroutine(DealDamageDelay(target, current_power, 0.4f));
         }
+        return 0.8f;
     }
     CombatCharacter GetBaseAttackTarget(CombatState combatState)
     {
@@ -186,20 +198,8 @@ public class CombatCharacter: MonoBehaviour
     }
     public void TakeDamage(int physicsDamage)
     {
-        Debug.Log("-------> Take Damage" + team + position + current_health);
-        current_health -= physicsDamage;
-        Debug.Log("-------> Take Damage" + team + position + current_health);
-        if (current_health <= 0)
-        {
-            current_health = 0;
-            AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.DEATH));
-        }
-        UpdateGO();
-    }
-    void UpdateGO()
-    {
-        gameObject.GetComponent<CharacterAnimatorCtrl>().SetHealthBar(max_health, current_health);
-        if (IsDeath()) gameObject.GetComponent<CharacterAnimatorCtrl>().Death();
+        LoseHealth(physicsDamage);
+        GainFury(4);
     }
     public void AddStatus (CombatCharacterStatus status)
     {
@@ -210,7 +210,48 @@ public class CombatCharacter: MonoBehaviour
         UnityEngine.Vector3 p = GameObject.Find("slot_" + (team == Team.A ? "A" : "B") + position.x + position.y).transform.position;
         transform.position = p;
         GameObject child = transform.Find("sword_man").gameObject;
-        GetComponent<CharacterAnimatorCtrl>().SetHealthBar(max_health, current_health);
+        display.SetHealthBar(max_health, current_health);
+        display.SetSpeedBar(max_speed, current_speed);
+        display.SetFuryBar(current_max_fury, current_fury);
         child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
+    }
+    public void GainHealth (int health)
+    {
+        current_health += health;
+        if (current_health > max_health) current_health = max_health;
+        display.SetHealthBar(max_health, current_health);
+    }
+    public void LoseHealth(int health)
+    {
+        current_health -= health;
+        display.SetHealthBar(max_health, current_health);
+        if (current_health <= 0)
+        {
+            current_health = 0;
+            AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.DEATH));
+            if (IsDeath()) display.Death();
+        }
+    }
+    public void GainFury(int value)
+    {
+        if (skill != null)
+        {
+            current_fury += value;
+            if (current_fury > current_max_fury) current_fury = current_max_fury;
+            display.SetFuryBar(current_max_fury, current_fury);
+        }
+    }
+    public int GetSpeedNeeded()
+    {
+        return max_speed - current_speed;
+    }
+    public void AddSpeed(int speedAdd)
+    {
+        current_speed += speedAdd;
+        display.SetSpeedBar(max_speed, current_speed);
+    }
+    public bool IsEnoughSpeed()
+    {
+        return GetSpeedNeeded() <= 0;
     }
 };
