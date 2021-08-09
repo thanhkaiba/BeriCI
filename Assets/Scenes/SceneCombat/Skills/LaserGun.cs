@@ -8,7 +8,7 @@ public class LaserGun : Skill
     public LaserGun()
     {
         name = "LaserGun";
-        MAX_FURY = 0;
+        MAX_FURY = 10;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
