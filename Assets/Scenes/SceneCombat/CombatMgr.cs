@@ -78,7 +78,6 @@ public class CombatMgr : MonoBehaviour
         combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatCharacter character)
         {
             character.AddSpeed(speedAdd);
-            Debug.Log(character.current_speed);
             if (character.IsEnoughSpeed()) listAvaiableCharacter.Add(character);
         });
 

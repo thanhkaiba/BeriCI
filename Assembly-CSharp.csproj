@@ -77,6 +77,8 @@
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\SkillMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\TakeRest.cs" />
+    <Compile Include="Assets\Utils\FlyText\FlyTextMgr.cs" />
+    <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

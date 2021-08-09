@@ -20,7 +20,6 @@ public class CombatState : MonoBehaviour
     public CombatState()
     {
         status = CombatStatus.PREPARING;
-        //CreateDemoTeam();
         lastTeamAction = Team.B;
     }
     public void CreateDemoTeam()

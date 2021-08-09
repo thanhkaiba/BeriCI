@@ -215,7 +215,7 @@ public class CombatCharacter: MonoBehaviour
         display.SetFuryBar(current_max_fury, current_fury);
         child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
     }
-    public void GainHealth (int health)
+    public void GainHealth(int health)
     {
         current_health += health;
         if (current_health > max_health) current_health = max_health;
@@ -231,6 +231,7 @@ public class CombatCharacter: MonoBehaviour
             if (IsDeath()) display.Death();
         }
         display.SetHealthBar(max_health, current_health);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + health, transform.position);
     }
     public void GainFury(int value)
     {
