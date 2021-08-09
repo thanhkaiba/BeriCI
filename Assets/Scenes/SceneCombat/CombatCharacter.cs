@@ -122,13 +122,13 @@ public class CombatCharacter: MonoBehaviour
 
     public float DoCombatAction(CombatState combatState)
     {
-        bool useSkillCondition = UseSkillCondition();
+        bool useSkillCondition = UseSkillCondition(combatState);
         if (useSkillCondition) return UseSkill(combatState);
         else return BaseAttack(combatState);
     }
-    bool UseSkillCondition ()
+    bool UseSkillCondition (CombatState combatState)
     {
-        return skill != null && current_fury >= current_max_fury;
+        return skill != null && current_fury >= current_max_fury && skill.CanActive(this, combatState);
     }
     float UseSkill (CombatState combatState)
     {
@@ -139,7 +139,7 @@ public class CombatCharacter: MonoBehaviour
         display.SetFuryBar(current_max_fury, current_fury);
         return skill.CastSkill(this, combatState);
     }
-    float BaseAttack(CombatState combatState)
+    float BaseAttack (CombatState combatState)
     {
         current_speed -= max_speed;
         display.SetSpeedBar(max_speed, current_speed);

@@ -38,7 +38,7 @@ public class CombatState : MonoBehaviour
             {
                 GameObject characterGO = CreateCharacter();
                 CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, null);
+                character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, i == 3 ? new LaserGun() : null);
                 charactersTeamB.Add(character);
             }
         }
@@ -73,6 +73,16 @@ public class CombatState : MonoBehaviour
     {
         List<CombatCharacter> result = new List<CombatCharacter>();
         List<CombatCharacter> CTeam = t == Team.A ? charactersTeamA : charactersTeamB;
+        CTeam.ForEach(delegate (CombatCharacter character)
+        {
+            if (!character.IsDeath()) result.Add(character);
+        });
+        return result;
+    }
+    public List<CombatCharacter> GetAliveCharacterEnermy(Team t)
+    {
+        List<CombatCharacter> result = new List<CombatCharacter>();
+        List<CombatCharacter> CTeam = t == Team.A ? charactersTeamB : charactersTeamA;
         CTeam.ForEach(delegate (CombatCharacter character)
         {
             if (!character.IsDeath()) result.Add(character);

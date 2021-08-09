@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Skills\TakeRest.cs" />
     <Compile Include="Assets\Utils\FlyText\FlyTextMgr.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\LaserGun.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
