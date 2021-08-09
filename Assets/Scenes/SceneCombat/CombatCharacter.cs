@@ -147,7 +147,7 @@ public class CombatCharacter: MonoBehaviour
         CombatCharacter target = GetBaseAttackTarget(combatState);
         if (target != null)
         {
-            display.BaseAttack();
+            display.BaseAttack(target);
             StartCoroutine(DealDamageDelay(target, current_power, 0.4f));
         }
         return 0.8f;

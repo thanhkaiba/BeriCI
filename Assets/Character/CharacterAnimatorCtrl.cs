@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 public class CharacterAnimatorCtrl : MonoBehaviour
 {
     public GameObject modelObject;
@@ -12,9 +12,18 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     public Text speedText;
     public Slider furyBar;
     public Text furyText;
-    public void BaseAttack()
+    public float BaseAttack(CombatCharacter target)
     {
         modelObject.GetComponent<Animator>().SetTrigger("BaseAttack");
+
+        Vector3 oriPos = transform.position;
+        float d = Vector3.Distance(oriPos, target.transform.position);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOMove(desPos, 0.3f));
+        seq.AppendInterval(0.2f);
+        seq.Append(transform.DOMove(oriPos, 0.3f));
+        return 0.8f;
     }
     public void Death()
     {
