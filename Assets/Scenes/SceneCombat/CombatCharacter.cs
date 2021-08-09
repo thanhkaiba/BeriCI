@@ -224,13 +224,13 @@ public class CombatCharacter: MonoBehaviour
     public void LoseHealth(int health)
     {
         current_health -= health;
-        display.SetHealthBar(max_health, current_health);
         if (current_health <= 0)
         {
             current_health = 0;
             AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.DEATH));
             if (IsDeath()) display.Death();
         }
+        display.SetHealthBar(max_health, current_health);
     }
     public void GainFury(int value)
     {
