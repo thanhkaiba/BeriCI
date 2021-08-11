@@ -82,6 +82,7 @@
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\Slash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\UtimateSlash.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\NuclearBomb.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

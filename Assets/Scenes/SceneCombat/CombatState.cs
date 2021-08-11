@@ -32,13 +32,13 @@ public class CombatState : MonoBehaviour
             {
                 GameObject characterGO = CreateCharacter();
                 CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("A " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.A, i == 0 ? new UltimateSlash() : null);
+                character.SetData("A " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.A, i == 0 ? new TakeRest() : null);
                 charactersTeamA.Add(character);
             }
             {
                 GameObject characterGO = CreateCharacter();
                 CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, i == 3 ? new LaserGun() : null);
+                character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, i == 3 ? new NuclearBomb() : null);
                 charactersTeamB.Add(character);
             }
         }
