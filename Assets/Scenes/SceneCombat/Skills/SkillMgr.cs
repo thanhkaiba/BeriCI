@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -42,6 +43,29 @@ public class Skill
         listChar.ForEach(delegate (CombatCharacter character)
         {
             if (character.position.y == row) result.Add(character);
+        });
+        return result;
+    }
+    public CombatCharacter GetNearestTarget(CombatCharacter mine, List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int myRow = mine.position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (col < NR_col)
+                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
         });
         return result;
     }

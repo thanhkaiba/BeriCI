@@ -12,9 +12,13 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     public Text speedText;
     public Slider furyBar;
     public Text furyText;
+    public void TriggerAnimation(string trigger)
+    {
+        modelObject.GetComponent<Animator>().SetTrigger(trigger);
+    }
     public float BaseAttack(CombatCharacter target)
     {
-        modelObject.GetComponent<Animator>().SetTrigger("BaseAttack");
+        TriggerAnimation("BaseAttack");
 
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
@@ -27,7 +31,7 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     }
     public void Death()
     {
-        modelObject.GetComponent<Animator>().SetTrigger("Death");
+        TriggerAnimation("Death");
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.6f);
         seq.AppendCallback(() => { gameObject.SetActive(false); });
