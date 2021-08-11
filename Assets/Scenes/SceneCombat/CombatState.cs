@@ -70,7 +70,7 @@ public class CombatState : MonoBehaviour
         {
             GameObject characterGO = CreateCharacter();
             CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-            character.SetData("A SNIPER", Random.Range(50, 60), Random.Range(350, 550), 90, 10, CharacterType.ENTERTAINER, new Position(1, 1), Team.A, null);
+            character.SetData("A SNIPER", Random.Range(50, 60), Random.Range(350, 550), 90, 10, CharacterType.ENTERTAINER, new Position(1, 1), Team.A, new LifeRain());
             charactersTeamA.Add(character);
         }
         // B

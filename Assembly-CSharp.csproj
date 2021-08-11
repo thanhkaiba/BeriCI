@@ -84,6 +84,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\NuclearBomb.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\FrozenAxe.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\LifeRain.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
