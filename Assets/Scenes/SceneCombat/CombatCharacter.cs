@@ -1,6 +1,9 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
 public enum CharacterType
@@ -28,7 +31,7 @@ public class CombatCharacterStatus
 {
     public CombatCharacterStatusName name;
     public int remainTurn;
-    public CombatCharacterStatus(CombatCharacterStatusName _name, int turn = 0)
+    public CombatCharacterStatus(CombatCharacterStatusName _name, int turn = 1)
     {
         name = _name;
         remainTurn = turn;
@@ -102,18 +105,28 @@ public class CombatCharacter: MonoBehaviour
             current_max_fury = skill.MAX_FURY;
         }
     }
-    /*public void SetGameObject(GameObject GO)
-    {
-        gameObject = GO;
-    }*/
     public bool HaveStatus(CombatCharacterStatusName name)
     {
-        bool result = false;
-        listStatus.ForEach(delegate (CombatCharacterStatus status)
+        return listStatus.Find(x => x.name == name) != null;
+    }
+    public int GetStatusRemainTurn(CombatCharacterStatusName name)
+    {
+        CombatCharacterStatus status = listStatus.Find(x => x.name == name);
+        if (status == null) return 0;
+        return status.remainTurn;
+    }
+    public void CountdownStatusRemain()
+    {
+        CombatCharacterStatusName[] listName = new CombatCharacterStatusName[]
         {
-            if (status.name == name) result = true;
-        });
-        return result;
+            CombatCharacterStatusName.FROZEN,
+        };
+        foreach (CombatCharacterStatusName statusName in listName)
+        {
+            CombatCharacterStatus status = listStatus.Find(status => status.name == statusName);
+            if (status != null) status.remainTurn -= 1;
+        }
+        listStatus.RemoveAll(status => status.remainTurn <= 0);
     }
     public bool IsDeath()
     {
@@ -123,7 +136,8 @@ public class CombatCharacter: MonoBehaviour
     public float DoCombatAction(CombatState combatState)
     {
         bool useSkillCondition = UseSkillCondition(combatState);
-        if (useSkillCondition) return UseSkill(combatState);
+        if (HaveStatus(CombatCharacterStatusName.FROZEN)) return Immobile();
+        else if(useSkillCondition) return UseSkill(combatState);
         else return BaseAttack(combatState);
     }
     bool UseSkillCondition (CombatState combatState)
@@ -151,6 +165,21 @@ public class CombatCharacter: MonoBehaviour
             StartCoroutine(DealDamageDelay(target, current_power, 0.4f));
         }
         return 0.8f;
+    }
+    float Immobile ()
+    {
+        current_speed -= max_speed;
+        display.SetSpeedBar(max_speed, current_speed);
+        CountdownStatusRemain();
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() =>
+        {
+            display.DisplayStatus(listStatus);
+            display.Immobile();
+        });
+        return 0.6f;
     }
     CombatCharacter GetBaseAttackTarget(CombatState combatState)
     {
@@ -203,7 +232,19 @@ public class CombatCharacter: MonoBehaviour
     }
     public void AddStatus (CombatCharacterStatus status)
     {
-        listStatus.Add(status);
+        CombatCharacterStatus existStatus = listStatus.Find(x => x.name == status.name);
+        if (existStatus != null)
+        {
+            if (status.remainTurn > existStatus.remainTurn)
+            {
+                existStatus.remainTurn = status.remainTurn;
+            }
+        }
+        else
+        {
+            listStatus.Add(status);
+        }
+        display.DisplayStatus(listStatus);
     }
     public void InitDisplayStatus()
     {

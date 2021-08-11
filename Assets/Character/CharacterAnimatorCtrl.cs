@@ -12,9 +12,23 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     public Text speedText;
     public Slider furyBar;
     public Text furyText;
+
+    public Image iceBlock;
+    private void Start()
+    {
+        iceBlock.gameObject.SetActive(false);
+    }
     public void TriggerAnimation(string trigger)
     {
         modelObject.GetComponent<Animator>().SetTrigger(trigger);
+    }
+    public void Immobile()
+    {
+        float oriX = transform.position.x;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DOMoveX(oriX - 0.5f, 0.1f));
+        seq.Append(transform.DOMoveX(oriX + 0.5f, 0.1f));
+        seq.Append(transform.DOMoveX(oriX, 0.1f));
     }
     public float BaseAttack(CombatCharacter target)
     {
@@ -54,5 +68,13 @@ public class CharacterAnimatorCtrl : MonoBehaviour
             furyBar.value = (float)min / max;
             furyText.text = min + "/" + max;
         }
+    }
+    public void DisplayStatus(List<CombatCharacterStatus> listStatus)
+    {
+        ShowInIce(listStatus.Find(x => x.name == CombatCharacterStatusName.FROZEN) != null);
+    }
+    public void ShowInIce(bool b)
+    {
+        iceBlock.gameObject.SetActive(b);
     }
 }

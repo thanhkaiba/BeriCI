@@ -28,7 +28,7 @@ public class Slash : Skill
     }
     float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage)
     {
-        attacking.gameObject.GetComponent<CharacterAnimatorCtrl>().TriggerAnimation("BaseAttack");
+        attacking.display.TriggerAnimation("BaseAttack");
 
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
