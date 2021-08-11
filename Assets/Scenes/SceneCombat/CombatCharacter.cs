@@ -183,38 +183,25 @@ public class CombatCharacter: MonoBehaviour
     }
     CombatCharacter GetBaseAttackTarget(CombatState combatState)
     {
-        if (type == CharacterType.SHIPWRIGHT
-            || true)
+        switch (type)
         {
-            return GetNearestTarget(
+            case CharacterType.ARCHER:
+            case CharacterType.SNIPER:
+                return GetNearestInRowTarget(
                 team == Team.A
-                ? combatState.GetAllTeamAliveCharacter(Team.B)
-                : combatState.GetAllTeamAliveCharacter(Team.A));
+                    ? combatState.GetAllTeamAliveCharacter(Team.B)
+                    : combatState.GetAllTeamAliveCharacter(Team.A));
+            case CharacterType.ASSASSIN:
+                return GetFurthestTarget(
+                    team == Team.A
+                    ? combatState.GetAllTeamAliveCharacter(Team.B)
+                    : combatState.GetAllTeamAliveCharacter(Team.A));
+            default:
+                return GetNearestTarget(
+                team == Team.A
+                    ? combatState.GetAllTeamAliveCharacter(Team.B)
+                    : combatState.GetAllTeamAliveCharacter(Team.A));
         }
-        return null;
-    }
-    CombatCharacter GetNearestTarget(List<CombatCharacter> listTarget)
-    {
-        CombatCharacter result = null;
-        int myRow = position.y;
-        int NR_col = 9999;
-        int NR_row = 9999;
-        listTarget.ForEach(delegate (CombatCharacter character)
-        {
-            int col = character.position.x;
-            int row = character.position.y;
-            if (
-                (result == null)
-                || (col < NR_col)
-                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
-            )
-            {
-                result = character;
-                NR_col = col;
-                NR_row = Math.Abs(myRow - row);
-            }
-        });
-        return result;
     }
     void DealDamage(CombatCharacter target, int physicsDamage)
     {
@@ -254,6 +241,7 @@ public class CombatCharacter: MonoBehaviour
         display.SetHealthBar(max_health, current_health);
         display.SetSpeedBar(max_speed, current_speed);
         display.SetFuryBar(current_max_fury, current_fury);
+        display.SetIconType(type);
         child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
     }
     public void GainHealth(int health)
@@ -295,5 +283,76 @@ public class CombatCharacter: MonoBehaviour
     public bool IsEnoughSpeed()
     {
         return GetSpeedNeeded() <= 0;
+    }
+    // target
+    CombatCharacter GetNearestTarget(List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int myRow = position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (col < NR_col)
+                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
+        });
+        return result;
+    }
+
+    CombatCharacter GetNearestInRowTarget(List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int myRow = position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (Math.Abs(myRow - row) < NR_row)
+                || (Math.Abs(myRow - row) == NR_row && col < NR_col)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
+        });
+        return result;
+    }
+    CombatCharacter GetFurthestTarget(List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int myRow = position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (col > NR_col)
+                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
+        });
+        return result;
     }
 };

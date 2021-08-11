@@ -8,7 +8,7 @@ public class NuclearBomb : Skill
     public NuclearBomb()
     {
         name = "Nuclear Bomb";
-        MAX_FURY = 50; // test, cho la 100
+        MAX_FURY = 80; // test, cho la 100
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)

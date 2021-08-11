@@ -25,7 +25,7 @@ public class CombatState : MonoBehaviour
     public void CreateDemoTeam()
     {
         // test tao team
-        for (int i = 0; i < 5; i++)
+        /*for (int i = 0; i < 5; i++)
         {
             int x = i / 3;
             int y = i % 3;
@@ -41,6 +41,68 @@ public class CombatState : MonoBehaviour
                 character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, i == 3 ? new NuclearBomb() : null);
                 charactersTeamB.Add(character);
             }
+        }*/
+        // A
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SuperTank", Random.Range(40, 60), Random.Range(1000, 1500), 100, 10, CharacterType.SHIPWRIGHT, new Position(0, 1), Team.A, new FrozenAxe());
+            charactersTeamA.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SWORD MAN 1", Random.Range(70, 80), Random.Range(800, 1200), 80, 10, CharacterType.SWORD_MAN, new Position(1, 0), Team.A, new UltimateSlash());
+            charactersTeamA.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SWORD MAN 2", Random.Range(70, 80), Random.Range(800, 1200), 60, 10, CharacterType.SWORD_MAN, new Position(1, 2), Team.A, null);
+            charactersTeamA.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SNIPER", Random.Range(180, 200), Random.Range(250, 350), Random.Range(150, 160), 10, CharacterType.SNIPER, new Position(2, 1), Team.A, new LaserGun());
+            charactersTeamA.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SNIPER", Random.Range(50, 60), Random.Range(350, 550), 90, 10, CharacterType.ENTERTAINER, new Position(1, 1), Team.A, null);
+            charactersTeamA.Add(character);
+        }
+        // B
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SuperTank", Random.Range(40, 60), Random.Range(1000, 1500), 100, 10, CharacterType.SHIPWRIGHT, new Position(0, 1), Team.B, new TakeRest());
+            charactersTeamB.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SWORD MAN 1", Random.Range(70, 80), Random.Range(800, 1200), 70, 10, CharacterType.SWORD_MAN, new Position(1, 1), Team.B, new Slash());
+            charactersTeamB.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A WIZARD", Random.Range(20, 25), Random.Range(800, 1200), 100, 10, CharacterType.WIZARD, new Position(2, 1), Team.B, new NuclearBomb());
+            charactersTeamB.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("AN ARCHER ", Random.Range(45, 65), Random.Range(250, 350), 20, 10, CharacterType.ARCHER, new Position(2, 2), Team.B, null);
+            charactersTeamB.Add(character);
+        }
+        {
+            GameObject characterGO = CreateCharacter();
+            CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
+            character.SetData("A SNIPER", Random.Range(100, 135), Random.Range(350, 550), 115, 10, CharacterType.ASSASSIN, new Position(2, 0), Team.B, null);
+            charactersTeamB.Add(character);
         }
     }
     public List<CombatCharacter> GetAllCombatCharacters()

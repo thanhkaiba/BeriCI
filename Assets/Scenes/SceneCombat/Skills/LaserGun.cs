@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class LaserGun : Skill
 {
-    public int base_damage = 100;
-    public int damage_per_level = 5;
+    public int base_damage = 180;
+    public int damage_per_level = 20;
     public LaserGun()
     {
         name = "LaserGun";

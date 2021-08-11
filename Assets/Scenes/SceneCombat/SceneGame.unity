@@ -1738,7 +1738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ffc009a4d37c147810ee9d7292ba8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeChangeScene: 0
 --- !u!4 &1919406577
 Transform:
   m_ObjectHideFlags: 0

@@ -18,6 +18,4 @@ public class UserData : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public int timeChangeScene = 0;
 }
