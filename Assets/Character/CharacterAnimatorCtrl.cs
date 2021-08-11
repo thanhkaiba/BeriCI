@@ -28,13 +28,9 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     public void Death()
     {
         modelObject.GetComponent<Animator>().SetTrigger("Death");
-        StartCoroutine(InActiveDelay(0.6f));
-        
-    }
-    IEnumerator InActiveDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        gameObject.SetActive(false);
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(0.6f);
+        seq.AppendCallback(() => { gameObject.SetActive(false); });
     }
     public void SetHealthBar(int max, int min)
     {

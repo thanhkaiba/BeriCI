@@ -2,19 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum SkillRank
+public enum SkillRank
 {
     B,
     A,
     S,
     SR,
-}
-enum TargetTeam
-{
-    A,
-    B,
-    BOTH,
-    NONE,
 }
 
 enum TargetType
@@ -31,6 +24,7 @@ public class Skill
     public string name = "Skill Base";
     public int MAX_FURY = 100;
     public int START_FURY = 50;
+    public SkillRank rank = SkillRank.A;
 
     public virtual bool CanActive(CombatCharacter cChar, CombatState cbState)
     {

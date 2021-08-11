@@ -7,6 +7,10 @@ public class TakeRest : Skill
         MAX_FURY = 10;
         START_FURY = 5;
     }
+    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    {
+        return cChar.current_health < cChar.max_health;
+    }
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
