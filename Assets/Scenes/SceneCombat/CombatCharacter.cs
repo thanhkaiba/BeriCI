@@ -79,9 +79,12 @@ public class CombatCharacter: MonoBehaviour
     public Team team;
 
     public CharacterAnimatorCtrl display;
+    public CharBarControl bar;
+    public GameObject characterBar;
     private void Start()
     {
         display = GetComponent<CharacterAnimatorCtrl>();
+        bar = transform.Find("CharacterBar").GetComponent<CharBarControl>();
         InitDisplayStatus();
     }
     public void SetData(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
@@ -149,14 +152,14 @@ public class CombatCharacter: MonoBehaviour
         current_speed -= max_speed;
         current_fury = 0;
         Debug.Log("Use skill now " + skill.name);
-        display.SetSpeedBar(max_speed, current_speed);
-        display.SetFuryBar(current_max_fury, current_fury);
+        bar.SetSpeedBar(max_speed, current_speed);
+        bar.SetFuryBar(current_max_fury, current_fury);
         return skill.CastSkill(this, combatState);
     }
     float BaseAttack (CombatState combatState)
     {
         current_speed -= max_speed;
-        display.SetSpeedBar(max_speed, current_speed);
+        bar.SetSpeedBar(max_speed, current_speed);
         GainFury(10);
         CombatCharacter target = GetBaseAttackTarget(combatState);
         if (target != null)
@@ -169,7 +172,7 @@ public class CombatCharacter: MonoBehaviour
     float Immobile ()
     {
         current_speed -= max_speed;
-        display.SetSpeedBar(max_speed, current_speed);
+        bar.SetSpeedBar(max_speed, current_speed);
         CountdownStatusRemain();
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
         Sequence seq = DOTween.Sequence();
@@ -238,17 +241,17 @@ public class CombatCharacter: MonoBehaviour
         UnityEngine.Vector3 p = GameObject.Find("slot_" + (team == Team.A ? "A" : "B") + position.x + position.y).transform.position;
         transform.position = p;
         GameObject child = transform.Find("sword_man").gameObject;
-        display.SetHealthBar(max_health, current_health);
-        display.SetSpeedBar(max_speed, current_speed);
-        display.SetFuryBar(current_max_fury, current_fury);
-        display.SetIconType(type);
+        bar.SetHealthBar(max_health, current_health);
+        bar.SetSpeedBar(max_speed, current_speed);
+        bar.SetFuryBar(current_max_fury, current_fury);
+        bar.SetIconType(type);
         child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
     }
     public void GainHealth(int health)
     {
         current_health += health;
         if (current_health > max_health) current_health = max_health;
-        display.SetHealthBar(max_health, current_health);
+        bar.SetHealthBar(max_health, current_health);
     }
     public void LoseHealth(int health)
     {
@@ -259,7 +262,7 @@ public class CombatCharacter: MonoBehaviour
             AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.DEATH));
             if (IsDeath()) display.Death();
         }
-        display.SetHealthBar(max_health, current_health);
+        bar.SetHealthBar(max_health, current_health);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + health, transform.position);
     }
     public void GainFury(int value)
@@ -268,7 +271,7 @@ public class CombatCharacter: MonoBehaviour
         {
             current_fury += value;
             if (current_fury > current_max_fury) current_fury = current_max_fury;
-            display.SetFuryBar(current_max_fury, current_fury);
+            bar.SetFuryBar(current_max_fury, current_fury);
         }
     }
     public int GetSpeedNeeded()
@@ -278,7 +281,7 @@ public class CombatCharacter: MonoBehaviour
     public void AddSpeed(int speedAdd)
     {
         current_speed += speedAdd;
-        display.SetSpeedBar(max_speed, current_speed);
+        bar.SetSpeedBar(max_speed, current_speed);
     }
     public bool IsEnoughSpeed()
     {

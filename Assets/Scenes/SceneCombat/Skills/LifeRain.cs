@@ -4,12 +4,12 @@ using System.Collections.Generic;
 public class LifeRain : Skill
 {
     public int base_heal = 50;
-    public int heal_per_level = 40;
+    public int heal_per_level = 20;
     public LifeRain()
     {
         name = "Life Rain";
-        MAX_FURY = 40;
-        START_FURY = 10;
+        MAX_FURY = 25;
+        START_FURY = 15;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
