@@ -6,19 +6,6 @@ using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
-public enum CharacterType
-{
-    SHIPWRIGHT,
-    SNIPER,
-    ARCHER,
-    SWORD_MAN,
-    DOCTOR,
-    ENTERTAINER,
-    WIZARD,
-    ASSASSIN,
-    PET
-};
-
 public enum CombatCharacterStatusName
 {
     DEATH,

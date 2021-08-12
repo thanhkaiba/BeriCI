@@ -4,11 +4,11 @@ using System.Collections.Generic;
 public class LaserGun : Skill
 {
     public int base_damage = 180;
-    public int damage_per_level = 20;
+    public int damage_per_level = 26;
     public LaserGun()
     {
         name = "LaserGun";
-        MAX_FURY = 10;
+        MAX_FURY = 15;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)

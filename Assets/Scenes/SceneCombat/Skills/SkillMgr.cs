@@ -26,7 +26,7 @@ public class Skill
     public string name = "Skill Base";
     public int MAX_FURY = 100;
     public int START_FURY = 50;
-    public SkillRank rank = SkillRank.A;
+    public virtual SkillRank rank = SkillRank.A;
 
     public virtual bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
@@ -111,6 +111,24 @@ public class Skill
             }
         }
         return lp;
+    }
+    public CombatCharacter GetLowestPercentHealthTarget(List<CombatCharacter> teamChar)
+    {
+        CombatCharacter result = null;
+        float curPercent = 1.0f;
+        teamChar.ForEach(character =>
+        {
+            float percent = (float)character.current_health / (float)character.max_health;
+            if (
+                (result == null)
+                || (percent < curPercent)
+            )
+            {
+                result = character;
+                curPercent = percent;
+            }
+        });
+        return result;
     }
 }
 

@@ -13,8 +13,7 @@ public class NuclearBomb : Skill
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
-        List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        List<CombatCharacter> targets = GetSameLineTarget(cChar.position.y, enermy);
+        List<CombatCharacter> targets = cbState.GetAliveCharacterEnermy(cChar.team);
         return targets.Count > 0;
     }
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)

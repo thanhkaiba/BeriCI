@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slash : Skill
 {
-    public int base_damage = 50;
+    public int base_damage = 10;
     public int damage_per_level = 5;
     public Slash()
     {

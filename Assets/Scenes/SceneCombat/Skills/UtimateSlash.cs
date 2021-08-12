@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class UltimateSlash : Skill
 {
-    public int base_damage = 250;
+    public int base_damage = 120;
     public int damage_per_level = 12;
+    public int base_heal = 10;
     public UltimateSlash()
     {
         name = "Ultimate Slash";
@@ -20,13 +21,14 @@ public class UltimateSlash : Skill
     {
         base.CastSkill(cChar, cbState);
         int deal_damage = cChar.current_power * 2 + base_damage + cChar.level * damage_per_level;
+        int heal = base_heal + cChar.current_power;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
-        return RunAnimation(cChar, target, deal_damage);
+        return RunAnimation(cChar, target, deal_damage, heal);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage, int heal)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 
@@ -36,7 +38,10 @@ public class UltimateSlash : Skill
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOMove(desPos, 0.6f));
         seq.AppendInterval(0.2f);
-        seq.AppendCallback(() => { target.TakeDamage(damage); });
+        seq.AppendCallback(() => {
+            target.TakeDamage(damage);
+            attacking.GainHealth(heal);
+        });
         seq.Append(attacking.transform.DOMove(oriPos, 0.4f));
         return 1.2f;
     }

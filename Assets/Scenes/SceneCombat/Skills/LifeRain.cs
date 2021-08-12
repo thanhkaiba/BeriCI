@@ -13,9 +13,7 @@ public class LifeRain : Skill
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
-        List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        List<CombatCharacter> targets = GetSameLineTarget(cChar.position.y, enermy);
-        return targets.Count > 0;
+        return true;
     }
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
