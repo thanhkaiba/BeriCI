@@ -26,7 +26,7 @@ public class Skill
     public string name = "Skill Base";
     public int MAX_FURY = 100;
     public int START_FURY = 50;
-    public virtual SkillRank rank = SkillRank.A;
+    public SkillRank rank = SkillRank.A;
 
     public virtual bool CanActive(CombatCharacter cChar, CombatState cbState)
     {

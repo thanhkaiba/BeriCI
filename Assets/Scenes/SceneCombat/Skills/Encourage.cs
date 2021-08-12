@@ -14,6 +14,7 @@ public class Encourage : Skill
         name = "Encourage";
         MAX_FURY = 20;
         START_FURY = 0;
+        rank = SkillRank.S;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
