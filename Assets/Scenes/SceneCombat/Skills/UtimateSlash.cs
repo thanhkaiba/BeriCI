@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class UltimateSlash : Skill
 {
-    public int base_damage = 120;
-    public int damage_per_level = 12;
-    public int base_heal = 10;
+    public float base_damage = 120;
+    public float damage_per_level = 12;
+    public float base_heal = 10;
     public UltimateSlash()
     {
         name = "Ultimate Slash";
@@ -20,15 +20,15 @@ public class UltimateSlash : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int deal_damage = cChar.current_power * 2 + base_damage + cChar.level * damage_per_level;
-        int heal = base_heal + cChar.current_power;
+        float deal_damage = cChar.current_power * 2 + base_damage + cChar.level * damage_per_level;
+        float heal = base_heal + cChar.current_power;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
         return RunAnimation(cChar, target, deal_damage, heal);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage, int heal)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage, float heal)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 

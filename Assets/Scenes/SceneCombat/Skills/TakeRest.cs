@@ -14,7 +14,7 @@ public class TakeRest : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        cChar.GainHealth((int)(0.4 * cChar.max_health));
+        cChar.GainHealth(0.4f * cChar.max_health);
         return RunAnimTakeRest(cChar);
     }
     float RunAnimTakeRest(CombatCharacter cChar)

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Deceive : Skill
 {
-    public int base_damage = 0;
-    public int damage_per_level = 5;
+    public float base_damage = 0;
+    public float damage_per_level = 5;
     public Deceive()
     {
         name = "Deceive";
@@ -19,7 +19,7 @@ public class Deceive : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int deal_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
+        float deal_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
 
         cChar.position = GetRandomAvaiablePosition(cbState.GetAllTeamAliveCharacter(cChar.team));
 
@@ -28,7 +28,7 @@ public class Deceive : Skill
 
         return RunAnimation(cChar, target, deal_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage)
     {
 
         Vector3 newPos = GameObject.Find("slot_" + (attacking.team == Team.A ? "A" : "B") + attacking.position.x + attacking.position.y).transform.position;

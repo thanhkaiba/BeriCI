@@ -40,11 +40,11 @@ public class CombatCharacter: MonoBehaviour
 {
     public string charName;
 
-    public int base_power;
-    public int current_power;
+    public float base_power;
+    public float current_power;
 
-    public int max_health;
-    public int current_health;
+    public float max_health;
+    public float current_health;
 
     public int max_speed;
     public int current_speed;
@@ -74,7 +74,7 @@ public class CombatCharacter: MonoBehaviour
         bar = transform.Find("CharacterBar").GetComponent<CharBarControl>();
         InitDisplayStatus();
     }
-    public void SetData(string name, int power, int health, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
+    public void SetData(string name, float power, float health, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
     {
         this.charName = name;
         this.base_power = power;
@@ -193,16 +193,16 @@ public class CombatCharacter: MonoBehaviour
                     : combatState.GetAllTeamAliveCharacter(Team.A));
         }
     }
-    void DealDamage(CombatCharacter target, int physicsDamage)
+    void DealDamage(CombatCharacter target, float physicsDamage)
     {
         target.TakeDamage(physicsDamage);
     }
-    IEnumerator DealDamageDelay(CombatCharacter target, int current_power, float delay)
+    IEnumerator DealDamageDelay(CombatCharacter target, float current_power, float delay)
     {
         yield return new WaitForSeconds(delay);
         DealDamage(target, current_power);
     }
-    public void TakeDamage(int physicsDamage)
+    public void TakeDamage(float physicsDamage)
     {
         LoseHealth(physicsDamage);
         GainFury(3);
@@ -234,13 +234,13 @@ public class CombatCharacter: MonoBehaviour
         bar.SetIconType(type);
         child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
     }
-    public void GainHealth(int health)
+    public void GainHealth(float health)
     {
         current_health += health;
         if (current_health > max_health) current_health = max_health;
         bar.SetHealthBar(max_health, current_health);
     }
-    public void LoseHealth(int health)
+    public void LoseHealth(float health)
     {
         current_health -= health;
         if (current_health <= 0)
@@ -250,7 +250,7 @@ public class CombatCharacter: MonoBehaviour
             if (IsDeath()) display.Death();
         }
         bar.SetHealthBar(max_health, current_health);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + health, transform.position);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
     public void GainFury(int value)
     {

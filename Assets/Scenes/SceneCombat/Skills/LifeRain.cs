@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 public class LifeRain : Skill
 {
-    public int base_heal = 50;
-    public int heal_per_level = 20;
+    public float base_heal = 50;
+    public float heal_per_level = 20;
+    public int gain_fury = 5;
     public LifeRain()
     {
         name = "Life Rain";
@@ -18,7 +19,7 @@ public class LifeRain : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int heal = base_heal + cChar.level * heal_per_level;
+        float heal = base_heal + cChar.level * heal_per_level;
 
         List<CombatCharacter> targets = cbState.GetAllTeamAliveCharacter(cChar.team);
 
@@ -29,6 +30,7 @@ public class LifeRain : Skill
             targets.ForEach(delegate (CombatCharacter character)
             {
                 character.GainHealth(heal);
+                character.GainFury(gain_fury);
             });
         });
         seq.AppendInterval(0.2f);

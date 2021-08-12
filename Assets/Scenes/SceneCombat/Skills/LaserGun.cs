@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class LaserGun : Skill
 {
-    public int base_damage = 180;
-    public int damage_per_level = 26;
+    public float base_damage = 180;
+    public float damage_per_level = 26;
     public LaserGun()
     {
         name = "LaserGun";
@@ -20,7 +20,7 @@ public class LaserGun : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int deal_damage = base_damage + cChar.level * damage_per_level;
+        float deal_damage = base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         List<CombatCharacter> targets = GetSameLineTarget(cChar.position.y, enermy);

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Slash : Skill
 {
-    public int base_damage = 10;
-    public int damage_per_level = 5;
+    public float base_damage = 10;
+    public float damage_per_level = 5;
     public Slash()
     {
         name = "Slash";
@@ -19,14 +19,14 @@ public class Slash : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int deal_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
+        float deal_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
         return RunAnimation(cChar, target, deal_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 

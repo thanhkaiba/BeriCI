@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Encourage : Skill
 {
-    public int base_heal = 100;
-    public int heal_per_level = 20;
+    public float base_heal = 40;
+    public float heal_per_level = 15;
     public int base_speed = 55;
     public int speed_per_level = 1;
     public int fury = 10;
@@ -23,7 +23,7 @@ public class Encourage : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int heal = base_heal + cChar.level * heal_per_level;
+        float heal = base_heal + cChar.level * heal_per_level;
         int speed = base_speed + cChar.level * speed_per_level;
         int buff_fury = fury;
 
@@ -32,7 +32,7 @@ public class Encourage : Skill
 
         return RunAnimation(cChar, target, heal, speed, buff_fury);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int heal, int speed, int fury)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float heal, int speed, int fury)
     {
         attacking.display.TriggerAnimation("BaseAttack");
         Sequence seq = DOTween.Sequence();

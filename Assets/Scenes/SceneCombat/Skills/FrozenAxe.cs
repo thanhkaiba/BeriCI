@@ -18,14 +18,14 @@ public class FrozenAxe : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int deal_damage = cChar.current_power;
+        float deal_damage = cChar.current_power;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
         return RunAnimation(cChar, target, deal_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, int damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 

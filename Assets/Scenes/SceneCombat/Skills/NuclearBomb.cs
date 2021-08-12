@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class NuclearBomb : Skill
 {
-    public int base_damage = 450;
-    public int damage_per_level = 45;
+    public float base_damage = 450;
+    public float damage_per_level = 45;
     public NuclearBomb()
     {
         name = "Nuclear Bomb";
@@ -19,7 +19,7 @@ public class NuclearBomb : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        int deal_damage = base_damage + cChar.level * damage_per_level;
+        float deal_damage = base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> targets = cbState.GetAliveCharacterEnermy(cChar.team);
 

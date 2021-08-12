@@ -75,8 +75,8 @@ public class CombatState : MonoBehaviour
         CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
         character.SetData(
             data.name,
-            (int) data.GetPower(),
-            (int) data.GetHealth(),
+            data.GetPower(),
+            data.GetHealth(),
             data.GetSpeed(),
             data.level,
             data.TYPE,

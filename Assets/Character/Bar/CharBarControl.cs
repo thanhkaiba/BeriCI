@@ -51,10 +51,10 @@ public class CharBarControl : MonoBehaviour
         }
         iconType.sprite = spr;
     }
-    public void SetHealthBar(int max, int min)
+    public void SetHealthBar(float max, float min)
     {
-        healthBar.value = (float)min / max;
-        healthText.text = min.ToString();
+        healthBar.value = min / max;
+        healthText.text = (System.Math.Ceiling(min)).ToString();
     }
     public void SetSpeedBar(int max, int min)
     {
