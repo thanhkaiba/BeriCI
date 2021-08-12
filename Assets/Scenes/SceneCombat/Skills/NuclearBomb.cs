@@ -8,7 +8,7 @@ public class NuclearBomb : Skill
     public NuclearBomb()
     {
         name = "Nuclear Bomb";
-        MAX_FURY = 80; // test, cho la 100
+        MAX_FURY = 110;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
@@ -19,7 +19,7 @@ public class NuclearBomb : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float deal_damage = base_damage + cChar.level * damage_per_level;
+        float spell_damage = base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> targets = cbState.GetAliveCharacterEnermy(cChar.team);
 
@@ -29,7 +29,7 @@ public class NuclearBomb : Skill
         seq.AppendCallback(() => {
             targets.ForEach(delegate (CombatCharacter character)
             {
-                character.TakeDamage(deal_damage);
+                character.TakeDamage(0, spell_damage, 0);
             });
         });
         seq.AppendInterval(0.2f);

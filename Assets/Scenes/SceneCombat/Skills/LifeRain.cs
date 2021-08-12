@@ -5,7 +5,7 @@ public class LifeRain : Skill
 {
     public float base_heal = 50;
     public float heal_per_level = 20;
-    public int gain_fury = 5;
+    public int gain_fury = 8;
     public LifeRain()
     {
         name = "Life Rain";

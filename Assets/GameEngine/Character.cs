@@ -48,88 +48,88 @@ public class Character
                 POWER_P_LEVEL =         RF(2.5f, 4.0f);
                 HEALTH =                RF(520, 680); // nhieu mau
                 HEALTH_P_LEVEL =        RF(45, 60);
-                SPEED =                 RI(95, 105);
-                ARMOR =                 RF(20, 25); // nhieu giap
-                ARMOR_P_LEVEL =         RF(1.5f, 2);
-                MAGIC_RESIST =          RF(20, 25);
-                MAGIC_RESIST_P_LEVEL =  RF(0.5f, 1);
+                SPEED =                 RI(95, 100);
+                ARMOR =                 35; // nhieu giap
+                ARMOR_P_LEVEL =         0.8f;
+                MAGIC_RESIST =          0;
+                MAGIC_RESIST_P_LEVEL =  0;
                 break;
             case CharacterType.SNIPER:
                 POWER = RF(120f, 160f); // damage to
-                POWER_P_LEVEL = RF(12f, 16f);
+                POWER_P_LEVEL = RF(20, 25);
                 HEALTH = RF(180, 240);
                 HEALTH_P_LEVEL = RF(20, 25);
-                SPEED = RI(135, 165); // ban cham
-                ARMOR = RF(10, 12);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(35, 40);
-                MAGIC_RESIST_P_LEVEL = RF(0.3f, 0.5f); // nhieu khang phep
+                SPEED = RI(98, 108); // ban cham
+                ARMOR = 20;
+                ARMOR_P_LEVEL = 0.5f;
+                MAGIC_RESIST = 5;
+                MAGIC_RESIST_P_LEVEL = 0.34f;
                 break;
             case CharacterType.ARCHER:
-                POWER = RF(18, 20); // damage it
-                POWER_P_LEVEL = RF(3.5f, 4.0f);
+                POWER = RF(25, 35); // damage it
+                POWER_P_LEVEL = RF(4.0f, 5.5f);
                 HEALTH = RF(180, 240);
                 HEALTH_P_LEVEL = RF(16, 20);
-                SPEED = RI(24, 36); // ban nhanh
-                ARMOR = RF(10, 14);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(10, 14);
-                MAGIC_RESIST_P_LEVEL = RF(0.1f, 0.15f);
+                SPEED = RI(24, 28); // ban nhanh
+                ARMOR = 15;
+                ARMOR_P_LEVEL = 0.4f;
+                MAGIC_RESIST = 0;
+                MAGIC_RESIST_P_LEVEL = 0;
                 break;
             case CharacterType.SWORD_MAN:
                 POWER = RF(70, 80); 
                 POWER_P_LEVEL = RF(6f, 10f);
                 HEALTH = RF(400, 550);
                 HEALTH_P_LEVEL = RF(28, 32);
-                SPEED = RI(95, 105);
-                ARMOR = RF(10, 12);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(10, 14);
-                MAGIC_RESIST_P_LEVEL = RF(0.1f, 0.15f);
+                SPEED = RI(80, 90);
+                ARMOR = 20;
+                ARMOR_P_LEVEL = 0.5f;
+                MAGIC_RESIST = 20;
+                MAGIC_RESIST_P_LEVEL = 0;
                 break;
             case CharacterType.DOCTOR:
                 POWER = RF(25, 30);
                 POWER_P_LEVEL = RF(3f, 5f);
-                HEALTH = RF(180, 240);
+                HEALTH = RF(300, 350);
                 HEALTH_P_LEVEL = RF(25, 30);
                 SPEED = RI(95, 105);
-                ARMOR = RF(10, 14);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(10, 14);
-                MAGIC_RESIST_P_LEVEL = RF(0.1f, 0.15f);
+                ARMOR = 10;
+                ARMOR_P_LEVEL = 0.5f;
+                MAGIC_RESIST = 100; // khoa hoc noi khong voi phep thuat
+                MAGIC_RESIST_P_LEVEL = 0;
                 break;
             case CharacterType.ENTERTAINER:
                 POWER = RF(25, 30);
                 POWER_P_LEVEL = RF(3f, 8f);
-                HEALTH = RF(180, 240);
+                HEALTH = RF(240, 280);
                 HEALTH_P_LEVEL = RF(22, 34);
-                SPEED = RI(58, 68);
-                ARMOR = RF(10, 14);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(10, 14);
-                MAGIC_RESIST_P_LEVEL = RF(0.1f, 0.15f);
+                SPEED = RI(62, 74);
+                ARMOR = 10;
+                ARMOR_P_LEVEL = 0.4f;
+                MAGIC_RESIST = 10;
+                MAGIC_RESIST_P_LEVEL = 0;
                 break;
             case CharacterType.WIZARD:
                 POWER = RF(20, 25);
                 POWER_P_LEVEL = RF(2f, 4f);
-                HEALTH = RF(300, 350);
-                HEALTH_P_LEVEL = RF(30, 32);
-                SPEED = RI(95, 105);
-                ARMOR = RF(10, 14);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(50, 60);
-                MAGIC_RESIST_P_LEVEL = RF(0.3f, 0.8f); // nhieu khang phep
+                HEALTH = RF(160, 200);
+                HEALTH_P_LEVEL = RF(16, 20);
+                SPEED = RI(92, 100);
+                ARMOR = 100; // phap su khang vat ly
+                ARMOR_P_LEVEL = 0;
+                MAGIC_RESIST = 50;
+                MAGIC_RESIST_P_LEVEL = 0.5f; // nhieu khang phep
                 break;
             case CharacterType.ASSASSIN:
-                POWER = RF(80, 100);
-                POWER_P_LEVEL = RF(10f, 12f);
+                POWER = RF(120, 140);
+                POWER_P_LEVEL = RF(23f, 25f);
                 HEALTH = RF(250, 300);
                 HEALTH_P_LEVEL = RF(25, 30);
-                SPEED = RI(115, 125);
-                ARMOR = RF(10, 14);
-                ARMOR_P_LEVEL = RF(0.2f, 0.4f);
-                MAGIC_RESIST = RF(35, 40);
-                MAGIC_RESIST_P_LEVEL = RF(0.3f, 0.5f); // nhieu khang phep
+                SPEED = RI(100, 112);
+                ARMOR = 15;
+                ARMOR_P_LEVEL = 0.2f;
+                MAGIC_RESIST = 10;
+                MAGIC_RESIST_P_LEVEL = 0.4f;
                 break;
             case CharacterType.PET:
                 POWER = RF(1, 300);

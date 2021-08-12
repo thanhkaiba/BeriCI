@@ -46,6 +46,12 @@ public class CombatCharacter: MonoBehaviour
     public float max_health;
     public float current_health;
 
+    public float base_armor;
+    public float current_armor;
+
+    public float base_magic_resist;
+    public float current_magic_resist;
+
     public int max_speed;
     public int current_speed;
 
@@ -74,15 +80,19 @@ public class CombatCharacter: MonoBehaviour
         bar = transform.Find("CharacterBar").GetComponent<CharBarControl>();
         InitDisplayStatus();
     }
-    public void SetData(string name, float power, float health, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
+    public void SetData(string name, float power, float health, float armor, float magic_resist, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
     {
-        this.charName = name;
-        this.base_power = power;
-        this.current_power = power;
-        this.max_health = health;
-        this.current_health = health;
-        this.max_speed = speed;
-        this.current_speed = 0;
+        charName = name;
+        base_power = power;
+        current_power = power;
+        max_health = health;
+        current_health = health;
+        base_armor = armor;
+        current_armor = armor;
+        base_magic_resist = magic_resist;
+        current_magic_resist = magic_resist;
+        max_speed = speed;
+        current_speed = 0;
         this.level = level;
         this.type = type;
         this.position = position;
@@ -152,7 +162,7 @@ public class CombatCharacter: MonoBehaviour
         if (target != null)
         {
             display.BaseAttack(target);
-            StartCoroutine(DealDamageDelay(target, current_power, 0.4f));
+            StartCoroutine(DealBaseAttackDamageDelay(target, current_power, 0.4f));
         }
         return 0.8f;
     }
@@ -193,19 +203,23 @@ public class CombatCharacter: MonoBehaviour
                     : combatState.GetAllTeamAliveCharacter(Team.A));
         }
     }
-    void DealDamage(CombatCharacter target, float physicsDamage)
+    void DealBaseAttackDamage(CombatCharacter target, float physicsDamage)
     {
-        target.TakeDamage(physicsDamage);
+        target.TakeDamage(physicsDamage, 0, 0);
     }
-    IEnumerator DealDamageDelay(CombatCharacter target, float current_power, float delay)
+    IEnumerator DealBaseAttackDamageDelay(CombatCharacter target, float current_power, float delay)
     {
         yield return new WaitForSeconds(delay);
-        DealDamage(target, current_power);
+        DealBaseAttackDamage(target, current_power);
     }
-    public void TakeDamage(float physicsDamage)
+    public float TakeDamage(float physicsDamage, float magicDamage = 0, float trueDamage = 0)
     {
-        LoseHealth(physicsDamage);
+        float physicTake = physicsDamage * 100 / (100 + current_armor);
+        float magicTake = magicDamage * 100 / (100 + current_magic_resist);
+        float totalDamage = physicTake + magicTake + trueDamage;
+        LoseHealth(totalDamage);
         GainFury(3);
+        return totalDamage;
     }
     public void AddStatus (CombatCharacterStatus status)
     {

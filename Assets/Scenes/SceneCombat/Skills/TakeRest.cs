@@ -4,7 +4,7 @@ public class TakeRest : Skill
     public TakeRest()
     {
         name = "TakeRest";
-        MAX_FURY = 10;
+        MAX_FURY = 24;
         START_FURY = 5;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)

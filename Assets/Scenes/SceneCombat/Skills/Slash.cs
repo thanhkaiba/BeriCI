@@ -19,14 +19,14 @@ public class Slash : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float deal_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
+        float physic_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
-        return RunAnimation(cChar, target, deal_damage);
+        return RunAnimation(cChar, target, physic_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float physic_damage)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 
@@ -36,7 +36,7 @@ public class Slash : Skill
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendInterval(0.2f);
-        seq.AppendCallback(() => { target.TakeDamage(damage); });
+        seq.AppendCallback(() => { target.TakeDamage(physic_damage, 0, 0); });
         seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
         return 0.8f;
     }

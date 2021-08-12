@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Deceive : Skill
 {
-    public float base_damage = 0;
-    public float damage_per_level = 5;
+    public float base_damage = 10;
+    public float damage_per_level = 8;
     public Deceive()
     {
         name = "Deceive";
@@ -19,28 +19,28 @@ public class Deceive : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float deal_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
-
-        cChar.position = GetRandomAvaiablePosition(cbState.GetAllTeamAliveCharacter(cChar.team));
+        float physic_damage = cChar.current_power;
+        float magic_damage = base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetFurthestTarget(cChar, enermy);
 
-        return RunAnimation(cChar, target, deal_damage);
+        cChar.position = GetRandomAvaiablePosition(cbState.GetAllTeamAliveCharacter(cChar.team));
+
+        return RunAnimation(cChar, target, physic_damage, magic_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float physic_damage, float magic_damage)
     {
 
         Vector3 newPos = GameObject.Find("slot_" + (attacking.team == Team.A ? "A" : "B") + attacking.position.x + attacking.position.y).transform.position;
         float d = Vector3.Distance(newPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(newPos, target.transform.position, d - 2.0f);
         Sequence seq = DOTween.Sequence();
-        seq.Append(attacking.transform.DOMove(newPos, 0.5f));
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendCallback(() => attacking.display.TriggerAnimation("BaseAttack"));
         seq.AppendInterval(0.2f);
-        seq.AppendCallback(() => { target.TakeDamage(damage); });
+        seq.AppendCallback(() => { target.TakeDamage(physic_damage, magic_damage, 0); });
         seq.Append(attacking.transform.DOMove(newPos, 0.3f));
-        return 1.5f;
+        return 1.0f;
     }
 }

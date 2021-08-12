@@ -2,14 +2,18 @@ using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FrozenAxe : Skill
+public class HeadShot : Skill
 {
-    public int turn = 1;
-    public FrozenAxe()
+    public float damage_ratio = 1.0f;
+    public float lose_health_ratio = 0.35f;
+
+    public float sniper_damage_ratio = 1.2f;
+    public float sniper_lose_health_ratio = 0.35f;
+    public HeadShot()
     {
-        name = "Frozen Axe";
+        name = "HeadShot";
         MAX_FURY = 30;
-        START_FURY = 25;
+        START_FURY = 10;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
@@ -18,14 +22,17 @@ public class FrozenAxe : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float spell_damage = cChar.current_power;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        CombatCharacter target = GetNearestTarget(cChar, enermy);
+        CombatCharacter target = GetLowestHealthTarget(enermy);
 
-        return RunAnimation(cChar, target, spell_damage);
+        float physic_damage = cChar.type == CharacterType.SNIPER
+            ? damage_ratio * cChar.current_power + lose_health_ratio * (target.max_health - target.current_health)
+            : sniper_damage_ratio * cChar.current_power + sniper_lose_health_ratio * (target.max_health - target.current_health);
+
+        return RunAnimation(cChar, target, physic_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float spell_damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float physic_damage)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 
@@ -35,10 +42,7 @@ public class FrozenAxe : Skill
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendInterval(0.2f);
-        seq.AppendCallback(() => {
-            target.TakeDamage(0, spell_damage, 0);
-            target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, 1));
-        });
+        seq.AppendCallback(() => { target.TakeDamage(physic_damage, 0, 0); });
         seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
         return 0.8f;
     }

@@ -20,14 +20,14 @@ public class LaserGun : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float deal_damage = base_damage + cChar.level * damage_per_level;
+        float spell_damage = base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         List<CombatCharacter> targets = GetSameLineTarget(cChar.position.y, enermy);
 
         targets.ForEach(delegate (CombatCharacter character)
         {
-            character.TakeDamage(deal_damage);
+            character.TakeDamage(0, spell_damage, 0);
         });
 
         return 0.8f;

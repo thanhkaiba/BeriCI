@@ -118,7 +118,7 @@ public class Skill
         float curPercent = 1.0f;
         teamChar.ForEach(character =>
         {
-            float percent = (float)character.current_health / (float)character.max_health;
+            float percent = character.current_health / character.max_health;
             if (
                 (result == null)
                 || (percent < curPercent)
@@ -126,6 +126,40 @@ public class Skill
             {
                 result = character;
                 curPercent = percent;
+            }
+        });
+        return result;
+    }
+    public CombatCharacter GetLowestHealthTarget(List<CombatCharacter> teamChar)
+    {
+        CombatCharacter result = null;
+        float health = 0.0f;
+        teamChar.ForEach(character =>
+        {
+            if (
+                (result == null)
+                || (character.current_health < health)
+            )
+            {
+                result = character;
+                health = character.current_health;
+            }
+        });
+        return result;
+    }
+    public CombatCharacter GetFurthestFuryMax (List<CombatCharacter> teamChar)
+    {
+        CombatCharacter result = null;
+        int distance = 0;
+        teamChar.ForEach(character =>
+        {
+            if (
+                (result == null)
+                || (character.max_fury - character.current_fury > distance)
+            )
+            {
+                result = character;
+                distance = character.max_fury - character.current_fury;
             }
         });
         return result;

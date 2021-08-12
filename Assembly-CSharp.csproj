@@ -90,6 +90,9 @@
     <Compile Include="Assets\GameEngine\Character.cs" />
     <Compile Include="Assets\GameEngine\GameUtils.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\Encourage.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\FightingPassion.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\HeadShot.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\HighNote.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
