@@ -218,7 +218,7 @@ public class CombatCharacter: MonoBehaviour
     public void TakeDamage(int physicsDamage)
     {
         LoseHealth(physicsDamage);
-        GainFury(4);
+        GainFury(3);
     }
     public void AddStatus (CombatCharacterStatus status)
     {

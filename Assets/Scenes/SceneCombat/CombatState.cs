@@ -64,7 +64,7 @@ public class CombatState : MonoBehaviour
         {
             GameObject characterGO = CreateCharacter();
             CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-            character.SetData("A SNIPER", Random.Range(180, 200), Random.Range(250, 350), Random.Range(150, 160), 10, CharacterType.SNIPER, new Position(2, 1), Team.A, new LaserGun());
+            character.SetData("A SNIPER", Random.Range(250, 300), Random.Range(250, 300), Random.Range(135, 150), 10, CharacterType.SNIPER, new Position(2, 1), Team.A, new LaserGun());
             charactersTeamA.Add(character);
         }
         {
@@ -89,7 +89,7 @@ public class CombatState : MonoBehaviour
         {
             GameObject characterGO = CreateCharacter();
             CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-            character.SetData("A WIZARD", Random.Range(20, 25), Random.Range(800, 1200), 100, 10, CharacterType.WIZARD, new Position(2, 1), Team.B, new NuclearBomb());
+            character.SetData("A WIZARD", Random.Range(20, 25), Random.Range(800, 1200), 98, 10, CharacterType.WIZARD, new Position(2, 1), Team.B, new NuclearBomb());
             charactersTeamB.Add(character);
         }
         {
@@ -101,7 +101,7 @@ public class CombatState : MonoBehaviour
         {
             GameObject characterGO = CreateCharacter();
             CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-            character.SetData("A SNIPER", Random.Range(100, 135), Random.Range(350, 550), 115, 10, CharacterType.ASSASSIN, new Position(2, 0), Team.B, null);
+            character.SetData("A SNIPER", Random.Range(100, 135), Random.Range(350, 550), 115, 10, CharacterType.ASSASSIN, new Position(2, 0), Team.B, new Deceive());
             charactersTeamB.Add(character);
         }
     }

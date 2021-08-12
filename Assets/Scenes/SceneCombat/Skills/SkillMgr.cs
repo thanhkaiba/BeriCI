@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum SkillRank
@@ -68,6 +69,48 @@ public class Skill
             }
         });
         return result;
+    }
+    public CombatCharacter GetFurthestTarget(CombatCharacter mine, List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int myRow = mine.position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (col > NR_col)
+                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
+        });
+        return result;
+    }
+    public Position GetRandomAvaiablePosition (List<CombatCharacter> teamChar)
+    {
+        List<Position> p = GetAvaiablePosition(teamChar);
+        int index = UnityEngine.Random.Range(1, p.Count);
+        return p.ElementAt(index);
+    }
+    public List<Position> GetAvaiablePosition(List<CombatCharacter> teamChar)
+    {
+        List<Position> lp = new List<Position>();
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                CombatCharacter character = teamChar.Find(character => character.position.x == x && character.position.y == y);
+                if (character == null) lp.Add(new Position(x, y));
+            }
+        }
+        return lp;
     }
 }
 

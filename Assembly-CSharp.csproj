@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\LifeRain.cs" />
     <Compile Include="Assets\Character\Bar\CharBarControl.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\Deceive.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
