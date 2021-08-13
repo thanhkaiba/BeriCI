@@ -12,11 +12,13 @@ public enum CombatStatus
 public class CombatState : MonoBehaviour
 {
     public Camera MainCamera;
+    public GameObject warriorPrefab;
+    public GameObject goblinPrefab;
+
     public CombatStatus status;
     public List<CombatCharacter> charactersTeamA = new List<CombatCharacter>();
     public List<CombatCharacter> charactersTeamB = new List<CombatCharacter>();
     public Team lastTeamAction;
-    public GameObject characterFrefab;
     public CombatState()
     {
         status = CombatStatus.PREPARING;
@@ -24,30 +26,12 @@ public class CombatState : MonoBehaviour
     }
     public void CreateDemoTeam()
     {
-        // test tao team
-        /*for (int i = 0; i < 5; i++)
-        {
-            int x = i / 3;
-            int y = i % 3;
-            {
-                GameObject characterGO = CreateCharacter();
-                CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("A " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.A, i == 0 ? new FrozenAxe() : null);
-                charactersTeamA.Add(character);
-            }
-            {
-                GameObject characterGO = CreateCharacter();
-                CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-                character.SetData("B " + i, Random.Range(40, 110), Random.Range(350, 700), Random.Range(60, 120), 10, CharacterType.SHIPWRIGHT, new Position(x, y), Team.B, i == 3 ? new NuclearBomb() : null);
-                charactersTeamB.Add(character);
-            }
-        }*/
         // A
         //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 0), Team.A);
         //CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(0, 2), Team.A);
         //CreateCombatCharacter(CharacterType.SNIPER, new HeadShot(), new Position(2, 0), Team.A);
         //CreateCombatCharacter(CharacterType.DOCTOR, new Encourage(), new Position(2, 2), Team.A);
-        CreateCombatCharacter(CharacterType.SWORD_MAN, new Slash(), new Position(1, 1), Team.A);
+        //CreateCombatCharacter(CharacterType.SWORD_MAN, new Slash(), new Position(1, 1), Team.A);
         // A2
         //CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 1), Team.A);
         //CreateCombatCharacter(CharacterType.ENTERTAINER, new Encourage(), new Position(1, 0), Team.A);
@@ -77,7 +61,11 @@ public class CombatState : MonoBehaviour
         //CreateCombatCharacter(CharacterType.WIZARD, new NuclearBomb(), new Position(2, 1), Team.B);
         //CreateCombatCharacter(CharacterType.ENTERTAINER, new HighNote(), new Position(1, 1), Team.B);
         //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), Team.B);
-        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.B);
+        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.B);
+
+
+        CreateCombatCharacter(CharacterType.SHIPWRIGHT, null, new Position(1, 1), Team.B);
+        CreateCombatCharacter(CharacterType.ARCHER, null, new Position(2, 1), Team.A);
     }
     CombatCharacter CreateCombatCharacter(CharacterType type, Skill skill, Position pos, Team team) // test
     {
@@ -89,21 +77,9 @@ public class CombatState : MonoBehaviour
     }
     CombatCharacter CreateCombatCharacterFromCharacterData(Character data, Position pos, Team team)
     {
-        GameObject characterGO = CreateCharacter();
+        GameObject characterGO = CreateCharacter(data.model);
         CombatCharacter character = characterGO.AddComponent<CombatCharacter>() as CombatCharacter;
-        character.SetData(
-            data.name,
-            data.GetPower(),
-            data.GetHealth(),
-            data.GetArmor(),
-            data.GetMagicResist(),
-            data.GetSpeed(),
-            data.level,
-            data.TYPE,
-            pos,
-            team,
-            data.skill
-        );
+        character.SetData(data, pos, team);
         if (team == Team.A) charactersTeamA.Add(character);
         else charactersTeamB.Add(character);
         return character;
@@ -154,9 +130,21 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    GameObject CreateCharacter()
+    GameObject CreateCharacter(CharacterModel model)
     {
-        GameObject c = Instantiate(characterFrefab);
+        GameObject c;
+        switch (model)
+        {
+            case CharacterModel.WARRIOR:
+                c = Instantiate(warriorPrefab);
+                break;
+            case CharacterModel.GOBLIN_ARCHER:
+                c = Instantiate(goblinPrefab);
+                break;
+            default:
+                c = Instantiate(warriorPrefab);
+                break;
+        }
         c.GetComponent<Billboard>().cam = MainCamera.transform;
         return c;
     }

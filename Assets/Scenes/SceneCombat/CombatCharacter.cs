@@ -71,6 +71,8 @@ public class CombatCharacter: MonoBehaviour
 
     public Team team;
 
+    public CharacterModel model;
+
     public CharacterAnimatorCtrl display;
     public CharBarControl bar;
     public GameObject characterBar;
@@ -80,30 +82,31 @@ public class CombatCharacter: MonoBehaviour
         bar = transform.Find("CharacterBar").GetComponent<CharBarControl>();
         InitDisplayStatus();
     }
-    public void SetData(string name, float power, float health, float armor, float magic_resist, int speed, int level, CharacterType type, Position position, Team team, Skill skill)
+    public void SetData(Character data, Position p, Team t)
     {
         charName = name;
-        base_power = power;
-        current_power = power;
-        max_health = health;
-        current_health = health;
-        base_armor = armor;
-        current_armor = armor;
-        base_magic_resist = magic_resist;
-        current_magic_resist = magic_resist;
-        max_speed = speed;
+        base_power = data.GetPower();
+        current_power = data.GetPower();
+        max_health = data.GetHealth();
+        current_health = data.GetHealth();
+        base_armor = data.GetArmor();
+        current_armor = data.GetArmor();
+        base_magic_resist = data.GetMagicResist();
+        current_magic_resist = data.GetMagicResist();
+        max_speed = data.GetSpeed();
         current_speed = 0;
-        this.level = level;
-        this.type = type;
-        this.position = position;
-        this.team = team;
-        this.skill = skill;
+        level = data.level;
+        type = data.TYPE;
+        skill = data.skill;
+        position = p;
+        team = t;
         if (skill != null)
         {
             max_fury = skill.MAX_FURY;
             current_fury = skill.START_FURY;
             current_max_fury = skill.MAX_FURY;
         }
+        model = data.model;
     }
     public bool HaveStatus(CombatCharacterStatusName name)
     {
@@ -159,12 +162,13 @@ public class CombatCharacter: MonoBehaviour
         bar.SetSpeedBar(max_speed, current_speed);
         GainFury(10);
         CombatCharacter target = GetBaseAttackTarget(combatState);
+        float delay = 0;
         if (target != null)
         {
-            display.BaseAttack(target);
-            StartCoroutine(DealBaseAttackDamageDelay(target, current_power, 0.4f));
+            delay += display.BaseAttack(target);
+            StartCoroutine(DealBaseAttackDamageDelay(target, current_power, delay));
         }
-        return 0.8f;
+        return delay + 0.4f;
     }
     float Immobile ()
     {
@@ -241,12 +245,14 @@ public class CombatCharacter: MonoBehaviour
     {
         UnityEngine.Vector3 p = GameObject.Find("slot_" + (team == Team.A ? "A" : "B") + position.x + position.y).transform.position;
         transform.position = p;
-        GameObject child = transform.Find("sword_man").gameObject;
+        GameObject child = transform.Find("model").gameObject;
         bar.SetHealthBar(max_health, current_health);
         bar.SetSpeedBar(max_speed, current_speed);
         bar.SetFuryBar(current_max_fury, current_fury);
         bar.SetIconType(type);
-        child.transform.localScale = new Vector3(team == Team.A ? -100f : 100f, 100f, 100f);
+        float scale = child.transform.localScale.x;
+        int xModel = model == CharacterModel.GOBLIN_ARCHER ? -1 : 1;
+        child.transform.localScale = new Vector3(xModel*(team == Team.A ? -scale : scale), scale, scale);
     }
     public void GainHealth(float health)
     {

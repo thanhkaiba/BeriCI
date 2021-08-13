@@ -56,8 +56,10 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\GameEngine\GameUtils.cs" />
     <Compile Include="Assets\PlayerMovement.cs" />
     <Compile Include="Assets\Utils\MousePosition3D.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\Encourage.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
@@ -67,32 +69,27 @@
     <Compile Include="Assets\CameraFollow.cs" />
     <Compile Include="Assets\HealthBar.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\LaserGun.cs" />
-    <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\FightingPassion.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\Slash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\SkillMgr.cs" />
     <Compile Include="Assets\GameEngine\UserData.cs" />
     <Compile Include="Assets\Zombie.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\LifeRain.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\HeadShot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\TakeRest.cs" />
+    <Compile Include="Assets\GameEngine\Character.cs" />
     <Compile Include="Assets\Character\CharacterAnimatorCtrl.cs" />
-    <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\GroundSensor.cs" />
-    <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\Swordman.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\NuclearBomb.cs" />
     <Compile Include="Assets\Utils\Billboard.cs" />
     <Compile Include="Assets\Utils\FlyText\FlyTextMgr.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\HighNote.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatCharacter.cs" />
-    <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\PlayerController.cs" />
-    <Compile Include="Assets\Character\Low_Swordman\Demo\Scripts\Demo_GM.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\Character.cs" />
-    <Compile Include="Assets\GameEngine\GameUtils.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Skills\Encourage.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Skills\FightingPassion.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Skills\HeadShot.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Skills\HighNote.cs" />
+    <Compile Include="Assets\Character\Goblin Archer\Scripts\Arrow.cs" />
+    <Compile Include="Assets\Character\Goblin Archer\Scripts\MouseController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

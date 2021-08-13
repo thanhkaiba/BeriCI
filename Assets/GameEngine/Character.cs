@@ -15,6 +15,12 @@ public enum CharacterType
     PET
 };
 
+public enum CharacterModel
+{
+    WARRIOR,
+    GOBLIN_ARCHER,
+};
+
 public class Character
 {
     public string name = "A Character";
@@ -34,6 +40,8 @@ public class Character
 
     public int level = 1;
     public Skill skill;
+
+    public CharacterModel model = CharacterModel.WARRIOR;
     public Character(CharacterType type)
     {
         this.TYPE = type;
@@ -53,6 +61,7 @@ public class Character
                 ARMOR_P_LEVEL =         0.8f;
                 MAGIC_RESIST =          0;
                 MAGIC_RESIST_P_LEVEL =  0;
+                model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.SNIPER:
                 POWER = RF(120f, 160f); // damage to
@@ -64,6 +73,7 @@ public class Character
                 ARMOR_P_LEVEL = 0.5f;
                 MAGIC_RESIST = 5;
                 MAGIC_RESIST_P_LEVEL = 0.34f;
+                model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ARCHER:
                 POWER = RF(25, 35); // damage it
@@ -75,6 +85,7 @@ public class Character
                 ARMOR_P_LEVEL = 0.4f;
                 MAGIC_RESIST = 0;
                 MAGIC_RESIST_P_LEVEL = 0;
+                model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.SWORD_MAN:
                 POWER = RF(70, 90); 
@@ -86,6 +97,7 @@ public class Character
                 ARMOR_P_LEVEL = 0.5f;
                 MAGIC_RESIST = 20;
                 MAGIC_RESIST_P_LEVEL = 0;
+                model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.DOCTOR:
                 POWER = RF(25, 30);
@@ -97,6 +109,7 @@ public class Character
                 ARMOR_P_LEVEL = 0.5f;
                 MAGIC_RESIST = 100; // khoa hoc noi khong voi phep thuat
                 MAGIC_RESIST_P_LEVEL = 0;
+                model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.ENTERTAINER:
                 POWER = RF(25, 30);
@@ -108,6 +121,7 @@ public class Character
                 ARMOR_P_LEVEL = 0.4f;
                 MAGIC_RESIST = 10;
                 MAGIC_RESIST_P_LEVEL = 0;
+                model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.WIZARD:
                 POWER = RF(20, 25);
@@ -119,6 +133,7 @@ public class Character
                 ARMOR_P_LEVEL = 0;
                 MAGIC_RESIST = 50;
                 MAGIC_RESIST_P_LEVEL = 0.5f; // nhieu khang phep
+                model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ASSASSIN:
                 POWER = RF(120, 140);
@@ -130,6 +145,7 @@ public class Character
                 ARMOR_P_LEVEL = 0.2f;
                 MAGIC_RESIST = 10;
                 MAGIC_RESIST_P_LEVEL = 0.4f;
+                model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.PET:
                 POWER = RF(1, 300);
@@ -141,6 +157,7 @@ public class Character
                 ARMOR_P_LEVEL = RF(0.1f, 5f);
                 MAGIC_RESIST = RF(1, 100);
                 MAGIC_RESIST_P_LEVEL = RF(0.1f, 5f);
+                model = CharacterModel.WARRIOR;
                 break;
         }
     }
