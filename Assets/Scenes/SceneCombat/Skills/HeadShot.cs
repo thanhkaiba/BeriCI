@@ -12,8 +12,8 @@ public class HeadShot : Skill
     public HeadShot()
     {
         name = "HeadShot";
-        MAX_FURY = 30;
-        START_FURY = 10;
+        MAX_FURY = 15;
+        START_FURY = 5;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {

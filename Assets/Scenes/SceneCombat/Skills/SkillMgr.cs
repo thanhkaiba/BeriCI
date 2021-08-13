@@ -164,5 +164,12 @@ public class Skill
         });
         return result;
     }
+    public CombatCharacter GetBehind (CombatCharacter c, List<CombatCharacter> teamChar)
+    {
+        CombatCharacter result = null;
+        Position p = c.position;
+        result = teamChar.Find(cha => (cha.position.x == c.position.x + 1 && cha.position.y == c.position.y));
+        return result;
+    }
 }
 

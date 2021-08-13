@@ -77,8 +77,8 @@ public class Character
                 MAGIC_RESIST_P_LEVEL = 0;
                 break;
             case CharacterType.SWORD_MAN:
-                POWER = RF(70, 80); 
-                POWER_P_LEVEL = RF(6f, 10f);
+                POWER = RF(70, 90); 
+                POWER_P_LEVEL = RF(8f, 12);
                 HEALTH = RF(400, 550);
                 HEALTH_P_LEVEL = RF(28, 32);
                 SPEED = RI(80, 90);
