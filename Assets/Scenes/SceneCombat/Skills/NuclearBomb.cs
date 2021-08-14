@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public class NuclearBomb : Skill
 {
-    public float base_damage = 450;
-    public float damage_per_level = 45;
+    public float base_damage = 340;
+    public float damage_per_level = 34;
     public NuclearBomb()
     {
         name = "Nuclear Bomb";
-        MAX_FURY = 110;
+        MAX_FURY = 100;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)

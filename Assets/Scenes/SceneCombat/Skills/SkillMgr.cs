@@ -171,5 +171,28 @@ public class Skill
         result = teamChar.Find(cha => (cha.position.x == c.position.x + 1 && cha.position.y == c.position.y));
         return result;
     }
+    public CombatCharacter GetNearestInRowTarget(CombatCharacter c, List<CombatCharacter> listTarget)
+    {
+        CombatCharacter result = null;
+        int myRow = c.position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatCharacter character)
+        {
+            int col = character.position.x;
+            int row = character.position.y;
+            if (
+                (result == null)
+                || (Math.Abs(myRow - row) < NR_row)
+                || (Math.Abs(myRow - row) == NR_row && col < NR_col)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
+        });
+        return result;
+    }
 }
 

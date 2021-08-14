@@ -84,7 +84,7 @@ public class CombatCharacter: MonoBehaviour
     }
     public void SetData(Character data, Position p, Team t)
     {
-        charName = name;
+        charName = data.name;
         base_power = data.GetPower();
         current_power = data.GetPower();
         max_health = data.GetHealth();
@@ -168,7 +168,7 @@ public class CombatCharacter: MonoBehaviour
             delay += display.BaseAttack(target);
             StartCoroutine(DealBaseAttackDamageDelay(target, current_power, delay));
         }
-        return delay + 0.4f;
+        return delay + 0.2f;
     }
     float Immobile ()
     {
@@ -222,7 +222,7 @@ public class CombatCharacter: MonoBehaviour
         float magicTake = magicDamage * 100 / (100 + current_magic_resist);
         float totalDamage = physicTake + magicTake + trueDamage;
         LoseHealth(totalDamage);
-        GainFury(3);
+        GainFury(4);
         return totalDamage;
     }
     public void AddStatus (CombatCharacterStatus status)
@@ -250,6 +250,8 @@ public class CombatCharacter: MonoBehaviour
         bar.SetSpeedBar(max_speed, current_speed);
         bar.SetFuryBar(current_max_fury, current_fury);
         bar.SetIconType(type);
+        bar.SetIconSkill(skill);
+        bar.SetName(charName);
         float scale = child.transform.localScale.x;
         int xModel = model == CharacterModel.GOBLIN_ARCHER ? -1 : 1;
         child.transform.localScale = new Vector3(xModel*(team == Team.A ? -scale : scale), scale, scale);

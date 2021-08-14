@@ -52,23 +52,23 @@ public class Character
         switch(TYPE)
         {
             case CharacterType.SHIPWRIGHT:
-                POWER =                 RF(30f, 50f);
-                POWER_P_LEVEL =         RF(2.5f, 4.0f);
-                HEALTH =                RF(520, 680); // nhieu mau
-                HEALTH_P_LEVEL =        RF(45, 60);
+                POWER =                 RF(40f, 55f);
+                POWER_P_LEVEL =         RF(4.0f, 5.5f);
+                HEALTH =                RF(300, 400); // nhieu mau
+                HEALTH_P_LEVEL =        RF(30, 40);
                 SPEED =                 RI(95, 100);
                 ARMOR =                 35; // nhieu giap
-                ARMOR_P_LEVEL =         0.8f;
-                MAGIC_RESIST =          0;
+                ARMOR_P_LEVEL =         0.35f;
+                MAGIC_RESIST =          35;
                 MAGIC_RESIST_P_LEVEL =  0;
                 model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.SNIPER:
                 POWER = RF(120f, 160f); // damage to
-                POWER_P_LEVEL = RF(20, 25);
-                HEALTH = RF(180, 240);
-                HEALTH_P_LEVEL = RF(20, 25);
-                SPEED = RI(98, 108); // ban cham
+                POWER_P_LEVEL = RF(12, 16);
+                HEALTH = RF(140, 160);
+                HEALTH_P_LEVEL = RF(14, 16);
+                SPEED = 110; // ban cham
                 ARMOR = 20;
                 ARMOR_P_LEVEL = 0.5f;
                 MAGIC_RESIST = 5;
@@ -76,11 +76,11 @@ public class Character
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ARCHER:
-                POWER = RF(25, 35); // damage it
-                POWER_P_LEVEL = RF(4.0f, 5.5f);
-                HEALTH = RF(180, 240);
-                HEALTH_P_LEVEL = RF(16, 20);
-                SPEED = RI(24, 28); // ban nhanh
+                POWER = RF(32, 38); // damage it
+                POWER_P_LEVEL = RF(3.2f, 3.8f);
+                HEALTH = RF(140, 160);
+                HEALTH_P_LEVEL = RF(14, 16);
+                SPEED = RI(36, 42); // ban nhanh
                 ARMOR = 15;
                 ARMOR_P_LEVEL = 0.4f;
                 MAGIC_RESIST = 0;
@@ -88,35 +88,35 @@ public class Character
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.SWORD_MAN:
-                POWER = RF(70, 90); 
-                POWER_P_LEVEL = RF(8f, 12);
-                HEALTH = RF(400, 550);
-                HEALTH_P_LEVEL = RF(28, 32);
+                POWER = RF(74, 88); 
+                POWER_P_LEVEL = RF(7.4f, 8.8f);
+                HEALTH = RF(200, 240);
+                HEALTH_P_LEVEL = RF(20, 24);
                 SPEED = RI(80, 90);
                 ARMOR = 20;
-                ARMOR_P_LEVEL = 0.5f;
+                ARMOR_P_LEVEL = 0.25f;
                 MAGIC_RESIST = 20;
                 MAGIC_RESIST_P_LEVEL = 0;
                 model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.DOCTOR:
                 POWER = RF(25, 30);
-                POWER_P_LEVEL = RF(3f, 5f);
-                HEALTH = RF(300, 350);
-                HEALTH_P_LEVEL = RF(25, 30);
+                POWER_P_LEVEL = RF(2.5f, 3.0f);
+                HEALTH = RF(180, 220);
+                HEALTH_P_LEVEL = RF(20, 26);
                 SPEED = RI(95, 105);
                 ARMOR = 10;
                 ARMOR_P_LEVEL = 0.5f;
-                MAGIC_RESIST = 100; // khoa hoc noi khong voi phep thuat
+                MAGIC_RESIST = 80; // khoa hoc noi khong voi phep thuat
                 MAGIC_RESIST_P_LEVEL = 0;
                 model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.ENTERTAINER:
                 POWER = RF(25, 30);
-                POWER_P_LEVEL = RF(3f, 8f);
-                HEALTH = RF(240, 280);
-                HEALTH_P_LEVEL = RF(22, 34);
-                SPEED = RI(62, 74);
+                POWER_P_LEVEL = RF(2.5f, 3.0f);
+                HEALTH = RF(180, 220);
+                HEALTH_P_LEVEL = RF(20, 26);
+                SPEED = RI(68, 74);
                 ARMOR = 10;
                 ARMOR_P_LEVEL = 0.4f;
                 MAGIC_RESIST = 10;
@@ -125,22 +125,22 @@ public class Character
                 break;
             case CharacterType.WIZARD:
                 POWER = RF(20, 25);
-                POWER_P_LEVEL = RF(2f, 4f);
-                HEALTH = RF(160, 200);
+                POWER_P_LEVEL = RF(2.0f, 2.5f);
+                HEALTH = RF(140, 160);
                 HEALTH_P_LEVEL = RF(16, 20);
                 SPEED = RI(92, 100);
-                ARMOR = 100; // phap su khang vat ly
+                ARMOR = 10;
                 ARMOR_P_LEVEL = 0;
                 MAGIC_RESIST = 50;
                 MAGIC_RESIST_P_LEVEL = 0.5f; // nhieu khang phep
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ASSASSIN:
-                POWER = RF(120, 140);
-                POWER_P_LEVEL = RF(23f, 25f);
-                HEALTH = RF(250, 300);
-                HEALTH_P_LEVEL = RF(25, 30);
-                SPEED = RI(100, 112);
+                POWER = RF(65, 75);
+                POWER_P_LEVEL = RF(6.5f, 7.5f);
+                HEALTH = RF(140, 160);
+                HEALTH_P_LEVEL = RF(14, 16);
+                SPEED = RI(108, 120);
                 ARMOR = 15;
                 ARMOR_P_LEVEL = 0.2f;
                 MAGIC_RESIST = 10;

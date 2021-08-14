@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FrozenAxe : Skill
 {
-    public int turn = 1;
+    public int frozen_turn = 1;
+    public float damage_ratio = 1.0f;
     public FrozenAxe()
     {
         name = "Frozen Axe";
         MAX_FURY = 30;
-        START_FURY = 25;
+        START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
@@ -23,9 +24,9 @@ public class FrozenAxe : Skill
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
-        return RunAnimation(cChar, target, spell_damage);
+        return RunAnimation(cChar, target);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float spell_damage)
+    float RunAnimation(CombatCharacter attacking, CombatCharacter target)
     {
         attacking.display.TriggerAnimation("BaseAttack");
 
@@ -36,8 +37,8 @@ public class FrozenAxe : Skill
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => {
-            target.TakeDamage(0, spell_damage, 0);
-            target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, 1));
+            target.TakeDamage(damage_ratio * attacking.current_power, damage_ratio * attacking.current_power, 0);
+            target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, frozen_turn));
         });
         seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
         return 0.8f;

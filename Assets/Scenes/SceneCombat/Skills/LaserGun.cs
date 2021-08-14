@@ -7,7 +7,7 @@ public class LaserGun : Skill
     public float damage_per_level = 26;
     public LaserGun()
     {
-        name = "LaserGun";
+        name = "Laser Gun";
         MAX_FURY = 15;
         START_FURY = 0;
     }

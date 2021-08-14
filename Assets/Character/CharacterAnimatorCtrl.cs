@@ -8,13 +8,12 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     public GameObject modelObject;
     public CharBarControl barControl;
 
-    public Image iceBlock;
     public GameObject arrowPrefab;
     public Transform startArrow;
+    private GameObject iceBlock = null;
     private CharacterModel model; // sau se co 1 loai rieng de chia cac loai model
     private void Start()
     {
-        iceBlock.gameObject.SetActive(false);
         model = GetComponent<CombatCharacter>().model;
     }
     public void TriggerAnimation(string trigger)
@@ -40,7 +39,7 @@ public class CharacterAnimatorCtrl : MonoBehaviour
             Sequence seq = DOTween.Sequence();
             seq.Append(transform.DOMove(desPos, 0.3f));
             seq.AppendInterval(0.2f);
-            seq.Append(transform.DOMove(oriPos, 0.3f));
+            seq.Append(transform.DOMove(oriPos, 0.2f));
             return 0.4f;
         } else
         {
@@ -79,6 +78,9 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     }
     public void ShowInIce(bool b)
     {
-        iceBlock.gameObject.SetActive(b);
+        if (b)
+            if (iceBlock == null)iceBlock = Instantiate(GameEffMgr.Instance.frozenPrefab, transform);
+            else iceBlock.SetActive(b);
+        else if (iceBlock != null) iceBlock.SetActive(b);
     }
 }

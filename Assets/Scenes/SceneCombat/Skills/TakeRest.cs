@@ -1,11 +1,12 @@
 using DG.Tweening;
 public class TakeRest : Skill
 {
+    public float heal_ratio = 0.35f;
     public TakeRest()
     {
-        name = "TakeRest";
-        MAX_FURY = 24;
-        START_FURY = 5;
+        name = "Take Rest";
+        MAX_FURY = 40;
+        START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
@@ -14,7 +15,7 @@ public class TakeRest : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        cChar.GainHealth(0.4f * cChar.max_health);
+        cChar.GainHealth(heal_ratio * cChar.max_health);
         return RunAnimTakeRest(cChar);
     }
     float RunAnimTakeRest(CombatCharacter cChar)

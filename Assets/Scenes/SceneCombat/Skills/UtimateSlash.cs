@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class UltimateSlash : Skill
 {
-    public float base_damage = 120;
-    public float damage_per_level = 12;
     public float base_heal = 10;
+    public float scale_damage = 2f;
     public UltimateSlash()
     {
         name = "Ultimate Slash";
@@ -20,29 +19,28 @@ public class UltimateSlash : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float deal_damage = cChar.current_power * 2 + base_damage + cChar.level * damage_per_level;
+        float true_damage = cChar.current_power * scale_damage;
         float heal = base_heal + cChar.current_power;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);
 
-        return RunAnimation(cChar, target, deal_damage, heal);
+        return RunAnimation(cChar, target, true_damage, heal);
     }
     float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage, float heal)
     {
-        attacking.display.TriggerAnimation("BaseAttack");
-
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);
         Sequence seq = DOTween.Sequence();
-        seq.Append(attacking.transform.DOMove(desPos, 0.6f));
-        seq.AppendInterval(0.2f);
+        seq.Append(attacking.transform.DOMove(desPos, 0.4f));
+        seq.AppendInterval(0.1f);
         seq.AppendCallback(() => {
-            target.TakeDamage(damage);
+            attacking.display.TriggerAnimation("BaseAttack");
+            target.TakeDamage(0, 0, damage);
             attacking.GainHealth(heal);
         });
-        seq.Append(attacking.transform.DOMove(oriPos, 0.4f));
-        return 1.2f;
+        seq.Append(attacking.transform.DOMove(oriPos, 0.2f));
+        return 0.7f;
     }
 }

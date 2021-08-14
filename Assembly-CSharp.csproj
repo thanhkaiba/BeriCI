@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Skills\SkillMgr.cs" />
     <Compile Include="Assets\GameEngine\UserData.cs" />
     <Compile Include="Assets\Zombie.cs" />
+    <Compile Include="Assets\Character\Goblin Archer\Scripts\Arrow.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\LifeRain.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\HeadShot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\TakeRest.cs" />
@@ -86,10 +87,11 @@
     <Compile Include="Assets\Scenes\SceneCombat\Skills\HighNote.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatCharacter.cs" />
+    <Compile Include="Assets\Character\Goblin Archer\Scripts\MouseController.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Character\Goblin Archer\Scripts\Arrow.cs" />
-    <Compile Include="Assets\Character\Goblin Archer\Scripts\MouseController.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Skills\IceArrow.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

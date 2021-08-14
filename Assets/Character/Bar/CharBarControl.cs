@@ -12,7 +12,13 @@ public class CharBarControl : MonoBehaviour
     public Slider furyBar;
     public Text furyText;
     public Image iconType;
+    public Image iconSkill;
+    public Text textName;
 
+    public void SetName (string name)
+    {
+        textName.text = name;
+    }
     public void SetIconType(CharacterType type)
     {
         Sprite spr;
@@ -50,6 +56,15 @@ public class CharBarControl : MonoBehaviour
                 break;
         }
         iconType.sprite = spr;
+    }
+    public void SetIconSkill(Skill skill)
+    {
+        if (skill != null)
+        {
+            Debug.Log("skill.name" + skill.name);
+            iconSkill.sprite = Resources.Load<Sprite>("IconSkill/" + skill.name);
+        }
+        else iconSkill.sprite = Resources.Load<Sprite>("IconSkill/None");
     }
     public void SetHealthBar(float max, float min)
     {

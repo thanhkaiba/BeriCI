@@ -5,11 +5,11 @@ using UnityEngine;
 public class Deceive : Skill
 {
     public float base_damage = 10;
-    public float damage_per_level = 8;
+    public float damage_per_level = 2.5f;
     public Deceive()
     {
         name = "Deceive";
-        MAX_FURY = 10;
+        MAX_FURY = 20;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)

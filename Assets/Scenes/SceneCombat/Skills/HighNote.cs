@@ -6,11 +6,12 @@ public class HighNote : Skill
 {
     public int fury = 8;
     public float speed_self_buff = 0.15f;
-    public float buff_magic_resist = 5f;
+    public float buff_magic_resist = 8f;
+    public float buff_armor = 8f;
 
     public HighNote()
     {
-        name = "HighNote";
+        name = "High Note";
         MAX_FURY = 0;
         START_FURY = 0;
         rank = SkillRank.A;
@@ -38,6 +39,7 @@ public class HighNote : Skill
         {
             target.GainFury(fury);
             target.current_magic_resist += buff_magic_resist;
+            target.current_armor += buff_armor;
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+Buff+", target.transform.position);
         });
         seq.AppendInterval(0.2f);

@@ -11,9 +11,9 @@ public class HeadShot : Skill
     public float sniper_lose_health_ratio = 0.35f;
     public HeadShot()
     {
-        name = "HeadShot";
+        name = "Head Shot";
         MAX_FURY = 15;
-        START_FURY = 5;
+        START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
@@ -34,16 +34,14 @@ public class HeadShot : Skill
     }
     float RunAnimation(CombatCharacter attacking, CombatCharacter target, float physic_damage)
     {
-        attacking.display.TriggerAnimation("BaseAttack");
+        float delay = attacking.display.BaseAttack(target);
 
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);
         Sequence seq = DOTween.Sequence();
-        seq.Append(attacking.transform.DOMove(desPos, 0.3f));
-        seq.AppendInterval(0.2f);
+        seq.AppendInterval(delay);
         seq.AppendCallback(() => { target.TakeDamage(physic_damage, 0, 0); });
-        seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
         return 0.8f;
     }
 }
