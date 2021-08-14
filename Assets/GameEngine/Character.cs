@@ -8,8 +8,7 @@ public enum CharacterType
     SNIPER,
     ARCHER,
     SWORD_MAN,
-    DOCTOR,
-    ENTERTAINER,
+    LOGISTICS,
     WIZARD,
     ASSASSIN,
     PET
@@ -59,7 +58,7 @@ public class Character
                 SPEED =                 RI(95, 100);
                 ARMOR =                 35; // nhieu giap
                 ARMOR_P_LEVEL =         0.35f;
-                MAGIC_RESIST =          35;
+                MAGIC_RESIST =          20;
                 MAGIC_RESIST_P_LEVEL =  0;
                 model = CharacterModel.WARRIOR;
                 break;
@@ -99,19 +98,7 @@ public class Character
                 MAGIC_RESIST_P_LEVEL = 0;
                 model = CharacterModel.WARRIOR;
                 break;
-            case CharacterType.DOCTOR:
-                POWER = RF(25, 30);
-                POWER_P_LEVEL = RF(2.5f, 3.0f);
-                HEALTH = RF(180, 220);
-                HEALTH_P_LEVEL = RF(20, 26);
-                SPEED = RI(95, 105);
-                ARMOR = 10;
-                ARMOR_P_LEVEL = 0.5f;
-                MAGIC_RESIST = 80; // khoa hoc noi khong voi phep thuat
-                MAGIC_RESIST_P_LEVEL = 0;
-                model = CharacterModel.WARRIOR;
-                break;
-            case CharacterType.ENTERTAINER:
+            case CharacterType.LOGISTICS:
                 POWER = RF(25, 30);
                 POWER_P_LEVEL = RF(2.5f, 3.0f);
                 HEALTH = RF(180, 220);
@@ -119,8 +106,8 @@ public class Character
                 SPEED = RI(68, 74);
                 ARMOR = 10;
                 ARMOR_P_LEVEL = 0.4f;
-                MAGIC_RESIST = 10;
-                MAGIC_RESIST_P_LEVEL = 0;
+                MAGIC_RESIST = 50;
+                MAGIC_RESIST_P_LEVEL = 0.5f;
                 model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.WIZARD:
@@ -130,9 +117,9 @@ public class Character
                 HEALTH_P_LEVEL = RF(16, 20);
                 SPEED = RI(92, 100);
                 ARMOR = 10;
-                ARMOR_P_LEVEL = 0;
-                MAGIC_RESIST = 50;
-                MAGIC_RESIST_P_LEVEL = 0.5f; // nhieu khang phep
+                ARMOR_P_LEVEL = 0.1f;
+                MAGIC_RESIST = 30;
+                MAGIC_RESIST_P_LEVEL = 0.3f;
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ASSASSIN:

@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class Slash : Skill
 {
-    public float base_damage = 10;
-    public float damage_per_level = 5;
+    public float scale_damage_ratio = 2;
     public float behind_damage_ratio = 0.7f;
     public Slash()
     {
         name = "Slash";
-        MAX_FURY = 1;
-        START_FURY = 0;
+        MAX_FURY = 10;
+        START_FURY = 7;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {
@@ -20,7 +19,7 @@ public class Slash : Skill
     public override float CastSkill(CombatCharacter cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float physic_damage = cChar.current_power + base_damage + cChar.level * damage_per_level;
+        float physic_damage = cChar.current_power * scale_damage_ratio;
 
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetNearestTarget(cChar, enermy);

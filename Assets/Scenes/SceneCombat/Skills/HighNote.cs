@@ -6,8 +6,8 @@ public class HighNote : Skill
 {
     public int fury = 8;
     public float speed_self_buff = 0.15f;
-    public float buff_magic_resist = 8f;
-    public float buff_armor = 8f;
+    public float buff_magic_resist = 10f;
+    public float buff_armor = 10f;
 
     public HighNote()
     {

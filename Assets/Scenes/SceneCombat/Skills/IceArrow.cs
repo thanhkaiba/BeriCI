@@ -8,7 +8,7 @@ public class IceArrow : Skill
     public IceArrow()
     {
         name = "Ice Arrow";
-        MAX_FURY = 20;
+        MAX_FURY = 30;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
@@ -34,7 +34,7 @@ public class IceArrow : Skill
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => {
-            target.TakeDamage(0, 0, attacking.current_power);
+            target.TakeDamage(0, attacking.current_power, attacking.current_power);
             target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, frozen_turn));
         });
         return delay;

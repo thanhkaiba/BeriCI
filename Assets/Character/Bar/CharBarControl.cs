@@ -36,11 +36,8 @@ public class CharBarControl : MonoBehaviour
             case CharacterType.SWORD_MAN:
                 spr = Resources.Load<Sprite>("IconCharacterType/SwordMan");
                 break;
-            case CharacterType.DOCTOR:
-                spr = Resources.Load<Sprite>("IconCharacterType/Doctor");
-                break;
-            case CharacterType.ENTERTAINER:
-                spr = Resources.Load<Sprite>("IconCharacterType/Entertainer");
+            case CharacterType.LOGISTICS:
+                spr = Resources.Load<Sprite>("IconCharacterType/Logistics");
                 break;
             case CharacterType.WIZARD:
                 spr = Resources.Load<Sprite>("IconCharacterType/Wizard");
