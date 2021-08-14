@@ -3,8 +3,8 @@ public class FightingPassion : Skill
 {
     float increaseDamageRatio = 0.25f;
     float increaseSpeedRatio = 0.8f;
-    float armor_increase = 10;
-    float magic_resist_increase = 10;
+    float armor_increase = 20;
+    float magic_resist_increase = 20;
     public FightingPassion()
     {
         name = "Fighting Passion";

@@ -194,5 +194,9 @@ public class Skill
         });
         return result;
     }
+    public Team GetOppositeTeam(Team t)
+    {
+        return (t == Team.A ? Team.B : Team.A);
+    }
 }
 

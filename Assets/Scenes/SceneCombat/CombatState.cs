@@ -27,11 +27,11 @@ public class CombatState : MonoBehaviour
     public void CreateDemoTeam()
     {
         // A
-        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 0), Team.A);
-        CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(1, 1), Team.A);
-        CreateCombatCharacter(CharacterType.SNIPER, new HeadShot(), new Position(2, 0), Team.A);
-        CreateCombatCharacter(CharacterType.SNIPER, new HeadShot(), new Position(2, 2), Team.A);
-        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), Team.A);
+        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 0), Team.A);
+        //CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(1, 1), Team.A);
+        //CreateCombatCharacter(CharacterType.SNIPER, new HeadShot(), new Position(2, 0), Team.A);
+        //CreateCombatCharacter(CharacterType.SNIPER, new HeadShot(), new Position(2, 2), Team.A);
+        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), Team.A);
         // A2
         //CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 1), Team.A);
         //CreateCombatCharacter(CharacterType.LOGISTICS, new Encourage(), new Position(1, 0), Team.A);
@@ -51,17 +51,17 @@ public class CombatState : MonoBehaviour
         //CreateCombatCharacter(CharacterType.LOGISTICS, new Encourage(), new Position(2, 2), Team.B);
         //CreateCombatCharacter(CharacterType.LOGISTICS, new Encourage(), new Position(2, 0), Team.B);
         // B3
-        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.B);
-        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), Team.B);
-        CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(2, 0), Team.B);
-        CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(2, 2), Team.B);
-        CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(1, 1), Team.B);
+        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.B);
+        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), Team.B);
+        //CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(2, 0), Team.B);
+        //CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(2, 2), Team.B);
+        //CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(1, 1), Team.B);
         // B4
-        //CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 1), Team.B);
-        //CreateCombatCharacter(CharacterType.WIZARD, new NuclearBomb(), new Position(2, 1), Team.B);
-        //CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(1, 1), Team.B);
-        //CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 2), Team.B);
-        //CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 0), Team.B);
+        CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 1), Team.B);
+        CreateCombatCharacter(CharacterType.WIZARD, new NuclearBomb(), new Position(2, 1), Team.B);
+        CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(1, 1), Team.B);
+        CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 2), Team.B);
+        CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 0), Team.B);
 
 
         //CreateCombatCharacter(CharacterType.ARCHER, null, new Position(2, 1), Team.A);
@@ -76,11 +76,11 @@ public class CombatState : MonoBehaviour
         //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), Team.A);
         //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.A);
 
-        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 1), Team.B);
-        //CreateCombatCharacter(CharacterType.ARCHER, new HeadShot(), new Position(2, 0), Team.B);
-        //CreateCombatCharacter(CharacterType.ARCHER, new HeadShot(), new Position(2, 2), Team.B);
-        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 2), Team.B);
-        //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 0), Team.B);
+        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 1), Team.A);
+        CreateCombatCharacter(CharacterType.ARCHER, new HeadShot(), new Position(2, 0), Team.A);
+        CreateCombatCharacter(CharacterType.ARCHER, new HeadShot(), new Position(2, 2), Team.A);
+        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 2), Team.A);
+        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 0), Team.A);
     }
     CombatCharacter CreateCombatCharacter(CharacterType type, Skill skill, Position pos, Team team) // test
     {
