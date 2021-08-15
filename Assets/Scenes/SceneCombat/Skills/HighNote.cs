@@ -33,8 +33,10 @@ public class HighNote : Skill
     float RunAnimation(CombatCharacter attacking, CombatCharacter target)
     {
         attacking.display.TriggerAnimation("BaseAttack");
+        GameEffMgr.Instance.ShowBuffEnergy(attacking.transform.position, target.transform.position);
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOLocalMoveY(1f, 0.5f));
+        seq.AppendInterval(0.4f);
         seq.AppendCallback(() =>
         {
             target.GainFury(fury);
@@ -44,6 +46,6 @@ public class HighNote : Skill
         });
         seq.AppendInterval(0.2f);
         seq.Append(attacking.transform.DOLocalMoveY(0f, 0.3f));
-        return 0.8f;
+        return 1.0f;
     }
 }

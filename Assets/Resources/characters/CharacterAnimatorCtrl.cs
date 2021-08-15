@@ -29,6 +29,7 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     }
     public float BaseAttack(CombatCharacter target)
     {
+        //GameEffMgr.Instance.ShowFireBallFly(transform.position, Team.A);
         TriggerAnimation("BaseAttack");
         if (model == CharacterModel.WARRIOR)
         {

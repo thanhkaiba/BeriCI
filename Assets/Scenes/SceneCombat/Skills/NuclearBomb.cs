@@ -22,11 +22,11 @@ public class NuclearBomb : Skill
         float spell_damage = base_damage + cChar.level * damage_per_level;
 
         List<CombatCharacter> targets = cbState.GetAliveCharacterEnermy(cChar.team);
-        
+        GameEffMgr.Instance.ShowFireBallFly(cChar.transform.position, GetOppositeTeam(cChar.team));
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));
+        seq.AppendInterval(0.5f);
         seq.AppendCallback(() => GameEffMgr.Instance.ShowExplosion(GetOppositeTeam(cChar.team)));
-        seq.AppendInterval(0.4f);
         seq.AppendCallback(() => {
             targets.ForEach(delegate (CombatCharacter character)
             {

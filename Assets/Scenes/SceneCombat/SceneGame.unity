@@ -2443,9 +2443,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5217115ea2e63c245a2b6d6d9bbd5eb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frozenPrefab: {fileID: 2236271020983303941, guid: b69ca9bfbbcdbac46afffa5528df40c5,
-    type: 3}
   bigExplosion: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664,
+    type: 3}
+  fireBall: {fileID: 1947871717301538, guid: a990e3ac1318b834488c784d851f42a9, type: 3}
+  energyExplosion: {fileID: 1329845292236604, guid: 9bba9cf244c53c5439505dfc96fdd11c,
     type: 3}
   fieldLeft: {fileID: 647465597}
   fieldRight: {fileID: 166191600}
