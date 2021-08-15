@@ -10,7 +10,7 @@ public class Encourage : Skill
     public int base_speed = 45;
     public int speed_per_level = 0;
 
-    public int fury = 10;
+    public int fury = 4;
 
     public float base_power_buff = 10;
     public float power_buff_per_level = 1;
@@ -36,13 +36,15 @@ public class Encourage : Skill
         List<CombatCharacter> allies = cbState.GetAllTeamAliveCharacter(cChar.team);
         CombatCharacter target = GetLowestPercentHealthTarget(allies);
 
-        return RunAnimation(cChar, target, heal, speed, buff_fury, power_buff);
+        return RunAnimation(cChar, target, heal, target != cChar ? speed : 0, buff_fury, power_buff);
     }
     float RunAnimation(CombatCharacter attacking, CombatCharacter target, float heal, int speed, int fury, float power_buff)
     {
         attacking.display.TriggerAnimation("BaseAttack");
+        GameEffMgr.Instance.ShowBuffEnergy(attacking.transform.position, target.transform.position);
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOLocalMoveY(1f, 0.5f));
+        seq.AppendInterval(0.4f);
         seq.AppendCallback(() =>
         {
             target.GainHealth(heal);
@@ -53,6 +55,6 @@ public class Encourage : Skill
         });
         seq.AppendInterval(0.2f);
         seq.Append(attacking.transform.DOLocalMoveY(0f, 0.3f));
-        return 0.8f;
+        return 1.0f;
     }
 }

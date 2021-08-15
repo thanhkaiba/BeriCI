@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class HeadShot : Skill
 {
-    public float damage_ratio = 1.0f;
-    public float lose_health_ratio = 0.35f;
+    public float damage_ratio = 1.1f;
+    public float lose_health_ratio = 0.15f;
 
     public float sniper_damage_ratio = 1.5f;
     public float sniper_lose_health_ratio = 0.35f;

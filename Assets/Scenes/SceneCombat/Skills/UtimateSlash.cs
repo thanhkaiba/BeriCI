@@ -32,11 +32,11 @@ public class UltimateSlash : Skill
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);
+        attacking.display.TriggerAnimation("BaseAttack");
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOMove(desPos, 0.4f));
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() => {
-            attacking.display.TriggerAnimation("BaseAttack");
             target.TakeDamage(0, 0, damage);
             attacking.GainHealth(heal);
         });

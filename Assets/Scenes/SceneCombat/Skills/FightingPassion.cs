@@ -1,10 +1,12 @@
 using DG.Tweening;
 public class FightingPassion : Skill
 {
-    float increaseDamageRatio = 0.25f;
+    float increaseDamageRatio = 0.18f;
     float increaseSpeedRatio = 0.8f;
-    float armor_increase = 20;
-    float magic_resist_increase = 20;
+    float armor_increase = 8;
+    float magic_resist_increase = 8;
+    float increase_health = 35;
+    float increase_health_per_level = 3.5f;
     public FightingPassion()
     {
         name = "Fighting Passion";
@@ -23,6 +25,8 @@ public class FightingPassion : Skill
         cChar.current_speed += (int)System.Math.Floor(cChar.max_speed * increaseSpeedRatio);
         cChar.current_armor += armor_increase;
         cChar.current_magic_resist += magic_resist_increase;
+        cChar.max_health += increase_health + increase_health_per_level * cChar.level;
+        cChar.GainHealth(increase_health + increase_health_per_level * cChar.level);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+" + (int)incPower + "POW", cChar.transform.position);
         return RunAnim(cChar);
     }

@@ -123,8 +123,8 @@ public class Character
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ASSASSIN:
-                POWER = RF(65, 75);
-                POWER_P_LEVEL = RF(6.5f, 7.5f);
+                POWER = RF(80, 96);
+                POWER_P_LEVEL = RF(8.0f, 9.6f);
                 HEALTH = RF(140, 160);
                 HEALTH_P_LEVEL = RF(14, 16);
                 SPEED = RI(108, 120);

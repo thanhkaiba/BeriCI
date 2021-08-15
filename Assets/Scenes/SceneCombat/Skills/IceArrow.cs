@@ -8,7 +8,7 @@ public class IceArrow : Skill
     public IceArrow()
     {
         name = "Ice Arrow";
-        MAX_FURY = 30;
+        MAX_FURY = 50;
         START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
