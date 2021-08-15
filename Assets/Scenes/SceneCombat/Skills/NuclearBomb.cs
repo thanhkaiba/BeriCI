@@ -27,6 +27,7 @@ public class NuclearBomb : Skill
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() => GameEffMgr.Instance.ShowExplosion(GetOppositeTeam(cChar.team)));
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() => {
             targets.ForEach(delegate (CombatCharacter character)
             {

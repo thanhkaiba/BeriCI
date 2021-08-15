@@ -30,7 +30,7 @@ public class GameEffMgr : MonoBehaviour
     {
         var go = team == Team.A ? fieldLeft : fieldRight; 
         GameObject ex = Instantiate(bigExplosion, go.transform.position, go.transform.rotation);
-        ex.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        ex.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(2.0f);
         seq.AppendCallback(() => Destroy(ex));
