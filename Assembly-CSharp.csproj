@@ -57,29 +57,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\GameEngine\GameUtils.cs" />
-    <Compile Include="Assets\PlayerMovement.cs" />
+    <Compile Include="Assets\Utils\PlayerMovement.cs" />
     <Compile Include="Assets\Utils\MousePosition3D.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\Encourage.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
-    <Compile Include="Assets\Rotator.cs" />
-    <Compile Include="Assets\Character\Bar\CharBarControl.cs" />
+    <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\Deceive.cs" />
-    <Compile Include="Assets\CameraFollow.cs" />
-    <Compile Include="Assets\HealthBar.cs" />
+    <Compile Include="Assets\Utils\CameraFollow.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\LaserGun.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\FightingPassion.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\Slash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\SkillMgr.cs" />
     <Compile Include="Assets\GameEngine\UserData.cs" />
-    <Compile Include="Assets\Zombie.cs" />
-    <Compile Include="Assets\Character\Goblin Archer\Scripts\Arrow.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\LifeRain.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\HeadShot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\TakeRest.cs" />
     <Compile Include="Assets\GameEngine\Character.cs" />
-    <Compile Include="Assets\Character\CharacterAnimatorCtrl.cs" />
+    <Compile Include="Assets\Resources\characters\CharacterAnimatorCtrl.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\NuclearBomb.cs" />
@@ -89,9 +85,10 @@
     <Compile Include="Assets\Scenes\SceneCombat\Skills\HighNote.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatCharacter.cs" />
-    <Compile Include="Assets\Character\Goblin Archer\Scripts\MouseController.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
+    <Compile Include="Assets\Resources\characters\CharacterShadow.cs" />
+    <Compile Include="Assets\Utils\CameraLook.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -670,6 +667,12 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Tilemap.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -685,6 +688,12 @@
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
@@ -694,26 +703,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.ProGrids.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ProGrids.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ProGrids">
       <HintPath>Library\ScriptAssemblies\Unity.ProGrids.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

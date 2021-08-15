@@ -12,8 +12,6 @@ public enum CombatStatus
 public class CombatState : MonoBehaviour
 {
     public Camera MainCamera;
-    public GameObject warriorPrefab;
-    public GameObject goblinPrefab;
 
     public CombatStatus status;
     public List<CombatCharacter> charactersTeamA = new List<CombatCharacter>();
@@ -61,7 +59,7 @@ public class CombatState : MonoBehaviour
         CreateCombatCharacter(CharacterType.WIZARD, new NuclearBomb(), new Position(2, 1), Team.B);
         CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(1, 1), Team.B);
         CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 2), Team.B);
-        CreateCombatCharacter(CharacterType.LOGISTICS, new HighNote(), new Position(0, 0), Team.B);
+        CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.B);
 
 
         //CreateCombatCharacter(CharacterType.ARCHER, null, new Position(2, 1), Team.A);
@@ -77,8 +75,8 @@ public class CombatState : MonoBehaviour
         //CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), Team.A);
 
         CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 1), Team.A);
-        CreateCombatCharacter(CharacterType.ARCHER, new HeadShot(), new Position(2, 0), Team.A);
-        CreateCombatCharacter(CharacterType.ARCHER, new HeadShot(), new Position(2, 2), Team.A);
+        CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(2, 0), Team.A);
+        CreateCombatCharacter(CharacterType.ARCHER, new IceArrow(), new Position(2, 2), Team.A);
         CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 2), Team.A);
         CreateCombatCharacter(CharacterType.SHIPWRIGHT, new FrozenAxe(), new Position(0, 0), Team.A);
     }
@@ -151,16 +149,18 @@ public class CombatState : MonoBehaviour
         switch (model)
         {
             case CharacterModel.WARRIOR:
-                c = Instantiate(warriorPrefab);
+                c = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
                 break;
             case CharacterModel.GOBLIN_ARCHER:
-                c = Instantiate(goblinPrefab);
+                c = Instantiate(Resources.Load<GameObject>("characters/goblin_archer"));
                 break;
             default:
-                c = Instantiate(warriorPrefab);
+                c = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
                 break;
         }
         c.GetComponent<Billboard>().cam = MainCamera.transform;
+        var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
+        shadow.GetComponent<CharacterShadow>().SetCharacter(c);
         return c;
     }
 };

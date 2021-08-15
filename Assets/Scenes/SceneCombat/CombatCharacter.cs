@@ -79,8 +79,19 @@ public class CombatCharacter: MonoBehaviour
     private void Start()
     {
         display = GetComponent<CharacterAnimatorCtrl>();
-        bar = transform.Find("CharacterBar").GetComponent<CharBarControl>();
+        bar = CreateStatusBar();
+        
         InitDisplayStatus();
+    }
+    CharBarControl CreateStatusBar ()
+    {
+        var barPrefab = Resources.Load<GameObject>("characters/Bar/Bar2");
+        var barGO = Instantiate<GameObject>(
+            barPrefab,
+            transform.Find("nodeBar"));
+        barGO.transform.localScale = new Vector3(0.018f, 0.018f, 0.018f);
+        barGO.transform.localPosition = new Vector3(0, 0, 0);
+        return barGO.transform.GetComponent<CharBarControl>();
     }
     public void SetData(Character data, Position p, Team t)
     {
@@ -177,13 +188,9 @@ public class CombatCharacter: MonoBehaviour
         CountdownStatusRemain();
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.2f);
-        seq.AppendCallback(() =>
-        {
-            display.DisplayStatus(listStatus);
-            display.Immobile();
-        });
-        return 0.6f;
+        
+        display.DisplayStatus(listStatus);
+        return display.Immobile() + 0.2f;
     }
     CombatCharacter GetBaseAttackTarget(CombatState combatState)
     {
@@ -245,16 +252,13 @@ public class CombatCharacter: MonoBehaviour
     {
         UnityEngine.Vector3 p = GameObject.Find("slot_" + (team == Team.A ? "A" : "B") + position.x + position.y).transform.position;
         transform.position = p;
-        GameObject child = transform.Find("model").gameObject;
         bar.SetHealthBar(max_health, current_health);
         bar.SetSpeedBar(max_speed, current_speed);
         bar.SetFuryBar(current_max_fury, current_fury);
         bar.SetIconType(type);
         bar.SetIconSkill(skill);
         bar.SetName(charName);
-        float scale = child.transform.localScale.x;
-        int xModel = model == CharacterModel.GOBLIN_ARCHER ? -1 : 1;
-        child.transform.localScale = new Vector3(xModel*(team == Team.A ? -scale : scale), scale, scale);
+        display.SetFaceDirection(team == Team.A ? -1 : 1);
     }
     public void GainHealth(float health)
     {
