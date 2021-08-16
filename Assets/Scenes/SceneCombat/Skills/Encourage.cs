@@ -10,7 +10,7 @@ public class Encourage : Skill
     public int base_speed = 45;
     public int speed_per_level = 0;
 
-    public int fury = 4;
+    public int fury = 8;
 
     public float base_power_buff = 10;
     public float power_buff_per_level = 1;

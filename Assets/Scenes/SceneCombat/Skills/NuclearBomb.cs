@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class NuclearBomb : Skill
 {
-    public float base_damage = 340;
-    public float damage_per_level = 34;
+    public float base_damage = 350;
+    public float damage_per_level = 35;
     public NuclearBomb()
     {
         name = "Nuclear Bomb";

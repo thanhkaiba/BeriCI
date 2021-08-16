@@ -2,11 +2,11 @@ using DG.Tweening;
 public class FightingPassion : Skill
 {
     float increaseDamageRatio = 0.18f;
-    float increaseSpeedRatio = 0.8f;
-    float armor_increase = 8;
-    float magic_resist_increase = 8;
-    float increase_health = 35;
-    float increase_health_per_level = 3.5f;
+    float increaseSpeedRatio = 0.4f;
+    float armor_increase = 12;
+    float magic_resist_increase = 12;
+    float increase_health = 30;
+    float increase_health_per_level = 3.0f;
     public FightingPassion()
     {
         name = "Fighting Passion";

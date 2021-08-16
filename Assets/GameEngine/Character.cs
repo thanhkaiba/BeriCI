@@ -118,7 +118,7 @@ public class Character
                 SPEED = RI(92, 100);
                 ARMOR = 10;
                 ARMOR_P_LEVEL = 0.1f;
-                MAGIC_RESIST = 30;
+                MAGIC_RESIST = 100;
                 MAGIC_RESIST_P_LEVEL = 0.3f;
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;

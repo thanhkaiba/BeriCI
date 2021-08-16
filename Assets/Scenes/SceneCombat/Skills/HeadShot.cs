@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class HeadShot : Skill
 {
-    public float damage_ratio = 1.1f;
-    public float lose_health_ratio = 0.15f;
+    public float damage_ratio = 1.0f;
+    public float lose_health_ratio = 0.1f;
 
-    public float sniper_damage_ratio = 1.5f;
-    public float sniper_lose_health_ratio = 0.35f;
+    public float sniper_damage_ratio = 1.2f;
+    public float sniper_lose_health_ratio = 0.25f;
     public HeadShot()
     {
         name = "Head Shot";
         MAX_FURY = 15;
-        START_FURY = 5;
+        START_FURY = 0;
     }
     public override bool CanActive(CombatCharacter cChar, CombatState cbState)
     {

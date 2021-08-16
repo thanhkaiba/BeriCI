@@ -29,7 +29,7 @@ public class CombatState : MonoBehaviour
     }
     void CreateRandomTeam(Team t)
     {
-        int r = Random.Range(0, 11);
+        int r = Random.Range(0, 12);
         switch (r)
         {
             case 0:
@@ -108,6 +108,13 @@ public class CombatState : MonoBehaviour
                 CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), t);
                 CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), t);
                 CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(0, 1), t);
+                break;
+            case 11:
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(2, 2), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(2, 0), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 0), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 2), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 1), t);
                 break;
         }
     }

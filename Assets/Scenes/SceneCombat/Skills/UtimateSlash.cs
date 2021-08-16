@@ -5,7 +5,7 @@ using UnityEngine;
 public class UltimateSlash : Skill
 {
     public float base_heal = 40;
-    public float scale_damage = 2.5f;
+    public float scale_damage = 2.0f;
     public UltimateSlash()
     {
         name = "Ultimate Slash";

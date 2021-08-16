@@ -5,7 +5,7 @@ using UnityEngine;
 public class FrozenAxe : Skill
 {
     public int frozen_turn = 1;
-    public float damage_ratio = 1.0f;
+    public float damage_ratio = 0.7f;
     public FrozenAxe()
     {
         name = "Frozen Axe";
