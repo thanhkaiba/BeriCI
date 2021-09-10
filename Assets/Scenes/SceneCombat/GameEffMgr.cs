@@ -2,6 +2,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
 public class GameEffMgr : MonoBehaviour
@@ -54,5 +55,40 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendInterval(0.6f);
         seq.AppendCallback(() => Destroy(eff));
         return 0.8f;
+    }
+    public float ShowSkillIconFall(Vector3 p, string skillName)
+    {
+        GameObject go = new GameObject();
+        SpriteRenderer spr = go.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        spr.sprite = Resources.Load<Sprite>("IconSkill/" + skillName);
+        go.transform.position = p;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(go.transform.DOMoveY(p.y + 4, 0));
+        seq.Append(go.transform.DOMoveY(p.y + 1, 0.6f));
+        seq.AppendCallback(() => Destroy(go));
+        return 0.4f;
+    }
+    public float ShowSkillIconActive(Vector3 p, string skillName)
+    {
+        GameObject go = new GameObject();
+        SpriteRenderer spr = go.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        spr.sprite = Resources.Load<Sprite>("IconSkill/" + skillName);
+        go.transform.position = p;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(go.transform.DOMoveY(p.y + 2, 0));
+        seq.Append(go.transform.DOScale(1.5f, 0.6f));
+        seq.AppendCallback(() => Destroy(go));
+        return 0.4f;
+    }
+    private void Start()
+    {
+        GameObject prefab = Resources.Load<GameObject>("sea/waveprefab");
+        for (int i = -15; i < 16; i++)
+        {
+            for (int j = 0; j < 1; j++) {
+                GameObject eff = Instantiate(prefab, new Vector3(25*j, -3, i * 2f), new Quaternion(0, 0, 0, 0));
+                eff.GetComponent<WaveFakeOcean>().isReverse = i % 2 == 0;
+            }
+        }
     }
 }

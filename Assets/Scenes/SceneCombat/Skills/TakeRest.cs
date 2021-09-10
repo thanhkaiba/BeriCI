@@ -23,6 +23,7 @@ public class TakeRest : Skill
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));
         seq.Append(cChar.transform.DOLocalMoveY(0f, 0.3f));
+        GameEffMgr.Instance.ShowSkillIconActive(cChar.transform.position, name);
         return 0.8f;
     }
 }

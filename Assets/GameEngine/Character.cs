@@ -56,9 +56,9 @@ public class Character
                 HEALTH =                RF(300, 400); // nhieu mau
                 HEALTH_P_LEVEL =        RF(30, 40);
                 SPEED =                 RI(95, 100);
-                ARMOR =                 35; // nhieu giap
-                ARMOR_P_LEVEL =         0.35f;
-                MAGIC_RESIST =          20;
+                ARMOR =                 RI(25, 40); // nhieu giap
+                ARMOR_P_LEVEL =         0f;
+                MAGIC_RESIST =          RI(10, 30);
                 MAGIC_RESIST_P_LEVEL =  0;
                 model = CharacterModel.WARRIOR;
                 break;
@@ -69,9 +69,9 @@ public class Character
                 HEALTH_P_LEVEL = RF(14, 16);
                 SPEED = 110; // ban cham
                 ARMOR = 20;
-                ARMOR_P_LEVEL = 0.5f;
+                ARMOR_P_LEVEL = 0f;
                 MAGIC_RESIST = 5;
-                MAGIC_RESIST_P_LEVEL = 0.34f;
+                MAGIC_RESIST_P_LEVEL = 0f;
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ARCHER:
@@ -81,7 +81,7 @@ public class Character
                 HEALTH_P_LEVEL = RF(14, 16);
                 SPEED = RI(36, 42); // ban nhanh
                 ARMOR = 15;
-                ARMOR_P_LEVEL = 0.4f;
+                ARMOR_P_LEVEL = 0f;
                 MAGIC_RESIST = 0;
                 MAGIC_RESIST_P_LEVEL = 0;
                 model = CharacterModel.GOBLIN_ARCHER;
@@ -92,9 +92,9 @@ public class Character
                 HEALTH = RF(200, 240);
                 HEALTH_P_LEVEL = RF(20, 24);
                 SPEED = RI(80, 90);
-                ARMOR = 20;
-                ARMOR_P_LEVEL = 0.25f;
-                MAGIC_RESIST = 20;
+                ARMOR = RI(20, 25);
+                ARMOR_P_LEVEL = 0f;
+                MAGIC_RESIST = RI(18, 24);
                 MAGIC_RESIST_P_LEVEL = 0;
                 model = CharacterModel.WARRIOR;
                 break;
@@ -104,10 +104,10 @@ public class Character
                 HEALTH = RF(180, 220);
                 HEALTH_P_LEVEL = RF(20, 26);
                 SPEED = RI(68, 74);
-                ARMOR = 10;
-                ARMOR_P_LEVEL = 0.4f;
+                ARMOR = RI(10, 15);
+                ARMOR_P_LEVEL = 0f;
                 MAGIC_RESIST = 50;
-                MAGIC_RESIST_P_LEVEL = 0.5f;
+                MAGIC_RESIST_P_LEVEL = 0f;
                 model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.WIZARD:
@@ -117,9 +117,9 @@ public class Character
                 HEALTH_P_LEVEL = RF(16, 20);
                 SPEED = RI(92, 100);
                 ARMOR = 10;
-                ARMOR_P_LEVEL = 0.1f;
+                ARMOR_P_LEVEL = 0f;
                 MAGIC_RESIST = 100;
-                MAGIC_RESIST_P_LEVEL = 0.3f;
+                MAGIC_RESIST_P_LEVEL = 0f;
                 model = CharacterModel.GOBLIN_ARCHER;
                 break;
             case CharacterType.ASSASSIN:
@@ -128,10 +128,10 @@ public class Character
                 HEALTH = RF(140, 160);
                 HEALTH_P_LEVEL = RF(14, 16);
                 SPEED = RI(108, 120);
-                ARMOR = 15;
-                ARMOR_P_LEVEL = 0.2f;
-                MAGIC_RESIST = 10;
-                MAGIC_RESIST_P_LEVEL = 0.4f;
+                ARMOR = 25;
+                ARMOR_P_LEVEL = 0f;
+                MAGIC_RESIST = 25;
+                MAGIC_RESIST_P_LEVEL = 0f;
                 model = CharacterModel.WARRIOR;
                 break;
             case CharacterType.PET:

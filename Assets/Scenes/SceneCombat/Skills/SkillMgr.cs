@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum SkillRank
 {
@@ -192,6 +193,20 @@ public class Skill
                 NR_row = Math.Abs(myRow - row);
             }
         });
+        return result;
+    }
+    public List<CombatCharacter> GetRandomTarget(List<CombatCharacter> listTarget, int number = 1)
+    {
+        if (number > listTarget.Count) number = listTarget.Count;
+        var clone = new List<CombatCharacter>();
+        var result = new List<CombatCharacter>();
+        listTarget.ForEach(item => clone.Add(item));
+        for (int i = 0; i < number; i++)
+        {
+            int r = Random.Range(0, clone.Count);
+            result.Add(clone[r]);
+            clone.RemoveAt(r);
+        }
         return result;
     }
     public Team GetOppositeTeam(Team t)

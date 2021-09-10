@@ -225,8 +225,11 @@ public class CombatCharacter: MonoBehaviour
     }
     public float TakeDamage(float physicsDamage, float magicDamage = 0, float trueDamage = 0)
     {
-        float physicTake = physicsDamage * 100 / (100 + current_armor);
-        float magicTake = magicDamage * 100 / (100 + current_magic_resist);
+        float physicTake, magicTake;
+        if (current_armor > 0) physicTake = physicsDamage * 100 / (100 + current_armor);
+        else physicTake = physicsDamage * (2 - 100 / (100 - current_armor));
+        if (current_magic_resist > 0) magicTake = magicDamage * 100 / (100 + current_magic_resist);
+        else magicTake = magicDamage * (2 - 100 / (100 - current_magic_resist));
         float totalDamage = physicTake + magicTake + trueDamage;
         LoseHealth(totalDamage);
         GainFury(4);

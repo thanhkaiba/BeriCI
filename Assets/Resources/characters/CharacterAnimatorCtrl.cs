@@ -43,27 +43,7 @@ public class CharacterAnimatorCtrl : MonoBehaviour
             return 0.4f;
         } else
         {
-            var arrow = Instantiate(
-                Resources.Load<GameObject>("GameComponents/arrow"),
-                startArrow.position,
-                Quaternion.identity);
-            arrow.SetActive(false);
-            Sequence seq = DOTween.Sequence();
-            seq.AppendInterval(0.05f);
-            seq.AppendCallback(() => {
-                arrow.SetActive(true);
-            });
-            var targetHeart = new Vector3(target.transform.position.x,
-                target.transform.position.y + 2.0f,
-                target.transform.position.z
-            );
-            Vector3 oriPos = transform.position;
-            float d = Vector3.Distance(oriPos, targetHeart);
-            Vector3 desPos = Vector3.MoveTowards(oriPos, targetHeart, d - 1.4f);
-            if (arrow.transform.position.x < desPos.x) arrow.transform.localScale = new Vector3(-1, 1, 1);
-            seq.Append(arrow.transform.DOMove(desPos, 0.4f));
-            seq.AppendCallback(() => Destroy(arrow));
-            return 0.4f;
+            return ArrowToTarget(target);
         }
     }
     public void Death()
@@ -92,5 +72,38 @@ public class CharacterAnimatorCtrl : MonoBehaviour
         float scale = modelObject.transform.localScale.x;
         int xModel = model == CharacterModel.GOBLIN_ARCHER ? -1 : 1;
         modelObject.transform.localScale = new Vector3(scale * xModel * scaleX, scale, scale);
+    }
+    public float ArrowToTarget(CombatCharacter target)
+    {
+        var arrow = Instantiate(
+                Resources.Load<GameObject>("GameComponents/arrow"),
+                startArrow.position,
+                Quaternion.identity);
+        arrow.SetActive(false);
+        var targetHeart = new Vector3(target.transform.position.x,
+            target.transform.position.y + 2.0f,
+            target.transform.position.z
+        );
+        Vector3 oriPos = transform.position;
+        float d = Vector3.Distance(oriPos, targetHeart);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, targetHeart, d - 1.4f);
+        int r = 1;
+        if (arrow.transform.position.x < desPos.x)
+        {
+            arrow.transform.localScale = new Vector3(-1, 1, 1);
+            r = -1;
+        }
+
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(0.05f);
+        seq.AppendCallback(() => {
+            arrow.SetActive(true);
+            arrow.transform.rotation = Quaternion.Euler(0, 0, -5 * r);
+            arrow.transform.DORotate(new Vector3(0, 0, 10 * r), 0.4f);
+        });
+        seq.Append(arrow.transform.DOJump(desPos, 1, 1, 0.4f));
+        seq.AppendCallback(() => Destroy(arrow));
+
+        return 0.4f;
     }
 }

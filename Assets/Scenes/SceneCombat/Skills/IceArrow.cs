@@ -5,6 +5,7 @@ using UnityEngine;
 public class IceArrow : Skill
 {
     public int frozen_turn = 1;
+    public float scale_damage = 2.0f;
     public IceArrow()
     {
         name = "Ice Arrow";
@@ -34,7 +35,7 @@ public class IceArrow : Skill
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => {
-            target.TakeDamage(0, attacking.current_power, attacking.current_power);
+            target.TakeDamage(0, attacking.current_power*scale_damage);
             target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, frozen_turn));
         });
         return delay;

@@ -29,7 +29,7 @@ public class CombatState : MonoBehaviour
     }
     void CreateRandomTeam(Team t)
     {
-        int r = Random.Range(0, 12);
+        int r = Random.Range(0, 16);
         switch (r)
         {
             case 0:
@@ -115,6 +115,34 @@ public class CombatState : MonoBehaviour
                 CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 0), t);
                 CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 2), t);
                 CreateCombatCharacter(CharacterType.SWORD_MAN, new FightingPassion(), new Position(0, 1), t);
+                break;
+            case 12:
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), t);
+                CreateCombatCharacter(CharacterType.ARCHER, new Marksman(), new Position(2, 0), t);
+                CreateCombatCharacter(CharacterType.ARCHER, new Marksman(), new Position(2, 2), t);
+                CreateCombatCharacter(CharacterType.ARCHER, new Marksman(), new Position(1, 1), t);
+                break;
+            case 13:
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(2, 1), t);
+                CreateCombatCharacter(CharacterType.WIZARD, new FreezeWorld(), new Position(1, 1), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(0, 0), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(0, 1), t);
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(0, 2), t);
+                break;
+            case 14:
+                CreateCombatCharacter(CharacterType.SWORD_MAN, new UltimateSlash(), new Position(2, 1), t);
+                CreateCombatCharacter(CharacterType.WIZARD, new FreezeWorld(), new Position(1, 1), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 1), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), t);
+                break;
+            case 15:
+                CreateCombatCharacter(CharacterType.ARCHER, new LethalTempo(), new Position(2, 1), t);
+                CreateCombatCharacter(CharacterType.ARCHER, new LethalTempo(), new Position(1, 1), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 0), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 1), t);
+                CreateCombatCharacter(CharacterType.SHIPWRIGHT, new TakeRest(), new Position(0, 2), t);
                 break;
         }
     }
