@@ -61,7 +61,7 @@ public class CombatCharacter: MonoBehaviour
 
     public int level;
 
-    public CharacterType type;
+    public AttackType type;
 
     public Position position;
 
@@ -93,7 +93,7 @@ public class CombatCharacter: MonoBehaviour
         barGO.transform.localPosition = new Vector3(0, 0, 0);
         return barGO.transform.GetComponent<CharBarControl>();
     }
-    public void SetData(Character data, Position p, Team t)
+    public void SetData(Sailor data, Position p, Team t)
     {
         charName = data.name;
         base_power = data.GetPower();
@@ -104,10 +104,10 @@ public class CombatCharacter: MonoBehaviour
         current_armor = data.GetArmor();
         base_magic_resist = data.GetMagicResist();
         current_magic_resist = data.GetMagicResist();
-        max_speed = data.GetSpeed();
+        max_speed = (int) (10000f/data.GetSpeed());
         current_speed = 0;
         level = data.level;
-        type = data.TYPE;
+        type = data.attackType;
         skill = data.skill;
         position = p;
         team = t;
@@ -117,7 +117,6 @@ public class CombatCharacter: MonoBehaviour
             current_fury = skill.START_FURY;
             current_max_fury = skill.MAX_FURY;
         }
-        model = data.model;
     }
     public bool HaveStatus(CombatCharacterStatusName name)
     {
@@ -196,13 +195,12 @@ public class CombatCharacter: MonoBehaviour
     {
         switch (type)
         {
-            case CharacterType.ARCHER:
-            case CharacterType.SNIPER:
+            case AttackType.RANGE:
                 return GetNearestInRowTarget(
                 team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
-            case CharacterType.ASSASSIN:
+            case AttackType.ASSASSINATE:
                 return GetFurthestTarget(
                     team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)

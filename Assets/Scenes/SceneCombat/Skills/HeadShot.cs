@@ -26,9 +26,7 @@ public class HeadShot : Skill
         List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
         CombatCharacter target = GetLowestHealthTarget(enermy);
 
-        float physic_damage = cChar.type == CharacterType.SNIPER
-            ? damage_ratio * cChar.current_power + lose_health_ratio * (target.max_health - target.current_health)
-            : sniper_damage_ratio * cChar.current_power + sniper_lose_health_ratio * (target.max_health - target.current_health);
+        float physic_damage = damage_ratio * cChar.current_power + lose_health_ratio * (target.max_health - target.current_health);
 
         return RunAnimation(cChar, target, physic_damage);
     }

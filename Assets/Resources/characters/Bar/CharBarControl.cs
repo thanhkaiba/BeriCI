@@ -19,34 +19,19 @@ public class CharBarControl : MonoBehaviour
     {
         textName.text = name;
     }
-    public void SetIconType(CharacterType type)
+    public void SetIconType(AttackType type)
     {
         Sprite spr;
         switch (type)
         {
-            case CharacterType.SHIPWRIGHT:
-                spr = Resources.Load<Sprite>("IconCharacterType/Tanker");
-                break;
-            case CharacterType.SNIPER:
-                spr = Resources.Load<Sprite>("IconCharacterType/Sniper");
-                break;
-            case CharacterType.ARCHER:
-                spr = Resources.Load<Sprite>("IconCharacterType/Archer");
-                break;
-            case CharacterType.SWORD_MAN:
+            case AttackType.MELEE:
                 spr = Resources.Load<Sprite>("IconCharacterType/SwordMan");
                 break;
-            case CharacterType.LOGISTICS:
-                spr = Resources.Load<Sprite>("IconCharacterType/Logistics");
+            case AttackType.RANGE:
+                spr = Resources.Load<Sprite>("IconCharacterType/Archer");
                 break;
-            case CharacterType.WIZARD:
-                spr = Resources.Load<Sprite>("IconCharacterType/Wizard");
-                break;
-            case CharacterType.ASSASSIN:
+            case AttackType.ASSASSINATE:
                 spr = Resources.Load<Sprite>("IconCharacterType/Assassin");
-                break;
-            case CharacterType.PET:
-                spr = Resources.Load<Sprite>("IconCharacterType/Pet");
                 break;
             default:
                 spr = Resources.Load<Sprite>("IconCharacterType/Archer");

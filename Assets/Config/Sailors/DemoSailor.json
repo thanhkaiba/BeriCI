@@ -1,0 +1,17 @@
+{
+    "power_base": 50,
+    "power_base_step": 0.1,
+    "power_plv": 1,
+    "power_plv_step": 0.01,
+
+    "health_base": 120,
+    "health_base_step": 5,
+    "health_plv": 10,
+    "health_plv_step": 0.1,
+
+    "speed_base": 80,
+    "speed_step": 0.15,
+
+    "armor": 30,
+    "magic_resist": 30
+}

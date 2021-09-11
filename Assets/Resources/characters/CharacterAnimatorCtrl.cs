@@ -12,7 +12,7 @@ public class CharacterAnimatorCtrl : MonoBehaviour
     private CharacterModel model;
     private void Start()
     {
-        model = GetComponent<CombatCharacter>().model;
+        model = CharacterModel.WARRIOR;
     }
     public void TriggerAnimation(string trigger)
     {

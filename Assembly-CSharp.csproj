@@ -52,10 +52,13 @@
      <Compile Include="Assets\Utils\MousePosition3D.cs" />
      <Compile Include="Assets\Scenes\SceneCombat\Skills\Encourage.cs" />
      <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
+     <Compile Include="Assets\Scenes\SceneCombat\Skills\Marksman.cs" />
+     <Compile Include="Assets\Scenes\SceneCombat\Skills\LethalTempo.cs" />
      <Compile Include="Assets\Utils\CameraLook.cs" />
      <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
      <Compile Include="Assets\Utils\MousePosition2D.cs" />
      <Compile Include="Assets\Resources\characters\CharacterShadow.cs" />
+     <Compile Include="Assets\Scenes\SceneCombat\Skills\FreezeWorld.cs" />
      <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
      <Compile Include="Assets\Scenes\SceneCombat\Skills\Deceive.cs" />
      <Compile Include="Assets\Utils\CameraFollow.cs" />
@@ -81,9 +84,8 @@
      <Compile Include="Assets\Scenes\SceneCombat\CombatCharacter.cs" />
      <Compile Include="Assets\Scenes\SceneCombat\Skills\FrozenAxe.cs" />
      <Compile Include="Assets\Utils\FindDeepChild.cs" />
-     <Compile Include="Assets\Scenes\SceneCombat\Skills\Marksman.cs" />
-     <Compile Include="Assets\Scenes\SceneCombat\Skills\FreezeWorld.cs" />
-     <Compile Include="Assets\Scenes\SceneCombat\Skills\LethalTempo.cs" />
+     <Compile Include="Assets\GameEngine\Sailor.cs" />
+     <Compile Include="Assets\GameEngine\Sailors\DemoSailor.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.15f2/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
