@@ -12,24 +12,24 @@ public class Slash : Skill
         MAX_FURY = 10;
         START_FURY = 7;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float physic_damage = cChar.current_power * scale_damage_ratio;
+        float physic_damage = cChar.cs.current_power * scale_damage_ratio;
 
-        List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        CombatCharacter target = GetNearestTarget(cChar, enermy);
-        CombatCharacter behind_target = GetBehind(target, enermy);
+        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        Sailor target = GetNearestTarget(cChar, enermy);
+        Sailor behind_target = GetBehind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, CombatCharacter behind_target, float physic_damage)
+    float RunAnimation(Sailor attacking, Sailor target, Sailor behind_target, float physic_damage)
     {
-        attacking.display.TriggerAnimation("BaseAttack");
+        attacking.TriggerAnimation("BaseAttack");
 
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);

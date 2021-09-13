@@ -16,23 +16,23 @@ public class HighNote : Skill
         START_FURY = 0;
         rank = SkillRank.A;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
-        CombatCharacter target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.team));
-        return (target != null && (target.max_fury - target.current_fury > 0));
+        Sailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
+        return (target != null && (target.cs.max_fury - target.cs.current_fury > 0));
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        cChar.current_speed += (int)System.Math.Floor(speed_self_buff * cChar.max_speed);
+        cChar.cs.current_speed += (int)System.Math.Floor(speed_self_buff * cChar.cs.max_speed);
 
-        CombatCharacter target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.team));
+        Sailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
 
         return RunAnimation(cChar, target);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target)
+    float RunAnimation(Sailor attacking, Sailor target)
     {
-        attacking.display.TriggerAnimation("BaseAttack");
+        attacking.TriggerAnimation("BaseAttack");
         GameEffMgr.Instance.ShowBuffEnergy(attacking.transform.position, target.transform.position);
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOLocalMoveY(1f, 0.5f));
@@ -40,8 +40,8 @@ public class HighNote : Skill
         seq.AppendCallback(() =>
         {
             target.GainFury(fury);
-            target.current_magic_resist += buff_magic_resist;
-            target.current_armor += buff_armor;
+            target.cs.current_magic_resist += buff_magic_resist;
+            target.cs.current_armor += buff_armor;
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+Buff+", target.transform.position);
         });
         seq.AppendInterval(0.2f);

@@ -19,17 +19,27 @@ public class GameUtils : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    public Character CreateRandomCharacter()
+    public Sailor CreateSailor(string name)
     {
-        Array values = Enum.GetValues(typeof(CharacterType));
-        System.Random random = new System.Random();
-        CharacterType randomType = (CharacterType)values.GetValue(random.Next(values.Length));
-        return CreateRandomCharacter(randomType);
-    }
-    public Character CreateRandomCharacter(CharacterType type)
-    {
-        Character c = new Character(type);
-        c.SetRandomStats();
-        return c;
+        GameObject characterGO;
+        Sailor character;
+        switch (name)
+        {
+            case "demo":
+                characterGO = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
+                character = characterGO.AddComponent<DemoSailor>() as Sailor;
+                break;
+            case "demo2":
+                characterGO = Instantiate(Resources.Load<GameObject>("characters/goblin_archer"));
+                character = characterGO.AddComponent<DemoSailor2>() as DemoSailor2;
+                break;
+            default:
+                characterGO = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
+                character = characterGO.AddComponent<Sailor>() as Sailor;
+                break;
+        }
+
+        return character;
     }
 }
+ 

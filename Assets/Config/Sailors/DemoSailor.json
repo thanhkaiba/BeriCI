@@ -1,4 +1,6 @@
 {
+    "root_name": "Demo Sailor",
+
     "power_base": 50,
     "power_base_step": 0.1,
     "power_plv": 1,
@@ -13,5 +15,7 @@
     "speed_step": 0.15,
 
     "armor": 30,
-    "magic_resist": 30
+    "magic_resist": 30,
+
+    "attack_type": 0
 }

@@ -1,23 +1,11 @@
-using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using DG.Tweening;
 
-public class DemoSailor: Sailor
+public class DemoSailorAnimator : CharacterAnimatorCtrl
 {
-    public DemoSailor()
-    {
-        skill = new Slash();
-        config_url = "Assets/Config/Sailors/DemoSailor.json";
-    }
-    private void Start()
-    {
-        modelObject = transform.Find("model").gameObject;
-        SetFaceDirection();
-    }
-    public override float RunBaseAttack(Sailor target)
+    public override float BaseAttack(Sailor target)
     {
         TriggerAnimation("BaseAttack");
         Vector3 oriPos = transform.position;
@@ -29,9 +17,8 @@ public class DemoSailor: Sailor
         seq.Append(transform.DOMove(oriPos, 0.2f));
         return 0.4f;
     }
-    public void SetFaceDirection()
+    public override void SetFaceDirection(int scaleX)
     {
-        int scaleX = cs.team == Team.A ? -1 : 1;
         float scale = modelObject.transform.localScale.x;
         modelObject.transform.localScale = new Vector3(scale * scaleX, scale, scale);
     }

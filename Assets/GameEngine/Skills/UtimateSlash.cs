@@ -12,27 +12,27 @@ public class UltimateSlash : Skill
         MAX_FURY = 30;
         START_FURY = 0;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float true_damage = cChar.current_power * scale_damage;
-        float heal = base_heal + cChar.current_power;
+        float true_damage = cChar.cs.current_power * scale_damage;
+        float heal = base_heal + cChar.cs.current_power;
 
-        List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        CombatCharacter target = GetNearestTarget(cChar, enermy);
+        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        Sailor target = GetNearestTarget(cChar, enermy);
 
         return RunAnimation(cChar, target, true_damage, heal);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target, float damage, float heal)
+    float RunAnimation(Sailor attacking, Sailor target, float damage, float heal)
     {
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);
-        attacking.display.TriggerAnimation("BaseAttack");
+        attacking.TriggerAnimation("BaseAttack");
         Sequence seq = DOTween.Sequence();
         seq.Append(attacking.transform.DOMove(desPos, 0.4f));
         seq.AppendInterval(0.1f);

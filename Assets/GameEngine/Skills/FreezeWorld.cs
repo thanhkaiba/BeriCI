@@ -13,19 +13,19 @@ public class FreezeWorld : Skill
         MAX_FURY = 16;
         START_FURY = 0;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
 
-        List<CombatCharacter> targets = cbState.GetAliveCharacterEnermy(cChar.team);
+        List<Sailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
 
         return RunAnimation(cChar, targets);
     }
-    float RunAnimation(CombatCharacter attacking, List<CombatCharacter> targets)
+    float RunAnimation(Sailor attacking, List<Sailor> targets)
     {
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.5f);
@@ -33,8 +33,8 @@ public class FreezeWorld : Skill
             targets.ForEach(target =>
             {
                 target.TakeDamage(0, damage + attacking.level * damage_p_lv, 0);
-                target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, 1));
-                target.current_armor -= decrease_armor;
+                target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, 1));
+                target.cs.current_armor -= decrease_armor;
             });
         });
         GameEffMgr.Instance.ShowSkillIconActive(attacking.transform.position, name);

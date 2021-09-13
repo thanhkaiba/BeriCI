@@ -33,6 +33,7 @@ public class FlyTextMgr : MonoBehaviour
         Debug.Log("p " + p);
         GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
         c.GetComponent<Text>().text = text;
+        //c.GetComponent<Text>().fontSize = 50;
         c.transform.position = p;
     }
 }

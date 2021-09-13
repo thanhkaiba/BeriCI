@@ -35,14 +35,14 @@ public class CombatMgr : MonoBehaviour
     {
         int speedAdd = CalculateSpeedAddThisLoop();
         Debug.Log(" ----> speedAdd: " + speedAdd);
-        CombatCharacter actionChar = AddSpeedAndGetActionCharacter(speedAdd);
+        Sailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
         Debug.Log(
             " ----> combat action character: " + actionChar.charName
-            + " | team: " + (actionChar.team == Team.A ? "A" : "B")
-            + " | position: " + actionChar.position
+            + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
+            + " | position: " + actionChar.cs.position
         );
         float delayTime = actionChar.DoCombatAction(combatState);
-        combatState.lastTeamAction = actionChar.team;
+        combatState.lastTeamAction = actionChar.cs.team;
         StartCoroutine(NextLoop(delayTime));
     }
     IEnumerator NextLoop(float delay)
@@ -62,7 +62,7 @@ public class CombatMgr : MonoBehaviour
     int CalculateSpeedAddThisLoop()
     {
         int speedAdd = 9999;
-        combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatCharacter character)
+        combatState.GetAllAliveCombatCharacters().ForEach(delegate (Sailor character)
         {
             int speedNeed = character.GetSpeedNeeded();
             speedAdd = Math.Min(speedNeed, speedAdd);
@@ -71,11 +71,11 @@ public class CombatMgr : MonoBehaviour
         return Math.Max(speedAdd, 0);
     }
 
-    CombatCharacter AddSpeedAndGetActionCharacter(int speedAdd)
+    Sailor AddSpeedAndGetActionCharacter(int speedAdd)
     {
-        List<CombatCharacter> listAvaiableCharacter = new List<CombatCharacter>();
+        List<Sailor> listAvaiableCharacter = new List<Sailor>();
 
-        combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatCharacter character)
+        combatState.GetAllAliveCombatCharacters().ForEach(delegate (Sailor character)
         {
             character.AddSpeed(speedAdd);
             if (character.IsEnoughSpeed()) listAvaiableCharacter.Add(character);
@@ -83,21 +83,21 @@ public class CombatMgr : MonoBehaviour
 
         return RuleGetActionCharacter(listAvaiableCharacter);
     }
-    CombatCharacter RuleGetActionCharacter(List<CombatCharacter> listAvaiableCharacter)
+    Sailor RuleGetActionCharacter(List<Sailor> listAvaiableCharacter)
     {
-        listAvaiableCharacter.Sort(delegate (CombatCharacter c1, CombatCharacter c2)
+        listAvaiableCharacter.Sort(delegate (Sailor c1, Sailor c2)
         {
-            if (c1.max_speed < c2.max_speed) return -1;
+            if (c1.cs.max_speed < c2.cs.max_speed) return -1;
             else return 1;
         });
-        List<CombatCharacter> teamA = new List<CombatCharacter>();
-        List<CombatCharacter> teamB = new List<CombatCharacter>();
-        listAvaiableCharacter.ForEach(delegate (CombatCharacter character)
+        List<Sailor> teamA = new List<Sailor>();
+        List<Sailor> teamB = new List<Sailor>();
+        listAvaiableCharacter.ForEach(delegate (Sailor character)
         {
-            if (character.team == Team.A) teamA.Add(character);
-            if (character.team == Team.B) teamB.Add(character);
+            if (character.cs.team == Team.A) teamA.Add(character);
+            if (character.cs.team == Team.B) teamB.Add(character);
         });
-        List<CombatCharacter> targetList = teamA;
+        List<Sailor> targetList = teamA;
         if (
             teamA.Count <= 0
             || (combatState.lastTeamAction == Team.A && teamB.Count > 0)

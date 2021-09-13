@@ -9,11 +9,6 @@ public class CharacterAnimatorCtrl : MonoBehaviour
 
     public Transform startArrow;
     private GameObject iceBlock = null;
-    private CharacterModel model;
-    private void Start()
-    {
-        model = CharacterModel.WARRIOR;
-    }
     public void TriggerAnimation(string trigger)
     {
         modelObject.GetComponent<Animator>().SetTrigger(trigger);
@@ -27,24 +22,10 @@ public class CharacterAnimatorCtrl : MonoBehaviour
         seq.Append(transform.DOMoveX(oriX, 0.05f));
         return 0.15f;
     }
-    public float BaseAttack(CombatCharacter target)
+    public virtual float BaseAttack(Sailor target)
     {
-        //GameEffMgr.Instance.ShowFireBallFly(transform.position, Team.A);
         TriggerAnimation("BaseAttack");
-        if (model == CharacterModel.WARRIOR)
-        {
-            Vector3 oriPos = transform.position;
-            float d = Vector3.Distance(oriPos, target.transform.position);
-            Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);
-            Sequence seq = DOTween.Sequence();
-            seq.Append(transform.DOMove(desPos, 0.3f));
-            seq.AppendInterval(0.2f);
-            seq.Append(transform.DOMove(oriPos, 0.2f));
-            return 0.4f;
-        } else
-        {
-            return ArrowToTarget(target);
-        }
+        return ArrowToTarget(target);
     }
     public void Death()
     {
@@ -53,9 +34,9 @@ public class CharacterAnimatorCtrl : MonoBehaviour
         seq.AppendInterval(0.6f);
         seq.AppendCallback(() => { gameObject.SetActive(false); });
     }
-    public void DisplayStatus(List<CombatCharacterStatus> listStatus)
+    public void DisplayStatus(List<SailorStatus> listStatus)
     {
-        ShowInIce(listStatus.Find(x => x.name == CombatCharacterStatusName.FROZEN) != null);
+        ShowInIce(listStatus.Find(x => x.name == SailorStatusType.FROZEN) != null);
     }
     public void ShowInIce(bool b)
     {
@@ -67,13 +48,12 @@ public class CharacterAnimatorCtrl : MonoBehaviour
             else iceBlock.SetActive(b);
         else if (iceBlock != null) iceBlock.SetActive(b);
     }
-    public void SetFaceDirection(int scaleX)
+    public virtual void SetFaceDirection(int scaleX)
     {
         float scale = modelObject.transform.localScale.x;
-        int xModel = model == CharacterModel.GOBLIN_ARCHER ? -1 : 1;
-        modelObject.transform.localScale = new Vector3(scale * xModel * scaleX, scale, scale);
+        modelObject.transform.localScale = new Vector3(- scale * scaleX, scale, scale);
     }
-    public float ArrowToTarget(CombatCharacter target)
+    public float ArrowToTarget(Sailor target)
     {
         var arrow = Instantiate(
                 Resources.Load<GameObject>("GameComponents/arrow"),

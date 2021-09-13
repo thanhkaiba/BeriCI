@@ -1,0 +1,43 @@
+using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Marksman : Skill
+{
+    public float damage_ratio = 1.0f;
+    public Marksman()
+    {
+        name = "Marksman";
+        MAX_FURY = 10;
+        START_FURY = 0;
+    }
+    public override bool CanActive(Sailor cChar, CombatState cbState)
+    {
+        return base.CanActive(cChar, cbState);
+    }
+    public override float CastSkill(Sailor cChar, CombatState cbState)
+    {
+        base.CastSkill(cChar, cbState);
+
+        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<Sailor> targets = GetRandomTarget(enermy, 2);
+
+
+
+        return RunAnimation(cChar, targets);
+    }
+    float RunAnimation(Sailor attacking, List<Sailor> targets)
+    {
+        float delay = attacking.RunSkill(targets);
+
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(delay);
+        seq.AppendCallback(() => {
+            targets.ForEach(target =>
+            {
+                target.TakeDamage(attacking.cs.current_power * damage_ratio, 0, 0);
+            });
+        });
+        return 0.8f;
+    }
+}

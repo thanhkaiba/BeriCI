@@ -12,22 +12,22 @@ public class IceArrow : Skill
         MAX_FURY = 50;
         START_FURY = 0;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
 
-        List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        CombatCharacter target = GetNearestInRowTarget(cChar, enermy);
+        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        Sailor target = GetNearestInRowTarget(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target)
+    float RunAnimation(Sailor attacking, Sailor target)
     {
-        float delay = attacking.display.BaseAttack(target);
+        float delay = attacking.RunBaseAttack(target);
 
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
@@ -35,8 +35,8 @@ public class IceArrow : Skill
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => {
-            target.TakeDamage(0, attacking.current_power*scale_damage);
-            target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, frozen_turn));
+            target.TakeDamage(0, attacking.cs.current_power *scale_damage);
+            target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, frozen_turn));
         });
         return delay;
     }

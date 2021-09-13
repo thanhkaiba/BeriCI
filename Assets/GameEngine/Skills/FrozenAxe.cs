@@ -12,23 +12,23 @@ public class FrozenAxe : Skill
         MAX_FURY = 30;
         START_FURY = 0;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float spell_damage = cChar.current_power;
+        float spell_damage = cChar.cs.current_power;
 
-        List<CombatCharacter> enermy = cbState.GetAliveCharacterEnermy(cChar.team);
-        CombatCharacter target = GetNearestTarget(cChar, enermy);
+        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        Sailor target = GetNearestTarget(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }
-    float RunAnimation(CombatCharacter attacking, CombatCharacter target)
+    float RunAnimation(Sailor attacking, Sailor target)
     {
-        attacking.display.TriggerAnimation("BaseAttack");
+        attacking.TriggerAnimation("BaseAttack");
 
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
@@ -37,8 +37,8 @@ public class FrozenAxe : Skill
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => {
-            target.TakeDamage(damage_ratio * attacking.current_power, damage_ratio * attacking.current_power, 0);
-            target.AddStatus(new CombatCharacterStatus(CombatCharacterStatusName.FROZEN, frozen_turn));
+            target.TakeDamage(damage_ratio * attacking.cs.current_power, damage_ratio * attacking.cs.current_power, 0);
+            target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, frozen_turn));
         });
         seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
         return 0.8f;

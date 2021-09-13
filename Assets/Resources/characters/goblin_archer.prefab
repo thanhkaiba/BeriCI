@@ -9,8 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2611943385484996443}
-  - component: {fileID: -6671405554594719764}
-  - component: {fileID: 8895869943188290055}
   m_Layer: 0
   m_Name: goblin_archer
   m_TagString: Untagged
@@ -34,33 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-6671405554594719764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7481347250635805039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b34d37491d6d154f93612478a61f9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modelObject: {fileID: 3664712240779846294}
-  startArrow: {fileID: 3664712240779689616}
---- !u!114 &8895869943188290055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7481347250635805039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf268ceec73d43d48a01c3481bf9044a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1 &8431332014807131554
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,21 +132,9 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 11400000, guid: 65b131eded1be894198904fd6d529a42, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 65b131eded1be894198904fd6d529a42, type: 3}
---- !u!1 &3664712240779846294 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100000, guid: 65b131eded1be894198904fd6d529a42,
-    type: 3}
-  m_PrefabInstance: {fileID: 3664712240779813942}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3664712240779689654 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 65b131eded1be894198904fd6d529a42,
-    type: 3}
-  m_PrefabInstance: {fileID: 3664712240779813942}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &3664712240779689616 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 400038, guid: 65b131eded1be894198904fd6d529a42,
     type: 3}
   m_PrefabInstance: {fileID: 3664712240779813942}
   m_PrefabAsset: {fileID: 0}

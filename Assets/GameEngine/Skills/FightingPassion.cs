@@ -13,24 +13,24 @@ public class FightingPassion : Skill
         MAX_FURY = 10;
         START_FURY = 0;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return true;
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float incPower = cChar.base_power * increaseDamageRatio;
-        cChar.current_power += cChar.base_power * increaseDamageRatio;
-        cChar.current_speed += (int)System.Math.Floor(cChar.max_speed * increaseSpeedRatio);
-        cChar.current_armor += armor_increase;
-        cChar.current_magic_resist += magic_resist_increase;
-        cChar.max_health += increase_health + increase_health_per_level * cChar.level;
+        float incPower = cChar.cs.base_power * increaseDamageRatio;
+        cChar.cs.current_power += cChar.cs.base_power * increaseDamageRatio;
+        cChar.cs.current_speed += (int)System.Math.Floor(cChar.cs.max_speed * increaseSpeedRatio);
+        cChar.cs.current_armor += armor_increase;
+        cChar.cs.current_magic_resist += magic_resist_increase;
+        cChar.cs.max_health += increase_health + increase_health_per_level * cChar.level;
         cChar.GainHealth(increase_health + increase_health_per_level * cChar.level);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+" + (int)incPower + "POW", cChar.transform.position);
         return RunAnim(cChar);
     }
-    float RunAnim(CombatCharacter cChar)
+    float RunAnim(Sailor cChar)
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));

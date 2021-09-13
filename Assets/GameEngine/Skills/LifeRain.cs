@@ -12,22 +12,22 @@ public class LifeRain : Skill
         MAX_FURY = 25;
         START_FURY = 15;
     }
-    public override bool CanActive(CombatCharacter cChar, CombatState cbState)
+    public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         return true;
     }
-    public override float CastSkill(CombatCharacter cChar, CombatState cbState)
+    public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float heal = base_heal + cChar.level * heal_per_level;
 
-        List<CombatCharacter> targets = cbState.GetAllTeamAliveCharacter(cChar.team);
+        List<Sailor> targets = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
 
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() => {
-            targets.ForEach(delegate (CombatCharacter character)
+            targets.ForEach(delegate (Sailor character)
             {
                 character.GainHealth(heal);
                 character.GainFury(gain_fury);
