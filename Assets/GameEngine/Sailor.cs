@@ -20,7 +20,7 @@ public class Sailor: MonoBehaviour
     public int quality;
 
     public CharBarControl bar;
-    private void Awake()
+    public virtual void Awake()
     {
         using (StreamReader r = new StreamReader(config_url))
         {
@@ -212,6 +212,7 @@ public class Sailor: MonoBehaviour
         bar.SetIconType(config_stats.attack_type);
         bar.SetIconSkill(skill);
         bar.SetName(charName);
+        SetFaceDirection();
     }
     public void GainHealth(float health)
     {
@@ -373,5 +374,11 @@ public class Sailor: MonoBehaviour
             }
             else iceBlock.SetActive(b);
         else if (iceBlock != null) iceBlock.SetActive(b);
+    }
+    public virtual void SetFaceDirection()
+    {
+        int scaleX = cs.team == Team.A ? -1 : 1;
+        float scale = modelObject.transform.localScale.x;
+        modelObject.transform.localScale = new Vector3(scale * scaleX, scale, scale);
     }
 };

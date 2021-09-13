@@ -12,10 +12,10 @@ public class DemoSailor: Sailor
         skill = new Slash();
         config_url = "Assets/Config/Sailors/DemoSailor.json";
     }
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
         modelObject = transform.Find("model").gameObject;
-        SetFaceDirection();
     }
     public override float RunBaseAttack(Sailor target)
     {
@@ -28,11 +28,5 @@ public class DemoSailor: Sailor
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(oriPos, 0.2f));
         return 0.4f;
-    }
-    public void SetFaceDirection()
-    {
-        int scaleX = cs.team == Team.A ? -1 : 1;
-        float scale = modelObject.transform.localScale.x;
-        modelObject.transform.localScale = new Vector3(scale * scaleX, scale, scale);
     }
 }

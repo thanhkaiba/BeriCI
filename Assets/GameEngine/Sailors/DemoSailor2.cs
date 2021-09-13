@@ -15,11 +15,11 @@ public class DemoSailor2 : Sailor
     }
 
     // animations
-    private void Start()
+    public override void Awake()
     {
+        base.Awake();
         modelObject = transform.Find("model").gameObject;
         startArrow = transform.FindDeepChild("goblin_L_hand");
-        SetFaceDirection();
     }
     public Transform startArrow;
     public override float RunBaseAttack(Sailor target)
@@ -75,7 +75,7 @@ public class DemoSailor2 : Sailor
         }
         return delay;
     }
-    public void SetFaceDirection()
+    public override void SetFaceDirection()
     {
         int scaleX = cs.team == Team.A ? -1 : 1;
         float scale = modelObject.transform.localScale.x;
