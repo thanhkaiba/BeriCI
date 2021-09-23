@@ -63,7 +63,7 @@ public class CharBarControl : MonoBehaviour
         furyBar.gameObject.SetActive(max != 0);
         if (max != 0)
         {
-            furyBar.value = (float)min / max;
+            furyBar.value = (float) min / max;
             furyText.text = min + "/" + max;
         }
     }

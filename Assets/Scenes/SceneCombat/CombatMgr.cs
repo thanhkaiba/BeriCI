@@ -15,13 +15,14 @@ public enum Team
 
 public class CombatMgr : MonoBehaviour
 {
-    CombatState combatState;
-    public GameObject characterFrefab;
+    public CombatState combatState;
+    public UIIngameMgr UIMgr;
+    public int actionCount = 0;
     private void Start()
     {
-        combatState = GameObject.Find("CombatState").GetComponent<CombatState>();
         combatState.CreateDemoTeam();
-
+        UIMgr.HideAllHighlightInfo();
+        UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         StartCoroutine(StartGame());
     }
     IEnumerator StartGame()
@@ -36,6 +37,10 @@ public class CombatMgr : MonoBehaviour
         int speedAdd = CalculateSpeedAddThisLoop();
         Debug.Log(" ----> speedAdd: " + speedAdd);
         Sailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
+        actionCount++;
+        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
+        UIMgr.HideAllHighlightInfo();
+        UIMgr.ShowActionCount(actionCount);
         Debug.Log(
             " ----> combat action character: " + actionChar.charName
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
@@ -55,6 +60,7 @@ public class CombatMgr : MonoBehaviour
 
     void GameOver(Team winTeam)
     {
+        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
     }
@@ -73,37 +79,12 @@ public class CombatMgr : MonoBehaviour
 
     Sailor AddSpeedAndGetActionCharacter(int speedAdd)
     {
-        List<Sailor> listAvaiableCharacter = new List<Sailor>();
-
         combatState.GetAllAliveCombatCharacters().ForEach(delegate (Sailor character)
         {
             character.AddSpeed(speedAdd);
-            if (character.IsEnoughSpeed()) listAvaiableCharacter.Add(character);
         });
 
-        return RuleGetActionCharacter(listAvaiableCharacter);
-    }
-    Sailor RuleGetActionCharacter(List<Sailor> listAvaiableCharacter)
-    {
-        listAvaiableCharacter.Sort(delegate (Sailor c1, Sailor c2)
-        {
-            if (c1.cs.max_speed < c2.cs.max_speed) return -1;
-            else return 1;
-        });
-        List<Sailor> teamA = new List<Sailor>();
-        List<Sailor> teamB = new List<Sailor>();
-        listAvaiableCharacter.ForEach(delegate (Sailor character)
-        {
-            if (character.cs.team == Team.A) teamA.Add(character);
-            if (character.cs.team == Team.B) teamB.Add(character);
-        });
-        List<Sailor> targetList = teamA;
-        if (
-            teamA.Count <= 0
-            || (combatState.lastTeamAction == Team.A && teamB.Count > 0)
-        ) targetList = teamB;
-        Debug.Log("targetList" + targetList.Count);
-        return targetList.First();
+        return combatState.GetQueueNextActionSailor().First();
     }
     public Team CheckTeamWin()
     {

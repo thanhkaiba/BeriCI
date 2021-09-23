@@ -30,10 +30,10 @@ public class CombatState : MonoBehaviour
     void CreateRandomTeam(Team t)
     {
         CreateCombatSailor("demo", new CombatPosition(0, 0), t);
-        CreateCombatSailor("demo", new CombatPosition(1, 1), t);
-        CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
+        //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
+        //CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
         CreateCombatSailor("demo2", new CombatPosition(2, 2), t);
-        CreateCombatSailor("demo", new CombatPosition(0, 2), t);
+        //CreateCombatSailor("demo", new CombatPosition(0, 2), t);
     }
 
     Sailor CreateCombatSailor(string name, CombatPosition pos, Team team)
@@ -96,6 +96,18 @@ public class CombatState : MonoBehaviour
         CTeam.ForEach(delegate (Sailor character)
         {
             if (!character.IsDeath()) result.Add(character);
+        });
+        return result;
+    }
+    public List<Sailor> GetQueueNextActionSailor()
+    {
+        List<Sailor> result = GetAllAliveCombatCharacters();
+        result.Sort(delegate (Sailor sailor1, Sailor sailor2)
+        {
+            int speedNeed_1 = sailor1.GetSpeedNeeded();
+            int speedNeed_2 = sailor2.GetSpeedNeeded();
+            if (speedNeed_1 < speedNeed_2) return -1;
+            else return 1;
         });
         return result;
     }

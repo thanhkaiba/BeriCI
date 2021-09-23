@@ -112,6 +112,7 @@ public class Sailor: MonoBehaviour
     }
     float UseSkill (CombatState combatState)
     {
+        GameEvents.instance.castSkill.Invoke(this, skill);
         cs.current_speed -= cs.max_speed;
         cs.current_fury = 0;
         Debug.Log("Use skill now " + skill.name);
@@ -131,6 +132,7 @@ public class Sailor: MonoBehaviour
             delay += RunBaseAttack(target);
             StartCoroutine(DealBaseAttackDamageDelay(target, cs.current_power, delay));
         }
+        GameEvents.instance.attackOneTarget.Invoke(this, target);
         return delay + 0.2f;
     }
     float Immobile ()
@@ -166,6 +168,7 @@ public class Sailor: MonoBehaviour
     }
     void DealBaseAttackDamage(Sailor target, float physicsDamage)
     {
+
         target.TakeDamage(physicsDamage, 0, 0);
     }
     IEnumerator DealBaseAttackDamageDelay(Sailor target, float current_power, float delay)
@@ -230,6 +233,7 @@ public class Sailor: MonoBehaviour
             if (IsDeath()) RunDeath();
         }
         bar.SetHealthBar(cs.max_health, cs.current_health);
+        GameEvents.instance.takeDamage.Invoke(this, health);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
     public void GainFury(int value)

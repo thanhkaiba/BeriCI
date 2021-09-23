@@ -48,8 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\GameEngine\GameUtils.cs" />
+     <Compile Include="Assets\Scenes\SceneCombat\SailorInQueue\SailorInQueue.cs" />
      <Compile Include="Assets\Utils\PlayerMovement.cs" />
      <Compile Include="Assets\Utils\MousePosition3D.cs" />
+     <Compile Include="Assets\GameEngine\Sailors\DemoSailor2.cs" />
      <Compile Include="Assets\GameEngine\Skills\Encourage.cs" />
      <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
      <Compile Include="Assets\GameEngine\Skills\Marksman.cs" />
@@ -64,7 +66,9 @@
      <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
      <Compile Include="Assets\GameEngine\Skills\Deceive.cs" />
      <Compile Include="Assets\Utils\CameraFollow.cs" />
+     <Compile Include="Assets\GameEngine\SailorData.cs" />
      <Compile Include="Assets\GameEngine\Skills\LaserGun.cs" />
+     <Compile Include="Assets\Scenes\SceneCombat\UIIngameMgr.cs" />
      <Compile Include="Assets\GameEngine\Skills\FightingPassion.cs" />
      <Compile Include="Assets\GameEngine\Skills\Slash.cs" />
      <Compile Include="Assets\GameEngine\Skills\SkillMgr.cs" />
@@ -85,8 +89,7 @@
      <Compile Include="Assets\GameEngine\Skills\UtimateSlash.cs" />
      <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
      <Compile Include="Assets\Utils\FindDeepChild.cs" />
-     <Compile Include="Assets\GameEngine\SailorData.cs" />
-     <Compile Include="Assets\GameEngine\Sailors\DemoSailor2.cs" />
+     <Compile Include="Assets\GameEngine\GameEvents.cs" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.15f2/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
@@ -660,14 +663,32 @@
  <Reference Include="System.Xml.Serialization">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.3.15f2/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.2D.IK.Runtime">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.IK.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Animation.Editor">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Animation.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.InternalAPIEngineBridge.001">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.InternalAPIEngineBridge.001.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.VSCode.Editor">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="PsdPlugin">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/PsdPlugin.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Animation.Triangle.Runtime">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Animation.Triangle.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualStudio.Editor">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Animation.Runtime">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Animation.Runtime.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
@@ -677,6 +698,21 @@
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Mathematics.Editor">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Common.Runtime">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Common.Runtime.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.IK.Editor">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.IK.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Sprite.Editor">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Psdimporter.Editor">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Psdimporter.Editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.UI">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
@@ -689,6 +725,15 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Common.Editor">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.2D.Common.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.InternalAPIEditorBridge.001">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.InternalAPIEditorBridge.001.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Mathematics">
+ <HintPath>E:/Unity project/AmazingAwesome/AmazingAwesome2/My 3D 2D Game/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
