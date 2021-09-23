@@ -23,6 +23,7 @@ public class CombatMgr : MonoBehaviour
         combatState.CreateDemoTeam();
         UIMgr.HideAllHighlightInfo();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
+        UIMgr.ShowActionCount(actionCount);
         StartCoroutine(StartGame());
     }
     IEnumerator StartGame()

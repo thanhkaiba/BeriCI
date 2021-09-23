@@ -12,17 +12,10 @@ public class GameEvents : MonoBehaviour
     {
         instance = this;
     }
-    public AttackOneTargetEvent attackOneTarget;
-    public TakeDamageEvent takeDamage;
-    public CastSkillEvent castSkill;
-    public UIHighlightTarget highlightTarget;
-    private void Start()
-    {
-        if (attackOneTarget == null) attackOneTarget = new AttackOneTargetEvent();
-        if (takeDamage == null) takeDamage = new TakeDamageEvent();
-        if (castSkill == null) castSkill = new CastSkillEvent();
-        if (highlightTarget == null) highlightTarget = new UIHighlightTarget();
-    }
+    public AttackOneTargetEvent attackOneTarget = new AttackOneTargetEvent();
+    public TakeDamageEvent takeDamage = new TakeDamageEvent();
+    public CastSkillEvent castSkill = new CastSkillEvent();
+    public UIHighlightTarget highlightTarget = new UIHighlightTarget();
 }
 
 public class AttackOneTargetEvent : UnityEvent<Sailor, Sailor> { }

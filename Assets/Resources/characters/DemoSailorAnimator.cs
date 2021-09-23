@@ -15,7 +15,7 @@ public class DemoSailorAnimator : CharacterAnimatorCtrl
         seq.Append(transform.DOMove(desPos, 0.3f));
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(oriPos, 0.2f));
-        return 0.4f;
+        return 0.7f;
     }
     public override void SetFaceDirection(int scaleX)
     {

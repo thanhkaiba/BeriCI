@@ -45,13 +45,15 @@ public class UIIngameMgr : MonoBehaviour
 
     public void ShowActionCount(int count)
     {
-        transform.FindDeepChild("")
+        actionCount.text = count.ToString();
     }
 
     Sailor currentA;
     Sailor currentB;
     private void Start()
     {
+        Debug.Log("GameEvents.instance " + GameEvents.instance);
+        Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
         GameEvents.instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
         GameEvents.instance.takeDamage.AddListener(ShowHighLightTakeDamage);
         GameEvents.instance.castSkill.AddListener(ShowHighLightCastSkill);
@@ -107,7 +109,7 @@ public class UIIngameMgr : MonoBehaviour
         icon.sprite = Resources.Load<Sprite>("IconSailor/" + sailor.charName);
         health.value = sailor.cs.current_health / sailor.cs.max_health;
         Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
-        if (sailor.cs.max_fury != 0) fury.value = sailor.cs.current_fury / sailor.cs.max_fury;
+        if (sailor.cs.max_fury != 0) fury.value = (float) sailor.cs.current_fury / (float) sailor.cs.max_fury;
         else fury.value = 1;
     }
 }

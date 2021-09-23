@@ -133,7 +133,7 @@ public class Sailor: MonoBehaviour
             StartCoroutine(DealBaseAttackDamageDelay(target, cs.current_power, delay));
         }
         GameEvents.instance.attackOneTarget.Invoke(this, target);
-        return delay + 0.2f;
+        return delay + 0.5f;
     }
     float Immobile ()
     {
