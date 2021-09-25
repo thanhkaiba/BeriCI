@@ -66,8 +66,8 @@ public class UIIngameMgr : MonoBehaviour
     }
     public void ShowHighLightTakeDamage(Sailor s, float damage)
     {
-        if (s.cs.team == Team.A && currentA == s) ShowHighlightInfo(s);
-        if (s.cs.team == Team.B && currentB == s) ShowHighlightInfo(s);
+        if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
+        if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);
     }
     public void ShowHighLightCastSkill(Sailor s, Skill skill)
     {
@@ -85,20 +85,21 @@ public class UIIngameMgr : MonoBehaviour
         if (sailor == null) return;
         GameObject node;
         Image icon;
-        Slider health, fury;
+        HealthSlider health;
+        Slider fury;
         switch (sailor.cs.team)
         {
             case Team.A:
                 node = transform.FindDeepChild("sailorA").gameObject;
                 icon = transform.FindDeepChild("IconSailorA").GetComponent<Image>();
-                health = transform.FindDeepChild("sliderHealthA").GetComponent<Slider>();
+                health = transform.FindDeepChild("sliderHealthA").GetComponent<HealthSlider>();
                 fury = transform.FindDeepChild("sliderFuryA").GetComponent<Slider>();
                 currentA = sailor;
                 break;
             case Team.B:
                 node = transform.FindDeepChild("sailorB").gameObject;
                 icon = transform.FindDeepChild("IconSailorB").GetComponent<Image>();
-                health = transform.FindDeepChild("sliderHealthB").GetComponent<Slider>();
+                health = transform.FindDeepChild("sliderHealthB").GetComponent<HealthSlider>();
                 fury = transform.FindDeepChild("sliderFuryB").GetComponent<Slider>();
                 currentB = sailor;
                 break;
@@ -107,9 +108,28 @@ public class UIIngameMgr : MonoBehaviour
         }
         node.SetActive(true);
         icon.sprite = Resources.Load<Sprite>("IconSailor/" + sailor.charName);
-        health.value = sailor.cs.current_health / sailor.cs.max_health;
-        Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
+        health.SetValue(sailor.cs.current_health / sailor.cs.max_health);
+        //Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
         if (sailor.cs.max_fury != 0) fury.value = (float) sailor.cs.current_fury / (float) sailor.cs.max_fury;
         else fury.value = 1;
+    }
+    public void ShowTakeDamage(Sailor sailor)
+    {
+        if (sailor == null) return;
+        HealthSlider health;
+        switch (sailor.cs.team)
+        {
+            case Team.A:
+                health = transform.FindDeepChild("sliderHealthA").GetComponent<HealthSlider>();
+                currentA = sailor;
+                break;
+            case Team.B:
+                health = transform.FindDeepChild("sliderHealthB").GetComponent<HealthSlider>();
+                currentB = sailor;
+                break;
+            default:
+                return;
+        }
+        health.ChangeValue(sailor.cs.current_health / sailor.cs.max_health);
     }
 }

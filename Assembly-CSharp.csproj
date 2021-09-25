@@ -99,6 +99,8 @@
     <Compile Include="Assets\GameEngine\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
+    <Compile Include="Assets\Utils\SmoothSlider.cs" />
+    <Compile Include="Assets\Utils\HealthSlider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
