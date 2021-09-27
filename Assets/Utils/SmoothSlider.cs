@@ -21,7 +21,7 @@ public class SmoothSlider : Slider
     void LateUpdate()
     {
         if (!changed) return;
-        value = Mathf.MoveTowards(value, realValue, 0.4f * Time.deltaTime);
+        value = Mathf.MoveTowards(value, realValue, 0.8f * Time.deltaTime);
         if (value == realValue) changed = false;
     }
 }

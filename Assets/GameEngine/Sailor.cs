@@ -176,7 +176,7 @@ public class Sailor: MonoBehaviour
         yield return new WaitForSeconds(delay);
         DealBaseAttackDamage(target, current_power);
     }
-    public float TakeDamage(float physicsDamage, float magicDamage = 0, float trueDamage = 0)
+    public virtual float TakeDamage(float physicsDamage = 0, float magicDamage = 0, float trueDamage = 0)
     {
         float physicTake, magicTake;
         if (cs.current_armor > 0) physicTake = physicsDamage * 100 / (100 + cs.current_armor);
@@ -206,7 +206,7 @@ public class Sailor: MonoBehaviour
     }
     public void InitDisplayStatus()
     {
-        UnityEngine.Vector3 p = GameObject.Find("slot_" + (cs.team == Team.A ? "A" : "B") + cs.position.x + cs.position.y).transform.position;
+        UnityEngine.Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
         transform.position = p;
         Debug.Log("max_health " + cs.max_health + " " + cs.current_health);
         bar.SetHealthBar(cs.max_health, cs.current_health);
@@ -249,7 +249,7 @@ public class Sailor: MonoBehaviour
     {
         return cs.max_speed - cs.current_speed;
     }
-    public void AddSpeed(int speedAdd)
+    public virtual void AddSpeed(int speedAdd)
     {
         cs.current_speed += speedAdd;
         bar.SetSpeedBar(cs.max_speed, cs.current_speed);

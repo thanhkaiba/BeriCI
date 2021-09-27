@@ -25,15 +25,23 @@ public class CombatState : MonoBehaviour
     public void CreateDemoTeam()
     {
         CreateRandomTeam(Team.A);
-        CreateRandomTeam(Team.B);
+        CreateTargetTeam(Team.B);
     }
     void CreateRandomTeam(Team t)
     {
         CreateCombatSailor("demo", new CombatPosition(0, 0), t);
-        //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
-        //CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
+        CreateCombatSailor("demo", new CombatPosition(1, 1), t);
+        CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
         CreateCombatSailor("demo2", new CombatPosition(2, 2), t);
-        //CreateCombatSailor("demo", new CombatPosition(0, 2), t);
+        CreateCombatSailor("demo", new CombatPosition(0, 2), t);
+    }
+    void CreateTargetTeam(Team t)
+    {
+        CreateCombatSailor("target", new CombatPosition(0, 0), t);
+        CreateCombatSailor("target", new CombatPosition(1, 1), t);
+        CreateCombatSailor("target", new CombatPosition(0, 2), t);
+        CreateCombatSailor("target", new CombatPosition(2, 0), t);
+        CreateCombatSailor("target", new CombatPosition(2, 2), t);
     }
 
     Sailor CreateCombatSailor(string name, CombatPosition pos, Team team)

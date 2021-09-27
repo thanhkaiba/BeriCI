@@ -33,6 +33,10 @@ public class GameUtils : MonoBehaviour
                 characterGO = Instantiate(Resources.Load<GameObject>("characters/goblin_archer"));
                 character = characterGO.AddComponent<DemoSailor2>() as DemoSailor2;
                 break;
+            case "target":
+                characterGO = Instantiate(Resources.Load<GameObject>("characters/Target/target"));
+                character = characterGO.AddComponent<Target>() as Target;
+                break;
             default:
                 characterGO = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
                 character = characterGO.AddComponent<Sailor>() as Sailor;

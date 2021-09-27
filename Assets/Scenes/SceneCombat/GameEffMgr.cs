@@ -82,13 +82,13 @@ public class GameEffMgr : MonoBehaviour
     }
     private void Start()
     {
-        GameObject prefab = Resources.Load<GameObject>("sea/waveprefab");
-        for (int i = -15; i < 16; i++)
-        {
-            for (int j = 0; j < 1; j++) {
-                GameObject eff = Instantiate(prefab, new Vector3(25*j, -3, i * 2f), new Quaternion(0, 0, 0, 0));
-                eff.GetComponent<WaveFakeOcean>().isReverse = i % 2 == 0;
-            }
-        }
+        //GameObject prefab = Resources.Load<GameObject>("sea/waveprefab");
+        //for (int i = -15; i < 16; i++)
+        //{
+        //    for (int j = 0; j < 1; j++) {
+        //        GameObject eff = Instantiate(prefab, new Vector3(25*j, -3, i * 2f), new Quaternion(0, 0, 0, 0));
+        //        eff.GetComponent<WaveFakeOcean>().isReverse = i % 2 == 0;
+        //    }
+        //}
     }
 }

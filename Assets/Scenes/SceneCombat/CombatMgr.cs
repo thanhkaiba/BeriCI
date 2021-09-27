@@ -20,6 +20,7 @@ public class CombatMgr : MonoBehaviour
     public int actionCount = 0;
     private void Start()
     {
+        //return;
         combatState.CreateDemoTeam();
         UIMgr.HideAllHighlightInfo();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
