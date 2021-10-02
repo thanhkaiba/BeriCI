@@ -176,7 +176,7 @@ public class Sailor: MonoBehaviour
             StartCoroutine(DealBaseAttackDamageDelay(target, cs.Power, delay));
         }
         GameEvents.instance.attackOneTarget.Invoke(this, target);
-        return delay + 0.5f;
+        return delay + 0.8f;
     }
     float Immobile ()
     {
@@ -259,6 +259,7 @@ public class Sailor: MonoBehaviour
         bar.SetIconSkill(skill);
         bar.SetName(charName);
         SetFaceDirection();
+        Debug.Log("Set Face Direction");
     }
     public void GainHealth(float health)
     {
