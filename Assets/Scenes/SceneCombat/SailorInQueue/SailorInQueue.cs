@@ -20,7 +20,7 @@ public class SailorInQueue : MonoBehaviour
     }
     public void PresentData()
     {
-        speedSlider.value = (float)sailorData.cs.current_speed / sailorData.cs.max_speed;
+        speedSlider.value = (float)sailorData.cs.CurrentSpeed / sailorData.cs.MaxSpeed;
         if (sailorData.cs.team == Team.B) icon.transform.localScale = new Vector3(-1, 1, 1);
     }
 }

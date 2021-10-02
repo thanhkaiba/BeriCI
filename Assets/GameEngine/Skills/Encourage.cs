@@ -46,9 +46,9 @@ public class Encourage : Skill
         seq.AppendCallback(() =>
         {
             target.GainHealth(heal);
-            target.AddSpeed((int) speed * target.cs.max_speed);
+            target.AddSpeed((int) speed * target.cs.MaxSpeed);
             target.GainFury(fury);
-            target.cs.current_power += power_buff;
+            target.cs.BasePower += power_buff;
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+Buff+", target.transform.position);
         });
         seq.AppendInterval(0.2f);

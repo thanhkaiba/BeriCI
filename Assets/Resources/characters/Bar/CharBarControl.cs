@@ -25,16 +25,16 @@ public class CharBarControl : MonoBehaviour
         switch (type)
         {
             case AttackType.MELEE:
-                spr = Resources.Load<Sprite>("IconCharacterType/SwordMan");
+                spr = Resources.Load<Sprite>("Icons/attack_type/mellee");
                 break;
             case AttackType.RANGE:
-                spr = Resources.Load<Sprite>("IconCharacterType/Archer");
+                spr = Resources.Load<Sprite>("Icons/attack_type/range");
                 break;
             case AttackType.ASSASSINATE:
-                spr = Resources.Load<Sprite>("IconCharacterType/Assassin");
+                spr = Resources.Load<Sprite>("Icons/attack_type/assassinate");
                 break;
             default:
-                spr = Resources.Load<Sprite>("IconCharacterType/Archer");
+                spr = Resources.Load<Sprite>("Icons/attack_type/mellee");
                 break;
         }
         iconType.sprite = spr;

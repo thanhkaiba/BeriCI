@@ -1,5 +1,5 @@
 {
-    "root_name": "Demo Sailor",
+    "root_name": "Helti",
 
     "power_base": 50,
     "power_base_step": 0.1,
@@ -19,6 +19,7 @@
 
     "attack_type": 0,
     "types": [
+        1,
         2
     ]
 }

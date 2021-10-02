@@ -119,7 +119,7 @@ public class Skill
         float curPercent = 1.0f;
         teamChar.ForEach(character =>
         {
-            float percent = character.cs.current_health / character.cs.max_health;
+            float percent = character.cs.CurHealth / character.cs.MaxHealth;
             if (
                 (result == null)
                 || (percent < curPercent)
@@ -139,11 +139,11 @@ public class Skill
         {
             if (
                 (result == null)
-                || (character.cs.current_health < health)
+                || (character.cs.CurHealth < health)
             )
             {
                 result = character;
-                health = character.cs.current_health;
+                health = character.cs.CurHealth;
             }
         });
         return result;
@@ -156,11 +156,11 @@ public class Skill
         {
             if (
                 (result == null)
-                || (character.cs.max_fury - character.cs.current_fury > distance)
+                || (character.cs.MaxFury - character.cs.Fury > distance)
             )
             {
                 result = character;
-                distance = character.cs.max_fury - character.cs.current_fury;
+                distance = character.cs.MaxFury - character.cs.MaxFury;
             }
         });
         return result;

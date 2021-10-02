@@ -19,7 +19,7 @@ public class Slash : Skill
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float physic_damage = cChar.cs.current_power * scale_damage_ratio;
+        float physic_damage = cChar.cs.Power * scale_damage_ratio;
 
         List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         Sailor target = GetNearestTarget(cChar, enermy);

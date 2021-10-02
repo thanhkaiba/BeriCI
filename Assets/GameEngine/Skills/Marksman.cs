@@ -35,7 +35,7 @@ public class Marksman : Skill
         seq.AppendCallback(() => {
             targets.ForEach(target =>
             {
-                target.TakeDamage(attacking.cs.current_power * damage_ratio, 0, 0);
+                target.TakeDamage(attacking.cs.Power * damage_ratio, 0, 0);
             });
         });
         return 0.8f;

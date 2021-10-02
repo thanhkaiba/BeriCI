@@ -35,9 +35,9 @@ public class IceArrow : Skill
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => {
-            target.TakeDamage(0, attacking.cs.current_power *scale_damage);
+            target.TakeDamage(0, attacking.cs.Power *scale_damage);
             target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, frozen_turn));
         });
-        return delay;
+        return delay + 0.2f;
     }
 }

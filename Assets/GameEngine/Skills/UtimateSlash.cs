@@ -19,8 +19,8 @@ public class UltimateSlash : Skill
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float true_damage = cChar.cs.current_power * scale_damage;
-        float heal = base_heal + cChar.cs.current_power;
+        float true_damage = cChar.cs.Power * scale_damage;
+        float heal = base_heal + cChar.cs.Power;
 
         List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         Sailor target = GetNearestTarget(cChar, enermy);

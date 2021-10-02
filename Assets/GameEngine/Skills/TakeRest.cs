@@ -10,12 +10,12 @@ public class TakeRest : Skill
     }
     public override bool CanActive(Sailor cChar, CombatState cbState)
     {
-        return cChar.cs.current_health < cChar.cs.max_health;
+        return cChar.cs.CurHealth < cChar.cs.MaxHealth;
     }
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        cChar.GainHealth(heal_ratio * cChar.cs.max_health);
+        cChar.GainHealth(heal_ratio * cChar.cs.MaxHealth);
         return RunAnimTakeRest(cChar);
     }
     float RunAnimTakeRest(Sailor cChar)

@@ -17,6 +17,27 @@ public enum SailorStatusType
     BURN,
 };
 
+public enum SailorType
+{
+    WILD,
+    MIGHTY,
+    SWORD_MAN,
+    HORROR,
+    BERSERK,
+    DOCTOR,
+    WIZARD,
+    SUPPORT,
+    SNIPER,
+    ASSASSIN,
+    KUNG_FU,
+};
+
+public class PassiveType
+{
+    public SailorType type;
+    public int level;
+}
+
 public class SailorStatus
 {
     public SailorStatusType name;
@@ -60,6 +81,8 @@ public class ConfigStats
     public float magic_resist;
 
     public AttackType attack_type;
+
+    public IEnumerable<SailorType> types;
     public float GetPower(int level, int quality)
     {
         return power_base + quality * power_base_step + (power_plv + quality * power_plv_step) * level;
@@ -84,27 +107,56 @@ public class ConfigStats
 
 public class CombatStats
 {
-    public float base_power;
-    public float current_power;
+    public float BasePower;
+    public float Power
+    {
+        get { return BasePower; }
+    }
 
-    public float max_health;
-    public float current_health;
+    public float MaxHealth;
+    public float CurHealth;
 
-    public float base_armor;
-    public float current_armor;
+    public float BaseArmor;
+    public float Armor {
+        get { return BaseArmor; }
+    }
 
-    public float base_magic_resist;
-    public float current_magic_resist;
+    public float BaseMagicResist;
+    public float MagicResist {
+        get {
+            // tinh toan dua tren status
+            return BaseMagicResist;
+        }
+    }
 
-    public float display_speed;
-    public int max_speed;
-    public int current_speed;
+    public float DisplaySpeed;
+    public int MaxSpeed
+    {
+        get { return (int)(10000f / DisplaySpeed); }
+    }
+    public int CurrentSpeed;
 
-    public int max_fury;
-    public int current_fury;
-    public int current_max_fury = 0;
+    public int BaseFury;
+    public int MaxFury
+    {
+        get { return BaseFury; }
+    }
+    public int Fury;
+
+    public List<SailorType> types = new List<SailorType>();
 
     public CombatPosition position;
     public List<SailorStatus> listStatus = new List<SailorStatus>();
     public Team team;
+
+    public bool HaveType(SailorType type)
+    {
+        bool found = false;
+        types.ForEach(_t =>
+        {
+            if (_t == type) found = true;
+        });
+        Debug.Log("HaveType: " + found);
+        return found;
+    }
 }

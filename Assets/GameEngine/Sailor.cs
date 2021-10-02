@@ -34,7 +34,7 @@ public class Sailor: MonoBehaviour
         var barGO = Instantiate<GameObject>(
             barPrefab,
             transform.Find("nodeBar"));
-        barGO.transform.localScale = new Vector3(0.018f, 0.018f, 0.018f);
+        barGO.transform.localScale = new Vector3(0.024f, 0.024f, 1f);
         barGO.transform.localPosition = new Vector3(0, 0, 0);
         return barGO.transform.GetComponent<CharBarControl>();
     }
@@ -42,20 +42,20 @@ public class Sailor: MonoBehaviour
     {
         cs = new CombatStats()
         {
-            base_power = config_stats.GetPower(level, quality),
-            current_power = config_stats.GetPower(level, quality),
-            max_health = config_stats.GetHealth(level, quality),
-            current_health = config_stats.GetHealth(level, quality),
-            base_armor = config_stats.GetArmor(),
-            current_armor = config_stats.GetArmor(),
-            base_magic_resist = config_stats.GetMagicResist(),
-            current_magic_resist = config_stats.GetMagicResist(),
-            display_speed = config_stats.GetSpeed(level, quality),
-            max_speed = (int)(10000f / config_stats.GetSpeed(level, quality)),
-            current_speed = 0,
+            BasePower = config_stats.GetPower(level, quality),
+            MaxHealth = config_stats.GetHealth(level, quality),
+            CurHealth = config_stats.GetHealth(level, quality),
+            BaseArmor = config_stats.GetArmor(),
+            BaseMagicResist = config_stats.GetMagicResist(),
+            DisplaySpeed = config_stats.GetSpeed(level, quality),
+            CurrentSpeed = 0,
             position = p,
             team = t,
         };
+        foreach (SailorType type in config_stats.types)
+        {
+            cs.types.Add(type);
+        }
 
         charName = config_stats.root_name;
 
@@ -64,12 +64,55 @@ public class Sailor: MonoBehaviour
 
         if (skill != null)
         {
-            cs.max_fury = skill.MAX_FURY;
-            cs.current_fury = skill.START_FURY;
-            cs.current_max_fury = skill.MAX_FURY;
+            cs.BaseFury = skill.MAX_FURY;
+            cs.Fury = skill.START_FURY;
         }
         bar = CreateStatusBar();
         InitDisplayStatus();
+    }
+    public void UpdateCombatData(List<PassiveType> ownTeam, List<PassiveType> oppTeam)
+    {
+        ownTeam.ForEach(p =>
+        {
+            switch (p.type)
+            {
+                case SailorType.SWORD_MAN:
+                    if (cs.HaveType(SailorType.SWORD_MAN))
+                    {
+                        if (p.level == 1) cs.DisplaySpeed += 12;
+                        if (p.level == 2) cs.DisplaySpeed += 20;
+                    }
+                    break;
+                case SailorType.SUPPORT:
+                    if (p.level == 1) cs.Fury += 10;
+                    if (p.level == 2) cs.Fury += 15;
+                    break;
+                case SailorType.ASSASSIN:
+                    if (cs.HaveType(SailorType.ASSASSIN))
+                    {
+                        if (p.level == 1) cs.BasePower *= 1.15f;
+                        if (p.level == 2) cs.BasePower *= 1.20f;
+                        if (p.level == 2) cs.BasePower *= 1.25f;
+                        if (p.level == 2) cs.BasePower *= 1.35f;
+                    }
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        oppTeam.ForEach(p =>
+        {
+            switch (p.type)
+            {
+                case SailorType.HORROR:
+                    if (p.level == 1) cs.BaseArmor -= 12;
+                    if (p.level == 2) cs.BaseArmor -= 20;
+                    break;
+                default:
+                    break;
+            }
+        });
     }
     public bool HaveStatus(SailorStatusType name)
     {
@@ -108,37 +151,37 @@ public class Sailor: MonoBehaviour
     }
     bool UseSkillCondition (CombatState combatState)
     {
-        return skill != null && cs.current_fury >= cs.current_max_fury && skill.CanActive(this, combatState);
+        return skill != null && cs.Fury >= cs.MaxFury && skill.CanActive(this, combatState);
     }
     float UseSkill (CombatState combatState)
     {
         GameEvents.instance.castSkill.Invoke(this, skill);
-        cs.current_speed -= cs.max_speed;
-        cs.current_fury = 0;
+        cs.CurrentSpeed -= cs.MaxSpeed;
+        cs.Fury = 0;
         Debug.Log("Use skill now " + skill.name);
-        bar.SetSpeedBar(cs.max_speed, cs.current_speed);
-        bar.SetFuryBar(cs.current_max_fury, cs.current_fury);
+        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
         return skill.CastSkill(this, combatState);
     }
     float BaseAttack (CombatState combatState)
     {
-        cs.current_speed -= cs.max_speed;
-        bar.SetSpeedBar(cs.max_speed, cs.current_speed);
+        cs.CurrentSpeed -= cs.MaxSpeed;
+        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         GainFury(10);
         Sailor target = GetBaseAttackTarget(combatState);
         float delay = 0;
         if (target != null)
         {
             delay += RunBaseAttack(target);
-            StartCoroutine(DealBaseAttackDamageDelay(target, cs.current_power, delay));
+            StartCoroutine(DealBaseAttackDamageDelay(target, cs.Power, delay));
         }
         GameEvents.instance.attackOneTarget.Invoke(this, target);
         return delay + 0.5f;
     }
     float Immobile ()
     {
-        cs.current_speed -= cs.max_speed;
-        bar.SetSpeedBar(cs.max_speed, cs.current_speed);
+        cs.CurrentSpeed -= cs.MaxSpeed;
+        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         CountdownStatusRemain();
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
 
@@ -179,10 +222,10 @@ public class Sailor: MonoBehaviour
     public virtual float TakeDamage(float physicsDamage = 0, float magicDamage = 0, float trueDamage = 0)
     {
         float physicTake, magicTake;
-        if (cs.current_armor > 0) physicTake = physicsDamage * 100 / (100 + cs.current_armor);
-        else physicTake = physicsDamage * (2 - 100 / (100 - cs.current_armor));
-        if (cs.current_magic_resist > 0) magicTake = magicDamage * 100 / (100 + cs.current_magic_resist);
-        else magicTake = magicDamage * (2 - 100 / (100 - cs.current_magic_resist));
+        if (cs.Armor > 0) physicTake = physicsDamage * 100 / (100 + cs.Armor);
+        else physicTake = physicsDamage * (2 - 100 / (100 - cs.Armor));
+        if (cs.MagicResist > 0) magicTake = magicDamage * 100 / (100 + cs.MagicResist);
+        else magicTake = magicDamage * (2 - 100 / (100 - cs.MagicResist));
         float totalDamage = physicTake + magicTake + trueDamage;
         LoseHealth(totalDamage);
         GainFury(4);
@@ -208,10 +251,10 @@ public class Sailor: MonoBehaviour
     {
         UnityEngine.Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
         transform.position = p;
-        Debug.Log("max_health " + cs.max_health + " " + cs.current_health);
-        bar.SetHealthBar(cs.max_health, cs.current_health);
-        bar.SetSpeedBar(cs.max_speed, cs.current_speed);
-        bar.SetFuryBar(cs.current_max_fury, cs.current_fury);
+        Debug.Log("max_health " + cs.MaxHealth + " " + cs.CurHealth);
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(config_stats.attack_type);
         bar.SetIconSkill(skill);
         bar.SetName(charName);
@@ -219,20 +262,20 @@ public class Sailor: MonoBehaviour
     }
     public void GainHealth(float health)
     {
-        cs.current_health += health;
-        if (cs.current_health > cs.max_health) cs.current_health = cs.max_health;
-        bar.SetHealthBar(cs.max_health, cs.current_health);
+        cs.CurHealth += health;
+        if (cs.CurHealth > cs.MaxHealth) cs.CurHealth = cs.MaxHealth;
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
     }
     public void LoseHealth(float health)
     {
-        cs.current_health -= health;
-        if (cs.current_health <= 0)
+        cs.CurHealth -= health;
+        if (cs.CurHealth <= 0)
         {
-            cs.current_health = 0;
+            cs.CurHealth = 0;
             AddStatus(new SailorStatus(SailorStatusType.DEATH));
             if (IsDeath()) RunDeath();
         }
-        bar.SetHealthBar(cs.max_health, cs.current_health);
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         GameEvents.instance.takeDamage.Invoke(this, health);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
@@ -240,26 +283,25 @@ public class Sailor: MonoBehaviour
     {
         if (skill != null)
         {
-            cs.current_fury += value;
-            if (cs.current_fury > cs.current_max_fury) cs.current_fury = cs.current_max_fury;
-            bar.SetFuryBar(cs.current_max_fury, cs.current_fury);
+            cs.Fury += value;
+            if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
+            bar.SetFuryBar(cs.MaxFury, cs.Fury);
         }
     }
     public int GetSpeedNeeded()
     {
-        return cs.max_speed - cs.current_speed;
+        return cs.MaxSpeed - cs.CurrentSpeed;
     }
     public virtual void AddSpeed(int speedAdd)
     {
-        cs.current_speed += speedAdd;
-        bar.SetSpeedBar(cs.max_speed, cs.current_speed);
+        cs.CurrentSpeed += speedAdd;
+        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
     }
     public void IncDisplaySpeed(float spInc)
     {
-        cs.display_speed += spInc;
-        cs.max_speed = (int)(10000f / cs.display_speed);
+        cs.DisplaySpeed += spInc;
 
-        bar.SetSpeedBar(cs.max_speed, cs.current_speed);
+        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
     }
     public bool IsEnoughSpeed()
     {

@@ -26,7 +26,7 @@ public class HeadShot : Skill
         List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         Sailor target = GetLowestHealthTarget(enermy);
 
-        float physic_damage = damage_ratio * cChar.cs.current_power + lose_health_ratio * (target.cs.max_health - target.cs.current_health);
+        float physic_damage = damage_ratio * cChar.cs.Power + lose_health_ratio * (target.cs.MaxHealth - target.cs.CurHealth);
 
         return RunAnimation(cChar, target, physic_damage);
     }

@@ -34,7 +34,7 @@ public class FreezeWorld : Skill
             {
                 target.TakeDamage(0, damage + attacking.level * damage_p_lv, 0);
                 target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, 1));
-                target.cs.current_armor -= decrease_armor;
+                target.cs.BaseArmor -= decrease_armor;
             });
         });
         GameEffMgr.Instance.ShowSkillIconActive(attacking.transform.position, name);

@@ -108,9 +108,9 @@ public class UIIngameMgr : MonoBehaviour
         }
         node.SetActive(true);
         icon.sprite = Resources.Load<Sprite>("IconSailor/" + sailor.charName);
-        health.SetValue(sailor.cs.current_health / sailor.cs.max_health);
+        health.SetValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
         //Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
-        if (sailor.cs.max_fury != 0) fury.value = (float) sailor.cs.current_fury / (float) sailor.cs.max_fury;
+        if (sailor.cs.MaxFury != 0) fury.value = (float) sailor.cs.Fury / (float) sailor.cs.MaxFury;
         else fury.value = 1;
     }
     public void ShowTakeDamage(Sailor sailor)
@@ -130,6 +130,6 @@ public class UIIngameMgr : MonoBehaviour
             default:
                 return;
         }
-        health.ChangeValue(sailor.cs.current_health / sailor.cs.max_health);
+        health.ChangeValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
     }
 }

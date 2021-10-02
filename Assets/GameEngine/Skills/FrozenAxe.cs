@@ -19,7 +19,7 @@ public class FrozenAxe : Skill
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float spell_damage = cChar.cs.current_power;
+        float spell_damage = cChar.cs.Power;
 
         List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         Sailor target = GetNearestTarget(cChar, enermy);
@@ -37,7 +37,7 @@ public class FrozenAxe : Skill
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => {
-            target.TakeDamage(damage_ratio * attacking.cs.current_power, damage_ratio * attacking.cs.current_power, 0);
+            target.TakeDamage(damage_ratio * attacking.cs.Power, damage_ratio * attacking.cs.Power, 0);
             target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, frozen_turn));
         });
         seq.Append(attacking.transform.DOMove(oriPos, 0.3f));

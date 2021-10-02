@@ -19,12 +19,12 @@ public class HighNote : Skill
     public override bool CanActive(Sailor cChar, CombatState cbState)
     {
         Sailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
-        return (target != null && (target.cs.max_fury - target.cs.current_fury > 0));
+        return (target != null && (target.cs.MaxFury - target.cs.Fury > 0));
     }
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        cChar.cs.current_speed += (int)System.Math.Floor(speed_self_buff * cChar.cs.max_speed);
+        cChar.cs.CurrentSpeed += (int)System.Math.Floor(speed_self_buff * cChar.cs.MaxSpeed);
 
         Sailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
 
@@ -40,8 +40,8 @@ public class HighNote : Skill
         seq.AppendCallback(() =>
         {
             target.GainFury(fury);
-            target.cs.current_magic_resist += buff_magic_resist;
-            target.cs.current_armor += buff_armor;
+            target.cs.BaseMagicResist += buff_magic_resist;
+            target.cs.BaseArmor += buff_armor;
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+Buff+", target.transform.position);
         });
         seq.AppendInterval(0.2f);

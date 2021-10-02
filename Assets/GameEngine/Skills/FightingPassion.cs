@@ -20,12 +20,12 @@ public class FightingPassion : Skill
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float incPower = cChar.cs.base_power * increaseDamageRatio;
-        cChar.cs.current_power += cChar.cs.base_power * increaseDamageRatio;
-        cChar.cs.current_speed += (int)System.Math.Floor(cChar.cs.max_speed * increaseSpeedRatio);
-        cChar.cs.current_armor += armor_increase;
-        cChar.cs.current_magic_resist += magic_resist_increase;
-        cChar.cs.max_health += increase_health + increase_health_per_level * cChar.level;
+        float incPower = cChar.cs.BasePower * increaseDamageRatio;
+        cChar.cs.BasePower += cChar.cs.BasePower * increaseDamageRatio;
+        cChar.cs.CurrentSpeed += (int)System.Math.Floor(cChar.cs.MaxSpeed * increaseSpeedRatio);
+        cChar.cs.BaseArmor += armor_increase;
+        cChar.cs.BaseMagicResist += magic_resist_increase;
+        cChar.cs.MaxHealth += increase_health + increase_health_per_level * cChar.level;
         cChar.GainHealth(increase_health + increase_health_per_level * cChar.level);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+" + (int)incPower + "POW", cChar.transform.position);
         return RunAnim(cChar);

@@ -17,5 +17,6 @@
     "armor": 10,
     "magic_resist": 10,
 
-    "attack_type": 0
+    "attack_type": 0,
+    "types": []
 }

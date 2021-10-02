@@ -5,27 +5,17 @@ using System.IO;
 using UnityEngine;
 using DG.Tweening;
 
-public class Target : Sailor
+public class Helti : Sailor
 {
-    public Target()
+    public Helti()
     {
-        skill = null;
-        config_url = "Assets/Config/Sailors/Target.json";
+        skill = new Slash();
+        config_url = "Assets/Config/Sailors/Helti.json";
     }
     public override void Awake()
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
-    }
-    public override float TakeDamage(float physicsDamage = 0, float magicDamage = 0, float trueDamage = 0)
-    {
-        TriggerAnimation("TakeDamage");
-        Debug.Log("THE HELL");
-        return base.TakeDamage(physicsDamage, magicDamage, trueDamage);
-    }
-    public override void AddSpeed(int speedAdd)
-    {
-        // do nothing
     }
     public override float RunBaseAttack(Sailor target)
     {

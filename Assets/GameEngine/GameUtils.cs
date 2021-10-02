@@ -37,12 +37,16 @@ public class GameUtils : MonoBehaviour
                 characterGO = Instantiate(Resources.Load<GameObject>("characters/Target/target"));
                 character = characterGO.AddComponent<Target>() as Target;
                 break;
+            case "helti":
+                characterGO = Instantiate(Resources.Load<GameObject>("characters/Helti/Helti"));
+                character = characterGO.AddComponent<Helti>() as Helti;
+                break;
             default:
                 characterGO = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
                 character = characterGO.AddComponent<Sailor>() as Sailor;
                 break;
         }
-
+        
         return character;
     }
 }

@@ -19,7 +19,7 @@ public class Deceive : Skill
     public override float CastSkill(Sailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float physic_damage = cChar.cs.current_power;
+        float physic_damage = cChar.cs.Power;
         float magic_damage = base_damage + cChar.level * damage_per_level;
 
         List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
