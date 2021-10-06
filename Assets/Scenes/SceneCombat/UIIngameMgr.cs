@@ -134,7 +134,7 @@ public class UIIngameMgr : MonoBehaviour
                 return;
         }
         node.SetActive(true);
-        icon.sprite = Resources.Load<Sprite>("IconSailor/" + sailor.charName);
+        icon.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.charName);
         health.SetValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
         //Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
         if (sailor.cs.MaxFury != 0) fury.value = (float) sailor.cs.Fury / (float) sailor.cs.MaxFury;

@@ -19,9 +19,9 @@
     "armor": 20,
     "magic_resist": 20,
 
-    "attack_type": 0,
+    "attack_type": "MELEE",
     "types": [
-        2,
-        3
+        "MIGHTY",
+        "SWORD_MAN"
     ]
 }

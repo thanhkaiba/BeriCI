@@ -6,7 +6,7 @@ public enum AttackType
 {
     MELEE,
     RANGE,
-    ASSASSINATE,
+    SNEAK,
 };
 
 public enum SailorStatusType

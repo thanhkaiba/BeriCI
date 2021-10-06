@@ -30,8 +30,8 @@ public class CharBarControl : MonoBehaviour
             case AttackType.RANGE:
                 spr = Resources.Load<Sprite>("Icons/attack_type/range");
                 break;
-            case AttackType.ASSASSINATE:
-                spr = Resources.Load<Sprite>("Icons/attack_type/assassinate");
+            case AttackType.SNEAK:
+                spr = Resources.Load<Sprite>("Icons/attack_type/sneak");
                 break;
             default:
                 spr = Resources.Load<Sprite>("Icons/attack_type/mellee");

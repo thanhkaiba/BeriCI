@@ -172,6 +172,17 @@ public class Skill
         result = teamChar.Find(cha => (cha.cs.position.x == c.cs.position.x + 1 && cha.cs.position.y == c.cs.position.y));
         return result;
     }
+    public List<Sailor> GetAllBehind(Sailor c, List<Sailor> teamChar)
+    {
+        List<Sailor> result = new List<Sailor>();
+        CombatPosition p = c.cs.position;
+        teamChar.ForEach(cha =>
+        {
+            if ((cha.cs.position.x == c.cs.position.x + 1 || cha.cs.position.x == c.cs.position.x + 2)
+                && cha.cs.position.y == c.cs.position.y) result.Add(cha);
+        });
+        return result;
+    }
     public Sailor GetNearestInRowTarget(Sailor c, List<Sailor> listTarget)
     {
         Sailor result = null;

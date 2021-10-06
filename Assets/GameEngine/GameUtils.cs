@@ -51,13 +51,14 @@ public class GameUtils : MonoBehaviour
         
         return character;
     }
-    public Item CreateItem(string itemId)
+    public Item CreateItem(string itemId, int quality = 0)
     {
         Item item;
         using (StreamReader r = new StreamReader("Assets/Config/Items/" + itemId + ".json"))
         {
             string json = r.ReadToEnd();
             item = JsonConvert.DeserializeObject<Item>(json);
+            item.quality = quality;
         }
         return item;
     }

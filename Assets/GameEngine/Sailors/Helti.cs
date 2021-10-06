@@ -63,17 +63,17 @@ public class WindSlash : Skill
 
         List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         Sailor target = GetNearestTarget(cChar, enermy);
-        Sailor behind_target = GetBehind(target, enermy);
+        List<Sailor> behind_target = GetAllBehind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage / 3);
     }
-    float RunAnimation(Sailor attacking, Sailor target, Sailor behind_target, float physics_damage)
+    float RunAnimation(Sailor attacking, Sailor target, List<Sailor> behind_target, float physics_damage)
     {
         attacking.TriggerAnimation("CastSkill");
         GameEvents.instance.highlightTarget.Invoke(target);
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
         desPos.y += 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
@@ -82,23 +82,23 @@ public class WindSlash : Skill
         seq.AppendCallback(() =>
         {
             target.TakeDamage(physics_damage, 0, 0);
-            if (behind_target != null) behind_target.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2);
+            behind_target.ForEach(s => s.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2));
         });
-        seq.AppendInterval(0.45f);
+        seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
             target.TakeDamage(physics_damage, 0, 0);
-            if (behind_target != null) behind_target.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2);
+            behind_target.ForEach(s => s.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2));
         });
-        seq.AppendInterval(0.45f);
+        seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
             target.TakeDamage(physics_damage, 0, 0);
-            if (behind_target != null) behind_target.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2);
+            behind_target.ForEach(s => s.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2));
         });
 
-        seq.AppendInterval(0.45f);
-        seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
+        seq.AppendInterval(0.3f);
+        seq.Append(attacking.transform.DOJump(oriPos, 0.8f, 1, 0.4f));
         return 2.0f;
     }
 }

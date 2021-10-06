@@ -74,7 +74,7 @@ public class Sailor: MonoBehaviour
             cs.types.Add(type);
         }
 
-        items.ForEach(item =>
+        if (items != null) items.ForEach(item =>
         {
             cs.BasePower += item.Power;
             cs.MaxHealth += item.Health;
@@ -166,11 +166,20 @@ public class Sailor: MonoBehaviour
         }
         cs.listStatus.RemoveAll(status => status.remainTurn <= 0);
     }
+    public void CheckDeath()
+    {
+        if (IsDeath()) return;
+        if (cs.CurHealth <= 0)
+        {
+            AddStatus(new SailorStatus(SailorStatusType.DEATH));
+            if (IsDeath()) RunDeath();
+        }
+    }
     public bool IsDeath()
     {
         return HaveStatus(SailorStatusType.DEATH);
     }
-
+        
     public float DoCombatAction(CombatState combatState)
     {
         bool useSkillCondition = UseSkillCondition(combatState);
@@ -218,7 +227,6 @@ public class Sailor: MonoBehaviour
     {
         cs.CurrentSpeed -= cs.MaxSpeed;
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
-        CountdownStatusRemain();
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
 
         DisplayStatus(cs.listStatus);
@@ -238,7 +246,7 @@ public class Sailor: MonoBehaviour
                 cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
-            case AttackType.ASSASSINATE:
+            case AttackType.SNEAK:
                 return GetFurthestTarget(
                     cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
@@ -322,16 +330,14 @@ public class Sailor: MonoBehaviour
     public void LoseHealth(float health)
     {
         cs.CurHealth -= health;
-        if (cs.CurHealth <= 0)
-        {
-            cs.CurHealth = 0;
-            AddStatus(new SailorStatus(SailorStatusType.DEATH));
-            if (IsDeath()) RunDeath();
-        }
+        if (cs.CurHealth <= 0) cs.CurHealth = 0;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        CheckDeath();
+
         GameEvents.instance.takeDamage.Invoke(this, health);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
+
     public void GainFury(int value)
     {
         if (skill != null)

@@ -53,8 +53,16 @@ public class CombatMgr : MonoBehaviour
         );
         float delayTime = actionChar.DoCombatAction(combatState);
         combatState.lastTeamAction = actionChar.cs.team;
+        StartCoroutine(EndLoop(actionChar, delayTime));
         StartCoroutine(NextLoop(delayTime));
     }
+
+    IEnumerator EndLoop(Sailor actor, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        combatState.RunEndAction(actor);
+    }
+
     IEnumerator NextLoop(float delay)
     {
         yield return new WaitForSeconds(delay);

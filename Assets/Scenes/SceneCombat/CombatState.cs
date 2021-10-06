@@ -34,26 +34,54 @@ public class CombatState : MonoBehaviour
     public void CreateDemoTeam()
     {
         CreateRandomTeam(Team.A);
-        CreateRandomTeam(Team.B);
+        CreateTargetTeam(Team.B);
     }
     void CreateRandomTeam(Team t)
     {
-        CreateCombatSailor("helti", new CombatPosition(1, 0), t);
-        CreateCombatSailor("helti", new CombatPosition(1, 2), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 1), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 1), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 1), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 0), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 0), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 0), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 2), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 2), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 2), t);
+        //CreateCombatSailor("helti", new CombatPosition(1, 2), t);
         //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
         //CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
         //CreateCombatSailor("demo2", new CombatPosition(2, 2), t);
         //CreateCombatSailor("demo", new CombatPosition(0, 2), t);
     }
+
     void CreateTargetTeam(Team t)
     {
-        CreateCombatSailor("target", new CombatPosition(0, 0), t);
+        CreateCombatSailor("target", new CombatPosition(0, 1), t);
         CreateCombatSailor("target", new CombatPosition(1, 1), t);
+        CreateCombatSailor("target", new CombatPosition(2, 1), t);
+        CreateCombatSailor("target", new CombatPosition(0, 0), t);
+        CreateCombatSailor("target", new CombatPosition(1, 0), t);
+        CreateCombatSailor("target", new CombatPosition(2, 0), t);
         CreateCombatSailor("target", new CombatPosition(0, 2), t);
+        CreateCombatSailor("target", new CombatPosition(1, 2), t);
+        CreateCombatSailor("target", new CombatPosition(2, 2), t);
     }
 
-    Sailor CreateCombatSailor(string name, CombatPosition pos, Team team)
+    Sailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
     {
+        string[] split = sailorString.Split(char.Parse("|"));
+        string name = split[0];
+
+        Debug.Log("name>>> " + name);
+
+        List<Item> listItem = new List<Item>();
+        for (int i = 1; i < split.Length; i++)
+        {
+            string itemName = split[i].Split(char.Parse(":"))[0];
+            string itemQuality = split[i].Split(char.Parse(":"))[1];
+            listItem.Add(GameUtils.Instance.CreateItem(itemName, Int32.Parse(itemQuality)));
+        }
+
         int quality = UnityEngine.Random.Range(1, 100 + 1);
         int level = UnityEngine.Random.Range(1, 10 + 1);
 
@@ -65,7 +93,7 @@ public class CombatState : MonoBehaviour
         var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
         shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
 
-        sailor.SetEquipItems(new List<Item>());
+        sailor.SetEquipItems(listItem);
         sailor.InitCombatData(level, quality, pos, team);
         if (team == Team.A) sailorsTeamA.Add(sailor);
         else sailorsTeamB.Add(sailor);
@@ -158,7 +186,7 @@ public class CombatState : MonoBehaviour
         else if (typeCount[(int)SailorType.SWORD_MAN] >= 2) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 1 });
 
         // do next here
-
+        if (typeCount[(int)SailorType.BERSERK] >= 1) result.Add(new PassiveType() { type = SailorType.BERSERK, level = 1 });
         //
         return result;
     }
@@ -167,5 +195,15 @@ public class CombatState : MonoBehaviour
     {
         sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(passiveTypeA, passiveTypeB));
         sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(passiveTypeB, passiveTypeA));
+    }
+
+    public void RunEndAction(Sailor actor)
+    {
+        actor.CountdownStatusRemain();
+        var listSailor = GetAllCombatCharacters();
+        listSailor.ForEach(sailor =>
+        {
+            sailor.CheckDeath();
+        });
     }
 };

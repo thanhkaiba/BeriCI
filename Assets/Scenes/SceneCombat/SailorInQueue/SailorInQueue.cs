@@ -12,7 +12,7 @@ public class SailorInQueue : MonoBehaviour
     public void SetData(Sailor s)
     {
         sailorData = s;
-        icon.sprite = Resources.Load<Sprite>("IconSailor/" + s.charName);
+        icon.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + s.charName);
     }
     public Sailor GetData()
     {
