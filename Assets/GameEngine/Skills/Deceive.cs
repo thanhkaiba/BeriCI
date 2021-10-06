@@ -29,7 +29,7 @@ public class Deceive : Skill
 
         return RunAnimation(cChar, target, physic_damage, magic_damage);
     }
-    float RunAnimation(Sailor attacking, Sailor target, float physic_damage, float magic_damage)
+    float RunAnimation(Sailor attacking, Sailor target, float physics_damage, float magic_damage)
     {
 
         Vector3 newPos = GameObject.Find("slot_" + (attacking.cs.team == Team.A ? "A" : "B") + attacking.cs.position.x + attacking.cs.position.y).transform.position;
@@ -39,7 +39,10 @@ public class Deceive : Skill
         seq.Append(attacking.transform.DOMove(desPos, 0.3f));
         seq.AppendCallback(() => attacking.TriggerAnimation("BaseAttack"));
         seq.AppendInterval(0.2f);
-        seq.AppendCallback(() => { target.TakeDamage(physic_damage, magic_damage, 0); });
+        seq.AppendCallback(() => target.TakeDamage(new Damage() {
+            physics_damage = physics_damage,
+            magic_damage = magic_damage,
+        }));
         seq.Append(attacking.transform.DOMove(newPos, 0.3f));
         return 1.0f;
     }

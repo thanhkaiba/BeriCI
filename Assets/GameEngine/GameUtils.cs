@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Newtonsoft.Json;
+using System.IO;
 
 public class GameUtils : MonoBehaviour
 {
@@ -48,6 +50,16 @@ public class GameUtils : MonoBehaviour
         }
         
         return character;
+    }
+    public Item CreateItem(string itemId)
+    {
+        Item item;
+        using (StreamReader r = new StreamReader("Assets/Config/Items/" + itemId + ".json"))
+        {
+            string json = r.ReadToEnd();
+            item = JsonConvert.DeserializeObject<Item>(json);
+        }
+        return item;
     }
 }
  

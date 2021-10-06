@@ -13,9 +13,10 @@ public class UIIngameMgr : MonoBehaviour
     public Text actionCount;
     public void InitListSailorInQueue(List<Sailor> sailors)
     {
+        Transform node = transform.FindDeepChild("ListSailorInQueue");
         for (int i = 0; i < sailors.Count; i++)
         {
-            SailorInQueue s = Instantiate(sailorInQueue, transform.FindDeepChild("ListSailorInQueue")).GetComponent<SailorInQueue>();
+            SailorInQueue s = Instantiate(sailorInQueue, node).GetComponent<SailorInQueue>();
             s.transform.localPosition = new Vector3(-i * 96, 0, 0);
             s.transform.SetSiblingIndex(sailors.Count-i);
             listSailorInQueue.Add(s);
@@ -46,6 +47,32 @@ public class UIIngameMgr : MonoBehaviour
     public void ShowActionCount(int count)
     {
         actionCount.text = count.ToString();
+    }
+
+    public void ShowCombineSailorType(List<PassiveType> passiveTypeA, List<PassiveType> passiveTypeB)
+    {
+        Transform nodeLeft = transform.FindDeepChild("NodeTypeLeft");
+        Transform nodeRight = transform.FindDeepChild("NodeTypeRight");
+
+        for (int i = 0; i < passiveTypeA.Count; i++)
+        {
+            GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
+            TypeCombineInGameCanvas s = Instantiate(GO, nodeLeft).GetComponent<TypeCombineInGameCanvas>();
+            s.ChangeIcon(passiveTypeA[i].type);
+            s.ChangeLevel(passiveTypeA[i].level);
+            s.ChangeText("");
+            s.transform.DOLocalMoveY(-60*i, 0.5f);
+        }
+
+        for (int i = 0; i < passiveTypeB.Count; i++)
+        {
+            GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
+            TypeCombineInGameCanvas s = Instantiate(GO, nodeRight).GetComponent<TypeCombineInGameCanvas>();
+            s.ChangeIcon(passiveTypeA[i].type);
+            s.ChangeLevel(passiveTypeA[i].level);
+            s.ChangeText("");
+            s.transform.DOLocalMoveY(-60*i, 0.5f);
+        }
     }
 
     Sailor currentA;

@@ -6,6 +6,8 @@
     "power_plv": 0,
     "power_plv_step": 0,
 
+    "crit": 0.0,
+
     "health_base": 1000000000,
     "health_base_step": 0,
     "health_plv": 0,

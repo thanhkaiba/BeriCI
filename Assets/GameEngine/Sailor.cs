@@ -7,12 +7,24 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+public class Damage
+{
+    public float physics_damage = 0;
+    public float magic_damage = 0;
+    public float true_damage = 0;
+    public int fury_gain = 0;
+    public bool isCrit = false;
+}
 
 public class Sailor: MonoBehaviour
 {
     protected string config_url; // must define in extended
     public ConfigStats config_stats;
     public CombatStats cs;
+
+    public List<Item> items;
 
     public string charName;
     public Skill skill = null;
@@ -31,12 +43,16 @@ public class Sailor: MonoBehaviour
     CharBarControl CreateStatusBar()
     {
         var barPrefab = Resources.Load<GameObject>("characters/Bar/Bar2");
-        var barGO = Instantiate<GameObject>(
+        var barGO = Instantiate(
             barPrefab,
             transform.Find("nodeBar"));
         barGO.transform.localScale = new Vector3(0.024f, 0.024f, 1f);
         barGO.transform.localPosition = new Vector3(0, 0, 0);
         return barGO.transform.GetComponent<CharBarControl>();
+    }
+    public void SetEquipItems(List<Item> _items)
+    {
+        items = _items;
     }
     public void InitCombatData(int level, int quality, CombatPosition p, Team t)
     {
@@ -49,6 +65,7 @@ public class Sailor: MonoBehaviour
             BaseMagicResist = config_stats.GetMagicResist(),
             DisplaySpeed = config_stats.GetSpeed(level, quality),
             CurrentSpeed = 0,
+            Crit = config_stats.GetCrit(),
             position = p,
             team = t,
         };
@@ -56,6 +73,17 @@ public class Sailor: MonoBehaviour
         {
             cs.types.Add(type);
         }
+
+        items.ForEach(item =>
+        {
+            cs.BasePower += item.Power;
+            cs.MaxHealth += item.Health;
+            cs.BaseArmor += item.Armor;
+            cs.BaseMagicResist += item.MagicResist;
+            cs.DisplaySpeed += item.Speed;
+            cs.Crit += item.Crit;
+            if (item.type_buff != SailorType.NONE) cs.types.Add(item.type_buff);
+        });
 
         charName = config_stats.root_name;
 
@@ -70,7 +98,8 @@ public class Sailor: MonoBehaviour
         bar = CreateStatusBar();
         InitDisplayStatus();
     }
-    public void UpdateCombatData(List<PassiveType> ownTeam, List<PassiveType> oppTeam)
+    
+    public void UpdateCombatData(List<PassiveType> ownTeam, List<PassiveType> oppTeam) // them giam chi so theo toc he
     {
         ownTeam.ForEach(p =>
         {
@@ -173,7 +202,14 @@ public class Sailor: MonoBehaviour
         if (target != null)
         {
             delay += RunBaseAttack(target);
-            StartCoroutine(DealBaseAttackDamageDelay(target, cs.Power, delay));
+            bool isCrit = IsCrit();
+            Damage damage = new Damage()
+            {
+                physics_damage = isCrit ? cs.Power * 1.5f : cs.Power,
+                isCrit = isCrit,
+                fury_gain = 4,
+            };
+            StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
         }
         GameEvents.instance.attackOneTarget.Invoke(this, target);
         return delay + 0.8f;
@@ -187,6 +223,11 @@ public class Sailor: MonoBehaviour
 
         DisplayStatus(cs.listStatus);
         return RunImmobile() + 0.2f;
+    }
+    bool IsCrit()
+    {
+        float r = Random.Range(0f, 1f);
+        return r < cs.Crit;
     }
     Sailor GetBaseAttackTarget(CombatState combatState)
     {
@@ -209,27 +250,38 @@ public class Sailor: MonoBehaviour
                     : combatState.GetAllTeamAliveCharacter(Team.A));
         }
     }
-    void DealBaseAttackDamage(Sailor target, float physicsDamage)
+    void DealBaseAttackDamage(Sailor target, Damage damage)
     {
 
-        target.TakeDamage(physicsDamage, 0, 0);
+        target.TakeDamage(damage);
     }
-    IEnumerator DealBaseAttackDamageDelay(Sailor target, float current_power, float delay)
+    IEnumerator DealBaseAttackDamageDelay(Sailor target, Damage damage, float delay)
     {
         yield return new WaitForSeconds(delay);
-        DealBaseAttackDamage(target, current_power);
+        DealBaseAttackDamage(target, damage);
     }
-    public virtual float TakeDamage(float physicsDamage = 0, float magicDamage = 0, float trueDamage = 0)
+    public virtual float TakeDamage(Damage d)
     {
         float physicTake, magicTake;
-        if (cs.Armor > 0) physicTake = physicsDamage * 100 / (100 + cs.Armor);
-        else physicTake = physicsDamage * (2 - 100 / (100 - cs.Armor));
-        if (cs.MagicResist > 0) magicTake = magicDamage * 100 / (100 + cs.MagicResist);
-        else magicTake = magicDamage * (2 - 100 / (100 - cs.MagicResist));
-        float totalDamage = physicTake + magicTake + trueDamage;
+        if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
+        else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
+        if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
+        else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
+        float totalDamage = physicTake + magicTake + d.true_damage;
         LoseHealth(totalDamage);
-        GainFury(4);
+        GainFury(d.fury_gain);
         return totalDamage;
+    }
+    public virtual float TakeDamage(float physics_damage = 0, float magic_damage = 0, float true_damage = 0, int fury_gain = 4, bool isCrit = false)
+    {
+        return TakeDamage(new Damage()
+        {
+            physics_damage = physics_damage,
+            magic_damage = magic_damage,
+            true_damage = true_damage,
+            fury_gain = fury_gain,
+            isCrit = isCrit,
+        });
     }
     public void AddStatus (SailorStatus status)
     {

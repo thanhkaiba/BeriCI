@@ -17,11 +17,10 @@ public class Target : Sailor
         base.Awake();
         modelObject = transform.Find("model").gameObject;
     }
-    public override float TakeDamage(float physicsDamage = 0, float magicDamage = 0, float trueDamage = 0)
+    public override float TakeDamage(Damage d)
     {
         TriggerAnimation("TakeDamage");
-        Debug.Log("THE HELL");
-        return base.TakeDamage(physicsDamage, magicDamage, trueDamage);
+        return base.TakeDamage(d);
     }
     public override void AddSpeed(int speedAdd)
     {

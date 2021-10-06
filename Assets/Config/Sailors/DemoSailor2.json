@@ -6,6 +6,8 @@
     "power_plv": 2,
     "power_plv_step": 0.02,
 
+    "crit": 0.25,
+
     "health_base": 200,
     "health_base_step": 1,
     "health_plv": 10,
@@ -19,7 +21,7 @@
 
     "attack_type": 1,
     "types": [
-        8,
-        4
+        9,
+        5
     ]
 }

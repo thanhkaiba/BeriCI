@@ -19,6 +19,7 @@ public enum SailorStatusType
 
 public enum SailorType
 {
+    NONE,
     WILD,
     MIGHTY,
     SWORD_MAN,
@@ -69,6 +70,8 @@ public class ConfigStats
     public float power_plv;
     public float power_plv_step;
 
+    public float crit;
+
     public float health_base;
     public float health_base_step;
     public float health_plv;
@@ -94,6 +97,10 @@ public class ConfigStats
     public float GetSpeed(int level, int quality)
     {
         return speed_base + speed_step * quality;
+    }
+    public float GetCrit()
+    {
+        return crit;
     }
     public float GetArmor()
     {
@@ -135,6 +142,8 @@ public class CombatStats
         get { return (int)(10000f / DisplaySpeed); }
     }
     public int CurrentSpeed;
+
+    public float Crit;
 
     public int BaseFury;
     public int MaxFury

@@ -65,9 +65,11 @@ public class CombatState : MonoBehaviour
         var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
         shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
 
+        sailor.SetEquipItems(new List<Item>());
         sailor.InitCombatData(level, quality, pos, team);
         if (team == Team.A) sailorsTeamA.Add(sailor);
         else sailorsTeamB.Add(sailor);
+
         return sailor;
     }
     public List<Sailor> GetAllCombatCharacters()
