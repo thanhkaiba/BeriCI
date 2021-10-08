@@ -35,6 +35,7 @@ public class CombatMgr : MonoBehaviour
         yield return new WaitForSeconds(2);
         combatState.status = CombatStatus.STARTED;
         Debug.Log(">>>>>>>>>>> Start Game <<<<<<<<<<<<");
+        GuiMgr.Instance.ShowPopup("PopupDemo");
         CombatLoop();
     }
     void CombatLoop()
