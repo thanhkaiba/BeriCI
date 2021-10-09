@@ -38,15 +38,15 @@ public class CombatState : MonoBehaviour
     }
     void CreateRandomTeam(Team t)
     {
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 1), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 1), t);
         CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 1), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 1), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 0), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 0), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 0), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 2), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 2), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 2), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 1), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 0), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 0), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 0), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 2), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 2), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 2), t);
         //CreateCombatSailor("helti", new CombatPosition(1, 2), t);
         //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
         //CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
@@ -72,7 +72,7 @@ public class CombatState : MonoBehaviour
         string[] split = sailorString.Split(char.Parse("|"));
         string name = split[0];
 
-        Debug.Log("name>>> " + name);
+        //Debug.Log("CreateCombatSailor>>> " + name);
 
         List<Item> listItem = new List<Item>();
         for (int i = 1; i < split.Length; i++)

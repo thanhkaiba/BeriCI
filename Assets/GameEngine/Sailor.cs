@@ -16,6 +16,10 @@ public class Damage
     public float true_damage = 0;
     public int fury_gain = 0;
     public bool isCrit = false;
+    public float total
+    {
+        get { return physics_damage + magic_damage + true_damage; }
+    }
 }
 
 public class Sailor: MonoBehaviour
@@ -196,7 +200,7 @@ public class Sailor: MonoBehaviour
         GameEvents.instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
         cs.Fury = 0;
-        Debug.Log("Use skill now " + skill.name);
+        //Debug.Log("Use skill now " + skill.name);
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         return skill.CastSkill(this, combatState);
@@ -276,7 +280,14 @@ public class Sailor: MonoBehaviour
         if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
         else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
         float totalDamage = physicTake + magicTake + d.true_damage;
-        LoseHealth(totalDamage);
+        LoseHealth(new Damage()
+        {
+            physics_damage = physicTake,
+            magic_damage = magicTake,
+            true_damage = d.true_damage,
+            fury_gain = d.fury_gain,
+            isCrit = d.isCrit,
+        });
         GainFury(d.fury_gain);
         return totalDamage;
     }
@@ -311,7 +322,6 @@ public class Sailor: MonoBehaviour
     {
         UnityEngine.Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
         transform.position = p;
-        Debug.Log("max_health " + cs.MaxHealth + " " + cs.CurHealth);
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
@@ -319,7 +329,6 @@ public class Sailor: MonoBehaviour
         bar.SetIconSkill(skill);
         bar.SetName(charName);
         SetFaceDirection();
-        Debug.Log("Set Face Direction");
     }
     public void GainHealth(float health)
     {
@@ -334,8 +343,18 @@ public class Sailor: MonoBehaviour
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.instance.takeDamage.Invoke(this, health);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
+        GameEvents.instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
+        //FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
+    }
+    public void LoseHealth(Damage d)
+    {
+        cs.CurHealth -= d.physics_damage + d.magic_damage + d.true_damage;
+        if (cs.CurHealth <= 0) cs.CurHealth = 0;
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        CheckDeath();
+
+        GameEvents.instance.takeDamage.Invoke(this, d);
+        //FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
 
     public void GainFury(int value)

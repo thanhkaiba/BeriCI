@@ -19,6 +19,6 @@ public class GameEvents : MonoBehaviour
 }
 
 public class AttackOneTargetEvent : UnityEvent<Sailor, Sailor> { }
-public class TakeDamageEvent : UnityEvent<Sailor, float> { }
+public class TakeDamageEvent : UnityEvent<Sailor, Damage> { }
 public class CastSkillEvent : UnityEvent<Sailor, Skill> { }
 public class UIHighlightTarget : UnityEvent<Sailor> { }

@@ -49,7 +49,7 @@ public class WindSlash : Skill
     public WindSlash()
     {
         name = "WindSlash";
-        MAX_FURY = 0;
+        MAX_FURY = 25;
         START_FURY = 7;
     }
     public override bool CanActive(Sailor cChar, CombatState cbState)

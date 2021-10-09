@@ -28,20 +28,19 @@ public class CombatMgr : MonoBehaviour
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowCombineSailorType(combatState.passiveTypeA, combatState.passiveTypeB);
         UIMgr.ShowActionCount(actionCount);
-        StartCoroutine(StartGame());
+        //StartCoroutine(StartGame());
     }
     IEnumerator StartGame()
     {
         yield return new WaitForSeconds(2);
         combatState.status = CombatStatus.STARTED;
         Debug.Log(">>>>>>>>>>> Start Game <<<<<<<<<<<<");
-        GuiMgr.Instance.ShowPopup("PopupDemo");
         CombatLoop();
     }
     void CombatLoop()
     {
         int speedAdd = CalculateSpeedAddThisLoop();
-        Debug.Log(" ----> speedAdd: " + speedAdd);
+        //Debug.Log(" ----> speedAdd: " + speedAdd);
         Sailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
         actionCount++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
@@ -54,8 +53,8 @@ public class CombatMgr : MonoBehaviour
         );
         float delayTime = actionChar.DoCombatAction(combatState);
         combatState.lastTeamAction = actionChar.cs.team;
-        StartCoroutine(EndLoop(actionChar, delayTime));
-        StartCoroutine(NextLoop(delayTime));
+        StartCoroutine(EndLoop(actionChar, 2));
+        StartCoroutine(NextLoop(2));
     }
 
     IEnumerator EndLoop(Sailor actor, float delay)

@@ -165,7 +165,7 @@ public class CombatStats
         {
             if (_t == type) found = true;
         });
-        Debug.Log("HaveType: " + found);
+        //Debug.Log("HaveType: " + found);
         return found;
     }
 }

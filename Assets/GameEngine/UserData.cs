@@ -7,7 +7,7 @@ public class UserData : MonoBehaviour
     public static UserData Instance { get; private set; }
     public void Awake()
     {
-        Debug.Log("FIRST TIME APPEAR");
+        Debug.Log("Create UserData");
         if (Instance == null)
         {
             Instance = this;

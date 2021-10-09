@@ -8,9 +8,18 @@ using Image = UnityEngine.UI.Image;
 
 public class UIIngameMgr : MonoBehaviour
 {
+    public static UIIngameMgr Instance;
     public GameObject sailorInQueue;
-    public List<SailorInQueue> listSailorInQueue;
     public Text actionCount;
+    public List<SailorInQueue> listSailorInQueue;
+    public void Awake()
+    {
+        Instance = this;
+    }
+    public void OnDestroy()
+    {
+        Instance = null;
+    }
     public void InitListSailorInQueue(List<Sailor> sailors)
     {
         Transform node = transform.FindDeepChild("ListSailorInQueue");
@@ -58,9 +67,7 @@ public class UIIngameMgr : MonoBehaviour
         {
             GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
             TypeCombineInGameCanvas s = Instantiate(GO, nodeLeft).GetComponent<TypeCombineInGameCanvas>();
-            s.ChangeIcon(passiveTypeA[i].type);
-            s.ChangeLevel(passiveTypeA[i].level);
-            s.ChangeText("");
+            s.SetData(passiveTypeA[i]);
             s.transform.DOLocalMoveY(-60*i, 0.5f);
         }
 
@@ -68,9 +75,7 @@ public class UIIngameMgr : MonoBehaviour
         {
             GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
             TypeCombineInGameCanvas s = Instantiate(GO, nodeRight).GetComponent<TypeCombineInGameCanvas>();
-            s.ChangeIcon(passiveTypeA[i].type);
-            s.ChangeLevel(passiveTypeA[i].level);
-            s.ChangeText("");
+            s.SetData(passiveTypeB[i]);
             s.transform.DOLocalMoveY(-60*i, 0.5f);
         }
     }
@@ -79,8 +84,8 @@ public class UIIngameMgr : MonoBehaviour
     Sailor currentB;
     private void Start()
     {
-        Debug.Log("GameEvents.instance " + GameEvents.instance);
-        Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
+        //Debug.Log("GameEvents.instance " + GameEvents.instance);
+        //Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
         GameEvents.instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
         GameEvents.instance.takeDamage.AddListener(ShowHighLightTakeDamage);
         GameEvents.instance.castSkill.AddListener(ShowHighLightCastSkill);
@@ -91,7 +96,7 @@ public class UIIngameMgr : MonoBehaviour
         ShowHighlightInfo(a);
         ShowHighlightInfo(b);
     }
-    public void ShowHighLightTakeDamage(Sailor s, float damage)
+    public void ShowHighLightTakeDamage(Sailor s, Damage damage)
     {
         if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
         if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);

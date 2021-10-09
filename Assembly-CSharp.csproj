@@ -59,6 +59,7 @@
     <Compile Include="Assets\Utils\MousePosition3D.cs" />
     <Compile Include="Assets\GameEngine\Sailors\DemoSailor2.cs" />
     <Compile Include="Assets\Resources\Icons\sailor_type\TypeCombineInGameCanvas.cs" />
+    <Compile Include="Assets\GameEngine\GuiMgr.cs" />
     <Compile Include="Assets\GameEngine\Sailors\Target.cs" />
     <Compile Include="Assets\GameEngine\Items\Items.cs" />
     <Compile Include="Assets\GameEngine\Skills\Encourage.cs" />
@@ -103,7 +104,8 @@
     <Compile Include="Assets\GameEngine\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\GuiMgr.cs" />
+    <Compile Include="Assets\Popup\Resources\PopupDemo\PopupDemo.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\TooltipCombineType\TooltipCombineType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

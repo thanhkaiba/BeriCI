@@ -10,7 +10,6 @@ public class GameEffMgr : MonoBehaviour
     public static GameEffMgr Instance { get; private set; }
     public void Awake()
     {
-        Debug.Log("FIRST TIME APPEAR");
         if (Instance == null)
         {
             Instance = this;

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.EventSystems;
 
 public class CameraLook : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class CameraLook : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Debug.Log("EventSystem.current.IsPointerOverGameObject() " + EventSystem.current.IsPointerOverGameObject());
+            //if (EventSystem.current.IsPointerOverGameObject()) return;
+
             isSwiping = true;
             lastX = Input.mousePosition.x;
         }

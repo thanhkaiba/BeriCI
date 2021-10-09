@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 public class TextDamage : MonoBehaviour
 {
+    public GameObject iconCrit;
     void Start()
     {
-        transform.DOMoveY(transform.position.y+30, 0.0f).SetEase(Ease.InOutSine);
         transform.DOMoveY(transform.position.y+70, 1.0f).SetEase(Ease.InOutSine);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.5f);
@@ -16,8 +16,11 @@ public class TextDamage : MonoBehaviour
         seq.AppendCallback(() => { Destroy(gameObject); });
     }
 
-    void Update()
+    public void Present(float damage, Vector3 p, bool isCrit)
     {
-        
+        GetComponent<Text>().text = "-" + (int)damage;
+        transform.position = new Vector3(p.x + Random.Range(-10, 30), p.y + Random.Range(100, 125), p.z);
+        GetComponent<Text>().fontSize = isCrit ? 32 : 30;
+        if (iconCrit != null) iconCrit.SetActive(isCrit);
     }
 }

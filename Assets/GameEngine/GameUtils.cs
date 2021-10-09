@@ -10,7 +10,6 @@ public class GameUtils : MonoBehaviour
     public static GameUtils Instance { get; private set; }
     public void Awake()
     {
-        Debug.Log("FIRST TIME APPEAR");
         if (Instance == null)
         {
             Instance = this;
