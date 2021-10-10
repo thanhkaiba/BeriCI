@@ -1,9 +1,11 @@
 using DG.Tweening;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class Helti : Sailor
 {
+    public SailorConfig config;
     public Helti()
     {
         skill = new WindSlash();
@@ -11,6 +13,16 @@ public class Helti : Sailor
     }
     public override void Awake()
     {
+        // test write json
+        //config = Resources.Load<SailorConfig>("Configs/Sailors/Demo");
+        //string json = config.Serialize(config);
+
+        //File.WriteAllText("Assets/Helti.json", "");
+        //StreamWriter writer = new StreamWriter("Assets/Helti.json", true);
+        //writer.WriteLine(json);
+        //writer.Close();
+
+
         base.Awake();
         modelObject = transform.Find("model").gameObject;
     }

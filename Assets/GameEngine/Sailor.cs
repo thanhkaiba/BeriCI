@@ -112,24 +112,17 @@ public class Sailor: MonoBehaviour
                 case SailorType.SWORD_MAN:
                     if (cs.HaveType(SailorType.SWORD_MAN))
                     {
-                        if (p.level == 1) cs.DisplaySpeed += 12;
-                        if (p.level == 2) cs.DisplaySpeed += 20;
+                        cs.DisplaySpeed += CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
                     }
                     break;
                 case SailorType.SUPPORT:
-                    if (p.level == 1) cs.Fury += 10;
-                    if (p.level == 2) cs.Fury += 15;
+                    cs.Fury += (int) CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
                     break;
                 case SailorType.ASSASSIN:
                     if (cs.HaveType(SailorType.ASSASSIN))
                     {
-                        if (p.level == 1) cs.BasePower *= 1.15f;
-                        if (p.level == 2) cs.BasePower *= 1.20f;
-                        if (p.level == 2) cs.BasePower *= 1.25f;
-                        if (p.level == 2) cs.BasePower *= 1.35f;
+                        cs.BasePower *= CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
                     }
-                    break;
-                default:
                     break;
             }
         });
@@ -139,10 +132,7 @@ public class Sailor: MonoBehaviour
             switch (p.type)
             {
                 case SailorType.HORROR:
-                    if (p.level == 1) cs.BaseArmor -= 12;
-                    if (p.level == 2) cs.BaseArmor -= 20;
-                    break;
-                default:
+                    cs.BaseArmor -= CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
                     break;
             }
         });
@@ -225,6 +215,19 @@ public class Sailor: MonoBehaviour
             StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
         }
         GameEvents.instance.attackOneTarget.Invoke(this, target);
+
+        // passive
+        if (cs.HaveType(SailorType.BERSERK))
+        {
+            PassiveType berserk = combatState.GetTeamPassiveType(cs.team, SailorType.BERSERK);
+            if (berserk != null)
+            {
+                Debug.Log("cs.DisplaySpeed " + cs.DisplaySpeed);
+                cs.DisplaySpeed += CombineTypeConfig.Instance.GetParams(berserk.type, berserk.level)[0];
+                Debug.Log("cs.DisplaySpeed " + cs.DisplaySpeed);
+            }
+        }
+
         return delay + 0.8f;
     }
     float Immobile ()

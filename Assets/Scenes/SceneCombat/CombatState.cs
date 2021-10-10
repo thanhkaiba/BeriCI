@@ -39,13 +39,13 @@ public class CombatState : MonoBehaviour
     void CreateRandomTeam(Team t)
     {
         //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 1), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 1), t);
+        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 1), t);
         //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 1), t);
         //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 0), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 0), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 0), t);
         //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 0), t);
         //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 2), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 2), t);
+        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 2), t);
         //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 2), t);
         //CreateCombatSailor("helti", new CombatPosition(1, 2), t);
         //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
@@ -179,14 +179,26 @@ public class CombatState : MonoBehaviour
                 if (sailor.cs.HaveType(type)) typeCount[(int)type] += 1;
             }
         });
+
+        foreach (SailorType type in Enum.GetValues(typeof(SailorType)))
+        {
+            if (!CombineTypeConfig.Instance.HaveCombine(type)) continue;
+            var milestones = CombineTypeConfig.Instance.GetMilestones(type);
+            for (int level = milestones.Count - 1; level >= 0; level--)
+            {
+                int popNeed = milestones[level];
+                if (typeCount[(int)type] >= popNeed) result.Add(new PassiveType() { type = type, level = level, current = typeCount[(int)type] });
+            }
+        }
+
         // chuyen vao config sau
-        if (typeCount[(int)SailorType.WILD] >= 3) result.Add(new PassiveType() { type = SailorType.WILD, level = 1 });
+        //if (typeCount[(int)SailorType.WILD] >= 3) result.Add(new PassiveType() { type = SailorType.WILD, level = 1 });
 
-        if (typeCount[(int)SailorType.SWORD_MAN] >= 4) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 2 });
-        else if (typeCount[(int)SailorType.SWORD_MAN] >= 2) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 1 });
+        //if (typeCount[(int)SailorType.SWORD_MAN] >= 4) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 2 });
+        //else if (typeCount[(int)SailorType.SWORD_MAN] >= 2) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 1 });
 
-        // do next here
-        if (typeCount[(int)SailorType.BERSERK] >= 1) result.Add(new PassiveType() { type = SailorType.BERSERK, level = 1 });
+        //// do next here
+        //if (typeCount[(int)SailorType.BERSERK] >= 1) result.Add(new PassiveType() { type = SailorType.BERSERK, level = 1 });
         //
         return result;
     }
@@ -195,6 +207,11 @@ public class CombatState : MonoBehaviour
     {
         sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(passiveTypeA, passiveTypeB));
         sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(passiveTypeB, passiveTypeA));
+    }
+    public PassiveType GetTeamPassiveType(Team team, SailorType type)
+    {
+        List<PassiveType> t = team == Team.A ? passiveTypeA : passiveTypeB;
+        return t.Find(e => e.type == type);
     }
 
     public void RunEndAction(Sailor actor)

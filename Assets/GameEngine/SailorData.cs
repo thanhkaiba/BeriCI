@@ -37,6 +37,7 @@ public class PassiveType
 {
     public SailorType type;
     public int level;
+    public int current = 0;
 }
 
 public class SailorStatus

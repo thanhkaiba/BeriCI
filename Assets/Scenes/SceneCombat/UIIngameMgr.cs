@@ -68,7 +68,7 @@ public class UIIngameMgr : MonoBehaviour
             GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
             TypeCombineInGameCanvas s = Instantiate(GO, nodeLeft).GetComponent<TypeCombineInGameCanvas>();
             s.SetData(passiveTypeA[i]);
-            s.transform.DOLocalMoveY(-60*i, 0.5f);
+            s.transform.DOLocalMoveY(-128*i, 0.5f);
         }
 
         for (int i = 0; i < passiveTypeB.Count; i++)

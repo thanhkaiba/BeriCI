@@ -26,7 +26,7 @@ public class TypeCombineInGameCanvas : MonoBehaviour
     public void ChangeLevel(int level)
     {
         // sau phai check theo tung loai
-        if (level > 1) GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/sailor_type/border_0");
+        if (level >= 1) GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/sailor_type/border_0");
         else GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/sailor_type/border_1");
     }
     public void SetData(PassiveType data)

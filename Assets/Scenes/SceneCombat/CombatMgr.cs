@@ -28,7 +28,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowCombineSailorType(combatState.passiveTypeA, combatState.passiveTypeB);
         UIMgr.ShowActionCount(actionCount);
-        //StartCoroutine(StartGame());
+        StartCoroutine(StartGame());
     }
     IEnumerator StartGame()
     {

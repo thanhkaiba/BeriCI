@@ -17,5 +17,7 @@ public class UserData : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        // read config
+        new CombineTypeConfig();
     }
 }
