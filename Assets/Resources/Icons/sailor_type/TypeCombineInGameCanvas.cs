@@ -9,10 +9,14 @@ public class TypeCombineInGameCanvas : MonoBehaviour
     public Image icon;
     public Text text;
     public PassiveType data;
+    public bool clickable = true;
     private void Start()
     {
-        Button b = gameObject.AddComponent<Button>() as Button;
-        b.onClick.AddListener(() => OnClickIcon(Input.mousePosition));
+        if (clickable)
+        {
+            Button b = gameObject.AddComponent<Button>() as Button;
+            b.onClick.AddListener(() => OnClickIcon(Input.mousePosition));
+        }
     }
     public void ChangeIcon(SailorType type)
     {

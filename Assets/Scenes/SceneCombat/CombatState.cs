@@ -187,7 +187,11 @@ public class CombatState : MonoBehaviour
             for (int level = milestones.Count - 1; level >= 0; level--)
             {
                 int popNeed = milestones[level];
-                if (typeCount[(int)type] >= popNeed) result.Add(new PassiveType() { type = type, level = level, current = typeCount[(int)type] });
+                if (typeCount[(int)type] >= popNeed)
+                {
+                    result.Add(new PassiveType() { type = type, level = level, current = typeCount[(int)type] });
+                    break;
+                }
             }
         }
 

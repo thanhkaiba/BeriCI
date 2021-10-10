@@ -9,7 +9,7 @@ public class Helti : Sailor
     public Helti()
     {
         skill = new WindSlash();
-        config_url = "Assets/Config/Sailors/Helti.json";
+        config_url = "ScriptableObject/Sailors/Helti";
     }
     public override void Awake()
     {

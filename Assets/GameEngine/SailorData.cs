@@ -62,57 +62,6 @@ public class CombatPosition
     }
 }
 
-public class ConfigStats
-{
-    public string root_name;
-
-    public float power_base;
-    public float power_base_step;
-    public float power_plv;
-    public float power_plv_step;
-
-    public float crit;
-
-    public float health_base;
-    public float health_base_step;
-    public float health_plv;
-    public float health_plv_step;
-
-    public float speed_base;
-    public float speed_step;
-
-    public float armor;
-    public float magic_resist;
-
-    public AttackType attack_type;
-
-    public IEnumerable<SailorType> types;
-    public float GetPower(int level, int quality)
-    {
-        return power_base + quality * power_base_step + (power_plv + quality * power_plv_step) * level;
-    }
-    public float GetHealth(int level, int quality)
-    {
-        return health_base + quality * health_base_step + (health_plv + quality * health_plv_step) * level;
-    }
-    public float GetSpeed(int level, int quality)
-    {
-        return speed_base + speed_step * quality;
-    }
-    public float GetCrit()
-    {
-        return crit;
-    }
-    public float GetArmor()
-    {
-        return armor;
-    }
-    public float GetMagicResist()
-    {
-        return magic_resist;
-    }
-}
-
 public class CombatStats
 {
     public float BasePower;

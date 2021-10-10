@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d233b5ba6a610f64399ebe3388569f49, type: 3}
+  m_Name: DemoItem
+  m_EditorClassIdentifier: 
+  prettyPrint: 1
+  item_name: Fun Item
+  rank: 0
+  pos: 1
+  power_base: 50
+  power_step: 0
+  health_base: 0
+  health_step: 0
+  speed_base: 0
+  speed_step: 0
+  crit_base: 0
+  crit_step: 0
+  armor_base: 0
+  armor_step: 0
+  magic_resist_base: 0
+  magic_resist_step: 0
+  type_buff: 5
+  quality: 20

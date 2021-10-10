@@ -25,7 +25,7 @@ public class Damage
 public class Sailor: MonoBehaviour
 {
     protected string config_url; // must define in extended
-    public ConfigStats config_stats;
+    public SailorConfig config_stats;
     public CombatStats cs;
 
     public List<Item> items;
@@ -38,11 +38,7 @@ public class Sailor: MonoBehaviour
     public CharBarControl bar;
     public virtual void Awake()
     {
-        using (StreamReader r = new StreamReader(config_url))
-        {
-            string json = r.ReadToEnd();
-            config_stats = JsonConvert.DeserializeObject<ConfigStats>(json);
-        }
+        config_stats = Resources.Load<SailorConfig>(config_url);
     }
     CharBarControl CreateStatusBar()
     {
