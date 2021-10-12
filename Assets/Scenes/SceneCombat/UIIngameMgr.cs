@@ -80,6 +80,11 @@ public class UIIngameMgr : MonoBehaviour
         }
     }
 
+    public void ShowSailorDetail(GameObject sailor)
+    {
+        Debug.Log("click" + sailor.GetComponent<Sailor>().charName);
+    }
+
     Sailor currentA;
     Sailor currentB;
     private void Start()

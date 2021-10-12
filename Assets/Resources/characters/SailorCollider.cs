@@ -4,15 +4,8 @@ using UnityEngine;
 
 public class SailorCollider : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     private void OnMouseDown()
     {
-        Debug.Log("click");
+        if (UIIngameMgr.Instance != null) UIIngameMgr.Instance.ShowSailorDetail(gameObject);
     }
 }
