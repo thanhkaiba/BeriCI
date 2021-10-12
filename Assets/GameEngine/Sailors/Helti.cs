@@ -13,10 +13,9 @@ public class Helti : Sailor
     }
     public override void Awake()
     {
-        // test write json
-        //config = Resources.Load<SailorConfig>("Configs/Sailors/Demo");
-        //string json = config.Serialize(config);
-
+        //ContainerClassBonus a = Resources.Load<ContainerClassBonus>("ScriptableObject/ClassBonus/ContainerClassBonus");
+        //string json = a.Serialize(a);
+        //Debug.Log("AAAA " + json);
         //File.WriteAllText("Assets/Helti.json", "");
         //StreamWriter writer = new StreamWriter("Assets/Helti.json", true);
         //writer.WriteLine(json);

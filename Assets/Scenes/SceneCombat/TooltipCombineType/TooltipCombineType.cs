@@ -38,7 +38,8 @@ public class TooltipCombineType : MonoBehaviour
     }
     public void ShowTooltipPassiveType(PassiveType data, Vector2 pos)
     {
-        //Debug.Log("ShowTooltipPassiveType " + data.type + "pos: " + pos.x + " " + pos.y);
+        ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+
         gameObject.SetActive(true);
 
         // dong thanh ham limit width height
@@ -50,8 +51,8 @@ public class TooltipCombineType : MonoBehaviour
         if (pos.y > Screen.height - 20 - height / 2) pos.y = Screen.height - 20 - width / 2;
         transform.position = pos;
 
-        int maxPop = CombineTypeConfig.Instance.GetMaxPopNeed(data.type);
-        List<float> para = CombineTypeConfig.Instance.GetParams(data.type, data.level);
+        int maxPop = config.GetMaxPopNeed(data.type);
+        List<float> para = config.GetParams(data.type, data.level);
         iconType.SetData(data);
         title.text = "" + data.type + " (" + data.current + "/" + maxPop + ")";
         switch (data.type)

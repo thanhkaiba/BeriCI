@@ -1,13 +1,12 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UserData : MonoBehaviour
+public class GlobalConfigs : MonoBehaviour
 {
-    public static UserData Instance { get; private set; }
+    public static GlobalConfigs Instance { get; private set; }
     public void Awake()
     {
-        Debug.Log("Create UserData");
         if (Instance == null)
         {
             Instance = this;
@@ -18,4 +17,6 @@ public class UserData : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public ContainerClassBonus ClassBonus;
 }

@@ -7,6 +7,7 @@ using Newtonsoft.Json.Serialization;
 
 using Object = UnityEngine.Object;
 
+[CreateAssetMenu]
 public class ScriptableObjectPro : ScriptableObject
 {
 
@@ -40,7 +41,7 @@ public class ScriptableObjectPro : ScriptableObject
                         continue;
                     if (unityObjType.IsAssignableFrom(field.FieldType))
                     {
-                        Debug.LogError("Failed to serialize a Unity object reference -- this is not supported by the " + GetType().Name
+                        Debug.LogWarning("Failed to serialize a Unity object reference -- this is not supported by the " + GetType().Name
                             + ". Ignoring the property. (" + type.Name + "'s \"" + field.Name + "\" field)");
                         continue;
                     }
@@ -101,8 +102,6 @@ public class ScriptableObjectPro : ScriptableObject
     }
     #endregion
 
-    [SerializeField] private bool prettyPrint = true;
-
     private JsonSerializerSettings settings = new JsonSerializerSettings()
     {
         ContractResolver = new UnityImitatingContractResolver(),
@@ -115,7 +114,7 @@ public class ScriptableObjectPro : ScriptableObject
     public string Serialize<T>(T obj)
     {
         string text;
-        Formatting formatting = prettyPrint ? Formatting.Indented : Formatting.None;
+        Formatting formatting = Formatting.Indented;
         settings.Formatting = formatting;
         try
         {

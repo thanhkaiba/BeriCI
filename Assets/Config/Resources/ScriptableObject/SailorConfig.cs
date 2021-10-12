@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Sailor", menuName = "Sailor")]
+[CreateAssetMenu(fileName = "New Sailor", menuName = "config/Sailor")]
 public class SailorConfig : ScriptableObjectPro
 {
     public string root_name = "Root";

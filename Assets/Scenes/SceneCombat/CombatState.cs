@@ -12,7 +12,7 @@ public enum CombatStatus
 
 public class CombatState : MonoBehaviour
 {
-    public static CombatState instance;
+    public static CombatState Instance;
     public Camera MainCamera;
 
     public CombatStatus status;
@@ -24,7 +24,7 @@ public class CombatState : MonoBehaviour
     public List<PassiveType> passiveTypeB = new List<PassiveType>();
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     public CombatState()
     {
@@ -159,12 +159,12 @@ public class CombatState : MonoBehaviour
     }
     public void CalculateTypePassive()
     {
-        passiveTypeA = CalculateTypePassive(sailorsTeamA);
-        passiveTypeB = CalculateTypePassive(sailorsTeamB);
+        passiveTypeA = CalculateClassBonus(sailorsTeamA);
+        passiveTypeB = CalculateClassBonus(sailorsTeamB);
         //passiveTypeA.ForEach(p => Debug.Log("passiveTypeA: " + p.type + " " + p.level));
     }
 
-    private List<PassiveType> CalculateTypePassive(List<Sailor> t)
+    private List<PassiveType> CalculateClassBonus(List<Sailor> t)
     {
         List<PassiveType> result = new List<PassiveType>();
 
@@ -182,8 +182,9 @@ public class CombatState : MonoBehaviour
 
         foreach (SailorType type in Enum.GetValues(typeof(SailorType)))
         {
-            if (!CombineTypeConfig.Instance.HaveCombine(type)) continue;
-            var milestones = CombineTypeConfig.Instance.GetMilestones(type);
+            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+            if (!config.HaveCombine(type)) continue;
+            var milestones = config.GetMilestones(type);
             for (int level = milestones.Count - 1; level >= 0; level--)
             {
                 int popNeed = milestones[level];

@@ -101,6 +101,7 @@ public class Sailor: MonoBehaviour
     
     public void UpdateCombatData(List<PassiveType> ownTeam, List<PassiveType> oppTeam) // them giam chi so theo toc he
     {
+        ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
         ownTeam.ForEach(p =>
         {
             switch (p.type)
@@ -108,16 +109,16 @@ public class Sailor: MonoBehaviour
                 case SailorType.SWORD_MAN:
                     if (cs.HaveType(SailorType.SWORD_MAN))
                     {
-                        cs.DisplaySpeed += CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
+                        cs.DisplaySpeed += config.GetParams(p.type, p.level)[0];
                     }
                     break;
                 case SailorType.SUPPORT:
-                    cs.Fury += (int) CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
+                    cs.Fury += (int) config.GetParams(p.type, p.level)[0];
                     break;
                 case SailorType.ASSASSIN:
                     if (cs.HaveType(SailorType.ASSASSIN))
                     {
-                        cs.BasePower *= CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
+                        cs.BasePower *= config.GetParams(p.type, p.level)[0];
                     }
                     break;
             }
@@ -128,7 +129,7 @@ public class Sailor: MonoBehaviour
             switch (p.type)
             {
                 case SailorType.HORROR:
-                    cs.BaseArmor -= CombineTypeConfig.Instance.GetParams(p.type, p.level)[0];
+                    cs.BaseArmor -= config.GetParams(p.type, p.level)[0];
                     break;
             }
         });
@@ -215,11 +216,12 @@ public class Sailor: MonoBehaviour
         // passive
         if (cs.HaveType(SailorType.BERSERK))
         {
+            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
             PassiveType berserk = combatState.GetTeamPassiveType(cs.team, SailorType.BERSERK);
             if (berserk != null)
             {
                 Debug.Log("cs.DisplaySpeed " + cs.DisplaySpeed);
-                cs.DisplaySpeed += CombineTypeConfig.Instance.GetParams(berserk.type, berserk.level)[0];
+                cs.DisplaySpeed += config.GetParams(berserk.type, berserk.level)[0];
                 Debug.Log("cs.DisplaySpeed " + cs.DisplaySpeed);
             }
         }
@@ -343,7 +345,6 @@ public class Sailor: MonoBehaviour
         CheckDeath();
 
         GameEvents.instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
-        //FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
     public void LoseHealth(Damage d)
     {
@@ -353,7 +354,6 @@ public class Sailor: MonoBehaviour
         CheckDeath();
 
         GameEvents.instance.takeDamage.Invoke(this, d);
-        //FlyTextMgr.Instance.CreateFlyTextWith3DPosition("-" + (int)health, transform.position);
     }
 
     public void GainFury(int value)

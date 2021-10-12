@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d233b5ba6a610f64399ebe3388569f49, type: 3}
   m_Name: DemoItem
   m_EditorClassIdentifier: 
-  prettyPrint: 1
   item_name: Fun Item
   rank: 0
   pos: 1
-  power_base: 50
+  power_base: -10
   power_step: 0
   health_base: 0
   health_step: 0

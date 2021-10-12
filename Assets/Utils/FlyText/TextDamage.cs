@@ -16,11 +16,12 @@ public class TextDamage : MonoBehaviour
         seq.AppendCallback(() => { Destroy(gameObject); });
     }
 
-    public void Present(float damage, Vector3 p, bool isCrit)
+    public void Present(float damage, Vector3 p, bool isCrit, Color color)
     {
         GetComponent<Text>().text = "-" + (int)damage;
         transform.position = new Vector3(p.x + Random.Range(-10, 30), p.y + Random.Range(100, 125), p.z);
         GetComponent<Text>().fontSize = isCrit ? 32 : 30;
+        GetComponent<Text>().color = color;
         if (iconCrit != null) iconCrit.SetActive(isCrit);
     }
 }

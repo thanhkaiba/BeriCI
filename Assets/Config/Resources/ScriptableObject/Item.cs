@@ -12,7 +12,7 @@ public enum ItemPosition
     SHOES,
 }
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Item")]
+[CreateAssetMenu(fileName = "New Item", menuName = "config/Item")]
 public class Item : ScriptableObjectPro
 {
     public string item_name = "";
