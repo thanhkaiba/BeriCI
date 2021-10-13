@@ -6,6 +6,7 @@ public class SailorCollider : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        if (UIIngameMgr.Instance != null) UIIngameMgr.Instance.ShowSailorDetail(gameObject);
+        //if (UIIngameMgr.Instance != null) UIIngameMgr.Instance.ShowSailorDetail(gameObject);
+        if (TooltipSailorInfo.Instance != null) TooltipSailorInfo.Instance.ShowTooltip(gameObject);
     }
 }

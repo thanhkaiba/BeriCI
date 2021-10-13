@@ -29,6 +29,14 @@ public class Skill
     public int START_FURY = 50;
     public SkillRank rank = SkillRank.A;
 
+    public virtual void UpdateData(SkillConfig config)
+    {
+        name = config.skillName;
+        MAX_FURY = config.maxFury;
+        START_FURY = config.startFury;
+        rank = config.rank;
+    }
+
     public virtual bool CanActive(Sailor cChar, CombatState cbState)
     {
         return true;

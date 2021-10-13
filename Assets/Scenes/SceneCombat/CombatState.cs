@@ -13,7 +13,6 @@ public enum CombatStatus
 public class CombatState : MonoBehaviour
 {
     public static CombatState Instance;
-    public Camera MainCamera;
 
     public CombatStatus status;
     public List<Sailor> sailorsTeamA = new List<Sailor>();
@@ -38,16 +37,16 @@ public class CombatState : MonoBehaviour
     }
     void CreateRandomTeam(Team t)
     {
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 1), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 1), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 1), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 0), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 0), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 0), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(0, 2), t);
-        CreateCombatSailor("helti|DemoItem:20", new CombatPosition(1, 2), t);
-        //CreateCombatSailor("helti|DemoItem:20", new CombatPosition(2, 2), t);
-        //CreateCombatSailor("helti", new CombatPosition(1, 2), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 1), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 1), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 1), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 0), t);
+        CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 0), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 0), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 2), t);
+        CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 2), t);
+        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 2), t);
+        //CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
         //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
         //CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
         //CreateCombatSailor("demo2", new CombatPosition(2, 2), t);
@@ -56,15 +55,19 @@ public class CombatState : MonoBehaviour
 
     void CreateTargetTeam(Team t)
     {
-        CreateCombatSailor("target", new CombatPosition(0, 1), t);
-        CreateCombatSailor("target", new CombatPosition(1, 1), t);
-        CreateCombatSailor("target", new CombatPosition(2, 1), t);
-        CreateCombatSailor("target", new CombatPosition(0, 0), t);
-        CreateCombatSailor("target", new CombatPosition(1, 0), t);
-        CreateCombatSailor("target", new CombatPosition(2, 0), t);
-        CreateCombatSailor("target", new CombatPosition(0, 2), t);
-        CreateCombatSailor("target", new CombatPosition(1, 2), t);
-        CreateCombatSailor("target", new CombatPosition(2, 2), t);
+        //CreateCombatSailor("Target", new CombatPosition(0, 1), t);
+        //CreateCombatSailor("Target", new CombatPosition(1, 1), t);
+        //CreateCombatSailor("Target", new CombatPosition(2, 1), t);
+        //CreateCombatSailor("Target", new CombatPosition(0, 0), t);
+        //CreateCombatSailor("Target", new CombatPosition(1, 0), t);
+        //CreateCombatSailor("Target", new CombatPosition(2, 0), t);
+        //CreateCombatSailor("Target", new CombatPosition(0, 2), t);
+        //CreateCombatSailor("Target", new CombatPosition(1, 2), t);
+        //CreateCombatSailor("Target", new CombatPosition(2, 2), t);
+
+
+        CreateCombatSailor("Helti", new CombatPosition(1, 0), t);
+        CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
     }
 
     Sailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
@@ -82,19 +85,14 @@ public class CombatState : MonoBehaviour
             listItem.Add(GameUtils.Instance.CreateItem(itemName, Int32.Parse(itemQuality)));
         }
 
+        Sailor sailor = GameUtils.Instance.CreateSailor(name);
         int quality = UnityEngine.Random.Range(1, 100 + 1);
         int level = UnityEngine.Random.Range(1, 10 + 1);
 
-        Sailor sailor = GameUtils.Instance.CreateSailor(name);
-
-        Billboard billboard = sailor.gameObject.AddComponent<Billboard>() as Billboard;
-        billboard.cam = MainCamera.transform;
-
-        var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
-        shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
-
         sailor.SetEquipItems(listItem);
         sailor.InitCombatData(level, quality, pos, team);
+        sailor.CreateStatusBar();
+        sailor.InitDisplayStatus();
         if (team == Team.A) sailorsTeamA.Add(sailor);
         else sailorsTeamB.Add(sailor);
 

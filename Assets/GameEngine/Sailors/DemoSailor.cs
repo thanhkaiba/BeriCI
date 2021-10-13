@@ -10,7 +10,6 @@ public class DemoSailor: Sailor
     public DemoSailor()
     {
         skill = new Slash();
-        config_url = "Assets/Config/Sailors/DemoSailor.json";
     }
     public override void Awake()
     {

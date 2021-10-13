@@ -8,19 +8,16 @@ public class Helti : Sailor
     public SailorConfig config;
     public Helti()
     {
-        skill = new WindSlash();
-        config_url = "ScriptableObject/Sailors/Helti";
     }
     public override void Awake()
     {
-        //ContainerClassBonus a = Resources.Load<ContainerClassBonus>("ScriptableObject/ClassBonus/ContainerClassBonus");
+        //SailorConfig a = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Helti");
         //string json = a.Serialize(a);
         //Debug.Log("AAAA " + json);
         //File.WriteAllText("Assets/Helti.json", "");
         //StreamWriter writer = new StreamWriter("Assets/Helti.json", true);
         //writer.WriteLine(json);
         //writer.Close();
-
 
         base.Awake();
         modelObject = transform.Find("model").gameObject;
@@ -45,7 +42,7 @@ public class Helti : Sailor
     }
     private void LateUpdate()
     {
-        SetFaceDirection();
+        if (cs != null) SetFaceDirection();
     }
     public override float TakeDamage(Damage d)
     {
@@ -55,13 +52,13 @@ public class Helti : Sailor
 }
 public class WindSlash : Skill
 {
-    public float scale_damage_ratio = 2;
-    public float behind_damage_ratio = 0.7f;
-    public WindSlash()
+    public float scale_damage_ratio;
+    public float behind_damage_ratio;
+    public override void UpdateData(SkillConfig config)
     {
-        name = "WindSlash";
-        MAX_FURY = 25;
-        START_FURY = 7;
+        base.UpdateData(config);
+        scale_damage_ratio = config._params[0];
+        behind_damage_ratio = config._params[1];
     }
     public override bool CanActive(Sailor cChar, CombatState cbState)
     {
@@ -76,12 +73,12 @@ public class WindSlash : Skill
         Sailor target = GetNearestTarget(cChar, enermy);
         List<Sailor> behind_target = GetAllBehind(target, enermy);
 
-        return RunAnimation(cChar, target, behind_target, physic_damage / 3);
+        return RunAnimation(cChar, target, behind_target, physic_damage);
     }
     float RunAnimation(Sailor attacking, Sailor target, List<Sailor> behind_target, float physics_damage)
     {
         attacking.TriggerAnimation("CastSkill");
-        GameEvents.instance.highlightTarget.Invoke(target);
+        GameEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);

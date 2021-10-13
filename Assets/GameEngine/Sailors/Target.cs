@@ -10,7 +10,6 @@ public class Target : Sailor
     public Target()
     {
         skill = null;
-        config_url = "ScriptableObject/Sailors/Target";
     }
     public override void Awake()
     {

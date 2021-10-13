@@ -48,7 +48,7 @@ public class TooltipCombineType : MonoBehaviour
         if (pos.x < 180 + width / 2) pos.x = 180 + width / 2;
         if (pos.x > Screen.width - 180 - width / 2) pos.x = Screen.width - 180 - width / 2;
         if (pos.y < 20 + height / 2) pos.y = 20 + height / 2;
-        if (pos.y > Screen.height - 20 - height / 2) pos.y = Screen.height - 20 - width / 2;
+        if (pos.y > Screen.height - 20 - height / 2) pos.y = Screen.height - 20 - height / 2;
         transform.position = pos;
 
         int maxPop = config.GetMaxPopNeed(data.type);

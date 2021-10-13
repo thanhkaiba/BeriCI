@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Target
   m_EditorClassIdentifier: 
-  prettyPrint: 1
+  model: {fileID: 8118427497505597567, guid: a4aa1d45cbf7e0241b22f45a51db0b5c, type: 3}
   root_name: Target
   power_base: 50
   power_base_step: 0.1
   power_plv: 1
   power_plv_step: 0.01
   crit: 0.25
-  health_base: 120
+  health_base: 200
   health_base_step: 1
-  health_plv: 10
+  health_plv: 5
   health_plv_step: 0.1
   speed_base: 80
   speed_step: 0.15
@@ -29,3 +29,4 @@ MonoBehaviour:
   magic_resist: 20
   attack_type: 0
   types: 02000000
+  skillConfig: {fileID: 0}

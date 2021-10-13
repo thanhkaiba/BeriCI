@@ -24,7 +24,6 @@ public class Damage
 
 public class Sailor: MonoBehaviour
 {
-    protected string config_url; // must define in extended
     public SailorConfig config_stats;
     public CombatStats cs;
 
@@ -38,9 +37,8 @@ public class Sailor: MonoBehaviour
     public CharBarControl bar;
     public virtual void Awake()
     {
-        config_stats = Resources.Load<SailorConfig>(config_url);
     }
-    CharBarControl CreateStatusBar()
+    public void CreateStatusBar()
     {
         var barPrefab = Resources.Load<GameObject>("characters/Bar/Bar2");
         var barGO = Instantiate(
@@ -48,7 +46,7 @@ public class Sailor: MonoBehaviour
             transform.Find("nodeBar"));
         barGO.transform.localScale = new Vector3(0.024f, 0.024f, 1f);
         barGO.transform.localPosition = new Vector3(0, 0, 0);
-        return barGO.transform.GetComponent<CharBarControl>();
+        bar = barGO.transform.GetComponent<CharBarControl>();
     }
     public void SetEquipItems(List<Item> _items)
     {
@@ -95,8 +93,6 @@ public class Sailor: MonoBehaviour
             cs.BaseFury = skill.MAX_FURY;
             cs.Fury = skill.START_FURY;
         }
-        bar = CreateStatusBar();
-        InitDisplayStatus();
     }
     
     public void UpdateCombatData(List<PassiveType> ownTeam, List<PassiveType> oppTeam) // them giam chi so theo toc he
@@ -119,6 +115,13 @@ public class Sailor: MonoBehaviour
                     if (cs.HaveType(SailorType.ASSASSIN))
                     {
                         cs.BasePower *= config.GetParams(p.type, p.level)[0];
+                    }
+                    break;
+                case SailorType.MIGHTY:
+                    if (cs.HaveType(SailorType.MIGHTY))
+                    {
+                        cs.MaxHealth += cs.MaxHealth * config.GetParams(p.type, p.level)[0];
+                        cs.CurHealth = cs.MaxHealth;
                     }
                     break;
             }
@@ -184,7 +187,7 @@ public class Sailor: MonoBehaviour
     }
     float UseSkill (CombatState combatState)
     {
-        GameEvents.instance.castSkill.Invoke(this, skill);
+        GameEvents.Instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
         cs.Fury = 0;
         //Debug.Log("Use skill now " + skill.name);
@@ -211,7 +214,7 @@ public class Sailor: MonoBehaviour
             };
             StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
         }
-        GameEvents.instance.attackOneTarget.Invoke(this, target);
+        GameEvents.Instance.attackOneTarget.Invoke(this, target);
 
         // passive
         if (cs.HaveType(SailorType.BERSERK))
@@ -220,9 +223,9 @@ public class Sailor: MonoBehaviour
             PassiveType berserk = combatState.GetTeamPassiveType(cs.team, SailorType.BERSERK);
             if (berserk != null)
             {
-                Debug.Log("cs.DisplaySpeed " + cs.DisplaySpeed);
-                cs.DisplaySpeed += config.GetParams(berserk.type, berserk.level)[0];
-                Debug.Log("cs.DisplaySpeed " + cs.DisplaySpeed);
+                float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
+                cs.DisplaySpeed += speedAdd;
+                GameEvents.Instance.activeClassBonus.Invoke(this, SailorType.BERSERK, new List<float> { speedAdd });
             }
         }
 
@@ -344,7 +347,7 @@ public class Sailor: MonoBehaviour
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
+        GameEvents.Instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
     }
     public void LoseHealth(Damage d)
     {
@@ -353,7 +356,7 @@ public class Sailor: MonoBehaviour
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.instance.takeDamage.Invoke(this, d);
+        GameEvents.Instance.takeDamage.Invoke(this, d);
     }
 
     public void GainFury(int value)

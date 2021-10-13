@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class SmoothSlider : Slider
 {
+    public float speed = 0.8f;
     float realValue = 0f;
     bool changed = false;
 
@@ -21,7 +22,7 @@ public class SmoothSlider : Slider
     void LateUpdate()
     {
         if (!changed) return;
-        value = Mathf.MoveTowards(value, realValue, 0.8f * Time.deltaTime);
+        value = Mathf.MoveTowards(value, realValue, speed * Time.deltaTime);
         if (value == realValue) changed = false;
     }
 }

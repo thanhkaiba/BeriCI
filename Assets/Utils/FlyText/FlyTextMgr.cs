@@ -14,7 +14,7 @@ public class FlyTextMgr : MonoBehaviour
     }
     private void Start()
     {
-        GameEvents.instance.takeDamage.AddListener(ShowTextTakeDamage);
+        GameEvents.Instance.takeDamage.AddListener(ShowTextTakeDamage);
     }
     public void ShowTextTakeDamage(Sailor s, Damage damage)
     {

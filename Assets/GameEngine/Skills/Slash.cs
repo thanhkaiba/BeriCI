@@ -30,7 +30,7 @@ public class Slash : Skill
     float RunAnimation(Sailor attacking, Sailor target, Sailor behind_target, float physic_damage)
     {
         attacking.TriggerAnimation("BaseAttack");
-        GameEvents.instance.highlightTarget.Invoke(target);
+        GameEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 2.0f);

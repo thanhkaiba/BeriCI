@@ -89,5 +89,32 @@ public class GameEffMgr : MonoBehaviour
         //        eff.GetComponent<WaveFakeOcean>().isReverse = i % 2 == 0;
         //    }
         //}
+        GameEvents.Instance.activeClassBonus.AddListener(ActiveClassBonus);
+    }
+    private void ActiveClassBonus(Sailor sailor, SailorType type, List<float> _params)
+    {
+        ShowClassIconActive(sailor.transform.position, type);
+        //switch (type)
+        //{
+        //    case SailorType.BERSERK:
+
+        //        break;
+        //}
+        //return;
+    }
+    public float ShowClassIconActive(Vector3 p, SailorType type)
+    {
+        GameObject go = new GameObject();
+        SpriteRenderer spr = go.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
+        Billboard billboard = go.AddComponent(typeof(Billboard)) as Billboard;
+        billboard.cam = Camera.main.transform;
+        spr.sprite = Resources.Load<Sprite>("Icons/sailor_type/" + type);
+        spr.transform.localScale = new Vector3(3, 3, 3);
+        go.transform.position = p;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(go.transform.DOMoveY(p.y + 8, 0));
+        seq.Append(go.transform.DOScale(5f, 0.4f));
+        seq.AppendCallback(() => Destroy(go));
+        return 0.4f;
     }
 }

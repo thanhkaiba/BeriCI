@@ -68,12 +68,14 @@
     <Compile Include="Assets\GameEngine\Sailor.cs" />
     <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
+    <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
     <Compile Include="Assets\Resources\characters\CharacterShadow.cs" />
     <Compile Include="Assets\GameEngine\GameEvents.cs" />
     <Compile Include="Assets\GameEngine\Skills\FreezeWorld.cs" />
     <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ContainerClassBonus.cs" />
     <Compile Include="Assets\GameEngine\Skills\Deceive.cs" />
     <Compile Include="Assets\Utils\CameraFollow.cs" />
     <Compile Include="Assets\GameEngine\SailorData.cs" />
@@ -82,8 +84,10 @@
     <Compile Include="Assets\Scenes\SceneCombat\UIIngameMgr.cs" />
     <Compile Include="Assets\GameEngine\Skills\FightingPassion.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\SailorConfig.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonus.cs" />
     <Compile Include="Assets\GameEngine\Skills\Slash.cs" />
     <Compile Include="Assets\GameEngine\Skills\SkillMgr.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\SkillConfig.cs" />
     <Compile Include="Assets\GameEngine\UserData.cs" />
     <Compile Include="Assets\Utils\HealthSlider.cs" />
     <Compile Include="Assets\Popup\Resources\PopupDemo\PopupDemo.cs" />
@@ -96,9 +100,11 @@
     <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
     <Compile Include="Assets\GameEngine\Sailors\Helti.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\TooltipCombineType\TooltipCombineType.cs" />
+    <Compile Include="Assets\GameEngine\GlobalConfigs.cs" />
     <Compile Include="Assets\Utils\ClickDetector.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />
     <Compile Include="Assets\GameEngine\Skills\NuclearBomb.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonusLevel.cs" />
     <Compile Include="Assets\Utils\Billboard.cs" />
     <Compile Include="Assets\GameEngine\Skills\IceArrow.cs" />
     <Compile Include="Assets\Utils\FlyText\FlyTextMgr.cs" />
@@ -107,11 +113,7 @@
     <Compile Include="Assets\GameEngine\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ContainerClassBonus.cs" />
-    <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonus.cs" />
-    <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonusLevel.cs" />
-    <Compile Include="Assets\GameEngine\GlobalConfigs.cs" />
-    <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\TooltipSailorInfo\TooltipSailorInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

@@ -26,12 +26,12 @@ public class UIIngameMgr : MonoBehaviour
         for (int i = 0; i < sailors.Count; i++)
         {
             SailorInQueue s = Instantiate(sailorInQueue, node).GetComponent<SailorInQueue>();
-            s.transform.localPosition = new Vector3(-i * 96, 0, 0);
+            s.transform.localPosition = new Vector3(-i * 146, 0, 0);
             s.transform.SetSiblingIndex(sailors.Count-i);
             listSailorInQueue.Add(s);
             s.SetData(sailors[i]);
             s.PresentData();
-            //s.transform.DOLocalMoveX(250 - i * 96, 0.5f);
+            //s.transform.DOLocalMoveX(250 - i * 146, 0.5f);
         }
     }
     public void UpdateListSailorInQueue(List<Sailor> sailors)
@@ -42,7 +42,7 @@ public class UIIngameMgr : MonoBehaviour
             int index = sailors.IndexOf(listSailorInQueue[i].GetData());
             if (index >= 0)
             {
-                s.transform.DOLocalMoveX(-index * 96, 0.5f);
+                s.transform.DOLocalMoveX(-index * 146, 0.5f);
                 s.transform.SetSiblingIndex(listSailorInQueue.Count-index-1);
                 s.PresentData();
             }
@@ -91,10 +91,10 @@ public class UIIngameMgr : MonoBehaviour
     {
         //Debug.Log("GameEvents.instance " + GameEvents.instance);
         //Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
-        GameEvents.instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
-        GameEvents.instance.takeDamage.AddListener(ShowHighLightTakeDamage);
-        GameEvents.instance.castSkill.AddListener(ShowHighLightCastSkill);
-        GameEvents.instance.highlightTarget.AddListener(ShowHighlightInfo);
+        GameEvents.Instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
+        GameEvents.Instance.takeDamage.AddListener(ShowHighLightTakeDamage);
+        GameEvents.Instance.castSkill.AddListener(ShowHighLightCastSkill);
+        GameEvents.Instance.highlightTarget.AddListener(ShowHighlightInfo);
     }
     public void ShowHighlightConfrontation(Sailor a, Sailor b)
     {

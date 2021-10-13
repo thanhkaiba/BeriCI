@@ -22,33 +22,23 @@ public class GameUtils : MonoBehaviour
     }
     public Sailor CreateSailor(string name)
     {
-        GameObject characterGO;
-        Sailor character;
-        switch (name)
+        SailorConfig config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + name);
+        if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
+        GameObject characterGO = Instantiate(config_stats.model);
+        Sailor sailor = characterGO.AddComponent(Type.GetType(name)) as Sailor;
+        sailor.config_stats = config_stats;
+        if (config_stats.skillConfig)
         {
-            case "demo":
-                characterGO = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
-                character = characterGO.AddComponent<DemoSailor>() as Sailor;
-                break;
-            case "demo2":
-                characterGO = Instantiate(Resources.Load<GameObject>("characters/goblin_archer"));
-                character = characterGO.AddComponent<DemoSailor2>() as DemoSailor2;
-                break;
-            case "target":
-                characterGO = Instantiate(Resources.Load<GameObject>("characters/Target/target"));
-                character = characterGO.AddComponent<Target>() as Target;
-                break;
-            case "helti":
-                characterGO = Instantiate(Resources.Load<GameObject>("characters/Helti/Helti"));
-                character = characterGO.AddComponent<Helti>() as Helti;
-                break;
-            default:
-                characterGO = Instantiate(Resources.Load<GameObject>("characters/sword_man"));
-                character = characterGO.AddComponent<Sailor>() as Sailor;
-                break;
+            sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
+            sailor.skill.UpdateData(config_stats.skillConfig);
         }
-        
-        return character;
+
+        Billboard billboard = sailor.gameObject.AddComponent<Billboard>() as Billboard;
+
+        var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
+        shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
+
+        return sailor;
     }
     public Item CreateItem(string itemId, int quality = 0)
     {

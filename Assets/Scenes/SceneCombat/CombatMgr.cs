@@ -51,10 +51,11 @@ public class CombatMgr : MonoBehaviour
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
             + " | position: " + actionChar.cs.position
         );
-        float delayTime = actionChar.DoCombatAction(combatState);
+        float delayTime = actionChar.DoCombatAction(combatState) + 0.2f;
         combatState.lastTeamAction = actionChar.cs.team;
-        StartCoroutine(EndLoop(actionChar, 2));
-        StartCoroutine(NextLoop(2));
+        StartCoroutine(WaitAndDo(2*delayTime/3, () => UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor()) ));
+        StartCoroutine(EndLoop(actionChar, delayTime));
+        StartCoroutine(NextLoop(delayTime));
     }
 
     IEnumerator EndLoop(Sailor actor, float delay)
@@ -69,6 +70,11 @@ public class CombatMgr : MonoBehaviour
         Team winTeam = CheckTeamWin();
         if (winTeam == Team.NONE) CombatLoop();
         else GameOver(winTeam);
+    }
+    IEnumerator WaitAndDo(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action();
     }
 
     void GameOver(Team winTeam)

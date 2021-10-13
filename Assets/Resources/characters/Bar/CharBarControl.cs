@@ -21,23 +21,7 @@ public class CharBarControl : MonoBehaviour
     }
     public void SetIconType(AttackType type)
     {
-        Sprite spr;
-        switch (type)
-        {
-            case AttackType.MELEE:
-                spr = Resources.Load<Sprite>("Icons/attack_type/mellee");
-                break;
-            case AttackType.RANGE:
-                spr = Resources.Load<Sprite>("Icons/attack_type/range");
-                break;
-            case AttackType.SNEAK:
-                spr = Resources.Load<Sprite>("Icons/attack_type/sneak");
-                break;
-            default:
-                spr = Resources.Load<Sprite>("Icons/attack_type/mellee");
-                break;
-        }
-        iconType.sprite = spr;
+        iconType.sprite = Resources.Load<Sprite>("Icons/attack_type/" + type);
     }
     public void SetIconSkill(Skill skill)
     {

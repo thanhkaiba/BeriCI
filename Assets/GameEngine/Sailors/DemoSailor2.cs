@@ -11,7 +11,6 @@ public class DemoSailor2 : Sailor
     public DemoSailor2()
     {
         skill = new IceArrow();
-        config_url = "Assets/Config/Sailors/DemoSailor2.json";
     }
 
     // animations

@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Sailor", menuName = "config/Sailor")]
 public class SailorConfig : ScriptableObjectPro
 {
+    public GameObject model;
     public string root_name = "Root";
 
     public float power_base = 0;
@@ -26,7 +27,9 @@ public class SailorConfig : ScriptableObjectPro
     public float magic_resist = 0;
 
     public AttackType attack_type = AttackType.MELEE;
-    public SailorType[] types = new SailorType[0];
+    public List<SailorType> types;
+
+    public SkillConfig skillConfig;
 
     public float GetPower(int level, int quality)
     {
