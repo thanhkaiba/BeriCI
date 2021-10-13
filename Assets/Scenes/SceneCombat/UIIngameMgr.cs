@@ -40,12 +40,12 @@ public class UIIngameMgr : MonoBehaviour
         {
             var s = listSailorInQueue[i];
             int index = sailors.IndexOf(listSailorInQueue[i].GetData());
-            s.gameObject.SetActive(i < 8);
             if (index >= 0)
             {
                 s.transform.DOLocalMoveX(-index * 150, 0.5f);
                 s.transform.SetSiblingIndex(listSailorInQueue.Count-index-1);
                 s.PresentData();
+                s.gameObject.SetActive(index < 8);
             }
             else
             {

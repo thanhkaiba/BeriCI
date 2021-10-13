@@ -38,4 +38,8 @@ public class SailorInQueue : MonoBehaviour
         }
         level.text = sailorData.level.ToString();
     }
+    public void OnClick()
+    {
+        TooltipSailorInfo.Instance.ShowTooltip(sailorData.gameObject, true);
+    }
 }
