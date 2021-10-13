@@ -70,7 +70,7 @@
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
     <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
-    <Compile Include="Assets\Resources\characters\CharacterShadow.cs" />
+    <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
     <Compile Include="Assets\GameEngine\GameEvents.cs" />
     <Compile Include="Assets\GameEngine\Skills\FreezeWorld.cs" />
     <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
@@ -114,6 +114,7 @@
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\TooltipSailorInfo\TooltipSailorInfo.cs" />
+    <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
@@ -757,6 +758,9 @@
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

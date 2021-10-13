@@ -185,7 +185,7 @@ public class Sailor: MonoBehaviour
     {
         return skill != null && cs.Fury >= cs.MaxFury && skill.CanActive(this, combatState);
     }
-    float UseSkill (CombatState combatState)
+    public virtual float UseSkill (CombatState combatState)
     {
         GameEvents.Instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
@@ -359,7 +359,7 @@ public class Sailor: MonoBehaviour
         GameEvents.Instance.takeDamage.Invoke(this, d);
     }
 
-    public void GainFury(int value)
+    public virtual void GainFury(int value)
     {
         if (skill != null)
         {

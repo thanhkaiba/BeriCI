@@ -25,6 +25,8 @@ public class TooltipSailorInfo : MonoBehaviour
     public Text textSpeed;
     public Text textArmor;
     public Text textMagicResist;
+
+    public List<Image> iconItems;
     void Awake()
     {
         Instance = this;

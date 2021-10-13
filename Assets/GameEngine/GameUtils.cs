@@ -33,9 +33,9 @@ public class GameUtils : MonoBehaviour
             sailor.skill.UpdateData(config_stats.skillConfig);
         }
 
-        Billboard billboard = sailor.gameObject.AddComponent<Billboard>() as Billboard;
+        sailor.gameObject.AddComponent<Billboard>();
 
-        var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
+        var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
         shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
 
         return sailor;
