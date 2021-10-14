@@ -199,7 +199,6 @@ public class Sailor: MonoBehaviour
     {
         cs.CurrentSpeed -= cs.MaxSpeed;
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
-        GainFury(10);
         Sailor target = GetBaseAttackTarget(combatState);
         float delay = 0;
         if (target != null)
@@ -268,7 +267,7 @@ public class Sailor: MonoBehaviour
     }
     void DealBaseAttackDamage(Sailor target, Damage damage)
     {
-
+        GainFury(10);
         target.TakeDamage(damage);
     }
     IEnumerator DealBaseAttackDamageDelay(Sailor target, Damage damage, float delay)
