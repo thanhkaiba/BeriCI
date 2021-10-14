@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sailors : MonoBehaviour
+public class SquadContainer : MonoBehaviour
 {
     [SerializeField] Slot[] slots;
     List<string> squad = new List<string> { "Helti", "Target", "Helti", "", "", "", "Helti" , "Target", "Helti" };
@@ -15,12 +15,8 @@ public class Sailors : MonoBehaviour
 
             if (sailorId.Length > 0)
             {
-              
-                Sailor sailor = GameUtils.Instance.CreateSailor(sailorId);
-                Drag drag = sailor.gameObject.AddComponent<Drag>();
-                sailor.transform.parent = transform;
-                drag.slots = slots;
 
+                Sailor sailor = AddSailor(sailorId);
                 slot.SetSelectedSailer(sailor);
             } else
             {
@@ -28,5 +24,15 @@ public class Sailors : MonoBehaviour
             }
         }
       
+    }
+
+    public Sailor AddSailor(string sailorId)
+    {
+        Sailor sailor = GameUtils.Instance.CreateSailor(sailorId);
+        Drag drag = sailor.gameObject.AddComponent<Drag>();
+        sailor.transform.parent = transform;
+        drag.slots = slots;
+
+        return sailor;
     }
 }

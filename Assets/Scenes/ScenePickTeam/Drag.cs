@@ -44,12 +44,9 @@ public class Drag : MonoBehaviour
         slots[originIndex].OnSelecting();
 
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float distance = 0;
-        if (hPlane.Raycast(ray, out distance))
+        if (ConvertMousePosWorldPos(Input.mousePosition, out Vector3 postion))
         {
-            dist = transform.position - ray.GetPoint(distance);
-
+            dist = transform.position - postion;
         }
     }
 
@@ -68,15 +65,27 @@ public class Drag : MonoBehaviour
 
     void OnMouseDrag()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float distance = 0;
-        if (hPlane.Raycast(ray, out distance))
+        
+        if (ConvertMousePosWorldPos(Input.mousePosition, out Vector3 postion))
         {
-            transform.position = ray.GetPoint(distance) + dist;
+            transform.position = postion;
+            transform.position += dist;
         }
 
         CheckNewSelecting();
 
+    }
+
+    public bool ConvertMousePosWorldPos(Vector2 mousePosition, out Vector3 worldPos)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+        if (hPlane.Raycast(ray, out float distance))
+        {
+            worldPos = ray.GetPoint(distance);
+            return true;
+        }
+        worldPos = Vector3.zero;
+        return false;
     }
 
     private void CheckNewSelecting()
