@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Drag : MonoBehaviour
 {
-    private Vector3 dist;
-    private Plane hPlane;
+    private Plane sailorPlane;
+    private Vector3 diff;
     public Slot[] slots;
     private Collider boxAround;
     [SerializeField]
@@ -16,7 +16,7 @@ public class Drag : MonoBehaviour
 
     private void Start()
     {
-        hPlane = new Plane(new Vector3(0, 1, 0), Vector3.up * (transform.position.y));
+       
         boxAround = GetComponent<Collider>();
         sailor = GetComponent<Sailor>();
 
@@ -39,20 +39,37 @@ public class Drag : MonoBehaviour
             {
                 originIndex = i;
             }
+            slots[i].boxAround.enabled = true;
         }
         selectingIndex = originIndex;
         slots[originIndex].OnSelecting();
 
 
-        if (ConvertMousePosWorldPos(Input.mousePosition, out Vector3 postion))
+        Vector3 normal = new Vector3(0, 0, 0);
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (boxAround.Raycast(ray, out RaycastHit hit, 1000))
         {
-            dist = transform.position - postion;
+            normal = hit.point;
+         
         }
+
+        diff = transform.position - normal;
+
+        normal.x = 0;
+        normal.z = 0;
+        sailorPlane = new Plane(normal, normal);
     }
 
     private void OnMouseUp()
     {
-       
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].GetOwner() == sailor)
+            {
+                originIndex = i;
+            }
+            slots[i].boxAround.enabled = false;
+        }
         if (selectingIndex >= 0)
         {
             slots[selectingIndex].SetSelectedSailer(sailor);
@@ -60,33 +77,27 @@ public class Drag : MonoBehaviour
             selectingIndex = -1;
             
         }
+
+       
     }
 
 
     void OnMouseDrag()
     {
         
-        if (ConvertMousePosWorldPos(Input.mousePosition, out Vector3 postion))
+     
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (sailorPlane.Raycast(ray, out float distance))
         {
-            transform.position = postion;
-            transform.position += dist;
+            transform.position = ray.GetPoint(distance) + diff;
+            
         }
 
         CheckNewSelecting();
 
     }
 
-    public bool ConvertMousePosWorldPos(Vector2 mousePosition, out Vector3 worldPos)
-    {
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        if (hPlane.Raycast(ray, out float distance))
-        {
-            worldPos = ray.GetPoint(distance);
-            return true;
-        }
-        worldPos = Vector3.zero;
-        return false;
-    }
+   
 
     private void CheckNewSelecting()
     {

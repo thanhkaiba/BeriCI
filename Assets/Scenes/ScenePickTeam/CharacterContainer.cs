@@ -50,14 +50,7 @@ public class CharacterContainer : MonoBehaviour
         Sailor sailor = squadContainer.AddSailor(sailorId);
         Drag drag = sailor.GetComponent<Drag>();
         Debug.Log(data.position);
-        if (drag.ConvertMousePosWorldPos(data.position, out Vector3 worldPos))
-        {
-            sailor.transform.position = worldPos;
-        } 
-        else
-        {
-            Debug.Log("FAIL");
-        }
+      
        
     }
 }
