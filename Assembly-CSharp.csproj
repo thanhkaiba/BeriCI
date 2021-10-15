@@ -60,7 +60,7 @@
     <Compile Include="Assets\GameEngine\Sailors\DemoSailor2.cs" />
     <Compile Include="Assets\Resources\Icons\sailor_type\TypeCombineInGameCanvas.cs" />
     <Compile Include="Assets\GameEngine\GuiMgr.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Drag.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\DragableSubSailor.cs" />
     <Compile Include="Assets\GameEngine\Sailors\Target.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\TooltipSailorInfo\TooltipSailorInfo.cs" />
     <Compile Include="Assets\GameEngine\Skills\Encourage.cs" />
@@ -68,6 +68,7 @@
     <Compile Include="Assets\GameEngine\Skills\Marksman.cs" />
     <Compile Include="Assets\GameEngine\Skills\LethalTempo.cs" />
     <Compile Include="Assets\GameEngine\Sailor.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\CharacterContainer.cs" />
     <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
     <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
@@ -86,7 +87,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\UIIngameMgr.cs" />
     <Compile Include="Assets\GameEngine\Skills\FightingPassion.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\SailorConfig.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SquadContainer.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonus.cs" />
     <Compile Include="Assets\GameEngine\Skills\Slash.cs" />
     <Compile Include="Assets\GameEngine\Skills\SkillMgr.cs" />
@@ -98,7 +99,7 @@
     <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
     <Compile Include="Assets\GameEngine\Skills\HeadShot.cs" />
     <Compile Include="Assets\GameEngine\Skills\TakeRest.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Slot.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Slot.cs" />
     <Compile Include="Assets\GameEngine\Sailors\DemoSailor.cs" />
     <Compile Include="Assets\Utils\ScriptableObjectPro.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
@@ -117,7 +118,7 @@
     <Compile Include="Assets\GameEngine\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\CharacterContainer.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\DragableSailor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
