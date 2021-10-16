@@ -72,7 +72,7 @@ public class DragableSubsailor : DragableSailor
 
         if (swapSailor != null)
         {
-            originImage.GetComponent<SubSailorIcon>().CreateSailorImage(swapSailor.charName);
+            originImage.GetComponent<SubSailorIcon>().CreateSailorImage(swapSailor.config_stats.name);
             originImage.enabled = true;
             Destroy(swapSailor.gameObject);
         } else
