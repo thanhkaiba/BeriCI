@@ -6,6 +6,7 @@ using UnityEngine;
 public class Helti : Sailor
 {
     public SailorConfig config;
+    private GameObject circle;
     public Helti()
     {
     }
@@ -19,8 +20,22 @@ public class Helti : Sailor
         //writer.WriteLine(json);
         //writer.Close();
 
+        circle = Instantiate(Resources.Load<GameObject>("GameComponents/SkillAvaiableCircle/circle"));
+        circle.GetComponent<CircleSkillAvaiable>().SetCharacter(gameObject);
+        circle.SetActive(false);
+
         base.Awake();
         modelObject = transform.Find("model").gameObject;
+    }
+    public override void GainFury(int value)
+    {
+        base.GainFury(value);
+        if (cs.Fury >= cs.MaxFury && !circle.activeSelf) circle.GetComponent<CircleSkillAvaiable>().Appear();
+    }
+    public override float UseSkill(CombatState combatState)
+    {
+        circle.GetComponent<CircleSkillAvaiable>().Disappear();
+        return base.UseSkill(combatState);
     }
     public override float RunBaseAttack(Sailor target)
     {

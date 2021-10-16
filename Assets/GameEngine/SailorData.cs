@@ -33,6 +33,15 @@ public enum SailorType
     KUNG_FU,
 };
 
+public enum SailorRank
+{
+    B,
+    A,
+    S,
+    SR,
+    SSR,
+}
+
 public class PassiveType
 {
     public SailorType type;

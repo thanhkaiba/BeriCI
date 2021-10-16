@@ -55,19 +55,19 @@ public class CombatState : MonoBehaviour
 
     void CreateTargetTeam(Team t)
     {
-        //CreateCombatSailor("Target", new CombatPosition(0, 1), t);
-        //CreateCombatSailor("Target", new CombatPosition(1, 1), t);
-        //CreateCombatSailor("Target", new CombatPosition(2, 1), t);
-        //CreateCombatSailor("Target", new CombatPosition(0, 0), t);
-        //CreateCombatSailor("Target", new CombatPosition(1, 0), t);
-        //CreateCombatSailor("Target", new CombatPosition(2, 0), t);
-        //CreateCombatSailor("Target", new CombatPosition(0, 2), t);
-        //CreateCombatSailor("Target", new CombatPosition(1, 2), t);
-        //CreateCombatSailor("Target", new CombatPosition(2, 2), t);
+        CreateCombatSailor("Target", new CombatPosition(0, 1), t);
+        CreateCombatSailor("Target", new CombatPosition(1, 1), t);
+        CreateCombatSailor("Target", new CombatPosition(2, 1), t);
+        CreateCombatSailor("Target", new CombatPosition(0, 0), t);
+        CreateCombatSailor("Target", new CombatPosition(1, 0), t);
+        CreateCombatSailor("Target", new CombatPosition(2, 0), t);
+        CreateCombatSailor("Target", new CombatPosition(0, 2), t);
+        CreateCombatSailor("Target", new CombatPosition(1, 2), t);
+        CreateCombatSailor("Target", new CombatPosition(2, 2), t);
 
 
-        CreateCombatSailor("Helti", new CombatPosition(1, 0), t);
-        CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
+        //CreateCombatSailor("Helti", new CombatPosition(1, 0), t);
+        //CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
     }
 
     Sailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)

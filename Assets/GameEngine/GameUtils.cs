@@ -27,21 +27,21 @@ public class GameUtils : MonoBehaviour
         GameObject characterGO = Instantiate(config_stats.model);
         Sailor sailor = characterGO.AddComponent(Type.GetType(name)) as Sailor;
         sailor.config_stats = config_stats;
-        sailor.charName = name;
         if (config_stats.skillConfig)
         {
             sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
             sailor.skill.UpdateData(config_stats.skillConfig);
         }
 
-        Billboard billboard = sailor.gameObject.AddComponent<Billboard>() as Billboard;
+        sailor.gameObject.AddComponent<Billboard>();
 
-       
+        //var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
+        //shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
+
         return sailor;
     }
     public Item CreateItem(string itemId, int quality = 0)
     {
-        Debug.Log("ScriptableObject/Items/" + itemId);
         Item item = Resources.Load<Item>("ScriptableObject/Items/DemoItem");
         item.quality = quality;
 

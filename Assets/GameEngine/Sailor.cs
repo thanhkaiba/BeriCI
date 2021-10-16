@@ -29,7 +29,6 @@ public class Sailor: MonoBehaviour
 
     public List<Item> items;
 
-    public string charName;
     public Skill skill = null;
     public int level;
     public int quality;
@@ -82,8 +81,6 @@ public class Sailor: MonoBehaviour
             cs.Crit += item.Crit;
             if (item.type_buff != SailorType.NONE) cs.types.Add(item.type_buff);
         });
-
-        charName = config_stats.root_name;
 
         this.level = level;
         this.quality = quality;
@@ -185,7 +182,7 @@ public class Sailor: MonoBehaviour
     {
         return skill != null && cs.Fury >= cs.MaxFury && skill.CanActive(this, combatState);
     }
-    float UseSkill (CombatState combatState)
+    public virtual float UseSkill (CombatState combatState)
     {
         GameEvents.Instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
@@ -199,7 +196,6 @@ public class Sailor: MonoBehaviour
     {
         cs.CurrentSpeed -= cs.MaxSpeed;
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
-        GainFury(10);
         Sailor target = GetBaseAttackTarget(combatState);
         float delay = 0;
         if (target != null)
@@ -268,7 +264,7 @@ public class Sailor: MonoBehaviour
     }
     void DealBaseAttackDamage(Sailor target, Damage damage)
     {
-
+        GainFury(10);
         target.TakeDamage(damage);
     }
     IEnumerator DealBaseAttackDamageDelay(Sailor target, Damage damage, float delay)
@@ -331,7 +327,7 @@ public class Sailor: MonoBehaviour
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(config_stats.attack_type);
         bar.SetIconSkill(skill);
-        bar.SetName(charName);
+        bar.SetName(config_stats.root_name);
         SetFaceDirection();
     }
     public void GainHealth(float health)
@@ -359,7 +355,7 @@ public class Sailor: MonoBehaviour
         GameEvents.Instance.takeDamage.Invoke(this, d);
     }
 
-    public void GainFury(int value)
+    public virtual void GainFury(int value)
     {
         if (skill != null)
         {

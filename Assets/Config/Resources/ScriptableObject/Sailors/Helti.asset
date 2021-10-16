@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Helti
   m_EditorClassIdentifier: 
   model: {fileID: 6048849634696698574, guid: 74fe4a8c08068d84199649cdff66c447, type: 3}
+  avatar: {fileID: 21300000, guid: 0194787e1ae0c7149b2b069186944e9e, type: 3}
   root_name: Helti
+  rank: 2
   power_base: 50
   power_base_step: 0.1
   power_plv: 1

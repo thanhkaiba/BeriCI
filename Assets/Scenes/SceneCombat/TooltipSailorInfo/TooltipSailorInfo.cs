@@ -25,6 +25,8 @@ public class TooltipSailorInfo : MonoBehaviour
     public Text textSpeed;
     public Text textArmor;
     public Text textMagicResist;
+
+    public List<Image> iconItems;
     void Awake()
     {
         Instance = this;
@@ -76,15 +78,15 @@ public class TooltipSailorInfo : MonoBehaviour
             furySlider.transform.Find("Text").GetComponent<Text>().text = (sailor.cs.Fury).ToString() + "/" + (sailor.cs.MaxFury).ToString();
         }
     }
-    public void ShowTooltip(GameObject sailorGO)
+    public void ShowTooltip(GameObject sailorGO, bool clickFromUI = false)
     {
-        if (gameObject.activeSelf) return;
+        //if (gameObject.activeSelf) return;
         sailor = sailorGO.GetComponent<Sailor>();
         follow = sailorGO.transform.Find("nodeBar");
         gameObject.SetActive(true);
-        justOpen = true;
+        justOpen = !clickFromUI;
 
-        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.charName);
+        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.config_stats.root_name);
         var listType = sailor.config_stats.types;
         for (int i = 0; i < 3; i++)
         {
