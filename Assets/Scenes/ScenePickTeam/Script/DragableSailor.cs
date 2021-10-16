@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class DragableSailor : MonoBehaviour
 {
-    private Plane sailorPlane;
+    protected Plane sailorPlane;
     private Vector3 diff;
     protected BoxCollider boxAround;
-    public Slot[] slots;
-    private int selectingIndex = -1;
+    public Slot[] slots { get; set; }
+    [SerializeField]
+    protected int selectingIndex = -1;
     protected Sailor sailor;
-    private int originIndex;
+    [SerializeField]
+    protected int originIndex = -1;
 
     private void Start()
     {
@@ -57,18 +59,18 @@ public class DragableSailor : MonoBehaviour
 
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
         if (sailorPlane.Raycast(ray, out float distance))
         {
             transform.position = ray.GetPoint(distance) + diff;
 
-        } 
+        }
 
         CheckNewSelecting();
 
-
     }
 
-    private void OnMouseUp()
+    protected void OnMouseUp()
     {
         for (int i = 0; i < slots.Length; i++)
         {
@@ -80,12 +82,19 @@ public class DragableSailor : MonoBehaviour
         }
         if (selectingIndex >= 0)
         {
-            slots[selectingIndex].SetSelectedSailer(sailor);
-            originIndex = selectingIndex;
-            selectingIndex = -1;
+            OnMouseUpWithSlot();
+        } 
+    }
 
-        }
+    protected void OnMouseUpWithSlot()
+    {
+        slots[selectingIndex].SetSelectedSailer(sailor);
+        originIndex = selectingIndex;
+        selectingIndex = -1;
+    }
 
+    protected void OnMouseUpEmpty()
+    {
 
     }
 
@@ -106,7 +115,7 @@ public class DragableSailor : MonoBehaviour
         }
     }
 
-    private void UpdateSlots(int newSelecting)
+    protected virtual void UpdateSlots(int newSelecting)
     {
         if (selectingIndex >= 0)
         {
@@ -116,4 +125,5 @@ public class DragableSailor : MonoBehaviour
         slots[newSelecting].OnSelecting();
         selectingIndex = newSelecting;
     }
+
 }
