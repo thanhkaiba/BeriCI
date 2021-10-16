@@ -9,14 +9,14 @@ public class SquadSlot : MonoBehaviour
     {
         AVAIABLE, SELECTING, SELECTED
     }
-    public Collider boxAround;
+    public Bounds boxAround;
     private Sailor sailor;
     [SerializeField]
     private State state = State.AVAIABLE;
 
     private void Start()
     {
-        boxAround = GetComponent<Collider>();
+        boxAround = GetComponent<SpriteRenderer>().bounds;
     }
     public void OnSelecting()
     {

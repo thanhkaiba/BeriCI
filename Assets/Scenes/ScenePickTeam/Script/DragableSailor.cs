@@ -30,7 +30,6 @@ public class DragableSailor : MonoBehaviour
             {
                 originIndex = i;
             }
-            slots[i].boxAround.enabled = true;
         }
         selectingIndex = originIndex;
         slots[originIndex].OnSelecting();
@@ -78,7 +77,6 @@ public class DragableSailor : MonoBehaviour
             {
                 originIndex = i;
             }
-            slots[i].boxAround.enabled = false;
         }
         if (selectingIndex >= 0)
         {
@@ -104,7 +102,7 @@ public class DragableSailor : MonoBehaviour
         for (int i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
-            if (slot.boxAround.bounds.Intersects(boxAround.bounds))
+            if (slot.boxAround.Intersects(boxAround.bounds))
             {
                 if (i != selectingIndex)
                 {
