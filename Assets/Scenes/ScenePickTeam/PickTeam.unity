@@ -133,9 +133,8 @@ GameObject:
   m_Component:
   - component: {fileID: 17908861}
   - component: {fileID: 17908864}
-  - component: {fileID: 17908863}
   - component: {fileID: 17908862}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,22 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &17908863
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 17908860}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &17908864
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -245,9 +232,8 @@ GameObject:
   m_Component:
   - component: {fileID: 50940441}
   - component: {fileID: 50940444}
-  - component: {fileID: 50940443}
   - component: {fileID: 50940442}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -280,22 +266,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &50940443
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 50940440}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &50940444
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -429,9 +403,8 @@ GameObject:
   m_Component:
   - component: {fileID: 236412442}
   - component: {fileID: 236412445}
-  - component: {fileID: 236412444}
   - component: {fileID: 236412443}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,22 +437,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &236412444
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 236412441}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &236412445
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -540,7 +501,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324995393}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +529,7 @@ Transform:
   - {fileID: 415035638}
   - {fileID: 1504590422}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &364912359
 GameObject:
@@ -605,7 +566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.046520837, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -89.320496, y: -5.6500244}
+  m_AnchoredPosition: {x: -89.319916, y: -5.6500244}
   m_SizeDelta: {x: 0, y: 126.69}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &364912361
@@ -691,7 +652,7 @@ Transform:
   - {fileID: 145258509}
   - {fileID: 789270311}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &415035637
 GameObject:
@@ -703,9 +664,8 @@ GameObject:
   m_Component:
   - component: {fileID: 415035638}
   - component: {fileID: 415035641}
-  - component: {fileID: 415035640}
   - component: {fileID: 415035639}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -738,22 +698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &415035640
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 415035637}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &415035641
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -885,7 +833,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &493402241
 GameObject:
@@ -897,9 +845,8 @@ GameObject:
   m_Component:
   - component: {fileID: 493402242}
   - component: {fileID: 493402245}
-  - component: {fileID: 493402244}
   - component: {fileID: 493402243}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -932,22 +879,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &493402244
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 493402241}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &493402245
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1086,7 +1021,7 @@ Camera:
   field of view: 60
   orthographic: 0
   orthographic size: 5
-  m_Depth: 1
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 63
@@ -1238,7 +1173,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &906783381
 GameObject:
@@ -1250,9 +1185,8 @@ GameObject:
   m_Component:
   - component: {fileID: 906783383}
   - component: {fileID: 906783382}
-  - component: {fileID: 906783384}
   - component: {fileID: 906783385}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1324,20 +1258,6 @@ Transform:
   m_Father: {fileID: 324995393}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!136 &906783384
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 906783381}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &906783385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,8 +1270,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
+--- !u!1 &1006542605
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1006542608}
+  - component: {fileID: 1006542607}
+  - component: {fileID: 1006542606}
+  m_Layer: 0
+  m_Name: Camera UpGround
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1006542606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006542605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+--- !u!20 &1006542607
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006542605}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 136
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &1006542608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006542605}
+  m_LocalRotation: {x: 0.2686443, y: -0, z: -0, w: 0.9632395}
+  m_LocalPosition: {x: 0, y: 34.5, z: -51}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 31.167, y: 0, z: 0}
 --- !u!1 &1052719983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1653,7 @@ RectTransform:
   m_Children:
   - {fileID: 1105874378}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1736,7 +1765,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 31.167, y: 0, z: 0}
 --- !u!1 &1382823890
 GameObject:
@@ -1748,9 +1777,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1382823891}
   - component: {fileID: 1382823894}
-  - component: {fileID: 1382823893}
   - component: {fileID: 1382823892}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1783,22 +1811,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &1382823893
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1382823890}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1382823894
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1891,7 +1907,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1504590421
 GameObject:
@@ -1903,9 +1919,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1504590422}
   - component: {fileID: 1504590425}
-  - component: {fileID: 1504590424}
   - component: {fileID: 1504590423}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1938,22 +1953,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &1504590424
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1504590421}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1504590425
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2015,9 +2018,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1526332785}
   - component: {fileID: 1526332788}
-  - component: {fileID: 1526332787}
   - component: {fileID: 1526332786}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Slot (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2050,22 +2052,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxAround: {fileID: 0}
+  boxAround:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   state: 0
---- !u!136 &1526332787
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1526332784}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.67499995
-  m_Height: 1.2099999
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!212 &1526332788
 SpriteRenderer:
   m_ObjectHideFlags: 0
