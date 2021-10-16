@@ -47,7 +47,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.HideAllHighlightInfo();
         UIMgr.ShowActionCount(actionCount);
         Debug.Log(
-            " ----> combat action character: " + actionChar.charName
+            " ----> combat action character: " + actionChar.config_stats.root_name
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
             + " | position: " + actionChar.cs.position
         );

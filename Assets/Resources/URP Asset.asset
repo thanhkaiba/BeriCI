@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
-  m_Name: UniversalRenderPipelineAsset
+  m_Name: URP Asset
   m_EditorClassIdentifier: 
   k_AssetVersion: 6
   k_AssetPreviousVersion: 5
@@ -18,6 +18,7 @@ MonoBehaviour:
   m_RendererData: {fileID: 0}
   m_RendererDataList:
   - {fileID: 11400000, guid: 390bc17b40ae38d468ebf6628e20eab6, type: 2}
+  - {fileID: 11400000, guid: 54f44d2ddb3a2454580b767966b088c7, type: 2}
   m_DefaultRendererIndex: 0
   m_RequireDepthTexture: 1
   m_RequireOpaqueTexture: 0

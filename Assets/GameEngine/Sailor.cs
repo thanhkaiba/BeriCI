@@ -29,7 +29,6 @@ public class Sailor: MonoBehaviour
 
     public List<Item> items;
 
-    public string charName;
     public Skill skill = null;
     public int level;
     public int quality;
@@ -82,8 +81,6 @@ public class Sailor: MonoBehaviour
             cs.Crit += item.Crit;
             if (item.type_buff != SailorType.NONE) cs.types.Add(item.type_buff);
         });
-
-        charName = config_stats.root_name;
 
         this.level = level;
         this.quality = quality;
@@ -330,7 +327,7 @@ public class Sailor: MonoBehaviour
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(config_stats.attack_type);
         bar.SetIconSkill(skill);
-        bar.SetName(charName);
+        bar.SetName(config_stats.root_name);
         SetFaceDirection();
     }
     public void GainHealth(float health)

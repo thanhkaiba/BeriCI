@@ -42,7 +42,6 @@ public class GameUtils : MonoBehaviour
     }
     public Item CreateItem(string itemId, int quality = 0)
     {
-        Debug.Log("ScriptableObject/Items/" + itemId);
         Item item = Resources.Load<Item>("ScriptableObject/Items/DemoItem");
         item.quality = quality;
 

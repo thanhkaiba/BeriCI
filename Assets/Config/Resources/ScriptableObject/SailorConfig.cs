@@ -6,7 +6,9 @@ using UnityEngine;
 public class SailorConfig : ScriptableObjectPro
 {
     public GameObject model;
+    public Sprite avatar;
     public string root_name = "Root";
+    public SailorRank rank = SailorRank.S;
 
     public float power_base = 0;
     public float power_base_step = 0;

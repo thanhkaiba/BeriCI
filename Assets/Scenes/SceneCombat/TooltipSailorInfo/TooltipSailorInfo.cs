@@ -86,7 +86,7 @@ public class TooltipSailorInfo : MonoBehaviour
         gameObject.SetActive(true);
         justOpen = !clickFromUI;
 
-        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.charName);
+        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.config_stats.root_name);
         var listType = sailor.config_stats.types;
         for (int i = 0; i < 3; i++)
         {

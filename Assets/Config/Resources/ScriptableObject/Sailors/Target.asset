@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Target
   m_EditorClassIdentifier: 
   model: {fileID: 8118427497505597567, guid: a4aa1d45cbf7e0241b22f45a51db0b5c, type: 3}
+  avatar: {fileID: 21300000, guid: abc0dcf00305af64cad0bcacec5ff18b, type: 3}
   root_name: Target
   power_base: 50
   power_base_step: 0.1
