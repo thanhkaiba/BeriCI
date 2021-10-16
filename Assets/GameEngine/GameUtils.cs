@@ -35,8 +35,8 @@ public class GameUtils : MonoBehaviour
 
         sailor.gameObject.AddComponent<Billboard>();
 
-        var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
-        shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
+        //var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
+        //shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
 
         return sailor;
     }
