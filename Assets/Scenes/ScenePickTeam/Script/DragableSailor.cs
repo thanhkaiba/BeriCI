@@ -7,7 +7,7 @@ public class DragableSailor : MonoBehaviour
     protected Plane sailorPlane;
     private Vector3 diff;
     protected BoxCollider boxAround;
-    public Slot[] slots { get; set; }
+    public SquadSlot[] slots { get; set; }
     [SerializeField]
     protected int selectingIndex = -1;
     protected Sailor sailor;
@@ -103,7 +103,7 @@ public class DragableSailor : MonoBehaviour
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            Slot slot = slots[i];
+            SquadSlot slot = slots[i];
             if (slot.boxAround.bounds.Intersects(boxAround.bounds))
             {
                 if (i != selectingIndex)

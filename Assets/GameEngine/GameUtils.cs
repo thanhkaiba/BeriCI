@@ -27,6 +27,7 @@ public class GameUtils : MonoBehaviour
         GameObject characterGO = Instantiate(config_stats.model);
         Sailor sailor = characterGO.AddComponent(Type.GetType(name)) as Sailor;
         sailor.config_stats = config_stats;
+        sailor.charName = name;
         if (config_stats.skillConfig)
         {
             sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
@@ -35,9 +36,7 @@ public class GameUtils : MonoBehaviour
 
         Billboard billboard = sailor.gameObject.AddComponent<Billboard>() as Billboard;
 
-        var shadow = Instantiate(Resources.Load<GameObject>("characters/shadow"));
-        shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
-
+       
         return sailor;
     }
     public Item CreateItem(string itemId, int quality = 0)

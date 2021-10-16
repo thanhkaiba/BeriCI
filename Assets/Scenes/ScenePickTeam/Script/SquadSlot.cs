@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Slot : MonoBehaviour
+public class SquadSlot : MonoBehaviour
 {
     public enum State
     {
@@ -47,7 +47,7 @@ public class Slot : MonoBehaviour
        
     }
 
-    public void Swap(Slot slot)
+    public void Swap(SquadSlot slot)
     {
         Sailor s = GetOwner();
         SetSelectedSailer(slot.GetOwner());

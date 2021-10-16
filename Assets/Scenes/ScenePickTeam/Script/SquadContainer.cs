@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SquadContainer : MonoBehaviour
 {
-    [SerializeField] Slot[] slots;
+    [SerializeField] SquadSlot[] slots;
     List<string> squad = new List<string> { "Helti", "Target", "Helti", "", "", "", "Helti" , "Target", "Helti" };
     void Start()
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            Slot slot = slots[i];
+            SquadSlot slot = slots[i];
             string sailorId = squad[i];
 
             if (sailorId.Length > 0)
