@@ -73,10 +73,12 @@
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\CharacterContainer.cs" />
     <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Network\Client.cs" />
     <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
     <Compile Include="Assets\GameEngine\GameEvents.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Network\UIManager.cs" />
     <Compile Include="Assets\GameEngine\Skills\FreezeWorld.cs" />
     <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
@@ -121,6 +123,10 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Network\ClientHandle.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Network\Packet.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Network\ThreadManager.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\Network\ClientSend.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
