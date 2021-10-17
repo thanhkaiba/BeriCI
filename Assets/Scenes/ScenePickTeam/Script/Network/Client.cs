@@ -51,6 +51,8 @@ public class Client : MonoBehaviour
         private Packet receivedData;
         private byte[] receiveBuffer;
 
+
+        /// <summary>Initializes the newly connected client's TCP-related info.</summary>
         public void Connect()
         {
             socket = new TcpClient
@@ -79,6 +81,10 @@ public class Client : MonoBehaviour
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
 
+
+
+        /// <summary>Sends data to the client via TCP.</summary>
+        /// <param name="_packet">The packet to send.</param>
         public void SendData(Packet _packet)
         {
             try
@@ -94,6 +100,9 @@ public class Client : MonoBehaviour
             }
         }
 
+
+
+        /// <summary>Reads incoming data from the stream.</summary>
         private void ReceiveCallback(IAsyncResult _result)
         {
             try
@@ -108,21 +117,26 @@ public class Client : MonoBehaviour
                 byte[] _data = new byte[_byteLength];
                 Array.Copy(receiveBuffer, _data, _byteLength);
 
+                
                 receivedData.Reset(HandleData(_data));
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
             }
-            catch
+            catch (Exception e)
             {
+                Debug.Log($"Error receiving data from server via TCP: {e}");
                 // TODO: disconnect
             }
         }
 
+        /// <summary>Prepares received data to be used by the appropriate packet handler methods.</summary>
+        /// <param name="_data">The received data.</param>
         private bool HandleData(byte[] _data)
         {
             int _packetLength = 0;
 
             receivedData.SetBytes(_data);
 
+            // If client's received data contains a packet
             if (receivedData.UnreadLength() >= 4)
             {
                 _packetLength = receivedData.ReadInt();
@@ -132,35 +146,56 @@ public class Client : MonoBehaviour
                 }
             }
 
+
+
+            // While packet contains data AND packet data length doesn't exceed the length of the packet we're reading
             while (_packetLength > 0 && _packetLength <= receivedData.UnreadLength())
             {
+
                 byte[] _packetBytes = receivedData.ReadBytes(_packetLength);
                 ThreadManager.ExecuteOnMainThread(() =>
                 {
                     using (Packet _packet = new Packet(_packetBytes))
                     {
                         int _packetId = _packet.ReadInt();
-                        packetHandlers[_packetId](_packet);
+                        packetHandlers[_packetId](_packet); // Call appropriate method to handle the packet
                     }
                 });
 
+
+                // Reset packet length
                 _packetLength = 0;
                 if (receivedData.UnreadLength() >= 4)
                 {
+                    // If client's received data contains another packet
                     _packetLength = receivedData.ReadInt();
                     if (_packetLength <= 0)
                     {
-                        return true;
+                        // If packet contains no data
+                        return true; // Reset receivedData instance to allow it to be reused
                     }
                 }
             }
 
+
+            // because packet always has int (4 bytes) for command-id so it's impossible for length = 1
             if (_packetLength <= 1)
             {
-                return true;
+                return true;  // Reset receivedData instance to allow it to be reused
             }
 
+
             return false;
+        }
+
+        /// <summary>Closes and cleans up the TCP connection.</summary>
+        public void Disconnect()
+        {
+            socket.Close();
+            stream = null;
+            receivedData = null;
+            receiveBuffer = null;
+            socket = null;
         }
     }
 
@@ -172,4 +207,6 @@ public class Client : MonoBehaviour
         };
         Debug.Log("Initialized packets.");
     }
+
+ 
 }
