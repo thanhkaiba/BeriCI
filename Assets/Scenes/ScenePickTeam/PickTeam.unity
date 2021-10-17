@@ -1214,7 +1214,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1150913812}
         m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: ConnectedToServer
+        m_MethodName: ConnectToServer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1344,6 +1344,7 @@ GameObject:
   m_Component:
   - component: {fileID: 849023977}
   - component: {fileID: 849023978}
+  - component: {fileID: 849023979}
   m_Layer: 0
   m_Name: ClientManager
   m_TagString: Untagged
@@ -1380,6 +1381,18 @@ MonoBehaviour:
   ip: 127.0.0.1
   port: 26950
   myId: 0
+--- !u!114 &849023979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 849023976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d56ef2e3194e2f499cab1a8c0af7d30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &877664649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,6 +1986,7 @@ GameObject:
   - component: {fileID: 1150913811}
   - component: {fileID: 1150913810}
   - component: {fileID: 1150913812}
+  - component: {fileID: 1150913813}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -2051,7 +2065,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f29e279e00303c4fb2e89d82dcaa4d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usernameField: {fileID: 0}
+  usernameField: {fileID: 1077126626}
+--- !u!114 &1150913813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150913808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f54cae894518e5438eeb9ab8bfcc6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1234413704
 GameObject:
   m_ObjectHideFlags: 0
