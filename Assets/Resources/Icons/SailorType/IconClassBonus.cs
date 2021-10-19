@@ -18,7 +18,7 @@ public class IconClassBonus : MonoBehaviour
             b.onClick.AddListener(() => OnClickIcon(Input.mousePosition));
         }
     }
-    public void ChangeIcon(SailorType type)
+    public void ChangeIcon(SailorClass type)
     {
         //Debug.Log("ChangeIcon SailorType: " + type + "   |||| " + "Icons/SailorType/type_" + type);
         icon.sprite = Resources.Load<Sprite>("Icons/SailorType/" + type);

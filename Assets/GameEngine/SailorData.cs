@@ -17,7 +17,7 @@ public enum SailorStatusType
     BURN,
 };
 
-public enum SailorType
+public enum SailorClass
 {
     NONE,
     WILD,
@@ -44,7 +44,7 @@ public enum SailorRank
 
 public class ClassBonusItem
 {
-    public SailorType type;
+    public SailorClass type;
     public int level;
     public int current = 0;
 }
@@ -111,13 +111,13 @@ public class CombatStats
     }
     public int Fury;
 
-    public List<SailorType> types = new List<SailorType>();
+    public List<SailorClass> types = new List<SailorClass>();
 
     public CombatPosition position;
     public List<SailorStatus> listStatus = new List<SailorStatus>();
     public Team team;
 
-    public bool HaveType(SailorType type)
+    public bool HaveType(SailorClass type)
     {
         bool found = false;
         types.ForEach(_t =>

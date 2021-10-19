@@ -87,7 +87,7 @@ public class TooltipSailorInfo : MonoBehaviour
         justOpen = !clickFromUI;
 
         avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.config_stats.root_name);
-        var listType = sailor.config_stats.types;
+        var listType = sailor.config_stats.classes;
         for (int i = 0; i < 3; i++)
         {
             if (listType.Count > i)

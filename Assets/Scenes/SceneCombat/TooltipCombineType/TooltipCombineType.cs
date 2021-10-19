@@ -57,37 +57,37 @@ public class TooltipCombineType : MonoBehaviour
         title.text = "" + data.type + " (" + data.current + "/" + maxPop + ")";
         switch (data.type)
         {
-            case SailorType.WILD:
+            case SailorClass.WILD:
                 content.text = "WILD hồi " + (para[0] * 100) + "% máu khi tấn công kẻ địch";
                 break;
-            case SailorType.MIGHTY:
+            case SailorClass.MIGHTY:
                 content.text = "MIGHTY tăng " + (para[0] * 100) + "% máu tối đa";
                 break;
-            case SailorType.SWORD_MAN:
+            case SailorClass.SWORD_MAN:
                 content.text = "SWORD MAN tăng " + para[0] + " tốc độ";
                 break;
-            case SailorType.HORROR:
+            case SailorClass.HORROR:
                 content.text = "Tất cả kẻ địch bị giảm " + para[0] + " giáp";
                 break;
-            case SailorType.BERSERK:
+            case SailorClass.BERSERK:
                 content.text = "BERSERK tăng " + para[0] + " tốc độ sau khi tấn công kẻ địch";
                 break;
-            case SailorType.DOCTOR:
+            case SailorClass.DOCTOR:
                 content.text = "DOCTOR tăng " + (para[0] * 100) + "% hiệu lực hồi máu";
                 break;
-            case SailorType.WIZARD:
+            case SailorClass.WIZARD:
                 content.text = "WIZARD tăng " + (para[0] * 100) + "% sát thương kĩ năng";
                 break;
-            case SailorType.SUPPORT:
+            case SailorClass.SUPPORT:
                 content.text = "Tất cả đồng đội nhận " + para[0] + " fury khởi đầu";
                 break;
-            case SailorType.SNIPER:
+            case SailorClass.SNIPER:
                 content.text = "Khi một sniper tấn công, các sniper còn lại bứt tốc " + (para[0] * 100) + "%";
                 break;
-            case SailorType.ASSASSIN:
+            case SailorClass.ASSASSIN:
                 content.text = "ASSASSIN tăng " + (para[0] * 100) + "% sát thương. \n Chỉ áp dụng khi đội hình có duy nhất 1 ASSASSIN";
                 break;
-            case SailorType.KUNG_FU:
+            case SailorClass.KUNG_FU:
                 content.text = "KUNG FU sẽ tấn công thêm " + para[0] + "lần";
                 break;
         }

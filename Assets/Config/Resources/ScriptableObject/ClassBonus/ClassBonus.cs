@@ -10,7 +10,7 @@ public class ClassBonus : ScriptableObjectPro
 {
     public ContainerClassBonus container;
 
-    public SailorType type;
+    public SailorClass type;
     public List<ClassBonusLevel> levels;
 
 #if UNITY_EDITOR
