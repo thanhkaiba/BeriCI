@@ -8,4 +8,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SceneLoading/SceneLoading.unity
     guid: f34e9851453c8aa4aa979bef9b67da82
+  - enabled: 1
+    path: Assets/Scenes/SceneLogin/SceneLogin.unity
+    guid: fb4e180a85202dc4b85a38d52b9ef6a5
+  - enabled: 1
+    path: Assets/Scenes/SceneLobby/SceneLobby.unity
+    guid: 3274908b4e5ca9e49941a2b4bc676f16
+  - enabled: 1
+    path: Assets/Scenes/ScenePickTeam/PickTeam.unity
+    guid: f7bc780a865acb24c9d9e03c40cb65a2
   m_configObjects: {}

@@ -28,7 +28,7 @@ public class SquadContainer : MonoBehaviour
 
     public Sailor AddSubSailor(string sailorId)
     {
-        Sailor sailor = GameUtils.Instance.CreateSailor(sailorId);
+        Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSubsailor drag = sailor.gameObject.AddComponent<DragableSubsailor>();
         sailor.transform.parent = transform;
         drag.slots = slots;
@@ -38,7 +38,7 @@ public class SquadContainer : MonoBehaviour
 
     public Sailor AddSailor(string sailorId)
     {
-        Sailor sailor = GameUtils.Instance.CreateSailor(sailorId);
+        Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSailor drag = sailor.gameObject.AddComponent<DragableSailor>();
         sailor.transform.parent = transform;
         drag.slots = slots;
