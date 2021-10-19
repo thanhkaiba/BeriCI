@@ -10,7 +10,7 @@ public class CombineTypeConfig
 {
     private class PassiveConfig
     {
-        public SailorType type;
+        public SailorClass type;
         public IEnumerable<Level> levels;
     }
     private class Level
@@ -30,7 +30,7 @@ public class CombineTypeConfig
             config = JsonConvert.DeserializeObject< IEnumerable<PassiveConfig> >(json);
         }
     }
-    private PassiveConfig GetPassiveConfig(SailorType type)
+    private PassiveConfig GetPassiveConfig(SailorClass type)
     {
         foreach (PassiveConfig item in config)
         {
@@ -38,12 +38,12 @@ public class CombineTypeConfig
         }
         return null;
     }
-    public bool HaveCombine(SailorType type)
+    public bool HaveCombine(SailorClass type)
     {
         var config = GetPassiveConfig(type);
         return config != null;
     }
-    public List<int> GetMilestones (SailorType type)
+    public List<int> GetMilestones (SailorClass type)
     {
         var config = GetPassiveConfig(type);
         List<int> result = new List<int>();
@@ -56,7 +56,7 @@ public class CombineTypeConfig
         }
         return result;
     }
-    public int GetMaxPopNeed(SailorType type)
+    public int GetMaxPopNeed(SailorClass type)
     {
         var config = GetPassiveConfig(type);
         int result = 0;
@@ -69,7 +69,7 @@ public class CombineTypeConfig
         }
         return result;
     }
-    public List<float> GetParams (SailorType type, int level)
+    public List<float> GetParams (SailorClass type, int level)
     {
         var config = GetPassiveConfig(type);
         List<float> result = new List<float>();

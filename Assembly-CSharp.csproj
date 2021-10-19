@@ -111,7 +111,7 @@
     <Compile Include="Assets\Utils\ScriptableObjectPro.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
     <Compile Include="Assets\GameEngine\Sailors\Helti.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\TooltipCombineType\TooltipCombineType.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\TooltipClassBonus\TooltipClassBonus.cs" />
     <Compile Include="Assets\GameEngine\GlobalConfigs.cs" />
     <Compile Include="Assets\Utils\ClickDetector.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />

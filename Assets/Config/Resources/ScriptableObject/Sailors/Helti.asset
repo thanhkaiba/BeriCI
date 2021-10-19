@@ -30,5 +30,5 @@ MonoBehaviour:
   armor: 20
   magic_resist: 20
   attack_type: 0
-  types: 0300000002000000
+  classes: 0200000003000000
   skillConfig: {fileID: 11400000, guid: 8c2bc3b1f0fb0f34db570e2b5ad430b6, type: 2}

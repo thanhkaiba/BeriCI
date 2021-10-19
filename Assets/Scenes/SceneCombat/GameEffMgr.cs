@@ -91,7 +91,7 @@ public class GameEffMgr : MonoBehaviour
         //}
         GameEvents.Instance.activeClassBonus.AddListener(ActiveClassBonus);
     }
-    private void ActiveClassBonus(CombatSailor sailor, SailorType type, List<float> _params)
+    private void ActiveClassBonus(CombatSailor sailor, SailorClass type, List<float> _params)
     {
         ShowClassIconActive(sailor.transform.position, type);
         //switch (type)
@@ -102,7 +102,7 @@ public class GameEffMgr : MonoBehaviour
         //}
         //return;
     }
-    public float ShowClassIconActive(Vector3 p, SailorType type)
+    public float ShowClassIconActive(Vector3 p, SailorClass type)
     {
         GameObject go = new GameObject();
         SpriteRenderer spr = go.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;

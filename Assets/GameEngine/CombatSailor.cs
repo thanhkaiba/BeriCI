@@ -66,7 +66,7 @@ public class CombatSailor: MonoBehaviour
             position = p,
             team = t,
         };
-        foreach (SailorType type in config_stats.types)
+        foreach (SailorClass type in config_stats.classes)
         {
             cs.types.Add(type);
         }
@@ -79,7 +79,7 @@ public class CombatSailor: MonoBehaviour
             cs.BaseMagicResist += item.MagicResist;
             cs.DisplaySpeed += item.Speed;
             cs.Crit += item.Crit;
-            if (item.type_buff != SailorType.NONE) cs.types.Add(item.type_buff);
+            if (item.class_buff != SailorClass.NONE) cs.types.Add(item.class_buff);
         });
 
         this.level = level;
@@ -99,23 +99,23 @@ public class CombatSailor: MonoBehaviour
         {
             switch (p.type)
             {
-                case SailorType.SWORD_MAN:
-                    if (cs.HaveType(SailorType.SWORD_MAN))
+                case SailorClass.SWORD_MAN:
+                    if (cs.HaveType(SailorClass.SWORD_MAN))
                     {
                         cs.DisplaySpeed += config.GetParams(p.type, p.level)[0];
                     }
                     break;
-                case SailorType.SUPPORT:
+                case SailorClass.SUPPORT:
                     cs.Fury += (int) config.GetParams(p.type, p.level)[0];
                     break;
-                case SailorType.ASSASSIN:
-                    if (cs.HaveType(SailorType.ASSASSIN))
+                case SailorClass.ASSASSIN:
+                    if (cs.HaveType(SailorClass.ASSASSIN))
                     {
                         cs.BasePower *= config.GetParams(p.type, p.level)[0];
                     }
                     break;
-                case SailorType.MIGHTY:
-                    if (cs.HaveType(SailorType.MIGHTY))
+                case SailorClass.MIGHTY:
+                    if (cs.HaveType(SailorClass.MIGHTY))
                     {
                         cs.MaxHealth += cs.MaxHealth * config.GetParams(p.type, p.level)[0];
                         cs.CurHealth = cs.MaxHealth;
@@ -128,7 +128,7 @@ public class CombatSailor: MonoBehaviour
         {
             switch (p.type)
             {
-                case SailorType.HORROR:
+                case SailorClass.HORROR:
                     cs.BaseArmor -= config.GetParams(p.type, p.level)[0];
                     break;
             }
@@ -213,15 +213,15 @@ public class CombatSailor: MonoBehaviour
         GameEvents.Instance.attackOneTarget.Invoke(this, target);
 
         // passive
-        if (cs.HaveType(SailorType.BERSERK))
+        if (cs.HaveType(SailorClass.BERSERK))
         {
             ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
-            ClassBonusItem berserk = combatState.GetTeamPassiveType(cs.team, SailorType.BERSERK);
+            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.BERSERK);
             if (berserk != null)
             {
                 float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
                 cs.DisplaySpeed += speedAdd;
-                GameEvents.Instance.activeClassBonus.Invoke(this, SailorType.BERSERK, new List<float> { speedAdd });
+                GameEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
             }
         }
 

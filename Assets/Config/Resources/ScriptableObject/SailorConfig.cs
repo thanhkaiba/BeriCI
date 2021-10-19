@@ -29,7 +29,7 @@ public class SailorConfig : ScriptableObjectPro
     public float magic_resist = 0;
 
     public AttackType attack_type = AttackType.MELEE;
-    public List<SailorType> types;
+    public List<SailorClass> classes;
 
     public SkillConfig skillConfig;
 
@@ -56,5 +56,14 @@ public class SailorConfig : ScriptableObjectPro
     public float GetMagicResist()
     {
         return magic_resist;
+    }
+    public bool HaveType(SailorClass type)
+    {
+        bool found = false;
+        classes.ForEach(_t =>
+        {
+            if (_t == type) found = true;
+        });
+        return found;
     }
 }

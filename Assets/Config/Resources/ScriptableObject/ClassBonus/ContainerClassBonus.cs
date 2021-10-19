@@ -44,7 +44,7 @@ public class ContainerClassBonus : ScriptableObjectPro
 #endif
 
     // function
-    private ClassBonus GetPassiveConfig(SailorType type)
+    private ClassBonus GetPassiveConfig(SailorClass type)
     {
         foreach (ClassBonus item in classBonusList)
         {
@@ -52,12 +52,12 @@ public class ContainerClassBonus : ScriptableObjectPro
         }
         return null;
     }
-    public bool HaveBonus(SailorType type)
+    public bool HaveBonus(SailorClass type)
     {
         var config = GetPassiveConfig(type);
         return config != null;
     }
-    public List<int> GetMilestones(SailorType type)
+    public List<int> GetMilestones(SailorClass type)
     {
         var config = GetPassiveConfig(type);
         List<int> result = new List<int>();
@@ -70,7 +70,7 @@ public class ContainerClassBonus : ScriptableObjectPro
         }
         return result;
     }
-    public int GetMaxPopNeed(SailorType type)
+    public int GetMaxPopNeed(SailorClass type)
     {
         var config = GetPassiveConfig(type);
         int result = 0;
@@ -83,7 +83,7 @@ public class ContainerClassBonus : ScriptableObjectPro
         }
         return result;
     }
-    public List<float> GetParams(SailorType type, int level)
+    public List<float> GetParams(SailorClass type, int level)
     {
         var config = GetPassiveConfig(type);
         List<float> result = new List<float>();

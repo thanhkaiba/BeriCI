@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 445014383865144889}
   - component: {fileID: 4315123248398211315}
   m_Layer: 5
-  m_Name: TooltipCombineType
+  m_Name: TooltipClassBonus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

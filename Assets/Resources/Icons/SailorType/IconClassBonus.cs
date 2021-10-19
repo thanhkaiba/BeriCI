@@ -18,7 +18,7 @@ public class IconClassBonus : MonoBehaviour
             b.onClick.AddListener(() => OnClickIcon(Input.mousePosition));
         }
     }
-    public void ChangeIcon(SailorType type)
+    public void ChangeIcon(SailorClass type)
     {
         //Debug.Log("ChangeIcon SailorType: " + type + "   |||| " + "Icons/SailorType/type_" + type);
         icon.sprite = Resources.Load<Sprite>("Icons/SailorType/" + type);
@@ -43,9 +43,9 @@ public class IconClassBonus : MonoBehaviour
     private void OnClickIcon(Vector2 mousePos)
     {
         if (data == null) return;
-        if (TooltipCombineType.Instance != null)
+        if (TooltipClassBonus.Instance != null)
         {
-            TooltipCombineType.Instance.ShowTooltipPassiveType(data, mousePos);
+            TooltipClassBonus.Instance.ShowTooltipPassiveType(data, mousePos);
         }
     }
 }

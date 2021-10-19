@@ -45,24 +45,24 @@ public class GameUtils : UnityEngine.Object
 
         return item;
     }
-    public static List<ClassBonusItem> CalculateClassBonus(List<CombatSailor> t)
+    public static List<ClassBonusItem> CalculateClassBonus(List<Sailor> t)
     {
         List<ClassBonusItem> result = new List<ClassBonusItem>();
 
         List<int> typeCount = new List<int>();
-        for (int i = 0; i < Enum.GetNames(typeof(SailorType)).Length; i++)
+        for (int i = 0; i < Enum.GetNames(typeof(SailorClass)).Length; i++)
         {
             typeCount.Add(0);
         }
         t.ForEach(sailor =>
         {
-            foreach (SailorType type in (SailorType[])Enum.GetValues(typeof(SailorType)))
+            foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
             {
-                if (sailor.cs.HaveType(type)) typeCount[(int)type] += 1;
+                if (sailor.HaveType(type)) typeCount[(int)type] += 1;
             }
         });
 
-        foreach (SailorType type in Enum.GetValues(typeof(SailorType)))
+        foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))
         {
             ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
             if (!config.HaveBonus(type)) continue;

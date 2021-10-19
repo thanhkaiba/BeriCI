@@ -36,7 +36,7 @@ public class Item : ScriptableObjectPro
     public float magic_resist_base = 0;
     public float magic_resist_step = 0;
 
-    public SailorType type_buff = SailorType.BERSERK;
+    public SailorClass class_buff = SailorClass.BERSERK;
 
     public int quality = 0;
     public float Power

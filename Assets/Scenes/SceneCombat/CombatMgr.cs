@@ -22,11 +22,11 @@ public class CombatMgr : MonoBehaviour
     {
         //return;
         combatState.CreateDemoTeam();
-        combatState.CalculateTypePassive();
+        combatState.CalculateClassBonus();
         combatState.UpdateGameWithClassBonus();
         UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.ShowClassBonus(combatState.passiveTypeA, combatState.passiveTypeB);
+        UIMgr.ShowClassBonus(combatState.ClassBonusA, combatState.classBonusB);
         UIMgr.ShowActionCount(actionCount);
         StartCoroutine(StartGame());
     }

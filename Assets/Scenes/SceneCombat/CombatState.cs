@@ -19,8 +19,8 @@ public class CombatState : MonoBehaviour
     public List<CombatSailor> sailorsTeamB = new List<CombatSailor>();
     public Team lastTeamAction;
 
-    public List<ClassBonusItem> passiveTypeA = new List<ClassBonusItem>();
-    public List<ClassBonusItem> passiveTypeB = new List<ClassBonusItem>();
+    public List<ClassBonusItem> ClassBonusA = new List<ClassBonusItem>();
+    public List<ClassBonusItem> classBonusB = new List<ClassBonusItem>();
     private void Awake()
     {
         Instance = this;
@@ -154,21 +154,56 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    public void CalculateTypePassive()
+
+    private List<ClassBonusItem> CalculateClassBonus(List<CombatSailor> t)
     {
-        passiveTypeA = GameUtils.CalculateClassBonus(sailorsTeamA);
-        passiveTypeB = GameUtils.CalculateClassBonus(sailorsTeamB);
+        List<ClassBonusItem> result = new List<ClassBonusItem>();
+
+        List<int> typeCount = new List<int>();
+        for (int i = 0; i < Enum.GetNames(typeof(SailorClass)).Length; i++)
+        {
+            typeCount.Add(0);
+        }
+        t.ForEach(sailor =>
+        {
+            foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
+            {
+                if (sailor.cs.HaveType(type)) typeCount[(int)type] += 1;
+            }
+        });
+
+        foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))
+        {
+            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+            if (!config.HaveBonus(type)) continue;
+            var milestones = config.GetMilestones(type);
+            for (int level = milestones.Count - 1; level >= 0; level--)
+            {
+                int popNeed = milestones[level];
+                if (typeCount[(int)type] >= popNeed)
+                {
+                    result.Add(new ClassBonusItem() { type = type, level = level, current = typeCount[(int)type] });
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+    public void CalculateClassBonus()
+    {
+        ClassBonusA = CalculateClassBonus(sailorsTeamA);
+        classBonusB = CalculateClassBonus(sailorsTeamB);
         //passiveTypeA.ForEach(p => Debug.Log("passiveTypeA: " + p.type + " " + p.level));
     }
 
     public void UpdateGameWithClassBonus()
     {
-        sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(passiveTypeA, passiveTypeB));
-        sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(passiveTypeB, passiveTypeA));
+        sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(ClassBonusA, classBonusB));
+        sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(classBonusB, ClassBonusA));
     }
-    public ClassBonusItem GetTeamPassiveType(Team team, SailorType type)
+    public ClassBonusItem GetTeamClassBonus(Team team, SailorClass type)
     {
-        List<ClassBonusItem> t = team == Team.A ? passiveTypeA : passiveTypeB;
+        List<ClassBonusItem> t = team == Team.A ? ClassBonusA : classBonusB;
         return t.Find(e => e.type == type);
     }
 
