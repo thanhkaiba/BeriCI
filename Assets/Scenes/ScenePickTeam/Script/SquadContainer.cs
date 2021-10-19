@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SquadContainer : MonoBehaviour
 {
+    private TeamColor teamColor;
     [SerializeField] SquadSlot[] slots;
     List<string> squad = new List<string> { "Helti", "Target", "Helti", "", "", "", "Helti" , "Target", "Helti" };
+
     void Start()
     {
+        teamColor = FindObjectOfType<TeamColor>();
         for (int i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
@@ -44,5 +47,19 @@ public class SquadContainer : MonoBehaviour
         drag.slots = slots;
 
         return sailor;
+    }
+
+    public void OnUpdateSquad()
+    {
+        List<Sailor> squad = new List<Sailor>();
+        foreach (SquadSlot slot in slots)
+        {
+            if (slot.GetOwner() != null)
+            {
+                squad.Add(slot.GetOwner());
+            }
+        }
+
+        teamColor.ShowClassBonus(squad);
     }
 }

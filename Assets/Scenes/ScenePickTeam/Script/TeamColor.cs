@@ -4,26 +4,15 @@ using UnityEngine;
 
 public class TeamColor : MonoBehaviour
 {
-    public void ShowClassBonus(List<ClassBonusItem> passiveTypeA, List<ClassBonusItem> passiveTypeB)
+    public void ShowClassBonus(List<Sailor> squad)
     {
-      /*  GameUtils.CalculateClassBonus(sailorsTeamA)
-        Transform nodeLeft = transform.FindDeepChild("NodeTypeLeft");
-        Transform nodeRight = transform.FindDeepChild("NodeTypeRight");
+        List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(squad);
 
-        for (int i = 0; i < passiveTypeA.Count; i++)
+        for (int i = 0; i < passiveType.Count; i++)
         {
-            GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
-            IconClassBonus s = Instantiate(GO, nodeLeft).GetComponent<IconClassBonus>();
-            s.SetData(passiveTypeA[i]);
-            s.transform.DOLocalMoveY(-128 * i, 0.5f);
+            GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");
+            IconClassBonus s = Instantiate(icon, transform).GetComponent<IconClassBonus>();
+            s.SetData(passiveType[i]);
         }
-
-        for (int i = 0; i < passiveTypeB.Count; i++)
-        {
-            GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
-            IconClassBonus s = Instantiate(GO, nodeRight).GetComponent<IconClassBonus>();
-            s.SetData(passiveTypeB[i]);
-            s.transform.DOLocalMoveY(-128 * i, 0.5f);
-        }*/
     }
 }

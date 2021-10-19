@@ -13,11 +13,13 @@ public class DragableSailor : MonoBehaviour
     protected Sailor sailor;
     [SerializeField]
     protected int originIndex = -1;
+    SquadContainer squad;
 
     private void Start()
     {
         boxAround = GetComponent<BoxCollider>();
         sailor = GetComponent<Sailor>();
+        squad = FindObjectOfType<SquadContainer>();
 
     }
 
@@ -89,6 +91,7 @@ public class DragableSailor : MonoBehaviour
         slots[selectingIndex].SetSelectedSailer(sailor);
         originIndex = selectingIndex;
         selectingIndex = -1;
+        squad.OnUpdateSquad();
     }
 
     protected void OnMouseUpEmpty()
