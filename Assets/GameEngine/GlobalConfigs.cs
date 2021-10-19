@@ -2,21 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalConfigs : MonoBehaviour
+public class GlobalConfigs : Singleton<GlobalConfigs>
 {
-    public static GlobalConfigs Instance { get; private set; }
-    public void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     public ContainerClassBonus ClassBonus;
+    protected override void OnAwake()
+    {
+        ClassBonus = Resources.Load<ContainerClassBonus>("ScriptableObject/ClassBonus/ContainerClassBonus");
+    }
 }
