@@ -19,8 +19,8 @@ public class CombatState : MonoBehaviour
     public List<CombatSailor> sailorsTeamB = new List<CombatSailor>();
     public Team lastTeamAction;
 
-    public List<ClassBonusItem> passiveTypeA = new List<ClassBonusItem>();
-    public List<ClassBonusItem> passiveTypeB = new List<ClassBonusItem>();
+    public List<ClassBonusItem> ClassBonusA = new List<ClassBonusItem>();
+    public List<ClassBonusItem> classBonusB = new List<ClassBonusItem>();
     private void Awake()
     {
         Instance = this;
@@ -189,21 +189,21 @@ public class CombatState : MonoBehaviour
         }
         return result;
     }
-    public void CalculateTypePassive()
+    public void CalculateClassBonus()
     {
-        passiveTypeA = CalculateClassBonus(sailorsTeamA);
-        passiveTypeB = CalculateClassBonus(sailorsTeamB);
+        ClassBonusA = CalculateClassBonus(sailorsTeamA);
+        classBonusB = CalculateClassBonus(sailorsTeamB);
         //passiveTypeA.ForEach(p => Debug.Log("passiveTypeA: " + p.type + " " + p.level));
     }
 
     public void UpdateGameWithClassBonus()
     {
-        sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(passiveTypeA, passiveTypeB));
-        sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(passiveTypeB, passiveTypeA));
+        sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(ClassBonusA, classBonusB));
+        sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(classBonusB, ClassBonusA));
     }
-    public ClassBonusItem GetTeamPassiveType(Team team, SailorClass type)
+    public ClassBonusItem GetTeamClassBonus(Team team, SailorClass type)
     {
-        List<ClassBonusItem> t = team == Team.A ? passiveTypeA : passiveTypeB;
+        List<ClassBonusItem> t = team == Team.A ? ClassBonusA : classBonusB;
         return t.Find(e => e.type == type);
     }
 

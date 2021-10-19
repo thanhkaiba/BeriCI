@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class TooltipCombineType : MonoBehaviour
+public class TooltipClassBonus : MonoBehaviour
 {
     public IconClassBonus iconType; 
     public Text title;
     public Text content;
-    public static TooltipCombineType Instance;
+    public static TooltipClassBonus Instance;
     void Awake()
     {
         Instance = this;

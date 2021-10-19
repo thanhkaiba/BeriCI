@@ -6030,7 +6030,7 @@ PrefabInstance:
     - target: {fileID: 831566076195945997, guid: 54a9b9ed8fd201d4face3ea8153844d2,
         type: 3}
       propertyPath: m_Name
-      value: TooltipCombineType
+      value: TooltipClassBonus
       objectReference: {fileID: 0}
     - target: {fileID: 973018014579224409, guid: 54a9b9ed8fd201d4face3ea8153844d2,
         type: 3}

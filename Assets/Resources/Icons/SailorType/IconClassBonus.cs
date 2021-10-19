@@ -43,9 +43,9 @@ public class IconClassBonus : MonoBehaviour
     private void OnClickIcon(Vector2 mousePos)
     {
         if (data == null) return;
-        if (TooltipCombineType.Instance != null)
+        if (TooltipClassBonus.Instance != null)
         {
-            TooltipCombineType.Instance.ShowTooltipPassiveType(data, mousePos);
+            TooltipClassBonus.Instance.ShowTooltipPassiveType(data, mousePos);
         }
     }
 }

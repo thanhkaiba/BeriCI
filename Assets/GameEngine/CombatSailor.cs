@@ -216,7 +216,7 @@ public class CombatSailor: MonoBehaviour
         if (cs.HaveType(SailorClass.BERSERK))
         {
             ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
-            ClassBonusItem berserk = combatState.GetTeamPassiveType(cs.team, SailorClass.BERSERK);
+            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.BERSERK);
             if (berserk != null)
             {
                 float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
