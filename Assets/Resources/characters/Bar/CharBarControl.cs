@@ -21,7 +21,7 @@ public class CharBarControl : MonoBehaviour
     }
     public void SetIconType(AttackType type)
     {
-        iconType.sprite = Resources.Load<Sprite>("Icons/attack_type/" + type);
+        iconType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + type);
     }
     public void SetIconSkill(Skill skill)
     {

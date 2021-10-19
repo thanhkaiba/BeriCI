@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class TooltipCombineType : MonoBehaviour
 {
-    public TypeCombineInGameCanvas iconType; 
+    public IconClassBonus iconType; 
     public Text title;
     public Text content;
     public static TooltipCombineType Instance;
@@ -36,7 +36,7 @@ public class TooltipCombineType : MonoBehaviour
             else gameObject.SetActive(false);
         }
     }
-    public void ShowTooltipPassiveType(PassiveType data, Vector2 pos)
+    public void ShowTooltipPassiveType(ClassBonusItem data, Vector2 pos)
     {
         ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
 

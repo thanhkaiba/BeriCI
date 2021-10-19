@@ -13,11 +13,11 @@ public class FightingPassion : Skill
         MAX_FURY = 10;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return true;
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float incPower = cChar.cs.BasePower * increaseDamageRatio;
@@ -30,7 +30,7 @@ public class FightingPassion : Skill
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+" + (int)incPower + "POW", cChar.transform.position);
         return RunAnim(cChar);
     }
-    float RunAnim(Sailor cChar)
+    float RunAnim(CombatSailor cChar)
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));

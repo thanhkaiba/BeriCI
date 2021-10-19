@@ -11,22 +11,22 @@ public class Marksman : Skill
         MAX_FURY = 10;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        List<Sailor> targets = GetRandomTarget(enermy, 2);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<CombatSailor> targets = GetRandomTarget(enermy, 2);
 
 
 
         return RunAnimation(cChar, targets);
     }
-    float RunAnimation(Sailor attacking, List<Sailor> targets)
+    float RunAnimation(CombatSailor attacking, List<CombatSailor> targets)
     {
         float delay = attacking.RunSkill(targets);
 

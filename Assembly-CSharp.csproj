@@ -58,7 +58,7 @@
     <Compile Include="Assets\Utils\PlayerMovement.cs" />
     <Compile Include="Assets\Utils\MousePosition3D.cs" />
     <Compile Include="Assets\GameEngine\Sailors\DemoSailor2.cs" />
-    <Compile Include="Assets\Resources\Icons\sailor_type\TypeCombineInGameCanvas.cs" />
+    <Compile Include="Assets\Resources\Icons\SailorType\IconClassBonus.cs" />
     <Compile Include="Assets\GameEngine\GuiMgr.cs" />
     <Compile Include="Assets\GameEngine\Sailors\Target.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\TooltipSailorInfo\TooltipSailorInfo.cs" />
@@ -66,15 +66,15 @@
     <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
     <Compile Include="Assets\GameEngine\Skills\Marksman.cs" />
     <Compile Include="Assets\GameEngine\Skills\LethalTempo.cs" />
-    <Compile Include="Assets\GameEngine\Sailor.cs" />
+    <Compile Include="Assets\GameEngine\CombatSailor.cs" />
     <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
-    <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
+    <Compile Include="Assets\Resources\Characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
     <Compile Include="Assets\GameEngine\GameEvents.cs" />
     <Compile Include="Assets\GameEngine\Skills\FreezeWorld.cs" />
-    <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
+    <Compile Include="Assets\Resources\Characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ContainerClassBonus.cs" />
     <Compile Include="Assets\GameEngine\Skills\Deceive.cs" />
@@ -115,6 +115,7 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\GameEngine\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
+    <Compile Include="Assets\GameEngine\Sailor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

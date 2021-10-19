@@ -37,32 +37,32 @@ public class Skill
         rank = config.rank;
     }
 
-    public virtual bool CanActive(Sailor cChar, CombatState cbState)
+    public virtual bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return true;
     }
-    public virtual float CastSkill(Sailor cChar, CombatState cbState)
+    public virtual float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         Debug.Log(">>>>>>>>>>>>>>>" + cChar.config_stats.root_name + " active " + name);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition(name, cChar.transform.position);
         return 0.5f;
     }
-    public List<Sailor> GetSameLineTarget(int row, List<Sailor> listChar)
+    public List<CombatSailor> GetSameLineTarget(int row, List<CombatSailor> listChar)
     {
-        List<Sailor> result = new List<Sailor>();
-        listChar.ForEach(delegate (Sailor character)
+        List<CombatSailor> result = new List<CombatSailor>();
+        listChar.ForEach(delegate (CombatSailor character)
         {
             if (character.cs.position.y == row) result.Add(character);
         });
         return result;
     }
-    public Sailor GetNearestTarget(Sailor mine, List<Sailor> listTarget)
+    public CombatSailor GetNearestTarget(CombatSailor mine, List<CombatSailor> listTarget)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         int myRow = mine.cs.position.y;
         int NR_col = 9999;
         int NR_row = 9999;
-        listTarget.ForEach(delegate (Sailor character)
+        listTarget.ForEach(delegate (CombatSailor character)
         {
             int col = character.cs.position.x;
             int row = character.cs.position.y;
@@ -79,13 +79,13 @@ public class Skill
         });
         return result;
     }
-    public Sailor GetFurthestTarget(Sailor mine, List<Sailor> listTarget)
+    public CombatSailor GetFurthestTarget(CombatSailor mine, List<CombatSailor> listTarget)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         int myRow = mine.cs.position.y;
         int NR_col = 9999;
         int NR_row = 9999;
-        listTarget.ForEach(delegate (Sailor character)
+        listTarget.ForEach(delegate (CombatSailor character)
         {
             int col = character.cs.position.x;
             int row = character.cs.position.y;
@@ -102,28 +102,28 @@ public class Skill
         });
         return result;
     }
-    public CombatPosition GetRandomAvaiablePosition (List<Sailor> teamChar)
+    public CombatPosition GetRandomAvaiablePosition (List<CombatSailor> teamChar)
     {
         List<CombatPosition> p = GetAvaiablePosition(teamChar);
         int index = UnityEngine.Random.Range(1, p.Count);
         return p.ElementAt(index);
     }
-    public List<CombatPosition> GetAvaiablePosition(List<Sailor> teamChar)
+    public List<CombatPosition> GetAvaiablePosition(List<CombatSailor> teamChar)
     {
         List<CombatPosition> lp = new List<CombatPosition>();
         for (int x = 0; x < 3; x++)
         {
             for (int y = 0; y < 3; y++)
             {
-                Sailor character = teamChar.Find(character => character.cs.position.x == x && character.cs.position.y == y);
+                CombatSailor character = teamChar.Find(character => character.cs.position.x == x && character.cs.position.y == y);
                 if (character == null) lp.Add(new CombatPosition(x, y));
             }
         }
         return lp;
     }
-    public Sailor GetLowestPercentHealthTarget(List<Sailor> teamChar)
+    public CombatSailor GetLowestPercentHealthTarget(List<CombatSailor> teamChar)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         float curPercent = 1.0f;
         teamChar.ForEach(character =>
         {
@@ -139,9 +139,9 @@ public class Skill
         });
         return result;
     }
-    public Sailor GetLowestHealthTarget(List<Sailor> teamChar)
+    public CombatSailor GetLowestHealthTarget(List<CombatSailor> teamChar)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         float health = 0.0f;
         teamChar.ForEach(character =>
         {
@@ -156,9 +156,9 @@ public class Skill
         });
         return result;
     }
-    public Sailor GetFurthestFuryMax (List<Sailor> teamChar)
+    public CombatSailor GetFurthestFuryMax (List<CombatSailor> teamChar)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         int distance = 0;
         teamChar.ForEach(character =>
         {
@@ -173,16 +173,16 @@ public class Skill
         });
         return result;
     }
-    public Sailor GetBehind (Sailor c, List<Sailor> teamChar)
+    public CombatSailor GetBehind (CombatSailor c, List<CombatSailor> teamChar)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         CombatPosition p = c.cs.position;
         result = teamChar.Find(cha => (cha.cs.position.x == c.cs.position.x + 1 && cha.cs.position.y == c.cs.position.y));
         return result;
     }
-    public List<Sailor> GetAllBehind(Sailor c, List<Sailor> teamChar)
+    public List<CombatSailor> GetAllBehind(CombatSailor c, List<CombatSailor> teamChar)
     {
-        List<Sailor> result = new List<Sailor>();
+        List<CombatSailor> result = new List<CombatSailor>();
         CombatPosition p = c.cs.position;
         teamChar.ForEach(cha =>
         {
@@ -191,13 +191,13 @@ public class Skill
         });
         return result;
     }
-    public Sailor GetNearestInRowTarget(Sailor c, List<Sailor> listTarget)
+    public CombatSailor GetNearestInRowTarget(CombatSailor c, List<CombatSailor> listTarget)
     {
-        Sailor result = null;
+        CombatSailor result = null;
         int myRow = c.cs.position.y;
         int NR_col = 9999;
         int NR_row = 9999;
-        listTarget.ForEach(delegate (Sailor character)
+        listTarget.ForEach(delegate (CombatSailor character)
         {
             int col = character.cs.position.x;
             int row = character.cs.position.y;
@@ -214,11 +214,11 @@ public class Skill
         });
         return result;
     }
-    public List<Sailor> GetRandomTarget(List<Sailor> listTarget, int number = 1)
+    public List<CombatSailor> GetRandomTarget(List<CombatSailor> listTarget, int number = 1)
     {
         if (number > listTarget.Count) number = listTarget.Count;
-        var clone = new List<Sailor>();
-        var result = new List<Sailor>();
+        var clone = new List<CombatSailor>();
+        var result = new List<CombatSailor>();
         listTarget.ForEach(item => clone.Add(item));
         for (int i = 0; i < number; i++)
         {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 using DG.Tweening;
 
-public class DemoSailor2 : Sailor
+public class DemoSailor2 : CombatSailor
 {
     public DemoSailor2()
     {
@@ -21,13 +21,13 @@ public class DemoSailor2 : Sailor
         startArrow = transform.FindDeepChild("goblin_L_hand");
     }
     public Transform startArrow;
-    public override float RunBaseAttack(Sailor target)
+    public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("BaseAttack");
         return ArrowToTarget(target);
     }
 
-    public float ArrowToTarget(Sailor target)
+    public float ArrowToTarget(CombatSailor target)
     {
         if (target == null) return 0f;
         var arrow = Instantiate(
@@ -61,7 +61,7 @@ public class DemoSailor2 : Sailor
 
         return 0.4f;
     }
-    public override float RunSkill (List<Sailor> targets)
+    public override float RunSkill (List<CombatSailor> targets)
     {
         float delay = 0f;
         if (skill is Marksman)

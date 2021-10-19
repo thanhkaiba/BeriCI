@@ -11,17 +11,17 @@ public class NuclearBomb : Skill
         MAX_FURY = 100;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
-        List<Sailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<CombatSailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         return targets.Count > 0;
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float spell_damage = base_damage + cChar.level * damage_per_level;
 
-        List<Sailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<CombatSailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         GameEffMgr.Instance.ShowFireBallFly(cChar.transform.position, GetOppositeTeam(cChar.cs.team));
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));
@@ -29,7 +29,7 @@ public class NuclearBomb : Skill
         seq.AppendCallback(() => GameEffMgr.Instance.ShowExplosion(GetOppositeTeam(cChar.cs.team)));
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() => {
-            targets.ForEach(delegate (Sailor character)
+            targets.ForEach(delegate (CombatSailor character)
             {
                 character.TakeDamage(0, spell_damage, 0);
             });

@@ -42,7 +42,7 @@ public enum SailorRank
     SSR,
 }
 
-public class PassiveType
+public class ClassBonusItem
 {
     public SailorType type;
     public int level;

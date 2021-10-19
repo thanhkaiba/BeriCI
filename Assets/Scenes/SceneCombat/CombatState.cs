@@ -15,12 +15,12 @@ public class CombatState : MonoBehaviour
     public static CombatState Instance;
 
     public CombatStatus status;
-    public List<Sailor> sailorsTeamA = new List<Sailor>();
-    public List<Sailor> sailorsTeamB = new List<Sailor>();
+    public List<CombatSailor> sailorsTeamA = new List<CombatSailor>();
+    public List<CombatSailor> sailorsTeamB = new List<CombatSailor>();
     public Team lastTeamAction;
 
-    public List<PassiveType> passiveTypeA = new List<PassiveType>();
-    public List<PassiveType> passiveTypeB = new List<PassiveType>();
+    public List<ClassBonusItem> passiveTypeA = new List<ClassBonusItem>();
+    public List<ClassBonusItem> passiveTypeB = new List<ClassBonusItem>();
     private void Awake()
     {
         Instance = this;
@@ -65,12 +65,11 @@ public class CombatState : MonoBehaviour
         CreateCombatSailor("Target", new CombatPosition(1, 2), t);
         CreateCombatSailor("Target", new CombatPosition(2, 2), t);
 
-
         //CreateCombatSailor("Helti", new CombatPosition(1, 0), t);
         //CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
     }
 
-    Sailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
+    CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
     {
         string[] split = sailorString.Split(char.Parse("|"));
         string name = split[0];
@@ -85,7 +84,7 @@ public class CombatState : MonoBehaviour
             listItem.Add(GameUtils.CreateItem(itemName, Int32.Parse(itemQuality)));
         }
 
-        Sailor sailor = GameUtils.CreateSailor(name);
+        CombatSailor sailor = GameUtils.CreateCombatSailor(name);
         int quality = UnityEngine.Random.Range(1, 100 + 1);
         int level = UnityEngine.Random.Range(1, 10 + 1);
 
@@ -98,22 +97,22 @@ public class CombatState : MonoBehaviour
 
         return sailor;
     }
-    public List<Sailor> GetAllCombatCharacters()
+    public List<CombatSailor> GetAllCombatCharacters()
     {
-        List<Sailor> result = new List<Sailor>();
-        sailorsTeamA.ForEach(delegate (Sailor character)
+        List<CombatSailor> result = new List<CombatSailor>();
+        sailorsTeamA.ForEach(delegate (CombatSailor character)
         {
             result.Add(character);
         });
-        sailorsTeamB.ForEach(delegate (Sailor character)
+        sailorsTeamB.ForEach(delegate (CombatSailor character)
         {
             result.Add(character);
         });
         return result;
     }
-    public List<Sailor> GetAllAliveCombatCharacters()
+    public List<CombatSailor> GetAllAliveCombatCharacters()
     {
-        List<Sailor> result = new List<Sailor>();
+        List<CombatSailor> result = new List<CombatSailor>();
         sailorsTeamA.ForEach(character => {
             if (!character.IsDeath()) result.Add(character);
         });
@@ -123,30 +122,30 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    public List<Sailor> GetAllTeamAliveCharacter(Team t)
+    public List<CombatSailor> GetAllTeamAliveCharacter(Team t)
     {
-        List<Sailor> result = new List<Sailor>();
-        List<Sailor> CTeam = t == Team.A ? sailorsTeamA : sailorsTeamB;
-        CTeam.ForEach(delegate (Sailor character)
+        List<CombatSailor> result = new List<CombatSailor>();
+        List<CombatSailor> CTeam = t == Team.A ? sailorsTeamA : sailorsTeamB;
+        CTeam.ForEach(delegate (CombatSailor character)
         {
             if (!character.IsDeath()) result.Add(character);
         });
         return result;
     }
-    public List<Sailor> GetAliveCharacterEnermy(Team t)
+    public List<CombatSailor> GetAliveCharacterEnermy(Team t)
     {
-        List<Sailor> result = new List<Sailor>();
-        List<Sailor> CTeam = t == Team.A ? sailorsTeamB : sailorsTeamA;
-        CTeam.ForEach(delegate (Sailor character)
+        List<CombatSailor> result = new List<CombatSailor>();
+        List<CombatSailor> CTeam = t == Team.A ? sailorsTeamB : sailorsTeamA;
+        CTeam.ForEach(delegate (CombatSailor character)
         {
             if (!character.IsDeath()) result.Add(character);
         });
         return result;
     }
-    public List<Sailor> GetQueueNextActionSailor()
+    public List<CombatSailor> GetQueueNextActionSailor()
     {
-        List<Sailor> result = GetAllAliveCombatCharacters();
-        result.Sort(delegate (Sailor sailor1, Sailor sailor2)
+        List<CombatSailor> result = GetAllAliveCombatCharacters();
+        result.Sort(delegate (CombatSailor sailor1, CombatSailor sailor2)
         {
             int speedNeed_1 = sailor1.GetSpeedNeeded();
             int speedNeed_2 = sailor2.GetSpeedNeeded();
@@ -157,67 +156,23 @@ public class CombatState : MonoBehaviour
     }
     public void CalculateTypePassive()
     {
-        passiveTypeA = CalculateClassBonus(sailorsTeamA);
-        passiveTypeB = CalculateClassBonus(sailorsTeamB);
+        passiveTypeA = GameUtils.CalculateClassBonus(sailorsTeamA);
+        passiveTypeB = GameUtils.CalculateClassBonus(sailorsTeamB);
         //passiveTypeA.ForEach(p => Debug.Log("passiveTypeA: " + p.type + " " + p.level));
     }
 
-    private List<PassiveType> CalculateClassBonus(List<Sailor> t)
-    {
-        List<PassiveType> result = new List<PassiveType>();
-
-        List<int> typeCount = new List<int>();
-        for (int i = 0; i < Enum.GetNames(typeof(SailorType)).Length; i++) {
-            typeCount.Add(0);
-        }
-        t.ForEach(sailor =>
-        {
-            foreach (SailorType type in (SailorType[])Enum.GetValues(typeof(SailorType)))
-            {
-                if (sailor.cs.HaveType(type)) typeCount[(int)type] += 1;
-            }
-        });
-
-        foreach (SailorType type in Enum.GetValues(typeof(SailorType)))
-        {
-            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
-            if (!config.HaveCombine(type)) continue;
-            var milestones = config.GetMilestones(type);
-            for (int level = milestones.Count - 1; level >= 0; level--)
-            {
-                int popNeed = milestones[level];
-                if (typeCount[(int)type] >= popNeed)
-                {
-                    result.Add(new PassiveType() { type = type, level = level, current = typeCount[(int)type] });
-                    break;
-                }
-            }
-        }
-
-        // chuyen vao config sau
-        //if (typeCount[(int)SailorType.WILD] >= 3) result.Add(new PassiveType() { type = SailorType.WILD, level = 1 });
-
-        //if (typeCount[(int)SailorType.SWORD_MAN] >= 4) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 2 });
-        //else if (typeCount[(int)SailorType.SWORD_MAN] >= 2) result.Add(new PassiveType() { type = SailorType.SWORD_MAN, level = 1 });
-
-        //// do next here
-        //if (typeCount[(int)SailorType.BERSERK] >= 1) result.Add(new PassiveType() { type = SailorType.BERSERK, level = 1 });
-        //
-        return result;
-    }
-
-    public void UpdateGameWithPassive()
+    public void UpdateGameWithClassBonus()
     {
         sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(passiveTypeA, passiveTypeB));
         sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(passiveTypeB, passiveTypeA));
     }
-    public PassiveType GetTeamPassiveType(Team team, SailorType type)
+    public ClassBonusItem GetTeamPassiveType(Team team, SailorType type)
     {
-        List<PassiveType> t = team == Team.A ? passiveTypeA : passiveTypeB;
+        List<ClassBonusItem> t = team == Team.A ? passiveTypeA : passiveTypeB;
         return t.Find(e => e.type == type);
     }
 
-    public void RunEndAction(Sailor actor)
+    public void RunEndAction(CombatSailor actor)
     {
         actor.CountdownStatusRemain();
         var listSailor = GetAllCombatCharacters();
@@ -228,7 +183,7 @@ public class CombatState : MonoBehaviour
     }
     public float GetTeamHealthRatio(Team t)
     {
-        List<Sailor> list = t == Team.A ? sailorsTeamA : sailorsTeamB;
+        List<CombatSailor> list = t == Team.A ? sailorsTeamA : sailorsTeamB;
         float health = 0;
         float total_health = 0;
         list.ForEach(sailor =>

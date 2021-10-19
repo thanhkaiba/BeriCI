@@ -9,11 +9,11 @@ public class LethalTempo : Skill
         MAX_FURY = 10;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return cChar.cs.MaxSpeed > 15;
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         cChar.IncDisplaySpeed(speed_buff);

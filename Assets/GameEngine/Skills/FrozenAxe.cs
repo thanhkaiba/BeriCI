@@ -12,21 +12,21 @@ public class FrozenAxe : Skill
         MAX_FURY = 30;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float spell_damage = cChar.cs.Power;
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        Sailor target = GetNearestTarget(cChar, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        CombatSailor target = GetNearestTarget(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }
-    float RunAnimation(Sailor attacking, Sailor target)
+    float RunAnimation(CombatSailor attacking, CombatSailor target)
     {
         attacking.TriggerAnimation("BaseAttack");
 

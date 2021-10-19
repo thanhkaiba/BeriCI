@@ -13,19 +13,19 @@ public class FreezeWorld : Skill
         MAX_FURY = 16;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
 
-        List<Sailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<CombatSailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
 
         return RunAnimation(cChar, targets);
     }
-    float RunAnimation(Sailor attacking, List<Sailor> targets)
+    float RunAnimation(CombatSailor attacking, List<CombatSailor> targets)
     {
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.5f);

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class TooltipSailorInfo : MonoBehaviour
 {
     private Transform follow;
-    private Sailor sailor;
+    private CombatSailor sailor;
     public static TooltipSailorInfo Instance;
     private bool justOpen = false;
 
@@ -81,7 +81,7 @@ public class TooltipSailorInfo : MonoBehaviour
     public void ShowTooltip(GameObject sailorGO, bool clickFromUI = false)
     {
         //if (gameObject.activeSelf) return;
-        sailor = sailorGO.GetComponent<Sailor>();
+        sailor = sailorGO.GetComponent<CombatSailor>();
         follow = sailorGO.transform.Find("nodeBar");
         gameObject.SetActive(true);
         justOpen = !clickFromUI;
@@ -93,12 +93,12 @@ public class TooltipSailorInfo : MonoBehaviour
             if (listType.Count > i)
             {
                 iconTypes[i].gameObject.SetActive(true);
-                iconTypes[i].sprite = Resources.Load<Sprite>("Icons/sailor_type/" + listType[i]);
+                iconTypes[i].sprite = Resources.Load<Sprite>("Icons/SailorType/" + listType[i]);
             }
             else iconTypes[i].gameObject.SetActive(false);
         }
         var attackType = sailor.config_stats.attack_type;
-        iconAttackType.sprite = Resources.Load<Sprite>("Icons/attack_type/" + attackType);
+        iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + attackType);
         textLevel.text = sailor.level.ToString();
 
         qualityBar.value = (float) sailor.quality / 200;

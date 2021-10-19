@@ -16,7 +16,7 @@ public class FlyTextMgr : MonoBehaviour
     {
         GameEvents.Instance.takeDamage.AddListener(ShowTextTakeDamage);
     }
-    public void ShowTextTakeDamage(Sailor s, Damage damage)
+    public void ShowTextTakeDamage(CombatSailor s, Damage damage)
     {
         Vector3 v3 = cam.GetComponent<Camera>().WorldToScreenPoint(s.transform.position);
         if (damage.physics_damage > 0)

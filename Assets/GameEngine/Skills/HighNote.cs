@@ -16,21 +16,21 @@ public class HighNote : Skill
         START_FURY = 0;
         rank = SkillRank.A;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
-        Sailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
+        CombatSailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
         return (target != null && (target.cs.MaxFury - target.cs.Fury > 0));
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         cChar.cs.CurrentSpeed += (int)System.Math.Floor(speed_self_buff * cChar.cs.MaxSpeed);
 
-        Sailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
+        CombatSailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
 
         return RunAnimation(cChar, target);
     }
-    float RunAnimation(Sailor attacking, Sailor target)
+    float RunAnimation(CombatSailor attacking, CombatSailor target)
     {
         attacking.TriggerAnimation("BaseAttack");
         GameEffMgr.Instance.ShowBuffEnergy(attacking.transform.position, target.transform.position);

@@ -12,24 +12,24 @@ public class Deceive : Skill
         MAX_FURY = 20;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float physic_damage = cChar.cs.Power;
         float magic_damage = base_damage + cChar.level * damage_per_level;
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        Sailor target = GetFurthestTarget(cChar, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        CombatSailor target = GetFurthestTarget(cChar, enermy);
 
         cChar.cs.position = GetRandomAvaiablePosition(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
 
         return RunAnimation(cChar, target, physic_damage, magic_damage);
     }
-    float RunAnimation(Sailor attacking, Sailor target, float physics_damage, float magic_damage)
+    float RunAnimation(CombatSailor attacking, CombatSailor target, float physics_damage, float magic_damage)
     {
 
         Vector3 newPos = GameObject.Find("slot_" + (attacking.cs.team == Team.A ? "A" : "B") + attacking.cs.position.x + attacking.cs.position.y).transform.position;

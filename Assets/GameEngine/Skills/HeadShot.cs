@@ -15,22 +15,22 @@ public class HeadShot : Skill
         MAX_FURY = 15;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        Sailor target = GetLowestHealthTarget(enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        CombatSailor target = GetLowestHealthTarget(enermy);
 
         float physic_damage = damage_ratio * cChar.cs.Power + lose_health_ratio * (target.cs.MaxHealth - target.cs.CurHealth);
 
         return RunAnimation(cChar, target, physic_damage);
     }
-    float RunAnimation(Sailor attacking, Sailor target, float physic_damage)
+    float RunAnimation(CombatSailor attacking, CombatSailor target, float physic_damage)
     {
         float delay = attacking.RunBaseAttack(target);
 

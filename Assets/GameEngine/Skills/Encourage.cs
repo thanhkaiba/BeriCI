@@ -20,23 +20,23 @@ public class Encourage : Skill
         START_FURY = 0;
         rank = SkillRank.S;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float heal = base_heal + cChar.level * heal_per_level;
         int buff_fury = fury;
         float power_buff = base_power_buff + power_buff_per_level * cChar.level;
 
-        List<Sailor> allies = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
-        Sailor target = GetLowestPercentHealthTarget(allies);
+        List<CombatSailor> allies = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
+        CombatSailor target = GetLowestPercentHealthTarget(allies);
 
         return RunAnimation(cChar, target, heal, target != cChar ? speed_percent : 0f, buff_fury, power_buff);
     }
-    float RunAnimation(Sailor attacking, Sailor target, float heal, float speed, int fury, float power_buff)
+    float RunAnimation(CombatSailor attacking, CombatSailor target, float heal, float speed, int fury, float power_buff)
     {
         attacking.TriggerAnimation("BaseAttack");
         GameEffMgr.Instance.ShowBuffEnergy(attacking.transform.position, target.transform.position);

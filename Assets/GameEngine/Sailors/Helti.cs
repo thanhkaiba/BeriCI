@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Helti : Sailor
+public class Helti : CombatSailor
 {
     public SailorConfig config;
     private GameObject circle;
@@ -37,7 +37,7 @@ public class Helti : Sailor
         circle.GetComponent<CircleSkillAvaiable>().Disappear();
         return base.UseSkill(combatState);
     }
-    public override float RunBaseAttack(Sailor target)
+    public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("BaseAttack");
         Vector3 oriPos = transform.position;
@@ -75,22 +75,22 @@ public class WindSlash : Skill
         scale_damage_ratio = config._params[0];
         behind_damage_ratio = config._params[1];
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float physic_damage = cChar.cs.Power * scale_damage_ratio;
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        Sailor target = GetNearestTarget(cChar, enermy);
-        List<Sailor> behind_target = GetAllBehind(target, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        CombatSailor target = GetNearestTarget(cChar, enermy);
+        List<CombatSailor> behind_target = GetAllBehind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage);
     }
-    float RunAnimation(Sailor attacking, Sailor target, List<Sailor> behind_target, float physics_damage)
+    float RunAnimation(CombatSailor attacking, CombatSailor target, List<CombatSailor> behind_target, float physics_damage)
     {
         attacking.TriggerAnimation("CastSkill");
         GameEvents.Instance.highlightTarget.Invoke(target);

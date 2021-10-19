@@ -19,8 +19,8 @@ public class GameEvents : MonoBehaviour
     public ActiveClassBonus activeClassBonus = new ActiveClassBonus();
 }
 
-public class AttackOneTargetEvent : UnityEvent<Sailor, Sailor> { }
-public class TakeDamageEvent : UnityEvent<Sailor, Damage> { }
-public class CastSkillEvent : UnityEvent<Sailor, Skill> { }
-public class UIHighlightTarget : UnityEvent<Sailor> { }
-public class ActiveClassBonus : UnityEvent<Sailor, SailorType, List<float>> { }
+public class AttackOneTargetEvent : UnityEvent<CombatSailor, CombatSailor> { }
+public class TakeDamageEvent : UnityEvent<CombatSailor, Damage> { }
+public class CastSkillEvent : UnityEvent<CombatSailor, Skill> { }
+public class UIHighlightTarget : UnityEvent<CombatSailor> { }
+public class ActiveClassBonus : UnityEvent<CombatSailor, SailorType, List<float>> { }

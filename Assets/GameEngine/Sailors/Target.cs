@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using DG.Tweening;
 
-public class Target : Sailor
+public class Target : CombatSailor
 {
     public Target()
     {
@@ -25,7 +25,7 @@ public class Target : Sailor
     {
         // do nothing
     }
-    public override float RunBaseAttack(Sailor target)
+    public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("BaseAttack");
         Vector3 oriPos = transform.position;
