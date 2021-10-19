@@ -92,20 +92,22 @@ public class UIIngameMgr : MonoBehaviour
     {
         //Debug.Log("GameEvents.instance " + GameEvents.instance);
         //Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
-        GameEvents.Instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
-        GameEvents.Instance.takeDamage.AddListener(ShowHighLightTakeDamage);
-        GameEvents.Instance.castSkill.AddListener(ShowHighLightCastSkill);
-        GameEvents.Instance.highlightTarget.AddListener(ShowHighlightInfo);
+        //GameEvents.Instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
+        GameEvents.Instance.takeDamage.AddListener(UpdateTotalHealth);
+        //GameEvents.Instance.castSkill.AddListener(ShowHighLightCastSkill);
+        //GameEvents.Instance.highlightTarget.AddListener(ShowHighlightInfo);
     }
     public void ShowHighlightConfrontation(Sailor a, Sailor b)
     {
         ShowHighlightInfo(a);
         ShowHighlightInfo(b);
     }
-    public void ShowHighLightTakeDamage(Sailor s, Damage damage)
+    public void UpdateTotalHealth(Sailor s, Damage damage)
     {
-        if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
-        if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);
+        //if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
+        //if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);
+        UpdateTotalHealth(Team.A);
+        UpdateTotalHealth(Team.B);
     }
     public void ShowHighLightCastSkill(Sailor s, Skill skill)
     {
@@ -169,5 +171,30 @@ public class UIIngameMgr : MonoBehaviour
                 return;
         }
         health.ChangeValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
+    }
+    public void UpdateTotalHealth()
+    {
+        UpdateTotalHealth(Team.A);
+        UpdateTotalHealth(Team.B);
+    }
+    private void UpdateTotalHealth(Team t)
+    {
+        HealthSlider health;
+        GameObject node;
+        switch (t)
+        {
+            case Team.A:
+                node = transform.FindDeepChild("sailorA").gameObject;
+                health = transform.FindDeepChild("sliderHealthA").GetComponent<HealthSlider>();
+                break;
+            case Team.B:
+                node = transform.FindDeepChild("sailorB").gameObject;
+                health = transform.FindDeepChild("sliderHealthB").GetComponent<HealthSlider>();
+                break;
+            default:
+                return;
+        }
+        node.SetActive(true);
+        health.ChangeValue(CombatState.Instance.GetTeamHealthRatio(t));
     }
 }

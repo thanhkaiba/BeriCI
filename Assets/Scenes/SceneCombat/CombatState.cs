@@ -82,10 +82,10 @@ public class CombatState : MonoBehaviour
         {
             string itemName = split[i].Split(char.Parse(":"))[0];
             string itemQuality = split[i].Split(char.Parse(":"))[1];
-            listItem.Add(GameUtils.Instance.CreateItem(itemName, Int32.Parse(itemQuality)));
+            listItem.Add(GameUtils.CreateItem(itemName, Int32.Parse(itemQuality)));
         }
 
-        Sailor sailor = GameUtils.Instance.CreateSailor(name);
+        Sailor sailor = GameUtils.CreateSailor(name);
         int quality = UnityEngine.Random.Range(1, 100 + 1);
         int level = UnityEngine.Random.Range(1, 10 + 1);
 
@@ -225,5 +225,17 @@ public class CombatState : MonoBehaviour
         {
             sailor.CheckDeath();
         });
+    }
+    public float GetTeamHealthRatio(Team t)
+    {
+        List<Sailor> list = t == Team.A ? sailorsTeamA : sailorsTeamB;
+        float health = 0;
+        float total_health = 0;
+        list.ForEach(sailor =>
+        {
+            health += sailor.cs.CurHealth;
+            total_health += sailor.cs.MaxHealth;
+        });
+        return health / total_health;
     }
 };
