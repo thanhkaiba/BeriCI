@@ -52,7 +52,7 @@ public class ContainerClassBonus : ScriptableObjectPro
         }
         return null;
     }
-    public bool HaveCombine(SailorType type)
+    public bool HaveBonus(SailorType type)
     {
         var config = GetPassiveConfig(type);
         return config != null;

@@ -8,17 +8,17 @@ public class TakeRest : Skill
         MAX_FURY = 32;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return cChar.cs.CurHealth < cChar.cs.MaxHealth;
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         cChar.GainHealth(heal_ratio * cChar.cs.MaxHealth);
         return RunAnimTakeRest(cChar);
     }
-    float RunAnimTakeRest(Sailor cChar)
+    float RunAnimTakeRest(CombatSailor cChar)
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));

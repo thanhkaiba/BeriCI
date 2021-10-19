@@ -5,7 +5,7 @@ using System.IO;
 using UnityEngine;
 using DG.Tweening;
 
-public class DemoSailor: Sailor
+public class DemoSailor: CombatSailor
 {
     public DemoSailor()
     {
@@ -16,7 +16,7 @@ public class DemoSailor: Sailor
         base.Awake();
         modelObject = transform.Find("model").gameObject;
     }
-    public override float RunBaseAttack(Sailor target)
+    public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("BaseAttack");
         Vector3 oriPos = transform.position;

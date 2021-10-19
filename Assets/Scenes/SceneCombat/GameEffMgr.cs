@@ -91,7 +91,7 @@ public class GameEffMgr : MonoBehaviour
         //}
         GameEvents.Instance.activeClassBonus.AddListener(ActiveClassBonus);
     }
-    private void ActiveClassBonus(Sailor sailor, SailorType type, List<float> _params)
+    private void ActiveClassBonus(CombatSailor sailor, SailorType type, List<float> _params)
     {
         ShowClassIconActive(sailor.transform.position, type);
         //switch (type)
@@ -108,7 +108,7 @@ public class GameEffMgr : MonoBehaviour
         SpriteRenderer spr = go.AddComponent(typeof(SpriteRenderer)) as SpriteRenderer;
         Billboard billboard = go.AddComponent(typeof(Billboard)) as Billboard;
         billboard.cam = Camera.main.transform;
-        spr.sprite = Resources.Load<Sprite>("Icons/sailor_type/" + type);
+        spr.sprite = Resources.Load<Sprite>("Icons/SailorType/" + type);
         spr.transform.localScale = new Vector3(3, 3, 3);
         go.transform.position = p;
         Sequence seq = DOTween.Sequence();

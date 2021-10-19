@@ -11,21 +11,21 @@ public class LaserGun : Skill
         MAX_FURY = 15;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        List<Sailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<CombatSailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);
         return targets.Count > 0;
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float spell_damage = base_damage + cChar.level * damage_per_level;
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        List<Sailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        List<CombatSailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);
 
-        targets.ForEach(delegate (Sailor character)
+        targets.ForEach(delegate (CombatSailor character)
         {
             character.TakeDamage(0, spell_damage, 0);
         });

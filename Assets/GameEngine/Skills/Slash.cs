@@ -12,22 +12,22 @@ public class Slash : Skill
         MAX_FURY = 10;
         START_FURY = 7;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
         float physic_damage = cChar.cs.Power * scale_damage_ratio;
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        Sailor target = GetNearestTarget(cChar, enermy);
-        Sailor behind_target = GetBehind(target, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        CombatSailor target = GetNearestTarget(cChar, enermy);
+        CombatSailor behind_target = GetBehind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage);
     }
-    float RunAnimation(Sailor attacking, Sailor target, Sailor behind_target, float physic_damage)
+    float RunAnimation(CombatSailor attacking, CombatSailor target, CombatSailor behind_target, float physic_damage)
     {
         attacking.TriggerAnimation("BaseAttack");
         GameEvents.Instance.highlightTarget.Invoke(target);

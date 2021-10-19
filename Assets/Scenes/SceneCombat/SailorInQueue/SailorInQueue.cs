@@ -6,18 +6,18 @@ using UnityEngine.UI;
 
 public class SailorInQueue : MonoBehaviour
 {
-    private Sailor sailorData;
+    private CombatSailor sailorData;
     public Image background;
     public SmoothSlider speedSlider;
     public Image icon;
     public Text level;
-    public void SetData(Sailor s)
+    public void SetData(CombatSailor s)
     {
         sailorData = s;
         icon.sprite = s.config_stats.avatar;
         speedSlider.speed = 2.4f;
     }
-    public Sailor GetData()
+    public CombatSailor GetData()
     {
         return sailorData;
     }

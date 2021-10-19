@@ -23,10 +23,10 @@ public class CombatMgr : MonoBehaviour
         //return;
         combatState.CreateDemoTeam();
         combatState.CalculateTypePassive();
-        combatState.UpdateGameWithPassive();
+        combatState.UpdateGameWithClassBonus();
         UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.ShowCombineSailorType(combatState.passiveTypeA, combatState.passiveTypeB);
+        UIMgr.ShowClassBonus(combatState.passiveTypeA, combatState.passiveTypeB);
         UIMgr.ShowActionCount(actionCount);
         StartCoroutine(StartGame());
     }
@@ -41,7 +41,7 @@ public class CombatMgr : MonoBehaviour
     {
         int speedAdd = CalculateSpeedAddThisLoop();
         //Debug.Log(" ----> speedAdd: " + speedAdd);
-        Sailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
+        CombatSailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
         actionCount++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowActionCount(actionCount);
@@ -57,7 +57,7 @@ public class CombatMgr : MonoBehaviour
         StartCoroutine(NextLoop(delayTime));
     }
 
-    IEnumerator EndLoop(Sailor actor, float delay)
+    IEnumerator EndLoop(CombatSailor actor, float delay)
     {
         yield return new WaitForSeconds(delay);
         combatState.RunEndAction(actor);
@@ -86,7 +86,7 @@ public class CombatMgr : MonoBehaviour
     int CalculateSpeedAddThisLoop()
     {
         int speedAdd = 9999;
-        combatState.GetAllAliveCombatCharacters().ForEach(delegate (Sailor character)
+        combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatSailor character)
         {
             int speedNeed = character.GetSpeedNeeded();
             speedAdd = Math.Min(speedNeed, speedAdd);
@@ -95,9 +95,9 @@ public class CombatMgr : MonoBehaviour
         return Math.Max(speedAdd, 0);
     }
 
-    Sailor AddSpeedAndGetActionCharacter(int speedAdd)
+    CombatSailor AddSpeedAndGetActionCharacter(int speedAdd)
     {
-        combatState.GetAllAliveCombatCharacters().ForEach(delegate (Sailor character)
+        combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatSailor character)
         {
             character.AddSpeed(speedAdd);
         });

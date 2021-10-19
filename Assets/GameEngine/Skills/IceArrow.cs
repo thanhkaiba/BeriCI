@@ -12,20 +12,20 @@ public class IceArrow : Skill
         MAX_FURY = 50;
         START_FURY = 0;
     }
-    public override bool CanActive(Sailor cChar, CombatState cbState)
+    public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         return base.CanActive(cChar, cbState);
     }
-    public override float CastSkill(Sailor cChar, CombatState cbState)
+    public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
 
-        List<Sailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        Sailor target = GetNearestInRowTarget(cChar, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
+        CombatSailor target = GetNearestInRowTarget(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }
-    float RunAnimation(Sailor attacking, Sailor target)
+    float RunAnimation(CombatSailor attacking, CombatSailor target)
     {
         float delay = attacking.RunBaseAttack(target);
 

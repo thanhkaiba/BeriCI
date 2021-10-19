@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class TypeCombineInGameCanvas : MonoBehaviour
+public class IconClassBonus : MonoBehaviour
 {
     public Image icon;
     public Text text;
-    public PassiveType data;
+    public ClassBonusItem data;
     public bool clickable = true;
     private void Start()
     {
@@ -20,8 +20,8 @@ public class TypeCombineInGameCanvas : MonoBehaviour
     }
     public void ChangeIcon(SailorType type)
     {
-        //Debug.Log("ChangeIcon SailorType: " + type + "   |||| " + "Icons/sailor_type/type_" + type);
-        icon.sprite = Resources.Load<Sprite>("Icons/sailor_type/" + type);
+        //Debug.Log("ChangeIcon SailorType: " + type + "   |||| " + "Icons/SailorType/type_" + type);
+        icon.sprite = Resources.Load<Sprite>("Icons/SailorType/" + type);
     }
     public void ChangeText(string _text)
     {
@@ -30,10 +30,10 @@ public class TypeCombineInGameCanvas : MonoBehaviour
     public void ChangeLevel(int level)
     {
         // sau phai check theo tung loai
-        if (level >= 1) GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/sailor_type/border_0");
-        else GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/sailor_type/border_1");
+        if (level >= 1) GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/SailorType/border_0");
+        else GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/SailorType/border_1");
     }
-    public void SetData(PassiveType data)
+    public void SetData(ClassBonusItem data)
     {
         this.data = data;
         ChangeIcon(data.type);

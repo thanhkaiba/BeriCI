@@ -20,7 +20,7 @@ public class UIIngameMgr : MonoBehaviour
     {
         Instance = null;
     }
-    public void InitListSailorInQueue(List<Sailor> sailors)
+    public void InitListSailorInQueue(List<CombatSailor> sailors)
     {
         Transform node = transform.FindDeepChild("ListSailorInQueue");
         for (int i = 0; i < sailors.Count; i++)
@@ -34,7 +34,7 @@ public class UIIngameMgr : MonoBehaviour
             s.gameObject.SetActive(i < 8);
         }
     }
-    public void UpdateListSailorInQueue(List<Sailor> sailors)
+    public void UpdateListSailorInQueue(List<CombatSailor> sailors)
     {
         for (int i = 0; i < listSailorInQueue.Count; i++)
         {
@@ -59,23 +59,23 @@ public class UIIngameMgr : MonoBehaviour
         actionCount.text = count.ToString();
     }
 
-    public void ShowCombineSailorType(List<PassiveType> passiveTypeA, List<PassiveType> passiveTypeB)
+    public void ShowClassBonus(List<ClassBonusItem> passiveTypeA, List<ClassBonusItem> passiveTypeB)
     {
         Transform nodeLeft = transform.FindDeepChild("NodeTypeLeft");
         Transform nodeRight = transform.FindDeepChild("NodeTypeRight");
 
         for (int i = 0; i < passiveTypeA.Count; i++)
         {
-            GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
-            TypeCombineInGameCanvas s = Instantiate(GO, nodeLeft).GetComponent<TypeCombineInGameCanvas>();
+            GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
+            IconClassBonus s = Instantiate(GO, nodeLeft).GetComponent<IconClassBonus>();
             s.SetData(passiveTypeA[i]);
             s.transform.DOLocalMoveY(-128*i, 0.5f);
         }
 
         for (int i = 0; i < passiveTypeB.Count; i++)
         {
-            GameObject GO = Resources.Load<GameObject>("Icons/sailor_type/combine");
-            TypeCombineInGameCanvas s = Instantiate(GO, nodeRight).GetComponent<TypeCombineInGameCanvas>();
+            GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
+            IconClassBonus s = Instantiate(GO, nodeRight).GetComponent<IconClassBonus>();
             s.SetData(passiveTypeB[i]);
             s.transform.DOLocalMoveY(-128 * i, 0.5f);
         }
@@ -83,11 +83,11 @@ public class UIIngameMgr : MonoBehaviour
 
     public void ShowSailorDetail(GameObject sailor)
     {
-        Debug.Log("click" + sailor.GetComponent<Sailor>().config_stats.root_name);
+        Debug.Log("click" + sailor.GetComponent<CombatSailor>().config_stats.root_name);
     }
 
-    Sailor currentA;
-    Sailor currentB;
+    CombatSailor currentA;
+    CombatSailor currentB;
     private void Start()
     {
         //Debug.Log("GameEvents.instance " + GameEvents.instance);
@@ -97,19 +97,19 @@ public class UIIngameMgr : MonoBehaviour
         //GameEvents.Instance.castSkill.AddListener(ShowHighLightCastSkill);
         //GameEvents.Instance.highlightTarget.AddListener(ShowHighlightInfo);
     }
-    public void ShowHighlightConfrontation(Sailor a, Sailor b)
+    public void ShowHighlightConfrontation(CombatSailor a, CombatSailor b)
     {
         ShowHighlightInfo(a);
         ShowHighlightInfo(b);
     }
-    public void UpdateTotalHealth(Sailor s, Damage damage)
+    public void UpdateTotalHealth(CombatSailor s, Damage damage)
     {
         //if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
         //if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);
         UpdateTotalHealth(Team.A);
         UpdateTotalHealth(Team.B);
     }
-    public void ShowHighLightCastSkill(Sailor s, Skill skill)
+    public void ShowHighLightCastSkill(CombatSailor s, Skill skill)
     {
         ShowHighlightInfo(s);
     }
@@ -120,7 +120,7 @@ public class UIIngameMgr : MonoBehaviour
         transform.FindDeepChild("sailorB").gameObject.SetActive(false);
         currentB = null;
     }
-    public void ShowHighlightInfo(Sailor sailor)
+    public void ShowHighlightInfo(CombatSailor sailor)
     {
         if (sailor == null) return;
         GameObject node;
@@ -153,7 +153,7 @@ public class UIIngameMgr : MonoBehaviour
         if (sailor.cs.MaxFury != 0) fury.value = (float) sailor.cs.Fury / (float) sailor.cs.MaxFury;
         else fury.value = 1;
     }
-    public void ShowTakeDamage(Sailor sailor)
+    public void ShowTakeDamage(CombatSailor sailor)
     {
         if (sailor == null) return;
         HealthSlider health;
