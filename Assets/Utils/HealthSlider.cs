@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HealthSlider : MonoBehaviour
 {
-    public Slider mainSlider;
+    public SmoothSlider mainSlider;
     public SmoothSlider smoothSlider;
     public void SetValue(float val)
     {
@@ -14,7 +14,8 @@ public class HealthSlider : MonoBehaviour
     }
     public void ChangeValue(float val)
     {
-        mainSlider.value = val;
+        if (mainSlider.value < val) mainSlider.ChangeValue(val);
+        else mainSlider.SetValue(val);
         smoothSlider.ChangeValue(val);
     }
 }

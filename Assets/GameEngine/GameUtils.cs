@@ -5,22 +5,9 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 
-public class GameUtils : MonoBehaviour
+public class GameUtils : UnityEngine.Object
 {
-    public static GameUtils Instance { get; private set; }
-    public void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    public Sailor CreateSailor(string name)
+    public static Sailor CreateSailor(string name)
     {
         SailorConfig config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + name);
         if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
@@ -40,7 +27,7 @@ public class GameUtils : MonoBehaviour
 
         return sailor;
     }
-    public Item CreateItem(string itemId, int quality = 0)
+    public static Item CreateItem(string itemId, int quality = 0)
     {
         Item item = Resources.Load<Item>("ScriptableObject/Items/DemoItem");
         item.quality = quality;

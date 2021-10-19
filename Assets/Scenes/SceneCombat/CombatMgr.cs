@@ -24,7 +24,7 @@ public class CombatMgr : MonoBehaviour
         combatState.CreateDemoTeam();
         combatState.CalculateTypePassive();
         combatState.UpdateGameWithPassive();
-        UIMgr.HideAllHighlightInfo();
+        UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowCombineSailorType(combatState.passiveTypeA, combatState.passiveTypeB);
         UIMgr.ShowActionCount(actionCount);
@@ -44,7 +44,6 @@ public class CombatMgr : MonoBehaviour
         Sailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
         actionCount++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.HideAllHighlightInfo();
         UIMgr.ShowActionCount(actionCount);
         Debug.Log(
             " ----> combat action character: " + actionChar.config_stats.root_name
