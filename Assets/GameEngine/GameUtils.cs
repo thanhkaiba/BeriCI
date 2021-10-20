@@ -64,7 +64,7 @@ public class GameUtils : UnityEngine.Object
 
         foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))
         {
-            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+            ContainerClassBonus config = GlobalConfigs.ClassBonus;
             if (!config.HaveBonus(type)) continue;
             var milestones = config.GetMilestones(type);
             for (int level = milestones.Count - 1; level >= 0; level--)

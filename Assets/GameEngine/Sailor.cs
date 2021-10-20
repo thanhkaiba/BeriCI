@@ -1,13 +1,5 @@
-using DG.Tweening;
-using Newtonsoft.Json;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class Sailor : MonoBehaviour
 {
@@ -41,11 +33,15 @@ public class Sailor : MonoBehaviour
     public List<SailorClass> GetListClasses()
     {
         List<SailorClass> result = new List<SailorClass>(config_stats.classes);
-        for (int i = 0; i < items.Count; i++)
+        if (items != null)
         {
-            Item item = items[i];
-            if (item.class_buff != SailorClass.NONE) result.Add(item.class_buff);
+            for (int i = 0; i < items.Count; i++)
+            {
+                Item item = items[i];
+                if (item.class_buff != SailorClass.NONE) result.Add(item.class_buff);
+            }
         }
+
         return result;
     }
 };

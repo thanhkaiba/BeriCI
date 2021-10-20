@@ -8,10 +8,20 @@ public class TeamColor : MonoBehaviour
     {
         List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(squad);
 
+        IconClassBonus[] icons = gameObject.GetComponentsInChildren<IconClassBonus>();
+
         for (int i = 0; i < passiveType.Count; i++)
         {
-            GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");
-            IconClassBonus s = Instantiate(icon, transform).GetComponent<IconClassBonus>();
+            IconClassBonus s;
+            if (i >= icons.Length)
+            {
+                GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");
+                s = Instantiate(icon, transform).GetComponent<IconClassBonus>();
+            } else
+            {
+                s = icons[i];
+            }
+            
             s.SetData(passiveType[i]);
         }
     }

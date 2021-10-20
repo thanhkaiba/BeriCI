@@ -2,11 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GlobalConfigs : Singleton<GlobalConfigs>
+public class GlobalConfigs : Object
 {
-    public ContainerClassBonus ClassBonus;
-    protected override void OnAwake()
-    {
-        ClassBonus = Resources.Load<ContainerClassBonus>("ScriptableObject/ClassBonus/ContainerClassBonus");
-    }
+    public static ContainerClassBonus ClassBonus = Resources.Load<ContainerClassBonus>("ScriptableObject/ClassBonus/ContainerClassBonus");
+
 }

@@ -38,7 +38,7 @@ public class TooltipClassBonus : MonoBehaviour
     }
     public void ShowTooltipPassiveType(ClassBonusItem data, Vector2 pos)
     {
-        ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
 
         gameObject.SetActive(true);
 

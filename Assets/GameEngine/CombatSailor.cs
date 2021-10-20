@@ -94,7 +94,7 @@ public class CombatSailor: MonoBehaviour
     
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam) // them giam chi so theo toc he
     {
-        ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
         ownTeam.ForEach(p =>
         {
             switch (p.type)
@@ -215,7 +215,7 @@ public class CombatSailor: MonoBehaviour
         // passive
         if (cs.HaveType(SailorClass.BERSERK))
         {
-            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+            ContainerClassBonus config = GlobalConfigs.ClassBonus;
             ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.BERSERK);
             if (berserk != null)
             {
