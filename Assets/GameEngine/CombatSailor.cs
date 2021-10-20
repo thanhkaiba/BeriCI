@@ -174,7 +174,7 @@ public class CombatSailor: Sailor
     }
     public virtual float UseSkill (CombatState combatState)
     {
-        GameEvents.Instance.castSkill.Invoke(this, skill);
+        CombatEvents.Instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
         cs.Fury = 0;
         //Debug.Log("Use skill now " + skill.name);
@@ -200,7 +200,7 @@ public class CombatSailor: Sailor
             };
             StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
         }
-        GameEvents.Instance.attackOneTarget.Invoke(this, target);
+        CombatEvents.Instance.attackOneTarget.Invoke(this, target);
 
         // passive
         if (cs.HaveType(SailorClass.BERSERK))
@@ -211,7 +211,7 @@ public class CombatSailor: Sailor
             {
                 float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
                 cs.DisplaySpeed += speedAdd;
-                GameEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
             }
         }
 
@@ -333,7 +333,7 @@ public class CombatSailor: Sailor
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.Instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
+        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
     }
     public void LoseHealth(Damage d)
     {
@@ -342,7 +342,7 @@ public class CombatSailor: Sailor
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.Instance.takeDamage.Invoke(this, d);
+        CombatEvents.Instance.takeDamage.Invoke(this, d);
     }
 
     public virtual void GainFury(int value)

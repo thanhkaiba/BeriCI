@@ -93,7 +93,7 @@ public class WindSlash : Skill
     float RunAnimation(CombatSailor attacking, CombatSailor target, List<CombatSailor> behind_target, float physics_damage)
     {
         attacking.TriggerAnimation("CastSkill");
-        GameEvents.Instance.highlightTarget.Invoke(target);
+        CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = attacking.transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);

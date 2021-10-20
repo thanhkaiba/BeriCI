@@ -63,7 +63,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Target.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipSailorInfo\TooltipSailorInfo.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Encourage.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\CombatMgr.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Marksman.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LethalTempo.cs" />
     <Compile Include="Assets\GameEngine\CombatSailor.cs" />
@@ -72,7 +72,7 @@
     <Compile Include="Assets\Resources\Characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
-    <Compile Include="Assets\GameEngine\GameEvents.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatEvents.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FreezeWorld.cs" />
     <Compile Include="Assets\Resources\Characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
@@ -104,7 +104,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipClassBonus\TooltipClassBonus.cs" />
     <Compile Include="Assets\GameEngine\GlobalConfigs.cs" />
     <Compile Include="Assets\Utils\ClickDetector.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\CombatState.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatState.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\NuclearBomb.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonusLevel.cs" />
     <Compile Include="Assets\Utils\Billboard.cs" />

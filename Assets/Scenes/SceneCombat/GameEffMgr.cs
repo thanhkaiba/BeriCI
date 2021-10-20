@@ -89,7 +89,7 @@ public class GameEffMgr : MonoBehaviour
         //        eff.GetComponent<WaveFakeOcean>().isReverse = i % 2 == 0;
         //    }
         //}
-        GameEvents.Instance.activeClassBonus.AddListener(ActiveClassBonus);
+        CombatEvents.Instance.activeClassBonus.AddListener(ActiveClassBonus);
     }
     private void ActiveClassBonus(CombatSailor sailor, SailorClass type, List<float> _params)
     {
