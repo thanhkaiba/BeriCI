@@ -7,6 +7,7 @@ public class LoginManager : MonoBehaviour
 {
    public void OnLoginSuccess()
     {
+ 
         SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
     }
 }

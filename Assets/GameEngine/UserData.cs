@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UserData : MonoBehaviour
+public class UserData : Singleton<UserData>
 {
-    public static UserData Instance { get; private set; }
-    public void Awake()
+    public string uid { get; private set; }
+
+    // for sailors aren't in squad
+    public List<SailorModel> sailors;
+
+    public Dictionary<int, SailorModel> squad;
+
+    protected override void OnAwake()
     {
-        Debug.Log("Create UserData");
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        
     }
 }

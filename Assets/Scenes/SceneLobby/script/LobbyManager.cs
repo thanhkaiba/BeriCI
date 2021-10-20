@@ -8,6 +8,7 @@ public class LobbyManager : MonoBehaviour
   
     public void RunScenePickTeam()
     {
+    
         SceneManager.LoadScene("Scenes/ScenePickTeam/ScenePickTeam");
     }
 }
