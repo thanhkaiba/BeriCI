@@ -84,6 +84,7 @@ public class DragableSubsailor : DragableSailor
         dragable.slots = slots;
         slots[selectingIndex].SetSelectedSailer(sailor);
         Destroy(this);
+        dragedFunction();
 
     }
 

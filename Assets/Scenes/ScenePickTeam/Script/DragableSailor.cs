@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public delegate void DragedFunction();
 public class DragableSailor : MonoBehaviour
 {
     protected Plane sailorPlane;
@@ -13,14 +15,17 @@ public class DragableSailor : MonoBehaviour
     protected Sailor sailor;
     [SerializeField]
     protected int originIndex = -1;
-    SquadContainer squad;
+    protected DragedFunction dragedFunction;
 
     private void Start()
     {
         boxAround = GetComponent<BoxCollider>();
         sailor = GetComponent<Sailor>();
-        squad = FindObjectOfType<SquadContainer>();
+    }
 
+    public void setListener(DragedFunction f)
+    {
+        dragedFunction = f;
     }
 
     protected void OnMouseDown()
@@ -91,7 +96,7 @@ public class DragableSailor : MonoBehaviour
         slots[selectingIndex].SetSelectedSailer(sailor);
         originIndex = selectingIndex;
         selectingIndex = -1;
-        squad.OnUpdateSquad();
+        dragedFunction();
     }
 
     protected void OnMouseUpEmpty()

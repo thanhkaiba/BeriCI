@@ -26,6 +26,7 @@ public class SquadContainer : MonoBehaviour
                 slot.SetSelectedSailer(null);
             }
         }
+        OnUpdateSquad();
       
     }
 
@@ -33,6 +34,7 @@ public class SquadContainer : MonoBehaviour
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSubsailor drag = sailor.gameObject.AddComponent<DragableSubsailor>();
+        drag.setListener(() => OnUpdateSquad());
         sailor.transform.parent = transform;
         drag.slots = slots;
 
@@ -43,6 +45,7 @@ public class SquadContainer : MonoBehaviour
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSailor drag = sailor.gameObject.AddComponent<DragableSailor>();
+        drag.setListener(() => OnUpdateSquad());
         sailor.transform.parent = transform;
         drag.slots = slots;
 
