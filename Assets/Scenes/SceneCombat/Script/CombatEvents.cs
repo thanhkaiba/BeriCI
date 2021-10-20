@@ -5,9 +5,9 @@ using System.Transactions;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameEvents : MonoBehaviour
+public class CombatEvents : MonoBehaviour
 {
-    public static GameEvents Instance;
+    public static CombatEvents Instance;
     private void Awake()
     {
         Instance = this;

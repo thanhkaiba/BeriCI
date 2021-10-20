@@ -22,16 +22,10 @@ public class Damage
     }
 }
 
-public class CombatSailor: MonoBehaviour
+public class CombatSailor: Sailor
 {
-    public SailorConfig config_stats;
     public CombatStats cs;
-
-    public List<Item> items;
-
     public Skill skill = null;
-    public int level;
-    public int quality;
 
     public CharBarControl bar;
     public virtual void Awake()
@@ -46,10 +40,6 @@ public class CombatSailor: MonoBehaviour
         barGO.transform.localScale = new Vector3(0.024f, 0.024f, 1f);
         barGO.transform.localPosition = new Vector3(0, 0, 0);
         bar = barGO.transform.GetComponent<CharBarControl>();
-    }
-    public void SetEquipItems(List<Item> _items)
-    {
-        items = _items;
     }
     public void InitCombatData(int level, int quality, CombatPosition p, Team t)
     {
@@ -184,7 +174,7 @@ public class CombatSailor: MonoBehaviour
     }
     public virtual float UseSkill (CombatState combatState)
     {
-        GameEvents.Instance.castSkill.Invoke(this, skill);
+        CombatEvents.Instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
         cs.Fury = 0;
         //Debug.Log("Use skill now " + skill.name);
@@ -210,7 +200,7 @@ public class CombatSailor: MonoBehaviour
             };
             StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
         }
-        GameEvents.Instance.attackOneTarget.Invoke(this, target);
+        CombatEvents.Instance.attackOneTarget.Invoke(this, target);
 
         // passive
         if (cs.HaveType(SailorClass.BERSERK))
@@ -221,7 +211,7 @@ public class CombatSailor: MonoBehaviour
             {
                 float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
                 cs.DisplaySpeed += speedAdd;
-                GameEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
             }
         }
 
@@ -343,7 +333,7 @@ public class CombatSailor: MonoBehaviour
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.Instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
+        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
     }
     public void LoseHealth(Damage d)
     {
@@ -352,7 +342,7 @@ public class CombatSailor: MonoBehaviour
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        GameEvents.Instance.takeDamage.Invoke(this, d);
+        CombatEvents.Instance.takeDamage.Invoke(this, d);
     }
 
     public virtual void GainFury(int value)
@@ -456,13 +446,8 @@ public class CombatSailor: MonoBehaviour
     }
 
     // animation
-    public GameObject modelObject;
 
     private GameObject iceBlock = null;
-    public void TriggerAnimation(string trigger)
-    {
-        modelObject.GetComponent<Animator>().SetTrigger(trigger);
-    }
     public virtual float RunImmobile()
     {
         float oriX = transform.position.x;

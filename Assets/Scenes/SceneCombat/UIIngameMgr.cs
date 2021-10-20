@@ -93,7 +93,7 @@ public class UIIngameMgr : MonoBehaviour
         //Debug.Log("GameEvents.instance " + GameEvents.instance);
         //Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
         //GameEvents.Instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
-        GameEvents.Instance.takeDamage.AddListener(UpdateTotalHealth);
+        CombatEvents.Instance.takeDamage.AddListener(UpdateTotalHealth);
         //GameEvents.Instance.castSkill.AddListener(ShowHighLightCastSkill);
         //GameEvents.Instance.highlightTarget.AddListener(ShowHighlightInfo);
     }
