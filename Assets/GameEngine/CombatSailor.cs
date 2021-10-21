@@ -22,7 +22,7 @@ public class Damage
     }
 }
 
-public class CombatSailor: Sailor
+public class CombatSailor : Sailor
 {
     public CombatStats cs;
     public Skill skill = null;

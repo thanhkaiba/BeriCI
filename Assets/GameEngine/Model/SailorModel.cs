@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SailorModel
 {
-
     public SailorModel(string _id, string _name)
     {
         id = _id;

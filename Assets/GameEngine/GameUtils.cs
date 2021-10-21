@@ -9,11 +9,12 @@ public class GameUtils : UnityEngine.Object
 {
     public static CombatSailor CreateCombatSailor(string name)
     {
-        SailorConfig config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + name);
-        if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
+        SailorModel model = new SailorModel("id_fake", name);
+        SailorConfig config_stats = model.config_stats;
+        //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(config_stats.model);
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
-        sailor.Model.config_stats = config_stats;
+        sailor.Model = model;
         if (config_stats.skillConfig)
         {
             sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;

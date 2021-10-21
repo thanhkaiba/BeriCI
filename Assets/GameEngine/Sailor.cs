@@ -4,17 +4,6 @@ using UnityEngine;
 public class Sailor : MonoBehaviour
 {
     public SailorModel Model;
-
-    public Sailor(SailorModel model)
-    {
-        Model = model;
-    }
-
-    public Sailor()
-    {
-
-    }
-
     public void SetEquipItems(List<Item> _items)
     {
         Model.items = _items;

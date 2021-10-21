@@ -165,7 +165,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 237, y: -226}
+  m_AnchoredPosition: {x: 172, y: -125}
   m_SizeDelta: {x: 254.3835, y: 50.6216}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532395524
@@ -949,6 +949,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopupDemo
       objectReference: {fileID: 0}
+    - target: {fileID: 4824220671271600513, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -125
+      objectReference: {fileID: 0}
     - target: {fileID: 4880721812681897569, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -973,6 +978,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
       value: SceneGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713415335464026375, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_Text
+      value: PlayNow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93158fb40fce6eb4e9f2d3f13396d8bd, type: 3}
