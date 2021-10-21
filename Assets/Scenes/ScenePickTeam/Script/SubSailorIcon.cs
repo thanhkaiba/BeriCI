@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class SubSailorIcon : MonoBehaviour
 {
     private string sailorId;
+    private string sailorName;
     private Image image;
     private SquadContainer squadContainer;
 
@@ -43,15 +44,15 @@ public class SubSailorIcon : MonoBehaviour
         trans.SetParent(GetComponent<Transform>().parent.parent);
         trans.sizeDelta = new Vector2(110, 110);
         Image flyImage = g.AddComponent<Image>();
-        flyImage.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorId);
+        flyImage.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorName);
         return flyImage;
     }
 
-    public void CreateSailorImage(string sailorId)
+    public void CreateSailorImage(string id, string name)
     {
-        this.sailorId = sailorId;
-        image.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorId);
-
+        sailorId = id;
+        sailorName = name;
+        image.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorName);
     }
 
     public SubSailorIcon Init(Transform parent)

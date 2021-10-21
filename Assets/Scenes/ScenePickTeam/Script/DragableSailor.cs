@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public delegate void DragedFunction();
 public class DragableSailor : MonoBehaviour
 {
     protected Plane sailorPlane;
@@ -11,11 +10,10 @@ public class DragableSailor : MonoBehaviour
     protected BoxCollider boxAround;
     public SquadSlot[] slots { get; set; }
     [SerializeField]
-    protected int selectingIndex = -1;
+    protected short selectingIndex = -1;
     protected Sailor sailor;
     [SerializeField]
-    protected int originIndex = -1;
-    protected DragedFunction dragedFunction;
+    protected short originIndex = -1;
 
     private void Start()
     {
@@ -23,15 +21,10 @@ public class DragableSailor : MonoBehaviour
         sailor = GetComponent<Sailor>();
     }
 
-    public void setListener(DragedFunction f)
-    {
-        dragedFunction = f;
-    }
-
     protected void OnMouseDown()
     {
 
-        for (int i = 0; i < slots.Length; i++)
+        for (short i = 0; i < slots.Length; i++)
         {
             if (slots[i].GetOwner() == sailor)
             {
@@ -78,7 +71,7 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseUp()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (short i = 0; i < slots.Length; i++)
         {
             if (slots[i].GetOwner() == sailor)
             {
@@ -93,10 +86,18 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseUpWithSlot()
     {
+        
+
+        if (SquadData.Instance.IsSlotEmpty(selectingIndex)) {
+            SquadData.Instance.Occupie(sailor.name, selectingIndex);
+        } else
+        {
+            SquadData.Instance.Swap(sailor.name, SquadData.Instance.OwnerOf(selectingIndex));
+        }
+
         slots[selectingIndex].SetSelectedSailer(sailor);
         originIndex = selectingIndex;
         selectingIndex = -1;
-        dragedFunction();
     }
 
     protected void OnMouseUpEmpty()
@@ -107,7 +108,7 @@ public class DragableSailor : MonoBehaviour
 
     private void CheckNewSelecting()
     {
-        for (int i = 0; i < slots.Length; i++)
+        for (short i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
             if (slot.boxAround.Intersects(boxAround.bounds))
@@ -121,7 +122,7 @@ public class DragableSailor : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateSlots(int newSelecting)
+    protected virtual void UpdateSlots(short newSelecting)
     {
         if (selectingIndex >= 0)
         {

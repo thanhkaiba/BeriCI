@@ -20,7 +20,7 @@ public class LaserGun : Skill
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float spell_damage = base_damage + cChar.level * damage_per_level;
+        float spell_damage = base_damage + cChar.Model.level * damage_per_level;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         List<CombatSailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);

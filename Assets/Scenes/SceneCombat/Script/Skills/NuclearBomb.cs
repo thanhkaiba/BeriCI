@@ -19,7 +19,7 @@ public class NuclearBomb : Skill
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float spell_damage = base_damage + cChar.level * damage_per_level;
+        float spell_damage = base_damage + cChar.Model.level * damage_per_level;
 
         List<CombatSailor> targets = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         GameEffMgr.Instance.ShowFireBallFly(cChar.transform.position, GetOppositeTeam(cChar.cs.team));

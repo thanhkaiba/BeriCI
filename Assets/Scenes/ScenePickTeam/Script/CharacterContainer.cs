@@ -5,17 +5,16 @@ using UnityEngine.UI;
 
 public class CharacterContainer : MonoBehaviour
 {
-    private List<string> substituteSailors = new List<string> { "Helti", "Target", "Helti", "Helti", "Target", "Helti" };
-    private SquadContainer squadContainer;
+    private List<SailorModel> substituteSailors;
     void Start()
     {
-       
-        foreach (string sailorId in substituteSailors)
+        substituteSailors = SquadData.Instance.GetSubstituteSailors();
+        foreach (SailorModel model in substituteSailors)
         {
-            GameObject imgObject = new GameObject(sailorId);
+            GameObject imgObject = new GameObject(model.id);
             imgObject.transform.SetParent(transform);
             SubSailorIcon subSailorIcon = imgObject.AddComponent<SubSailorIcon>();
-            subSailorIcon.Init(transform).CreateSailorImage(sailorId);
-}
-    } 
+            subSailorIcon.Init(transform).CreateSailorImage(model.id, model.name);
+        }
+    }
 }

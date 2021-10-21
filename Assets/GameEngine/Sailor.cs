@@ -3,13 +3,21 @@ using UnityEngine;
 
 public class Sailor : MonoBehaviour
 {
-    public SailorConfig config_stats;
-    public List<Item> items;
-    public int level;
-    public int quality;
+    public SailorModel Model;
+
+    public Sailor(SailorModel model)
+    {
+        Model = model;
+    }
+
+    public Sailor()
+    {
+
+    }
+
     public void SetEquipItems(List<Item> _items)
     {
-        items = _items;
+        Model.items = _items;
     }
     // animation
     public GameObject modelObject;
@@ -32,12 +40,12 @@ public class Sailor : MonoBehaviour
     }
     public List<SailorClass> GetListClasses()
     {
-        List<SailorClass> result = new List<SailorClass>(config_stats.classes);
-        if (items != null)
+        List<SailorClass> result = new List<SailorClass>(Model.config_stats.classes);
+        if (Model.items != null)
         {
-            for (int i = 0; i < items.Count; i++)
+            for (int i = 0; i < Model.items.Count; i++)
             {
-                Item item = items[i];
+                Item item = Model.items[i];
                 if (item.class_buff != SailorClass.NONE) result.Add(item.class_buff);
             }
         }

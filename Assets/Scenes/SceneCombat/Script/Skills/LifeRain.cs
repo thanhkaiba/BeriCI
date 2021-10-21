@@ -19,7 +19,7 @@ public class LifeRain : Skill
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float heal = base_heal + cChar.level * heal_per_level;
+        float heal = base_heal + cChar.Model.level * heal_per_level;
 
         List<CombatSailor> targets = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
 

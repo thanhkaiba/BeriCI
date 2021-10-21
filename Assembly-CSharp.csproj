@@ -78,6 +78,7 @@
     <Compile Include="Assets\Scenes\SceneLogin\Network\Client.cs" />
     <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
+    <Compile Include="Assets\GameEngine\Model\SailorModel.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatEvents.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\UIManager.cs" />
@@ -132,7 +133,8 @@
     <Compile Include="Assets\GameEngine\Singleton.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\Model\SailorModel.cs" />
+    <Compile Include="Assets\GameEngine\SquadData.cs" />
+    <Compile Include="Assets\GameEngine\GameEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

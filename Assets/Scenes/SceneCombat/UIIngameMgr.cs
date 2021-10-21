@@ -83,7 +83,7 @@ public class UIIngameMgr : MonoBehaviour
 
     public void ShowSailorDetail(GameObject sailor)
     {
-        Debug.Log("click" + sailor.GetComponent<CombatSailor>().config_stats.root_name);
+        Debug.Log("click" + sailor.GetComponent<CombatSailor>().Model.config_stats.root_name);
     }
 
     CombatSailor currentA;
@@ -147,7 +147,7 @@ public class UIIngameMgr : MonoBehaviour
                 return;
         }
         node.SetActive(true);
-        icon.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.config_stats.root_name);
+        icon.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.Model.config_stats.root_name);
         health.SetValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
         //Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
         if (sailor.cs.MaxFury != 0) fury.value = (float) sailor.cs.Fury / (float) sailor.cs.MaxFury;

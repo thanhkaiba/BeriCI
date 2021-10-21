@@ -68,11 +68,12 @@ public class DragableSubsailor : DragableSailor
 
     new void OnMouseUpWithSlot()
     {
-       
+
+        SquadData.Instance.Replace(sailor.name, selectingIndex);
 
         if (swapSailor != null)
         {
-            originImage.GetComponent<SubSailorIcon>().CreateSailorImage(swapSailor.config_stats.name);
+            originImage.GetComponent<SubSailorIcon>().CreateSailorImage(swapSailor.Model.id, swapSailor.Model.name);
             originImage.enabled = true;
             Destroy(swapSailor.gameObject);
         } else
@@ -84,7 +85,6 @@ public class DragableSubsailor : DragableSailor
         dragable.slots = slots;
         slots[selectingIndex].SetSelectedSailer(sailor);
         Destroy(this);
-        dragedFunction();
 
     }
 
@@ -118,7 +118,7 @@ public class DragableSubsailor : DragableSailor
 
     }
 
-    protected override void UpdateSlots(int newSelecting)
+    protected override void UpdateSlots(short newSelecting)
     {
         if (selectingIndex >= 0)
         {

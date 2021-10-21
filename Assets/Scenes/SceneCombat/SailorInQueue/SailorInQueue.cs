@@ -14,7 +14,7 @@ public class SailorInQueue : MonoBehaviour
     public void SetData(CombatSailor s)
     {
         sailorData = s;
-        icon.sprite = s.config_stats.avatar;
+        icon.sprite = s.Model.config_stats.avatar;
         speedSlider.speed = 2.4f;
     }
     public CombatSailor GetData()
@@ -36,7 +36,7 @@ public class SailorInQueue : MonoBehaviour
             icon.transform.localScale = new Vector3(-1, 1, 1);
             background.color = Color.red;
         }
-        level.text = sailorData.level.ToString();
+        level.text = sailorData.Model.level.ToString();
     }
     public void OnClick()
     {

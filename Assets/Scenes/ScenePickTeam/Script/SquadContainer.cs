@@ -6,27 +6,30 @@ public class SquadContainer : MonoBehaviour
 {
     private TeamColor teamColor;
     [SerializeField] SquadSlot[] slots;
-    List<string> squad = new List<string> { "Helti", "Target", "Helti", "", "", "", "Helti" , "Target", "Helti" };
 
     void Start()
     {
-        teamColor = FindObjectOfType<TeamColor>();
-        for (int i = 0; i < slots.Length; i++)
+        foreach (KeyValuePair<short, string> squadSlot in SquadData.Instance.Squad)
         {
-            SquadSlot slot = slots[i];
-            string sailorId = squad[i];
+            SquadSlot slot = slots[squadSlot.Key];
+            string sailorId = squadSlot.Value;
 
             if (sailorId.Length > 0)
             {
 
                 Sailor sailor = AddSailor(sailorId);
                 slot.SetSelectedSailer(sailor);
-            } else
+            }
+            else
             {
                 slot.SetSelectedSailer(null);
             }
+
         }
+        teamColor = FindObjectOfType<TeamColor>();
+
         OnUpdateSquad();
+        GameEvent.SquadChange.AddListener(OnUpdateSquad);
       
     }
 
@@ -34,7 +37,6 @@ public class SquadContainer : MonoBehaviour
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSubsailor drag = sailor.gameObject.AddComponent<DragableSubsailor>();
-        drag.setListener(() => OnUpdateSquad());
         sailor.transform.parent = transform;
         drag.slots = slots;
 
@@ -45,7 +47,6 @@ public class SquadContainer : MonoBehaviour
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSailor drag = sailor.gameObject.AddComponent<DragableSailor>();
-        drag.setListener(() => OnUpdateSquad());
         sailor.transform.parent = transform;
         drag.slots = slots;
 

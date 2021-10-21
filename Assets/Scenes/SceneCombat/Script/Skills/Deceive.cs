@@ -20,7 +20,7 @@ public class Deceive : Skill
     {
         base.CastSkill(cChar, cbState);
         float physic_damage = cChar.cs.Power;
-        float magic_damage = base_damage + cChar.level * damage_per_level;
+        float magic_damage = base_damage + cChar.Model.level * damage_per_level;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
         CombatSailor target = GetFurthestTarget(cChar, enermy);

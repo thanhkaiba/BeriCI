@@ -25,8 +25,8 @@ public class FightingPassion : Skill
         cChar.cs.CurrentSpeed += (int)System.Math.Floor(cChar.cs.MaxSpeed * increaseSpeedRatio);
         cChar.cs.BaseArmor += armor_increase;
         cChar.cs.BaseMagicResist += magic_resist_increase;
-        cChar.cs.MaxHealth += increase_health + increase_health_per_level * cChar.level;
-        cChar.GainHealth(increase_health + increase_health_per_level * cChar.level);
+        cChar.cs.MaxHealth += increase_health + increase_health_per_level * cChar.Model.level;
+        cChar.GainHealth(increase_health + increase_health_per_level * cChar.Model.level);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+" + (int)incPower + "POW", cChar.transform.position);
         return RunAnim(cChar);
     }
