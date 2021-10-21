@@ -89,10 +89,11 @@ public class DragableSailor : MonoBehaviour
         
 
         if (SquadData.Instance.IsSlotEmpty(selectingIndex)) {
-            SquadData.Instance.Occupie(sailor.name, selectingIndex);
+            SquadData.Instance.Occupie(sailor.Model.id, selectingIndex);
         } else
         {
-            SquadData.Instance.Swap(sailor.name, SquadData.Instance.OwnerOf(selectingIndex));
+           
+            SquadData.Instance.Swap(sailor.Model.id, SquadData.Instance.OwnerOf(selectingIndex));
         }
 
         slots[selectingIndex].SetSelectedSailer(sailor);

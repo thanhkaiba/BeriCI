@@ -55,15 +55,6 @@ public class SquadContainer : MonoBehaviour
 
     public void OnUpdateSquad()
     {
-        List<Sailor> squad = new List<Sailor>();
-        foreach (SquadSlot slot in slots)
-        {
-            if (slot.GetOwner() != null)
-            {
-                squad.Add(slot.GetOwner());
-            }
-        }
-
-        teamColor.ShowClassBonus(squad);
+        teamColor.ShowClassBonus();
     }
 }

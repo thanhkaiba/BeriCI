@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TeamColor : MonoBehaviour
 {
-    public void ShowClassBonus(List<Sailor> squad)
+    public void ShowClassBonus()
     {
-        List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(squad);
+        List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(SquadData.Instance.GetSquadModelList());
 
         IconClassBonus[] icons = gameObject.GetComponentsInChildren<IconClassBonus>();
 

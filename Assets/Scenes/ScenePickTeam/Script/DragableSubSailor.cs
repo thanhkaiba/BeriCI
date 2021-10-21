@@ -69,7 +69,7 @@ public class DragableSubsailor : DragableSailor
     new void OnMouseUpWithSlot()
     {
 
-        SquadData.Instance.Replace(sailor.name, selectingIndex);
+        SquadData.Instance.Replace(sailor.Model.id, selectingIndex);
 
         if (swapSailor != null)
         {

@@ -55,7 +55,7 @@ public class GameUtils : UnityEngine.Object
 
         return item;
     }
-    public static List<ClassBonusItem> CalculateClassBonus(List<Sailor> t)
+    public static List<ClassBonusItem> CalculateClassBonus(List<SailorModel> sailorModels)
     {
         List<ClassBonusItem> result = new List<ClassBonusItem>();
 
@@ -64,11 +64,11 @@ public class GameUtils : UnityEngine.Object
         {
             typeCount.Add(0);
         }
-        t.ForEach(sailor =>
+        sailorModels.ForEach(model =>
         {
             foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
             {
-                if (sailor.HaveType(type)) typeCount[(int)type] += 1;
+                if (model.HaveType(type)) typeCount[(int)type] += 1;
             }
         });
 

@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class SquadData : Singleton<SquadData>
@@ -59,6 +57,7 @@ public class SquadData : Singleton<SquadData>
 
         Squad[slotA] = sailorB;
         Squad[slotB] = sailorA;
+        GameEvent.SquadChange.Invoke();
 
         return true;
     }
@@ -75,6 +74,7 @@ public class SquadData : Singleton<SquadData>
             return false;
         }
         Squad[slot] = sailorId;
+        GameEvent.SquadChange.Invoke();
         return true;
     }
 
@@ -85,6 +85,7 @@ public class SquadData : Singleton<SquadData>
             return false;
         }
         Squad[slot] = subSailor;
+        GameEvent.SquadChange.Invoke();
         return true;
     }
 
@@ -136,6 +137,20 @@ public class SquadData : Singleton<SquadData>
             }
         }
         return false;
+    }
+
+    public List<SailorModel> GetSquadModelList()
+    {
+        List<SailorModel> result = new List<SailorModel>();
+        Dictionary<short, string>.ValueCollection values = Squad.Values;
+        foreach (string val in values)
+        {
+           if (val != "")
+            {
+                result.Add(GetSailorModel(val));
+            }
+        }
+        return result;
     }
 
     public List<SailorModel> GetSubstituteSailors()
