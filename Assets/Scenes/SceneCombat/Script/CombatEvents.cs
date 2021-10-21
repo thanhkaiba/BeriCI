@@ -12,6 +12,10 @@ public class CombatEvents : MonoBehaviour
     {
         Instance = this;
     }
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
     public AttackOneTargetEvent attackOneTarget = new AttackOneTargetEvent();
     public TakeDamageEvent takeDamage = new TakeDamageEvent();
     public CastSkillEvent castSkill = new CastSkillEvent();

@@ -8,4 +8,8 @@ public class PopupDemo : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    public void RunScene (string sceneName)
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+    }
 }

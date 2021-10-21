@@ -693,5 +693,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: PopupDemo
       objectReference: {fileID: 0}
+    - target: {fileID: 4880721812681897569, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880721812681897569, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1933743721}
+    - target: {fileID: 4880721812681897569, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RunScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880721812681897569, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PopupDemo, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4880721812681897569, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: SceneGame
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93158fb40fce6eb4e9f2d3f13396d8bd, type: 3}
+--- !u!114 &1933743721 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2772782037876193550, guid: 93158fb40fce6eb4e9f2d3f13396d8bd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1196610953}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d58f82ab004688f418092720e121fce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
