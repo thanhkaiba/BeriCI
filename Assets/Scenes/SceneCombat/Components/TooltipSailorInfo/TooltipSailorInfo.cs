@@ -86,8 +86,8 @@ public class TooltipSailorInfo : MonoBehaviour
         gameObject.SetActive(true);
         justOpen = !clickFromUI;
 
-        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.config_stats.root_name);
-        var listType = sailor.config_stats.classes;
+        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.Model.config_stats.root_name);
+        var listType = sailor.Model.config_stats.classes;
         for (int i = 0; i < 3; i++)
         {
             if (listType.Count > i)
@@ -97,10 +97,10 @@ public class TooltipSailorInfo : MonoBehaviour
             }
             else iconTypes[i].gameObject.SetActive(false);
         }
-        var attackType = sailor.config_stats.attack_type;
+        var attackType = sailor.Model.config_stats.attack_type;
         iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + attackType);
-        textLevel.text = sailor.level.ToString();
+        textLevel.text = sailor.Model.level.ToString();
 
-        qualityBar.value = (float) sailor.quality / 200;
+        qualityBar.value = (float) sailor.Model.quality / 200;
     }
 }

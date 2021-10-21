@@ -43,7 +43,7 @@ public class Skill
     }
     public virtual float CastSkill(CombatSailor cChar, CombatState cbState)
     {
-        Debug.Log(">>>>>>>>>>>>>>>" + cChar.config_stats.root_name + " active " + name);
+        Debug.Log(">>>>>>>>>>>>>>>" + cChar.Model.config_stats.root_name + " active " + name);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition(name, cChar.transform.position);
         return 0.5f;
     }

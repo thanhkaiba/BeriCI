@@ -45,23 +45,23 @@ public class CombatSailor: Sailor
     {
         cs = new CombatStats()
         {
-            BasePower = config_stats.GetPower(level, quality),
-            MaxHealth = config_stats.GetHealth(level, quality),
-            CurHealth = config_stats.GetHealth(level, quality),
-            BaseArmor = config_stats.GetArmor(),
-            BaseMagicResist = config_stats.GetMagicResist(),
-            DisplaySpeed = config_stats.GetSpeed(level, quality),
+            BasePower = Model.config_stats.GetPower(level, quality),
+            MaxHealth = Model.config_stats.GetHealth(level, quality),
+            CurHealth = Model.config_stats.GetHealth(level, quality),
+            BaseArmor = Model.config_stats.GetArmor(),
+            BaseMagicResist = Model.config_stats.GetMagicResist(),
+            DisplaySpeed = Model.config_stats.GetSpeed(level, quality),
             CurrentSpeed = 0,
-            Crit = config_stats.GetCrit(),
+            Crit = Model.config_stats.GetCrit(),
             position = p,
             team = t,
         };
-        foreach (SailorClass type in config_stats.classes)
+        foreach (SailorClass type in Model.config_stats.classes)
         {
             cs.types.Add(type);
         }
 
-        if (items != null) items.ForEach(item =>
+        if (Model.items != null) Model.items.ForEach(item =>
         {
             cs.BasePower += item.Power;
             cs.MaxHealth += item.Health;
@@ -72,8 +72,8 @@ public class CombatSailor: Sailor
             if (item.class_buff != SailorClass.NONE) cs.types.Add(item.class_buff);
         });
 
-        this.level = level;
-        this.quality = quality;
+        Model.level = level;
+        Model.quality = quality;
 
         if (skill != null)
         {
@@ -84,7 +84,7 @@ public class CombatSailor: Sailor
     
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam) // them giam chi so theo toc he
     {
-        ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
         ownTeam.ForEach(p =>
         {
             switch (p.type)
@@ -205,7 +205,7 @@ public class CombatSailor: Sailor
         // passive
         if (cs.HaveType(SailorClass.BERSERK))
         {
-            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+            ContainerClassBonus config = GlobalConfigs.ClassBonus;
             ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.BERSERK);
             if (berserk != null)
             {
@@ -233,7 +233,7 @@ public class CombatSailor: Sailor
     }
     CombatSailor GetBaseAttackTarget(CombatState combatState)
     {
-        switch (config_stats.attack_type)
+        switch (Model.config_stats.attack_type)
         {
             case AttackType.RANGE:
                 return GetNearestInRowTarget(
@@ -315,9 +315,9 @@ public class CombatSailor: Sailor
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
-        bar.SetIconType(config_stats.attack_type);
+        bar.SetIconType(Model.config_stats.attack_type);
         bar.SetIconSkill(skill);
-        bar.SetName(config_stats.root_name);
+        bar.SetName(Model.config_stats.root_name);
         SetFaceDirection();
     }
     public void GainHealth(float health)

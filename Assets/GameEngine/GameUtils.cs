@@ -13,7 +13,7 @@ public class GameUtils : UnityEngine.Object
         if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(config_stats.model);
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
-        sailor.config_stats = config_stats;
+        sailor.Model.config_stats = config_stats;
         if (config_stats.skillConfig)
         {
             sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
@@ -27,16 +27,25 @@ public class GameUtils : UnityEngine.Object
 
         return sailor;
     }
-    public static Sailor CreateSailor(string name)
+    public static Sailor CreateSailor(string id)
     {
-        SailorConfig config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + name);
-        if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
-        GameObject characterGO = Instantiate(config_stats.model);
-        Sailor sailor = characterGO.AddComponent<Sailor>() as Sailor;
-        sailor.config_stats = config_stats;
+        SailorModel sailorModel = SquadData.Instance.GetSailorModel(id);
+        if (sailorModel == null)
+        {
+            Debug.LogError("Sailor id = " + id + " not found");
+        }
+        return CreateSailor(sailorModel);
+    }
 
+    public static Sailor CreateSailor(SailorModel sailorModel)
+    {
+
+        GameObject characterGO = Instantiate(sailorModel.config_stats.model);
+        Sailor sailor = characterGO.AddComponent<Sailor>();
+        sailor.Model = sailorModel;
         sailor.gameObject.AddComponent<Billboard>();
         return sailor;
+
     }
     public static Item CreateItem(string itemId, int quality = 0)
     {
@@ -64,7 +73,7 @@ public class GameUtils : UnityEngine.Object
 
         foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))
         {
-            ContainerClassBonus config = GlobalConfigs.Instance.ClassBonus;
+            ContainerClassBonus config = GlobalConfigs.ClassBonus;
             if (!config.HaveBonus(type)) continue;
             var milestones = config.GetMilestones(type);
             for (int level = milestones.Count - 1; level >= 0; level--)

@@ -29,7 +29,7 @@ public class IconClassBonus : MonoBehaviour
     }
     public void ChangeLevel(int level)
     {
-        // sau phai check theo tung loai
+        // TODO sau phai check theo tung loai
         if (level >= 1) GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/SailorType/border_0");
         else GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/SailorType/border_1");
     }

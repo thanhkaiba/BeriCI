@@ -46,7 +46,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowActionCount(actionCount);
         Debug.Log(
-            " ----> combat action character: " + actionChar.config_stats.root_name
+            " ----> combat action character: " + actionChar.Model.config_stats.root_name
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
             + " | position: " + actionChar.cs.position
         );

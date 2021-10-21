@@ -3,20 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class UserData : MonoBehaviour
+public class UserData : Singleton<UserData>
 {
-    public static UserData Instance { get; private set; }
-    public void Awake()
-    {
-        Debug.Log("Create UserData");
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public string uid { get; private set; }
+    public string username { get; private set; }
+    public string avatar { get; private set; }
+   
 }

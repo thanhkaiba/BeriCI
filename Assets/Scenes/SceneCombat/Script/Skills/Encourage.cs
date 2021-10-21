@@ -27,9 +27,9 @@ public class Encourage : Skill
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {
         base.CastSkill(cChar, cbState);
-        float heal = base_heal + cChar.level * heal_per_level;
+        float heal = base_heal + cChar.Model.level * heal_per_level;
         int buff_fury = fury;
-        float power_buff = base_power_buff + power_buff_per_level * cChar.level;
+        float power_buff = base_power_buff + power_buff_per_level * cChar.Model.level;
 
         List<CombatSailor> allies = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
         CombatSailor target = GetLowestPercentHealthTarget(allies);
