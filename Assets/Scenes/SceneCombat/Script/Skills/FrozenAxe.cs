@@ -8,7 +8,7 @@ public class FrozenAxe : Skill
     public float damage_ratio = 0.7f;
     public FrozenAxe()
     {
-        name = "Frozen Axe";
+        skill_name = "Frozen Axe";
         MAX_FURY = 30;
         START_FURY = 0;
     }
@@ -22,7 +22,7 @@ public class FrozenAxe : Skill
         float spell_damage = cChar.cs.Power;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetNearestTarget(cChar, enermy);
+        CombatSailor target = GetMeleeTarget(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }

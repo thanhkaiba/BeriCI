@@ -25,6 +25,7 @@ public class GameUtils : UnityEngine.Object
 
         var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
         shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
+        shadow.transform.Find("silhouette_shadow").gameObject.layer = 7;
 
         return sailor;
     }

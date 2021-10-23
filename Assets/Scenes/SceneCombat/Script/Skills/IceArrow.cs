@@ -8,7 +8,7 @@ public class IceArrow : Skill
     public float scale_damage = 2.0f;
     public IceArrow()
     {
-        name = "Ice Arrow";
+        skill_name = "Ice Arrow";
         MAX_FURY = 50;
         START_FURY = 0;
     }

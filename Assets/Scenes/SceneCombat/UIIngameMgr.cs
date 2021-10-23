@@ -34,6 +34,10 @@ public class UIIngameMgr : MonoBehaviour
             s.gameObject.SetActive(i < 8);
         }
     }
+    public void UpdateListSailorInQueue()
+    {
+        UpdateListSailorInQueue(CombatState.Instance.GetQueueNextActionSailor());
+    }
     public void UpdateListSailorInQueue(List<CombatSailor> sailors)
     {
         for (int i = 0; i < listSailorInQueue.Count; i++)

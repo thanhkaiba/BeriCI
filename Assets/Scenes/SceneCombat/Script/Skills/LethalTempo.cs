@@ -5,7 +5,7 @@ public class LethalTempo : Skill
 
     public LethalTempo()
     {
-        name = "Lethal Tempo";
+        skill_name = "Lethal Tempo";
         MAX_FURY = 10;
         START_FURY = 0;
     }
@@ -17,7 +17,7 @@ public class LethalTempo : Skill
     {
         base.CastSkill(cChar, cbState);
         cChar.IncDisplaySpeed(speed_buff);
-        GameEffMgr.Instance.ShowSkillIconFall(cChar.transform.position, name);
+        GameEffMgr.Instance.ShowSkillIconFall(cChar.transform.position, skill_name);
         return 0.4f;
     }
 }

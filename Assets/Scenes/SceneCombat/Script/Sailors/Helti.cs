@@ -12,14 +12,6 @@ public class Helti : CombatSailor
     }
     public override void Awake()
     {
-        //SailorConfig a = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Helti");
-        //string json = a.Serialize(a);
-        //Debug.Log("AAAA " + json);
-        //File.WriteAllText("Assets/Helti.json", "");
-        //StreamWriter writer = new StreamWriter("Assets/Helti.json", true);
-        //writer.WriteLine(json);
-        //writer.Close();
-
         circle = Instantiate(Resources.Load<GameObject>("GameComponents/SkillAvaiableCircle/circle"));
         circle.GetComponent<CircleSkillAvaiable>().SetCharacter(gameObject);
         circle.SetActive(false);
@@ -85,7 +77,7 @@ public class WindSlash : Skill
         float physic_damage = cChar.cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetNearestTarget(cChar, enermy);
+        CombatSailor target = GetMeleeTarget(cChar, enermy);
         List<CombatSailor> behind_target = GetAllBehind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage);
@@ -122,6 +114,6 @@ public class WindSlash : Skill
 
         seq.AppendInterval(0.3f);
         seq.Append(attacking.transform.DOJump(oriPos, 0.8f, 1, 0.4f));
-        return 2.0f;
+        return 1.8f;
     }
 }

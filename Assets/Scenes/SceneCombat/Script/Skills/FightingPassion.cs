@@ -9,7 +9,7 @@ public class FightingPassion : Skill
     float increase_health_per_level = 3.0f;
     public FightingPassion()
     {
-        name = "Fighting Passion";
+        skill_name = "Fighting Passion";
         MAX_FURY = 10;
         START_FURY = 0;
     }

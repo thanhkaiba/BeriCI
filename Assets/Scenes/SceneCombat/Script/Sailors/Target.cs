@@ -21,7 +21,7 @@ public class Target : CombatSailor
         TriggerAnimation("TakeDamage");
         return base.TakeDamage(d);
     }
-    public override void AddSpeed(int speedAdd)
+    public override void SpeedUp(int speedAdd)
     {
         // do nothing
     }

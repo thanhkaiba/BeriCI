@@ -24,14 +24,14 @@ enum TargetType
 }
 public class Skill
 {
-    public string name = "Skill Base";
+    public string skill_name = "Skill Base";
     public int MAX_FURY = 100;
     public int START_FURY = 50;
     public SkillRank rank = SkillRank.A;
 
     public virtual void UpdateData(SkillConfig config)
     {
-        name = config.skillName;
+        skill_name = config.skillName;
         MAX_FURY = config.maxFury;
         START_FURY = config.startFury;
         rank = config.rank;
@@ -43,8 +43,8 @@ public class Skill
     }
     public virtual float CastSkill(CombatSailor cChar, CombatState cbState)
     {
-        Debug.Log(">>>>>>>>>>>>>>>" + cChar.Model.config_stats.root_name + " active " + name);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition(name, cChar.transform.position);
+        Debug.Log(">>>>>>>>>>>>>>>" + cChar.Model.config_stats.root_name + " active " + skill_name);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition(skill_name, cChar.transform.position);
         return 0.5f;
     }
     public List<CombatSailor> GetSameLineTarget(int row, List<CombatSailor> listChar)
@@ -56,7 +56,30 @@ public class Skill
         });
         return result;
     }
-    public CombatSailor GetNearestTarget(CombatSailor mine, List<CombatSailor> listTarget)
+    public CombatSailor GetRangeAttackTarget(CombatSailor mine, List<CombatSailor> listTarget)
+    {
+        CombatSailor result = null;
+        int myRow = mine.cs.position.y;
+        int NR_col = 9999;
+        int NR_row = 9999;
+        listTarget.ForEach(delegate (CombatSailor character)
+        {
+            int col = character.cs.position.x;
+            int row = character.cs.position.y;
+            if (
+                (result == null)
+                || (Math.Abs(myRow - row) < NR_row)
+                || (Math.Abs(myRow - row) == NR_row && col < NR_col)
+            )
+            {
+                result = character;
+                NR_col = col;
+                NR_row = Math.Abs(myRow - row);
+            }
+        });
+        return result;
+    }
+    public CombatSailor GetMeleeTarget(CombatSailor mine, List<CombatSailor> listTarget)
     {
         CombatSailor result = null;
         int myRow = mine.cs.position.y;
@@ -188,6 +211,16 @@ public class Skill
         {
             if ((cha.cs.position.x == c.cs.position.x + 1 || cha.cs.position.x == c.cs.position.x + 2)
                 && cha.cs.position.y == c.cs.position.y) result.Add(cha);
+        });
+        return result;
+    }
+    public List<CombatSailor> GetAllAround(CombatSailor c, List<CombatSailor> teamChar)
+    {
+        List<CombatSailor> result = new List<CombatSailor>();
+        CombatPosition p = c.cs.position;
+        teamChar.ForEach(cha =>
+        {
+            if ( Math.Abs(cha.cs.position.x - c.cs.position.x) <= 1 && Math.Abs(cha.cs.position.y - c.cs.position.y) <= 1 && c != cha) result.Add(cha);
         });
         return result;
     }

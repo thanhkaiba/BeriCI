@@ -19,6 +19,14 @@ MonoBehaviour:
     m_Key: HELLO
     m_Metadata:
       m_Items: []
+  - m_Id: 8201928413184
+    m_Key: SWORD_MAN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8421303095296
+    m_Key: SWORD_MAN_TOOLTIP
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

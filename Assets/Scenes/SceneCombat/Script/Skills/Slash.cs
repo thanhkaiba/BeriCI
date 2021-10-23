@@ -8,7 +8,7 @@ public class Slash : Skill
     public float behind_damage_ratio = 0.7f;
     public Slash()
     {
-        name = "Slash";
+        skill_name = "Slash";
         MAX_FURY = 10;
         START_FURY = 7;
     }
@@ -22,7 +22,7 @@ public class Slash : Skill
         float physic_damage = cChar.cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetNearestTarget(cChar, enermy);
+        CombatSailor target = GetMeleeTarget(cChar, enermy);
         CombatSailor behind_target = GetBehind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage);
