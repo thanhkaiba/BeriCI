@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SquadData : Singleton<SquadData>
 {
@@ -17,23 +16,29 @@ public class SquadData : Singleton<SquadData>
     {
         Sailors = new List<SailorModel>
         {
-            new SailorModel("1", "Helti") { quality = 1, level = 1},
-            new SailorModel("2", "Helti") { quality = 1, level = 1},
-            new SailorModel("3", "Helti") { quality = 1, level = 1},
-            new SailorModel("4", "Helti") { quality = 1, level = 1},
-            new SailorModel("5", "Helti") { quality = 1, level = 1},
+            new SailorModel("1", "Meechic") { quality = 1, level = 1},
+            new SailorModel("2", "Meechic") { quality = 1, level = 1},
+            new SailorModel("3", "Meechic") { quality = 1, level = 1},
+            new SailorModel("4", "Meechic") { quality = 1, level = 1},
+            new SailorModel("5", "Meechic") { quality = 1, level = 1},
             new SailorModel("6", "Target") { quality = 1, level = 1},
-            new SailorModel("7", "Helti") { quality = 1, level = 1},
-            new SailorModel("8", "Helti") { quality = 1, level = 1},
+            new SailorModel("7", "Target") { quality = 1, level = 1},
+            new SailorModel("8", "Target") { quality = 1, level = 1},
             new SailorModel("9", "Target") { quality = 1, level = 1},
+            new SailorModel("9", "Target") { quality = 1, level = 1},
+            new SailorModel("9", "Helti") { quality = 1, level = 1},
+            new SailorModel("9", "Helti") { quality = 1, level = 1},
+            new SailorModel("9", "Helti") { quality = 1, level = 1},
+            new SailorModel("9", "Helti") { quality = 1, level = 1},
+            new SailorModel("9", "Helti") { quality = 1, level = 1},
            
         };
-
+        
         Squad = new Dictionary<short, string>
         {
-            {0,  "1"},
-            {1,  "6"},
-            {2,  "9"},
+            {0,  ""},
+            {1,  ""},
+            {2,  ""},
             {3,  ""},
             {4,  ""},
         };

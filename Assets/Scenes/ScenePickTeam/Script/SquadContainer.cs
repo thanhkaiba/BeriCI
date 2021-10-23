@@ -30,7 +30,6 @@ public class SquadContainer : MonoBehaviour
 
         OnUpdateSquad();
         GameEvent.SquadChange.AddListener(OnUpdateSquad);
-        StartCoroutine(MyCoroutine());
 
     }
 
@@ -57,26 +56,5 @@ public class SquadContainer : MonoBehaviour
     public void OnUpdateSquad()
     {
         teamColor.ShowClassBonus();
-    }
-
-    IEnumerator MyCoroutine()
-    {
-        print("Coroutine has started");
-        yield return MyOtherCoroutine();
-        print("Coroutine has ended");
-    }
-
-    IEnumerator MyOtherCoroutine()
-    {
-
-        int i = 3;
-
-        while (i > 0)
-        {
-            // Do something 3 times
-            i--;
-            yield return new WaitForSeconds(1);
-        }
-        print("All Done!");
     }
 }
