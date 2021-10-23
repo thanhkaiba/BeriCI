@@ -137,6 +137,7 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SceneControls.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

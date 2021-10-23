@@ -728,7 +728,7 @@ MonoBehaviour:
   root: {fileID: 1843082392}
   background: {fileID: 1331349838}
   progressText: {fileID: 1908677876}
-  crossFadeTime: 0.5
+  crossFadeTime: 5
   buttonLogin: {fileID: 850282888}
 --- !u!1 &1908677874
 GameObject:
