@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,91 +53,90 @@
     <UnityVersion>2020.3.15f2</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Assets\GameEngine\GameUtils.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\SailorInQueue\SailorInQueue.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\DragableSailor.cs" />
     <Compile Include="Assets\Utils\PlayerMovement.cs" />
-    <Compile Include="Assets\Utils\MousePosition3D.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\DemoSailor2.cs" />
     <Compile Include="Assets\Resources\Icons\SailorType\IconClassBonus.cs" />
     <Compile Include="Assets\GameEngine\GuiMgr.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Script\DragableSubSailor.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Target.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ThreadManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipSailorInfo\TooltipSailorInfo.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Encourage.cs" />
     <Compile Include="Assets\GameEngine\GameEvent.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Marksman.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SubSailorIcon.cs" />
+    <Compile Include="Assets\GameEngine\TextLocalization.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LethalTempo.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Script\TeamColor.cs" />
     <Compile Include="Assets\GameEngine\CombatSailor.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\CharacterContainer.cs" />
-    <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Utils\FlyText\TextDamage.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\Client.cs" />
-    <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
     <Compile Include="Assets\GameEngine\Model\SailorModel.cs" />
-    <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatEvents.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\UIManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FreezeWorld.cs" />
-    <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
-    <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ContainerClassBonus.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Deceive.cs" />
     <Compile Include="Assets\Utils\CameraFollow.cs" />
     <Compile Include="Assets\GameEngine\SailorData.cs" />
-    <Compile Include="Assets\Scenes\SceneLobby\script\LobbyManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LaserGun.cs" />
+    <Compile Include="Assets\Scenes\SceneLogin\Network\ClientSend.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
+    <Compile Include="Assets\GameEngine\SquadData.cs" />
+    <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HeadShot.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\TakeRest.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\DemoSailor.cs" />
+    <Compile Include="Assets\Utils\ScriptableObjectPro.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipClassBonus\TooltipClassBonus.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Helti.cs" />
+    <Compile Include="Assets\GameEngine\GlobalConfigs.cs" />
+    <Compile Include="Assets\Utils\ClickDetector.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatState.cs" />
+    <Compile Include="Assets\Utils\Billboard.cs" />
+    <Compile Include="Assets\Utils\FlyText\FlyTextMgr.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HighNote.cs" />
+    <Compile Include="Assets\GameEngine\CombineTypeConfig.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\UtimateSlash.cs" />
+    <Compile Include="Assets\Scenes\SceneLogin\script\LoginManager.cs" />
+    <Compile Include="Assets\Scenes\SceneLogin\Network\Packet.cs" />
+    <Compile Include="Assets\GameEngine\Singleton.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FrozenAxe.cs" />
+    <Compile Include="Assets\GameEngine\GameUtils.cs" />
+    <Compile Include="Assets\Utils\MousePosition3D.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\DragableSubSailor.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Target.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Encourage.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SubSailorIcon.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\TeamColor.cs" />
+    <Compile Include="Assets\Utils\CameraLook.cs" />
+    <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
+    <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
+    <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Deceive.cs" />
+    <Compile Include="Assets\Scenes\SceneLobby\script\LobbyManager.cs" />
     <Compile Include="Assets\Utils\SmoothSlider.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ClientHandle.cs" />
-    <Compile Include="Assets\Scenes\SceneLogin\Network\ClientSend.cs" />
     <Compile Include="Assets\GameEngine\Sailor.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\UIIngameMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FightingPassion.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\SailorConfig.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonus.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Slash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\SkillMgr.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\SkillConfig.cs" />
     <Compile Include="Assets\GameEngine\UserData.cs" />
     <Compile Include="Assets\Utils\HealthSlider.cs" />
-    <Compile Include="Assets\GameEngine\SquadData.cs" />
     <Compile Include="Assets\Popup\Resources\PopupDemo\PopupDemo.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LifeRain.cs" />
-    <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HeadShot.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\TakeRest.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadSlot.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\DemoSailor.cs" />
-    <Compile Include="Assets\Utils\ScriptableObjectPro.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Helti.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipClassBonus\TooltipClassBonus.cs" />
-    <Compile Include="Assets\GameEngine\GlobalConfigs.cs" />
-    <Compile Include="Assets\Utils\ClickDetector.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatState.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\NuclearBomb.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonusLevel.cs" />
-    <Compile Include="Assets\Utils\Billboard.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\IceArrow.cs" />
-    <Compile Include="Assets\Utils\FlyText\FlyTextMgr.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HighNote.cs" />
-    <Compile Include="Assets\GameEngine\CombineTypeConfig.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
-    <Compile Include="Assets\Scenes\SceneLogin\script\LoginManager.cs" />
-    <Compile Include="Assets\Scenes\SceneLogin\Network\Packet.cs" />
-    <Compile Include="Assets\GameEngine\Singleton.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
+    <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
@@ -725,11 +724,20 @@
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.CacheServer">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.CacheServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>Library\ScriptAssemblies\Unity.Addressables.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Localization">
+      <HintPath>Library\ScriptAssemblies\Unity.Localization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -745,6 +753,9 @@
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>Library\ScriptAssemblies\Unity.ResourceManager.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -767,6 +778,9 @@
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Localization.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Localization.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
@@ -781,6 +795,15 @@
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Addressables.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
