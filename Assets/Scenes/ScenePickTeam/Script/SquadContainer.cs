@@ -30,7 +30,7 @@ public class SquadContainer : MonoBehaviour
 
         OnUpdateSquad();
         GameEvent.SquadChange.AddListener(OnUpdateSquad);
-      
+
     }
 
     public Sailor AddSubSailor(string sailorId)

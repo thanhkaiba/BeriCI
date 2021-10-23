@@ -23,15 +23,10 @@ MonoBehaviour:
     m_Localized: "Xin Ch\xE0o"
     m_Metadata:
       m_Items: []
-  - m_Id: 8201928413184
-    m_Localized: "Ki\u1EBFm s\u0129"
+  - m_Id: 9944682422272
+    m_Localized: Ki?m
     m_Metadata:
       m_Items: []
-  - m_Id: 8421303095296
-    m_Localized: "Ki\u1EBFm s\u0129 nh\u1EADn {0:1 Speed|{} Speed} t\u1ED1c \u0111\u1ED9."
-    m_Metadata:
-      m_Items:
-      - id: 0
   references:
     version: 1
     00000000:
