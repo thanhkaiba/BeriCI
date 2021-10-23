@@ -7,7 +7,7 @@ public class Marksman : Skill
     public float damage_ratio = 1.0f;
     public Marksman()
     {
-        name = "Marksman";
+        skill_name = "Marksman";
         MAX_FURY = 10;
         START_FURY = 0;
     }

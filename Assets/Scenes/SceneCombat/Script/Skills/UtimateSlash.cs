@@ -8,7 +8,7 @@ public class UltimateSlash : Skill
     public float scale_damage = 2.0f;
     public UltimateSlash()
     {
-        name = "Ultimate Slash";
+        skill_name = "Ultimate Slash";
         MAX_FURY = 30;
         START_FURY = 0;
     }
@@ -23,7 +23,7 @@ public class UltimateSlash : Skill
         float heal = base_heal + cChar.cs.Power;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetNearestTarget(cChar, enermy);
+        CombatSailor target = GetMeleeTarget(cChar, enermy);
 
         return RunAnimation(cChar, target, true_damage, heal);
     }

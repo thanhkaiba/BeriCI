@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
+  m_Name: Meechic
+  m_EditorClassIdentifier: 
+  model: {fileID: 4426643198683552016, guid: e0f035ffc804f1047a7924c12c6fb069, type: 3}
+  avatar: {fileID: 21300000, guid: 38d7c448d432f484eb3b2fee548abb78, type: 3}
+  root_name: Meechic
+  rank: 2
+  power_base: 100
+  power_base_step: 0.12
+  power_plv: 1.2
+  power_plv_step: 0.012
+  crit: 0
+  health_base: 100
+  health_base_step: 0.8
+  health_plv: 8
+  health_plv_step: 0.08
+  speed_base: 78
+  speed_step: 0.014
+  armor: 15
+  magic_resist: 15
+  attack_type: 1
+  classes: 09000000
+  skillConfig: {fileID: 11400000, guid: 6788278a360ebce4e8ea7c43781e1510, type: 2}

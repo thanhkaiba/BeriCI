@@ -8,7 +8,7 @@ public class Deceive : Skill
     public float damage_per_level = 2.5f;
     public Deceive()
     {
-        name = "Deceive";
+        skill_name = "Deceive";
         MAX_FURY = 20;
         START_FURY = 0;
     }

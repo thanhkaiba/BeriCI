@@ -26,7 +26,7 @@ MonoBehaviour:
   health_plv: 10
   health_plv_step: 0.1
   speed_base: 80
-  speed_step: 0.15
+  speed_step: 0.015
   armor: 20
   magic_resist: 20
   attack_type: 0

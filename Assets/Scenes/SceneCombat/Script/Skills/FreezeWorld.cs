@@ -9,7 +9,7 @@ public class FreezeWorld : Skill
     float damage_p_lv = 2f;
     public FreezeWorld()
     {
-        name = "Freeze World";
+        skill_name = "Freeze World";
         MAX_FURY = 16;
         START_FURY = 0;
     }
@@ -37,7 +37,7 @@ public class FreezeWorld : Skill
                 target.cs.BaseArmor -= decrease_armor;
             });
         });
-        GameEffMgr.Instance.ShowSkillIconActive(attacking.transform.position, name);
+        GameEffMgr.Instance.ShowSkillIconActive(attacking.transform.position, skill_name);
         return 0.8f;
     }
 }

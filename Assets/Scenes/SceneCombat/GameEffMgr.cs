@@ -25,7 +25,54 @@ public class GameEffMgr : MonoBehaviour
     public GameObject energyExplosion;
     public GameObject fieldLeft;
     public GameObject fieldRight;
+    public void BulletToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
+    {
+        var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Meechic/bullet"), startPos, Quaternion.identity);
+        bulletGO.SetActive(false);
 
+        var targetHeart = new Vector3(targetPos.x,
+            targetPos.y + 7.0f,
+            targetPos.z
+        );
+        Vector3 oriPos = transform.position;
+        float d = Vector3.Distance(oriPos, targetHeart);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, targetHeart, d - 1.4f);
+        int r = 1;
+        if (bulletGO.transform.position.x > desPos.x)
+        {
+            bulletGO.transform.localScale = new Vector3(-1, 1, 1);
+            r = -1;
+        }
+
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(delay);
+        seq.AppendCallback(() => {
+            bulletGO.SetActive(true);
+            bulletGO.transform.rotation = Quaternion.Euler(0, 0, -5 * r);
+            bulletGO.transform.DORotate(new Vector3(0, 0, 10 * r), 0.4f);
+        });
+        seq.Append(bulletGO.transform.DOJump(desPos, 1.4f, 1, flyTime).SetEase(Ease.OutSine));
+        seq.AppendCallback(() => {
+            ShowSmallExplosion(bulletGO.transform.position);
+            Destroy(bulletGO);
+        });
+    }
+    public void ShowSmallExplosion(Vector3 position)
+    {
+        GameObject ex = Instantiate(Resources.Load<GameObject>("ParticleEffect/FireExplosionEffects/Prefabs/DustExplosion"), position, new Quaternion());
+        ex.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+        Sequence seq2 = DOTween.Sequence();
+        seq2.AppendInterval(2.0f);
+        seq2.AppendCallback(() => Destroy(ex));
+    }
+    public void ShowExplosion(Vector3 position)
+    {
+        GameObject ex = Instantiate(Resources.Load<GameObject>("ParticleEffect/FireExplosionEffects/Prefabs/BigExplosion"), position, new Quaternion());
+        ex.transform.localScale = new Vector3(5.0f, 3.0f, 5.0f);
+        Sequence seq2 = DOTween.Sequence();
+        seq2.AppendInterval(2.0f);
+        seq2.AppendCallback(() => Destroy(ex));
+    }
     public float ShowExplosion(Team team)
     {
         var go = team == Team.A ? fieldLeft : fieldRight; 

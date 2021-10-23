@@ -28,7 +28,7 @@ public class CharBarControl : MonoBehaviour
         if (skill != null)
         {
             //Debug.Log("SetIconSkill skill.name" + skill.name);
-            iconSkill.sprite = Resources.Load<Sprite>("IconSkill/" + skill.name);
+            iconSkill.sprite = Resources.Load<Sprite>("IconSkill/" + skill.skill_name);
         }
         else iconSkill.sprite = Resources.Load<Sprite>("IconSkill/None");
     }

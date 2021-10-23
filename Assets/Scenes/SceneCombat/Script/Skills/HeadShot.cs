@@ -11,7 +11,7 @@ public class HeadShot : Skill
     public float sniper_lose_health_ratio = 0.25f;
     public HeadShot()
     {
-        name = "Head Shot";
+        skill_name = "Head Shot";
         MAX_FURY = 15;
         START_FURY = 0;
     }

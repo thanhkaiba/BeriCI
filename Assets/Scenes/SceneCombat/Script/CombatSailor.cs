@@ -214,8 +214,24 @@ public class CombatSailor : Sailor
                 CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
             }
         }
+        if (combatState.GetTeamClassBonus(cs.team, SailorClass.SNIPER) != null && cs.HaveType(SailorClass.SNIPER))
+        {
+            ContainerClassBonus config = GlobalConfigs.ClassBonus;
+            ClassBonusItem sniper = combatState.GetTeamClassBonus(cs.team, SailorClass.SNIPER);
+            var listYourTeam = combatState.GetAllTeamAliveCharacter(cs.team);
+            listYourTeam.ForEach(sai =>
+            {
+                int speedUpValue = (int) (config.GetParams(sniper.type, sniper.level)[0] * sai.cs.MaxSpeed);
+                if (sai.cs.HaveType(SailorClass.SNIPER) && sai != this)
+                {
+                    sai.SpeedUp(speedUpValue);
+                    CombatEvents.Instance.activeClassBonus.Invoke(sai, SailorClass.SNIPER, new List<float> { 0 });
+                }
+            });
+            UIIngameMgr.Instance.UpdateListSailorInQueue();
+        }
 
-        return delay + 0.8f;
+        return delay + 0.5f;
     }
     float Immobile ()
     {
@@ -358,7 +374,7 @@ public class CombatSailor : Sailor
     {
         return cs.MaxSpeed - cs.CurrentSpeed;
     }
-    public virtual void AddSpeed(int speedAdd)
+    public virtual void SpeedUp(int speedAdd)
     {
         cs.CurrentSpeed += speedAdd;
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);

@@ -11,7 +11,7 @@ public class HighNote : Skill
 
     public HighNote()
     {
-        name = "High Note";
+        skill_name = "High Note";
         MAX_FURY = 0;
         START_FURY = 0;
         rank = SkillRank.A;

@@ -15,7 +15,7 @@ public class Encourage : Skill
     public float power_buff_per_level = 1;
     public Encourage()
     {
-        name = "Encourage";
+        skill_name = "Encourage";
         MAX_FURY = 20;
         START_FURY = 0;
         rank = SkillRank.S;
@@ -46,7 +46,7 @@ public class Encourage : Skill
         seq.AppendCallback(() =>
         {
             target.GainHealth(heal);
-            target.AddSpeed((int) speed * target.cs.MaxSpeed);
+            target.SpeedUp((int) speed * target.cs.MaxSpeed);
             target.GainFury(fury);
             target.cs.BasePower += power_buff;
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+Buff+", target.transform.position);

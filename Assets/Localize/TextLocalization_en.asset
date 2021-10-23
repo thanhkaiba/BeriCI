@@ -16,11 +16,25 @@ MonoBehaviour:
     m_Code: en
   m_SharedData: {fileID: 11400000, guid: bae888e8d5e8dbb419c96dd506a2efec, type: 2}
   m_Metadata:
-    m_Items: []
+    m_Items:
+    - id: 0
   m_TableData:
   - m_Id: 299469332480
     m_Localized: Hello
     m_Metadata:
       m_Items: []
+  - m_Id: 8201928413184
+    m_Localized: Sword man
+    m_Metadata:
+      m_Items: []
+  - m_Id: 8421303095296
+    m_Localized: Sword Man gain {0:1 Speed|{} Speed} Speed.
+    m_Metadata:
+      m_Items:
+      - id: 0
   references:
     version: 1
+    00000000:
+      type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries: 0090c7bca8070000

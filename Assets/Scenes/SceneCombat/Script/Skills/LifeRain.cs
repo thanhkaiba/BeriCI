@@ -8,7 +8,7 @@ public class LifeRain : Skill
     public int gain_fury = 8;
     public LifeRain()
     {
-        name = "Life Rain";
+        skill_name = "Life Rain";
         MAX_FURY = 25;
         START_FURY = 15;
     }

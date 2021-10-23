@@ -81,7 +81,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("LobbyScene");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
     }
 
     int CalculateSpeedAddThisLoop()
@@ -100,7 +100,7 @@ public class CombatMgr : MonoBehaviour
     {
         combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatSailor character)
         {
-            character.AddSpeed(speedAdd);
+            character.SpeedUp(speedAdd);
         });
 
         return combatState.GetQueueNextActionSailor().First();
@@ -114,5 +114,9 @@ public class CombatMgr : MonoBehaviour
         if (!A_alive && B_alive) return Team.B;
         if (!A_alive && !B_alive) return Team.BOTH;
         return Team.NONE;
+    }
+    public void SetTimeScale(float scale)
+    {
+        Time.timeScale = scale;
     }
 }

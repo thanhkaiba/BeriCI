@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum CombatStatus
@@ -34,17 +35,31 @@ public class CombatState : MonoBehaviour
     {
         CreateRandomTeam(Team.A);
         CreateTargetTeam(Team.B);
+        //CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
+        //CreateCombatSailor("Helti", new CombatPosition(0, 2), Team.A);
+        //CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.A);
+        //CreateCombatSailor("Helti", new CombatPosition(2, 0), Team.A);
+        //CreateCombatSailor("Helti", new CombatPosition(2, 2), Team.A);
+
+        //CreateCombatSailor("Meechic", new CombatPosition(0, 0), Team.B);
+        //CreateCombatSailor("Meechic", new CombatPosition(0, 2), Team.B);
+        //CreateCombatSailor("Meechic", new CombatPosition(2, 1), Team.B);
+        //CreateCombatSailor("Meechic", new CombatPosition(0, 1), Team.B);
+        //CreateCombatSailor("Meechic", new CombatPosition(1, 1), Team.B);
     }
     void CreateRandomTeam(Team t)
     {
+        //CreateCombatSailor("Helti", new CombatPosition(0, 0), t);
+        //CreateCombatSailor("Helti", new CombatPosition(0, 2), t);
+        //CreateCombatSailor("Target", new CombatPosition(1, 1), t);
+        CreateCombatSailor("Meechic|DemoItem:20", new CombatPosition(2, 1), t);
+
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 1), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 1), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 1), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 0), t);
-        CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 0), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 0), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 2), t);
-        CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 2), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 2), t);
         //CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
         //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
@@ -204,7 +219,7 @@ public class CombatState : MonoBehaviour
     public ClassBonusItem GetTeamClassBonus(Team team, SailorClass type)
     {
         List<ClassBonusItem> t = team == Team.A ? ClassBonusA : classBonusB;
-        return t.Find(e => e.type == type);
+        return t.FirstOrDefault(e => e.type == type);
     }
 
     public void RunEndAction(CombatSailor actor)

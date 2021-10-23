@@ -7,7 +7,7 @@ public class NuclearBomb : Skill
     public float damage_per_level = 35;
     public NuclearBomb()
     {
-        name = "Nuclear Bomb";
+        skill_name = "Nuclear Bomb";
         MAX_FURY = 100;
         START_FURY = 0;
     }
