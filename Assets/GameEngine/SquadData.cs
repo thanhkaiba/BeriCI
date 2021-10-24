@@ -184,7 +184,7 @@ public class SquadData : Singleton<SquadData>
     /// </summary>
     /// <param name="combatPosition"></param>
     /// <returns>return null if not found</returns>
-    public SailorModel sailorAt(CombatPosition combatPosition)
+    public SailorModel SailorAt(CombatPosition combatPosition)
     {
         short slotIndex = (short)(combatPosition.x * NUM_SQUAD_COL + combatPosition.y);
         if (slotIndex < 0 || slotIndex >= MAX_SQUAD_SLOT)
