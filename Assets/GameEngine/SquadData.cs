@@ -83,11 +83,14 @@ public class SquadData : Singleton<SquadData>
             return false;
         }
 
-        if (Squad[slot] != null)
+        if (Squad[slot] != "")
         {
             return false;
         }
+
+        short oldIndex = SlotOf(sailorId);
         Squad[slot] = sailorId;
+        Squad[oldIndex] = "";
         GameEvent.SquadChange.Invoke();
         return true;
     }
