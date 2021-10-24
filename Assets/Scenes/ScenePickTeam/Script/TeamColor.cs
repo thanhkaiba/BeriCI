@@ -39,6 +39,5 @@ public class TeamColor : MonoBehaviour
             DestroyImmediate(child.gameObject);
         }
 
-        Debug.Log(transform.childCount);
     }
 }

@@ -194,4 +194,18 @@ public class SquadData : Singleton<SquadData>
         }
         return GetSailorModel(Squad[slotIndex]);
     }
+
+    public bool IsSquadFull()
+    {
+        int count = 0;
+        Dictionary<short, string>.ValueCollection values = Squad.Values;
+        foreach (string val in values)
+        {
+            if (val != "")
+            {
+                count++;
+            }
+        }
+        return count >= NUM_SAILOR_IN_SQUAD;
+    }
 }

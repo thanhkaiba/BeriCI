@@ -13,6 +13,7 @@ public class SquadSlot : MonoBehaviour
     private Sailor sailor;
     [SerializeField]
     private State state = State.AVAIABLE;
+    public bool selectable { get; set; }
 
     private void Start()
     {
@@ -46,6 +47,8 @@ public class SquadSlot : MonoBehaviour
         }
        
     }
+
+ 
 
     public void Swap(SquadSlot slot)
     {

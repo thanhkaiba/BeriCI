@@ -43,6 +43,18 @@ public class DragableSubsailor : DragableSailor
             transform.position = startPos;
 
         }
+
+        foreach (SquadSlot slot in slots)
+        {
+            if (slot.GetOwner() == null)
+            {
+                slot.selectable = !SquadData.Instance.IsSquadFull();
+            }
+            else
+            {
+                slot.selectable = true;
+            }
+        }
     }
 
     new void OnMouseUpEmpty()
@@ -54,6 +66,8 @@ public class DragableSubsailor : DragableSailor
 
     new void OnMouseUp()
     {
+
+       
         Destroy(dragImage.gameObject);
 
         if (selectingIndex >= 0 && !dragImage.enabled)
@@ -120,10 +134,6 @@ public class DragableSubsailor : DragableSailor
         {
             OnMouseUp();
         }
-
-
-      
-
     }
 
     protected override void UpdateSlots(short newSelecting)

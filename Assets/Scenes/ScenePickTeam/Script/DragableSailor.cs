@@ -23,9 +23,10 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseDown()
     {
-
+       
         for (short i = 0; i < slots.Length; i++)
         {
+            slots[i].selectable = true;
             if (slots[i].GetOwner() == sailor)
             {
                 originIndex = i;
@@ -112,7 +113,7 @@ public class DragableSailor : MonoBehaviour
         for (short i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
-            if (slot.boxAround.Intersects(boxAround.bounds))
+            if (slot.boxAround.Intersects(boxAround.bounds) && slot.selectable)
             {
                 if (i != selectingIndex)
                 {
