@@ -7,9 +7,6 @@ public class SceneControls : MonoBehaviour
 {
     public void OnJoinBattle()
     {
-
-        TextLocalization.Text("HELLO", text => Debug.Log(text), this);
-
         SceneManager.LoadScene("SceneGame");
     }
     // todo test save

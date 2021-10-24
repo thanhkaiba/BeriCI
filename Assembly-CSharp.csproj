@@ -8,9 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{DDCC5110-29BB-A1EB-C13C-0FE0938F9752}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{DEAA2D09-8281-E782-19DD-BCCDE6430172}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -83,6 +82,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LaserGun.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ClientSend.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Meechic.cs" />
     <Compile Include="Assets\GameEngine\SquadData.cs" />
     <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HeadShot.cs" />
@@ -139,7 +139,6 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Meechic.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
