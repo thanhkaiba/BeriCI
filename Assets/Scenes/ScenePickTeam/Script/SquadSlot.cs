@@ -42,7 +42,7 @@ public class SquadSlot : MonoBehaviour
             GetComponent<SpriteRenderer>().color = Color.red;
         } else
         {
-            this.OnFree();
+            OnFree();
         }
        
     }

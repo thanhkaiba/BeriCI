@@ -9,6 +9,7 @@ public class SquadContainer : MonoBehaviour
 
     void Start()
     {
+
         foreach (KeyValuePair<short, string> squadSlot in SquadData.Instance.Squad)
         {
             SquadSlot slot = slots[squadSlot.Key];
@@ -27,6 +28,7 @@ public class SquadContainer : MonoBehaviour
 
         }
         teamColor = FindObjectOfType<TeamColor>();
+
 
         OnUpdateSquad();
         GameEvent.SquadChange.AddListener(OnUpdateSquad);

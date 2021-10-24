@@ -8,7 +8,8 @@ public class SceneControls : MonoBehaviour
     public void OnJoinBattle()
     {
 
-        Debug.Log(TextLocalization.Text("HELLO"));
-        SceneManager.LoadScene("Scenes/SceneCombat/SceneGame");
+        TextLocalization.Text("HELLO", text => Debug.Log(text), this);
+
+        SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
     }
 }

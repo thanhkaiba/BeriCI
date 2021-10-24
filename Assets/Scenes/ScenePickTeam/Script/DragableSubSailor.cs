@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DragableSubsailor : DragableSailor
 {
-    private const int TransformHeight = 200;
+    private const int TransformHeight = 100;
     private Image dragImage;
     private Image originImage;
     private Sailor swapSailor;
@@ -56,7 +56,7 @@ public class DragableSubsailor : DragableSailor
     {
         Destroy(dragImage.gameObject);
 
-        if (selectingIndex >= 0)
+        if (selectingIndex >= 0 && !dragImage.enabled)
         {
             OnMouseUpWithSlot();
         }
@@ -103,7 +103,15 @@ public class DragableSubsailor : DragableSailor
             }
             else
             {
-
+                if (selectingIndex >= 0)
+                {
+                    if (swapSailor != null)
+                    {
+                        swapSailor.gameObject.SetActive(true);
+                    }
+                    slots[selectingIndex].SetSelectedSailer(swapSailor);
+                    selectingIndex = -1;
+                }
                 dragImage.enabled = true;
                 model.SetActive(false);
                 dragImage.transform.position = Input.mousePosition;

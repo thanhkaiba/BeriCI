@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
@@ -12,19 +13,16 @@ public class TextLocalization : MonoBehaviour
 
     public static string Text(string key)
     {
-        AsyncOperationHandle<string> stringOperation = LocalizationSettings.StringDatabase.GetLocalizedStringAsync(key);
-        if (stringOperation.Status == AsyncOperationStatus.Failed)
-        {
-            Debug.LogError("Failed to load string");
+        try {
+            return LocalizationSettings.StringDatabase.GetLocalizedString(key);
+        } catch (Exception e)
+        {  
+            Debug.LogError(e);
             return key;
-        }
-        else
-        {
-            return stringOperation.Result;
         }
     }
 
-    public static void Text(string key, LocalizeCallBack localizeCallBack)
+    public static void Text(string key, LocalizeCallBack localizeCallBack, MonoBehaviour gameObject)
     {
         AsyncOperationHandle<string> stringOperation = LocalizationSettings.StringDatabase.GetLocalizedStringAsync(key);
         if (stringOperation.Status == AsyncOperationStatus.Failed)
@@ -33,7 +31,7 @@ public class TextLocalization : MonoBehaviour
         }
         else
         {
-            LoadStringWithCoroutine(stringOperation, key, localizeCallBack);
+            gameObject.StartCoroutine(LoadStringWithCoroutine(stringOperation, key, localizeCallBack));
         }
     }
 

@@ -1,10 +1,14 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class SquadData : Singleton<SquadData>
 {
     // for sailors aren't in squad
     public List<SailorModel> Sailors;
+    private static readonly byte MAX_SQUAD_SLOT = 9;
+    private static readonly byte NUM_SQUAD_COL = 3;
+    public static readonly byte NUM_SAILOR_IN_SQUAD = 5;
 
     public Dictionary<short, string> Squad { get; private set; }
     protected override void OnAwake()
@@ -25,12 +29,12 @@ public class SquadData : Singleton<SquadData>
             new SailorModel("7", "Target") { quality = 1, level = 1},
             new SailorModel("8", "Target") { quality = 1, level = 1},
             new SailorModel("9", "Target") { quality = 1, level = 1},
-            new SailorModel("9", "Target") { quality = 1, level = 1},
-            new SailorModel("9", "Helti") { quality = 1, level = 1},
-            new SailorModel("9", "Helti") { quality = 1, level = 1},
-            new SailorModel("9", "Helti") { quality = 1, level = 1},
-            new SailorModel("9", "Helti") { quality = 1, level = 1},
-            new SailorModel("9", "Helti") { quality = 1, level = 1},
+            new SailorModel("10", "Target") { quality = 1, level = 1},
+            new SailorModel("11", "Helti") { quality = 1, level = 1},
+            new SailorModel("12", "Helti") { quality = 1, level = 1},
+            new SailorModel("12A", "Helti") { quality = 1, level = 1},
+            new SailorModel("13", "Helti") { quality = 1, level = 1},
+            new SailorModel("14", "Helti") { quality = 1, level = 1},
            
         };
         
@@ -45,7 +49,6 @@ public class SquadData : Singleton<SquadData>
             {6,  ""},
             {7,  ""},
             {8,  ""},
-            {9,  ""},
         };
 
     }
@@ -174,5 +177,21 @@ public class SquadData : Singleton<SquadData>
             }
         }
         return result;
+    }
+
+    /// <summary>
+    /// Get a sailor in squad by a combatPosition {x, y}
+    /// </summary>
+    /// <param name="combatPosition"></param>
+    /// <returns>return null if not found</returns>
+    public SailorModel sailorAt(CombatPosition combatPosition)
+    {
+        short slotIndex = (short)(combatPosition.x * NUM_SQUAD_COL + combatPosition.y);
+        if (slotIndex < 0 || slotIndex >= MAX_SQUAD_SLOT)
+        {
+            Debug.LogError("Index is out of range " + combatPosition);
+            return null;
+        }
+        return GetSailorModel(Squad[slotIndex]);
     }
 }

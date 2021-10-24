@@ -8,21 +8,37 @@ public class TeamColor : MonoBehaviour
     {
         List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(SquadData.Instance.GetSquadModelList());
 
-        IconClassBonus[] icons = gameObject.GetComponentsInChildren<IconClassBonus>();
+        ClearChildren();
+
 
         for (int i = 0; i < passiveType.Count; i++)
         {
-            IconClassBonus s;
-            if (i >= icons.Length)
-            {
-                GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");
-                s = Instantiate(icon, transform).GetComponent<IconClassBonus>();
-            } else
-            {
-                s = icons[i];
-            }
-            
+            GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");
+            IconClassBonus s = Instantiate(icon, transform).GetComponent<IconClassBonus>();
             s.SetData(passiveType[i]);
         }
+    }
+
+    public void ClearChildren()
+    {
+        int i = 0;
+
+        //Array to hold all child obj
+        GameObject[] allChildren = new GameObject[transform.childCount];
+
+        //Find all child obj and store to that array
+        foreach (Transform child in transform)
+        {
+            allChildren[i] = child.gameObject;
+            i += 1;
+        }
+
+        //Now destroy them
+        foreach (GameObject child in allChildren)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+
+        Debug.Log(transform.childCount);
     }
 }

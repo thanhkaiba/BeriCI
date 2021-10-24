@@ -71,7 +71,6 @@ namespace UnityEngine.Localization.Samples
                 waitForSecondsRealtime.Reset();
                 yield return waitForSecondsRealtime;
 
-                TextLocalization.Text("HELO", text => Debug.Log("Loading Manager: " + text));
                 root.SetActive(false);
                 buttonLogin.gameObject.SetActive(true);
             }
