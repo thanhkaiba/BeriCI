@@ -62,12 +62,17 @@ public class SailorStatus
 
 public class CombatPosition
 {
-    public int x;
-    public int y;
-    public CombatPosition(int x, int y)
+    public short x;
+    public short y;
+    public CombatPosition(short x, short y)
     {
         this.x = x;
         this.y = y;
+    }
+    public CombatPosition(int x, int y)
+    {
+        this.x = (short)x;
+        this.y = (short)y;
     }
 }
 

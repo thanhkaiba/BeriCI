@@ -33,13 +33,31 @@ public class CombatState : MonoBehaviour
     }
     public void CreateDemoTeam()
     {
-        CreateRandomTeam(Team.A);
-        CreateTargetTeam(Team.B);
+        //CreateRandomTeam(Team.A);
+        //CreateTargetTeam(Team.B);
         //CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(2, 0), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(2, 2), Team.A);
+
+        for (short x = 0; x < 3; x++)
+        {
+            for (short y = 0; y < 3; y++)
+            {
+                SailorModel sA = SquadData.Instance.SailorAt(new CombatPosition(x, y));
+                if (sA != null)
+                {
+                    CreateCombatSailor(sA, new CombatPosition(x, y), Team.A);
+                }
+
+                SailorModel sB = SquadData.Instance.SailorBAt(new CombatPosition(x, y));
+                if (sB != null)
+                {
+                    CreateCombatSailor(sB, new CombatPosition(x, y), Team.B);
+                }
+            }
+        }
 
         //CreateCombatSailor("Meechic", new CombatPosition(0, 0), Team.B);
         //CreateCombatSailor("Meechic", new CombatPosition(0, 2), Team.B);
@@ -112,6 +130,24 @@ public class CombatState : MonoBehaviour
 
         return sailor;
     }
+
+    CombatSailor CreateCombatSailor(SailorModel s, CombatPosition pos, Team team)
+    {
+        string name = s.config_stats.root_name;
+        List<Item> listItem = s.items;
+
+        CombatSailor sailor = GameUtils.CreateCombatSailor(name);
+
+        sailor.SetEquipItems(listItem);
+        sailor.InitCombatData(s.level, s.quality, pos, team);
+        sailor.CreateStatusBar();
+        sailor.InitDisplayStatus();
+        if (team == Team.A) sailorsTeamA.Add(sailor);
+        else sailorsTeamB.Add(sailor);
+
+        return sailor;
+    }
+
     public List<CombatSailor> GetAllCombatCharacters()
     {
         List<CombatSailor> result = new List<CombatSailor>();

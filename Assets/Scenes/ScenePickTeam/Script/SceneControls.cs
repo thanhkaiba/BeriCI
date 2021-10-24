@@ -10,6 +10,11 @@ public class SceneControls : MonoBehaviour
 
         TextLocalization.Text("HELLO", text => Debug.Log(text), this);
 
-        SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
+        SceneManager.LoadScene("SceneGame");
+    }
+    // todo test save
+    public void SaveSquadB()
+    {
+        SquadData.Instance.SaveSquadB();
     }
 }
