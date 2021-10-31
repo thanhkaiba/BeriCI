@@ -12,14 +12,6 @@ public class Meechic : CombatSailor
     }
     public override void Awake()
     {
-        //SailorConfig a = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Helti");
-        //string json = a.Serialize(a);
-        //Debug.Log("AAAA " + json);
-        //File.WriteAllText("Assets/Helti.json", "");
-        //StreamWriter writer = new StreamWriter("Assets/Helti.json", true);
-        //writer.WriteLine(json);
-        //writer.Close();
-
         circle = Instantiate(Resources.Load<GameObject>("GameComponents/SkillAvaiableCircle/circle"));
         circle.GetComponent<CircleSkillAvaiable>().SetCharacter(gameObject);
         circle.SetActive(false);

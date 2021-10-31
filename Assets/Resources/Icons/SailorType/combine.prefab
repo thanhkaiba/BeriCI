@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 7345881805733966444}
   text: {fileID: 5142414029116560070}
+  clickable: 1
 --- !u!1 &7793792200877690788
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,7 +247,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3/3
+  m_Text: 3/6
 --- !u!114 &2353768275514985202
 MonoBehaviour:
   m_ObjectHideFlags: 0

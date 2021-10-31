@@ -51,7 +51,6 @@ public class SquadData : Singleton<SquadData>
             {7,  ""},
             {8,  ""},
         };
-        SaveSquadB();
     }
 
     public SailorModel GetSailorModel(string id)
@@ -212,25 +211,4 @@ public class SquadData : Singleton<SquadData>
         }
         return count >= NUM_SAILOR_IN_SQUAD;
     }
-
-    // todo test doi thu
-    public Dictionary<short, string> Squad_B { get; private set; }
-    public void SaveSquadB()
-    {
-        Squad_B = Squad.ToDictionary(
-            entry => entry.Key,
-            entry => entry.Value
-        );
-    }
-    public SailorModel SailorBAt(CombatPosition combatPosition)
-    {
-        short slotIndex = (short)(combatPosition.y * NUM_SQUAD_COL + combatPosition.x);
-        if (slotIndex < 0 || slotIndex >= MAX_SQUAD_SLOT)
-        {
-            Debug.LogError("Index is out of range " + combatPosition);
-            return null;
-        }
-        return GetSailorModel(Squad_B[slotIndex]);
-    }
-    // end test save doi thu
 }

@@ -81,7 +81,7 @@ MonoBehaviour:
   container: {fileID: -160921110909277169}
   pop: 4
   _params:
-  - 20
+  - 12
 --- !u!114 &-3110705367694191897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   container: {fileID: -160921110909277169}
   pop: 2
   _params:
-  - 12
+  - 6
 --- !u!114 &6168404234597427221
 MonoBehaviour:
   m_ObjectHideFlags: 0

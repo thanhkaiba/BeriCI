@@ -51,7 +51,7 @@ public class CombatState : MonoBehaviour
                     CreateCombatSailor(sA, new CombatPosition(x, y), Team.A);
                 }
 
-                SailorModel sB = SquadData.Instance.SailorBAt(new CombatPosition(x, y));
+                SailorModel sB = SquadBData.Instance.SailorAt(new CombatPosition(x, y));
                 if (sB != null)
                 {
                     CreateCombatSailor(sB, new CombatPosition(x, y), Team.B);

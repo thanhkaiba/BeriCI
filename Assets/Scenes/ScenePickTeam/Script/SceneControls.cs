@@ -9,9 +9,4 @@ public class SceneControls : MonoBehaviour
     {
         SceneManager.LoadScene("SceneGame");
     }
-    // todo test save
-    public void SaveSquadB()
-    {
-        SquadData.Instance.SaveSquadB();
-    }
 }

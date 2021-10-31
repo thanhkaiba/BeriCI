@@ -194,7 +194,7 @@ public class CombatSailor : Sailor
             bool isCrit = IsCrit();
             Damage damage = new Damage()
             {
-                physics_damage = isCrit ? cs.Power * 1.5f : cs.Power,
+                physics_damage = isCrit ? cs.Power * 1.5f : cs.Power, // thay crit damage vao
                 isCrit = isCrit,
                 fury_gain = 4,
             };
