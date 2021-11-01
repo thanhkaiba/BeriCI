@@ -16,6 +16,9 @@ public class SailorConfig : ScriptableObjectPro
     public float power_plv_step = 0;
 
     public float crit = 0;
+    public float crit_damage = 0;
+
+    public float block_change = 0;
 
     public float health_base = 0;
     public float health_base_step = 0;
@@ -27,6 +30,7 @@ public class SailorConfig : ScriptableObjectPro
 
     public float armor = 0;
     public float magic_resist = 0;
+
 
     public AttackType attack_type = AttackType.MELEE;
     public List<SailorClass> classes;

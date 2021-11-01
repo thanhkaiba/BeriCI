@@ -6,6 +6,8 @@
   "power_plv": 1.0,
   "power_plv_step": 0.01,
   "crit": 0.25,
+  "crit_damage": 0.0,
+  "block_change": 0.0,
   "health_base": 120.0,
   "health_base_step": 1.0,
   "health_plv": 10.0,
