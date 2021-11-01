@@ -207,8 +207,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1022189048}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: RunScenePickTeam
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
+        m_MethodName: OnButtonPickTeamClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -600,7 +600,7 @@ GameObject:
   - component: {fileID: 1022189049}
   - component: {fileID: 1022189048}
   m_Layer: 0
-  m_Name: LobbyManager
+  m_Name: LobbyController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -618,13 +618,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc1509e7558e944994dd9603966cbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Host: 127.0.0.1
-  TcpPort: 9933
-  WSPort: 8080
-  Zone: BasicExamples
-  nameInput: {fileID: 0}
-  loginButton: {fileID: 0}
-  errorText: {fileID: 0}
+  loggedInText: {fileID: 559460686}
 --- !u!4 &1022189049
 Transform:
   m_ObjectHideFlags: 0
@@ -1156,8 +1150,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1022189048}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: RunScenePickTeam
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
+        m_MethodName: OnLogoutButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1289,8 +1283,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1022189048}
-        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
-        m_MethodName: RunScenePickTeam
+        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
+        m_MethodName: OnStartNewGameButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

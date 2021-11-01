@@ -1,18 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sfs2X;
-using Sfs2X.Logging;
-using Sfs2X.Util;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Requests;
 
-public class LobbyController : MonoBehaviour
+public class LobbyController : BaseController
 {
 
 	//----------------------------------------------------------
@@ -21,35 +14,12 @@ public class LobbyController : MonoBehaviour
 
 	public Text loggedInText;
 
-	//----------------------------------------------------------
-	// Private properties
-	//----------------------------------------------------------
 
-	private SmartFox sfs;
-	private bool shuttingDown;
-
-	//----------------------------------------------------------
-	// Unity callback methods
-	//----------------------------------------------------------
-
-	void Awake()
+    protected override void Awake()
 	{
-		Application.runInBackground = true;
-
-		if (SmartFoxConnection.IsInitialized)
-		{
-			sfs = SmartFoxConnection.Connection;
-		}
-		else
-		{
-			SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
-			return;
-		}
-
+		base.Awake();
 		loggedInText.text = "Logged in as " + sfs.MySelf.Name;
 
-		// Register event listeners
-		sfs.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
 		sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
 		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnRoomJoinError);
 
@@ -60,16 +30,12 @@ public class LobbyController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	protected override void Update()
 	{
 		if (sfs != null)
 			sfs.ProcessEvents();
 	}
 
-	void OnApplicationQuit()
-	{
-		shuttingDown = true;
-	}
 
 
 
@@ -95,33 +61,10 @@ public class LobbyController : MonoBehaviour
 		reset();
 		SceneManager.LoadScene("Scenes/ScenePickTeam/ScenePickTeam");
 	}
-
-	//----------------------------------------------------------
-	// Private helper methods
-	//----------------------------------------------------------
-
-	private void reset()
-	{
-		// Remove SFS2X listeners
-		sfs.RemoveAllEventListeners();
-	}
-
 	
 	//----------------------------------------------------------
 	// SmartFoxServer event listeners
 	//----------------------------------------------------------
-
-	private void OnConnectionLost(BaseEvent evt)
-	{
-		// Remove SFS2X listeners
-		reset();
-
-		if (shuttingDown == true)
-			return;
-
-		// Return to login scene
-		SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
-	}
 
 	private void OnRoomJoin(BaseEvent evt)
 	{

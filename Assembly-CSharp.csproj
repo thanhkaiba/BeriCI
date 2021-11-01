@@ -61,7 +61,6 @@
     <Compile Include="Assets\GameEngine\GuiMgr.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ThreadManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipSailorInfo\TooltipSailorInfo.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Script\SceneControls.cs" />
     <Compile Include="Assets\GameEngine\GameEvent.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Marksman.cs" />
@@ -139,7 +138,9 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\SmartFoxConnection.cs" />
+    <Compile Include="Assets\GameEngine\network\SmartFoxConnection.cs" />
+    <Compile Include="Assets\GameEngine\network\BaseController.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\PickTeamController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
