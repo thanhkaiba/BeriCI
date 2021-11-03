@@ -10,8 +10,9 @@ using Sfs2X.Logging;
 using Sfs2X.Util;
 using Sfs2X.Core;
 using Sfs2X.Entities;
+using Sfs2X.Entities.Data;
 
-public class LoginController : MonoBehaviour
+public class LoginController : BaseController
 {
 
 	//----------------------------------------------------------
@@ -28,7 +29,7 @@ public class LoginController : MonoBehaviour
 	public int WSPort = 8080;
 
 	[Tooltip("Name of the SmartFoxServer 2X Zone to join")]
-	public string Zone = "BasicExamples";
+	public string Zone = "Piratera";
 
 	//----------------------------------------------------------
 	// UI elements
@@ -41,29 +42,32 @@ public class LoginController : MonoBehaviour
 	[SerializeField]
 	private Text errorText;
 
-	//----------------------------------------------------------
-	// Private properties
-	//----------------------------------------------------------
 
-	private SmartFox sfs;
+
+	private class UserInforPropertiesKey
+	{
+
+		public const string UID = "uid";
+		public const string USERNAME = "username";
+		public const string BERI = "beri";
+		public const string STAMINA = "stamina";
+		public const string LAST_COUNT = "last_count";
+		public const string EXP = "exp";
+		public const string LEVEL = "level";
+		public const string AVATAR = "avatar";
+	}
+
 
 	//----------------------------------------------------------
 	// Unity callback methods
 	//----------------------------------------------------------
 
-	void Awake()
+	protected override void Awake()
 	{
 		Application.runInBackground = true;
 
 		// Enable interface
 		enableLoginUI(true);
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		if (sfs != null)
-			sfs.ProcessEvents();
 	}
 
 	//----------------------------------------------------------
@@ -95,23 +99,60 @@ public class LoginController : MonoBehaviour
 		sfs.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
 		sfs.AddEventListener(SFSEvent.LOGIN, OnLogin);
 		sfs.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
+		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnJoinRoomError);
+		sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnJoinRoom);
+		sfs.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
+		sfs.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
 
 		// Connect to SFS2X
 		sfs.Connect(cfg);
 	}
 
-	//----------------------------------------------------------
-	// Private helper methods
-	//----------------------------------------------------------
 
-	private void enableLoginUI(bool enable)
+    protected override void OnReceiveServerAction(SFSAction action, ISFSObject packet)
+    {
+
+
+		switch (action)
+		{
+			case SFSAction.JOIN_ZONE_SUCCESS:
+				{
+
+					User user = sfs.MySelf;
+					SmartFoxConnection.Send(new SFSObject(), SFSAction.LOAD_LIST_HERO_INFO);
+					OpenLobby();
+					break;
+				}
+		}
+	}
+
+	private void OpenLobby()
+    {
+		reset();
+		SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
+	}
+
+    private void OnJoinRoom(BaseEvent evt)
+    {
+		
+		// Load lobby scene
+		//Application.LoadLevel("Lobby");
+		Debug.Log("Join Room Success" + ((Room)evt.Params["room"]).Name);
+		// SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
+	}
+
+    //----------------------------------------------------------
+    // Private helper methods
+    //----------------------------------------------------------
+
+    private void enableLoginUI(bool enable)
 	{
 		nameInput.interactable = enable;
 		loginButton.interactable = enable;
 		errorText.text = "";
 	}
 
-	private void reset()
+	protected override void reset()
 	{
 		// Remove SFS2X listeners
 		// This should be called when switching scenes, so events from the server do not trigger code in this scene
@@ -135,8 +176,12 @@ public class LoginController : MonoBehaviour
 			// Save reference to SmartFox instance; it will be used in the other scenes
 			SmartFoxConnection.Connection = sfs;
 
+			SFSObject sfso = SFSObject.NewInstance();
+			sfso.PutUtfString("passwd", "test");
+			sfso.PutInt("loginType", 1);
+			sfs.Send(new Sfs2X.Requests.LoginRequest(nameInput.text, "", Zone, sfso));
+
 			// Login
-			sfs.Send(new Sfs2X.Requests.LoginRequest(nameInput.text));
 		}
 		else
 		{
@@ -148,7 +193,7 @@ public class LoginController : MonoBehaviour
 		}
 	}
 
-	private void OnConnectionLost(BaseEvent evt)
+	protected override void OnConnectionLost(BaseEvent evt)
 	{
 		// Remove SFS2X listeners and re-enable interface
 		reset();
@@ -164,12 +209,14 @@ public class LoginController : MonoBehaviour
 
 	private void OnLogin(BaseEvent evt)
 	{
-		// Remove SFS2X listeners and re-enable interface
-		reset();
 
-		// Load lobby scene
-		//Application.LoadLevel("Lobby");
-		SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
+		if (sfs.RoomList.Count > 0)
+		{
+			// sfs.Send(new Sfs2X.Requests.JoinRoomRequest("The Lobby"));
+			Debug.Log("Request Join Room Lobby");
+		}
+
+		Debug.Log("Login success as " + sfs.MySelf.Name);
 	}
 
 	private void OnLoginError(BaseEvent evt)
@@ -183,4 +230,17 @@ public class LoginController : MonoBehaviour
 		// Show error message
 		errorText.text = "Login failed: " + (string)evt.Params["errorMessage"];
 	}
+
+	private void OnJoinRoomError(BaseEvent evt)
+	{
+		// Disconnect
+		sfs.Disconnect();
+
+		// Remove SFS2X listeners and re-enable interface
+		reset();
+
+		// Show error message
+		errorText.text = "Join Room failed: " + (string)evt.Params["errorMessage"];
+	}
+
 }

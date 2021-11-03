@@ -15,9 +15,8 @@ public class LobbyController : BaseController
 	public Text loggedInText;
 
 
-    protected override void Awake()
-	{
-		base.Awake();
+    private void Start()
+    {
 		loggedInText.text = "Logged in as " + sfs.MySelf.Name;
 
 		sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
@@ -25,15 +24,16 @@ public class LobbyController : BaseController
 
 
 		// Join the lobby Room (must exist in the Zone!)
-		sfs.Send(new JoinRoomRequest("The Lobby"));
-	
+		// sfs.Send(new JoinRoomRequest("The Lobby"));
 	}
 
-	// Update is called once per frame
-	protected override void Update()
+    // Update is called once per frame
+    protected override void Update()
 	{
 		if (sfs != null)
 			sfs.ProcessEvents();
+
+		
 	}
 
 
