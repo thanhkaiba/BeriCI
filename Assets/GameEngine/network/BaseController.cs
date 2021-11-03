@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Sfs2X;
 using Sfs2X.Core;
+using Sfs2X.Entities.Data;
 
 public class BaseController : MonoBehaviour
 {
@@ -34,7 +35,8 @@ public class BaseController : MonoBehaviour
 
 		// Register event listeners
 		sfs.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
-	
+		sfs.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
+
 	}
 
 	// Update is called once per frame
@@ -75,5 +77,25 @@ public class BaseController : MonoBehaviour
 		// Return to login scene
 		SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
 	}
+
+	protected virtual void OnExtentionResponse(BaseEvent evt)
+    {
+
+		ISFSObject packet = (ISFSObject)evt.Params["params"];
+
+		string cmd = (string)evt.Params["cmd"];
+		if (cmd == SmartFoxConnection.CLIENT_REQUEST)
+		{
+			Debug.Log("response:" + packet.GetDump());
+
+			SFSAction action = (SFSAction)packet.GetInt(SmartFoxConnection.ACTION_INCORE);
+			OnReceiveServerAction(action, packet);
+		}
+	}
+
+	protected virtual void OnReceiveServerAction(SFSAction action, ISFSObject packet)
+    {
+
+    }
 
 }

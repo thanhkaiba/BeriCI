@@ -674,7 +674,7 @@ MonoBehaviour:
   Host: 127.0.0.1
   TcpPort: 9933
   WSPort: 8080
-  Zone: BasicExamples
+  Zone: Piratera
   nameInput: {fileID: 10826815}
   loginButton: {fileID: 962814694}
   errorText: {fileID: 937110912}
