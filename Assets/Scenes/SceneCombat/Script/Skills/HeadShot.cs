@@ -24,7 +24,7 @@ public class HeadShot : Skill
         base.CastSkill(cChar, cbState);
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetLowestHealthTarget(enermy);
+        CombatSailor target = Targets.LowestHealth(enermy);
 
         float physic_damage = damage_ratio * cChar.cs.Power + lose_health_ratio * (target.cs.MaxHealth - target.cs.CurHealth);
 

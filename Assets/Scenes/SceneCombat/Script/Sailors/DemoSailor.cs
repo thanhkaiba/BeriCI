@@ -9,7 +9,7 @@ public class DemoSailor: CombatSailor
 {
     public DemoSailor()
     {
-        skill = new Slash();
+
     }
     public override void Awake()
     {

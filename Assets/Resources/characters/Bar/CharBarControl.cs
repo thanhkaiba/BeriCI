@@ -23,12 +23,12 @@ public class CharBarControl : MonoBehaviour
     {
         iconType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + type);
     }
-    public void SetIconSkill(Skill skill)
+    public void SetIconSkill(string skill_name)
     {
-        if (skill != null)
+        if (skill_name != null)
         {
             //Debug.Log("SetIconSkill skill.name" + skill.name);
-            iconSkill.sprite = Resources.Load<Sprite>("IconSkill/" + skill.skill_name);
+            iconSkill.sprite = Resources.Load<Sprite>("IconSkill/" + skill_name);
         }
         else iconSkill.sprite = Resources.Load<Sprite>("IconSkill/None");
     }

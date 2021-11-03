@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class FlyTextMgr : MonoBehaviour
 {
     public GameObject damageText;
-    public Camera cam;
     public static FlyTextMgr Instance { get; private set; }
     private void Awake()
     {
@@ -18,7 +17,7 @@ public class FlyTextMgr : MonoBehaviour
     }
     public void ShowTextTakeDamage(CombatSailor s, Damage damage)
     {
-        Vector3 v3 = cam.GetComponent<Camera>().WorldToScreenPoint(s.transform.position);
+        Vector3 v3 = Camera.main.WorldToScreenPoint(s.transform.position);
         if (damage.physics_damage > 0)
         {
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
@@ -39,7 +38,7 @@ public class FlyTextMgr : MonoBehaviour
     public void CreateFlyTextWith3DPosition(string text, Vector3 p)
     {
         //Debug.Log("=>>>>>>>p " + p);
-        Vector3 v3 = cam.GetComponent<Camera>().WorldToScreenPoint(p);
+        Vector3 v3 = Camera.main.GetComponent<Camera>().WorldToScreenPoint(p);
         CreateFlyText(text, v3);
     }
     public void CreateFlyText(string text, Vector3 p)

@@ -15,17 +15,17 @@ public class GameUtils : UnityEngine.Object
         GameObject characterGO = Instantiate(config_stats.model);
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
         sailor.Model = model;
-        if (config_stats.skillConfig)
-        {
-            sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
-            sailor.skill.UpdateData(config_stats.skillConfig);
-        }
+        //if (config_stats.skillConfig)
+        //{
+        //    sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
+        //    sailor.skill.UpdateData(config_stats.skillConfig);
+        //}
 
-        sailor.gameObject.AddComponent<Billboard>();
+        //sailor.gameObject.AddComponent<Billboard>();
 
-        var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
-        shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
-        shadow.transform.Find("silhouette_shadow").gameObject.layer = 7;
+        //var shadow = Instantiate(Resources.Load<GameObject>("GameComponents/shadow/shadow"));
+        //shadow.GetComponent<CharacterShadow>().SetCharacter(sailor.gameObject);
+        //shadow.transform.Find("silhouette_shadow").gameObject.layer = 7;
 
         return sailor;
     }

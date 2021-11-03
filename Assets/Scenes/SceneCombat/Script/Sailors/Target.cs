@@ -9,7 +9,7 @@ public class Target : CombatSailor
 {
     public Target()
     {
-        skill = null;
+
     }
     public override void Awake()
     {
@@ -36,5 +36,9 @@ public class Target : CombatSailor
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(oriPos, 0.2f));
         return 0.4f;
+    }
+    public override bool CanActiveSkill(CombatState cbState)
+    {
+        return false;
     }
 }

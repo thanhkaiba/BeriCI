@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Helti : CombatSailor
 {
-    public SailorConfig config;
     private GameObject circle;
     public Helti()
     {
@@ -56,64 +55,59 @@ public class Helti : CombatSailor
         TriggerAnimation("TakeDamage");
         return base.TakeDamage(d);
     }
-}
-public class WindSlash : Skill
-{
-    public float scale_damage_ratio;
-    public float behind_damage_ratio;
-    public override void UpdateData(SkillConfig config)
+    // skill
+    public override bool CanActiveSkill(CombatState cbState)
     {
-        base.UpdateData(config);
-        scale_damage_ratio = config._params[0];
-        behind_damage_ratio = config._params[1];
+        return base.CanActiveSkill(cbState);
     }
-    public override bool CanActive(CombatSailor cChar, CombatState cbState)
+    public override float CastSkill(CombatState cbState)
     {
-        return base.CanActive(cChar, cbState);
-    }
-    public override float CastSkill(CombatSailor cChar, CombatState cbState)
-    {
-        base.CastSkill(cChar, cbState);
-        float physic_damage = cChar.cs.Power * scale_damage_ratio;
+        float scale_damage_ratio = Model.config_stats.skill_params[0];
+        float behind_damage_ratio = Model.config_stats.skill_params[1];
+        base.CastSkill(cbState);
+        float main_damage = cs.Power * scale_damage_ratio;
+        float secondary_damage = cs.Power * behind_damage_ratio;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetMeleeTarget(cChar, enermy);
-        List<CombatSailor> behind_target = GetAllBehind(target, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        CombatSailor target = Targets.Melee(this, enermy);
+        List<CombatSailor> behind_target = Targets.AllBehind(target, enermy);
 
-        return RunAnimation(cChar, target, behind_target, physic_damage);
+        return RunAnimation(target, behind_target, main_damage, secondary_damage);
     }
-    float RunAnimation(CombatSailor attacking, CombatSailor target, List<CombatSailor> behind_target, float physics_damage)
+    float RunAnimation(CombatSailor target, List<CombatSailor> behind_target, float main_damage, float secondary_damage)
     {
-        attacking.TriggerAnimation("CastSkill");
+        float scale_damage_ratio = Model.config_stats.skill_params[0];
+        float behind_damage_ratio = Model.config_stats.skill_params[1];
+        TriggerAnimation("CastSkill");
         CombatEvents.Instance.highlightTarget.Invoke(target);
-        Vector3 oriPos = attacking.transform.position;
+        Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
         desPos.y += 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
-        seq.Append(attacking.transform.DOJump(desPos, 1.2f, 1, 0.3f));
+        seq.Append(transform.DOJump(desPos, 1.2f, 1, 0.3f));
 
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(physics_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2));
+            target.TakeDamage(main_damage, 0, 0);
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
         });
         seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(physics_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2));
+            target.TakeDamage(main_damage, 0, 0);
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
         });
         seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(physics_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(physics_damage * behind_damage_ratio, 0, 0, 2));
+            target.TakeDamage(main_damage, 0, 0);
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
         });
 
         seq.AppendInterval(0.3f);
-        seq.Append(attacking.transform.DOJump(oriPos, 0.8f, 1, 0.4f));
+        seq.Append(transform.DOJump(oriPos, 0.8f, 1, 0.4f));
         return 1.8f;
     }
 }

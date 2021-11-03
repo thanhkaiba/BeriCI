@@ -6,7 +6,7 @@ public enum AttackType
 {
     MELEE,
     RANGE,
-    SNEAK,
+    BACKSTAB,
 };
 
 public enum SailorStatusType
@@ -108,6 +108,10 @@ public class CombatStats
     public int CurrentSpeed;
 
     public float Crit;
+
+    public float CritDamage;
+
+    public float Block;
 
     public int BaseFury;
     public int MaxFury

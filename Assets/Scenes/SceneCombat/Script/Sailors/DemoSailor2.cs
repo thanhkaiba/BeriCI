@@ -10,7 +10,7 @@ public class DemoSailor2 : CombatSailor
 {
     public DemoSailor2()
     {
-        skill = new IceArrow();
+
     }
 
     // animations
@@ -64,14 +64,6 @@ public class DemoSailor2 : CombatSailor
     public override float RunSkill (List<CombatSailor> targets)
     {
         float delay = 0f;
-        if (skill is Marksman)
-        {
-            TriggerAnimation("BaseAttack");
-            targets.ForEach(target =>
-            {
-                delay = ArrowToTarget(target);
-            });
-        }
         return delay;
     }
     public override void SetFaceDirection()

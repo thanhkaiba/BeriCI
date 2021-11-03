@@ -16,6 +16,7 @@ public class Damage
     public float true_damage = 0;
     public int fury_gain = 0;
     public bool isCrit = false;
+    public bool isBlock = false;
     public float total
     {
         get { return physics_damage + magic_damage + true_damage; }
@@ -53,6 +54,10 @@ public class CombatSailor : Sailor
             DisplaySpeed = Model.config_stats.GetSpeed(level, quality),
             CurrentSpeed = 0,
             Crit = Model.config_stats.GetCrit(),
+            CritDamage = GlobalConfigs.Combat.base_crit_damage,
+            Block = Model.config_stats.GetBlock(),
+            BaseFury = Model.config_stats.max_fury,
+            Fury = Model.config_stats.start_fury,
             position = p,
             team = t,
         };
@@ -74,12 +79,6 @@ public class CombatSailor : Sailor
 
         Model.level = level;
         Model.quality = quality;
-
-        if (skill != null)
-        {
-            cs.BaseFury = skill.MAX_FURY;
-            cs.Fury = skill.START_FURY;
-        }
     }
     
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam) // them giam chi so theo toc he
@@ -170,17 +169,16 @@ public class CombatSailor : Sailor
     }
     bool UseSkillCondition (CombatState combatState)
     {
-        return skill != null && cs.Fury >= cs.MaxFury && skill.CanActive(this, combatState);
+        return cs.Fury >= cs.MaxFury && CanActiveSkill(combatState);
     }
     public virtual float UseSkill (CombatState combatState)
     {
-        CombatEvents.Instance.castSkill.Invoke(this, skill);
         cs.CurrentSpeed -= cs.MaxSpeed;
         cs.Fury = 0;
         //Debug.Log("Use skill now " + skill.name);
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
-        return skill.CastSkill(this, combatState);
+        return CastSkill(combatState);
     }
     float BaseAttack (CombatState combatState)
     {
@@ -192,11 +190,13 @@ public class CombatSailor : Sailor
         {
             delay += RunBaseAttack(target);
             bool isCrit = IsCrit();
+            bool isBlock = target.IsBlock();
             Damage damage = new Damage()
             {
                 physics_damage = isCrit ? cs.Power * 1.5f : cs.Power, // thay crit damage vao
                 isCrit = isCrit,
-                fury_gain = 4,
+                isBlock = isBlock,
+                fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
             };
             StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
         }
@@ -247,31 +247,36 @@ public class CombatSailor : Sailor
         float r = Random.Range(0f, 1f);
         return r < cs.Crit;
     }
-    CombatSailor GetBaseAttackTarget(CombatState combatState)
+    bool IsBlock()
+    {
+        float r = Random.Range(0f, 1f);
+        return r < cs.Block;
+    }
+   CombatSailor GetBaseAttackTarget(CombatState combatState)
     {
         switch (Model.config_stats.attack_type)
         {
             case AttackType.RANGE:
-                return GetNearestInRowTarget(
-                cs.team == Team.A
+                return Targets.Range(this,
+                    cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
-            case AttackType.SNEAK:
-                return GetFurthestTarget(
+            case AttackType.BACKSTAB:
+                return Targets.Backstab(this,
                     cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
             default:
-                return GetNearestTarget(
+                return Targets.Melee(this,
                 cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
         }
     }
-    void DealBaseAttackDamage(CombatSailor target, Damage damage)
+    float DealBaseAttackDamage(CombatSailor target, Damage damage)
     {
         GainFury(10);
-        target.TakeDamage(damage);
+        return target.TakeDamage(damage);
     }
     IEnumerator DealBaseAttackDamageDelay(CombatSailor target, Damage damage, float delay)
     {
@@ -280,12 +285,16 @@ public class CombatSailor : Sailor
     }
     public virtual float TakeDamage(Damage d)
     {
-        float physicTake, magicTake;
-        if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
-        else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
-        if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
-        else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
-        float totalDamage = physicTake + magicTake + d.true_damage;
+        float physicTake, magicTake, totalDamage;
+        if (d.isBlock) physicTake = magicTake = totalDamage = 0;
+        else
+        {
+            if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
+            else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
+            if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
+            else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
+            totalDamage = physicTake + magicTake + d.true_damage;
+        }
         LoseHealth(new Damage()
         {
             physics_damage = physicTake,
@@ -293,6 +302,7 @@ public class CombatSailor : Sailor
             true_damage = d.true_damage,
             fury_gain = d.fury_gain,
             isCrit = d.isCrit,
+            isBlock = d.isBlock,
         });
         GainFury(d.fury_gain);
         return totalDamage;
@@ -332,7 +342,7 @@ public class CombatSailor : Sailor
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(Model.config_stats.attack_type);
-        bar.SetIconSkill(skill);
+        bar.SetIconSkill(Model.config_stats.skill_name);
         bar.SetName(Model.config_stats.root_name);
         SetFaceDirection();
     }
@@ -363,12 +373,9 @@ public class CombatSailor : Sailor
 
     public virtual void GainFury(int value)
     {
-        if (skill != null)
-        {
-            cs.Fury += value;
-            if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
-            bar.SetFuryBar(cs.MaxFury, cs.Fury);
-        }
+        cs.Fury += value;
+        if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
     }
     public int GetSpeedNeeded()
     {
@@ -388,77 +395,6 @@ public class CombatSailor : Sailor
     public bool IsEnoughSpeed()
     {
         return GetSpeedNeeded() <= 0;
-    }
-    // target
-    CombatSailor GetNearestTarget(List<CombatSailor> listTarget)
-    {
-        CombatSailor result = null;
-        int myRow = cs.position.y;
-        int NR_col = 9999;
-        int NR_row = 9999;
-        listTarget.ForEach(delegate (CombatSailor character)
-        {
-            int col = character.cs.position.x;
-            int row = character.cs.position.y;
-            if (
-                (result == null)
-                || (col < NR_col)
-                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
-            )
-            {
-                result = character;
-                NR_col = col;
-                NR_row = Math.Abs(myRow - row);
-            }
-        });
-        return result;
-    }
-
-    CombatSailor GetNearestInRowTarget(List<CombatSailor> listTarget)
-    {
-        CombatSailor result = null;
-        int myRow = cs.position.y;
-        int NR_col = 9999;
-        int NR_row = 9999;
-        listTarget.ForEach(delegate (CombatSailor character)
-        {
-            int col = character.cs.position.x;
-            int row = character.cs.position.y;
-            if (
-                (result == null)
-                || (Math.Abs(myRow - row) < NR_row)
-                || (Math.Abs(myRow - row) == NR_row && col < NR_col)
-            )
-            {
-                result = character;
-                NR_col = col;
-                NR_row = Math.Abs(myRow - row);
-            }
-        });
-        return result;
-    }
-    CombatSailor GetFurthestTarget(List<CombatSailor> listTarget)
-    {
-        CombatSailor result = null;
-        int myRow = cs.position.y;
-        int NR_col = 9999;
-        int NR_row = 9999;
-        listTarget.ForEach(delegate (CombatSailor character)
-        {
-            int col = character.cs.position.x;
-            int row = character.cs.position.y;
-            if (
-                (result == null)
-                || (col > NR_col)
-                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
-            )
-            {
-                result = character;
-                NR_col = col;
-                NR_row = Math.Abs(myRow - row);
-            }
-        });
-        return result;
     }
 
     // animation
@@ -503,5 +439,18 @@ public class CombatSailor : Sailor
         int scaleX = cs.team == Team.A ? -1 : 1;
         float scale = modelObject.transform.localScale.x;
         modelObject.transform.localScale = new Vector3(scale * scaleX, scale, scale);
+    }
+
+    //skill
+    public virtual float CastSkill(CombatState cbState)
+    {
+        string skill_name = Model.config_stats.skill_name;
+        Debug.Log(">>>>>>>>>>>>>>>" + Model.config_stats.root_name + " active " + skill_name);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition(skill_name, transform.position);
+        return 0.5f;
+    }
+    public virtual bool CanActiveSkill(CombatState cbState)
+    {
+        return true;
     }
 };

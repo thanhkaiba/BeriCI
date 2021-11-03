@@ -21,6 +21,8 @@ MonoBehaviour:
   power_plv: 1.2
   power_plv_step: 0.012
   crit: 0
+  crit_damage: 0
+  block_change: 0
   health_base: 140
   health_base_step: 0.8
   health_plv: 8
@@ -32,3 +34,9 @@ MonoBehaviour:
   attack_type: 1
   classes: 09000000
   skillConfig: {fileID: 11400000, guid: 6788278a360ebce4e8ea7c43781e1510, type: 2}
+  skill_name: MeechikBooommm
+  start_fury: 0
+  max_fury: 20
+  skill_params:
+  - 2.5
+  - 1.2

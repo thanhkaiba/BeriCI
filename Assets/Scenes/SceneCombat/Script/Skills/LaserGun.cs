@@ -14,7 +14,7 @@ public class LaserGun : Skill
     public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        List<CombatSailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);
+        List<CombatSailor> targets = Targets.SameRow(cChar, enermy);
         return targets.Count > 0;
     }
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
@@ -23,7 +23,7 @@ public class LaserGun : Skill
         float spell_damage = base_damage + cChar.Model.level * damage_per_level;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        List<CombatSailor> targets = GetSameLineTarget(cChar.cs.position.y, enermy);
+        List<CombatSailor> targets = Targets.SameRow(cChar, enermy);
 
         targets.ForEach(delegate (CombatSailor character)
         {

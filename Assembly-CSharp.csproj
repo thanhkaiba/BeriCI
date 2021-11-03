@@ -117,6 +117,7 @@
     <Compile Include="Assets\Config\Resources\ScriptableObject\CombatConfig.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SubSailorIcon.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\TeamColor.cs" />
+    <Compile Include="Assets\GameEngine\network\SmartFoxConnection.cs" />
     <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Resources\Characters\SailorCollider.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
@@ -130,7 +131,9 @@
     <Compile Include="Assets\GameEngine\Sailor.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\UIIngameMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FightingPassion.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeam\Script\PickTeamController.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\SailorConfig.cs" />
+    <Compile Include="Assets\GameEngine\network\BaseController.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonus.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Slash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\SkillMgr.cs" />
@@ -147,9 +150,7 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\network\BaseController.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\Script\PickTeamController.cs" />
-    <Compile Include="Assets\GameEngine\network\SmartFoxConnection.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Targets.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
@@ -380,11 +381,11 @@
     <Reference Include="DOTween">
       <HintPath>Assets\Plugins\Demigiant\DOTween\DOTween.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="SmartFox2X">
       <HintPath>Assets\Plugins\SmartFox\SmartFox2X.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2020.3.15f2\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

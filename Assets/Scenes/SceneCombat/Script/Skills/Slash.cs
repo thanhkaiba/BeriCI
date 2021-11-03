@@ -22,8 +22,8 @@ public class Slash : Skill
         float physic_damage = cChar.cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetMeleeTarget(cChar, enermy);
-        CombatSailor behind_target = GetBehind(target, enermy);
+        CombatSailor target = Targets.Melee(cChar, enermy);
+        CombatSailor behind_target = Targets.Behind(target, enermy);
 
         return RunAnimation(cChar, target, behind_target, physic_damage);
     }

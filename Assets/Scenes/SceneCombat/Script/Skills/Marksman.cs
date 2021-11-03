@@ -20,7 +20,7 @@ public class Marksman : Skill
         base.CastSkill(cChar, cbState);
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        List<CombatSailor> targets = GetRandomTarget(enermy, 2);
+        List<CombatSailor> targets = Targets.Random(enermy, 2);
 
 
 

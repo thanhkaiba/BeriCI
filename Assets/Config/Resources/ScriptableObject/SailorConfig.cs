@@ -36,6 +36,10 @@ public class SailorConfig : ScriptableObjectPro
     public List<SailorClass> classes;
 
     public SkillConfig skillConfig;
+    public string skill_name = "";
+    public int start_fury;
+    public int max_fury;
+    public List<float> skill_params;
 
     public float GetPower(int level, int quality)
     {
@@ -52,6 +56,10 @@ public class SailorConfig : ScriptableObjectPro
     public float GetCrit()
     {
         return crit;
+    }
+    public float GetBlock()
+    {
+        return block_change;
     }
     public float GetArmor()
     {

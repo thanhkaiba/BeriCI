@@ -113,10 +113,6 @@ public class UIIngameMgr : MonoBehaviour
         UpdateTotalHealth(Team.A);
         UpdateTotalHealth(Team.B);
     }
-    public void ShowHighLightCastSkill(CombatSailor s, Skill skill)
-    {
-        ShowHighlightInfo(s);
-    }
     public void HideAllHighlightInfo()
     {
         transform.FindDeepChild("sailorA").gameObject.SetActive(false);

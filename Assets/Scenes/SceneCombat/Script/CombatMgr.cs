@@ -20,15 +20,21 @@ public class CombatMgr : MonoBehaviour
     public int actionCount = 0;
     private void Start()
     {
+        if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
+
         //return;
-        combatState.CreateDemoTeam();
-        combatState.CalculateClassBonus();
-        combatState.UpdateGameWithClassBonus();
+        PreparingGame();
         UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowClassBonus(combatState.ClassBonusA, combatState.classBonusB);
         UIMgr.ShowActionCount(actionCount);
         StartCoroutine(StartGame());
+    }
+    void PreparingGame()
+    {
+        combatState.CreateDemoTeam();
+        combatState.CalculateClassBonus();
+        combatState.UpdateGameWithClassBonus();
     }
     IEnumerator StartGame()
     {

@@ -18,7 +18,7 @@ public class HighNote : Skill
     }
     public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
-        CombatSailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
+        CombatSailor target = Targets.FurthestMaxFury(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
         return (target != null && (target.cs.MaxFury - target.cs.Fury > 0));
     }
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
@@ -26,7 +26,7 @@ public class HighNote : Skill
         base.CastSkill(cChar, cbState);
         cChar.cs.CurrentSpeed += (int)System.Math.Floor(speed_self_buff * cChar.cs.MaxSpeed);
 
-        CombatSailor target = GetFurthestFuryMax(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
+        CombatSailor target = Targets.FurthestMaxFury(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
 
         return RunAnimation(cChar, target);
     }

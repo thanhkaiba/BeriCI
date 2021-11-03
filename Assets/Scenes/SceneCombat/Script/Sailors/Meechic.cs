@@ -49,52 +49,43 @@ public class Meechic : CombatSailor
         TriggerAnimation("TakeDamage");
         return base.TakeDamage(d);
     }
-}
-
-public class MeechicBoommm : Skill
-{
-    public float scale_damage_ratio;
-    public float around_damage_ratio;
-    public override void UpdateData(SkillConfig config)
+    // skill
+    public override bool CanActiveSkill(CombatState cbState)
     {
-        base.UpdateData(config);
-        scale_damage_ratio = config._params[0];
-        around_damage_ratio = config._params[1];
+        return base.CanActiveSkill(cbState);
     }
-    public override bool CanActive(CombatSailor cChar, CombatState cbState)
+    public override float CastSkill(CombatState cbState)
     {
-        return base.CanActive(cChar, cbState);
-    }
-    public override float CastSkill(CombatSailor cChar, CombatState cbState)
-    {
-        base.CastSkill(cChar, cbState);
-        float physic_damage = cChar.cs.Power;
+        base.CastSkill(cbState);
+        float physic_damage = cs.Power;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = GetRangeAttackTarget(cChar, enermy);
-        List<CombatSailor> around_target = GetAllAround(target, enermy);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        CombatSailor target = Targets.Range(this, enermy);
+        List<CombatSailor> around_target = Targets.Around(target, enermy);
 
-        return RunAnimation(cChar, target, around_target, physic_damage);
+        return RunAnimation(target, around_target, physic_damage);
     }
-    float RunAnimation(CombatSailor attacking, CombatSailor target, List<CombatSailor> around_target, float physics_damage)
+    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage)
     {
-        attacking.TriggerAnimation("BaseAttack");
-        GameEffMgr.Instance.BulletToTarget(attacking.transform.FindDeepChild("nodeStartBullet").position, target.transform.position, 0.4f, 0.2f);
+        float scale_damage_ratio = Model.config_stats.skill_params[0];
+        float around_damage_ratio = Model.config_stats.skill_params[1];
+        TriggerAnimation("BaseAttack");
+        GameEffMgr.Instance.BulletToTarget(transform.FindDeepChild("nodeStartBullet").position, target.transform.position, 0.4f, 0.2f);
         CombatEvents.Instance.highlightTarget.Invoke(target);
-        Vector3 oriPos = attacking.transform.position;
+        Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
         desPos.y += 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.6f);
-        seq.AppendCallback(() => GameEffMgr.Instance.ShowExplosion(target.transform.position) );
+        seq.AppendCallback(() => GameEffMgr.Instance.ShowExplosion(target.transform.position));
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
             target.TakeDamage(physics_damage * scale_damage_ratio, 0, 0);
             around_target.ForEach(s => s.TakeDamage(physics_damage * around_damage_ratio, 0, 0, 2));
         });
-        
+
         seq.AppendInterval(0.3f);
         return 1.1f;
     }

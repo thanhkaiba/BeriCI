@@ -32,7 +32,7 @@ public class Encourage : Skill
         float power_buff = base_power_buff + power_buff_per_level * cChar.Model.level;
 
         List<CombatSailor> allies = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
-        CombatSailor target = GetLowestPercentHealthTarget(allies);
+        CombatSailor target = Targets.LowestPercentHealth(allies);
 
         return RunAnimation(cChar, target, heal, target != cChar ? speed_percent : 0f, buff_fury, power_buff);
     }
