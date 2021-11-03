@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Requests;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class LobbyController : BaseController
 {
@@ -12,12 +14,29 @@ public class LobbyController : BaseController
 	// UI elements
 	//----------------------------------------------------------
 
-	public Text loggedInText;
+	[SerializeField]
+	private Text userName;
+
+	[SerializeField]
+	private Image userAvatar;
+
+	[SerializeField]
+	private Text userLevel;
+
+	[SerializeField]
+	private Text userBeri;
+
+	[SerializeField]
+	private Text userStamina;
 
 
-    private void Start()
+	private void Start()
     {
-		loggedInText.text = "Logged in as " + sfs.MySelf.Name;
+		userName.text = UserData.Instance.Username;
+		userLevel.text = "Level: " + UserData.Instance.Level;
+		userBeri.text = "Beri: " + UserData.Instance.Beri;
+		userStamina.text = "Stamina: " + UserData.Instance.Stamina;
+		StartLoadAvatar(UserData.Instance.Avatar);
 
 		sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
 		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnRoomJoinError);
@@ -36,7 +55,31 @@ public class LobbyController : BaseController
 		
 	}
 
+	void StartLoadAvatar(string url)
+	{
+		StartCoroutine(LoadAvatar(url));
+	}
 
+	IEnumerator LoadAvatar(string url)
+	{
+		using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
+		{
+			yield return uwr.SendWebRequest();
+
+			if (uwr.result != UnityWebRequest.Result.Success)
+			{
+				Debug.Log(uwr.error);
+			}
+			else
+			{
+
+				// Get downloaded asset bundle
+				Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
+				userAvatar.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0));
+
+			}
+		}
+	}
 
 
 	public void OnLogoutButtonClick()

@@ -119,6 +119,13 @@ public class LoginController : BaseController
 				{
 
 					User user = sfs.MySelf;
+					UserData.Instance.Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
+					UserData.Instance.Username = user.Name;
+					UserData.Instance.Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
+					UserData.Instance.Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
+					UserData.Instance.Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
+					UserData.Instance.Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
+					UserData.Instance.LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
 					SmartFoxConnection.Send(new SFSObject(), SFSAction.LOAD_LIST_HERO_INFO);
 					OpenLobby();
 					break;
