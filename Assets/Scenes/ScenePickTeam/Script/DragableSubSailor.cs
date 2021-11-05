@@ -29,20 +29,16 @@ public class DragableSubsailor : DragableSailor
 
         dragImage = d;
         originImage = o;
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition2D);
+
+        Vector3 startPos = Camera.main.ScreenToWorldPoint(mousePosition2D);
+        startPos.z = transform.position.z;
+        transform.position = startPos;
+
         if (boxAround == null)
         {
             boxAround = GetComponent<BoxCollider>();
         }
-        sailorPlane = new Plane(Vector3.up, Vector3.zero);
-
-        if (sailorPlane.Raycast(ray, out float distance))
-        {
-            Vector3 startPos = ray.GetPoint(distance);
-            startPos.y = 0;
-            transform.position = startPos;
-
-        }
+      
 
         foreach (SquadSlot slot in slots)
         {

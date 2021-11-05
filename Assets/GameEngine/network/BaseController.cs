@@ -89,11 +89,12 @@ public class BaseController : MonoBehaviour
 			Debug.Log("response:" + packet.GetDump());
 
 			SFSAction action = (SFSAction)packet.GetInt(SmartFoxConnection.ACTION_INCORE);
-			OnReceiveServerAction(action, packet);
+			SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(SmartFoxConnection.ERROR_CODE);
+			OnReceiveServerAction(action, errorCode, packet);
 		}
 	}
 
-	protected virtual void OnReceiveServerAction(SFSAction action, ISFSObject packet)
+	protected virtual void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode , ISFSObject packet)
     {
 
     }

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class DragableSailor : MonoBehaviour
 {
-    protected Plane sailorPlane;
-    private Vector3 diff;
     protected BoxCollider boxAround;
     public SquadSlot[] slots { get; set; }
     [SerializeField]
@@ -34,20 +32,6 @@ public class DragableSailor : MonoBehaviour
         }
         selectingIndex = originIndex;
         slots[originIndex].OnSelecting();
-
-        Vector3 normal = new Vector3(0, 0, 0);
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (boxAround.Raycast(ray, out RaycastHit hit, 1000))
-        {
-            normal = hit.point;
-
-        }
-
-        diff = transform.position - normal;
-
-        normal.x = 0;
-        normal.z = 0;
-        sailorPlane = new Plane(Vector3.up, normal);
     }
 
   
@@ -57,16 +41,11 @@ public class DragableSailor : MonoBehaviour
     protected void OnMouseDrag()
     {
 
+        Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        movePos.z = transform.position.z;
+        transform.position = movePos;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        if (sailorPlane.Raycast(ray, out float distance))
-        {
-            transform.position = ray.GetPoint(distance) + diff;
-
-        }
-
-        CheckNewSelecting();
+        CheckNewSelecting(movePos);
 
     }
 
@@ -108,12 +87,12 @@ public class DragableSailor : MonoBehaviour
     }
 
 
-    private void CheckNewSelecting()
+    private void CheckNewSelecting(Vector3 mousePositon)
     {
         for (short i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
-            if (slot.boxAround.Intersects(boxAround.bounds) && slot.selectable)
+            if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot.selectable)
             {
                 if (i != selectingIndex)
                 {

@@ -35,11 +35,17 @@ public class SquadContainer : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        GameEvent.SquadChange.RemoveListener(OnUpdateSquad);
+    }
+
     public Sailor AddSubSailor(string sailorId)
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSubsailor drag = sailor.gameObject.AddComponent<DragableSubsailor>();
         sailor.transform.parent = transform;
+        sailor.transform.localPosition = Vector3.zero;
         drag.slots = slots;
 
         return sailor;
@@ -50,6 +56,7 @@ public class SquadContainer : MonoBehaviour
         Sailor sailor = GameUtils.CreateSailor(sailorId);
         DragableSailor drag = sailor.gameObject.AddComponent<DragableSailor>();
         sailor.transform.parent = transform;
+        sailor.transform.localPosition = Vector3.zero;
         drag.slots = slots;
 
         return sailor;

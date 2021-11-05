@@ -6,6 +6,8 @@ using Sfs2X.Entities;
 using Sfs2X.Requests;
 using System.Collections;
 using UnityEngine.Networking;
+using Sfs2X.Entities.Data;
+using System.Collections.Generic;
 
 public class LobbyController : BaseController
 {
@@ -44,6 +46,8 @@ public class LobbyController : BaseController
 
 		// Join the lobby Room (must exist in the Zone!)
 		// sfs.Send(new JoinRoomRequest("The Lobby"));
+
+		SmartFoxConnection.Send(SFSAction.LOAD_LIST_HERO_INFO);
 	}
 
     // Update is called once per frame
@@ -121,6 +125,42 @@ public class LobbyController : BaseController
 	{
 		// Show error message
 		Debug.Log("Room join failed: " + (string)evt.Params["errorMessage"]);
+	}
+
+	protected override void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+	{
+
+		switch (action)
+		{
+			case SFSAction.LOAD_LIST_HERO_INFO:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						ISFSArray sFSArray = packet.GetSFSArray("sailors");
+						foreach (ISFSObject obj in sFSArray)
+						{
+							SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name")) 
+							{ quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp")};
+							SquadData.Instance.Sailors.Add(model);
+						}
+
+						sFSArray = packet.GetSFSArray("fighting_lines");
+						foreach (ISFSObject obj in sFSArray)
+						{
+							string uid = obj.GetUtfString("sid");
+							ISFSObject pos = obj.GetSFSObject("pos");
+							byte x = pos.GetByte("x");
+							byte y = pos.GetByte("y");
+
+							short slotIndex = SquadData.Position2SlotIndex(x, y);
+							SquadData.Instance.Squad[slotIndex] = uid;
+						}
+
+					}
+				
+					break;
+				}
+		}
 	}
 
 }

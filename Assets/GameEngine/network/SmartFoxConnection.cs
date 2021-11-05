@@ -12,7 +12,8 @@ public class SmartFoxConnection : MonoBehaviour
 	private static SmartFoxConnection mInstance; 
 	private static SmartFox sfs;
 	public const string CLIENT_REQUEST = "clrq";
-	public static string ACTION_INCORE = "acc";
+    public static string ACTION_INCORE = "acc";
+	public static string ERROR_CODE = "error_code";
 
 	public static SmartFox Connection {
 		get {
@@ -35,11 +36,16 @@ public class SmartFoxConnection : MonoBehaviour
 		}
 	}
 
-	public static void Send(ISFSObject data, SFSAction action)
+	public static void Send(SFSAction action, ISFSObject data)
 	{
 		data.PutInt(ACTION_INCORE, (int)action);
 		ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
 		sfs.Send(extensionRequest);
+	}
+
+	public static void Send(SFSAction action)
+	{
+		Send(action, new SFSObject());
 	}
 
 	// Handle disconnection auto magically

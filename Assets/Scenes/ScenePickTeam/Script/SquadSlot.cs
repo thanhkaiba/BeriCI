@@ -39,7 +39,7 @@ public class SquadSlot : MonoBehaviour
         {
             state = State.SELECTED;
             sailor = s;
-            sailor.transform.position = transform.position;
+            sailor.transform.position = new Vector3(transform.position.x, transform.position.y, sailor.transform.position.z);
             GetComponent<SpriteRenderer>().color = Color.red;
         } else
         {
