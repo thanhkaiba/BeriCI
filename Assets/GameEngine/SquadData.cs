@@ -1,3 +1,4 @@
+using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,37 @@ public class SquadData : Singleton<SquadData>
     protected override void OnAwake()
     {
         ResetData();
+        GameEvent.SquadChange.AddListener(OnUpdateSquad);
+    }
+
+    private void OnUpdateSquad()
+    {
+        SmartFoxConnection.Send(SFSAction.TEAM_COMMIT, toSFSObject());
+    }
+
+    private ISFSObject toSFSObject()
+    {
+        SFSObject data = new SFSObject();
+        ISFSArray fighting_lines = new SFSArray();
+        foreach (KeyValuePair<short, string> slot in Squad)
+        {
+            if (slot.Value != "" && slot.Value != null)
+            {
+                CombatPosition combatPosition = SlotIndex2Position(slot.Key);
+                ISFSObject pos = new SFSObject();
+                pos.PutByte("x", (byte)combatPosition.x);
+                pos.PutByte("y", (byte)combatPosition.y);
+
+                ISFSObject slotData = new SFSObject();
+                slotData.PutUtfString("sid", slot.Value);
+                slotData.PutSFSObject("pos", pos);
+                fighting_lines.AddSFSObject(slotData);
+            }
+        }
+
+        data.PutSFSArray("fighting_lines", fighting_lines);
+
+        return data;
     }
 
     private void ResetData()
@@ -33,6 +65,8 @@ public class SquadData : Singleton<SquadData>
             {8,  ""},
         };
     }
+
+
 
     public SailorModel GetSailorModel(string id)
     {
@@ -182,6 +216,11 @@ public class SquadData : Singleton<SquadData>
     public static short Position2SlotIndex(short x, short y)
     {
         return (short)(y * NUM_SQUAD_COL + x);
+    }
+
+    public static CombatPosition SlotIndex2Position(short index)
+    {
+        return new CombatPosition(index % NUM_SQUAD_COL, index / NUM_SQUAD_COL);
     }
 
     public bool IsSquadFull()

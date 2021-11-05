@@ -35,6 +35,11 @@ public class SquadContainer : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        GameEvent.SquadChange.RemoveListener(OnUpdateSquad);
+    }
+
     public Sailor AddSubSailor(string sailorId)
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);

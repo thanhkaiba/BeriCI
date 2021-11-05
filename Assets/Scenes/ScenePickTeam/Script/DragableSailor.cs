@@ -92,8 +92,7 @@ public class DragableSailor : MonoBehaviour
         for (short i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
-            mousePositon.z = slot.transform.position.z;
-            if (slot.boxAround.Contains(mousePositon) && slot.selectable)
+            if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot.selectable)
             {
                 if (i != selectingIndex)
                 {

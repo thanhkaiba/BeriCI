@@ -47,7 +47,7 @@ public class LobbyController : BaseController
 		// Join the lobby Room (must exist in the Zone!)
 		// sfs.Send(new JoinRoomRequest("The Lobby"));
 
-		SmartFoxConnection.Send(new SFSObject(), SFSAction.LOAD_LIST_HERO_INFO);
+		SmartFoxConnection.Send(SFSAction.LOAD_LIST_HERO_INFO);
 	}
 
     // Update is called once per frame
@@ -139,7 +139,7 @@ public class LobbyController : BaseController
 						ISFSArray sFSArray = packet.GetSFSArray("sailors");
 						foreach (ISFSObject obj in sFSArray)
 						{
-							SailorModel model = new SailorModel(obj.GetUtfString("uid"), obj.GetUtfString("name")) 
+							SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name")) 
 							{ quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp")};
 							SquadData.Instance.Sailors.Add(model);
 						}
