@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\CharacterContainerB.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\UIManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FreezeWorld.cs" />
+    <Compile Include="Assets\GameEngine\network\SmartFoxErrorCode.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ContainerClassBonus.cs" />
     <Compile Include="Assets\Utils\CameraFollow.cs" />
     <Compile Include="Assets\GameEngine\SailorData.cs" />
@@ -152,7 +153,7 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\network\SmartFoxErrorCode.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

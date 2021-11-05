@@ -6,4 +6,5 @@
     LOAD_USER_INFO = 4,
     LOAD_LIST_HERO_INFO = 5,
     TEAM_COMMIT = 6,
+    COMBAT_BOT = 7,
 }
