@@ -44,7 +44,7 @@ public class Helti : CombatSailor
     }
     public override void SetFaceDirection()
     {
-        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1 : -1, 1, 1);
+        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1.42f : -1.42f, 1.42f, 1.42f);
     }
     private void LateUpdate()
     {

@@ -17,12 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScenePickTeam/ScenePickTeam.unity
     guid: f7bc780a865acb24c9d9e03c40cb65a2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SceneCombat/SceneGame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/ScenePickTeam/SceneTest/ScenePick2Team4Balance.unity
     guid: ca503b04611424c498e71bcbc2bffb77
+  - enabled: 1
+    path: Assets/Scenes/SceneCombat/SceneCombat2D.unity
+    guid: 228c65bb82644e749b0ff066e1d25488
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: a8764b1955520ca45a363558be435b17,
       type: 2}
