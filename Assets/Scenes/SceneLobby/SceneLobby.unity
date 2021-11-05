@@ -930,7 +930,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbc1509e7558e944994dd9603966cbf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loggedInText: {fileID: 559460686}
+  userName: {fileID: 559460686}
+  userAvatar: {fileID: 384870911}
+  userLevel: {fileID: 616054853}
+  userBeri: {fileID: 457179972}
+  userStamina: {fileID: 105141830}
 --- !u!4 &1022189049
 Transform:
   m_ObjectHideFlags: 0

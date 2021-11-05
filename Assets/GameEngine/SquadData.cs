@@ -6,7 +6,7 @@ using UnityEngine;
 public class SquadData : Singleton<SquadData>
 {
     // for sailors aren't in squad
-    public List<SailorModel> Sailors;
+    public List<SailorModel> Sailors = new List<SailorModel>();
     private static readonly byte MAX_SQUAD_SLOT = 9;
     private static readonly byte NUM_SQUAD_COL = 3;
     public static readonly byte NUM_SAILOR_IN_SQUAD = 5;
@@ -14,31 +14,12 @@ public class SquadData : Singleton<SquadData>
     public Dictionary<short, string> Squad { get; private set; }
     protected override void OnAwake()
     {
-        SetUpFakeData();
+        ResetData();
     }
 
-    private void SetUpFakeData()
+    private void ResetData()
     {
-        Sailors = new List<SailorModel>
-        {
-            new SailorModel("1", "Meechic") { quality = 1, level = 1},
-            new SailorModel("2", "Meechic") { quality = 1, level = 1},
-            new SailorModel("3", "Meechic") { quality = 1, level = 1},
-            new SailorModel("4", "Meechic") { quality = 1, level = 1},
-            new SailorModel("5", "Meechic") { quality = 1, level = 1},
-            new SailorModel("6", "Target") { quality = 1, level = 1},
-            new SailorModel("7", "Target") { quality = 1, level = 1},
-            new SailorModel("8", "Target") { quality = 1, level = 1},
-            new SailorModel("9", "Target") { quality = 1, level = 1},
-            new SailorModel("10", "Target") { quality = 1, level = 1},
-            new SailorModel("11", "Helti") { quality = 1, level = 1},
-            new SailorModel("12", "Helti") { quality = 1, level = 1},
-            new SailorModel("12A", "Helti") { quality = 1, level = 1},
-            new SailorModel("13", "Helti") { quality = 1, level = 1},
-            new SailorModel("14", "Helti") { quality = 1, level = 1},
-           
-        };
-        
+        Sailors.Clear();
         Squad = new Dictionary<short, string>
         {
             {0,  ""},
@@ -189,13 +170,18 @@ public class SquadData : Singleton<SquadData>
     /// <returns>return null if not found</returns>
     public SailorModel SailorAt(CombatPosition combatPosition)
     {
-        short slotIndex = (short)(combatPosition.y * NUM_SQUAD_COL + combatPosition.x);
+        short slotIndex = Position2SlotIndex(combatPosition.x, combatPosition.y);
         if (slotIndex < 0 || slotIndex >= MAX_SQUAD_SLOT)
         {
             Debug.LogError("Index is out of range " + combatPosition);
             return null;
         }
         return GetSailorModel(Squad[slotIndex]);
+    }
+
+    public static short Position2SlotIndex(short x, short y)
+    {
+        return (short)(y * NUM_SQUAD_COL + x);
     }
 
     public bool IsSquadFull()

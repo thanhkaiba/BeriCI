@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipSailorInfo\TooltipSailorInfo.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SceneControls.cs" />
     <Compile Include="Assets\GameEngine\GameEvent.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\Targets.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Marksman.cs" />
     <Compile Include="Assets\GameEngine\TextLocalization.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Assets\Scenes\SceneLobby\script\LobbyController.cs" />
     <Compile Include="Assets\Utils\SmoothSlider.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ClientHandle.cs" />
+    <Compile Include="Assets\GameEngine\network\SmartFoxAction.cs" />
     <Compile Include="Assets\GameEngine\Sailor.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\UIIngameMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FightingPassion.cs" />
@@ -150,8 +152,7 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Targets.cs" />
-    <Compile Include="Assets\GameEngine\network\SmartFoxAction.cs" />
+    <Compile Include="Assets\GameEngine\network\SmartFoxErrorCode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

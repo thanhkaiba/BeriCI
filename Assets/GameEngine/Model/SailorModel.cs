@@ -15,6 +15,7 @@ public class SailorModel
     public readonly string name;
     public int quality { get; set; }
     public int level { get; set; }
+    public int exp { get; set; }
     public List<Item> items { get; set; }
 
     public void LoadConfig()

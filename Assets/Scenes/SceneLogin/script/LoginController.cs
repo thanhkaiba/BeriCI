@@ -109,7 +109,7 @@ public class LoginController : BaseController
 	}
 
 
-    protected override void OnReceiveServerAction(SFSAction action, ISFSObject packet)
+    protected override void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
 
 
@@ -117,17 +117,22 @@ public class LoginController : BaseController
 		{
 			case SFSAction.JOIN_ZONE_SUCCESS:
 				{
-
-					User user = sfs.MySelf;
-					UserData.Instance.Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
-					UserData.Instance.Username = user.Name;
-					UserData.Instance.Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
-					UserData.Instance.Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
-					UserData.Instance.Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
-					UserData.Instance.Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
-					UserData.Instance.LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
-					SmartFoxConnection.Send(new SFSObject(), SFSAction.LOAD_LIST_HERO_INFO);
-					OpenLobby();
+					if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+						User user = sfs.MySelf;
+						UserData.Instance.Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
+						UserData.Instance.Username = user.Name;
+						UserData.Instance.Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
+						UserData.Instance.Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
+						UserData.Instance.Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
+						UserData.Instance.Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
+						UserData.Instance.LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
+						OpenLobby();
+					} else
+                    {
+						OnError("Error Code: " + errorCode);
+                    }
+					
 					break;
 				}
 		}
@@ -227,19 +232,19 @@ public class LoginController : BaseController
 	}
 
 	private void OnLoginError(BaseEvent evt)
-	{
-		// Disconnect
-		sfs.Disconnect();
-
-		// Remove SFS2X listeners and re-enable interface
-		reset();
-
-		// Show error message
-		errorText.text = "Login failed: " + (string)evt.Params["errorMessage"];
+	{		
+		OnError("Login failed: " + (string)evt.Params["errorMessage"]);
 	}
 
 	private void OnJoinRoomError(BaseEvent evt)
 	{
+	
+		OnError("Join Room failed: " + (string)evt.Params["errorMessage"]);
+	}
+
+
+	private void OnError(string message)
+    {
 		// Disconnect
 		sfs.Disconnect();
 
@@ -247,7 +252,7 @@ public class LoginController : BaseController
 		reset();
 
 		// Show error message
-		errorText.text = "Join Room failed: " + (string)evt.Params["errorMessage"];
+		errorText.text = message;
 	}
 
 }

@@ -13,6 +13,7 @@ public class SmartFoxConnection : MonoBehaviour
 	private static SmartFox sfs;
 	public const string CLIENT_REQUEST = "clrq";
 	public static string ACTION_INCORE = "acc";
+	public static string ERROR_CODE = "error_code";
 
 	public static SmartFox Connection {
 		get {
