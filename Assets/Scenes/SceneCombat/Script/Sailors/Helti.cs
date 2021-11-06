@@ -69,8 +69,8 @@ public class Helti : CombatSailor
         float secondary_damage = cs.Power * behind_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = Targets.Melee(this, enermy);
-        List<CombatSailor> behind_target = Targets.AllBehind(target, enermy);
+        CombatSailor target = TargetsUtils.Melee(this, enermy);
+        List<CombatSailor> behind_target = TargetsUtils.AllBehind(target, enermy);
 
         return RunAnimation(target, behind_target, main_damage, secondary_damage);
     }

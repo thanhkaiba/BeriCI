@@ -23,7 +23,7 @@ public class UltimateSlash : Skill
         float heal = base_heal + cChar.cs.Power;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = Targets.Melee(cChar, enermy);
+        CombatSailor target = TargetsUtils.Melee(cChar, enermy);
 
         return RunAnimation(cChar, target, true_damage, heal);
     }

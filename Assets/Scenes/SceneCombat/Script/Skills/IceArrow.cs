@@ -21,7 +21,7 @@ public class IceArrow : Skill
         base.CastSkill(cChar, cbState);
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = Targets.Range(cChar, enermy);
+        CombatSailor target = TargetsUtils.Range(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }

@@ -23,7 +23,7 @@ public class Deceive : Skill
         float magic_damage = base_damage + cChar.Model.level * damage_per_level;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = Targets.Backstab(cChar, enermy);
+        CombatSailor target = TargetsUtils.Backstab(cChar, enermy);
 
         //cChar.cs.position = GetRandomAvaiablePosition(cbState.GetAllTeamAliveCharacter(cChar.cs.team));
 

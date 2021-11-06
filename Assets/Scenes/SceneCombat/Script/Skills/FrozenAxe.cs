@@ -22,7 +22,7 @@ public class FrozenAxe : Skill
         float spell_damage = cChar.cs.Power;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cChar.cs.team);
-        CombatSailor target = Targets.Melee(cChar, enermy);
+        CombatSailor target = TargetsUtils.Melee(cChar, enermy);
 
         return RunAnimation(cChar, target);
     }

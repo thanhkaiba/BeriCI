@@ -60,8 +60,8 @@ public class Meechic : CombatSailor
         float physic_damage = cs.Power;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = Targets.Range(this, enermy);
-        List<CombatSailor> around_target = Targets.Around(target, enermy);
+        CombatSailor target = TargetsUtils.Range(this, enermy);
+        List<CombatSailor> around_target = TargetsUtils.Around(target, enermy);
 
         return RunAnimation(target, around_target, physic_damage);
     }

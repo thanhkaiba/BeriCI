@@ -31,6 +31,35 @@ public class CombatState : MonoBehaviour
         status = CombatStatus.PREPARING;
         lastTeamAction = Team.B;
     }
+    public void CreateTeamFromServer()
+    {
+        var listSailor = TempCombatData.Instance.listSailor;
+        var fgl0 = TempCombatData.Instance.fgl0;
+        var fgl1 = TempCombatData.Instance.fgl1;
+
+        for (short x = 0; x < 3; x++)
+        {
+            for (short y = 0; y < 3; y++)
+            {
+                {
+                    string sailorID = fgl0.SailorIdAt(x, y);
+                    if (sailorID != "")
+                    {
+                        SailorModel sailor = listSailor.Find(sailor => sailor.id == sailorID);
+                        CreateCombatSailor(sailor, new CombatPosition(x, y), Team.A);
+                    }
+                }
+                {
+                    string sailorID = fgl1.SailorIdAt(x, y);
+                    if (sailorID != "")
+                    {
+                        SailorModel sailor = listSailor.Find(sailor => sailor.id == sailorID);
+                        CreateCombatSailor(sailor, new CombatPosition(x, y), Team.B);
+                    }
+                }
+            }
+        }
+    }
     public void CreateDemoTeam()
     {
         CreateRandomTeam(Team.A);
@@ -133,6 +162,7 @@ public class CombatState : MonoBehaviour
 
     CombatSailor CreateCombatSailor(SailorModel s, CombatPosition pos, Team team)
     {
+        Debug.Log("sailor model: " + s);
         string name = s.config_stats.root_name;
         List<Item> listItem = s.items;
 

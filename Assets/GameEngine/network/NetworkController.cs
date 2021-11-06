@@ -233,6 +233,12 @@ public class NetworkController : MonoBehaviour
 					if (LoginController.Instance) LoginController.Instance.ReceiveJoinZoneSuccess(sfs, errorCode, packet);
 					break;
 				}
+			case SFSAction.COMBAT_BOT:
+				{
+					TempCombatData.Instance.LoadCombatDataFromSfs(packet);
+					SceneManager.LoadScene("SceneCombat2D");
+					break;
+				}
 		}
 	}
 

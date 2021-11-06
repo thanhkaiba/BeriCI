@@ -18,8 +18,10 @@ public class CombatMgr : MonoBehaviour
     public CombatState combatState;
     public UIIngameMgr UIMgr;
     public int actionCount = 0;
+    public static CombatMgr Instance;
     private void Start()
     {
+        Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
 
         //return;
@@ -28,11 +30,20 @@ public class CombatMgr : MonoBehaviour
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowClassBonus(combatState.ClassBonusA, combatState.classBonusB);
         UIMgr.ShowActionCount(actionCount);
-        StartCoroutine(StartGame());
+        //StartCoroutine(StartGame());
     }
-    void PreparingGame()
+    public void PreparingGame()
     {
-        combatState.CreateDemoTeam();
+        if (TempCombatData.Instance.waitForAServerGame)
+        {
+            combatState.CreateTeamFromServer();
+            TempCombatData.Instance.waitForAServerGame = false;
+        }
+        else
+        {
+            combatState.CreateDemoTeam();
+        }
+        
         combatState.CalculateClassBonus();
         combatState.UpdateGameWithClassBonus();
     }

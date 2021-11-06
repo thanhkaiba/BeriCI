@@ -257,17 +257,17 @@ public class CombatSailor : Sailor
         switch (Model.config_stats.attack_type)
         {
             case AttackType.RANGE:
-                return Targets.Range(this,
+                return TargetsUtils.Range(this,
                     cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
             case AttackType.BACKSTAB:
-                return Targets.Backstab(this,
+                return TargetsUtils.Backstab(this,
                     cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));
             default:
-                return Targets.Melee(this,
+                return TargetsUtils.Melee(this,
                 cs.team == Team.A
                     ? combatState.GetAllTeamAliveCharacter(Team.B)
                     : combatState.GetAllTeamAliveCharacter(Team.A));

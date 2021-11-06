@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 
-public class Targets
+public class TargetsUtils
 {
     public static CombatSailor Melee(CombatSailor actor, List<CombatSailor> l)
     {

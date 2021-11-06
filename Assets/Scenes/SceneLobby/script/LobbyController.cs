@@ -76,7 +76,8 @@ public class LobbyController : MonoBehaviour
 	}
 	public void OnStartNewGameButtonClick()
 	{
-		SceneManager.LoadScene("SceneCombat2d");
+		//SceneManager.LoadScene("SceneCombat2d");
+		NetworkController.Instance.Send(SFSAction.COMBAT_BOT);
 	}
 	public void OnButtonPickTeamClick()
     {
