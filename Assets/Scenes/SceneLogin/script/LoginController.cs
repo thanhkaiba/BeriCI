@@ -100,7 +100,7 @@ public class LoginController: MonoBehaviour
 		}
 		else
 		{
-			NetworkController.Instance.OnError("Login Fail: " + errorCode);
+			errorText.text = "Login error: code " + errorCode;
 		}
 	}
 
