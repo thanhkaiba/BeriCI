@@ -6,13 +6,13 @@ using Sfs2X.Entities.Data;
 
 public class BaseController : MonoBehaviour
 {
-
 	//----------------------------------------------------------
 	// Private properties
 	//----------------------------------------------------------
 
 	protected SmartFox sfs;
 	private bool shuttingDown;
+	protected bool forceLoginScene = true;
 
 	//----------------------------------------------------------
 	// Unity callback methods
@@ -28,7 +28,7 @@ public class BaseController : MonoBehaviour
 		}
 		else
 		{
-			SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
+			if (forceLoginScene) SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
 			return;
 		}
 
@@ -75,7 +75,7 @@ public class BaseController : MonoBehaviour
 			return;
 
 		// Return to login scene
-		SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
+		if (forceLoginScene) SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
 	}
 
 	protected virtual void OnExtentionResponse(BaseEvent evt)
