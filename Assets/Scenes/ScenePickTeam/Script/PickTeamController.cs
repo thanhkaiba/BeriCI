@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
+using UnityEngine;
 
-public class PickTeamController : BaseController
+public class PickTeamController: MonoBehaviour
 {
     public void OnJoinBattle()
     {

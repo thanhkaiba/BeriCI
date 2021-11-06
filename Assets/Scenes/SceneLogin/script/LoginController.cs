@@ -12,7 +12,7 @@ using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 
-public class LoginController : BaseController
+public class LoginController: MonoBehaviour
 {
 
 	//----------------------------------------------------------
@@ -61,13 +61,17 @@ public class LoginController : BaseController
 	//----------------------------------------------------------
 	// Unity callback methods
 	//----------------------------------------------------------
-
-	protected override void Awake()
+	public static LoginController Instance;
+	protected void Awake()
 	{
+		Instance = this;
 		Application.runInBackground = true;
-
 		// Enable interface
 		enableLoginUI(true);
+	}
+	protected void OnDestroy()
+	{
+		Instance = null;
 	}
 
 	//----------------------------------------------------------
@@ -77,182 +81,60 @@ public class LoginController : BaseController
 	public void OnLoginButtonClick()
 	{
 		enableLoginUI(false);
-
-		// Set connection parameters
-		ConfigData cfg = new ConfigData();
-		cfg.Host = Host;
-#if !UNITY_WEBGL
-		cfg.Port = TcpPort;
-#else
-		cfg.Port = WSPort;
-#endif
-		cfg.Zone = Zone;
-
-		// Initialize SFS2X client and add listeners
-#if !UNITY_WEBGL
-		sfs = new SmartFox();
-#else
-		sfs = new SmartFox(UseWebSocket.WS_BIN);
-#endif
-
-		sfs.AddEventListener(SFSEvent.CONNECTION, OnConnection);
-		sfs.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
-		sfs.AddEventListener(SFSEvent.LOGIN, OnLogin);
-		sfs.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
-		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnJoinRoomError);
-		sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnJoinRoom);
-		sfs.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
-		sfs.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
-
-		// Connect to SFS2X
-		sfs.Connect(cfg);
+		NetworkController.Instance.LoginToServer(new LoginData(nameInput.text, ""));
 	}
 
+	public void ReceiveJoinZoneSuccess(SmartFox sfs, SFSErrorCode errorCode, ISFSObject packet)
+	{
+		if (errorCode == SFSErrorCode.SUCCESS)
+		{
+			User user = sfs.MySelf;
+			UserData.Instance.Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
+			UserData.Instance.Username = user.Name;
+			UserData.Instance.Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
+			UserData.Instance.Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
+			UserData.Instance.Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
+			UserData.Instance.Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
+			UserData.Instance.LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
+			OpenLobby();
+		}
+		else
+		{
+			NetworkController.Instance.OnError("Login Fail: " + errorCode);
+		}
+	}
 
-    protected override void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
-    {
-
-
+	public void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+	{
 		switch (action)
 		{
-			case SFSAction.JOIN_ZONE_SUCCESS:
+			case SFSAction.LOAD_LIST_HERO_INFO:
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
-                    {
-						User user = sfs.MySelf;
-						UserData.Instance.Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
-						UserData.Instance.Username = user.Name;
-						UserData.Instance.Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
-						UserData.Instance.Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
-						UserData.Instance.Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
-						UserData.Instance.Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
-						UserData.Instance.LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
-						OpenLobby();
-					} else
-                    {
-						OnError("Error Code: " + errorCode);
-                    }
-					
+					{
+						CrewData.Instance.NewFromSFSObject(packet);
+					}
 					break;
 				}
 		}
 	}
-
 	private void OpenLobby()
     {
-		reset();
 		SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
 	}
-
-    private void OnJoinRoom(BaseEvent evt)
-    {
-		
-		// Load lobby scene
-		//Application.LoadLevel("Lobby");
-		Debug.Log("Join Room Success" + ((Room)evt.Params["room"]).Name);
-		// SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
-	}
-
     //----------------------------------------------------------
     // Private helper methods
     //----------------------------------------------------------
-
     private void enableLoginUI(bool enable)
 	{
 		nameInput.interactable = enable;
 		loginButton.interactable = enable;
 		errorText.text = "";
 	}
-
-	protected override void reset()
-	{
-		// Remove SFS2X listeners
-		// This should be called when switching scenes, so events from the server do not trigger code in this scene
-		sfs.RemoveAllEventListeners();
-
-		// Enable interface
-		enableLoginUI(true);
-	}
-
 	//----------------------------------------------------------
 	// SmartFoxServer event listeners
 	//----------------------------------------------------------
 
-	private void OnConnection(BaseEvent evt)
-	{
-		if ((bool)evt.Params["success"])
-		{
-			Debug.Log("SFS2X API version: " + sfs.Version);
-			Debug.Log("Connection mode is: " + sfs.ConnectionMode);
-
-			// Save reference to SmartFox instance; it will be used in the other scenes
-			SmartFoxConnection.Connection = sfs;
-
-			SFSObject sfso = SFSObject.NewInstance();
-			sfso.PutUtfString("passwd", "test");
-			sfso.PutInt("loginType", 1);
-			sfs.Send(new Sfs2X.Requests.LoginRequest(nameInput.text, "", Zone, sfso));
-
-			// Login
-		}
-		else
-		{
-			// Remove SFS2X listeners and re-enable interface
-			reset();
-
-			// Show error message
-			errorText.text = "Connection failed; is the server running at all?";
-		}
-	}
-
-	protected override void OnConnectionLost(BaseEvent evt)
-	{
-		// Remove SFS2X listeners and re-enable interface
-		reset();
-
-		string reason = (string)evt.Params["reason"];
-
-		if (reason != ClientDisconnectionReason.MANUAL)
-		{
-			// Show error message
-			errorText.text = "Connection was lost; reason is: " + reason;
-		}
-	}
-
-	private void OnLogin(BaseEvent evt)
-	{
-
-		if (sfs.RoomList.Count > 0)
-		{
-			// sfs.Send(new Sfs2X.Requests.JoinRoomRequest("The Lobby"));
-			Debug.Log("Request Join Room Lobby");
-		}
-
-		Debug.Log("Login success as " + sfs.MySelf.Name);
-	}
-
-	private void OnLoginError(BaseEvent evt)
-	{		
-		OnError("Login failed: " + (string)evt.Params["errorMessage"]);
-	}
-
-	private void OnJoinRoomError(BaseEvent evt)
-	{
 	
-		OnError("Join Room failed: " + (string)evt.Params["errorMessage"]);
-	}
-
-
-	private void OnError(string message)
-    {
-		// Disconnect
-		sfs.Disconnect();
-
-		// Remove SFS2X listeners and re-enable interface
-		reset();
-
-		// Show error message
-		errorText.text = message;
-	}
 
 }

@@ -9,7 +9,7 @@ using UnityEngine.Networking;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 
-public class LobbyController : BaseController
+public class LobbyController : MonoBehaviour
 {
 
 	//----------------------------------------------------------
@@ -31,7 +31,9 @@ public class LobbyController : BaseController
 	[SerializeField]
 	private Text userStamina;
 
-
+	public static LobbyController Instance;
+	private void Awake() { Instance = this; }
+	private void OnDestroy() { Instance = null; }
 	private void Start()
     {
 		userName.text = UserData.Instance.Username;
@@ -40,30 +42,15 @@ public class LobbyController : BaseController
 		userStamina.text = "Stamina: " + UserData.Instance.Stamina;
 		StartLoadAvatar(UserData.Instance.Avatar);
 
-		sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnRoomJoin);
-		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnRoomJoinError);
-
-
 		// Join the lobby Room (must exist in the Zone!)
 		// sfs.Send(new JoinRoomRequest("The Lobby"));
 
 		SmartFoxConnection.Send(SFSAction.LOAD_LIST_HERO_INFO);
 	}
-
-    // Update is called once per frame
-    protected override void Update()
-	{
-		if (sfs != null)
-			sfs.ProcessEvents();
-
-		
-	}
-
 	void StartLoadAvatar(string url)
 	{
 		StartCoroutine(LoadAvatar(url));
 	}
-
 	IEnumerator LoadAvatar(string url)
 	{
 		using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
@@ -76,7 +63,6 @@ public class LobbyController : BaseController
 			}
 			else
 			{
-
 				// Get downloaded asset bundle
 				Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
 				userAvatar.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0));
@@ -84,64 +70,34 @@ public class LobbyController : BaseController
 			}
 		}
 	}
-
-
 	public void OnLogoutButtonClick()
 	{
-		// Disconnect from server
-		sfs.Disconnect();
+		NetworkController.Instance.Logout();
 	}
-
-
-
 	public void OnStartNewGameButtonClick()
 	{
-
-		//TODO Request Game creation to server
-		reset();
 		SceneManager.LoadScene("SceneCombat2d");
-
 	}
-
 	public void OnButtonPickTeamClick()
     {
-		reset();
 		SceneManager.LoadScene("ScenePickTeam");
 	}
-	
 	//----------------------------------------------------------
 	// SmartFoxServer event listeners
 	//----------------------------------------------------------
-
-	private void OnRoomJoin(BaseEvent evt)
+	public void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
 	{
-		Room room = (Room)evt.Params["room"];
-
-		// Show system message
-		Debug.Log("\nYou joined a Room: " + room.Name);
-	}
-
-	private void OnRoomJoinError(BaseEvent evt)
-	{
-		// Show error message
-		Debug.Log("Room join failed: " + (string)evt.Params["errorMessage"]);
-	}
-
-	protected override void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
-	{
-
 		switch (action)
 		{
 			case SFSAction.LOAD_LIST_HERO_INFO:
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
+						Debug.Log("Load List hero success");
 						CrewData.Instance.NewFromSFSObject(packet);
 					}
-				
 					break;
 				}
 		}
 	}
-
 }
