@@ -8,7 +8,7 @@ public class CharacterContainer : MonoBehaviour
     private List<SailorModel> substituteSailors;
     void Start()
     {
-        substituteSailors = SquadData.Instance.GetSubstituteSailors();
+        substituteSailors = CrewData.Instance.GetSubstituteSailors();
         foreach (SailorModel model in substituteSailors)
         {
             GameObject imgObject = new GameObject(model.id);

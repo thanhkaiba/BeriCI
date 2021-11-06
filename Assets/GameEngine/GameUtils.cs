@@ -31,7 +31,7 @@ public class GameUtils : UnityEngine.Object
     }
     public static Sailor CreateSailor(string id)
     {
-        SailorModel sailorModel = SquadData.Instance.GetSailorModel(id);
+        SailorModel sailorModel = CrewData.Instance.GetSailorModel(id);
         if (sailorModel == null)
         {
             Debug.LogError("Sailor id = " + id + " Not found");

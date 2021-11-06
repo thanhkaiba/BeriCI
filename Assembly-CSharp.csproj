@@ -89,7 +89,7 @@
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\TeamColorB.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Meechic.cs" />
-    <Compile Include="Assets\GameEngine\SquadData.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatController.cs" />
     <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HeadShot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\TakeRest.cs" />
@@ -153,7 +153,8 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatController.cs" />
+    <Compile Include="Assets\GameEngine\FightingLine.cs" />
+    <Compile Include="Assets\GameEngine\CrewData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

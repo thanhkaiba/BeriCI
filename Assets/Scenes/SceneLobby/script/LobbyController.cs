@@ -136,7 +136,7 @@ public class LobbyController : BaseController
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
-						SquadData.Instance.NewFromSFSObject(packet);
+						CrewData.Instance.NewFromSFSObject(packet);
 					}
 				
 					break;

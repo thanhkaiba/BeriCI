@@ -44,7 +44,7 @@ public class DragableSubsailor : DragableSailor
         {
             if (slot.GetOwner() == null)
             {
-                slot.selectable = !SquadData.Instance.IsSquadFull();
+                slot.selectable = !CrewData.Instance.FightingTeam.IsFull();
             }
             else
             {
@@ -79,7 +79,7 @@ public class DragableSubsailor : DragableSailor
     new void OnMouseUpWithSlot()
     {
 
-        SquadData.Instance.Replace(sailor.Model.id, selectingIndex);
+        CrewData.Instance.Replace(sailor.Model.id, selectingIndex);
 
         if (swapSailor != null)
         {

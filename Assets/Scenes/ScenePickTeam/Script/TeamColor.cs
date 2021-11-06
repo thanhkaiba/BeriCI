@@ -6,7 +6,7 @@ public class TeamColor : MonoBehaviour
 {
     public void ShowClassBonus()
     {
-        List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(SquadData.Instance.GetSquadModelList());
+        List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList());
 
         ClearChildren();
 

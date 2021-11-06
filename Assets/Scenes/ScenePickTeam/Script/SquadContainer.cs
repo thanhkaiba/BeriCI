@@ -9,24 +9,27 @@ public class SquadContainer : MonoBehaviour
 
     void Start()
     {
-
-        foreach (KeyValuePair<short, string> squadSlot in SquadData.Instance.Squad)
+        for (short i = 0; i < FightingLine.NUM_SQUAD_COL; i++)
         {
-            SquadSlot slot = slots[squadSlot.Key];
-            string sailorId = squadSlot.Value;
-
-            if (sailorId.Length > 0)
+            for (short j = 0; j < FightingLine.NUM_SQUAD_COL; j++)
             {
+                short key = FightingLine.Position2SlotIndex(i, j);
+                SquadSlot slot = slots[key];
+                string sailorId = CrewData.Instance.FightingTeam.SailorIdAt(i, j);
 
-                Sailor sailor = AddSailor(sailorId);
-                slot.SetSelectedSailer(sailor);
-            }
-            else
-            {
-                slot.SetSelectedSailer(null);
-            }
+                if (sailorId.Length > 0)
+                {
 
+                    Sailor sailor = AddSailor(sailorId);
+                    slot.SetSelectedSailer(sailor);
+                }
+                else
+                {
+                    slot.SetSelectedSailer(null);
+                }
+            }
         }
+        
         teamColor = FindObjectOfType<TeamColor>();
 
 
