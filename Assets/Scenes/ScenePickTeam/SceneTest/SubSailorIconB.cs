@@ -14,6 +14,7 @@ public class SubSailorIconB : MonoBehaviour
 
     void Start()
     {
+        transform.localScale = new Vector3(1.0f, 1.0f);
         image = GetComponent<Image>();
         squadContainer = FindObjectOfType<SquadBContainer>();
 

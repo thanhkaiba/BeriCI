@@ -7,6 +7,6 @@ public class SceneControls : MonoBehaviour
 {
     public void OnJoinBattle()
     {
-        SceneManager.LoadScene("SceneGame");
+        SceneManager.LoadScene("SceneCombat2D");
     }
 }
