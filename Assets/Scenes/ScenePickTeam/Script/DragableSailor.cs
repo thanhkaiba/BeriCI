@@ -32,7 +32,6 @@ public class DragableSailor : MonoBehaviour
         }
         selectingIndex = originIndex;
         slots[originIndex].OnSelecting();
-        Debug.Log("on Touch");
     }
 
   
@@ -42,7 +41,6 @@ public class DragableSailor : MonoBehaviour
     protected void OnMouseDrag()
     {
 
-        Debug.Log("on onDrag");
         Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         movePos.z = transform.position.z;
         transform.position = movePos;

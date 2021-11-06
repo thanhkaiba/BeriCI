@@ -150,13 +150,7 @@ public class FightingLine
     /// <returns>return null if not found</returns>
     public string SailorIdAt(CombatPosition combatPosition)
     {
-        short slotIndex = Position2SlotIndex(combatPosition.x, combatPosition.y);
-        if (slotIndex < 0 || slotIndex >= MAX_SQUAD_SLOT)
-        {
-            Debug.LogError("Index is out of range " + combatPosition);
-            return null;
-        }
-        return slots[slotIndex];
+        return SailorIdAt(combatPosition.x, combatPosition.y);
     }
 
 
@@ -197,7 +191,7 @@ public class FightingLine
         return data;
     }
 
-    public void NewFromSFSObject(ISFSObject packet)
+    public FightingLine NewFromSFSObject(ISFSObject packet)
     {
 
         ISFSArray sFSArray = packet.GetSFSArray("fighting_lines");
@@ -211,6 +205,8 @@ public class FightingLine
             short slotIndex = Position2SlotIndex(x, y);
             slots[slotIndex] = uid;
         }
+
+        return this;
     }
 
     public void Clean()
