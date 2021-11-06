@@ -1,12 +1,8 @@
 using Sfs2X.Entities.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
 
 public class CrewData : Singleton<CrewData>
 {
-    // for sailors aren't in squad
     public List<SailorModel> Sailors = new List<SailorModel>();
     public FightingLine FightingTeam = new FightingLine();
 
