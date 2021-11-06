@@ -11,6 +11,7 @@ using Sfs2X.Util;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
+using Sfs2X.Requests;
 
 public class LoginData {
 	public LoginData(string username, string password)
@@ -41,6 +42,9 @@ public class NetworkController : MonoBehaviour
 	[Tooltip("Name of the SmartFoxServer 2X Zone to join")]
 	public string Zone = "Piratera";
 
+	public const string CLIENT_REQUEST = "clrq";
+	public static string ACTION_INCORE = "acc";
+	public static string ERROR_CODE = "error_code";
 	//----------------------------------------------------------
 	// Private properties
 	//----------------------------------------------------------
@@ -131,9 +135,6 @@ public class NetworkController : MonoBehaviour
 			Debug.Log("SFS2X API version: " + sfs.Version);
 			Debug.Log("Connection mode is: " + sfs.ConnectionMode);
 
-			// Save reference to SmartFox instance; it will be used in the other scenes
-			SmartFoxConnection.Connection = sfs;
-
 			SFSObject sfso = SFSObject.NewInstance();
 			sfso.PutUtfString("passwd", "test");
 			sfso.PutInt("loginType", 1);
@@ -197,12 +198,12 @@ public class NetworkController : MonoBehaviour
 		ISFSObject packet = (ISFSObject)evt.Params["params"];
 
 		string cmd = (string)evt.Params["cmd"];
-		if (cmd == SmartFoxConnection.CLIENT_REQUEST)
+		if (cmd == CLIENT_REQUEST)
 		{
 			Debug.Log("response:" + packet.GetDump());
 
-			SFSAction action = (SFSAction)packet.GetInt(SmartFoxConnection.ACTION_INCORE);
-			SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(SmartFoxConnection.ERROR_CODE);
+			SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
+			SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(ERROR_CODE);
 
 			if (errorCode != SFSErrorCode.SUCCESS)
 			{
@@ -210,6 +211,16 @@ public class NetworkController : MonoBehaviour
 			}
 			OnReceiveServerAction(action, errorCode, packet);
 		}
+	}
+	public void Send(SFSAction action, ISFSObject data)
+	{
+		data.PutInt(ACTION_INCORE, (int)action);
+		ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
+		sfs.Send(extensionRequest);
+	}
+	public void Send(SFSAction action)
+	{
+		Send(action, new SFSObject());
 	}
 	protected virtual void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
 	{

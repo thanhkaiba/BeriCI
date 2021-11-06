@@ -45,7 +45,7 @@ public class LobbyController : MonoBehaviour
 		// Join the lobby Room (must exist in the Zone!)
 		// sfs.Send(new JoinRoomRequest("The Lobby"));
 
-		SmartFoxConnection.Send(SFSAction.LOAD_LIST_HERO_INFO);
+		NetworkController.Instance.Send(SFSAction.LOAD_LIST_HERO_INFO);
 	}
 	void StartLoadAvatar(string url)
 	{
