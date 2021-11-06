@@ -191,10 +191,9 @@ public class FightingLine
         return data;
     }
 
-    public FightingLine NewFromSFSObject(ISFSObject packet)
+    public FightingLine NewFromSFSObject(ISFSArray sFSArray)
     {
 
-        ISFSArray sFSArray = packet.GetSFSArray("fighting_lines");
         foreach (ISFSObject obj in sFSArray)
         {
             string uid = obj.GetUtfString("sid");

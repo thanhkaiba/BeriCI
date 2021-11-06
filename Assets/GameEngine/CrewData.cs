@@ -39,7 +39,7 @@ public class CrewData : Singleton<CrewData>
             Sailors.Add(model);
         }
 
-        FightingTeam.NewFromSFSObject(packet);
+        FightingTeam.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
     }
 
 
