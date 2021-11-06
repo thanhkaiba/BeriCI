@@ -99,14 +99,14 @@ public class LobbyController : BaseController
 
 		//TODO Request Game creation to server
 		reset();
-		SceneManager.LoadScene("Scenes/SceneCombat/SceneGame");
+		SceneManager.LoadScene("SceneCombat2d");
 
 	}
 
 	public void OnButtonPickTeamClick()
     {
 		reset();
-		SceneManager.LoadScene("Scenes/ScenePickTeam/ScenePickTeam");
+		SceneManager.LoadScene("ScenePickTeam");
 	}
 	
 	//----------------------------------------------------------

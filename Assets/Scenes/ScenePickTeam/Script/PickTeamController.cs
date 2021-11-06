@@ -4,12 +4,12 @@ public class PickTeamController : BaseController
 {
     public void OnJoinBattle()
     {
-        SceneManager.LoadScene("SceneGame");
+        SceneManager.LoadScene("SceneCombat2d");
     }
 
     public void OnBackToLobby()
     {
-        SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
+        SceneManager.LoadScene("SceneLobby");
     }
   
 }
