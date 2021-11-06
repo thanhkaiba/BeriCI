@@ -67,6 +67,30 @@ public class SquadData : Singleton<SquadData>
     }
 
 
+    public void NewFromSFSObject(ISFSObject packet)
+    {
+        ResetData();
+        ISFSArray sFSArray = packet.GetSFSArray("sailors");
+        foreach (ISFSObject obj in sFSArray)
+        {
+            SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
+            { quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+            Sailors.Add(model);
+        }
+
+        sFSArray = packet.GetSFSArray("fighting_lines");
+        foreach (ISFSObject obj in sFSArray)
+        {
+            string uid = obj.GetUtfString("sid");
+            ISFSObject pos = obj.GetSFSObject("pos");
+            byte x = pos.GetByte("x");
+            byte y = pos.GetByte("y");
+
+            short slotIndex = SquadData.Position2SlotIndex(x, y);
+            Squad[slotIndex] = uid;
+        }
+    }
+
 
     public SailorModel GetSailorModel(string id)
     {

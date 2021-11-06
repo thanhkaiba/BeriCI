@@ -34,7 +34,7 @@ public class GameUtils : UnityEngine.Object
         SailorModel sailorModel = SquadData.Instance.GetSailorModel(id);
         if (sailorModel == null)
         {
-            Debug.LogError("Sailor id = " + id + " not found");
+            Debug.LogError("Sailor id = " + id + " Not found");
         }
         return CreateSailor(sailorModel);
     }
