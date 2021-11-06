@@ -90,6 +90,11 @@ public class BaseController : MonoBehaviour
 
 			SFSAction action = (SFSAction)packet.GetInt(SmartFoxConnection.ACTION_INCORE);
 			SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(SmartFoxConnection.ERROR_CODE);
+
+			if (errorCode != SFSErrorCode.SUCCESS)
+            {
+				Debug.LogError($"Packet {action} Fail, Error Code: {errorCode}");
+            }
 			OnReceiveServerAction(action, errorCode, packet);
 		}
 	}
