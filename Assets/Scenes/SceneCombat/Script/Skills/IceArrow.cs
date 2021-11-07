@@ -36,7 +36,7 @@ public class IceArrow : Skill
         seq.AppendInterval(delay);
         seq.AppendCallback(() => {
             target.TakeDamage(0, attacking.cs.Power *scale_damage);
-            target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, frozen_turn));
+            target.AddStatus(new SailorStatus(SailorStatusType.STUN, frozen_turn));
         });
         return delay + 0.2f;
     }

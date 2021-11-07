@@ -67,7 +67,7 @@ public class CombatMgr : MonoBehaviour
     {
         int speedAdd = CalculateSpeedAddThisLoop();
         //Debug.Log(" ----> speedAdd: " + speedAdd);
-        CombatSailor actionChar = AddSpeedAndGetActionCharacter(speedAdd);
+        CombatSailor actionChar = SpeedUpAllSailors(speedAdd);
         actionCount++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowActionCount(actionCount);
@@ -100,7 +100,7 @@ public class CombatMgr : MonoBehaviour
     {
         CombatAction actionProcess = listActions[actionCount];
         int speedAdd = CalculateSpeedAddThisLoop();
-        AddSpeedAndGetActionCharacter(speedAdd);
+        SpeedUpAllSailors(speedAdd);
         switch (actionProcess.type)
         {
             case CombatAcionType.BaseAttack:
@@ -165,8 +165,8 @@ public class CombatMgr : MonoBehaviour
 
     int CalculateSpeedAddThisLoop()
     {
-        int speedAdd = 9999;
-        combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatSailor character)
+        int speedAdd = 99999999;
+        combatState.GetAllAliveCombatSailors().ForEach(character =>
         {
             int speedNeed = character.GetSpeedNeeded();
             speedAdd = Math.Min(speedNeed, speedAdd);
@@ -175,19 +175,15 @@ public class CombatMgr : MonoBehaviour
         return Math.Max(speedAdd, 0);
     }
 
-    CombatSailor AddSpeedAndGetActionCharacter(int speedAdd)
+    CombatSailor SpeedUpAllSailors(int speedAdd)
     {
-        combatState.GetAllAliveCombatCharacters().ForEach(delegate (CombatSailor character)
-        {
-            character.SpeedUp(speedAdd);
-        });
-
+        combatState.GetAllAliveCombatSailors().ForEach(character =>character.SpeedUp(speedAdd));
         return combatState.GetQueueNextActionSailor().First();
     }
     public Team CheckTeamWin()
     {
-        bool A_alive = combatState.GetAllTeamAliveCharacter(Team.A).Count() > 0;
-        bool B_alive = combatState.GetAllTeamAliveCharacter(Team.B).Count() > 0;
+        bool A_alive = combatState.GetAllTeamAliveSailors(Team.A).Count() > 0;
+        bool B_alive = combatState.GetAllTeamAliveSailors(Team.B).Count() > 0;
 
         if (A_alive && !B_alive) return Team.A;
         if (!A_alive && B_alive) return Team.B;

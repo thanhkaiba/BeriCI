@@ -12,9 +12,11 @@ public enum AttackType
 public enum SailorStatusType
 {
     DEATH,
-    FROZEN,
+    STUN,
     POISON,
     BURN,
+    EXCITED,
+    BLEEDING,
 };
 
 public enum SailorClass
@@ -53,10 +55,12 @@ public class SailorStatus
 {
     public SailorStatusType name;
     public int remainTurn;
-    public SailorStatus(SailorStatusType _name, int turn = 1)
+    public List<float> _params;
+    public SailorStatus(SailorStatusType _name, int turn = 1, List<float> _params = null)
     {
         name = _name;
         remainTurn = turn;
+        this._params = _params;
     }
 };
 
@@ -100,10 +104,10 @@ public class CombatStats
         }
     }
 
-    public float DisplaySpeed;
-    public int MaxSpeed
+    public float Speed;
+    public int SpeedNeed
     {
-        get { return (int)(10000f / DisplaySpeed); }
+        get { return (int)(1000000f / Speed); }
     }
     public int CurrentSpeed;
 

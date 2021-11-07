@@ -51,7 +51,7 @@ public class CombatSailor : Sailor
             CurHealth = Model.config_stats.GetHealth(level, quality),
             BaseArmor = Model.config_stats.GetArmor(),
             BaseMagicResist = Model.config_stats.GetMagicResist(),
-            DisplaySpeed = Model.config_stats.GetSpeed(level, quality),
+            Speed = Model.config_stats.GetSpeed(level, quality),
             CurrentSpeed = 0,
             Crit = Model.config_stats.GetCrit(),
             CritDamage = GlobalConfigs.Combat.base_crit_damage,
@@ -72,7 +72,7 @@ public class CombatSailor : Sailor
             cs.MaxHealth += item.Health;
             cs.BaseArmor += item.Armor;
             cs.BaseMagicResist += item.MagicResist;
-            cs.DisplaySpeed += item.Speed;
+            cs.Speed += item.Speed;
             cs.Crit += item.Crit;
             if (item.class_buff != SailorClass.NONE) cs.types.Add(item.class_buff);
         });
@@ -91,7 +91,7 @@ public class CombatSailor : Sailor
                 case SailorClass.SWORD_MAN:
                     if (cs.HaveType(SailorClass.SWORD_MAN))
                     {
-                        cs.DisplaySpeed += config.GetParams(p.type, p.level)[0];
+                        cs.Speed += config.GetParams(p.type, p.level)[0];
                     }
                     break;
                 case SailorClass.SUPPORT:
@@ -137,7 +137,7 @@ public class CombatSailor : Sailor
     {
         SailorStatusType[] listName = new SailorStatusType[]
         {
-            SailorStatusType.FROZEN,
+            SailorStatusType.STUN,
         };
         foreach (SailorStatusType statusName in listName)
         {
@@ -163,7 +163,7 @@ public class CombatSailor : Sailor
     public float DoCombatAction(CombatState combatState)
     {
         bool useSkillCondition = UseSkillCondition(combatState);
-        if (HaveStatus(SailorStatusType.FROZEN)) return Immobile();
+        if (HaveStatus(SailorStatusType.STUN)) return Immobile();
         else if(useSkillCondition) return UseSkill(combatState);
         else return BaseAttack(combatState);
     }
@@ -173,18 +173,18 @@ public class CombatSailor : Sailor
     }
     public virtual float UseSkill (CombatState combatState)
     {
-        cs.CurrentSpeed -= cs.MaxSpeed;
+        cs.CurrentSpeed -= cs.SpeedNeed;
         cs.Fury = 0;
         //Debug.Log("Use skill now " + skill.name);
-        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         return CastSkill(combatState);
     }
     public float BaseAttack(CombatSailor target, bool isCrit, bool isBlock)
     {
         var combatState = CombatState.Instance;
-        cs.CurrentSpeed -= cs.MaxSpeed;
-        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         float delay = 0;
         if (target != null)
         {
@@ -208,7 +208,7 @@ public class CombatSailor : Sailor
             if (berserk != null)
             {
                 float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
-                cs.DisplaySpeed += speedAdd;
+                cs.Speed += speedAdd;
                 CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
             }
         }
@@ -216,10 +216,10 @@ public class CombatSailor : Sailor
         {
             ContainerClassBonus config = GlobalConfigs.ClassBonus;
             ClassBonusItem sniper = combatState.GetTeamClassBonus(cs.team, SailorClass.SNIPER);
-            var listYourTeam = combatState.GetAllTeamAliveCharacter(cs.team);
+            var listYourTeam = combatState.GetAllTeamAliveSailors(cs.team);
             listYourTeam.ForEach(sai =>
             {
-                int speedUpValue = (int)(config.GetParams(sniper.type, sniper.level)[0] * sai.cs.MaxSpeed);
+                int speedUpValue = (int)(config.GetParams(sniper.type, sniper.level)[0] * sai.cs.SpeedNeed);
                 if (sai.cs.HaveType(SailorClass.SNIPER) && sai != this)
                 {
                     sai.SpeedUp(speedUpValue);
@@ -241,8 +241,8 @@ public class CombatSailor : Sailor
     }
     float Immobile ()
     {
-        cs.CurrentSpeed -= cs.MaxSpeed;
-        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
 
         DisplayStatus(cs.listStatus);
@@ -265,23 +265,23 @@ public class CombatSailor : Sailor
             case AttackType.RANGE:
                 return TargetsUtils.Range(this,
                     cs.team == Team.A
-                    ? combatState.GetAllTeamAliveCharacter(Team.B)
-                    : combatState.GetAllTeamAliveCharacter(Team.A));
+                    ? combatState.GetAllTeamAliveSailors(Team.B)
+                    : combatState.GetAllTeamAliveSailors(Team.A));
             case AttackType.BACKSTAB:
                 return TargetsUtils.Backstab(this,
                     cs.team == Team.A
-                    ? combatState.GetAllTeamAliveCharacter(Team.B)
-                    : combatState.GetAllTeamAliveCharacter(Team.A));
+                    ? combatState.GetAllTeamAliveSailors(Team.B)
+                    : combatState.GetAllTeamAliveSailors(Team.A));
             default:
                 return TargetsUtils.Melee(this,
                 cs.team == Team.A
-                    ? combatState.GetAllTeamAliveCharacter(Team.B)
-                    : combatState.GetAllTeamAliveCharacter(Team.A));
+                    ? combatState.GetAllTeamAliveSailors(Team.B)
+                    : combatState.GetAllTeamAliveSailors(Team.A));
         }
     }
     float DealBaseAttackDamage(CombatSailor target, Damage damage)
     {
-        GainFury(10);
+        GainFury(GlobalConfigs.Combat.fury_per_base_attack);
         return target.TakeDamage(damage);
     }
     IEnumerator DealBaseAttackDamageDelay(CombatSailor target, Damage damage, float delay)
@@ -345,7 +345,7 @@ public class CombatSailor : Sailor
         UnityEngine.Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
         transform.position = p;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
-        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(Model.config_stats.attack_type);
         bar.SetIconSkill(Model.config_stats.skill_name);
@@ -385,18 +385,18 @@ public class CombatSailor : Sailor
     }
     public int GetSpeedNeeded()
     {
-        return cs.MaxSpeed - cs.CurrentSpeed;
+        return cs.SpeedNeed - cs.CurrentSpeed;
     }
     public virtual void SpeedUp(int speedAdd)
     {
         cs.CurrentSpeed += speedAdd;
-        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
     }
     public void IncDisplaySpeed(float spInc)
     {
-        cs.DisplaySpeed += spInc;
+        cs.Speed += spInc;
 
-        bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
     }
     public bool IsEnoughSpeed()
     {
@@ -428,7 +428,7 @@ public class CombatSailor : Sailor
     }
     public void DisplayStatus(List<SailorStatus> listStatus)
     {
-        ShowInIce(listStatus.Find(x => x.name == SailorStatusType.FROZEN) != null);
+        ShowInIce(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
     }
     public void ShowInIce(bool b)
     {

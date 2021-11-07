@@ -31,7 +31,7 @@ public class Encourage : Skill
         int buff_fury = fury;
         float power_buff = base_power_buff + power_buff_per_level * cChar.Model.level;
 
-        List<CombatSailor> allies = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
+        List<CombatSailor> allies = cbState.GetAllTeamAliveSailors(cChar.cs.team);
         CombatSailor target = TargetsUtils.LowestPercentHealth(allies);
 
         return RunAnimation(cChar, target, heal, target != cChar ? speed_percent : 0f, buff_fury, power_buff);
@@ -46,7 +46,7 @@ public class Encourage : Skill
         seq.AppendCallback(() =>
         {
             target.GainHealth(heal);
-            target.SpeedUp((int) speed * target.cs.MaxSpeed);
+            target.SpeedUp((int) speed * target.cs.SpeedNeed);
             target.GainFury(fury);
             target.cs.BasePower += power_buff;
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("+Buff+", target.transform.position);

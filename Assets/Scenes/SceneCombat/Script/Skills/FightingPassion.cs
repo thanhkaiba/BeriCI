@@ -22,7 +22,7 @@ public class FightingPassion : Skill
         base.CastSkill(cChar, cbState);
         float incPower = cChar.cs.BasePower * increaseDamageRatio;
         cChar.cs.BasePower += cChar.cs.BasePower * increaseDamageRatio;
-        cChar.cs.CurrentSpeed += (int)System.Math.Floor(cChar.cs.MaxSpeed * increaseSpeedRatio);
+        cChar.cs.CurrentSpeed += (int)System.Math.Floor(cChar.cs.SpeedNeed * increaseSpeedRatio);
         cChar.cs.BaseArmor += armor_increase;
         cChar.cs.BaseMagicResist += magic_resist_increase;
         cChar.cs.MaxHealth += increase_health + increase_health_per_level * cChar.Model.level;

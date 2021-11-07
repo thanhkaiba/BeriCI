@@ -190,7 +190,7 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    public List<CombatSailor> GetAllAliveCombatCharacters()
+    public List<CombatSailor> GetAllAliveCombatSailors()
     {
         List<CombatSailor> result = new List<CombatSailor>();
         sailorsTeamA.ForEach(character => {
@@ -202,7 +202,7 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    public List<CombatSailor> GetAllTeamAliveCharacter(Team t)
+    public List<CombatSailor> GetAllTeamAliveSailors(Team t)
     {
         List<CombatSailor> result = new List<CombatSailor>();
         List<CombatSailor> CTeam = t == Team.A ? sailorsTeamA : sailorsTeamB;
@@ -224,8 +224,8 @@ public class CombatState : MonoBehaviour
     }
     public List<CombatSailor> GetQueueNextActionSailor()
     {
-        List<CombatSailor> result = GetAllAliveCombatCharacters();
-        result.Sort(delegate (CombatSailor sailor1, CombatSailor sailor2)
+        List<CombatSailor> result = GetAllAliveCombatSailors();
+        result.Sort((sailor1, sailor2) =>
         {
             int speedNeed_1 = sailor1.GetSpeedNeeded();
             int speedNeed_2 = sailor2.GetSpeedNeeded();
@@ -310,7 +310,7 @@ public class CombatState : MonoBehaviour
     }
     public CombatSailor GetSailor(Team t, string id)
     {
-        var l = GetAllTeamAliveCharacter(t);
+        var l = GetAllTeamAliveSailors(t);
         return l.Find(sailor => {
             return sailor.Model.id == id;
         });

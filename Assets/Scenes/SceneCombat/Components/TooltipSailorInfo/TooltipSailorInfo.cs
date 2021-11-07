@@ -67,7 +67,7 @@ public class TooltipSailorInfo : MonoBehaviour
 
             textPower.text = ((int) sailor.cs.Power).ToString();
             textCrit.text = (sailor.cs.Crit*100).ToString() + "%";
-            textSpeed.text = ((int)sailor.cs.DisplaySpeed).ToString();
+            textSpeed.text = ((int)sailor.cs.Speed).ToString();
             textArmor.text = ((int)sailor.cs.Armor).ToString();
             textMagicResist.text = ((int)sailor.cs.MagicResist).ToString();
 

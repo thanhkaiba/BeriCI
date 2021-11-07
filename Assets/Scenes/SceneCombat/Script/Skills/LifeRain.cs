@@ -21,7 +21,7 @@ public class LifeRain : Skill
         base.CastSkill(cChar, cbState);
         float heal = base_heal + cChar.Model.level * heal_per_level;
 
-        List<CombatSailor> targets = cbState.GetAllTeamAliveCharacter(cChar.cs.team);
+        List<CombatSailor> targets = cbState.GetAllTeamAliveSailors(cChar.cs.team);
 
         Sequence seq = DOTween.Sequence();
         seq.Append(cChar.transform.DOLocalMoveY(1f, 0.5f));

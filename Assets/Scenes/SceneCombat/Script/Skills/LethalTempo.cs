@@ -11,7 +11,7 @@ public class LethalTempo : Skill
     }
     public override bool CanActive(CombatSailor cChar, CombatState cbState)
     {
-        return cChar.cs.MaxSpeed > 15;
+        return cChar.cs.SpeedNeed > 15;
     }
     public override float CastSkill(CombatSailor cChar, CombatState cbState)
     {

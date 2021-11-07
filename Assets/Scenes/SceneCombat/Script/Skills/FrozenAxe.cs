@@ -38,7 +38,7 @@ public class FrozenAxe : Skill
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => {
             target.TakeDamage(damage_ratio * attacking.cs.Power, damage_ratio * attacking.cs.Power, 0);
-            target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, frozen_turn));
+            target.AddStatus(new SailorStatus(SailorStatusType.STUN, frozen_turn));
         });
         seq.Append(attacking.transform.DOMove(oriPos, 0.3f));
         return 0.8f;

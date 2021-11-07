@@ -23,7 +23,7 @@ public class SailorInQueue : MonoBehaviour
     }
     public void PresentData()
     {
-        float newValue = (float)sailorData.cs.CurrentSpeed / sailorData.cs.MaxSpeed;
+        float newValue = (float)sailorData.cs.CurrentSpeed / sailorData.cs.SpeedNeed;
         if (speedSlider.value < newValue) speedSlider.ChangeValue(newValue);
         else speedSlider.SetValue(newValue);
         if (sailorData.cs.team == Team.A)

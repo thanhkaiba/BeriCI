@@ -33,7 +33,7 @@ public class FreezeWorld : Skill
             targets.ForEach(target =>
             {
                 target.TakeDamage(0, damage + attacking.Model.level * damage_p_lv, 0);
-                target.AddStatus(new SailorStatus(SailorStatusType.FROZEN, 1));
+                target.AddStatus(new SailorStatus(SailorStatusType.STUN, 1));
                 target.cs.BaseArmor -= decrease_armor;
             });
         });
