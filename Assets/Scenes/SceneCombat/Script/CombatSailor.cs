@@ -180,17 +180,15 @@ public class CombatSailor : Sailor
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         return CastSkill(combatState);
     }
-    float BaseAttack (CombatState combatState)
+    public float BaseAttack(CombatSailor target, bool isCrit, bool isBlock)
     {
+        var combatState = CombatState.Instance;
         cs.CurrentSpeed -= cs.MaxSpeed;
         bar.SetSpeedBar(cs.MaxSpeed, cs.CurrentSpeed);
-        CombatSailor target = GetBaseAttackTarget(combatState);
         float delay = 0;
         if (target != null)
         {
             delay += RunBaseAttack(target);
-            bool isCrit = IsCrit();
-            bool isBlock = target.IsBlock();
             Damage damage = new Damage()
             {
                 physics_damage = isCrit ? cs.Power * 1.5f : cs.Power, // thay crit damage vao
@@ -221,7 +219,7 @@ public class CombatSailor : Sailor
             var listYourTeam = combatState.GetAllTeamAliveCharacter(cs.team);
             listYourTeam.ForEach(sai =>
             {
-                int speedUpValue = (int) (config.GetParams(sniper.type, sniper.level)[0] * sai.cs.MaxSpeed);
+                int speedUpValue = (int)(config.GetParams(sniper.type, sniper.level)[0] * sai.cs.MaxSpeed);
                 if (sai.cs.HaveType(SailorClass.SNIPER) && sai != this)
                 {
                     sai.SpeedUp(speedUpValue);
@@ -232,6 +230,14 @@ public class CombatSailor : Sailor
         }
 
         return delay + 0.5f;
+    }
+    float BaseAttack (CombatState combatState)
+    {
+        // client auto
+        CombatSailor target = GetBaseAttackTarget(combatState);
+        bool isCrit = IsCrit();
+        bool isBlock = target.IsBlock();
+        return BaseAttack(target, isCrit, isBlock);
     }
     float Immobile ()
     {

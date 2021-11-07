@@ -17,6 +17,7 @@ public class TempCombatData : Singleton<TempCombatData>
 	public List<SailorModel> listSailor;
 	public FightingLine fgl0;
     public FightingLine fgl1;
+	public List<CombatAction> ca;
 
     public void LoadCombatDataFromSfs(ISFSObject packet)
     {
@@ -44,5 +45,75 @@ public class TempCombatData : Singleton<TempCombatData>
 		fgl1.NewFromSFSObject(packet.GetSFSArray("fgl_1"));
 
 		waitForAServerGame = true;
+
+		ca = new List<CombatAction>();
+		ISFSArray _ca = packet.GetSFSArray("ca");
+		foreach (ISFSObject obj in _ca)
+		{
+			ca.Add(new CombatAction(obj));
+		}
+	}
+}
+
+public enum CombatAcionType
+{
+	BaseAttack,
+	UseSkill,
+	GameResult,
+	GameState,
+}
+
+public class FGL
+{
+	public CombatPosition pos;
+	public string id;
+	public FGL(ISFSObject packet)
+	{
+		ISFSObject combatPos = packet.GetSFSObject("pos");
+		pos = new CombatPosition(combatPos.GetByte("x"), combatPos.GetByte("y"));
+		id = packet.GetUtfString("sid");
+	}
+}
+
+public class CombatAction
+{
+	public CombatAcionType type;
+	public byte actorTeam;
+	public FGL actor;
+	public FGL target;
+	public List<FGL> targets;
+	public bool haveCrit;
+	public bool haveBlock;
+	public byte teamWin;
+	public CombatAction(ISFSObject packet)
+	{
+		type = (CombatAcionType) packet.GetByte("actionType");
+		ISFSObject detail = packet.GetSFSObject("detail");
+		switch (type)
+		{
+			case CombatAcionType.BaseAttack:
+				actorTeam = detail.GetByte("actor_team");
+				actor = new FGL(detail.GetSFSObject("actor"));
+				target = new FGL(detail.GetSFSObject("target"));
+				haveCrit = detail.GetBool("have_crit");
+				haveBlock = detail.GetBool("have_block");
+				break;
+			case CombatAcionType.UseSkill:
+				actorTeam = detail.GetByte("actor_team");
+				actor = new FGL(detail.GetSFSObject("actor"));
+				targets = new List<FGL>();
+				foreach (ISFSObject obj in detail.GetSFSArray("targets"))
+				{
+					targets.Add(new FGL(obj));
+				}
+				haveCrit = detail.GetBool("have_crit");
+				haveBlock = detail.GetBool("have_block");
+				break;
+			case CombatAcionType.GameResult:
+				teamWin = detail.GetByte("team_win");
+				break;
+			case CombatAcionType.GameState:
+				break;
+		}
 	}
 }

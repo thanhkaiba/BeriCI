@@ -29,6 +29,16 @@ public class GameUtils : UnityEngine.Object
 
         return sailor;
     }
+    public static CombatSailor CreateCombatSailor(SailorModel model)
+    {
+        SailorConfig config_stats = model.config_stats;
+        //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
+        GameObject characterGO = Instantiate(config_stats.model);
+        CombatSailor sailor = characterGO.AddComponent(Type.GetType(model.config_stats.root_name)) as CombatSailor;
+        sailor.Model = model;
+
+        return sailor;
+    }
     public static Sailor CreateSailor(string id)
     {
         SailorModel sailorModel = CrewData.Instance.GetSailorModel(id);

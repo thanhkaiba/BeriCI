@@ -162,11 +162,10 @@ public class CombatState : MonoBehaviour
 
     CombatSailor CreateCombatSailor(SailorModel s, CombatPosition pos, Team team)
     {
-        Debug.Log("sailor model: " + s);
         string name = s.config_stats.root_name;
         List<Item> listItem = s.items;
 
-        CombatSailor sailor = GameUtils.CreateCombatSailor(name);
+        CombatSailor sailor = GameUtils.CreateCombatSailor(s);
 
         sailor.SetEquipItems(listItem);
         sailor.InitCombatData(s.level, s.quality, pos, team);
@@ -308,5 +307,12 @@ public class CombatState : MonoBehaviour
             total_health += sailor.cs.MaxHealth;
         });
         return health / total_health;
+    }
+    public CombatSailor GetSailor(Team t, string id)
+    {
+        var l = GetAllTeamAliveCharacter(t);
+        return l.Find(sailor => {
+            return sailor.Model.id == id;
+        });
     }
 };
