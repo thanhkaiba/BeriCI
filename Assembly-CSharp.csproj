@@ -65,9 +65,10 @@
     <Compile Include="Assets\GameEngine\GuiMgr.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ThreadManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Components\TooltipSailorInfo\TooltipSailorInfo.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\TempCombatData.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SceneControls.cs" />
     <Compile Include="Assets\GameEngine\GameEvent.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\Targets.cs" />
+    <Compile Include="Assets\Scenes\SceneCombat\Script\TargetsUtils.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Marksman.cs" />
     <Compile Include="Assets\GameEngine\TextLocalization.cs" />
@@ -92,7 +93,6 @@
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\TeamColorB.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Meechic.cs" />
-    <Compile Include="Assets\Scenes\SceneCombat\Script\CombatController.cs" />
     <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HeadShot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\TakeRest.cs" />
@@ -110,6 +110,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\UtimateSlash.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\script\LoginController.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\Packet.cs" />
+    <Compile Include="Assets\GameEngine\CrewData.cs" />
     <Compile Include="Assets\GameEngine\Singleton.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FrozenAxe.cs" />
     <Compile Include="Assets\GameEngine\GameUtils.cs" />
@@ -122,10 +123,10 @@
     <Compile Include="Assets\Config\Resources\ScriptableObject\CombatConfig.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SubSailorIcon.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\TeamColor.cs" />
-    <Compile Include="Assets\GameEngine\network\SmartFoxConnection.cs" />
     <Compile Include="Assets\Utils\CameraLook.cs" />
     <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
+    <Compile Include="Assets\GameEngine\FightingLine.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\DragableBSubSailor.cs" />
     <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
@@ -139,7 +140,6 @@
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FightingPassion.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\PickTeamController.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\SailorConfig.cs" />
-    <Compile Include="Assets\GameEngine\network\BaseController.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\ClassBonus\ClassBonus.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Slash.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\SkillMgr.cs" />
@@ -148,6 +148,7 @@
     <Compile Include="Assets\Utils\HealthSlider.cs" />
     <Compile Include="Assets\Popup\Resources\PopupDemo\PopupDemo.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LifeRain.cs" />
+    <Compile Include="Assets\GameEngine\network\NetworkController.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadSlot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\GameEffMgr.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\NuclearBomb.cs" />
@@ -156,8 +157,6 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\GameEngine\FightingLine.cs" />
-    <Compile Include="Assets\GameEngine\CrewData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />
