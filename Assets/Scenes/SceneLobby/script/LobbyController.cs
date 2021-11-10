@@ -37,9 +37,9 @@ public class LobbyController : MonoBehaviour
 	private void Start()
     {
 		userName.text = UserData.Instance.Username;
-		userLevel.text = "Level: " + UserData.Instance.Level;
-		userBeri.text = "Beri: " + UserData.Instance.Beri;
-		userStamina.text = "Stamina: " + UserData.Instance.Stamina;
+		userLevel.text = "" + UserData.Instance.Level;
+		userBeri.text = "" + UserData.Instance.Beri;
+		userStamina.text = "" + UserData.Instance.Stamina;
 		StartLoadAvatar(UserData.Instance.Avatar);
 
 		// Join the lobby Room (must exist in the Zone!)
