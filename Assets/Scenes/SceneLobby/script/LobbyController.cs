@@ -31,6 +31,9 @@ public class LobbyController : MonoBehaviour
 	[SerializeField]
 	private Text userStamina;
 
+	[SerializeField]
+	private Slider userExp;
+
 	public static LobbyController Instance;
 	private void Awake() { Instance = this; }
 	private void OnDestroy() { Instance = null; }
@@ -40,6 +43,7 @@ public class LobbyController : MonoBehaviour
 		userLevel.text = "" + UserData.Instance.Level;
 		userBeri.text = "" + UserData.Instance.Beri;
 		userStamina.text = "" + UserData.Instance.Stamina;
+		userExp.value = UserData.Instance.GetExpProgress();
 		StartLoadAvatar(UserData.Instance.Avatar);
 
 		// Join the lobby Room (must exist in the Zone!)
