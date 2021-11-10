@@ -9,7 +9,7 @@ public class TextDamage : MonoBehaviour
     public GameObject iconCrit;
     void Start()
     {
-        transform.DOMoveY(transform.position.y+70, 1.0f).SetEase(Ease.InOutSine);
+        transform.DOMoveY(transform.position.y+70, 1.0f).SetEase(Ease.OutCubic);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.5f);
         seq.Append(transform.GetComponent<Text>().DOFade(0, 0.2f));
