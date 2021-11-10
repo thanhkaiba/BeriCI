@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tons
   m_EditorClassIdentifier: 
   model: {fileID: 5284227797261016194, guid: 445d976b2fe369449995194b8ebc4f50, type: 3}
-  avatar: {fileID: 0}
+  avatar: {fileID: 21300000, guid: 248f8edf19bdc1146ab7729bdfd89bec, type: 3}
   root_name: Tons
   rank: 2
   power_base: 20
@@ -35,6 +35,6 @@ MonoBehaviour:
   classes: 0a000000
   skill_name: Huricane
   start_fury: 0
-  max_fury: 30
+  max_fury: 20
   skill_params:
   - 1.5

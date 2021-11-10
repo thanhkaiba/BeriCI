@@ -33,7 +33,9 @@ public class Tons : CombatSailor
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
+        //Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
+        Vector3 targetPos = target.transform.position;
+        Vector3 desPos = new Vector3(targetPos.x - 3.0f * (transform.position.x > targetPos.x ? 1 : -1), targetPos.y, targetPos.z);
         desPos.z -= 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.22f);
@@ -54,6 +56,8 @@ public class Tons : CombatSailor
         });
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(desPos, 0.0f));
+        float currentLocalScaleX = modelObject.transform.localScale.x;
+        seq.Append(modelObject.transform.DOScaleX(currentLocalScaleX*-1, 0.0f));
         seq.AppendInterval(0.42f);
         seq.AppendCallback(() => {
             GameObject ex = Instantiate(
@@ -65,16 +69,17 @@ public class Tons : CombatSailor
         });
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(oriPos, 0f).SetEase(Ease.InOutElastic));
+        seq.Append(modelObject.transform.DOScaleX(currentLocalScaleX, 0.0f));
         return 1.0f;
     }
     public override void SetFaceDirection()
     {
         if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1 : -1, 1, 1);
     }
-    private void LateUpdate()
-    {
-        if (cs != null) SetFaceDirection();
-    }
+    //private void LateUpdate()
+    //{
+    //    if (cs != null) SetFaceDirection();
+    //}
     public override float TakeDamage(Damage d)
     {
         TriggerAnimation("Hurt");
@@ -88,51 +93,49 @@ public class Tons : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float behind_damage_ratio = scale_damage_ratio;
         base.CastSkill(cbState);
-        float main_damage = cs.Power * scale_damage_ratio;
-        float secondary_damage = cs.Power * behind_damage_ratio;
+        float damage = cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Melee(this, enermy);
-        List<CombatSailor> behind_target = TargetsUtils.AllBehind(target, enermy);
+        CombatSailor target = TargetsUtils.Backstab(this, enermy);
+        List<CombatSailor> takeDamageUnit = TargetsUtils.SameRow(target, enermy);
 
-        return RunAnimation(target, behind_target, main_damage, secondary_damage);
+        return RunAnimation(target, takeDamageUnit, damage);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> behind_target, float main_damage, float secondary_damage)
+    float RunAnimation(CombatSailor target, List<CombatSailor> takeDamageUnit, float damage)
     {
-        float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float behind_damage_ratio = scale_damage_ratio;
-        TriggerAnimation("CastSkill");
-        CombatEvents.Instance.highlightTarget.Invoke(target);
+        TriggerAnimation("Skill");
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
-        desPos.y += 1;
+        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d + 8.0f);
+        desPos.z -= 1;
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.15f);
-        seq.Append(transform.DOJump(desPos, 1.2f, 1, 0.3f));
-
-        seq.AppendCallback(() =>
-        {
-            target.TakeDamage(main_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
-        });
         seq.AppendInterval(0.35f);
-        seq.AppendCallback(() =>
-        {
-            target.TakeDamage(main_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
+        seq.AppendCallback(() => {
+            GameObject ex = Instantiate(
+                Resources.Load<GameObject>("Effect2D/typhoon/typhoon"),
+                Vector3.MoveTowards(oriPos, desPos, -1), modelObject.transform.rotation);
+            Sequence seq2 = DOTween.Sequence();
+            seq2.AppendInterval(0.4f);
+            seq2.Append(ex.transform.DOMove(desPos, 0.5f).SetEase(Ease.InOutSine));
+            seq2.Append(ex.transform.DOMove(oriPos, 0.55f).SetEase(Ease.InOutSine));
+            seq2.AppendInterval(0.1f);
+            seq2.AppendCallback(() => Destroy(ex));
         });
-        seq.AppendInterval(0.35f);
-        seq.AppendCallback(() =>
-        {
-            target.TakeDamage(main_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
-        });
+        seq.AppendInterval(2.2f);
+        seq.AppendInterval(0.62f);
 
-        seq.AppendInterval(0.3f);
-        seq.Append(transform.DOJump(oriPos, 0.8f, 1, 0.4f));
-        return 1.8f;
+        Sequence seq3 = DOTween.Sequence();
+        seq3.AppendInterval(1.0f);
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendInterval(0.1f);
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendInterval(0.1f);
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendInterval(0.1f);
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendInterval(0.1f);
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        return 2.0f;
     }
 }
