@@ -79,6 +79,24 @@ public class CombatSailor : Sailor
 
         Model.level = level;
         Model.quality = quality;
+
+        Debug.Log("-----------------------------------");
+        Debug.Log(" > Model.id" + Model.id);
+        Debug.Log(" > BasePower" + cs.BasePower);
+        Debug.Log(" > MaxHealth" + cs.MaxHealth);
+        Debug.Log(" > CurHealth" + cs.CurHealth);
+        Debug.Log(" > BaseArmor" + cs.BaseArmor);
+        Debug.Log(" > BaseMagicResist" + cs.BaseMagicResist);
+        Debug.Log(" > Speed" + cs.Speed);
+        Debug.Log(" > CurrentSpeed" + cs.CurrentSpeed);
+        Debug.Log(" > Crit" + cs.Crit);
+        Debug.Log(" > CritDamage" + cs.CritDamage);
+        Debug.Log(" > Block" + cs.Block);
+        Debug.Log(" > BaseFury" + cs.BaseFury);
+        Debug.Log(" > Fury" + cs.Fury);
+        Debug.Log(" > Model.level" + Model.level);
+        Debug.Log(" > Model.quality" + Model.quality);
+        Debug.Log("-----------------------------------");
     }
     
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam) // them giam chi so theo toc he

@@ -90,8 +90,6 @@ public class CombatMgr : MonoBehaviour
         float delayTime = ProcessAction();
 
         actionCount++;
-        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.ShowActionCount(actionCount);
 
         StartCoroutine(WaitAndDo(2 * delayTime / 3, () => UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor())));
         StartCoroutine(NextLoopServer(delayTime));
@@ -101,11 +99,16 @@ public class CombatMgr : MonoBehaviour
         CombatAction actionProcess = listActions[actionCount];
         int speedAdd = CalculateSpeedAddThisLoop();
         SpeedUpAllSailors(speedAdd);
+        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
+        UIMgr.ShowActionCount(actionCount);
         switch (actionProcess.type)
         {
             case CombatAcionType.BaseAttack:
                 CombatSailor actionChar = GetActorAction(actionProcess);
                 CombatSailor target = GetTargetAction(actionProcess);
+                Debug.Log("target.cs.position: " + target.cs.position);
+                Debug.Log("actionProcess: " + actionCount);
+                Debug.Log("actionChar.cs.position: " + actionChar.cs.position + " " + actionChar.cs.team);
                 //float delayTime = actionChar.DoCombatAction(combatState) + 0.2f;
                 float delayTime = actionChar.BaseAttack(target, actionProcess.haveCrit, actionProcess.haveBlock) + 0.2f;
                 combatState.lastTeamAction = actionChar.cs.team;
@@ -124,6 +127,8 @@ public class CombatMgr : MonoBehaviour
     }
     private CombatSailor GetTargetAction(CombatAction action)
     {
+        Debug.Log("action.target.id: " + action.target.id);
+        Debug.Log("action.actorTeam: " + action.actorTeam);
         string actor_id = action.target.id;
         Team team = yourTeamIndex != action.actorTeam ? Team.A : Team.B;
         return combatState.GetSailor(team, actor_id);
@@ -177,7 +182,7 @@ public class CombatMgr : MonoBehaviour
 
     CombatSailor SpeedUpAllSailors(int speedAdd)
     {
-        combatState.GetAllAliveCombatSailors().ForEach(character =>character.SpeedUp(speedAdd));
+        combatState.GetAllAliveCombatSailors().ForEach(character => character.SpeedUp(speedAdd));
         return combatState.GetQueueNextActionSailor().First();
     }
     public Team CheckTeamWin()

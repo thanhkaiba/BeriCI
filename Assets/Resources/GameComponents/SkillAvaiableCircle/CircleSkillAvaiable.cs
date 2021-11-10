@@ -24,7 +24,7 @@ public class CircleSkillAvaiable : MonoBehaviour
     {
         gameObject.SetActive(true);
         transform.localScale = new Vector3(0, 0, 0);
-        transform.DOScale(new Vector3(0.25f, 0.25f, 0.25f), 0.5f).SetEase(Ease.OutBack); ;
+        transform.DOScale(new Vector3(0.25f, 0.25f, 0.25f), 0.5f).SetEase(Ease.OutBack);
     }
     public void Disappear()
     {

@@ -63,7 +63,7 @@ public class CombatState : MonoBehaviour
     public void CreateDemoTeam()
     {
         CreateRandomTeam(Team.A);
-        CreateTargetTeam(Team.B);
+        CreateRandomTeam(Team.B);
         //CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.A);
@@ -99,7 +99,7 @@ public class CombatState : MonoBehaviour
         //CreateCombatSailor("Helti", new CombatPosition(0, 0), t);
         //CreateCombatSailor("Helti", new CombatPosition(0, 2), t);
         //CreateCombatSailor("Target", new CombatPosition(1, 1), t);
-        CreateCombatSailor("Meechic|DemoItem:20", new CombatPosition(2, 1), t);
+        CreateCombatSailor("Tons", new CombatPosition(1, 1), t);
 
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 1), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 1), t);
