@@ -66,7 +66,7 @@ public class NetworkController : MonoBehaviour
 
 			Application.runInBackground = true;
 			SetupSFS();
-			ForceStartScene();
+			//ForceStartScene();
 		}
 		else Destroy(gameObject);
 	}
@@ -98,7 +98,8 @@ public class NetworkController : MonoBehaviour
 	}
 	private void ForceStartScene()
 	{
-		if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SceneLogin"))
+		if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SceneLogin")
+			&& SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SceneLoading"))
 		{
 			SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
 		}

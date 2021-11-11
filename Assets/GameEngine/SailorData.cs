@@ -13,6 +13,7 @@ public enum SailorStatusType
 {
     DEATH,
     STUN,
+    FROZEN,
     POISON,
     BURN,
     EXCITED,
