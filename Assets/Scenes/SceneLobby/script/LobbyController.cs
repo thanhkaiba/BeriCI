@@ -85,7 +85,7 @@ public class LobbyController : MonoBehaviour
 	}
 	public void OnButtonPickTeamClick()
     {
-		SceneManager.LoadScene("ScenePickTeam");
+		SceneManager.LoadScene("ScenePickTeamBattle");
 	}
 	//----------------------------------------------------------
 	// SmartFoxServer event listeners

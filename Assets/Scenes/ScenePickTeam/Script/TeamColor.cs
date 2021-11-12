@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class TeamColor : MonoBehaviour
 {
-    public void ShowClassBonus()
+    public void ShowClassBonus(List<ClassBonusItem> passiveType)
     {
-        List<ClassBonusItem> passiveType = GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList());
+  
 
         ClearChildren();
 

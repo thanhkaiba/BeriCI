@@ -56,7 +56,6 @@
     <Compile Include="Assets\Scenes\SceneCombat\SailorInQueue\SailorInQueue.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\DragableSailor.cs" />
     <Compile Include="Assets\Utils\PlayerMovement.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\DragableBSailor.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\DemoSailor2.cs" />
     <Compile Include="Assets\Resources\Icons\SailorType\IconClassBonus.cs" />
     <Compile Include="Assets\GameEngine\GuiMgr.cs" />
@@ -77,7 +76,6 @@
     <Compile Include="Assets\Utils\MousePosition2D.cs" />
     <Compile Include="Assets\GameEngine\Model\SailorModel.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\CombatEvents.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\CharacterContainerB.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\UIManager.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\FreezeWorld.cs" />
     <Compile Include="Assets\GameEngine\network\SmartFoxErrorCode.cs" />
@@ -86,10 +84,9 @@
     <Compile Include="Assets\GameEngine\SailorData.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LaserGun.cs" />
     <Compile Include="Assets\Scenes\SceneLogin\Network\ClientSend.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\SubSailorIconB.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SquadContainer.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\TeamColorB.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Meechic.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\StaminaConfig.cs" />
     <Compile Include="Assets\Resources\sea\WaveFakeOcean.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\HeadShot.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\TakeRest.cs" />
@@ -116,7 +113,7 @@
     <Compile Include="Assets\Scenes\SceneCombat\Script\Sailors\Target.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Encourage.cs" />
     <Compile Include="Assets\Config\RenderAllConfig.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\SquadBContainer.cs" />
+    <Compile Include="Assets\Scenes\ScenePickTeamBattle\SquadBContainer.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\CombatConfig.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\SubSailorIcon.cs" />
     <Compile Include="Assets\Scenes\ScenePickTeam\Script\TeamColor.cs" />
@@ -124,7 +121,6 @@
     <Compile Include="Assets\Resources\characters\SailorCollider.cs" />
     <Compile Include="Assets\Resources\GameComponents\shadow\CharacterShadow.cs" />
     <Compile Include="Assets\GameEngine\FightingLine.cs" />
-    <Compile Include="Assets\Scenes\ScenePickTeam\SceneTest\DragableBSubSailor.cs" />
     <Compile Include="Assets\Resources\characters\Bar\CharBarControl.cs" />
     <Compile Include="Assets\Config\Resources\ScriptableObject\Item.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\Deceive.cs" />
@@ -143,6 +139,7 @@
     <Compile Include="Assets\Config\Resources\ScriptableObject\SkillConfig.cs" />
     <Compile Include="Assets\GameEngine\UserData.cs" />
     <Compile Include="Assets\Utils\HealthSlider.cs" />
+    <Compile Include="Assets\Config\Resources\ScriptableObject\UserLevelConfig.cs" />
     <Compile Include="Assets\Popup\Resources\PopupDemo\PopupDemo.cs" />
     <Compile Include="Assets\Scenes\SceneCombat\Script\Skills\LifeRain.cs" />
     <Compile Include="Assets\GameEngine\network\NetworkController.cs" />
@@ -154,8 +151,6 @@
     <Compile Include="Assets\Resources\GameComponents\SkillAvaiableCircle\CircleSkillAvaiable.cs" />
     <Compile Include="Assets\Scenes\SceneLoading\LoadingManager.cs" />
     <Compile Include="Assets\Utils\FindDeepChild.cs" />
-    <Compile Include="Assets\Config\Resources\ScriptableObject\StaminaConfig.cs" />
-    <Compile Include="Assets\Config\Resources\ScriptableObject\UserLevelConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Resources\Font\iCielSoupofJustice.fnt" />

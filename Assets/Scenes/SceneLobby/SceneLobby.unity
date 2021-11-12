@@ -2069,6 +2069,7 @@ MonoBehaviour:
   userLevel: {fileID: 616054853}
   userBeri: {fileID: 1748305014}
   userStamina: {fileID: 105141830}
+  userExp: {fileID: 81704947}
 --- !u!4 &1022189049
 Transform:
   m_ObjectHideFlags: 0

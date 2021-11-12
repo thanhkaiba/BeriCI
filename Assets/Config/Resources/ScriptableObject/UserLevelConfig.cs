@@ -13,7 +13,7 @@ public class UserLevelConfig : ScriptableObjectPro
     
     public long GetExpNeed(int level)
     {
-        if (level > exp_need.Length)
+        if (level > exp_need.Length || level < 0)
         {
             level = exp_need.Length;
         }

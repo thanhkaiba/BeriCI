@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class SquadContainer : MonoBehaviour
+public class SquadBContainer : MonoBehaviour
 {
+    [SerializeField] SquadSlot[] slots;
     [SerializeField]
     private TeamColor teamColor;
-    [SerializeField] SquadSlot[] slots;
+
 
     void Start()
     {
@@ -28,27 +29,9 @@ public class SquadContainer : MonoBehaviour
                 }
             }
         }
-        
-        OnUpdateSquad();
-        GameEvent.SquadChange.AddListener(OnUpdateSquad);
 
-    }
+        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));
 
-    private void OnDestroy()
-    {
-        GameEvent.SquadChange.RemoveListener(OnUpdateSquad);
-    }
-
-    public Sailor AddSubSailor(string sailorId)
-    {
-        Sailor sailor = GameUtils.CreateSailor(sailorId);
-        DragableSubsailor drag = sailor.gameObject.AddComponent<DragableSubsailor>();
-        sailor.transform.parent = transform;
-        sailor.transform.localScale = Vector3.one;
-        sailor.transform.localPosition = Vector3.zero;
-        drag.slots = slots;
-
-        return sailor;
     }
 
     public Sailor AddSailor(string sailorId)
@@ -61,10 +44,5 @@ public class SquadContainer : MonoBehaviour
         drag.slots = slots;
 
         return sailor;
-    }
-
-    public void OnUpdateSquad()
-    {
-        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));
     }
 }
