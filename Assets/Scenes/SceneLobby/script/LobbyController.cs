@@ -43,7 +43,7 @@ public class LobbyController : MonoBehaviour
 		userLevel.text = "" + UserData.Instance.Level;
 		userBeri.text = "" + UserData.Instance.Beri;
 		userStamina.text = "" + UserData.Instance.Stamina;
-		userExp.value = UserData.Instance.GetExpProgress();
+		//userExp.value = UserData.Instance.GetExpProgress();
 		StartLoadAvatar(UserData.Instance.Avatar);
 
 		// Join the lobby Room (must exist in the Zone!)
@@ -94,15 +94,7 @@ public class LobbyController : MonoBehaviour
 	{
 		switch (action)
 		{
-			case SFSAction.LOAD_LIST_HERO_INFO:
-				{
-					if (errorCode == SFSErrorCode.SUCCESS)
-					{
-						Debug.Log("Load List hero success");
-						CrewData.Instance.NewFromSFSObject(packet);
-					}
-					break;
-				}
+			
 		}
 	}
 }

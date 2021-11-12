@@ -66,29 +66,26 @@ public class TooltipClassBonus : MonoBehaviour
             case SailorClass.SWORD_MAN:
                 content.text = "SWORD MAN tăng " + para[0] + " tốc độ";
                 break;
-            case SailorClass.HORROR:
+            case SailorClass.DEMON:
                 content.text = "Tất cả kẻ địch bị giảm " + para[0] + " giáp";
                 break;
-            case SailorClass.BERSERK:
-                content.text = "BERSERK tăng " + para[0] + " tốc độ sau khi tấn công kẻ địch";
+            case SailorClass.CYBORG:
+                content.text = "CYBORG tăng " + para[0] + " giáp";
                 break;
-            case SailorClass.DOCTOR:
-                content.text = "DOCTOR tăng " + (para[0] * 100) + "% hiệu lực hồi máu";
+            case SailorClass.SEA_CREATURE:
+                content.text = "Đồng đội nhận " + (para[0] * 100) + "kháng phép";
                 break;
-            case SailorClass.WIZARD:
-                content.text = "WIZARD tăng " + (para[0] * 100) + "% sát thương kĩ năng";
+            case SailorClass.MAGE:
+                content.text = "MAGE tăng " + (para[0] * 100) + "% Power";
                 break;
             case SailorClass.SUPPORT:
                 content.text = "Tất cả đồng đội nhận " + para[0] + " fury khởi đầu";
                 break;
-            case SailorClass.SNIPER:
-                content.text = "Khi một sniper tấn công, các sniper còn lại bứt tốc " + (para[0] * 100) + "%";
+            case SailorClass.MARKSMAN:
+                content.text = "Marksman gây thêm sát thương kẻ địch dưới " + (para[0] * 100) + "% máu.";
                 break;
             case SailorClass.ASSASSIN:
                 content.text = "ASSASSIN tăng " + (para[0] * 100) + "% sát thương. \n Chỉ áp dụng khi đội hình có duy nhất 1 ASSASSIN";
-                break;
-            case SailorClass.KUNG_FU:
-                content.text = "KUNG FU sẽ tấn công thêm " + para[0] + "lần";
                 break;
         }
 

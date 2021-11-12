@@ -66,7 +66,7 @@ public class NetworkController : MonoBehaviour
 
 			Application.runInBackground = true;
 			SetupSFS();
-			//ForceStartScene();
+			ForceStartScene();
 		}
 		else Destroy(gameObject);
 	}
@@ -175,7 +175,9 @@ public class NetworkController : MonoBehaviour
 
 	private void OnLoginError(BaseEvent evt)
 	{
-		OnError("Login failed: " + (string)evt.Params["errorMessage"]);
+		string errorText = "Login failed: " + (string)evt.Params["errorMessage"];
+		OnError(errorText);
+		if (LoginController.Instance) LoginController.Instance.OnLoginFail(errorText);
 	}
 	private void OnJoinRoom(BaseEvent evt)
 	{
@@ -238,6 +240,15 @@ public class NetworkController : MonoBehaviour
 				{
 					TempCombatData.Instance.LoadCombatDataFromSfs(packet);
 					SceneManager.LoadScene("SceneCombat2D");
+					break;
+				}
+			case SFSAction.LOAD_LIST_HERO_INFO:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						Debug.Log("Load List hero success");
+						CrewData.Instance.NewFromSFSObject(packet);
+					}
 					break;
 				}
 		}
