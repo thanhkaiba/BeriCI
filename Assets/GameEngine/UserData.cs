@@ -1,6 +1,5 @@
 ﻿
 using Sfs2X.Entities;
-using System;
 using UnityEngine;
 
 public class UserData : Singleton<UserData>
@@ -76,7 +75,7 @@ public class UserData : Singleton<UserData>
             return -1;
         }
 
-        long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        long now = GameTimeMgr.GetCurrentTime();
         long delta = now - LastCountStamina;
         int recoveringTime = StaminaConfig.recovering_time * 1000;
         delta = recoveringTime - delta % recoveringTime;

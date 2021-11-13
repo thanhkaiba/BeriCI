@@ -225,6 +225,7 @@ public class NetworkController : MonoBehaviour
 			Debug.Log("Request Join Room Lobby");
 		}
 
+	
 		Debug.Log("Login success as " + sfs.MySelf.Name);
 	}
 

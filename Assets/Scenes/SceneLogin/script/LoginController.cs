@@ -91,6 +91,7 @@ public class LoginController: MonoBehaviour
 		if (errorCode == SFSErrorCode.SUCCESS)
 		{
 			User user = NetworkController.Connection.MySelf;
+			GameTimeMgr.SetLoginTime((long)user.GetVariable("login_time").GetDoubleValue());
 			UserData.Instance.OnUserVariablesUpdate(user);
 			OpenLobby();
 		}
