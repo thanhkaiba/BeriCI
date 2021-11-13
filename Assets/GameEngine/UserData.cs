@@ -60,6 +60,7 @@ public class UserData : Singleton<UserData>
         Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
         LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
+        GameEvent.UserDataChange.Invoke();
    
     }
 

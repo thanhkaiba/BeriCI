@@ -35,12 +35,24 @@ public class LobbyUI : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		
+		StartLoadAvatar(UserData.Instance.Avatar);
+		UpdateUserInfo();
+		GameEvent.UserDataChange.AddListener(UpdateUserInfo);
+	}
+
+    private void OnDestroy()
+    {
+		GameEvent.UserDataChange.RemoveListener(UpdateUserInfo);
+    }
+
+    void UpdateUserInfo()
+    {
 		userName.text = UserData.Instance.Username;
 		userLevel.text = "" + UserData.Instance.Level;
 		userBeri.text = "" + UserData.Instance.Beri;
 		userStamina.text = "" + UserData.Instance.Stamina;
 		userExp.value = UserData.Instance.GetExpProgress();
-		StartLoadAvatar(UserData.Instance.Avatar);
 	}
 
 	void StartLoadAvatar(string url)
@@ -69,7 +81,8 @@ public class LobbyUI : MonoBehaviour
 
 	public void OnLogoutButtonClick()
 	{
-		NetworkController.Instance.Logout();
+		NetworkController.Instance.Send(SFSAction.BUY_STAMINA);
+		// NetworkController.Instance.Logout();
 	}
 	public void OnStartNewGameButtonClick()
 	{
@@ -87,6 +100,10 @@ public class LobbyUI : MonoBehaviour
 		{
 			TimeSpan remaining = TimeSpan.FromMilliseconds(UserData.Instance.TimeToHaveNewStamina());
 			userStaminaCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
+		} else
+        {
+			userStaminaCountDown.text = "";
+
 		}
 	}
 }

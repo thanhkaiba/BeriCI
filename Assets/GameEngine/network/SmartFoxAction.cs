@@ -7,4 +7,6 @@
     LOAD_LIST_HERO_INFO = 5,
     TEAM_COMMIT = 6,
     COMBAT_BOT = 7,
+    LOAD_TEAM = 8,
+    BUY_STAMINA = 9,
 }
