@@ -1,13 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Sfs2X;
-using Sfs2X.Logging;
-using Sfs2X.Util;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
@@ -43,23 +37,42 @@ public class LoginController: MonoBehaviour
 	private Text errorText;
 
 
-
-
-
 	//----------------------------------------------------------
 	// Unity callback methods
 	//----------------------------------------------------------
-	public static LoginController Instance;
-	protected void Awake()
+	void Awake()
 	{
-		Instance = this;
-		Application.runInBackground = true;
-		// Enable interface
+		NetworkController.AddServerActionListener(OnReceiveServerAction);
 		enableLoginUI(true);
 	}
-	protected void OnDestroy()
+
+	private void OnConnection(BaseEvent evt)
 	{
-		Instance = null;
+		if (!(bool)evt.Params["success"])
+		{
+			
+			OnError("Connection failed; is the server running at all?");
+
+		}
+	}
+
+	private void OnLoginFail(BaseEvent evt)
+    {
+		OnError("Login failed: " + (string)evt.Params["errorMessage"]);
+	}
+
+	private void OnError(string error)
+    {
+		Reset();
+		enableLoginUI(true);
+		errorText.text = error;
+
+	}
+
+    void OnDestroy()
+	{
+		NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+		Reset();
 	}
 
 	//----------------------------------------------------------
@@ -69,18 +82,15 @@ public class LoginController: MonoBehaviour
 	public void OnLoginButtonClick()
 	{
 		enableLoginUI(false);
-		NetworkController.Instance.LoginToServer(new LoginData(nameInput.text, ""));
+		NetworkController.LoginToServer(new LoginData(nameInput.text, ""));
+		NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
+		NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
 	}
-	public void OnLoginFail(string text)
-	{
-		enableLoginUI(true);
-		errorText.text = text;
-	}
-	public void ReceiveJoinZoneSuccess(SmartFox sfs, SFSErrorCode errorCode, ISFSObject packet)
+	public void ReceiveJoinZoneSuccess(SFSErrorCode errorCode, ISFSObject packet)
 	{
 		if (errorCode == SFSErrorCode.SUCCESS)
 		{
-			User user = sfs.MySelf;
+			User user = NetworkController.Connection.MySelf;
 			UserData.Instance.OnUserVariablesUpdate(user);
 			OpenLobby();
 		}
@@ -94,19 +104,17 @@ public class LoginController: MonoBehaviour
 	{
 		switch (action)
 		{
-			case SFSAction.LOAD_LIST_HERO_INFO:
+			case SFSAction.JOIN_ZONE_SUCCESS:
 				{
-					if (errorCode == SFSErrorCode.SUCCESS)
-					{
-						CrewData.Instance.NewFromSFSObject(packet);
-					}
+					ReceiveJoinZoneSuccess(errorCode, packet);
 					break;
 				}
+			
 		}
 	}
 	private void OpenLobby()
     {
-		SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
+		SceneManager.LoadScene("SceneLobby");
 	}
     //----------------------------------------------------------
     // Private helper methods
@@ -117,10 +125,12 @@ public class LoginController: MonoBehaviour
 		loginButton.interactable = enable;
 		errorText.text = "";
 	}
-	//----------------------------------------------------------
-	// SmartFoxServer event listeners
-	//----------------------------------------------------------
 
-	
+    private void Reset()
+    {
+		NetworkController.RemoveEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
+		NetworkController.RemoveEventListener(SFSEvent.CONNECTION, OnConnection);
+	}
+
 
 }

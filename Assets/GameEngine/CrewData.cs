@@ -15,7 +15,7 @@ public class CrewData : Singleton<CrewData>
 
     private void OnUpdateSquad()
     {
-        NetworkController.Instance.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
+        NetworkController.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
     }
 
 

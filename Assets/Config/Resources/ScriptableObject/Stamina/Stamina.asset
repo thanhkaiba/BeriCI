@@ -15,6 +15,6 @@ MonoBehaviour:
   max_stamina: 200
   pve_cost: 5
   pvp_cost: 5
-  recovering_time: 10
+  recovering_time: 600
   costs: 0a00000064000000c8000000f4010000e8030000
   statmina_buy_value: 25

@@ -1676,10 +1676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2016eb7ee93501446987a1f015c5c296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Host: 127.0.0.1
-  TcpPort: 9933
-  WSPort: 8080
-  Zone: Piratera
+  _persistent: 1
 --- !u!4 &745601085
 Transform:
   m_ObjectHideFlags: 0
@@ -3537,8 +3534,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1022189048}
-        m_TargetAssemblyTypeName: LobbyController, Assembly-CSharp
+      - m_Target: {fileID: 1521152364}
+        m_TargetAssemblyTypeName: LobbyUI, Assembly-CSharp
         m_MethodName: OnLogoutButtonClick
         m_Mode: 1
         m_Arguments:

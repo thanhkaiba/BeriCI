@@ -81,13 +81,13 @@ public class LobbyUI : MonoBehaviour
 
 	public void OnLogoutButtonClick()
 	{
-		NetworkController.Instance.Send(SFSAction.BUY_STAMINA);
-		// NetworkController.Instance.Logout();
+		//NetworkController.Send(SFSAction.BUY_STAMINA);
+		 NetworkController.Logout();
 	}
 	public void OnStartNewGameButtonClick()
 	{
 		//SceneManager.LoadScene("SceneCombat2d");
-		NetworkController.Instance.Send(SFSAction.COMBAT_BOT);
+		NetworkController.Send(SFSAction.COMBAT_BOT);
 	}
 	public void OnButtonPickTeamClick()
 	{

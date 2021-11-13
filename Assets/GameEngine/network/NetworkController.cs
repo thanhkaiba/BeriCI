@@ -1,12 +1,7 @@
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Sfs2X;
-using Sfs2X.Logging;
 using Sfs2X.Util;
 using Sfs2X.Core;
 using Sfs2X.Entities;
@@ -23,74 +18,72 @@ public class LoginData {
 	public string password = "";
 };
 
+public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
+
 public class NetworkController : MonoBehaviour
 {
-	public static NetworkController Instance;
 	//----------------------------------------------------------
 	// Editor public properties
 	//----------------------------------------------------------
+	public static NetworkController Instance;
 
-	[Tooltip("IP address or domain name of the SmartFoxServer 2X instance")]
-	public string Host = "127.0.0.1";
+	private static List<NetworkActionListenerDelegate> serverActionListeners = new List<NetworkActionListenerDelegate>();
+	private static readonly string Host = "127.0.0.1";
 
-	[Tooltip("TCP port listened by the SmartFoxServer 2X instance; used for regular socket connection in all builds except WebGL")]
-	public int TcpPort = 9933;
+	private static readonly int TcpPort = 9933;
 
-	[Tooltip("WebSocket port listened by the SmartFoxServer 2X instance; used for in WebGL build only")]
-	public int WSPort = 8080;
+	private static readonly int WSPort = 8080;
 
 	[Tooltip("Name of the SmartFoxServer 2X Zone to join")]
-	public string Zone = "Piratera";
+	private static readonly string Zone = "Piratera";
 
-	public const string CLIENT_REQUEST = "clrq";
-	public static string ACTION_INCORE = "acc";
-	public static string ERROR_CODE = "error_code";
+	private static readonly string   CLIENT_REQUEST = "clrq";
+	private static readonly string ACTION_INCORE = "acc";
+	private static readonly string ERROR_CODE = "error_code";
+
+	public static SmartFox Connection
+	{
+		get
+		{
+			return sfs;
+		}
+		
+	}
 	//----------------------------------------------------------
 	// Private properties
 	//----------------------------------------------------------
 
-	protected SmartFox sfs;
-	private LoginData loginData;
-	private bool shuttingDown;
+	private static SmartFox sfs;
+	private static LoginData loginData;
+	private static bool shuttingDown;
 
 	//----------------------------------------------------------
 	// Unity callback methods
 	//----------------------------------------------------------
 
-	protected virtual void Awake()
-	{
+
+	void Awake()
+    {
 		if (Instance == null)
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
-
 			Application.runInBackground = true;
-			SetupSFS();
 			ForceStartScene();
 		}
 		else Destroy(gameObject);
+	
+
 	}
-	private void SetupSFS()
+
+	private static void reset()
 	{
-		// Initialize SFS2X client and add listeners
-		#if !UNITY_WEBGL
-			sfs = new SmartFox();
-		#else
-			sfs = new SmartFox(UseWebSocket.WS_BIN);
-		#endif
-		// Register event listeners
-		sfs.AddEventListener(SFSEvent.CONNECTION, OnConnection);
-		sfs.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
-		sfs.AddEventListener(SFSEvent.LOGIN, OnLogin);
-		sfs.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
-		//sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnJoinRoom);
-		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnJoinRoomError);
-		sfs.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
-		sfs.AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, OnUserDataUpdate);
-
+		// Remove SFS2X listeners
+		sfs.RemoveAllEventListeners();
+		sfs = null;
 	}
 
-    private void OnUserDataUpdate(BaseEvent evt)
+    private static void OnUserDataUpdate(BaseEvent evt)
     {
 		List<string> changedVars = (List<string>)evt.Params["changedVars"];
 
@@ -115,29 +108,42 @@ public class NetworkController : MonoBehaviour
 		UserData.Instance.OnUserVariablesUpdate(user);
 	}
 
-    protected virtual void Update()
+	public static bool IsInitialized
+	{
+		get
+		{
+			return (sfs != null);
+		}
+	}
+
+	void Update()
 	{
 		if (sfs != null) sfs.ProcessEvents();
 	}
 	void OnApplicationQuit()
 	{
 		shuttingDown = true;
-	}
-	private void ForceStartScene()
-	{
-		if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SceneLogin")
-			&& SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SceneLoading"))
+		if (sfs != null && sfs.IsConnected)
 		{
-			SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
+			sfs.Disconnect();
 		}
+	}
+	private static void ForceStartScene()
+	{
+
+		if (SceneManager.GetActiveScene().name != "SceneLogin" && SceneManager.GetActiveScene().name != "SceneLoading")
+		{
+			SceneManager.LoadScene("SceneLogin");
+		}
+
 	}
 	//----------------------------------------------------------
 	// Private helper methods
 	//----------------------------------------------------------
-	public void LoginToServer(LoginData data)
+	public static void LoginToServer(LoginData data)
 	{
 		loginData = data;
-
+		// Set connection parameters
 		ConfigData cfg = new ConfigData();
 		cfg.Host = Host;
 		#if !UNITY_WEBGL
@@ -147,33 +153,58 @@ public class NetworkController : MonoBehaviour
 		#endif
 		cfg.Zone = Zone;
 
+
+		// Initialize SFS2X client and add listeners
+#if !UNITY_WEBGL
+		sfs = new SmartFox();
+#else
+			sfs = new SmartFox(UseWebSocket.WS_BIN);
+#endif
+		// Register event listeners
+		AddEventListener(SFSEvent.CONNECTION, OnConnection);
+		AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+		AddEventListener(SFSEvent.LOGIN, OnLogin);
+		AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
+		AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
+		AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, OnUserDataUpdate);
+
 		sfs.Connect(cfg);
 	}
-	public void Logout()
+	public static void Logout()
 	{
-		sfs.Disconnect();
+		if (sfs != null)
+        {
+			sfs.Disconnect();
+		}
 	}
 	//----------------------------------------------------------
 	// SmartFoxServer event listeners
 	//----------------------------------------------------------
-	private void OnConnection(BaseEvent evt)
+	private static void OnConnection(BaseEvent evt)
 	{
 		if ((bool)evt.Params["success"])
 		{
 			Debug.Log("SFS2X API version: " + sfs.Version);
 			Debug.Log("Connection mode is: " + sfs.ConnectionMode);
 
-			SFSObject sfso = SFSObject.NewInstance();
+			SFSObject sfso = new SFSObject();
 			sfso.PutUtfString("passwd", "test");
 			sfso.PutInt("loginType", 1);
-			sfs.Send(new Sfs2X.Requests.LoginRequest(loginData.username, "", Zone, sfso));
+			sfs.Send(new LoginRequest(loginData.username, "", Zone, sfso));
 			Debug.Log("Send Login");
 		}
 		else Debug.Log("Connection failed; is the server running at all?");
 	}
 
-	protected void OnConnectionLost(BaseEvent evt)
+	protected static void OnConnectionLost(BaseEvent evt)
 	{
+	
+	
+		reset();
+		if (shuttingDown == true)
+        {
+			return;
+		}
 		string reason = (string)evt.Params["reason"];
 
 		if (reason != ClientDisconnectionReason.MANUAL)
@@ -183,13 +214,10 @@ public class NetworkController : MonoBehaviour
 		}
 
 		// do something (popup disconnect,...)
-		if (SceneManager.GetActiveScene() != SceneManager.GetSceneByName("SceneLogin"))
-		{
-			SceneManager.LoadScene("Scenes/SceneLogin/SceneLogin");
-		}
+		ForceStartScene();
 	}
 
-	private void OnLogin(BaseEvent evt)
+	private static void OnLogin(BaseEvent evt)
 	{
 		if (sfs.RoomList.Count > 0)
 		{
@@ -200,29 +228,19 @@ public class NetworkController : MonoBehaviour
 		Debug.Log("Login success as " + sfs.MySelf.Name);
 	}
 
-	private void OnLoginError(BaseEvent evt)
+	private static void OnLoginError(BaseEvent evt)
 	{
 		string errorText = "Login failed: " + (string)evt.Params["errorMessage"];
 		OnError(errorText);
-		if (LoginController.Instance) LoginController.Instance.OnLoginFail(errorText);
 	}
-	private void OnJoinRoom(BaseEvent evt)
-	{
-		//Application.LoadLevel("Lobby");
-		Debug.Log("Join Room Success" + ((Room)evt.Params["room"]).Name);
-		// SceneManager.LoadScene("Scenes/SceneLobby/SceneLobby");
-	}
-	private void OnJoinRoomError(BaseEvent evt)
-	{
-		OnError("Join Room failed: " + (string)evt.Params["errorMessage"]);
-	}
-	public void OnError(string message)
+
+	public static void  OnError(string message)
 	{
 		Debug.Log("Network Error: " + message);
 		sfs.Disconnect();
 	}
 
-	protected virtual void OnExtentionResponse(BaseEvent evt)
+	protected static void OnExtentionResponse(BaseEvent evt)
 	{
 
 		ISFSObject packet = (ISFSObject)evt.Params["params"];
@@ -242,27 +260,24 @@ public class NetworkController : MonoBehaviour
 			OnReceiveServerAction(action, errorCode, packet);
 		}
 	}
-	public void Send(SFSAction action, ISFSObject data)
+	public static void Send(SFSAction action, ISFSObject data)
 	{
 		data.PutInt(ACTION_INCORE, (int)action);
 		ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
 		sfs.Send(extensionRequest);
 	}
-	public void Send(SFSAction action)
+	public static void Send(SFSAction action)
 	{
 		Send(action, new SFSObject());
 	}
-	protected virtual void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
 	{
-		if (LobbyController.Instance) LobbyController.Instance.OnReceiveServerAction(action, errorCode, packet);
-		if (LoginController.Instance) LoginController.Instance.OnReceiveServerAction(action, errorCode, packet);
+		foreach (NetworkActionListenerDelegate listener in serverActionListeners) {
+			listener(action, errorCode, packet);
+        }
 		switch (action)
 		{
-			case SFSAction.JOIN_ZONE_SUCCESS:
-				{
-					if (LoginController.Instance) LoginController.Instance.ReceiveJoinZoneSuccess(sfs, errorCode, packet);
-					break;
-				}
+		
 			case SFSAction.COMBAT_BOT:
 				{
 					TempCombatData.Instance.LoadCombatDataFromSfs(packet);
@@ -278,6 +293,58 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
+		}
+	}
+
+	public static void AddServerActionListener(NetworkActionListenerDelegate listener)
+    {
+		serverActionListeners.Add(listener);
+
+	}
+
+	public static void RemoveServerActionListener(NetworkActionListenerDelegate listener)
+	{
+		serverActionListeners.Remove(listener);
+
+	}
+
+
+	//
+	// Summary:
+	//     Adds a delegate to a given API event type that will be used for callbacks.
+	//
+	// Parameters:
+	//   eventType:
+	//     The name of the Sfs2X.Core.SFSEvent to get callbacks on.
+	//
+	//   listener:
+	//     The delegate method to register.
+	public static void AddEventListener(string eventType, EventListenerDelegate listener)
+    {
+		if (sfs != null)
+        {
+			sfs.AddEventListener(eventType, listener);
+        } else
+        {
+			Debug.LogError("Smart Fox Connection is NULL");
+        }
+    }
+
+	//
+	// Summary:
+	//     Removes a delegate registration for a given API event.
+	//
+	// Parameters:
+	//   eventType:
+	//     The SFSEvent to remove callbacks on.
+	//
+	//   listener:
+	//     The delegate method to unregister.
+	public static void RemoveEventListener(string eventType, EventListenerDelegate listener)
+    {
+		if (sfs != null)
+		{
+			sfs.RemoveEventListener(eventType, listener);
 		}
 	}
 
