@@ -671,10 +671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2016eb7ee93501446987a1f015c5c296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Host: 127.0.0.1
-  TcpPort: 9933
-  WSPort: 8080
-  Zone: Piratera
 --- !u!4 &611538909
 Transform:
   m_ObjectHideFlags: 0

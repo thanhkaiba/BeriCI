@@ -16,6 +16,7 @@ public class UserData : Singleton<UserData>
         public const string EXP = "exp";
         public const string LEVEL = "level";
         public const string AVATAR = "avatar";
+        public const string TIME_BUY_STAMINA_TODAY = "time_buy_to_day";
     }
 
     protected override void OnAwake()
@@ -36,6 +37,8 @@ public class UserData : Singleton<UserData>
     /// </summary>
     public int Level { get;  set; } 
     public long LastCountStamina { get;  set; }
+
+    public int TimeBuyStaminaToday { get; set; }
 
 
     public void LoadExpConfig()
@@ -59,6 +62,7 @@ public class UserData : Singleton<UserData>
         Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
         LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
+        TimeBuyStaminaToday = user.GetVariable(UserInforPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
         GameEvent.UserDataChange.Invoke();
    
     }

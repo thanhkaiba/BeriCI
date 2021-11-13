@@ -32,6 +32,9 @@ public class LobbyUI : MonoBehaviour
 
 	[SerializeField]
 	private Slider userExp;
+
+	[SerializeField]
+	private GameObject guiBuyStaminaPrefap;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -92,6 +95,12 @@ public class LobbyUI : MonoBehaviour
 	public void OnButtonPickTeamClick()
 	{
 		SceneManager.LoadScene("ScenePickTeamBattle");
+	}
+
+	public void ShowStaminaPack()
+    {
+		GuiManager.Instance.AddGui(guiBuyStaminaPrefap);
+
 	}
 
 	private void Update()
