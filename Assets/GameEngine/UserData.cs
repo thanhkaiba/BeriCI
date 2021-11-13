@@ -85,4 +85,9 @@ public class UserData : Singleton<UserData>
         delta = recoveringTime - delta % recoveringTime;
         return delta;
     }
+
+    public string GetCurrentStaminaFormat()
+    {
+        return  $"{Stamina}/{StaminaConfig.max_stamina}";
+    }
 }
