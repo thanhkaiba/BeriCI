@@ -130,7 +130,7 @@ public class NetworkController : MonoBehaviour
 	}
 	private static void ForceStartScene()
 	{
-
+		return;
 		if (SceneManager.GetActiveScene().name != "SceneLogin" && SceneManager.GetActiveScene().name != "SceneLoading")
 		{
 			SceneManager.LoadScene("SceneLogin");

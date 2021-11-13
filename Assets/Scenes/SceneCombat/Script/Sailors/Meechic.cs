@@ -43,8 +43,6 @@ public class Meechic : CombatSailor
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            startPos.y += 2.3f;
-            startPos.x += 1f;
             var go = GameEffMgr.Instance.ShowSmokeSide(startPos, startPos.x < targetPos.x);
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
