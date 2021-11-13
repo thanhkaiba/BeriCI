@@ -110,6 +110,6 @@ public class Meechic : CombatSailor
         });
 
         seq.AppendInterval(0.3f);
-        return 3.0f;
+        return 2.8f;
     }
 }

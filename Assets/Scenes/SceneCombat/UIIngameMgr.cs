@@ -13,9 +13,14 @@ public class UIIngameMgr : MonoBehaviour
     public Text actionCount;
     public List<SailorInQueue> listSailorInQueue;
     public Text timescale;
+
+    public UserAvatar avtA;
+    public UserAvatar avtB;
     public void Awake()
     {
         Instance = this;
+        avtA.LoadAvatar("");
+        avtB.LoadAvatar("");
     }
     public void OnDestroy()
     {
@@ -32,7 +37,6 @@ public class UIIngameMgr : MonoBehaviour
             listSailorInQueue.Add(s);
             s.SetData(sailors[i]);
             s.PresentData();
-            s.gameObject.SetActive(i < 8);
         }
     }
     public void UpdateListSailorInQueue()
@@ -50,7 +54,6 @@ public class UIIngameMgr : MonoBehaviour
                 s.transform.DOLocalMoveX(-index * 150, 0.5f);
                 s.transform.SetSiblingIndex(listSailorInQueue.Count-index-1);
                 s.PresentData();
-                s.gameObject.SetActive(index < 8);
             }
             else
             {
