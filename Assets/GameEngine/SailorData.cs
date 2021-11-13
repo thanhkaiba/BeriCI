@@ -23,17 +23,16 @@ public enum SailorStatusType
 public enum SailorClass
 {
     NONE,
-    WILD,
     MIGHTY,
     SWORD_MAN,
-    HORROR,
-    BERSERK,
-    DOCTOR,
-    WIZARD,
-    SUPPORT,
-    SNIPER,
+    MARKSMAN,
+    MAGE,
+    DEMON,
     ASSASSIN,
-    KUNG_FU,
+    WILD,
+    SEA_CREATURE,
+    CYBORG,
+    SUPPORT,
 };
 
 public enum SailorRank

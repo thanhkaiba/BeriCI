@@ -21,15 +21,7 @@ public class LobbyController : MonoBehaviour
 	{
 		switch (action)
 		{
-			case SFSAction.LOAD_LIST_HERO_INFO:
-				{
-					if (errorCode == SFSErrorCode.SUCCESS)
-					{
-						Debug.Log("Load List hero success");
-						CrewData.Instance.NewFromSFSObject(packet);
-					}
-					break;
-				}
+			
 		}
 	}
 

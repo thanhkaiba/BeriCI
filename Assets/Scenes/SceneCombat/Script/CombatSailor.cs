@@ -135,7 +135,7 @@ public class CombatSailor : Sailor
         {
             switch (p.type)
             {
-                case SailorClass.HORROR:
+                case SailorClass.DEMON:
                     cs.BaseArmor -= config.GetParams(p.type, p.level)[0];
                     break;
             }
@@ -219,29 +219,29 @@ public class CombatSailor : Sailor
         CombatEvents.Instance.attackOneTarget.Invoke(this, target);
 
         // passive
-        if (cs.HaveType(SailorClass.BERSERK))
+        if (cs.HaveType(SailorClass.CYBORG))
         {
             ContainerClassBonus config = GlobalConfigs.ClassBonus;
-            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.BERSERK);
+            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
             if (berserk != null)
             {
                 float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
                 cs.Speed += speedAdd;
-                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.BERSERK, new List<float> { speedAdd });
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { speedAdd });
             }
         }
-        if (combatState.GetTeamClassBonus(cs.team, SailorClass.SNIPER) != null && cs.HaveType(SailorClass.SNIPER))
+        if (combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN) != null && cs.HaveType(SailorClass.MARKSMAN))
         {
             ContainerClassBonus config = GlobalConfigs.ClassBonus;
-            ClassBonusItem sniper = combatState.GetTeamClassBonus(cs.team, SailorClass.SNIPER);
+            ClassBonusItem sniper = combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
             var listYourTeam = combatState.GetAllTeamAliveSailors(cs.team);
             listYourTeam.ForEach(sai =>
             {
                 int speedUpValue = (int)(config.GetParams(sniper.type, sniper.level)[0] * sai.cs.SpeedNeed);
-                if (sai.cs.HaveType(SailorClass.SNIPER) && sai != this)
+                if (sai.cs.HaveType(SailorClass.MARKSMAN) && sai != this)
                 {
                     sai.SpeedUp(speedUpValue);
-                    CombatEvents.Instance.activeClassBonus.Invoke(sai, SailorClass.SNIPER, new List<float> { 0 });
+                    CombatEvents.Instance.activeClassBonus.Invoke(sai, SailorClass.MARKSMAN, new List<float> { 0 });
                 }
             });
             UIIngameMgr.Instance.UpdateListSailorInQueue();

@@ -71,7 +71,11 @@ public class LoginController: MonoBehaviour
 		enableLoginUI(false);
 		NetworkController.Instance.LoginToServer(new LoginData(nameInput.text, ""));
 	}
-
+	public void OnLoginFail(string text)
+	{
+		enableLoginUI(true);
+		errorText.text = text;
+	}
 	public void ReceiveJoinZoneSuccess(SmartFox sfs, SFSErrorCode errorCode, ISFSObject packet)
 	{
 		if (errorCode == SFSErrorCode.SUCCESS)

@@ -27,16 +27,12 @@ public class GameEffMgr : MonoBehaviour
     public GameObject fieldRight;
     public void BulletToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
     {
-        var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Meechic/bullet"), startPos, Quaternion.identity);
+        var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/FX/meechik_projectile"), startPos, Quaternion.identity);
         bulletGO.SetActive(false);
 
-        var targetHeart = new Vector3(targetPos.x,
-            targetPos.y + 7.0f,
-            targetPos.z
-        );
         Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, targetHeart);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, targetHeart, d - 1.4f);
+        float d = Vector3.Distance(oriPos, targetPos);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
         int r = 1;
         if (bulletGO.transform.position.x > desPos.x)
         {
@@ -51,19 +47,36 @@ public class GameEffMgr : MonoBehaviour
             bulletGO.transform.rotation = Quaternion.Euler(0, 0, -5 * r);
             bulletGO.transform.DORotate(new Vector3(0, 0, 10 * r), 0.4f);
         });
-        seq.Append(bulletGO.transform.DOJump(desPos, 1.4f, 1, flyTime).SetEase(Ease.OutSine));
+        seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
         seq.AppendCallback(() => {
             ShowSmallExplosion(bulletGO.transform.position);
+            //ShowSmoke4(bulletGO.transform.position, startPos.x > targetPos.x);
             Destroy(bulletGO);
         });
     }
     public void ShowSmallExplosion(Vector3 position)
     {
-        GameObject ex = Instantiate(Resources.Load<GameObject>("ParticleEffect/FireExplosionEffects/Prefabs/DustExplosion"), position, new Quaternion());
-        ex.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/15 effects/Rocket_normal"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
         seq2.AppendInterval(2.0f);
         seq2.AppendCallback(() => Destroy(ex));
+    }
+    public void ShowSmoke4(Vector3 position, bool flip)
+    {
+        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/19 effects/smoke_4"), position, new Quaternion());
+        Sequence seq2 = DOTween.Sequence();
+        seq2.AppendInterval(2.0f);
+        seq2.AppendCallback(() => Destroy(ex));
+        ex.transform.localScale = new Vector3(flip ? -1 : 1, 1, 1);
+    }
+    public GameObject ShowSmokeSide(Vector3 position, bool flip)
+    {
+        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/19 effects/smoke_side"), position, new Quaternion());
+        Sequence seq2 = DOTween.Sequence();
+        seq2.AppendInterval(2.0f);
+        seq2.AppendCallback(() => Destroy(ex));
+        ex.transform.localScale = new Vector3(1, 1, 1);
+        return ex;
     }
     public void ShowExplosion(Vector3 position)
     {
