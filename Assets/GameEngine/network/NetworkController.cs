@@ -263,9 +263,13 @@ public class NetworkController : MonoBehaviour
 	}
 	public static void Send(SFSAction action, ISFSObject data)
 	{
-		data.PutInt(ACTION_INCORE, (int)action);
-		ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
-		sfs.Send(extensionRequest);
+		if (sfs != null)
+        {
+			data.PutInt(ACTION_INCORE, (int)action);
+			ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
+			sfs.Send(extensionRequest);
+		}
+	
 	}
 	public static void Send(SFSAction action)
 	{
