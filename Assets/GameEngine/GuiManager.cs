@@ -15,7 +15,7 @@ public class GuiManager : Singleton<GuiManager>
 
     public GameObject AddGui(GameObject prefap)
     {
-        Canvas canvas = FindObjectOfType<Canvas>();
+        Canvas canvas = FindObjectOfType<Canvas>(); 
 
         if (canvas != null)
         {
