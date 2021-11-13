@@ -11,21 +11,15 @@ public class Tons : CombatSailor
     }
     public override void Awake()
     {
-        circle = Instantiate(Resources.Load<GameObject>("GameComponents/SkillAvaiableCircle/circle"));
-        circle.GetComponent<CircleSkillAvaiable>().SetCharacter(gameObject);
-        circle.SetActive(false);
-
         base.Awake();
         modelObject = transform.Find("model").gameObject;
     }
     public override void GainFury(int value)
     {
         base.GainFury(value);
-        if (cs.Fury >= cs.MaxFury && !circle.activeSelf) circle.GetComponent<CircleSkillAvaiable>().Appear();
     }
     public override float UseSkill(CombatState combatState)
     {
-        circle.GetComponent<CircleSkillAvaiable>().Disappear();
         return base.UseSkill(combatState);
     }
     public override float RunBaseAttack(CombatSailor target)
@@ -127,15 +121,15 @@ public class Tons : CombatSailor
 
         Sequence seq3 = DOTween.Sequence();
         seq3.AppendInterval(1.0f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
         seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
         seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
         seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
         seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5, 0, 0, 2)));
+        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
         return 2.0f;
     }
 }

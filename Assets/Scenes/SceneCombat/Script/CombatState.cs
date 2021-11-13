@@ -100,6 +100,7 @@ public class CombatState : MonoBehaviour
         //CreateCombatSailor("Helti", new CombatPosition(0, 2), t);
         //CreateCombatSailor("Target", new CombatPosition(1, 1), t);
         CreateCombatSailor("Meechic", new CombatPosition(1, 1), t);
+        CreateCombatSailor("Tons", new CombatPosition(0, 0), t);
 
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 1), t);
         //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 1), t);

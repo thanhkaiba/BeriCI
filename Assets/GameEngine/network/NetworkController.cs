@@ -66,7 +66,7 @@ public class NetworkController : MonoBehaviour
 
 			Application.runInBackground = true;
 			SetupSFS();
-			ForceStartScene();
+			//ForceStartScene();
 		}
 		else Destroy(gameObject);
 	}
