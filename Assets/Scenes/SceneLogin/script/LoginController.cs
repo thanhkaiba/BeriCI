@@ -44,18 +44,6 @@ public class LoginController: MonoBehaviour
 
 
 
-	private class UserInforPropertiesKey
-	{
-
-		public const string UID = "uid";
-		public const string USERNAME = "username";
-		public const string BERI = "beri";
-		public const string STAMINA = "stamina";
-		public const string LAST_COUNT = "last_count";
-		public const string EXP = "exp";
-		public const string LEVEL = "level";
-		public const string AVATAR = "avatar";
-	}
 
 
 	//----------------------------------------------------------
@@ -89,13 +77,7 @@ public class LoginController: MonoBehaviour
 		if (errorCode == SFSErrorCode.SUCCESS)
 		{
 			User user = sfs.MySelf;
-			UserData.Instance.Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
-			UserData.Instance.Username = user.Name;
-			UserData.Instance.Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
-			UserData.Instance.Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
-			UserData.Instance.Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
-			UserData.Instance.Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
-			UserData.Instance.LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
+			UserData.Instance.OnUserVariablesUpdate(user);
 			OpenLobby();
 		}
 		else

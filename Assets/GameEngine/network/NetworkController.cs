@@ -86,9 +86,17 @@ public class NetworkController : MonoBehaviour
 		//sfs.AddEventListener(SFSEvent.ROOM_JOIN, OnJoinRoom);
 		sfs.AddEventListener(SFSEvent.ROOM_JOIN_ERROR, OnJoinRoomError);
 		sfs.AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
+		sfs.AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, OnUserDataUpdate);
 
 	}
-	protected virtual void Update()
+
+    private void OnUserDataUpdate(BaseEvent evt)
+    {
+		User user = sfs.MySelf;
+		UserData.Instance.OnUserVariablesUpdate(user);
+	}
+
+    protected virtual void Update()
 	{
 		if (sfs != null) sfs.ProcessEvents();
 	}
