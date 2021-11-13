@@ -96,24 +96,15 @@ public class CombatState : MonoBehaviour
     }
     void CreateRandomTeam(Team t)
     {
-        //CreateCombatSailor("Helti", new CombatPosition(0, 0), t);
-        //CreateCombatSailor("Helti", new CombatPosition(0, 2), t);
-        //CreateCombatSailor("Target", new CombatPosition(1, 1), t);
-        CreateCombatSailor("Meechic", new CombatPosition(1, 1), t);
         CreateCombatSailor("Tons", new CombatPosition(0, 0), t);
-
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 1), t);
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(1, 1), t);
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 1), t);
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 0), t);
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 0), t);
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(0, 2), t);
-        //CreateCombatSailor("Helti|DemoItem:20", new CombatPosition(2, 2), t);
-        //CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
-        //CreateCombatSailor("demo", new CombatPosition(1, 1), t);
-        //CreateCombatSailor("demo2", new CombatPosition(2, 0), t);
-        //CreateCombatSailor("demo2", new CombatPosition(2, 2), t);
-        //CreateCombatSailor("demo", new CombatPosition(0, 2), t);
+        CreateCombatSailor("Tons", new CombatPosition(1, 1), t);
+        CreateCombatSailor("Tons", new CombatPosition(2, 2), t);
+        CreateCombatSailor("Tons", new CombatPosition(0, 2), t);
+        CreateCombatSailor("Tons", new CombatPosition(2, 0), t);
+        CreateCombatSailor("Tons", new CombatPosition(1, 0), t);
+        CreateCombatSailor("Tons", new CombatPosition(0, 1), t);
+        CreateCombatSailor("Tons", new CombatPosition(2, 1), t);
+        CreateCombatSailor("Tons", new CombatPosition(1, 2), t);
     }
 
     void CreateTargetTeam(Team t)
@@ -239,7 +230,7 @@ public class CombatState : MonoBehaviour
     private List<ClassBonusItem> CalculateClassBonus(List<CombatSailor> t)
     {
         List<ClassBonusItem> result = new List<ClassBonusItem>();
-
+        List<string> countedSailor = new List<string>();
         List<int> typeCount = new List<int>();
         for (int i = 0; i < Enum.GetNames(typeof(SailorClass)).Length; i++)
         {
@@ -249,7 +240,13 @@ public class CombatState : MonoBehaviour
         {
             foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
             {
-                if (sailor.cs.HaveType(type)) typeCount[(int)type] += 1;
+                string sailorName = sailor.Model.config_stats.root_name;
+                // moi loai sailor chi tinh 1 lan
+                if (sailor.cs.HaveType(type) && !countedSailor.Contains(sailorName))
+                {
+                    typeCount[(int)type] += 1;
+                    //countedSailor.Add(sailorName);
+                }
             }
         });
 

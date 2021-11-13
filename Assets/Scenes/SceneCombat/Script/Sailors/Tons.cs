@@ -102,7 +102,7 @@ public class Tons : CombatSailor
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d + 8.0f);
-        desPos.z -= 1;
+        //desPos.z -= 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.35f);
         seq.AppendCallback(() => {

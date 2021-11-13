@@ -10,6 +10,13 @@ public class IconClassBonus : MonoBehaviour
     public Text text;
     public ClassBonusItem data;
     public bool clickable = true;
+
+    [SerializeField]
+    private Sprite bg_0;
+    [SerializeField]
+    private Sprite bg_1;
+    [SerializeField]
+    private Sprite bg_2;
     private void Start()
     {
         if (clickable)
@@ -30,15 +37,19 @@ public class IconClassBonus : MonoBehaviour
     public void ChangeLevel(int level)
     {
         // TODO sau phai check theo tung loai
-        if (level >= 1) GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/SailorType/border_0");
-        else GetComponent<Image>().sprite = Resources.Load<Sprite>("Icons/SailorType/border_1");
+        if (level >= 1) GetComponent<Image>().sprite = bg_2;
+        else GetComponent<Image>().sprite = bg_0;
     }
     public void SetData(ClassBonusItem data)
     {
         this.data = data;
         ChangeIcon(data.type);
         ChangeLevel(data.level);
-        ChangeText("");
+
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        int maxPop = config.GetMaxPopNeed(data.type);
+
+        ChangeText("" + data.current + "/" + maxPop);
     }
     private void OnClickIcon(Vector2 mousePos)
     {

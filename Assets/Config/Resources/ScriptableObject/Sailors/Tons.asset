@@ -32,7 +32,7 @@ MonoBehaviour:
   armor: 20
   magic_resist: 20
   attack_type: 2
-  classes: 0a000000
+  classes: 0200000001000000
   skill_name: Huricane
   start_fury: 0
   max_fury: 20

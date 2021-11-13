@@ -77,7 +77,8 @@ public class UIIngameMgr : MonoBehaviour
             GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
             IconClassBonus s = Instantiate(GO, nodeLeft).GetComponent<IconClassBonus>();
             s.SetData(passiveTypeA[i]);
-            s.transform.DOLocalMoveY(-128*i, 0.5f);
+            s.transform.DOLocalMoveX(72*i, 0.5f);
+            GO.transform.localScale = new Vector3(0.6f, 0.6f, 1);
         }
 
         for (int i = 0; i < passiveTypeB.Count; i++)
@@ -85,7 +86,8 @@ public class UIIngameMgr : MonoBehaviour
             GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
             IconClassBonus s = Instantiate(GO, nodeRight).GetComponent<IconClassBonus>();
             s.SetData(passiveTypeB[i]);
-            s.transform.DOLocalMoveY(-128 * i, 0.5f);
+            s.transform.DOLocalMoveX(-72 * i, 0.5f);
+            GO.transform.localScale = new Vector3(0.6f, 0.6f, 1);
         }
     }
 
