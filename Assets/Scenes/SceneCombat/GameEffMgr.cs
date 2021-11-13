@@ -33,31 +33,30 @@ public class GameEffMgr : MonoBehaviour
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-        int r = 1;
-        if (bulletGO.transform.position.x > desPos.x)
-        {
-            bulletGO.transform.localScale = new Vector3(-1, 1, 1);
-            r = -1;
-        }
+        int isFlip = 1;
+        if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
-        seq.AppendCallback(() => {
-            bulletGO.SetActive(true);
-            bulletGO.transform.rotation = Quaternion.Euler(0, 0, -5 * r);
-            bulletGO.transform.DORotate(new Vector3(0, 0, 10 * r), 0.4f);
-        });
+        seq.AppendCallback(() => bulletGO.SetActive(true));
         seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
         seq.AppendCallback(() => {
-            ShowSmallExplosion(bulletGO.transform.position);
+            //ShowSmallExplosion(bulletGO.transform.position);
             //ShowSmoke4(bulletGO.transform.position, startPos.x > targetPos.x);
             Destroy(bulletGO);
+
+            GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/bullet_explore/bullet_explore"), bulletGO.transform.position, new Quaternion());
+            Sequence seq2 = DOTween.Sequence();
+            seq2.AppendInterval(2.0f);
+            seq2.AppendCallback(() => Destroy(ex));
+            ex.transform.localScale = new Vector3(isFlip*3, 3, 3);
         });
     }
     public void ShowSmallExplosion(Vector3 position)
     {
         GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/15 effects/Rocket_normal"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
+        ex.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
         seq2.AppendInterval(2.0f);
         seq2.AppendCallback(() => Destroy(ex));
     }

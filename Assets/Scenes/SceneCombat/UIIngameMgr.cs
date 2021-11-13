@@ -12,6 +12,7 @@ public class UIIngameMgr : MonoBehaviour
     public GameObject sailorInQueue;
     public Text actionCount;
     public List<SailorInQueue> listSailorInQueue;
+    public Text timescale;
     public void Awake()
     {
         Instance = this;
@@ -196,5 +197,9 @@ public class UIIngameMgr : MonoBehaviour
         }
         node.SetActive(true);
         health.ChangeValue(CombatState.Instance.GetTeamHealthRatio(t));
+    }
+    public void ShowTimeScale()
+    {
+        timescale.text = "X" + (int) Time.timeScale;
     }
 }

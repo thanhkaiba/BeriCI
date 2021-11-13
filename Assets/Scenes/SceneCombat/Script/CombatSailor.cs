@@ -331,7 +331,7 @@ public class CombatSailor : Sailor
         GainFury(d.fury_gain);
         return totalDamage;
     }
-    public virtual float TakeDamage(float physics_damage = 0, float magic_damage = 0, float true_damage = 0, int fury_gain = 4, bool isCrit = false)
+    public virtual float TakeDamage(float physics_damage = 0, float magic_damage = 0, float true_damage = 0, int fury_gain = 0, bool isCrit = false)
     {
         return TakeDamage(new Damage()
         {

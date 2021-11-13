@@ -11,21 +11,15 @@ public class Helti : CombatSailor
     }
     public override void Awake()
     {
-        circle = Instantiate(Resources.Load<GameObject>("GameComponents/SkillAvaiableCircle/circle"));
-        circle.GetComponent<CircleSkillAvaiable>().SetCharacter(gameObject);
-        circle.SetActive(false);
-
         base.Awake();
         modelObject = transform.Find("model").gameObject;
     }
     public override void GainFury(int value)
     {
         base.GainFury(value);
-        if (cs.Fury >= cs.MaxFury && !circle.activeSelf) circle.GetComponent<CircleSkillAvaiable>().Appear();
     }
     public override float UseSkill(CombatState combatState)
     {
-        circle.GetComponent<CircleSkillAvaiable>().Disappear();
         return base.UseSkill(combatState);
     }
     public override float RunBaseAttack(CombatSailor target)

@@ -26,6 +26,7 @@ public class CombatMgr : MonoBehaviour
     {
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
+        Time.timeScale = 1;
 
         //return;
         PreparingGame();
@@ -162,6 +163,7 @@ public class CombatMgr : MonoBehaviour
 
     void GameOver(Team winTeam)
     {
+        Time.timeScale = 1;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
@@ -195,8 +197,9 @@ public class CombatMgr : MonoBehaviour
         if (!A_alive && !B_alive) return Team.BOTH;
         return Team.NONE;
     }
-    public void SetTimeScale(float scale)
+    public void ChangeTimeScale()
     {
-        Time.timeScale = scale;
+        if (Time.timeScale == 1) Time.timeScale = 2;
+        else Time.timeScale = 1;
     }
 }

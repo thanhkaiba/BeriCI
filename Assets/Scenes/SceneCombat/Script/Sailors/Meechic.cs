@@ -30,25 +30,23 @@ public class Meechic : CombatSailor
         targetPos.y += 3.4f;
         
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.48f);
+        seq.AppendInterval(0.88f);
         seq.AppendCallback(() =>
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            startPos.y -= 0.55f;
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0.4f, 0.2f);
+            //startPos.y -= 0.4f;
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
         });
         seq.AppendInterval(0.4f);
         seq.AppendCallback(() =>
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            startPos.y += 2.3f;
-            startPos.x += 1f;
             var go = GameEffMgr.Instance.ShowSmokeSide(startPos, startPos.x < targetPos.x);
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
-        return 1.1f;
+        return 1.25f;
     }
     
     public override void SetFaceDirection()
@@ -80,16 +78,30 @@ public class Meechic : CombatSailor
     {
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float around_damage_ratio = Model.config_stats.skill_params[1];
-        TriggerAnimation("BaseAttack");
-        //GameEffMgr.Instance.BulletToTarget(transform.FindDeepChild("nodeStartBullet").position, target.transform.position, 0.4f, 0.2f);
+        TriggerAnimation("skill");
+
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
         desPos.y += 1;
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.6f);
-        seq.AppendCallback(() => GameEffMgr.Instance.ShowExplosion(target.transform.position));
+        seq.AppendInterval(1.6f);
+        seq.AppendCallback(() =>
+        {
+            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
+            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
+            startPos.y -= 0.0f;
+            Vector3 targetPos = target.transform.position;
+            targetPos.y += 3.4f;
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
+        });
+        seq.AppendInterval(0.4f);
+        seq.AppendCallback(() => {
+            Vector3 explorePos = target.transform.position;
+            explorePos.y += 3.4f;
+            GameEffMgr.Instance.ShowSmallExplosion(explorePos);
+        });
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
@@ -98,6 +110,6 @@ public class Meechic : CombatSailor
         });
 
         seq.AppendInterval(0.3f);
-        return 1.1f;
+        return 3.0f;
     }
 }
