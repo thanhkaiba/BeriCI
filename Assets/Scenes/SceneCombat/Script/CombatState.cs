@@ -62,8 +62,8 @@ public class CombatState : MonoBehaviour
     }
     public void CreateDemoTeam()
     {
-        CreateRandomTeam(Team.A);
-        CreateRandomTeam(Team.B);
+        CreateTeamA();
+        CreateTeamB();
         //CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.A);
@@ -88,39 +88,20 @@ public class CombatState : MonoBehaviour
         //    }
         //}
 
-        //CreateCombatSailor("Meechic", new CombatPosition(0, 0), Team.B);
-        //CreateCombatSailor("Meechic", new CombatPosition(0, 2), Team.B);
-        //CreateCombatSailor("Meechic", new CombatPosition(2, 1), Team.B);
-        //CreateCombatSailor("Meechic", new CombatPosition(0, 1), Team.B);
-        //CreateCombatSailor("Meechic", new CombatPosition(1, 1), Team.B);
     }
-    void CreateRandomTeam(Team t)
+    void CreateTeamA()
     {
-        CreateCombatSailor("Tons", new CombatPosition(0, 0), t);
-        CreateCombatSailor("Tons", new CombatPosition(1, 1), t);
-        CreateCombatSailor("Tons", new CombatPosition(2, 2), t);
-        CreateCombatSailor("Tons", new CombatPosition(0, 2), t);
-        CreateCombatSailor("Tons", new CombatPosition(2, 0), t);
-        CreateCombatSailor("Tons", new CombatPosition(1, 0), t);
-        CreateCombatSailor("Tons", new CombatPosition(0, 1), t);
-        CreateCombatSailor("Tons", new CombatPosition(2, 1), t);
-        CreateCombatSailor("Tons", new CombatPosition(1, 2), t);
+        //CreateCombatSailor("Tons", new CombatPosition(1, 1), Team.A);
+        CreateCombatSailor("Tons", new CombatPosition(1, 0), Team.A);
+        CreateCombatSailor("Tons", new CombatPosition(0, 1), Team.A);
+        //CreateCombatSailor("Tons", new CombatPosition(2, 1), Team.A);
+        CreateCombatSailor("Tons", new CombatPosition(1, 2), Team.A);
     }
-
-    void CreateTargetTeam(Team t)
+    void CreateTeamB()
     {
-        CreateCombatSailor("Target", new CombatPosition(0, 1), t);
-        CreateCombatSailor("Target", new CombatPosition(1, 1), t);
-        CreateCombatSailor("Target", new CombatPosition(2, 1), t);
-        CreateCombatSailor("Target", new CombatPosition(0, 0), t);
-        CreateCombatSailor("Target", new CombatPosition(1, 0), t);
-        CreateCombatSailor("Target", new CombatPosition(2, 0), t);
-        CreateCombatSailor("Target", new CombatPosition(0, 2), t);
-        CreateCombatSailor("Target", new CombatPosition(1, 2), t);
-        CreateCombatSailor("Target", new CombatPosition(2, 2), t);
-
-        //CreateCombatSailor("Helti", new CombatPosition(1, 0), t);
-        //CreateCombatSailor("Helti", new CombatPosition(1, 2), t);
+        CreateCombatSailor("Tons", new CombatPosition(0, 0), Team.B);
+        //CreateCombatSailor("Tons", new CombatPosition(1, 1), Team.B);
+        //CreateCombatSailor("Tons", new CombatPosition(2, 2), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
@@ -139,11 +120,11 @@ public class CombatState : MonoBehaviour
         }
 
         CombatSailor sailor = GameUtils.CreateCombatSailor(name);
-        int quality = UnityEngine.Random.Range(1, 100 + 1);
-        int level = UnityEngine.Random.Range(1, 10 + 1);
+        sailor.Model.quality = UnityEngine.Random.Range(1, 100 + 1);
+        sailor.Model.level = UnityEngine.Random.Range(1, 10 + 1);
 
         sailor.SetEquipItems(listItem);
-        sailor.InitCombatData(level, quality, pos, team);
+        sailor.InitCombatData(pos, team);
         sailor.CreateStatusBar();
         sailor.InitDisplayStatus();
         if (team == Team.A) sailorsTeamA.Add(sailor);
@@ -160,7 +141,7 @@ public class CombatState : MonoBehaviour
         CombatSailor sailor = GameUtils.CreateCombatSailor(s);
 
         sailor.SetEquipItems(listItem);
-        sailor.InitCombatData(s.level, s.quality, pos, team);
+        sailor.InitCombatData(pos, team);
         sailor.CreateStatusBar();
         sailor.InitDisplayStatus();
         if (team == Team.A) sailorsTeamA.Add(sailor);
@@ -222,6 +203,8 @@ public class CombatState : MonoBehaviour
             int speedNeed_1 = sailor1.GetSpeedNeeded();
             int speedNeed_2 = sailor2.GetSpeedNeeded();
             if (speedNeed_1 < speedNeed_2) return -1;
+            if (speedNeed_1 > speedNeed_2) return 1;
+            if ( string.Compare(sailor1.Model.id, sailor2.Model.id, StringComparison.Ordinal) > 0) return -1;
             else return 1;
         });
         return result;
@@ -232,6 +215,7 @@ public class CombatState : MonoBehaviour
         List<ClassBonusItem> result = new List<ClassBonusItem>();
         List<string> countedSailor = new List<string>();
         List<int> typeCount = new List<int>();
+        int assassinCount = 0;
         for (int i = 0; i < Enum.GetNames(typeof(SailorClass)).Length; i++)
         {
             typeCount.Add(0);
@@ -245,16 +229,22 @@ public class CombatState : MonoBehaviour
                 if (sailor.cs.HaveType(type) && !countedSailor.Contains(sailorName))
                 {
                     typeCount[(int)type] += 1;
-                    //countedSailor.Add(sailorName);
+                    countedSailor.Add(sailorName);
                 }
             }
+            // Dem so assassin, neu >= 2 thi khong kich hoat
+            if (sailor.cs.HaveType(SailorClass.ASSASSIN)) assassinCount++;
+
         });
 
         foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))
         {
+            // nhieu hon 1 assassin thi skip tinh assassin
+            if (type == SailorClass.ASSASSIN && assassinCount > 1) continue;
+
             ContainerClassBonus config = GlobalConfigs.ClassBonus;
             if (!config.HaveBonus(type)) continue;
-            var milestones = config.GetMilestones(type);
+            List<int> milestones = config.GetMilestones(type);
             for (int level = milestones.Count - 1; level >= 0; level--)
             {
                 int popNeed = milestones[level];
