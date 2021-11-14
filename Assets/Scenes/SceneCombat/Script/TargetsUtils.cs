@@ -95,13 +95,16 @@ public class TargetsUtils
         });
         return result;
     }
-    public static List<CombatSailor> Around(CombatSailor actor, List<CombatSailor> l)
+    public static List<CombatSailor> Around(CombatSailor actor, List<CombatSailor> l, bool includeActor = false)
     {
         List<CombatSailor> result = new List<CombatSailor>();
         CombatPosition p = actor.cs.position;
         l.ForEach(cha =>
         {
-            if (Math.Abs(cha.cs.position.x - actor.cs.position.x) <= 1 && Math.Abs(cha.cs.position.y - actor.cs.position.y) <= 1 && actor != cha) result.Add(cha);
+            if (Math.Abs(cha.cs.position.x - actor.cs.position.x) <= 1 && Math.Abs(cha.cs.position.y - actor.cs.position.y) <= 1)
+            {
+                if (actor != cha || includeActor) result.Add(cha);
+            }
         });
         return result;
     }

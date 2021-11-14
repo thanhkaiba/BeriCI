@@ -21,17 +21,17 @@ public class FlyTextMgr : MonoBehaviour
         if (damage.physics_damage > 0)
         {
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
-            c.GetComponent<TextDamage>().Present(damage.physics_damage, v3, damage.isCrit, Color.red);
+            c.GetComponent<TextDamage>().Present(damage.physics_damage, v3, damage.isCrit, new Color(0.93f, 0.18f, 0.24f));
         }
         if (damage.magic_damage > 0)
         {
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
-            c.GetComponent<TextDamage>().Present(damage.physics_damage, v3, damage.isCrit, Color.blue);
+            c.GetComponent<TextDamage>().Present(damage.magic_damage, v3, damage.isCrit, new Color(0.58f, 0.72f, 0.92f));
         }
         if (damage.true_damage > 0)
         {
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
-            c.GetComponent<TextDamage>().Present(damage.physics_damage, v3, damage.isCrit, Color.white);
+            c.GetComponent<TextDamage>().Present(damage.true_damage, v3, damage.isCrit, Color.white);
         }
     }
 

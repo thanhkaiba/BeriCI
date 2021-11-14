@@ -26,7 +26,6 @@ public class Damage
 public class CombatSailor : Sailor
 {
     public CombatStats cs;
-    public Skill skill = null;
 
     public CharBarControl bar;
     public virtual void Awake()

@@ -70,11 +70,13 @@ public class GameEffMgr : MonoBehaviour
     }
     public GameObject ShowSmokeSide(Vector3 position, bool flip)
     {
+        position.x += 2.0f;
+        position.y += 2.5f;
         GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/19 effects/smoke_side"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
         seq2.AppendInterval(2.0f);
         seq2.AppendCallback(() => Destroy(ex));
-        ex.transform.localScale = new Vector3(1, 1, 1);
+        ex.transform.localScale = new Vector3(flip ? 1 : -1, 1, 1);
         return ex;
     }
     public void ShowExplosion(Vector3 position)

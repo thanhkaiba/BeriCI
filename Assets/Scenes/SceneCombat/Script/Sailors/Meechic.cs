@@ -30,23 +30,19 @@ public class Meechic : CombatSailor
         targetPos.y += 3.4f;
         
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.88f);
+        seq.AppendInterval(0.68f);
         seq.AppendCallback(() =>
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             //startPos.y -= 0.4f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
-        });
-        seq.AppendInterval(0.4f);
-        seq.AppendCallback(() =>
-        {
-            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
-            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
+
             var go = GameEffMgr.Instance.ShowSmokeSide(startPos, startPos.x < targetPos.x);
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
-        return 1.25f;
+        seq.AppendInterval(0.1f);
+        return 0.9f;
     }
     
     public override void SetFaceDirection()
@@ -66,18 +62,17 @@ public class Meechic : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
-        float physic_damage = cs.Power;
+        float physic_damage = cs.Power * Model.config_stats.skill_params[0];
+        float magic_damage = cs.Power * Model.config_stats.skill_params[1];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
-        List<CombatSailor> around_target = TargetsUtils.Around(target, enermy);
+        List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, true);
 
-        return RunAnimation(target, around_target, physic_damage);
+        return RunAnimation(target, around_target, physic_damage, magic_damage);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage)
+    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage, float magic_damage)
     {
-        float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float around_damage_ratio = Model.config_stats.skill_params[1];
         TriggerAnimation("skill");
 
         CombatEvents.Instance.highlightTarget.Invoke(target);
@@ -105,8 +100,8 @@ public class Meechic : CombatSailor
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(physics_damage * scale_damage_ratio, 0, 0);
-            around_target.ForEach(s => s.TakeDamage(physics_damage * around_damage_ratio, 0, 0, 2));
+            target.TakeDamage(physics_damage);
+            around_target.ForEach(s => s.TakeDamage(0, magic_damage));
         });
 
         seq.AppendInterval(0.3f);

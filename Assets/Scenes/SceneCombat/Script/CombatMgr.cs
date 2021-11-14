@@ -71,7 +71,7 @@ public class CombatMgr : MonoBehaviour
         CombatSailor actionChar = SpeedUpAllSailors(speedAdd);
         actionCount++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.ShowActionCount(actionCount);
+        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCount) ));
         Debug.Log(
             " ----> combat action character: " + actionChar.Model.config_stats.root_name
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")

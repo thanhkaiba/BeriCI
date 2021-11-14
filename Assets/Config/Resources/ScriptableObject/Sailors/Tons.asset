@@ -23,7 +23,7 @@ MonoBehaviour:
   crit: 0
   crit_damage: 0
   block_change: 0
-  health_base: 300
+  health_base: 200
   health_base_step: 0
   health_plv: 0
   health_plv_step: 0
