@@ -34,9 +34,9 @@ public class NetworkController : MonoBehaviour
 
 	private static readonly int WSPort = 8080;
 
-	[Tooltip("Name of the SmartFoxServer 2X Zone to join")]
-	private static readonly string Zone = "Piratera";
 
+
+	private static readonly string Zone = "Piratera";
 	private static readonly string   CLIENT_REQUEST = "clrq";
 	private static readonly string ACTION_INCORE = "acc";
 	private static readonly string ERROR_CODE = "error_code";
@@ -130,7 +130,6 @@ public class NetworkController : MonoBehaviour
 	}
 	private static void ForceStartScene()
 	{
-		return;
 		if (SceneManager.GetActiveScene().name != "SceneLogin" && SceneManager.GetActiveScene().name != "SceneLoading")
 		{
 			SceneManager.LoadScene("SceneLogin");

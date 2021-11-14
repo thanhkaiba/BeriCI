@@ -1,28 +1,42 @@
 ﻿using UnityEngine;
 
-public class GuiManager : Singleton<GuiManager>
+namespace Piratera.GUI
 {
-    public GameObject AddGui(string prefap)
+    public class GuiManager : Singleton<GuiManager>
     {
-        GameObject gui = Resources.Load(prefap) as GameObject;
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas != null)
+        public GameObject AddGui(string prefap)
         {
-            gui.transform.SetParent(canvas.transform);
+
+            return AddGui(Instantiate(Resources.Load(prefap) as GameObject));
         }
-        return gui;
-    }
 
-    public GameObject AddGui(GameObject prefap)
-    {
-        Canvas canvas = FindObjectOfType<Canvas>(); 
-
-        if (canvas != null)
+        public GameObject AddGui(GameObject prefap)
         {
-            GameObject gui = Instantiate(prefap, canvas.transform);
-            return gui;
+            Canvas canvas = FindObjectOfType<Canvas>();
 
+            if (canvas != null)
+            {
+                GameObject gui = Instantiate(prefap, canvas.transform);
+                return gui;
+
+            }
+            return null;
         }
-        return null;
+
+        public GameObject ShowPopupNotification(string text)
+        {
+            GameObject gameObject = AddGui("GUI/Prefap/PopupNotificaiton");
+            PopupNotification popup = gameObject.GetComponent<PopupNotification>();
+            popup.SetData(text);
+            return gameObject;
+        }
+
+        public GameObject ShowPopupNotification(string text, PopupNotificationOKDelegate oKDelegate)
+        {
+            GameObject gameObject = AddGui("GUI/Prefap/PopupNotificaiton");
+            PopupNotification popup = gameObject.GetComponent<PopupNotification>();
+            popup.SetData(text, oKDelegate);
+            return gameObject;
+        }
     }
 }
