@@ -1119,7 +1119,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7956002492378398338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b5fd2b253a914c145b3101d9a767cdf8, type: 3}
+  m_Script: {fileID: 11500000, guid: 781868f3631ecf1438a383d99b4db33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textBeriCost: {fileID: 7956002492552251832}
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7956002492378398338}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4767f09f8c191b41bae6aaf0921525a, type: 3}
+  m_Script: {fileID: 11500000, guid: fefd80fef046e274c9a0f56a6473a080, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fogOpacity: 0.5

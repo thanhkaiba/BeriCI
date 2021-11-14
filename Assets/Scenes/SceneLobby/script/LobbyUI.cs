@@ -98,7 +98,7 @@ public class LobbyUI : MonoBehaviour
 
 	public void ShowStaminaPack()
     {
-		GuiManager.Instance.AddGui("GUI/Prefap/GuiBuyStamina", LayerId.GUI);
+		GuiManager.Instance.AddGui<GuiBuyStamina>("GUI/Prefap/GuiBuyStamina", LayerId.GUI);
 
 	}
 

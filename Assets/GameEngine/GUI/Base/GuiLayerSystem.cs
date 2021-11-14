@@ -40,7 +40,7 @@ namespace Piratera.GUI
             layers.Add(panel);
         }
 
-        public GameObject AddGui(GameObject prefap, LayerId layerId)
+        public GameObject AddGui(GameObject prefap, LayerId layerId, string guiId)
         {
             GameObject layer = layers[((int)layerId)];
             if (layer != null)
