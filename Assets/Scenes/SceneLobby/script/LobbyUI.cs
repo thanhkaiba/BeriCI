@@ -1,3 +1,4 @@
+using Piratera.GUI;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -33,8 +34,6 @@ public class LobbyUI : MonoBehaviour
 	[SerializeField]
 	private Slider userExp;
 
-	[SerializeField]
-	private GameObject guiBuyStaminaPrefap;
 	// Start is called before the first frame update
 	void Start()
     {
@@ -99,7 +98,7 @@ public class LobbyUI : MonoBehaviour
 
 	public void ShowStaminaPack()
     {
-		GuiManager.Instance.AddGui(guiBuyStaminaPrefap);
+		GuiManager.Instance.AddGui<GuiBuyStamina>("GUI/Prefap/GuiBuyStamina", LayerId.GUI);
 
 	}
 

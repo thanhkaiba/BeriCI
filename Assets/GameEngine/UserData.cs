@@ -90,4 +90,9 @@ public class UserData : Singleton<UserData>
     {
         return  $"{Stamina}/{StaminaConfig.max_stamina}";
     }
+
+    public bool IsEnoughBeri(long beri)
+    {
+        return Beri >= beri;
+    }
 }
