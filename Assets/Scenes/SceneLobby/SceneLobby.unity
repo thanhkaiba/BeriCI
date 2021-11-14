@@ -2092,6 +2092,7 @@ GameObject:
   - component: {fileID: 1063658897}
   - component: {fileID: 1063658896}
   - component: {fileID: 1063658895}
+  - component: {fileID: 1063658899}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2191,6 +2192,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1063658899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063658894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458a0727898851d46b69611406cc2669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1073277372
 GameObject:
   m_ObjectHideFlags: 0
@@ -3220,8 +3233,6 @@ MonoBehaviour:
   userStamina: {fileID: 105141830}
   userStaminaCountDown: {fileID: 1143702403}
   userExp: {fileID: 81704947}
-  guiBuyStaminaPrefap: {fileID: 563962309723270111, guid: 4c85505de596e0f4f8e6ab98f7c03f5d,
-    type: 3}
 --- !u!4 &1521152365
 Transform:
   m_ObjectHideFlags: 0

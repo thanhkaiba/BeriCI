@@ -9,7 +9,6 @@ public class HaveFog : MonoBehaviour
     private float fogOpacity = 0.5f;
     [SerializeField]
     private bool blockTouchBehind = false;
-    // Start is called before the first frame update
     void Start()
     {
         GameObject panel = new GameObject("PanelFog");

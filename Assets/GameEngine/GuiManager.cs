@@ -4,20 +4,19 @@ namespace Piratera.GUI
 {
     public class GuiManager : Singleton<GuiManager>
     {
-        public GameObject AddGui(string prefap)
+        public GameObject AddGui(string prefap, LayerId layer = LayerId.GUI)
         {
 
-            return AddGui(Instantiate(Resources.Load(prefap) as GameObject));
+            return AddGui(Resources.Load(prefap) as GameObject, layer);
         }
 
-        public GameObject AddGui(GameObject prefap)
+        public GameObject AddGui(GameObject prefap, LayerId layer = LayerId.GUI)
         {
-            Canvas canvas = FindObjectOfType<Canvas>();
+            GuiLayerSystem guiLayerSystem = FindObjectOfType<GuiLayerSystem>();
 
-            if (canvas != null)
+            if (guiLayerSystem != null)
             {
-                GameObject gui = Instantiate(prefap, canvas.transform);
-                return gui;
+                return guiLayerSystem.AddGui(prefap, layer);
 
             }
             return null;
@@ -25,7 +24,7 @@ namespace Piratera.GUI
 
         public GameObject ShowPopupNotification(string text)
         {
-            GameObject gameObject = AddGui("GUI/Prefap/PopupNotificaiton");
+            GameObject gameObject = AddGui("GUI/Prefap/PopupNotificaiton", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text);
             return gameObject;
@@ -33,7 +32,7 @@ namespace Piratera.GUI
 
         public GameObject ShowPopupNotification(string text, PopupNotificationOKDelegate oKDelegate)
         {
-            GameObject gameObject = AddGui("GUI/Prefap/PopupNotificaiton");
+            GameObject gameObject = AddGui("GUI/Prefap/PopupNotificaiton", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text, oKDelegate);
             return gameObject;
