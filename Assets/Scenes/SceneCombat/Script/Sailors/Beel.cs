@@ -7,7 +7,6 @@ using UnityEngine;
 public class Beel : CombatSailor
 {
     public SailorConfig config;
-    private Spine.Bone boneTarget;
     public Beel()
     {
     }
@@ -15,16 +14,13 @@ public class Beel : CombatSailor
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
-        boneTarget = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("target");
-        boneTarget.SetLocalPosition(new Vector3(-200, 0, 0));
     }
     public override float RunBaseAttack(CombatSailor target)
     {
         Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
         relativePos.y += 4.5f;
         relativePos.x *= modelObject.transform.localScale.x;
-        TriggerAnimation("attack");
-        boneTarget.SetLocalPosition(relativePos);
+        TriggerAnimation("Attack");
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.4f;
@@ -51,7 +47,7 @@ public class Beel : CombatSailor
     }
     public override float TakeDamage(Damage d)
     {
-        TriggerAnimation("hurt");
+        TriggerAnimation("Hurt");
         return base.TakeDamage(d);
     }
     // skill
@@ -62,18 +58,17 @@ public class Beel : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
-        float physic_damage = cs.Power * Model.config_stats.skill_params[0];
-        float magic_damage = cs.Power * Model.config_stats.skill_params[1];
+        float magic_damage = cs.Power * Model.config_stats.skill_params[0];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, true);
 
-        return RunAnimation(target, around_target, physic_damage, magic_damage);
+        return RunAnimation(target, around_target, magic_damage, magic_damage);
     }
     float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage, float magic_damage)
     {
-        TriggerAnimation("skill");
+        TriggerAnimation("Skill");
 
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;

@@ -34,7 +34,6 @@ public enum SailorClass
     CYBORG,
     SUPPORT,
     KNIGHT,
-    DOCTOR,
 };
 
 public enum SailorRank

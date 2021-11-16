@@ -241,7 +241,7 @@ public class CombatSailor : Sailor
                 float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
                 float healthGain = percentHealthGain * cs.MaxHealth;
                 GainHealth(healthGain);
-                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { healthGain });
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.WILD, new List<float> { healthGain });
             }
         }
         if (cs.HaveType(SailorClass.CYBORG))

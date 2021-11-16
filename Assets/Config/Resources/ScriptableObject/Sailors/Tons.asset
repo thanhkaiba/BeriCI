@@ -15,7 +15,7 @@ MonoBehaviour:
   model: {fileID: 5284227797261016194, guid: 445d976b2fe369449995194b8ebc4f50, type: 3}
   avatar: {fileID: 21300000, guid: 248f8edf19bdc1146ab7729bdfd89bec, type: 3}
   root_name: Tons
-  rank: 2
+  rank: 3
   power_base: 85
   power_base_step: 0
   power_plv: 0
@@ -23,11 +23,11 @@ MonoBehaviour:
   crit: 0
   crit_damage: 0
   block_change: 0
-  health_base: 200
+  health_base: 300
   health_base_step: 0
   health_plv: 0
   health_plv_step: 0
-  speed_base: 90
+  speed_base: 85
   speed_step: 0
   armor: 20
   magic_resist: 20

@@ -23,7 +23,7 @@ public class Meechic : CombatSailor
         Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
         relativePos.y += 4.5f;
         relativePos.x *= modelObject.transform.localScale.x;
-        TriggerAnimation("attack");
+        TriggerAnimation("Attack");
         boneTarget.SetLocalPosition(relativePos);
 
         Vector3 targetPos = target.transform.position;
@@ -51,7 +51,7 @@ public class Meechic : CombatSailor
     }
     public override float TakeDamage(Damage d)
     {
-        TriggerAnimation("hurt");
+        TriggerAnimation("Hurt");
         return base.TakeDamage(d);
     }
     // skill
@@ -73,7 +73,7 @@ public class Meechic : CombatSailor
     }
     float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage, float magic_damage)
     {
-        TriggerAnimation("skill");
+        TriggerAnimation("Skill");
 
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;

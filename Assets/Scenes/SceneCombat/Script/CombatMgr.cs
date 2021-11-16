@@ -54,7 +54,7 @@ public class CombatMgr : MonoBehaviour
         // ui
         UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.ShowClassBonus(combatState.ClassBonusA, combatState.classBonusB);
+        UIMgr.ShowClassBonus(combatState.classBonusA, combatState.classBonusB);
         UIMgr.ShowActionCount(actionCount);
     }
     IEnumerator StartGame()
@@ -167,7 +167,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
+        //UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
     }
 
     int CalculateSpeedAddThisLoop()

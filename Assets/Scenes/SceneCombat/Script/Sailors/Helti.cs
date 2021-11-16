@@ -24,29 +24,24 @@ public class Helti : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-        TriggerAnimation("BaseAttack");
+        TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
         Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
-        desPos.y += 1;
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.15f);
-        seq.Append(transform.DOJump(desPos, 1.2f, 1, 0.3f));
-        seq.AppendInterval(0.2f);
-        seq.Append(transform.DOJump(oriPos, 1, 1, 0.3f));
-        return 0.4f;
+        seq.AppendInterval(0.8f);
+        seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+        seq.AppendInterval(0.3f);
+        seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
+        return 1.0f;
     }
     public override void SetFaceDirection()
     {
-        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1.42f : -1.42f, 1.42f, 1.42f);
-    }
-    private void LateUpdate()
-    {
-        if (cs != null) SetFaceDirection();
+        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1f : -1f, 1f, 1f);
     }
     public override float TakeDamage(Damage d)
     {
-        TriggerAnimation("TakeDamage");
+        TriggerAnimation("Hurt");
         return base.TakeDamage(d);
     }
     // skill
@@ -72,36 +67,36 @@ public class Helti : CombatSailor
     {
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float behind_damage_ratio = Model.config_stats.skill_params[1];
-        TriggerAnimation("CastSkill");
+        TriggerAnimation("Skill");
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
-        desPos.y += 1;
+        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
-        seq.Append(transform.DOJump(desPos, 1.2f, 1, 0.3f));
-
-        seq.AppendCallback(() =>
-        {
-            target.TakeDamage(main_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
-        });
-        seq.AppendInterval(0.35f);
-        seq.AppendCallback(() =>
-        {
-            target.TakeDamage(main_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
-        });
-        seq.AppendInterval(0.35f);
-        seq.AppendCallback(() =>
-        {
-            target.TakeDamage(main_damage, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage, 0, 0, 2));
-        });
-
+        seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);
-        seq.Append(transform.DOJump(oriPos, 0.8f, 1, 0.4f));
-        return 1.8f;
+
+        seq.AppendCallback(() =>
+        {
+            target.TakeDamage(main_damage/3, 0, 0);
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3, 0, 0, 2));
+        });
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() =>
+        {
+            target.TakeDamage(main_damage/3, 0, 0);
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3, 0, 0, 2));
+        });
+        seq.AppendInterval(0.8f);
+        seq.AppendCallback(() =>
+        {
+            target.TakeDamage(main_damage/3, 0, 0);
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3, 0, 0, 2));
+        });
+
+        seq.AppendInterval(0.8f);
+        seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
+        return 3.2f;
     }
 }

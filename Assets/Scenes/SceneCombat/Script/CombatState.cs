@@ -20,7 +20,7 @@ public class CombatState : MonoBehaviour
     public List<CombatSailor> sailorsTeamB = new List<CombatSailor>();
     public Team lastTeamAction;
 
-    public List<ClassBonusItem> ClassBonusA = new List<ClassBonusItem>();
+    public List<ClassBonusItem> classBonusA = new List<ClassBonusItem>();
     public List<ClassBonusItem> classBonusB = new List<ClassBonusItem>();
     private void Awake()
     {
@@ -91,17 +91,15 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        //CreateCombatSailor("Tons", new CombatPosition(1, 1), Team.A);
-        CreateCombatSailor("Tons", new CombatPosition(1, 0), Team.A);
-        CreateCombatSailor("Tons", new CombatPosition(0, 1), Team.A);
-        //CreateCombatSailor("Tons", new CombatPosition(2, 1), Team.A);
-        CreateCombatSailor("Tons", new CombatPosition(1, 2), Team.A);
+        //CreateCombatSailor("Tons", new CombatPosition(1, 0), Team.A);
+        CreateCombatSailor("Helti", new CombatPosition(0, 1), Team.A);
+        CreateCombatSailor("Meechic", new CombatPosition(2, 0), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("Tons", new CombatPosition(0, 0), Team.B);
-        CreateCombatSailor("Meechic", new CombatPosition(1, 1), Team.B);
-        CreateCombatSailor("Meechic", new CombatPosition(2, 2), Team.B);
+        CreateCombatSailor("Tons", new CombatPosition(1, 1), Team.B);
+        //CreateCombatSailor("Beel", new CombatPosition(2, 2), Team.B);
+        //CreateCombatSailor("Meechic", new CombatPosition(2, 2), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
@@ -259,19 +257,19 @@ public class CombatState : MonoBehaviour
     }
     public void CalculateClassBonus()
     {
-        ClassBonusA = CalculateClassBonus(sailorsTeamA);
+        classBonusA = CalculateClassBonus(sailorsTeamA);
         classBonusB = CalculateClassBonus(sailorsTeamB);
         //passiveTypeA.ForEach(p => Debug.Log("passiveTypeA: " + p.type + " " + p.level));
     }
 
     public void UpdateGameWithClassBonus()
     {
-        sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(ClassBonusA, classBonusB));
-        sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(classBonusB, ClassBonusA));
+        sailorsTeamA.ForEach(sailor => sailor.UpdateCombatData(classBonusA, classBonusB));
+        sailorsTeamB.ForEach(sailor => sailor.UpdateCombatData(classBonusB, classBonusA));
     }
     public ClassBonusItem GetTeamClassBonus(Team team, SailorClass type)
     {
-        List<ClassBonusItem> t = team == Team.A ? ClassBonusA : classBonusB;
+        List<ClassBonusItem> t = team == Team.A ? classBonusA : classBonusB;
         return t.FirstOrDefault(e => e.type == type);
     }
 
