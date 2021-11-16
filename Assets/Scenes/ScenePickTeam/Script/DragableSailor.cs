@@ -13,6 +13,8 @@ public class DragableSailor : MonoBehaviour
     [SerializeField]
     protected short originIndex = -1;
 
+    private Vector3 delta;
+
     private void Start()
     {
         boxAround = GetComponent<BoxCollider>();
@@ -32,20 +34,21 @@ public class DragableSailor : MonoBehaviour
         }
         selectingIndex = originIndex;
         slots[originIndex].OnSelecting();
+
+        Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        movePos.z = transform.position.z;
+        delta = transform.position - movePos;
     }
 
   
-
-
-
     protected void OnMouseDrag()
     {
 
         Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         movePos.z = transform.position.z;
-        transform.position = movePos;
+        transform.position = movePos + delta;
 
-        CheckNewSelecting(movePos);
+        CheckNewSelecting(transform.position);
 
     }
 
