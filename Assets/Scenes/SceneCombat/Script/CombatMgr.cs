@@ -59,10 +59,19 @@ public class CombatMgr : MonoBehaviour
     }
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        ActivateAllStartPassive();
+        yield return new WaitForSeconds(1);
         combatState.status = CombatStatus.STARTED;
         if (!serverGame) CombatLoop();
         else CombatLoopServer();
+    }
+    private void ActivateAllStartPassive()
+    {
+        combatState.GetAllAliveCombatSailors().ForEach(sailor =>
+        {
+            sailor.ActiveStartPassive();
+        });
     }
     void CombatLoop()
     {

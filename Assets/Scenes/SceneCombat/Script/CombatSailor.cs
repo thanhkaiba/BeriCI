@@ -157,6 +157,11 @@ public class CombatSailor : Sailor
             }
         });
     }
+
+    public virtual void ActiveStartPassive()
+    {
+        // do nothing, se say ra o 1 so tuong skill passive
+    }
     public bool HaveStatus(SailorStatusType name)
     {
         return cs.listStatus.Find(x => x.name == name) != null;

@@ -10,6 +10,7 @@ public class RenderAllConfig : MonoBehaviour
     {
         RenderSailorConfig("ScriptableObject/Sailors/Meechic", "Meechic");
         RenderSailorConfig("ScriptableObject/Sailors/Helti", "Helti");
+        RenderSailorConfig("ScriptableObject/Sailors/Tons", "Tons");
         RenderCombatConfig("ScriptableObject/Combat", "Combat");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
     }
