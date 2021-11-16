@@ -38,6 +38,27 @@ namespace Piratera.GUI
             popup.SetData(text, oKDelegate);
             return gameObject;
         }
+
+        public void ShowGuiWaiting(bool show)
+        {
+            if (show)
+            {
+                AddGui<GuiWaiting>("GUI/Prefap/GuiWaiting", LayerId.LOADING);
+            } else
+            {
+                DestroyGui<GuiWaiting>();
+            }
+        }
+
+        public void DestroyGui<T>()
+        {
+            GuiLayerSystem guiLayerSystem = FindObjectOfType<GuiLayerSystem>();
+
+            if (guiLayerSystem != null)
+            {
+                guiLayerSystem.DestroyGui(typeof(T).Name);
+            }
+        }
     }
 
 }

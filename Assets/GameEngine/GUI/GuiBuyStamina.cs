@@ -22,6 +22,16 @@ namespace Piratera.GUI
         {
             UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
             textStaminaValue.text = "" + staminaConfig.statmina_buy_value;
+            UpdateCurrentStamina();
+            GameEvent.UserDataChange.AddListener(UpdateCurrentStamina);
+        }
+
+        public void UpdateCurrentStamina()
+        {
+            GuiManager.Instance.ShowGuiWaiting(false);
+            textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
+
+            UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
             if (UserData.Instance.TimeBuyStaminaToday < staminaConfig.costs.Length)
             {
                 textBeriCost.text = "" + staminaConfig.costs[UserData.Instance.TimeBuyStaminaToday];
@@ -33,13 +43,6 @@ namespace Piratera.GUI
                 EnableButtonBuy(false);
             }
 
-            UpdateCurrentStamina();
-            GameEvent.UserDataChange.AddListener(UpdateCurrentStamina);
-        }
-
-        public void UpdateCurrentStamina()
-        {
-            textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
         }
 
         private void EnableButtonBuy(bool enabled)
@@ -78,11 +81,14 @@ namespace Piratera.GUI
 
             if (UserData.Instance.IsEnoughBeri(staminaConfig.costs[UserData.Instance.TimeBuyStaminaToday]))
             {
+                GuiManager.Instance.ShowGuiWaiting(true);
+
                 NetworkController.Send(SFSAction.BUY_STAMINA);
-                OnClose();
+                
             }
             else
             {
+                OnClose();
                 GuiManager.Instance.ShowPopupNotification("Not Enough Beri!");
             }
           

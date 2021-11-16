@@ -17,6 +17,8 @@ namespace Piratera.GUI
     class GuiLayerSystem : MonoBehaviour
     {
         private List<GameObject> layers = new List<GameObject>();
+        Dictionary<string, GameObject> guis = new Dictionary<string, GameObject>();
+
         void Start()
         {
             foreach (LayerId val in Enum.GetValues(typeof(LayerId)))
@@ -42,15 +44,31 @@ namespace Piratera.GUI
 
         public GameObject AddGui(GameObject prefap, LayerId layerId, string guiId)
         {
+            
             GameObject layer = layers[((int)layerId)];
             if (layer != null)
             {
                 GameObject gui = Instantiate(prefap, layer.transform);
+                if (guis.ContainsKey(guiId))
+                {
+                    DestroyGui(guiId);
+                    Debug.LogWarning("Duplicate GUI " + guiId);
+                }
+                guis[guiId] = gui;
                 return gui;
             }
 
             return null;
           
+        }
+
+        internal void DestroyGui(string guiId)
+        {
+            if (guis.ContainsKey(guiId))
+            {
+                Destroy(guis[guiId]);
+                guis.Remove(guiId);
+            }
         }
     }
 }
