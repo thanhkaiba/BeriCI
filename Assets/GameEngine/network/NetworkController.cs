@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Sfs2X;
@@ -8,6 +8,29 @@ using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
 
+public class LoginLogData
+{
+	/**
+	 * Là key, được tạo ra từ các thành phần bên dưới
+	 */
+	public static string device_id = SystemInfo.deviceUniqueIdentifier;
+
+	/**
+	 * Tên thiết bị
+	 */
+	public static string name = SystemInfo.deviceName;
+
+	/**
+	 * thông số mạng
+	 */
+	private string subscriber_Id;
+
+	 /**
+	 * thông số sim
+	 */
+	private string sim_serial;
+}
+
 public class LoginData {
 	public LoginData(string username, string password)
 	{
@@ -16,6 +39,77 @@ public class LoginData {
 	}
 	public string username = "";
 	public string password = "";
+
+	
+	
+	
+
+	/**
+	 * Chỉ dùng cho máy Android
+	 */
+	private string android_id;
+	/**
+	 * 
+	 */
+	private string mac_address;
+	/**
+	 * platform : android, ios, web, windowsphone8
+	 */
+	private string platform;
+	/**
+	 * true/false . Máy iOS là dùng cho jailbreak
+	 */
+	private string rooted;
+	/**
+	 * 
+	 */
+	private string finger_print;
+	/**
+	 * ios,windows phone, android, windows, mac
+	 */
+	private string os;
+	private string os_version;
+	/**
+	 * số tự sinh
+	 */
+	private string udid;
+	/**
+	 * 
+	 */
+	private string bluetooth_address;
+	/**
+	 * ID quảng cáo
+	 */
+	private string advertising_id;
+	/**
+	 * Là check sum tất cả các thông tin user gửi lên.
+	 */
+	private string checksum;
+	/**
+	 * IP login lần đầu
+	 */
+	private string first_ip;
+	/**
+	 * IP login lần cuối
+	 */
+	private string last_ip;
+
+	private string channel;
+	/**
+	 * ngôn ngữ đang sử dụng
+	 */
+	private string lang;
+	/**
+	 * version của user
+	 */
+	private string app_version;
+
+	private int width;
+	private int height;
+	private string carrier;
+	private string bundle_id;
+	private string location;
+	private string network;
 };
 
 public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
@@ -28,9 +122,9 @@ public class NetworkController : MonoBehaviour
 	public static NetworkController Instance;
 
 	private static List<NetworkActionListenerDelegate> serverActionListeners = new List<NetworkActionListenerDelegate>();
-	private static readonly string Host = "127.0.0.1";
+	private static readonly string Host = "34.101.198.96";
 
-	private static readonly int TcpPort = 9933;
+	private static readonly int TcpPort = 8972;
 
 	private static readonly int WSPort = 8080;
 
@@ -187,6 +281,7 @@ public class NetworkController : MonoBehaviour
 			SFSObject sfso = new SFSObject();
 			sfso.PutUtfString("passwd", "test");
 			sfso.PutInt("loginType", 1);
+			sfso.PutUtfString("client_info", "{}");
 			sfs.Send(new LoginRequest(loginData.username, "", Zone, sfso));
 			Debug.Log("Send Login");
 		}
