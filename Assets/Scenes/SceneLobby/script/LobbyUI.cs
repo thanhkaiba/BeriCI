@@ -83,7 +83,6 @@ public class LobbyUI : MonoBehaviour
 
 	public void OnLogoutButtonClick()
 	{
-		//NetworkController.Send(SFSAction.BUY_STAMINA);
 		 NetworkController.Logout();
 	}
 	public void OnStartNewGameButtonClick()
@@ -93,7 +92,7 @@ public class LobbyUI : MonoBehaviour
 	}
 	public void OnButtonPickTeamClick()
 	{
-		SceneManager.LoadScene("ScenePickTeamBattle");
+		SceneManager.LoadScene("ScenePickTeam");
 	}
 
 	public void ShowStaminaPack()
@@ -110,7 +109,7 @@ public class LobbyUI : MonoBehaviour
 			userStaminaCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
 		} else
         {
-			userStaminaCountDown.text = "";
+			userStaminaCountDown.text = "00:06:01";
 
 		}
 	}
