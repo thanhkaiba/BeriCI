@@ -163,11 +163,9 @@ public class NetworkController : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 			Application.runInBackground = true;
-			ForceStartScene();
+			//ForceStartScene();
 		}
 		else Destroy(gameObject);
-	
-
 	}
 
 	private static void reset()
@@ -292,8 +290,6 @@ public class NetworkController : MonoBehaviour
 
 	protected static void OnConnectionLost(BaseEvent evt)
 	{
-	
-	
 		reset();
 		if (shuttingDown == true)
         {

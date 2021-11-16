@@ -26,7 +26,6 @@ public class Damage
 public class CombatSailor : Sailor
 {
     public CombatStats cs;
-    public Skill skill = null;
 
     public CharBarControl bar;
     public virtual void Awake()
@@ -42,8 +41,10 @@ public class CombatSailor : Sailor
         barGO.transform.localPosition = new Vector3(0, 0, 0);
         bar = barGO.transform.GetComponent<CharBarControl>();
     }
-    public void InitCombatData(int level, int quality, CombatPosition p, Team t)
+    public void InitCombatData(CombatPosition p, Team t)
     {
+        int level = Model.level;
+        int quality = Model.quality;
         cs = new CombatStats()
         {
             BasePower = Model.config_stats.GetPower(level, quality),
@@ -98,34 +99,49 @@ public class CombatSailor : Sailor
         Debug.Log(" > Model.quality" + Model.quality);
         Debug.Log("-----------------------------------");
     }
-    
-    public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam) // them giam chi so theo toc he
+    // them giam chi so theo toc he
+    public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam)
     {
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         ownTeam.ForEach(p =>
         {
             switch (p.type)
             {
+                case SailorClass.MIGHTY:
+                    if (cs.HaveType(SailorClass.MIGHTY))
+                    {
+                        cs.MaxHealth *= 1 + config.GetParams(p.type, p.level)[0];
+                        cs.CurHealth = cs.MaxHealth;
+                    }
+                    break;
                 case SailorClass.SWORD_MAN:
                     if (cs.HaveType(SailorClass.SWORD_MAN))
                     {
                         cs.Speed += config.GetParams(p.type, p.level)[0];
                     }
                     break;
-                case SailorClass.SUPPORT:
-                    cs.Fury += (int) config.GetParams(p.type, p.level)[0];
+                case SailorClass.MAGE:
+                    if (cs.HaveType(SailorClass.MAGE))
+                    {
+                        cs.BasePower *= 1 + config.GetParams(p.type, p.level)[0];
+                    }
                     break;
                 case SailorClass.ASSASSIN:
                     if (cs.HaveType(SailorClass.ASSASSIN))
                     {
-                        cs.BasePower *= config.GetParams(p.type, p.level)[0];
+                        cs.BasePower *= 1 + config.GetParams(p.type, p.level)[0];
                     }
                     break;
-                case SailorClass.MIGHTY:
-                    if (cs.HaveType(SailorClass.MIGHTY))
+                case SailorClass.SEA_CREATURE:
+                    cs.BaseMagicResist += config.GetParams(p.type, p.level)[0];
+                    break;
+                case SailorClass.SUPPORT:
+                    cs.Fury += (int) config.GetParams(p.type, p.level)[0];
+                    break;
+                case SailorClass.KNIGHT:
+                    if (cs.HaveType(SailorClass.KNIGHT))
                     {
-                        cs.MaxHealth += cs.MaxHealth * config.GetParams(p.type, p.level)[0];
-                        cs.CurHealth = cs.MaxHealth;
+                        cs.BaseArmor += (int)config.GetParams(p.type, p.level)[0];
                     }
                     break;
             }
@@ -140,6 +156,11 @@ public class CombatSailor : Sailor
                     break;
             }
         });
+    }
+
+    public virtual void ActiveStartPassive()
+    {
+        // do nothing, se say ra o 1 so tuong skill passive
     }
     public bool HaveStatus(SailorStatusType name)
     {
@@ -185,6 +206,78 @@ public class CombatSailor : Sailor
         else if(useSkillCondition) return UseSkill(combatState);
         else return BaseAttack(combatState);
     }
+    // Base attack
+    // ... client tính
+    float BaseAttack(CombatState combatState)
+    {
+        // client auto
+        CombatSailor target = GetBaseAttackTarget(combatState);
+        bool isCrit = IsCrit();
+        bool isBlock = target.IsBlock();
+        return BaseAttack(target, isCrit, isBlock);
+    }
+    // ... server trả 
+    public float BaseAttack(CombatSailor target, bool isCrit, bool isBlock)
+    {
+        var combatState = CombatState.Instance;
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
+        float delay = 0;
+
+        // Calc Class Active
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        bool activeMarksman = false;
+        if (cs.HaveType(SailorClass.MARKSMAN)
+            && combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN) != null)
+        {
+            ClassBonusItem marksman = combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
+            if (marksman != null)
+            {
+                float healthRatio = config.GetParams(marksman.type, marksman.level)[0];
+                if (target.cs.GetCurrentHealthRatio() < healthRatio) activeMarksman = true;
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
+            }
+        }
+        if (cs.HaveType(SailorClass.WILD))
+        {
+            ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
+            if (wild != null)
+            {
+                float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
+                float healthGain = percentHealthGain * cs.MaxHealth;
+                GainHealth(healthGain);
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.WILD, new List<float> { healthGain });
+            }
+        }
+        if (cs.HaveType(SailorClass.CYBORG))
+        {
+            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
+            if (berserk != null)
+            {
+                int furyAdd = (int) config.GetParams(berserk.type, berserk.level)[0];
+                GainFury(furyAdd);
+                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
+            }
+        }
+        // Deal damage
+        if (target != null)
+        {
+            delay += RunBaseAttack(target);
+            float d = cs.Power;
+            if (isCrit) d *= GlobalConfigs.Combat.base_crit_damage;
+            if (activeMarksman) d *= 1.5f; // 1.5 hardcode
+            Damage damage = new Damage()
+            {
+                physics_damage = d,
+                isCrit = isCrit,
+                isBlock = isBlock,
+                fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
+            };
+            StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
+        }
+        return delay + 0.5f;
+    }
+    
     bool UseSkillCondition (CombatState combatState)
     {
         return cs.Fury >= cs.MaxFury && CanActiveSkill(combatState);
@@ -197,65 +290,6 @@ public class CombatSailor : Sailor
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         return CastSkill(combatState);
-    }
-    public float BaseAttack(CombatSailor target, bool isCrit, bool isBlock)
-    {
-        var combatState = CombatState.Instance;
-        cs.CurrentSpeed -= cs.SpeedNeed;
-        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
-        float delay = 0;
-        if (target != null)
-        {
-            delay += RunBaseAttack(target);
-            Damage damage = new Damage()
-            {
-                physics_damage = isCrit ? cs.Power * 1.5f : cs.Power, // thay crit damage vao
-                isCrit = isCrit,
-                isBlock = isBlock,
-                fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
-            };
-            StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
-        }
-        CombatEvents.Instance.attackOneTarget.Invoke(this, target);
-
-        // passive
-        if (cs.HaveType(SailorClass.CYBORG))
-        {
-            ContainerClassBonus config = GlobalConfigs.ClassBonus;
-            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
-            if (berserk != null)
-            {
-                float speedAdd = config.GetParams(berserk.type, berserk.level)[0];
-                cs.Speed += speedAdd;
-                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { speedAdd });
-            }
-        }
-        if (combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN) != null && cs.HaveType(SailorClass.MARKSMAN))
-        {
-            ContainerClassBonus config = GlobalConfigs.ClassBonus;
-            ClassBonusItem sniper = combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
-            var listYourTeam = combatState.GetAllTeamAliveSailors(cs.team);
-            listYourTeam.ForEach(sai =>
-            {
-                int speedUpValue = (int)(config.GetParams(sniper.type, sniper.level)[0] * sai.cs.SpeedNeed);
-                if (sai.cs.HaveType(SailorClass.MARKSMAN) && sai != this)
-                {
-                    sai.SpeedUp(speedUpValue);
-                    CombatEvents.Instance.activeClassBonus.Invoke(sai, SailorClass.MARKSMAN, new List<float> { 0 });
-                }
-            });
-            UIIngameMgr.Instance.UpdateListSailorInQueue();
-        }
-
-        return delay + 0.5f;
-    }
-    float BaseAttack (CombatState combatState)
-    {
-        // client auto
-        CombatSailor target = GetBaseAttackTarget(combatState);
-        bool isCrit = IsCrit();
-        bool isBlock = target.IsBlock();
-        return BaseAttack(target, isCrit, isBlock);
     }
     float Immobile ()
     {
@@ -297,15 +331,11 @@ public class CombatSailor : Sailor
                     : combatState.GetAllTeamAliveSailors(Team.A));
         }
     }
-    float DealBaseAttackDamage(CombatSailor target, Damage damage)
-    {
-        GainFury(GlobalConfigs.Combat.fury_per_base_attack);
-        return target.TakeDamage(damage);
-    }
     IEnumerator DealBaseAttackDamageDelay(CombatSailor target, Damage damage, float delay)
     {
         yield return new WaitForSeconds(delay);
-        DealBaseAttackDamage(target, damage);
+        GainFury(GlobalConfigs.Combat.fury_per_base_attack);
+        float damageDeal = target.TakeDamage(damage);
     }
     public virtual float TakeDamage(Damage d)
     {

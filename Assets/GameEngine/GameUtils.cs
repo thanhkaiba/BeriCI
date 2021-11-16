@@ -7,9 +7,10 @@ using System.IO;
 
 public class GameUtils : UnityEngine.Object
 {
+    // test only
     public static CombatSailor CreateCombatSailor(string name)
     {
-        SailorModel model = new SailorModel("id_fake", name);
+        SailorModel model = new SailorModel(RandomId(), name);
         SailorConfig config_stats = model.config_stats;
         //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(config_stats.model);
@@ -32,7 +33,6 @@ public class GameUtils : UnityEngine.Object
     public static CombatSailor CreateCombatSailor(SailorModel model)
     {
         SailorConfig config_stats = model.config_stats;
-        //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(config_stats.model);
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(model.config_stats.root_name)) as CombatSailor;
         sailor.Model = model;
@@ -99,6 +99,21 @@ public class GameUtils : UnityEngine.Object
             }
         }
         return result;
+    }
+
+    public static string RandomId(int stringLength = 6)
+    {
+        System.Random rd = new System.Random();
+
+        const string allowedChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789!@$?_-";
+        char[] chars = new char[stringLength];
+
+        for (int i = 0; i < stringLength; i++)
+        {
+            chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
+        }
+
+        return new string(chars);
     }
 }
  

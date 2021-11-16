@@ -19,7 +19,7 @@ public class TextDamage : MonoBehaviour
     public void Present(float damage, Vector3 p, bool isCrit, Color color)
     {
         GetComponent<Text>().text = "-" + (int)damage;
-        transform.position = new Vector3(p.x + Random.Range(-10, 30), p.y + Random.Range(100, 125), p.z);
+        transform.position = new Vector3(p.x + Random.Range(-65, 65), p.y + Random.Range(80, 165), p.z);
         GetComponent<Text>().fontSize = isCrit ? 32 : 30;
         GetComponent<Text>().color = color;
         if (iconCrit != null) iconCrit.SetActive(isCrit);

@@ -10,7 +10,5 @@ public class SkillConfig : ScriptableObjectPro
     public int maxFury;
     public int startFury;
 
-    public SkillRank rank;
-
     public List<float> _params;
 }

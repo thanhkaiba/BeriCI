@@ -12,31 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Helti
   m_EditorClassIdentifier: 
-  model: {fileID: 6048849634696698574, guid: 74fe4a8c08068d84199649cdff66c447, type: 3}
+  model: {fileID: 2117546187999679487, guid: 2eceaf2e44e436644a20f761989eca0d, type: 3}
   avatar: {fileID: 21300000, guid: 0194787e1ae0c7149b2b069186944e9e, type: 3}
   root_name: Helti
   rank: 2
-  power_base: 50
-  power_base_step: 0.1
-  power_plv: 1
-  power_plv_step: 0.01
+  power_base: 65
+  power_base_step: 0
+  power_plv: 0
+  power_plv_step: 0
   crit: 0.25
   crit_damage: 0
   block_change: 0
-  health_base: 120
+  health_base: 300
   health_base_step: 1
   health_plv: 10
-  health_plv_step: 0.1
-  speed_base: 80
-  speed_step: 0.015
+  health_plv_step: 0
+  speed_base: 90
+  speed_step: 0
   armor: 20
   magic_resist: 20
   attack_type: 0
   classes: 0200000003000000
-  skillConfig: {fileID: 11400000, guid: 8c2bc3b1f0fb0f34db570e2b5ad430b6, type: 2}
   skill_name: WindSlash
   start_fury: 0
-  max_fury: 25
+  max_fury: 10
   skill_params:
-  - 1
-  - 0.3
+  - 2
+  - 0.8

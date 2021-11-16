@@ -33,6 +33,7 @@ public enum SailorClass
     SEA_CREATURE,
     CYBORG,
     SUPPORT,
+    KNIGHT,
 };
 
 public enum SailorRank
@@ -139,5 +140,9 @@ public class CombatStats
         });
         //Debug.Log("HaveType: " + found);
         return found;
+    }
+    public float GetCurrentHealthRatio()
+    {
+        return CurHealth / MaxHealth;
     }
 }

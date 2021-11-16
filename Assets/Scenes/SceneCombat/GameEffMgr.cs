@@ -54,7 +54,7 @@ public class GameEffMgr : MonoBehaviour
     }
     public void ShowSmallExplosion(Vector3 position)
     {
-        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/15 effects/Rocket_normal"), position, new Quaternion());
+        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/rocket_explore/Rocket_normal"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
         ex.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
         seq2.AppendInterval(2.0f);
@@ -70,11 +70,11 @@ public class GameEffMgr : MonoBehaviour
     }
     public GameObject ShowSmokeSide(Vector3 position, bool flip)
     {
-        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/19 effects/smoke_side"), position, new Quaternion());
+        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/smoke/smoke_side/smoke_side"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
         seq2.AppendInterval(2.0f);
         seq2.AppendCallback(() => Destroy(ex));
-        ex.transform.localScale = new Vector3(1, 1, 1);
+        ex.transform.localScale = new Vector3(flip ? 1 : -1, 1, 1);
         return ex;
     }
     public void ShowExplosion(Vector3 position)

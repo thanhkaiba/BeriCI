@@ -18,13 +18,11 @@ public class CombatEvents : MonoBehaviour
     }
     public AttackOneTargetEvent attackOneTarget = new AttackOneTargetEvent();
     public TakeDamageEvent takeDamage = new TakeDamageEvent();
-    public CastSkillEvent castSkill = new CastSkillEvent();
     public UIHighlightTarget highlightTarget = new UIHighlightTarget();
     public ActiveClassBonus activeClassBonus = new ActiveClassBonus();
 }
 
 public class AttackOneTargetEvent : UnityEvent<CombatSailor, CombatSailor> { }
 public class TakeDamageEvent : UnityEvent<CombatSailor, Damage> { }
-public class CastSkillEvent : UnityEvent<CombatSailor, Skill> { }
 public class UIHighlightTarget : UnityEvent<CombatSailor> { }
 public class ActiveClassBonus : UnityEvent<CombatSailor, SailorClass, List<float>> { }
