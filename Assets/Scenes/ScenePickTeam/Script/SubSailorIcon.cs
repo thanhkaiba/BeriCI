@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -7,14 +5,13 @@ using UnityEngine.EventSystems;
 
 public class SubSailorIcon : MonoBehaviour
 {
-    private string sailorId;
-    private string sailorName;
-    private Image image;
+    public SailorModel model;
+    public IconSailor iconSailor;
     private SquadContainer squadContainer;
 
     void Start()
     {
-        image = GetComponent<Image>();
+        iconSailor = GetComponent<IconSailor>();
         squadContainer = FindObjectOfType<SquadContainer>();
 
         EventTrigger trigger = gameObject.AddComponent<EventTrigger>();
@@ -27,13 +24,13 @@ public class SubSailorIcon : MonoBehaviour
 
     public void OnSelectSubSailor(PointerEventData data)
     {
-        Sailor sailor = squadContainer.AddSubSailor(sailorId);
+        Sailor sailor = squadContainer.AddSubSailor(model.id);
         DragableSubsailor drag = sailor.GetComponent<DragableSubsailor>();
 
-        Image dragImage = CreateDragSailorImage(sailorId);
-        image.enabled = false;
-        dragImage.transform.position = image.transform.position;
-        drag.SetStartPosition(data.position, dragImage, image);
+        Image dragImage = CreateDragSailorImage(model.id);
+        iconSailor.SetVisible(false);
+        dragImage.transform.position = iconSailor.icon.transform.position;
+        drag.SetStartPosition(data.position, dragImage, this);
     }
 
    
@@ -42,25 +39,18 @@ public class SubSailorIcon : MonoBehaviour
         GameObject g = new GameObject("drag-" + sailorId);
         RectTransform trans = g.AddComponent<RectTransform>();
         trans.SetParent(GetComponent<Transform>().parent.parent);
-        trans.sizeDelta = new Vector2(186, 186);
+        trans.sizeDelta = iconSailor.icon.GetComponent<RectTransform>().sizeDelta;
         Image flyImage = g.AddComponent<Image>();
-        flyImage.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorName);
+        flyImage.sprite = model.config_stats.avatar;
         return flyImage;
     }
 
-    public void CreateSailorImage(string id, string name)
+    public void UpdateSailorImage(SailorModel model)
     {
-        sailorId = id;
-        sailorName = name;
-        image.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorName);
+        this.model = model;
+        iconSailor.PresentData(model);
     }
 
-    public SubSailorIcon Init(Transform parent)
-    {
-        RectTransform trans = gameObject.AddComponent<RectTransform>();
-        trans.sizeDelta = new Vector2(186, 186);
-        trans.SetParent(parent);
-        image = gameObject.AddComponent<Image>();
-        return this;
-    }
+
+
 }

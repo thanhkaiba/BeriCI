@@ -5,7 +5,7 @@ public class DragableSubsailor : DragableSailor
 {
     private const int TransformHeight = 200;
     private Image dragImage;
-    private Image originImage;
+    private SubSailorIcon subSailorIcon;
     private Sailor swapSailor;
     private GameObject model;
 
@@ -16,8 +16,9 @@ public class DragableSubsailor : DragableSailor
 
     }
 
-    public void SetStartPosition(Vector2 mousePosition2D, Image d, Image o)
+    public void SetStartPosition(Vector2 mousePosition2D, Image d, SubSailorIcon subSailorIcon)
     {
+        this.subSailorIcon = subSailorIcon;
         SetSailorOpacity(0.8f);
         Transform t = transform.Find("model");
         if (t != null)
@@ -26,7 +27,6 @@ public class DragableSubsailor : DragableSailor
         }
 
         dragImage = d;
-        originImage = o;
 
         Vector3 startPos = Camera.main.ScreenToWorldPoint(mousePosition2D);
         startPos.z = transform.position.z;
@@ -54,7 +54,7 @@ public class DragableSubsailor : DragableSailor
     new void OnMouseUpEmpty()
     {
      
-        originImage.enabled = true;
+        subSailorIcon.iconSailor.SetVisible(true);
         Destroy(gameObject);
     }
 
@@ -81,12 +81,12 @@ public class DragableSubsailor : DragableSailor
 
         if (swapSailor != null)
         {
-            originImage.GetComponent<SubSailorIcon>().CreateSailorImage(swapSailor.Model.id, swapSailor.Model.name);
-            originImage.enabled = true;
+            subSailorIcon.UpdateSailorImage(swapSailor.Model);
+            subSailorIcon.iconSailor.SetVisible(true);
             Destroy(swapSailor.gameObject);
         } else
         {
-            Destroy(originImage.gameObject);
+            Destroy(subSailorIcon.gameObject);
         }
 
         DragableSailor dragable = gameObject.AddComponent<DragableSailor>();
