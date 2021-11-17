@@ -500,7 +500,7 @@ public class CombatSailor : Sailor
     {
         string skill_name = Model.config_stats.skill_name;
         Debug.Log(">>>>>>>>>>>>>>>" + Model.config_stats.root_name + " active " + skill_name);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition(skill_name, transform.position);
+        //FlyTextMgr.Instance.CreateFlyTextWith3DPosition(skill_name, transform.position);
         return 0.5f;
     }
     public virtual bool CanActiveSkill(CombatState cbState)

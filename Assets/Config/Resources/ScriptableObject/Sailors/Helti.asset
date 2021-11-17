@@ -35,7 +35,7 @@ MonoBehaviour:
   classes: 0200000001000000
   skill_name: WindSlash
   start_fury: 0
-  max_fury: 30
+  max_fury: 40
   skill_params:
-  - 2.5
-  - 0.8
+  - 3
+  - 1.5
