@@ -18,18 +18,23 @@ public class FlyTextMgr : MonoBehaviour
     public void ShowTextTakeDamage(CombatSailor s, Damage damage)
     {
         Vector3 v3 = Camera.main.WorldToScreenPoint(s.transform.position);
+        v3.y += 30;
         if (damage.physics_damage > 0)
         {
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
             c.GetComponent<TextDamage>().Present(damage.physics_damage, v3, damage.isCrit, new Color(0.93f, 0.18f, 0.24f));
+            v3.x -= 40;
         }
         if (damage.magic_damage > 0)
         {
+            v3.x += 40;
+            v3.y -= 20;
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
             c.GetComponent<TextDamage>().Present(damage.magic_damage, v3, damage.isCrit, new Color(0.58f, 0.72f, 0.92f));
         }
         if (damage.true_damage > 0)
         {
+            v3.y -= 40;
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
             c.GetComponent<TextDamage>().Present(damage.true_damage, v3, damage.isCrit, Color.white);
         }

@@ -470,7 +470,7 @@ public class CombatSailor : Sailor
     {
         TriggerAnimation("Death");
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.6f);
+        seq.AppendInterval(0.1f);
         seq.AppendCallback(() => { gameObject.SetActive(false); });
         return 0f;
     }

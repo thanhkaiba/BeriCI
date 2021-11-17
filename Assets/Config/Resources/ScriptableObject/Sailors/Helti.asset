@@ -20,22 +20,22 @@ MonoBehaviour:
   power_base_step: 0
   power_plv: 0
   power_plv_step: 0
-  crit: 0.25
+  crit: 0
   crit_damage: 0
   block_change: 0
-  health_base: 300
-  health_base_step: 1
-  health_plv: 10
+  health_base: 380
+  health_base_step: 0
+  health_plv: 0
   health_plv_step: 0
   speed_base: 90
   speed_step: 0
   armor: 20
   magic_resist: 20
   attack_type: 0
-  classes: 0200000003000000
+  classes: 0200000001000000
   skill_name: WindSlash
   start_fury: 0
-  max_fury: 10
+  max_fury: 30
   skill_params:
-  - 2
+  - 2.5
   - 0.8
