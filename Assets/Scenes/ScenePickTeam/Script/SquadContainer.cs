@@ -65,6 +65,6 @@ public class SquadContainer : MonoBehaviour
 
     public void OnUpdateSquad()
     {
-       // teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));
+        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));
     }
 }
