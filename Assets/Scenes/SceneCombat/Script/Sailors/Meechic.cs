@@ -27,7 +27,7 @@ public class Meechic : CombatSailor
         boneTarget.SetLocalPosition(relativePos);
 
         Vector3 targetPos = target.transform.position;
-        targetPos.y += 3.4f;
+        targetPos.y += 3.0f;
         
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.68f);
@@ -88,7 +88,7 @@ public class Meechic : CombatSailor
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             startPos.y -= 0.0f;
             Vector3 targetPos = target.transform.position;
-            targetPos.y += 3.4f;
+            targetPos.y += 3.0f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
         });
         seq.AppendInterval(0.4f);

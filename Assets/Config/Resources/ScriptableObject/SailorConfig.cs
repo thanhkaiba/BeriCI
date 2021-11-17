@@ -10,7 +10,7 @@ public class SailorConfig : ScriptableObjectPro
     public string root_name = "Root";
     public SailorRank rank = SailorRank.S;
 
-    public float power_base = 0;
+    public float power_base = 50;
     public float power_base_step = 0;
     public float power_plv = 0;
     public float power_plv_step = 0;
@@ -20,24 +20,24 @@ public class SailorConfig : ScriptableObjectPro
 
     public float block_change = 0;
 
-    public float health_base = 0;
+    public float health_base = 300;
     public float health_base_step = 0;
     public float health_plv = 0;
     public float health_plv_step = 0;
 
-    public float speed_base = 0;
+    public float speed_base = 100;
     public float speed_step;
 
-    public float armor = 0;
-    public float magic_resist = 0;
+    public float armor = 10;
+    public float magic_resist = 10;
 
 
     public AttackType attack_type = AttackType.MELEE;
     public List<SailorClass> classes;
 
     public string skill_name = "";
-    public int start_fury;
-    public int max_fury;
+    public int start_fury = 0;
+    public int max_fury = 20;
     public List<float> skill_params;
 
     public float GetPower(int level, int quality)

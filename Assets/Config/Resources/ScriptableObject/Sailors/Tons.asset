@@ -35,6 +35,6 @@ MonoBehaviour:
   classes: 06000000
   skill_name: Huricane
   start_fury: 0
-  max_fury: 20
+  max_fury: 120
   skill_params:
   - 2

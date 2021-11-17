@@ -23,19 +23,19 @@ MonoBehaviour:
   crit: 0
   crit_damage: 0
   block_change: 0
-  health_base: 180
+  health_base: 260
   health_base_step: 0
   health_plv: 0
   health_plv_step: 0
-  speed_base: 120
+  speed_base: 105
   speed_step: 0
   armor: 15
   magic_resist: 15
   attack_type: 1
-  classes: 09000000
+  classes: 03000000
   skill_name: MeechikBooommm
   start_fury: 0
-  max_fury: 10
+  max_fury: 25
   skill_params:
   - 2
   - 0.5

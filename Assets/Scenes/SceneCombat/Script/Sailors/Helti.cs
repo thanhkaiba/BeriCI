@@ -26,14 +26,18 @@ public class Helti : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
+        int offset = transform.position.x < target.transform.position.x ? -1 : 1;
+        Vector3 desPos = new Vector3(
+            target.transform.position.x + offset * 4,
+            target.transform.position.y,
+            target.transform.position.z - 0.1f
+        );
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.8f);
+        seq.AppendInterval(0.25f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return 1.0f;
+        return 0.5f;
     }
     public override void SetFaceDirection()
     {
@@ -70,8 +74,12 @@ public class Helti : CombatSailor
         TriggerAnimation("Skill");
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 4.0f);
+        int offset = transform.position.x < target.transform.position.x ? -1 : 1;
+        Vector3 desPos = new Vector3(
+            target.transform.position.x + offset * 4,
+            target.transform.position.y,
+            target.transform.position.z - 0.1f
+        );
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
@@ -80,19 +88,19 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             target.TakeDamage(main_damage/3, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3, 0, 0, 2));
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3));
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
             target.TakeDamage(main_damage/3, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3, 0, 0, 2));
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3));
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {
             target.TakeDamage(main_damage/3, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3, 0, 0, 2));
+            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3));
         });
 
         seq.AppendInterval(0.8f);
