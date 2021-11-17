@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DragableSubsailor : DragableSailor
 {
-    private const int TransformHeight = 100;
+    private const int TransformHeight = 200;
     private Image dragImage;
     private Image originImage;
     private Sailor swapSailor;
@@ -20,7 +18,7 @@ public class DragableSubsailor : DragableSailor
 
     public void SetStartPosition(Vector2 mousePosition2D, Image d, Image o)
     {
-
+        SetSailorOpacity(0.8f);
         Transform t = transform.Find("model");
         if (t != null)
         {
@@ -62,8 +60,8 @@ public class DragableSubsailor : DragableSailor
 
     new void OnMouseUp()
     {
+        SetSailorOpacity(1f);
 
-       
         Destroy(dragImage.gameObject);
 
         if (selectingIndex >= 0 && !dragImage.enabled)
@@ -150,7 +148,4 @@ public class DragableSubsailor : DragableSailor
         slots[newSelecting].OnSelecting();
         selectingIndex = newSelecting;
     }
-
-
-
 }
