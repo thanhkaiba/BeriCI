@@ -42,7 +42,7 @@ public class SubSailorIcon : MonoBehaviour
         GameObject g = new GameObject("drag-" + sailorId);
         RectTransform trans = g.AddComponent<RectTransform>();
         trans.SetParent(GetComponent<Transform>().parent.parent);
-        trans.sizeDelta = new Vector2(110, 110);
+        trans.sizeDelta = new Vector2(186, 186);
         Image flyImage = g.AddComponent<Image>();
         flyImage.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailorName);
         return flyImage;
@@ -58,7 +58,7 @@ public class SubSailorIcon : MonoBehaviour
     public SubSailorIcon Init(Transform parent)
     {
         RectTransform trans = gameObject.AddComponent<RectTransform>();
-        trans.sizeDelta = new Vector2(110, 110);
+        trans.sizeDelta = new Vector2(186, 186);
         trans.SetParent(parent);
         image = gameObject.AddComponent<Image>();
         return this;
