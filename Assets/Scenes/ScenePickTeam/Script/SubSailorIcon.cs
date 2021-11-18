@@ -38,10 +38,15 @@ public class SubSailorIcon : MonoBehaviour
     {
         GameObject g = new GameObject("drag-" + sailorId);
         RectTransform trans = g.AddComponent<RectTransform>();
-        trans.SetParent(GetComponent<Transform>().parent.parent);
-        //trans.sizeDelta = iconSailor.icon.GetComponent<RectTransform>().sizeDelta;
+       
         Image flyImage = g.AddComponent<Image>();
         flyImage.sprite = model.config_stats.avatar;
+        flyImage.SetNativeSize();
+
+        trans.SetParent(GetComponent<Transform>().parent.parent);
+        trans.sizeDelta = iconSailor.icon.GetComponent<RectTransform>().sizeDelta;
+        trans.localScale = Vector3.one;
+        Debug.Log(trans.sizeDelta);
         return flyImage;
     }
 
