@@ -237,7 +237,7 @@ public class CombatSailor : Sailor
         }
         if (cs.HaveType(SailorClass.WILD))
         {
-            ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
+            ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.WILD);
             if (wild != null)
             {
                 float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
