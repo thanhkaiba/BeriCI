@@ -85,13 +85,13 @@ public class Scrub : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.3f);
+        seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
             target.TakeDamage(main_damage, 0, 0);
             if (behind_target) behind_target.TakeDamage(secondary_damage);
         });
-        seq.AppendInterval(0.5f);
+        seq.AppendInterval(0.45f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
         return 1.5f;
     }

@@ -35,5 +35,5 @@ MonoBehaviour:
   classes: 
   skill_name: 
   start_fury: 0
-  max_fury: 100
+  max_fury: 10
   skill_params: []
