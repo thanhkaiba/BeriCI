@@ -41,10 +41,6 @@ public class Herminia : CombatSailor
         return 1.1f;
     }
 
-    public override void SetFaceDirection()
-    {
-        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1 : -1, 1, 1);
-    }
     public override float TakeDamage(Damage d)
     {
         TriggerAnimation("Hurt");

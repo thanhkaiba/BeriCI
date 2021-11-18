@@ -39,10 +39,6 @@ public class Scrub : CombatSailor
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.4f;
     }
-    public override void SetFaceDirection()
-    {
-        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1f : -1f, 1f, 1f);
-    }
     public override float TakeDamage(Damage d)
     {
         TriggerAnimation("Hurt");

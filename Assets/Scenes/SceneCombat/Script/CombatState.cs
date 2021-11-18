@@ -150,7 +150,7 @@ public class CombatState : MonoBehaviour
         return sailor;
     }
 
-    public List<CombatSailor> GetAllCombatCharacters()
+    public List<CombatSailor> GetAllSailors()
     {
         List<CombatSailor> result = new List<CombatSailor>();
         sailorsTeamA.ForEach(delegate (CombatSailor character)
@@ -278,7 +278,7 @@ public class CombatState : MonoBehaviour
     public void RunEndAction(CombatSailor actor)
     {
         actor.CountdownStatusRemain();
-        var listSailor = GetAllCombatCharacters();
+        var listSailor = GetAllSailors();
         listSailor.ForEach(sailor =>
         {
             sailor.CheckDeath();
@@ -302,5 +302,18 @@ public class CombatState : MonoBehaviour
         return l.Find(sailor => {
             return sailor.Model.id == id;
         });
+    }
+    public CombatSailor GetSailor(string id)
+    {
+        var l = GetAllSailors();
+        return l.Find(sailor => {
+            return sailor.Model.id == id;
+        });
+    }
+    public List<CombatSailor> GetSailors(List<string> list_id)
+    {
+        var result = new List<CombatSailor>();
+        list_id.ForEach(id => result.Add(GetSailor(id)));
+        return result;
     }
 };
