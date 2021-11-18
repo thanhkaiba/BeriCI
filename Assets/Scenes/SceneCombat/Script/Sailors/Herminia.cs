@@ -77,17 +77,17 @@ public class Herminia : CombatSailor
         targetPos.y += 3.0f;
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(1.9f);
+        seq.AppendInterval(1.35f);
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            ArrowTarget(startPos, targetPos, 0.2f);
+            ArrowTarget(startPos, targetPos, 0.3f, true);
         });
-        seq.AppendInterval(0.2f);
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() => target.TakeDamage(0, 0, true_damage));
-        return 2.5f;
+        return 1.7f;
     }
-    private void ArrowTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
+    private void ArrowTarget(Vector3 startPos, Vector3 targetPos, float flyTime, bool haveAnims = false)
     {
         var arrGO = Instantiate(Resources.Load<GameObject>("Characters/Herminia/arrow/arrow"), startPos, Quaternion.identity);
         arrGO.SetActive(false);
@@ -103,5 +103,7 @@ public class Herminia : CombatSailor
         seq.AppendCallback(() => arrGO.SetActive(true));
         seq.Append(arrGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
         seq.AppendCallback(() => Destroy(arrGO));
+
+        arrGO.transform.Find("eff").gameObject.SetActive(haveAnims);
     }
 }

@@ -120,7 +120,7 @@ public class CombatMgr : MonoBehaviour
                 Debug.Log("actionProcess: " + actionCount);
                 Debug.Log("actionChar.cs.position: " + actionChar.cs.position + " " + actionChar.cs.team);
                 //float delayTime = actionChar.DoCombatAction(combatState) + 0.2f;
-                float delayTime = actionChar.BaseAttack(target, actionProcess.haveCrit, actionProcess.haveBlock) + 0.2f;
+                float delayTime = actionChar.BaseAttack(target, actionProcess.haveCrit) + 0.2f;
                 combatState.lastTeamAction = actionChar.cs.team;
                 StartCoroutine(EndLoop(actionChar, delayTime));
                 return delayTime;

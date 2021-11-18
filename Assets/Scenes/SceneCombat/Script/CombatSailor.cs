@@ -16,7 +16,6 @@ public class Damage
     public float true_damage = 0;
     public int fury_gain = 0;
     public bool isCrit = false;
-    public bool isBlock = false;
     public float total
     {
         get { return physics_damage + magic_damage + true_damage; }
@@ -56,7 +55,6 @@ public class CombatSailor : Sailor
             CurrentSpeed = 0,
             Crit = Model.config_stats.GetCrit(),
             CritDamage = GlobalConfigs.Combat.base_crit_damage,
-            Block = Model.config_stats.GetBlock(),
             BaseFury = Model.config_stats.max_fury,
             Fury = Model.config_stats.start_fury,
             position = p,
@@ -213,11 +211,10 @@ public class CombatSailor : Sailor
         // client auto
         CombatSailor target = GetBaseAttackTarget(combatState);
         bool isCrit = IsCrit();
-        bool isBlock = target.IsBlock();
-        return BaseAttack(target, isCrit, isBlock);
+        return BaseAttack(target, isCrit);
     }
     // ... server trả 
-    public float BaseAttack(CombatSailor target, bool isCrit, bool isBlock)
+    public float BaseAttack(CombatSailor target, bool isCrit)
     {
         var combatState = CombatState.Instance;
         cs.CurrentSpeed -= cs.SpeedNeed;
@@ -270,7 +267,6 @@ public class CombatSailor : Sailor
             {
                 physics_damage = d,
                 isCrit = isCrit,
-                isBlock = isBlock,
                 fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
             };
             StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
@@ -340,15 +336,13 @@ public class CombatSailor : Sailor
     public virtual float TakeDamage(Damage d)
     {
         float physicTake, magicTake, totalDamage;
-        if (d.isBlock) physicTake = magicTake = totalDamage = 0;
-        else
-        {
-            if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
-            else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
-            if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
-            else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
-            totalDamage = physicTake + magicTake + d.true_damage;
-        }
+
+        if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
+        else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
+        if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
+        else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
+        totalDamage = physicTake + magicTake + d.true_damage;
+
         LoseHealth(new Damage()
         {
             physics_damage = physicTake,
@@ -356,7 +350,6 @@ public class CombatSailor : Sailor
             true_damage = d.true_damage,
             fury_gain = d.fury_gain,
             isCrit = d.isCrit,
-            isBlock = d.isBlock,
         });
         GainFury(d.fury_gain);
         return totalDamage;
