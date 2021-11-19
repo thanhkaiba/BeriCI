@@ -46,7 +46,8 @@ public class SubSailorIcon : MonoBehaviour
         trans.SetParent(GetComponent<Transform>().parent.parent);
         trans.sizeDelta = iconSailor.icon.GetComponent<RectTransform>().sizeDelta;
         trans.localScale = Vector3.one;
-        Debug.Log(trans.sizeDelta);
+
+        flyImage.color = new Color(flyImage.color.r, flyImage.color.b, flyImage.color.g, 0.8f);
         return flyImage;
     }
 
