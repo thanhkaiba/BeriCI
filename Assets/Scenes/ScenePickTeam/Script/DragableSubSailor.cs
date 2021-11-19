@@ -18,6 +18,7 @@ public class DragableSubsailor : DragableSailor
 
     public void SetStartPosition(Vector2 mousePosition2D, Image d, SubSailorIcon subSailorIcon)
     {
+        draging = true;
         this.subSailorIcon = subSailorIcon;
         SetSailorOpacity(0.8f);
         Transform t = transform.Find("model");

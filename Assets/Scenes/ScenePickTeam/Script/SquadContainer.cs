@@ -5,6 +5,7 @@ public class SquadContainer : MonoBehaviour
     [SerializeField]
     private TeamColor teamColor;
     [SerializeField] SquadSlot[] slots;
+    public static bool Draging = false;
 
     void Start()
     {
