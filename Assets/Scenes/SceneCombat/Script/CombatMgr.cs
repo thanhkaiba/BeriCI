@@ -114,15 +114,15 @@ public class CombatMgr : MonoBehaviour
         switch (actionProcess.type)
         {
             case CombatAcionType.BaseAttack:
-                CombatSailor actionChar = GetActorAction(actionProcess);
+                CombatSailor actor = GetActorAction(actionProcess);
                 CombatSailor target = GetTargetAction(actionProcess);
-                Debug.Log("target.cs.position: " + target.cs.position);
                 Debug.Log("actionProcess: " + actionCount);
-                Debug.Log("actionChar.cs.position: " + actionChar.cs.position + " " + actionChar.cs.team);
-                //float delayTime = actionChar.DoCombatAction(combatState) + 0.2f;
-                float delayTime = actionChar.BaseAttack(target, actionProcess.haveCrit) + 0.2f;
-                combatState.lastTeamAction = actionChar.cs.team;
-                StartCoroutine(EndLoop(actionChar, delayTime));
+                float targetHealthLose = actionProcess._params[0];
+                float healthWildGain = 0;
+                if (actionProcess._params.Count > 1) healthWildGain = actionProcess._params[1];
+                float delayTime = actor.BaseAttack(target, actionProcess.haveCrit, targetHealthLose, healthWildGain) + 0.2f;
+                combatState.lastTeamAction = actor.cs.team;
+                StartCoroutine(EndLoop(actor, delayTime));
                 return delayTime;
             case CombatAcionType.GameResult:
                 return 0;
@@ -131,17 +131,15 @@ public class CombatMgr : MonoBehaviour
     }
     private CombatSailor GetActorAction(CombatAction action)
     {
-        string actor_id = action.actor.id;
         Team team = yourTeamIndex == action.actorTeam ? Team.A : Team.B;
-        return combatState.GetSailor(team, actor_id);
+        return combatState.GetSailor(team, action.actor);
     }
     private CombatSailor GetTargetAction(CombatAction action)
     {
-        Debug.Log("action.target.id: " + action.target.id);
-        Debug.Log("action.actorTeam: " + action.actorTeam);
-        string actor_id = action.target.id;
+        //Debug.Log("action.target.id: " + action.target);
+        //Debug.Log("action.actorTeam: " + action.actorTeam);
         Team team = yourTeamIndex != action.actorTeam ? Team.A : Team.B;
-        return combatState.GetSailor(team, actor_id);
+        return combatState.GetSailor(team, action.target);
     }
     IEnumerator NextLoopServer(float delay)
     {

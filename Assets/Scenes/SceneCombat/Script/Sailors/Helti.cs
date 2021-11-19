@@ -43,11 +43,6 @@ public class Helti : CombatSailor
     {
         if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1f : -1f, 1f, 1f);
     }
-    public override float TakeDamage(Damage d)
-    {
-        TriggerAnimation("Hurt");
-        return base.TakeDamage(d);
-    }
     // skill
     public override bool CanActiveSkill(CombatState cbState)
     {
@@ -55,30 +50,41 @@ public class Helti : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
+        base.CastSkill(cbState);
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
+
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float behind_damage_ratio = Model.config_stats.skill_params[1];
-        base.CastSkill(cbState);
         float main_damage = cs.Power * scale_damage_ratio;
         float secondary_damage = cs.Power * behind_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Melee(this, enermy);
-        List<CombatSailor> behind_target = TargetsUtils.AllBehind(target, enermy);
+        CombatSailor main_target = TargetsUtils.Melee(this, enermy);
+        List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
 
-        return RunAnimation(target, behind_target, main_damage, secondary_damage);
+        targets.Add(main_target.Model.id);
+        _params.Add( main_target.CalcDamageTake(new Damage() { physics_damage = main_damage }) );
+
+        behind_targets.ForEach(t =>
+        {
+            targets.Add(t.Model.id);
+            _params.Add(t.CalcDamageTake(new Damage() { physics_damage = secondary_damage }));
+        });
+
+        return RunSkillAnimation(targets, _params);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> behind_target, float main_damage, float secondary_damage)
+    float RunSkillAnimation(List<string> targets, List<float> _params)
     {
-        float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float behind_damage_ratio = Model.config_stats.skill_params[1];
         TriggerAnimation("Skill");
-        CombatEvents.Instance.highlightTarget.Invoke(target);
+        var listTarget = CombatState.Instance.GetSailors(targets);
+        var mainTarget = listTarget[0];
         Vector3 oriPos = transform.position;
-        int offset = transform.position.x < target.transform.position.x ? -1 : 1;
+        int offset = transform.position.x < mainTarget.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
-            target.transform.position.x + offset * 4,
-            target.transform.position.y,
-            target.transform.position.z - 0.1f
+            mainTarget.transform.position.x + offset * 4,
+            mainTarget.transform.position.y,
+            mainTarget.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
@@ -87,20 +93,20 @@ public class Helti : CombatSailor
 
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(main_damage/3, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3));
+            for (int i = 0; i < listTarget.Count; i++)
+                listTarget[i].LoseHealth(new Damage() { physics_damage = _params[i]/3 });
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(main_damage/3, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3));
+            for (int i = 0; i < listTarget.Count; i++)
+                listTarget[i].LoseHealth(new Damage() { physics_damage = _params[i]/3 });
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(main_damage/3, 0, 0);
-            behind_target.ForEach(s => s.TakeDamage(secondary_damage/3));
+            for (int i = 0; i < listTarget.Count; i++)
+                listTarget[i].LoseHealth(new Damage() { physics_damage = _params[i]/3 });
         });
 
         seq.AppendInterval(0.8f);

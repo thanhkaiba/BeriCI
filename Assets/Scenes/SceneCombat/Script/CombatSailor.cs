@@ -79,23 +79,23 @@ public class CombatSailor : Sailor
         Model.level = level;
         Model.quality = quality;
 
-        Debug.Log("-----------------------------------");
-        Debug.Log(" > Model.id" + Model.id);
-        Debug.Log(" > BasePower" + cs.BasePower);
-        Debug.Log(" > MaxHealth" + cs.MaxHealth);
-        Debug.Log(" > CurHealth" + cs.CurHealth);
-        Debug.Log(" > BaseArmor" + cs.BaseArmor);
-        Debug.Log(" > BaseMagicResist" + cs.BaseMagicResist);
-        Debug.Log(" > Speed" + cs.Speed);
-        Debug.Log(" > CurrentSpeed" + cs.CurrentSpeed);
-        Debug.Log(" > Crit" + cs.Crit);
-        Debug.Log(" > CritDamage" + cs.CritDamage);
-        Debug.Log(" > Block" + cs.Block);
-        Debug.Log(" > BaseFury" + cs.BaseFury);
-        Debug.Log(" > Fury" + cs.Fury);
-        Debug.Log(" > Model.level" + Model.level);
-        Debug.Log(" > Model.quality" + Model.quality);
-        Debug.Log("-----------------------------------");
+        //Debug.Log("-----------------------------------");
+        //Debug.Log(" > Model.id" + Model.id);
+        //Debug.Log(" > BasePower" + cs.BasePower);
+        //Debug.Log(" > MaxHealth" + cs.MaxHealth);
+        //Debug.Log(" > CurHealth" + cs.CurHealth);
+        //Debug.Log(" > BaseArmor" + cs.BaseArmor);
+        //Debug.Log(" > BaseMagicResist" + cs.BaseMagicResist);
+        //Debug.Log(" > Speed" + cs.Speed);
+        //Debug.Log(" > CurrentSpeed" + cs.CurrentSpeed);
+        //Debug.Log(" > Crit" + cs.Crit);
+        //Debug.Log(" > CritDamage" + cs.CritDamage);
+        //Debug.Log(" > Block" + cs.Block);
+        //Debug.Log(" > BaseFury" + cs.BaseFury);
+        //Debug.Log(" > Fury" + cs.Fury);
+        //Debug.Log(" > Model.level" + Model.level);
+        //Debug.Log(" > Model.quality" + Model.quality);
+        //Debug.Log("-----------------------------------");
     }
     // them giam chi so theo toc he
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam)
@@ -211,17 +211,7 @@ public class CombatSailor : Sailor
         // client auto
         CombatSailor target = GetBaseAttackTarget(combatState);
         bool isCrit = IsCrit();
-        return BaseAttack(target, isCrit);
-    }
-    // ... server trả 
-    public float BaseAttack(CombatSailor target, bool isCrit)
-    {
-        var combatState = CombatState.Instance;
-        cs.CurrentSpeed -= cs.SpeedNeed;
-        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
-        float delay = 0;
-
-        // Calc Class Active
+        // class bonus
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         bool activeMarksman = false;
         if (cs.HaveType(SailorClass.MARKSMAN)
@@ -235,17 +225,40 @@ public class CombatSailor : Sailor
                 CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
             }
         }
+        float healthGain = 0;
         if (cs.HaveType(SailorClass.WILD))
         {
             ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.WILD);
             if (wild != null)
             {
                 float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
-                float healthGain = percentHealthGain * cs.MaxHealth;
-                GainHealth(healthGain);
+                healthGain = percentHealthGain * cs.MaxHealth;
                 CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.WILD, new List<float> { healthGain });
             }
         }
+        // Deal damage
+        float d = cs.Power;
+        if (isCrit) d *= GlobalConfigs.Combat.base_crit_damage;
+        if (activeMarksman) d *= 1.5f; // 1.5 hardcode
+        Damage damage = new Damage()
+        {
+            physics_damage = cs.HaveType(SailorClass.MAGE) ? 0 : d,
+            magic_damage = cs.HaveType(SailorClass.MAGE) ? d : 0,
+            isCrit = isCrit,
+            fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
+        };
+        float damageTake = target.CalcDamageTake(damage);
+        return BaseAttack(target, isCrit, damageTake, healthGain);
+    }
+    // ... server trả 
+    public float BaseAttack(CombatSailor target, bool isCrit, float damageDeal, float wildHeal)
+    {
+        var combatState = CombatState.Instance;
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
+
+        // Calc Class Active
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
         if (cs.HaveType(SailorClass.CYBORG))
         {
             ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
@@ -256,24 +269,28 @@ public class CombatSailor : Sailor
                 CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
             }
         }
+        GainHealth(wildHeal);
         // Deal damage
-        if (target != null)
+        float delay = RunBaseAttack(target);
+        Damage damage = new Damage()
         {
-            delay += RunBaseAttack(target);
-            float d = cs.Power;
-            if (isCrit) d *= GlobalConfigs.Combat.base_crit_damage;
-            if (activeMarksman) d *= 1.5f; // 1.5 hardcode
-            Damage damage = new Damage()
-            {
-                physics_damage = d,
-                isCrit = isCrit,
-                fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
-            };
-            StartCoroutine(DealBaseAttackDamageDelay(target, damage, delay));
-        }
+            physics_damage = cs.HaveType(SailorClass.MAGE) ? 0 : damageDeal,
+            magic_damage = cs.HaveType(SailorClass.MAGE) ? damageDeal : 0,
+            isCrit = isCrit,
+            fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
+        };
+        StartCoroutine(WaitAndDo(delay, () =>
+        {
+            GainFury(GlobalConfigs.Combat.fury_per_base_attack);
+            target.LoseHealth(damage);
+        } ));
         return delay + 0.5f;
     }
-    
+    IEnumerator WaitAndDo(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action();
+    }
     bool UseSkillCondition (CombatState combatState)
     {
         return cs.Fury >= cs.MaxFury && CanActiveSkill(combatState);
@@ -351,7 +368,6 @@ public class CombatSailor : Sailor
             fury_gain = d.fury_gain,
             isCrit = d.isCrit,
         });
-        GainFury(d.fury_gain);
         return totalDamage;
     }
     public virtual float TakeDamage(float physics_damage = 0, float magic_damage = 0, float true_damage = 0, int fury_gain = 0, bool isCrit = false)
@@ -364,6 +380,17 @@ public class CombatSailor : Sailor
             fury_gain = fury_gain,
             isCrit = isCrit,
         });
+    }
+    public float CalcDamageTake(Damage d)
+    {
+        float physicTake, magicTake;
+
+        if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
+        else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
+        if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
+        else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
+
+        return physicTake + magicTake + d.true_damage;
     }
     public void AddStatus (SailorStatus status)
     {
@@ -410,6 +437,9 @@ public class CombatSailor : Sailor
     }
     public void LoseHealth(Damage d)
     {
+        TriggerAnimation("Hurt");
+        GainFury(d.fury_gain);
+
         cs.CurHealth -= d.physics_damage + d.magic_damage + d.true_damage;
         if (cs.CurHealth <= 0) cs.CurHealth = 0;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
@@ -483,9 +513,8 @@ public class CombatSailor : Sailor
     }
     public virtual void SetFaceDirection()
     {
-        int scaleX = cs.team == Team.A ? -1 : 1;
         float scale = modelObject.transform.localScale.x;
-        modelObject.transform.localScale = new Vector3(scale * scaleX, scale, scale);
+        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? scale : -scale, scale, scale);
     }
 
     //skill

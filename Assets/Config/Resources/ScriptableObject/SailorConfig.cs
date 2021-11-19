@@ -18,8 +18,6 @@ public class SailorConfig : ScriptableObjectPro
     public float crit = 0;
     public float crit_damage = 0;
 
-    public float block_change = 0;
-
     public float health_base = 300;
     public float health_base_step = 0;
     public float health_plv = 0;
@@ -55,10 +53,6 @@ public class SailorConfig : ScriptableObjectPro
     public float GetCrit()
     {
         return crit;
-    }
-    public float GetBlock()
-    {
-        return block_change;
     }
     public float GetArmor()
     {

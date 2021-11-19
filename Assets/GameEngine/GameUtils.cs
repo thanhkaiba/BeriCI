@@ -16,6 +16,8 @@ public class GameUtils : UnityEngine.Object
         GameObject characterGO = Instantiate(config_stats.model);
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
         sailor.Model = model;
+
+        Debug.Log(">>>>>>>>>>>>>>>>>_id " + model.id);
         //if (config_stats.skillConfig)
         //{
         //    sailor.skill = Activator.CreateInstance(Type.GetType(config_stats.skillConfig.skillName.Replace(" ", string.Empty))) as Skill;
@@ -100,19 +102,17 @@ public class GameUtils : UnityEngine.Object
         }
         return result;
     }
-
+    private static System.Random rd = new System.Random();
     public static string RandomId(int stringLength = 6)
     {
-        System.Random rd = new System.Random();
-
-        const string allowedChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789!@$?_-";
+        const string allowedChars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
         char[] chars = new char[stringLength];
 
         for (int i = 0; i < stringLength; i++)
         {
             chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
         }
-
+        Debug.Log("Random: " + new string(chars));
         return new string(chars);
     }
 }

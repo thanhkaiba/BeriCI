@@ -2,6 +2,7 @@ using Sfs2X.Entities.Data;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -79,11 +80,11 @@ public class CombatAction
 {
 	public CombatAcionType type;
 	public byte actorTeam;
-	public FGL actor;
-	public FGL target;
-	public List<FGL> targets;
+	public string actor;
+	public string target;
+	public List<string> targets;
+	public List<float> _params;
 	public bool haveCrit;
-	public bool haveBlock;
 	public byte teamWin;
 	public CombatAction(ISFSObject packet)
 	{
@@ -93,21 +94,16 @@ public class CombatAction
 		{
 			case CombatAcionType.BaseAttack:
 				actorTeam = detail.GetByte("actor_team");
-				actor = new FGL(detail.GetSFSObject("actor"));
-				target = new FGL(detail.GetSFSObject("target"));
+				actor = detail.GetUtfString("actor");
+				target = detail.GetUtfString("target");
 				haveCrit = detail.GetBool("have_crit");
-				haveBlock = detail.GetBool("have_block");
+				_params = detail.GetFloatArray("params").OfType<float>().ToList();
 				break;
 			case CombatAcionType.UseSkill:
 				actorTeam = detail.GetByte("actor_team");
-				actor = new FGL(detail.GetSFSObject("actor"));
-				targets = new List<FGL>();
-				foreach (ISFSObject obj in detail.GetSFSArray("targets"))
-				{
-					targets.Add(new FGL(obj));
-				}
-				haveCrit = detail.GetBool("have_crit");
-				haveBlock = detail.GetBool("have_block");
+				actor = detail.GetUtfString("actor");
+				targets = detail.GetUtfStringArray("targets").OfType<string>().ToList();
+				_params = detail.GetFloatArray("params").OfType<float>().ToList();
 				break;
 			case CombatAcionType.GameResult:
 				teamWin = detail.GetByte("team_win");
