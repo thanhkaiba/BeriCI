@@ -186,6 +186,7 @@ public class CombatSailor : Sailor
     public void CheckDeath()
     {
         if (IsDeath()) return;
+        Debug.Log("cs.CurHealth: " + cs.CurHealth);
         if (cs.CurHealth <= 0)
         {
             AddStatus(new SailorStatus(SailorStatusType.DEATH));
@@ -201,7 +202,7 @@ public class CombatSailor : Sailor
     {
         bool useSkillCondition = UseSkillCondition(combatState);
         if (HaveStatus(SailorStatusType.STUN)) return Immobile();
-        else if(useSkillCondition) return UseSkill(combatState);
+        else if(useSkillCondition) return CastSkill(combatState);
         else return BaseAttack(combatState);
     }
     // Base attack
@@ -295,15 +296,6 @@ public class CombatSailor : Sailor
     {
         return cs.Fury >= cs.MaxFury && CanActiveSkill(combatState);
     }
-    public virtual float UseSkill (CombatState combatState)
-    {
-        cs.CurrentSpeed -= cs.SpeedNeed;
-        cs.Fury = 0;
-        //Debug.Log("Use skill now " + skill.name);
-        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
-        bar.SetFuryBar(cs.MaxFury, cs.Fury);
-        return CastSkill(combatState);
-    }
     float Immobile ()
     {
         cs.CurrentSpeed -= cs.SpeedNeed;
@@ -343,12 +335,6 @@ public class CombatSailor : Sailor
                     ? combatState.GetAllTeamAliveSailors(Team.B)
                     : combatState.GetAllTeamAliveSailors(Team.A));
         }
-    }
-    IEnumerator DealBaseAttackDamageDelay(CombatSailor target, Damage damage, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GainFury(GlobalConfigs.Combat.fury_per_base_attack);
-        float damageDeal = target.TakeDamage(damage);
     }
     public virtual float TakeDamage(Damage d)
     {
@@ -520,13 +506,17 @@ public class CombatSailor : Sailor
     //skill
     public virtual float CastSkill(CombatState cbState)
     {
+        return 0.0f;
+    }
+    public virtual float ProcessSkill(List<string> targets = null, List<float> _params = null)
+    {
         string skill_name = Model.config_stats.skill_name;
         Debug.Log(">>>>>>>>>>>>>>>" + Model.config_stats.root_name + " active " + skill_name);
-        //FlyTextMgr.Instance.CreateFlyTextWith3DPosition(skill_name, transform.position);
-        return 0.5f;
-    }
-    public virtual float ProcessSkill(List<string> targets, List<float> _params)
-    {
+
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        cs.Fury = 0;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
         return 0;
     }
     public virtual bool CanActiveSkill(CombatState cbState)

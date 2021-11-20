@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Helti : CombatSailor
 {
-    private GameObject circle;
+    private GameObject wind;
+    private Animator windAnimator;
     public Helti()
     {
     }
@@ -13,14 +14,13 @@ public class Helti : CombatSailor
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
+
+        wind = Instantiate(Resources.Load<GameObject>("Characters/Helti/skill/skill"));
+        windAnimator = wind.transform.Find("eff").GetComponent<Animator>();
     }
     public override void GainFury(int value)
     {
         base.GainFury(value);
-    }
-    public override float UseSkill(CombatState combatState)
-    {
-        return base.UseSkill(combatState);
     }
     public override float RunBaseAttack(CombatSailor target)
     {
@@ -50,7 +50,6 @@ public class Helti : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
-        base.CastSkill(cbState);
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
@@ -76,6 +75,7 @@ public class Helti : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        base.ProcessSkill();
         TriggerAnimation("Skill");
         var listTarget = CombatState.Instance.GetSailors(targets);
         var mainTarget = listTarget[0];
@@ -86,6 +86,10 @@ public class Helti : CombatSailor
             mainTarget.transform.position.y,
             mainTarget.transform.position.z - 0.1f
         );
+
+        wind.transform.position = mainTarget.transform.position;
+        wind.transform.localScale = new Vector3(cs.team == Team.A ? 1.5f : -1.5f, 1.5f, 1.5f);
+
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
@@ -94,19 +98,22 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/3 });
+                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/4 });
+            windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/3 });
+                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/4 });
+            windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/3 });
+                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/2 });
+            windAnimator.SetTrigger("run");
         });
 
         seq.AppendInterval(0.8f);

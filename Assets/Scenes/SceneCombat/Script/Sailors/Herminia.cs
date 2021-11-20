@@ -53,7 +53,6 @@ public class Herminia : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
-        base.CastSkill(cbState);
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
@@ -67,6 +66,7 @@ public class Herminia : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        base.ProcessSkill();
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 

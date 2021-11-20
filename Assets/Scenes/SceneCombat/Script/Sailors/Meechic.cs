@@ -62,23 +62,39 @@ public class Meechic : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
+
         float physic_damage = cs.Power * Model.config_stats.skill_params[0];
         float magic_damage = cs.Power * Model.config_stats.skill_params[1];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
-        List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, true);
+        List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, false);
 
-        return RunAnimation(target, around_target, physic_damage, magic_damage);
+        targets.Add(target.Model.id);
+        _params.Add(target.CalcDamageTake(new Damage() { physics = physic_damage }));
+
+        around_target.ForEach(t =>
+        {
+            targets.Add(t.Model.id);
+            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }));
+        });
+
+        return ProcessSkill(targets, _params);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage, float magic_damage)
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        base.ProcessSkill();
         TriggerAnimation("Skill");
+        var listTargets = CombatState.Instance.GetSailors(targets);
+        var mainTarget = CombatState.Instance.GetSailor(targets[0]);
 
-        CombatEvents.Instance.highlightTarget.Invoke(target);
+
+        CombatEvents.Instance.highlightTarget.Invoke(mainTarget);
         Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
+        float d = Vector3.Distance(oriPos, mainTarget.transform.position);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, mainTarget.transform.position, d - 8.0f);
         desPos.y += 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.6f);
@@ -87,21 +103,21 @@ public class Meechic : CombatSailor
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             startPos.y -= 0.0f;
-            Vector3 targetPos = target.transform.position;
+            Vector3 targetPos = mainTarget.transform.position;
             targetPos.y += 3.0f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
         });
         seq.AppendInterval(0.4f);
         seq.AppendCallback(() => {
-            Vector3 explorePos = target.transform.position;
+            Vector3 explorePos = mainTarget.transform.position;
             explorePos.y += 3.4f;
             GameEffMgr.Instance.ShowSmallExplosion(explorePos);
         });
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(physics_damage);
-            around_target.ForEach(s => s.TakeDamage(0, magic_damage));
+            mainTarget.LoseHealth(new Damage() { physics = _params[0] });
+            for (int i = 1; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[0] });
         });
 
         seq.AppendInterval(0.3f);

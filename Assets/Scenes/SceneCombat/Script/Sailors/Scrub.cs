@@ -18,10 +18,6 @@ public class Scrub : CombatSailor
     {
         base.GainFury(value);
     }
-    public override float UseSkill(CombatState combatState)
-    {
-        return base.UseSkill(combatState);
-    }
     public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("Attack");
@@ -51,7 +47,6 @@ public class Scrub : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
-        base.CastSkill(cbState);
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
@@ -80,9 +75,11 @@ public class Scrub : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        base.ProcessSkill();
         TriggerAnimation("Skill");
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
-        CombatSailor behind_target = CombatState.Instance.GetSailor(targets[1]);
+        CombatSailor behind_target = null;
+        if (targets.Count > 1) behind_target = CombatState.Instance.GetSailor(targets[1]);
 
 
         CombatEvents.Instance.highlightTarget.Invoke(target);

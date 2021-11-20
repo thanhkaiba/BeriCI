@@ -1,0 +1,153 @@
+
+Helti_Skill.png
+size: 2048,2048
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+normal/ene_00
+  rotate: true
+  xy: 1889, 649
+  size: 198, 130
+  orig: 256, 190
+  offset: 0, 9
+  index: -1
+normal/ene_01
+  rotate: true
+  xy: 1889, 849
+  size: 229, 154
+  orig: 256, 190
+  offset: 0, 9
+  index: -1
+normal/ene_02
+  rotate: false
+  xy: 1408, 235
+  size: 240, 160
+  orig: 256, 190
+  offset: 0, 9
+  index: -1
+normal/ene_03
+  rotate: false
+  xy: 1650, 234
+  size: 238, 161
+  orig: 256, 190
+  offset: 14, 9
+  index: -1
+normal/ene_04
+  rotate: false
+  xy: 1408, 72
+  size: 222, 161
+  orig: 256, 190
+  offset: 32, 9
+  index: -1
+normal/ene_05
+  rotate: false
+  xy: 1632, 71
+  size: 210, 161
+  orig: 256, 190
+  offset: 44, 9
+  index: -1
+normal/ene_06
+  rotate: false
+  xy: 1844, 71
+  size: 184, 161
+  orig: 256, 190
+  offset: 70, 9
+  index: -1
+normal/ene_07
+  rotate: false
+  xy: 1889, 487
+  size: 126, 160
+  orig: 256, 190
+  offset: 128, 10
+  index: -1
+normal/ene_08
+  rotate: true
+  xy: 2, 2
+  size: 113, 160
+  orig: 256, 190
+  offset: 141, 10
+  index: -1
+normal/ene_09
+  rotate: true
+  xy: 164, 47
+  size: 68, 147
+  orig: 256, 190
+  offset: 186, 23
+  index: -1
+slash/slash_00
+  rotate: false
+  xy: 1409, 1080
+  size: 605, 480
+  orig: 752, 512
+  offset: 0, 0
+  index: -1
+slash/slash_01
+  rotate: false
+  xy: 1411, 1563
+  size: 635, 479
+  orig: 752, 512
+  offset: 5, 0
+  index: -1
+slash/slash_02
+  rotate: true
+  xy: 1408, 397
+  size: 681, 479
+  orig: 752, 512
+  offset: 18, 0
+  index: -1
+slash/slash_03
+  rotate: false
+  xy: 2, 1563
+  size: 704, 479
+  orig: 752, 512
+  offset: 35, 0
+  index: -1
+slash/slash_04
+  rotate: false
+  xy: 2, 599
+  size: 701, 480
+  orig: 752, 512
+  offset: 42, 0
+  index: -1
+slash/slash_05
+  rotate: false
+  xy: 2, 117
+  size: 701, 480
+  orig: 752, 512
+  offset: 51, 0
+  index: -1
+slash/slash_06
+  rotate: false
+  xy: 708, 1562
+  size: 701, 480
+  orig: 752, 512
+  offset: 51, 0
+  index: -1
+slash/slash_07
+  rotate: false
+  xy: 706, 1080
+  size: 701, 480
+  orig: 752, 512
+  offset: 51, 0
+  index: -1
+slash/slash_08
+  rotate: false
+  xy: 705, 598
+  size: 701, 480
+  orig: 752, 512
+  offset: 51, 0
+  index: -1
+slash/slash_09
+  rotate: false
+  xy: 705, 116
+  size: 701, 480
+  orig: 752, 512
+  offset: 51, 0
+  index: -1
+slash/slash_10
+  rotate: false
+  xy: 2, 1081
+  size: 702, 480
+  orig: 752, 512
+  offset: 50, 0
+  index: -1

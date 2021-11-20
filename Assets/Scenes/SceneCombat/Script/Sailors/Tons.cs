@@ -18,10 +18,6 @@ public class Tons : CombatSailor
     {
         base.GainFury(value);
     }
-    public override float UseSkill(CombatState combatState)
-    {
-        return base.UseSkill(combatState);
-    }
     public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("Attack");

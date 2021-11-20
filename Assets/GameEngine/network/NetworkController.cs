@@ -163,7 +163,7 @@ public class NetworkController : MonoBehaviour
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
 			Application.runInBackground = true;
-			ForceStartScene();
+			//ForceStartScene();
 		}
 		else Destroy(gameObject);
 	}
