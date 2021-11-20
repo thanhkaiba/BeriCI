@@ -11,6 +11,7 @@ public class RenderAllConfig : MonoBehaviour
         RenderSailorConfig("ScriptableObject/Sailors/Meechic", "Meechic");
         RenderSailorConfig("ScriptableObject/Sailors/Helti", "Helti");
         RenderSailorConfig("ScriptableObject/Sailors/Tons", "Tons");
+        RenderSailorConfig("ScriptableObject/Sailors/Herminia", "Herminia");
         RenderCombatConfig("ScriptableObject/Combat", "Combat");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
     }
@@ -26,7 +27,7 @@ public class RenderAllConfig : MonoBehaviour
         Debug.Log("RenderConfig " + src + " " + file_name);
         SailorConfig a = Resources.Load<SailorConfig>(src);
         string json = a.Serialize(a);
-        string filesrc = "Assets/Config/json/Sailors" + file_name + ".json";
+        string filesrc = "Assets/Config/json/Sailors/" + file_name + ".json";
         File.WriteAllText(filesrc, "");
         StreamWriter writer = new StreamWriter(filesrc, true);
         writer.WriteLine(json);
