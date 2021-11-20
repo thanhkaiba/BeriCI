@@ -90,7 +90,7 @@ public class TargetsUtils
         CombatPosition p = actor.cs.position;
         l.ForEach(cha =>
         {
-            if ((cha.cs.position.x == actor.cs.position.x + 1 || cha.cs.position.x == actor.cs.position.x + 2)
+            if ((cha.cs.position.x < actor.cs.position.x)
                 && cha.cs.position.y == actor.cs.position.y) result.Add(cha);
         });
         return result;
