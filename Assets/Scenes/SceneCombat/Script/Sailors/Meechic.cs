@@ -65,20 +65,20 @@ public class Meechic : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        float physic_damage = cs.Power * Model.config_stats.skill_params[0];
-        float magic_damage = cs.Power * Model.config_stats.skill_params[1];
+        float main_damage = cs.Power * Model.config_stats.skill_params[0];
+        float aoe_damage = cs.Power * Model.config_stats.skill_params[1];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, false);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = physic_damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
 
         around_target.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = aoe_damage }));
         });
 
         return ProcessSkill(targets, _params);
@@ -116,8 +116,7 @@ public class Meechic : CombatSailor
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
-            mainTarget.LoseHealth(new Damage() { physics = _params[0] });
-            for (int i = 1; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[0] });
+            for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[0] });
         });
 
         seq.AppendInterval(0.3f);

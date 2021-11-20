@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DG.Tweening;
+using Spine.Unity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -315,5 +317,20 @@ public class CombatState : MonoBehaviour
         var result = new List<CombatSailor>();
         list_id.ForEach(id => result.Add(GetSailor(id)));
         return result;
+    }
+    public void HighlightListSailor (List<CombatSailor> sailors, float time)
+    {
+        var l = GetAllSailors();
+        l.ForEach(sailor =>
+        {
+            if (!sailors.Contains(sailor))
+            {
+                Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
+                skeleton.SetColor(new Color(0.64f, 0.64f, 0.64f));
+                Sequence seq = DOTween.Sequence();
+                seq.AppendInterval(time);
+                seq.AppendCallback(() => skeleton.SetColor(Color.white));
+            }
+        });
     }
 };

@@ -75,21 +75,29 @@ public class Helti : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        Debug.Log("targets " + targets.Count);
+        Debug.Log("_params " + _params.Count);
         base.ProcessSkill();
         TriggerAnimation("Skill");
-        var listTarget = CombatState.Instance.GetSailors(targets);
-        var mainTarget = listTarget[0];
+        var listTargets = CombatState.Instance.GetSailors(targets);
+        var mainTarget = listTargets[0];
         Vector3 oriPos = transform.position;
         int offset = transform.position.x < mainTarget.transform.position.x ? -1 : 1;
+
+        var targetPos = mainTarget.transform.position;
+        targetPos.z -= 0.1f;
         Vector3 desPos = new Vector3(
-            mainTarget.transform.position.x + offset * 4,
-            mainTarget.transform.position.y,
-            mainTarget.transform.position.z - 0.1f
+            targetPos.x + offset * 4,
+            targetPos.y,
+            targetPos.z - 0.1f
         );
 
-        wind.transform.position = mainTarget.transform.position;
-        wind.transform.localScale = new Vector3(cs.team == Team.A ? 1.5f : -1.5f, 1.5f, 1.5f);
+        wind.transform.position = targetPos;
+        wind.transform.localScale = new Vector3(cs.team == Team.A ? 2.0f : -2.0f, 2.0f, 2.0f);
 
+        var listHighlight = new List<CombatSailor>() { this };
+        listHighlight.AddRange(listTargets);
+        CombatState.Instance.HighlightListSailor(listHighlight, 3.0f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
@@ -97,22 +105,22 @@ public class Helti : CombatSailor
 
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/4 });
+            for (int i = 0; i < listTargets.Count; i++)
+                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
             windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/4 });
+            for (int i = 0; i < listTargets.Count; i++)
+                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
             windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/2 });
+            for (int i = 0; i < listTargets.Count; i++)
+                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 4 / 10 });
             windAnimator.SetTrigger("run");
         });
 
