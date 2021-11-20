@@ -114,16 +114,27 @@ public class CombatMgr : MonoBehaviour
         switch (actionProcess.type)
         {
             case CombatAcionType.BaseAttack:
-                CombatSailor actor = GetActorAction(actionProcess);
-                CombatSailor target = GetTargetAction(actionProcess);
-                Debug.Log("actionProcess: " + actionCount);
-                float targetHealthLose = actionProcess._params[0];
-                float healthWildGain = 0;
-                if (actionProcess._params.Count > 1) healthWildGain = actionProcess._params[1];
-                float delayTime = actor.BaseAttack(target, actionProcess.haveCrit, targetHealthLose, healthWildGain) + 0.2f;
-                combatState.lastTeamAction = actor.cs.team;
-                StartCoroutine(EndLoop(actor, delayTime));
-                return delayTime;
+                {
+                    CombatSailor actor = GetActorAction(actionProcess);
+                    CombatSailor target = GetTargetAction(actionProcess);
+                    Debug.Log("actionProcess: " + actionCount);
+                    float targetHealthLose = actionProcess._params[0];
+                    float healthWildGain = 0;
+                    if (actionProcess._params.Count > 1) healthWildGain = actionProcess._params[1];
+                    float delayTime = actor.BaseAttack(target, actionProcess.haveCrit, targetHealthLose, healthWildGain) + 0.2f;
+                    combatState.lastTeamAction = actor.cs.team;
+                    StartCoroutine(EndLoop(actor, delayTime));
+                    return delayTime;
+                }
+            case CombatAcionType.UseSkill:
+                {
+                    CombatSailor actor = GetActorAction(actionProcess);
+                    float delayTime = actor.ProcessSkill(actionProcess.targets, actionProcess._params);
+                    Debug.Log("actionProcess: " + actionCount);
+                    combatState.lastTeamAction = actor.cs.team;
+                    StartCoroutine(EndLoop(actor, delayTime));
+                    return delayTime;
+                }
             case CombatAcionType.GameResult:
                 return 0;
         }

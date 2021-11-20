@@ -64,17 +64,17 @@ public class Helti : CombatSailor
         List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
 
         targets.Add(main_target.Model.id);
-        _params.Add( main_target.CalcDamageTake(new Damage() { physics_damage = main_damage }) );
+        _params.Add( main_target.CalcDamageTake(new Damage() { physics = main_damage }) );
 
         behind_targets.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics_damage = secondary_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage }));
         });
 
-        return RunSkillAnimation(targets, _params);
+        return ProcessSkill(targets, _params);
     }
-    float RunSkillAnimation(List<string> targets, List<float> _params)
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
         TriggerAnimation("Skill");
         var listTarget = CombatState.Instance.GetSailors(targets);
@@ -94,19 +94,19 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics_damage = _params[i]/3 });
+                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/3 });
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics_damage = _params[i]/3 });
+                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/3 });
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTarget.Count; i++)
-                listTarget[i].LoseHealth(new Damage() { physics_damage = _params[i]/3 });
+                listTarget[i].LoseHealth(new Damage() { physics = _params[i]/3 });
         });
 
         seq.AppendInterval(0.8f);

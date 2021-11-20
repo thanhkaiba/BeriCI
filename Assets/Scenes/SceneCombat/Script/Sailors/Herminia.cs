@@ -54,15 +54,22 @@ public class Herminia : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
-        float true_damage = cs.Power;
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
 
-        return RunAnimation(target, true_damage);
+        targets.Add(target.Model.id);
+        _params.Add(target.CalcDamageTake(new Damage() { pure = cs.Power }));
+
+        return ProcessSkill(targets, _params);
     }
-    float RunAnimation(CombatSailor target, float true_damage)
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
+        float loseHealth = _params[0];
+
         TriggerAnimation("Skill");
         Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
         relativePos.y += 1.5f;
@@ -80,7 +87,7 @@ public class Herminia : CombatSailor
             ArrowTarget(startPos, targetPos, 0.3f, true);
         });
         seq.AppendInterval(0.3f);
-        seq.AppendCallback(() => target.TakeDamage(0, 0, true_damage));
+        seq.AppendCallback(() => target.LoseHealth(new Damage() { pure = loseHealth }));
         return 1.7f;
     }
     private void ArrowTarget(Vector3 startPos, Vector3 targetPos, float flyTime, bool haveAnims = false)

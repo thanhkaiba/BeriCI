@@ -11,14 +11,14 @@ using Random = UnityEngine.Random;
 
 public class Damage
 {
-    public float physics_damage = 0;
-    public float magic_damage = 0;
-    public float true_damage = 0;
+    public float physics = 0;
+    public float magic = 0;
+    public float pure = 0;
     public int fury_gain = 0;
     public bool isCrit = false;
     public float total
     {
-        get { return physics_damage + magic_damage + true_damage; }
+        get { return physics + magic + pure; }
     }
 }
 
@@ -242,8 +242,8 @@ public class CombatSailor : Sailor
         if (activeMarksman) d *= 1.5f; // 1.5 hardcode
         Damage damage = new Damage()
         {
-            physics_damage = cs.HaveType(SailorClass.MAGE) ? 0 : d,
-            magic_damage = cs.HaveType(SailorClass.MAGE) ? d : 0,
+            physics = cs.HaveType(SailorClass.MAGE) ? 0 : d,
+            magic = cs.HaveType(SailorClass.MAGE) ? d : 0,
             isCrit = isCrit,
             fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
         };
@@ -274,8 +274,8 @@ public class CombatSailor : Sailor
         float delay = RunBaseAttack(target);
         Damage damage = new Damage()
         {
-            physics_damage = cs.HaveType(SailorClass.MAGE) ? 0 : damageDeal,
-            magic_damage = cs.HaveType(SailorClass.MAGE) ? damageDeal : 0,
+            physics = cs.HaveType(SailorClass.MAGE) ? 0 : damageDeal,
+            magic = cs.HaveType(SailorClass.MAGE) ? damageDeal : 0,
             isCrit = isCrit,
             fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
         };
@@ -354,17 +354,17 @@ public class CombatSailor : Sailor
     {
         float physicTake, magicTake, totalDamage;
 
-        if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
-        else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
-        if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
-        else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
-        totalDamage = physicTake + magicTake + d.true_damage;
+        if (cs.Armor > 0) physicTake = d.physics * 100 / (100 + cs.Armor);
+        else physicTake = d.physics * (2 - 100 / (100 - cs.Armor));
+        if (cs.MagicResist > 0) magicTake = d.magic * 100 / (100 + cs.MagicResist);
+        else magicTake = d.magic * (2 - 100 / (100 - cs.MagicResist));
+        totalDamage = physicTake + magicTake + d.pure;
 
         LoseHealth(new Damage()
         {
-            physics_damage = physicTake,
-            magic_damage = magicTake,
-            true_damage = d.true_damage,
+            physics = physicTake,
+            magic = magicTake,
+            pure = d.pure,
             fury_gain = d.fury_gain,
             isCrit = d.isCrit,
         });
@@ -374,9 +374,9 @@ public class CombatSailor : Sailor
     {
         return TakeDamage(new Damage()
         {
-            physics_damage = physics_damage,
-            magic_damage = magic_damage,
-            true_damage = true_damage,
+            physics = physics_damage,
+            magic = magic_damage,
+            pure = true_damage,
             fury_gain = fury_gain,
             isCrit = isCrit,
         });
@@ -385,12 +385,12 @@ public class CombatSailor : Sailor
     {
         float physicTake, magicTake;
 
-        if (cs.Armor > 0) physicTake = d.physics_damage * 100 / (100 + cs.Armor);
-        else physicTake = d.physics_damage * (2 - 100 / (100 - cs.Armor));
-        if (cs.MagicResist > 0) magicTake = d.magic_damage * 100 / (100 + cs.MagicResist);
-        else magicTake = d.magic_damage * (2 - 100 / (100 - cs.MagicResist));
+        if (cs.Armor > 0) physicTake = d.physics * 100 / (100 + cs.Armor);
+        else physicTake = d.physics * (2 - 100 / (100 - cs.Armor));
+        if (cs.MagicResist > 0) magicTake = d.magic * 100 / (100 + cs.MagicResist);
+        else magicTake = d.magic * (2 - 100 / (100 - cs.MagicResist));
 
-        return physicTake + magicTake + d.true_damage;
+        return physicTake + magicTake + d.pure;
     }
     public void AddStatus (SailorStatus status)
     {
@@ -433,14 +433,14 @@ public class CombatSailor : Sailor
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
 
-        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics_damage = health });
+        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = health });
     }
     public void LoseHealth(Damage d)
     {
         TriggerAnimation("Hurt");
         GainFury(d.fury_gain);
 
-        cs.CurHealth -= d.physics_damage + d.magic_damage + d.true_damage;
+        cs.CurHealth -= d.physics + d.magic + d.pure;
         if (cs.CurHealth <= 0) cs.CurHealth = 0;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         CheckDeath();
@@ -524,6 +524,10 @@ public class CombatSailor : Sailor
         Debug.Log(">>>>>>>>>>>>>>>" + Model.config_stats.root_name + " active " + skill_name);
         //FlyTextMgr.Instance.CreateFlyTextWith3DPosition(skill_name, transform.position);
         return 0.5f;
+    }
+    public virtual float ProcessSkill(List<string> targets, List<float> _params)
+    {
+        return 0;
     }
     public virtual bool CanActiveSkill(CombatState cbState)
     {

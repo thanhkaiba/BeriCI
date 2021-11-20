@@ -1,0 +1,29 @@
+{
+  "root_name": "Meechic",
+  "rank": 2,
+  "power_base": 80.0,
+  "power_base_step": 0.0,
+  "power_plv": 0.0,
+  "power_plv_step": 0.0,
+  "crit": 0.0,
+  "crit_damage": 0.0,
+  "health_base": 260.0,
+  "health_base_step": 0.0,
+  "health_plv": 0.0,
+  "health_plv_step": 0.0,
+  "speed_base": 105.0,
+  "speed_step": 0.0,
+  "armor": 15.0,
+  "magic_resist": 15.0,
+  "attack_type": 1,
+  "classes": [
+    3
+  ],
+  "skill_name": "MeechikBooommm",
+  "start_fury": 0,
+  "max_fury": 25,
+  "skill_params": [
+    2.0,
+    0.5
+  ]
+}

@@ -51,9 +51,13 @@ public class Scrub : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
+        base.CastSkill(cbState);
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
+
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float behind_damage_ratio = Model.config_stats.skill_params[1];
-        base.CastSkill(cbState);
+
         float main_damage = cs.Power * scale_damage_ratio;
         float secondary_damage = cs.Power * behind_damage_ratio;
 
@@ -61,13 +65,26 @@ public class Scrub : CombatSailor
         CombatSailor target = TargetsUtils.Melee(this, enermy);
         CombatSailor behind_target = TargetsUtils.Behind(target, enermy);
 
-        return RunAnimation(target, behind_target, main_damage, secondary_damage);
+        targets.Add(target.Model.id);
+        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
+
+        if (behind_target)
+        {
+            targets.Add(behind_target.Model.id);
+            _params.Add(behind_target.CalcDamageTake(new Damage() { physics = secondary_damage }));
+        }
+
+        
+
+        return ProcessSkill(targets, _params);
     }
-    float RunAnimation(CombatSailor target, CombatSailor behind_target, float main_damage, float secondary_damage)
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
-        float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float behind_damage_ratio = Model.config_stats.skill_params[1];
         TriggerAnimation("Skill");
+        CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
+        CombatSailor behind_target = CombatState.Instance.GetSailor(targets[1]);
+
+
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;
 
@@ -84,8 +101,8 @@ public class Scrub : CombatSailor
         seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(main_damage, 0, 0);
-            if (behind_target) behind_target.TakeDamage(secondary_damage);
+            target.LoseHealth(new Damage() { physics = _params[0] });
+            if (behind_target) behind_target.LoseHealth(new Damage() { physics = _params[1] });
         });
         seq.AppendInterval(0.45f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));

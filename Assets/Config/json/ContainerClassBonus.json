@@ -1,0 +1,208 @@
+{
+  "classBonusList": [
+    {
+      "type": 1,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            0.2
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            0.6
+          ]
+        }
+      ]
+    },
+    {
+      "type": 2,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            8.0
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            12.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 3,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            0.45
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            0.7
+          ]
+        }
+      ]
+    },
+    {
+      "type": 4,
+      "levels": [
+        {
+          "pop": 3,
+          "_params": [
+            0.5
+          ]
+        },
+        {
+          "pop": 5,
+          "_params": [
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 5,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            12.0
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            28.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 6,
+      "levels": [
+        {
+          "pop": 1,
+          "_params": [
+            0.3
+          ]
+        }
+      ]
+    },
+    {
+      "type": 7,
+      "levels": [
+        {
+          "pop": 3,
+          "_params": [
+            0.05
+          ]
+        },
+        {
+          "pop": 5,
+          "_params": [
+            0.1
+          ]
+        }
+      ]
+    },
+    {
+      "type": 8,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            20.0
+          ]
+        },
+        {
+          "pop": 3,
+          "_params": [
+            30.0
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            60.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 9,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            5.0
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            10.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 10,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            5.0
+          ]
+        },
+        {
+          "pop": 5,
+          "_params": [
+            15.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 11,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            15.0
+          ]
+        },
+        {
+          "pop": 4,
+          "_params": [
+            50.0
+          ]
+        }
+      ]
+    },
+    {
+      "type": 12,
+      "levels": [
+        {
+          "pop": 2,
+          "_params": [
+            0.2
+          ]
+        },
+        {
+          "pop": 3,
+          "_params": [
+            0.35
+          ]
+        }
+      ]
+    }
+  ]
+}

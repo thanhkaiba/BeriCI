@@ -26,7 +26,7 @@ public class RenderAllConfig : MonoBehaviour
         Debug.Log("RenderConfig " + src + " " + file_name);
         SailorConfig a = Resources.Load<SailorConfig>(src);
         string json = a.Serialize(a);
-        string filesrc = "Assets/"+ file_name + ".json";
+        string filesrc = "Assets/Config/json/Sailors" + file_name + ".json";
         File.WriteAllText(filesrc, "");
         StreamWriter writer = new StreamWriter(filesrc, true);
         writer.WriteLine(json);
@@ -38,7 +38,7 @@ public class RenderAllConfig : MonoBehaviour
         Debug.Log("RenderConfig " + src + " " + file_name);
         CombatConfig a = Resources.Load<CombatConfig>(src);
         string json = a.Serialize(a);
-        string filesrc = "Assets/" + file_name + ".json";
+        string filesrc = "Assets/Config/json/" + file_name + ".json";
         File.WriteAllText(filesrc, "");
         StreamWriter writer = new StreamWriter(filesrc, true);
         writer.WriteLine(json);
@@ -49,7 +49,7 @@ public class RenderAllConfig : MonoBehaviour
         Debug.Log("RenderConfig " + src + " " + file_name);
         ContainerClassBonus a = Resources.Load<ContainerClassBonus>(src);
         string json = a.Serialize(a);
-        string filesrc = "Assets/" + file_name + ".json";
+        string filesrc = "Assets/Config/json/" + file_name + ".json";
         File.WriteAllText(filesrc, "");
         StreamWriter writer = new StreamWriter(filesrc, true);
         writer.WriteLine(json);

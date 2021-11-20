@@ -204,7 +204,7 @@ public class CombatState : MonoBehaviour
             int speedNeed_2 = sailor2.GetSpeedNeeded();
             if (speedNeed_1 < speedNeed_2) return -1;
             if (speedNeed_1 > speedNeed_2) return 1;
-            if ( string.Compare(sailor1.Model.id, sailor2.Model.id, StringComparison.Ordinal) > 0) return -1;
+            if ( string.Compare(sailor1.Model.id, sailor2.Model.id, StringComparison.Ordinal) > 0) return 1;
             else return 1;
         });
         return result;
