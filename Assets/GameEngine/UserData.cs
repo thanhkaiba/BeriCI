@@ -88,7 +88,12 @@ public class UserData : Singleton<UserData>
 
     public string GetCurrentStaminaFormat()
     {
-        return  $"{Stamina}/{StaminaConfig.max_stamina}";
+        return  GetStaminaFormat(Stamina);
+    }
+
+    public string GetStaminaFormat(int stamina)
+    {
+        return $"{stamina}/{StaminaConfig.max_stamina}";
     }
 
     public bool IsEnoughBeri(long beri)

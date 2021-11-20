@@ -1,4 +1,6 @@
-﻿namespace Piratera.Utils
+﻿using System.Text.RegularExpressions;
+
+namespace Piratera.Utils
 {
     
 public static class StringUtils
@@ -17,6 +19,9 @@ public static class StringUtils
 
         return source.Substring(0, maxLength - 3) + "...";
     }
+    //public static string AddComma(string x, char sign = ',') => Regex.Replace(x, "\B(?= (\d{ 3})+(?!\d))", RegexOptions.Multiline);
+
+
 }
 
 }

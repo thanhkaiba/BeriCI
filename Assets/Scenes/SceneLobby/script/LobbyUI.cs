@@ -68,8 +68,9 @@ public class LobbyUI : MonoBehaviour
 		userExp.DOValue(UserData.Instance.GetExpProgress(), 0.6f);
 		userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
 		userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
-		userBeri.DOText(UserData.Instance.Beri.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.InOutCubic);
-		userStamina.DOText(UserData.Instance.GetCurrentStaminaFormat(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.InOutCubic);
+
+		DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => ((int)x).ToString());
+		DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
 	}
 
 	void StartLoadAvatar(string url)
