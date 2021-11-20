@@ -2388,6 +2388,8 @@ MonoBehaviour:
   rightButtons:
   - {fileID: 453471353}
   - {fileID: 532395524}
+  buttonFight: {fileID: 1830954499}
+  background: {fileID: 397020118}
 --- !u!4 &1521152365
 Transform:
   m_ObjectHideFlags: 0
