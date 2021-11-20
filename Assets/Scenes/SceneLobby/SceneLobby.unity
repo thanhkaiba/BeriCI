@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.3587269, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -416,7 +416,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.811
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -490,7 +490,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100/100
+  m_Text: 0/200
 --- !u!222 &105141831
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1079,8 +1079,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.08046012, y: 0.63600004}
   m_AnchorMax: {x: 0.08046012, y: 0.63600004}
-  m_AnchoredPosition: {x: 27.005615, y: 13.192024}
-  m_SizeDelta: {x: 326, y: 142}
+  m_AnchoredPosition: {x: 25.506, y: 21.6692}
+  m_SizeDelta: {x: 304.4495, y: 97.3597}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &559460686
 MonoBehaviour:
@@ -1115,7 +1115,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: BRUCE.W
+  m_Text: 
 --- !u!222 &559460687
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1194,7 +1194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 20
+  m_Text: 1
 --- !u!222 &616054854
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2382,6 +2382,12 @@ MonoBehaviour:
   userStamina: {fileID: 105141830}
   userStaminaCountDown: {fileID: 1143702403}
   userExp: {fileID: 81704947}
+  leftButtons:
+  - {fileID: 8697842}
+  - {fileID: 1307905999}
+  rightButtons:
+  - {fileID: 453471353}
+  - {fileID: 532395524}
 --- !u!4 &1521152365
 Transform:
   m_ObjectHideFlags: 0
@@ -2796,7 +2802,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 100
+  m_Text: 0
 --- !u!222 &1748305015
 CanvasRenderer:
   m_ObjectHideFlags: 0

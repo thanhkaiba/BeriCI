@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Piratera.GUI;
 using System;
 using System.Collections;
@@ -5,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Piratera.Utils;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -34,6 +36,12 @@ public class LobbyUI : MonoBehaviour
 	[SerializeField]
 	private Slider userExp;
 
+	[SerializeField]
+	private Button[] leftButtons;
+
+	[SerializeField]
+	private Button[] rightButtons;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -41,6 +49,7 @@ public class LobbyUI : MonoBehaviour
 		StartLoadAvatar(UserData.Instance.Avatar);
 		UpdateUserInfo();
 		GameEvent.UserDataChange.AddListener(UpdateUserInfo);
+		RunAppearAction();
 	}
 
     private void OnDestroy()
@@ -50,11 +59,11 @@ public class LobbyUI : MonoBehaviour
 
     void UpdateUserInfo()
     {
-		userName.text = UserData.Instance.Username;
-		userLevel.text = "" + UserData.Instance.Level;
-		userBeri.text = "" + UserData.Instance.Beri;
-		userStamina.text = "" + UserData.Instance.Stamina;
-		userExp.value = UserData.Instance.GetExpProgress();
+		userExp.DOValue(UserData.Instance.GetExpProgress(), 0.6f);
+		userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
+		userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
+		userBeri.DOText(UserData.Instance.Beri.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.InOutCubic);
+		userStamina.DOText(UserData.Instance.GetCurrentStaminaFormat(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.InOutCubic);
 	}
 
 	void StartLoadAvatar(string url)
@@ -111,6 +120,23 @@ public class LobbyUI : MonoBehaviour
         {
 			userStaminaCountDown.text = "00:06:01";
 
+		}
+	}
+
+	private void RunAppearAction()
+    {
+
+        foreach (Button button in leftButtons)
+        {
+
+			DoTweenUtils.FadeAppearX(button, -Screen.width/2, 1f);
+			
+			
+        }
+
+		foreach (Button button in rightButtons)
+		{
+			DoTweenUtils.FadeAppearX(button, Screen.width/2, 1f);
 		}
 	}
 }
