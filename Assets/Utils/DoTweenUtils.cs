@@ -83,7 +83,7 @@ namespace Piratera.Utils
             {
                 oldValue = x;
                 nodeText.text = transform(oldValue);
-            }, newValue, actionTime));
+            }, newValue - oldValue, actionTime));
 
             s.Insert(0, nodeText.transform.DOScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f)).SetRelative();
             s.Append(nodeText.transform.DOScale(new Vector3(-0.2f, -0.2f, -0.2f), 0.2f)).SetRelative();

@@ -25,7 +25,7 @@ namespace Piratera.GUI
 
         public GameObject ShowPopupNotification(string text)
         {
-            GameObject gameObject = AddGui<PopupNotification>("GUI/Prefap/PopupNotificaiton", LayerId.POPUP);
+            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotificaiton", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text);
             return gameObject;
@@ -33,7 +33,7 @@ namespace Piratera.GUI
 
         public GameObject ShowPopupNotification(string text, PopupNotificationOKDelegate oKDelegate)
         {
-            GameObject gameObject = AddGui<PopupNotification>("GUI/Prefap/PopupNotificaiton", LayerId.POPUP);
+            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotificaiton", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text, oKDelegate);
             return gameObject;
@@ -43,7 +43,7 @@ namespace Piratera.GUI
         {
             if (show)
             {
-                AddGui<GuiWaiting>("GUI/Prefap/GuiWaiting", LayerId.LOADING);
+                AddGui<GuiWaiting>("Prefap/GuiWaiting", LayerId.LOADING);
             } else
             {
                 DestroyGui<GuiWaiting>();
