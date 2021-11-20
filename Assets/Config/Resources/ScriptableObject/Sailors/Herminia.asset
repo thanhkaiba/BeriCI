@@ -31,7 +31,7 @@ MonoBehaviour:
   armor: 10
   magic_resist: 10
   attack_type: 1
-  classes: 
+  classes: 03000000
   skill_name: 
   start_fury: 0
   max_fury: 10

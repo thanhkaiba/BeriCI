@@ -95,9 +95,9 @@ public class Helti : CombatSailor
         wind.transform.position = targetPos;
         wind.transform.localScale = new Vector3(cs.team == Team.A ? 2.0f : -2.0f, 2.0f, 2.0f);
 
-        var listHighlight = new List<CombatSailor>() { this };
+        //var listHighlight = new List<CombatSailor>() { this };
         //listHighlight.AddRange(listTargets);
-        CombatState.Instance.HighlightListSailor(listHighlight, 0.5f);
+        CombatState.Instance.HighlightSailor2Step(this, listTargets, 0.45f, 2.5f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));

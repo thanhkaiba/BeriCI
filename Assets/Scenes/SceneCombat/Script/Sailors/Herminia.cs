@@ -90,7 +90,7 @@ public class Herminia : CombatSailor
         });
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() => target.LoseHealth(new Damage() { pure = loseHealth }));
-        return 1.7f;
+        return 2.1f;
     }
     private void ArrowTarget(Vector3 startPos, Vector3 targetPos, float flyTime, bool haveAnims = false)
     {
