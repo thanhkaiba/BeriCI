@@ -11,22 +11,28 @@ public class LoginUI : MonoBehaviour
     private Image chain;
     [SerializeField]
     private Image logo;
+    private Canvas canvas;
 
     // Start is called before the first frame update
     void Start()
     {
-		
+        canvas = FindObjectOfType<Canvas>();
 		RunAppearAction();
 	}
 
 	private void RunAppearAction()
 	{
+        float scale = canvas.transform.localScale.x;
+        float chainHeight = ((RectTransform)chain.transform).sizeDelta.y;
+        float loginBoxHeight = ((RectTransform)loginBox.transform).sizeDelta.y;
 
-        DoTweenUtils.FadeAppearY(chain, ((RectTransform)chain.transform).sizeDelta.y, 0.7f, Ease.InExpo);
 
 
-        DoTweenUtils.FadeAppearY(loginBox, ((RectTransform)chain.transform).sizeDelta.y + ((RectTransform)loginBox.transform).sizeDelta.y, 1f, Ease.OutFlash);
+        DoTweenUtils.FadeAppearY(chain,  chainHeight * scale, 0.6f, 0.2f ,Ease.OutFlash);
 
-        DoTweenUtils.FadeAppear(logo, 0.5f, 0.8f);
+
+        DoTweenUtils.FadeAppearY(loginBox, (chainHeight + loginBoxHeight) * scale, 1f, Ease.OutFlash);
+
+        DoTweenUtils.FadeAppear(logo, 0.5f, 1.2f);
     }
 }
