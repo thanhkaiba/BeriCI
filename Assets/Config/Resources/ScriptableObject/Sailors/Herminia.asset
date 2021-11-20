@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 3401150195266498147, guid: 19bf27a0d8128ca4d8c6f5133cd1cae6, type: 3}
   avatar: {fileID: 21300000, guid: 09a258d0c91e3d94daf23f5a156565b4, type: 3}
-  root_name: Root
+  root_name: Herminia
   rank: 0
   power_base: 50
   power_base_step: 0
@@ -22,7 +22,6 @@ MonoBehaviour:
   power_plv_step: 0
   crit: 0
   crit_damage: 0
-  block_change: 0
   health_base: 260
   health_base_step: 0
   health_plv: 0

@@ -67,6 +67,8 @@ public class Herminia : CombatSailor
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
         base.ProcessSkill();
+        Debug.Log("targets.Count: " + targets.Count);
+        Debug.Log("_params.Count: " + _params.Count);
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 

@@ -326,11 +326,18 @@ public class CombatState : MonoBehaviour
             if (!sailors.Contains(sailor))
             {
                 Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
-                skeleton.SetColor(new Color(0.64f, 0.64f, 0.64f));
+                skeleton.SetColor(new Color(0.5f, 0.5f, 0.5f));
                 Sequence seq = DOTween.Sequence();
                 seq.AppendInterval(time);
                 seq.AppendCallback(() => skeleton.SetColor(Color.white));
             }
         });
+
+        SpriteRenderer bg = GameObject.Find("bg").GetComponent<SpriteRenderer>();
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(bg.DOColor(new Color(0.5f, 0.5f, 0.5f), 0.2f));
+        seq.AppendInterval(time - 0.2f);
+        seq.Append(bg.DOColor(Color.white, 0.2f));
     }
 };

@@ -186,6 +186,7 @@ public class CombatMgr : MonoBehaviour
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
         //UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
+        StartCoroutine(WaitAndDo(2.0f, () => UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby") ));
     }
 
     int CalculateSpeedAddThisLoop()
