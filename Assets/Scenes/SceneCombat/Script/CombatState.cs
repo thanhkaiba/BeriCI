@@ -337,7 +337,42 @@ public class CombatState : MonoBehaviour
 
         Sequence seq = DOTween.Sequence();
         seq.Append(bg.DOColor(new Color(0.5f, 0.5f, 0.5f), 0.2f));
-        seq.AppendInterval(time - 0.2f);
+        seq.AppendInterval(time - 0.4f);
+        seq.Append(bg.DOColor(Color.white, 0.2f));
+    }
+    public void HighlightSailor2Step(CombatSailor main, List<CombatSailor> sailors, float time1, float time2)
+    {
+        var l = GetAllSailors();
+        l.ForEach(sailor =>
+        {
+            if (sailor == main) { }
+            else if (!sailors.Contains(sailor))
+            {
+                Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
+                skeleton.SetColor(new Color(0.2f, 0.2f, 0.2f));
+                Sequence seq = DOTween.Sequence();
+                seq.AppendInterval(time1);
+                seq.AppendCallback(() => skeleton.SetColor(new Color(0.5f, 0.5f, 0.5f)));
+                seq.AppendInterval(time2);
+                seq.AppendCallback(() => skeleton.SetColor(Color.white));
+            }
+            else
+            {
+                Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
+                Sequence seq = DOTween.Sequence();
+                seq.AppendCallback(() => skeleton.SetColor(new Color(0.5f, 0.5f, 0.5f)));
+                seq.AppendInterval(time1);
+                seq.AppendCallback(() => skeleton.SetColor(Color.white));
+            }
+        });
+
+        SpriteRenderer bg = GameObject.Find("bg").GetComponent<SpriteRenderer>();
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(bg.DOColor(new Color(0.2f, 0.2f, 0.2f), 0.2f));
+        seq.AppendInterval(time1 - 0.3f);
+        seq.Append(bg.DOColor(new Color(0.5f, 0.5f, 0.5f), 0.2f));
+        seq.AppendInterval(time2 - 0.3f);
         seq.Append(bg.DOColor(Color.white, 0.2f));
     }
 };
