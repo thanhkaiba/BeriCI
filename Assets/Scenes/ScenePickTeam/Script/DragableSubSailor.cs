@@ -8,16 +8,19 @@ public class DragableSubsailor : DragableSailor
     private SubSailorIcon subSailorIcon;
     private Sailor swapSailor;
     private GameObject model;
+    private Canvas canvas;
 
     private void Start()
     {
         boxAround = GetComponent<BoxCollider>();
         sailor = GetComponent<Sailor>();
+        canvas = FindObjectOfType<Canvas>();
 
     }
 
     public void SetStartPosition(Vector2 mousePosition2D, Image d, SubSailorIcon subSailorIcon)
     {
+        draging = true;
         this.subSailorIcon = subSailorIcon;
         SetSailorOpacity(0.8f);
         Transform t = transform.Find("model");
@@ -98,11 +101,11 @@ public class DragableSubsailor : DragableSailor
 
     private void Update()
     {
-
+        Debug.Log(new Vector2(Screen.width, Screen.height));
         if (Input.GetMouseButton(0))
         {
-
-            if (Input.mousePosition.y > TransformHeight)
+            Debug.Log(Input.mousePosition.y);
+            if (Input.mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
             {
                 dragImage.enabled = false;
                 model.SetActive(true);

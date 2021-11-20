@@ -14,6 +14,8 @@ public class DragableSailor : MonoBehaviour
     protected Sailor sailor;
     [SerializeField]
     protected short originIndex = -1;
+
+    protected bool draging = false;
     
 
     private Vector3 delta;
@@ -27,21 +29,31 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        SetSailorOpacity(0.8f);
-        for (short i = 0; i < slots.Length; i++)
+        if (!SquadContainer.Draging)
         {
-            slots[i].selectable = true;
-            if (slots[i].GetOwner() == sailor)
+            SetSailorOpacity(0.8f);
+            for (short i = 0; i < slots.Length; i++)
             {
-                originIndex = i;
+                slots[i].selectable = true;
+                if (slots[i].GetOwner() == sailor)
+                {
+                    originIndex = i;
+                }
             }
-        }
-        selectingIndex = originIndex;
-        slots[originIndex].OnSelecting();
+            selectingIndex = originIndex;
+            slots[originIndex].OnSelecting();
 
-        Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        originZ = transform.position.z;
-        delta = transform.position - movePos;
+            Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            originZ = transform.position.z;
+            delta = transform.position - movePos;
+            SquadContainer.Draging = true;
+            draging = true;
+        } else
+        {
+            draging = false;
+        }
+   
+
 
     }
 
@@ -49,31 +61,39 @@ public class DragableSailor : MonoBehaviour
     protected void OnMouseDrag()
     {
 
-        Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        transform.position = movePos + delta;
-        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+        if (draging)
+        {
+            Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            transform.position = movePos + delta;
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
 
-
-        CheckNewSelecting(transform.position);
+            CheckNewSelecting(transform.position);
+        }
 
     }
 
     protected void OnMouseUp()
     {
-        SetSailorOpacity(1f);
-        for (short i = 0; i < slots.Length; i++)
+        if (draging)
         {
-            if (slots[i].GetOwner() == sailor)
+            SquadContainer.Draging = false;
+            draging = false;
+            SetSailorOpacity(1f);
+            for (short i = 0; i < slots.Length; i++)
             {
-                originIndex = i;
+                if (slots[i].GetOwner() == sailor)
+                {
+                    originIndex = i;
+                }
             }
-        }
-        if (selectingIndex >= 0)
-        {
-            OnMouseUpWithSlot();
-        } else
-        {
-            OnMouseUpEmpty();
+            if (selectingIndex >= 0)
+            {
+                OnMouseUpWithSlot();
+            }
+            else
+            {
+                OnMouseUpEmpty();
+            }
         }
     }
 
