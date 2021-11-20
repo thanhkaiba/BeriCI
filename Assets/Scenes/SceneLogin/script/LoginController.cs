@@ -9,21 +9,7 @@ using Sfs2X.Entities.Data;
 public class LoginController: MonoBehaviour
 {
 
-	//----------------------------------------------------------
-	// Editor public properties
-	//----------------------------------------------------------
 
-	[Tooltip("IP address or domain name of the SmartFoxServer 2X instance")]
-	public string Host = "127.0.0.1";
-
-	[Tooltip("TCP port listened by the SmartFoxServer 2X instance; used for regular socket connection in all builds except WebGL")]
-	public int TcpPort = 9933;
-
-	[Tooltip("WebSocket port listened by the SmartFoxServer 2X instance; used for in WebGL build only")]
-	public int WSPort = 8080;
-
-	[Tooltip("Name of the SmartFoxServer 2X Zone to join")]
-	public string Zone = "Piratera";
 
 	//----------------------------------------------------------
 	// UI elements

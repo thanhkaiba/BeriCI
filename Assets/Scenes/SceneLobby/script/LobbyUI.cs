@@ -42,6 +42,12 @@ public class LobbyUI : MonoBehaviour
 	[SerializeField]
 	private Button[] rightButtons;
 
+	[SerializeField]
+	private Button buttonFight;
+
+	[SerializeField]
+	private Image background;
+
 	// Start is called before the first frame update
 	void Start()
     {
@@ -118,7 +124,7 @@ public class LobbyUI : MonoBehaviour
 			userStaminaCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
 		} else
         {
-			userStaminaCountDown.text = "00:06:01";
+			userStaminaCountDown.text = "";
 
 		}
 	}
@@ -126,17 +132,23 @@ public class LobbyUI : MonoBehaviour
 	private void RunAppearAction()
     {
 
+		Vector3 originScale = background.transform.localScale;
+		background.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+		background.transform.DOScale(originScale, 0.4f);
+		
         foreach (Button button in leftButtons)
         {
 
-			DoTweenUtils.FadeAppearX(button, -Screen.width/2, 1f);
+			DoTweenUtils.FadeAppearX(button, -Screen.width/2, 1f, UnityEngine.Random.Range(0.4f, 0.5f));
 			
 			
         }
 
 		foreach (Button button in rightButtons)
 		{
-			DoTweenUtils.FadeAppearX(button, Screen.width/2, 1f);
+			DoTweenUtils.FadeAppearX(button, Screen.width/2, 1f, UnityEngine.Random.Range(0.4f, 0.5f));
 		}
+
+		DoTweenUtils.ButtonBigAppear(buttonFight, 0.5f, Vector3.one ,1f);
 	}
 }

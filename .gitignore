@@ -72,3 +72,5 @@ crashlytics-build.properties
 .vs/My 3D 2D Game/v16/.suo
 Assembly-CSharp.csproj
 .vs/My 3D 2D Game/v16/.suo
+.DS_Store
+Recordings/*
