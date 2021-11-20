@@ -124,7 +124,7 @@ public class LobbyUI : MonoBehaviour
 			userStaminaCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
 		} else
         {
-			userStaminaCountDown.text = "00:06:01";
+			userStaminaCountDown.text = "";
 
 		}
 	}
