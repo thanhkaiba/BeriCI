@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 5156821089360978322, guid: b95a7d052d8163c419a51cbe57963113, type: 3}
   avatar: {fileID: 21300000, guid: ee1bc5bb98ce60b4d91fa2cdcb5fca40, type: 3}
-  root_name: Root
+  root_name: Scrub
   rank: 0
   power_base: 50
   power_base_step: 0
@@ -22,7 +22,6 @@ MonoBehaviour:
   power_plv_step: 0
   crit: 0
   crit_damage: 0
-  block_change: 0
   health_base: 320
   health_base_step: 0
   health_plv: 0
