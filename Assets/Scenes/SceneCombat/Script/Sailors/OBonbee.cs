@@ -94,18 +94,6 @@ public class Obonbee : CombatSailor
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
         });
-        seq.AppendInterval(0.5f);
-        seq.AppendCallback(() =>
-        {
-            for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
-        });
-        seq.AppendInterval(0.8f);
-        seq.AppendCallback(() =>
-        {
-            for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 4 / 10 });
-        });
 
         seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));

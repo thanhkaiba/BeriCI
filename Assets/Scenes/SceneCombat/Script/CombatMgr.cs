@@ -151,8 +151,8 @@ public class CombatMgr : MonoBehaviour
     {
         //Debug.Log("action.target.id: " + action.target);
         //Debug.Log("action.actorTeam: " + action.actorTeam);
-        Team team = yourTeamIndex != action.actorTeam ? Team.A : Team.B;
-        return combatState.GetSailor(team, action.target);
+        //Team team = yourTeamIndex != action.actorTeam ? Team.A : Team.B;
+        return combatState.GetSailor(action.target);
     }
     IEnumerator NextLoopServer(float delay)
     {
