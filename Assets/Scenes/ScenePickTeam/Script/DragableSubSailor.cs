@@ -101,10 +101,8 @@ public class DragableSubsailor : DragableSailor
 
     private void Update()
     {
-        Debug.Log(new Vector2(Screen.width, Screen.height));
         if (Input.GetMouseButton(0))
         {
-            Debug.Log(Input.mousePosition.y);
             if (Input.mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
             {
                 dragImage.enabled = false;

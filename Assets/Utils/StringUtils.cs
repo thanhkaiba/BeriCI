@@ -18,7 +18,7 @@ public static class StringUtils
         return source.Substring(0, maxLength - 3) + "...";
     }
 
-    public static string ShortNumber(float n, uint decimals = 1)
+    public static string ShortNumber(float n, uint decimals = 0)
         {
             if (n < 1e3) return n.ToString($"N{decimals}");
             if (n >= 1e3 && n < 1e6) return (n / 1e3).ToString($"N{decimals}") + "K";
@@ -31,7 +31,7 @@ public static class StringUtils
     
 
 
-    public static string ShortNumber(long n, uint decimals = 1)
+    public static string ShortNumber(long n, uint decimals = 0)
     {
         if (n < 1e3) return n.ToString($"N{decimals}");
         if (n >= 1e3 && n < 1e6) return (n / 1e3).ToString($"N{decimals}") + "K";
