@@ -66,7 +66,8 @@ public class LobbyUI : MonoBehaviour
 
     private void OnBeriChanged(long oldValue, long newValue)
     {
-		DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => ((int)x).ToString());
+		DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x));
+
 	}
 
 	private void OnStaminaChanged(int oldValue, int newValue)
@@ -105,7 +106,7 @@ public class LobbyUI : MonoBehaviour
 		userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
 		userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
 
-		DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => ((int)x).ToString());
+		DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => StringUtils.ShortNumber(x));
 		DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
 	}
 
