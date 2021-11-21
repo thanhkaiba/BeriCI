@@ -23,7 +23,12 @@ namespace Piratera.GUI
             UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
             textStaminaValue.text = "" + staminaConfig.statmina_buy_value;
             UpdateCurrentStamina();
-            GameEvent.UserDataChange.AddListener(UpdateCurrentStamina);
+            GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
+        }
+
+        private void UpdateCurrentStamina(int arg0, int arg1)
+        {
+            UpdateCurrentStamina();
         }
 
         public void UpdateCurrentStamina()
@@ -72,6 +77,7 @@ namespace Piratera.GUI
         public void OnClose()
         {
             Destroy(gameObject);
+            GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
         }
 
         public void OnBuyStamina()

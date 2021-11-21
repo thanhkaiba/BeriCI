@@ -10,7 +10,7 @@ public class CrewData : Singleton<CrewData>
     protected override void OnAwake()
     {
         ResetData();
-        GameEvent.SquadChange.AddListener(OnUpdateSquad);
+        GameEvent.SquadChanged.AddListener(OnUpdateSquad);
     }
 
     private void OnUpdateSquad()
@@ -52,7 +52,7 @@ public class CrewData : Singleton<CrewData>
     {
         if (FightingTeam.Swap(sailorA, sailorB))
         {
-            GameEvent.SquadChange.Invoke();
+            GameEvent.SquadChanged.Invoke();
         }
 
     }
@@ -66,7 +66,7 @@ public class CrewData : Singleton<CrewData>
 
         if (FightingTeam.Occupie(sailorId, slot))
         {
-            GameEvent.SquadChange.Invoke();
+            GameEvent.SquadChanged.Invoke();
         }
 
     }
@@ -80,7 +80,7 @@ public class CrewData : Singleton<CrewData>
         
         if (FightingTeam.Replace(subSailor, slot))
         {
-            GameEvent.SquadChange.Invoke();
+            GameEvent.SquadChanged.Invoke();
         }
     }
 

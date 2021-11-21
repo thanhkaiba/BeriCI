@@ -1,23 +1,26 @@
 ﻿
+using System.Collections.Generic;
 using Sfs2X.Entities;
 using UnityEngine;
+
+public class UserInfoPropertiesKey
+{
+
+    public const string UID = "uid";
+    public const string USERNAME = "username";
+    public const string BERI = "beri";
+    public const string STAMINA = "stamina";
+    public const string LAST_COUNT = "last_count";
+    public const string EXP = "exp";
+    public const string LEVEL = "level";
+    public const string AVATAR = "avatar";
+    public const string TIME_BUY_STAMINA_TODAY = "time_buy_to_day";
+}
 
 public class UserData : Singleton<UserData>
 {
 
-    private class UserInforPropertiesKey
-    {
-
-        public const string UID = "uid";
-        public const string USERNAME = "username";
-        public const string BERI = "beri";
-        public const string STAMINA = "stamina";
-        public const string LAST_COUNT = "last_count";
-        public const string EXP = "exp";
-        public const string LEVEL = "level";
-        public const string AVATAR = "avatar";
-        public const string TIME_BUY_STAMINA_TODAY = "time_buy_to_day";
-    }
+   
 
     protected override void OnAwake()
     {
@@ -52,19 +55,40 @@ public class UserData : Singleton<UserData>
         return (Exp * 1.0F) / LevelConfig.GetExpNeed(Level);
     }
 
+    public void OnUserVariablesUpdate(User user, List<string> changedVars)
+    {
+
+        Avatar = user.GetVariable(UserInfoPropertiesKey.AVATAR).GetStringValue();
+        Username = user.Name;
+        Exp = (long)user.GetVariable(UserInfoPropertiesKey.EXP).GetDoubleValue();
+        Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
+        LastCountStamina = (long)user.GetVariable(UserInfoPropertiesKey.LAST_COUNT).GetDoubleValue();
+        TimeBuyStaminaToday = user.GetVariable(UserInfoPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
+        GameEvent.UserDataChanged.Invoke(changedVars);
+
+        long oldBeri = Beri;
+        Beri = (long)user.GetVariable(UserInfoPropertiesKey.BERI).GetDoubleValue();
+
+        if (oldBeri != Beri)
+        {
+            GameEvent.UserBeriChanged.Invoke(oldBeri, Beri);
+        }
+
+        int oldStamina = Stamina;
+        Stamina = user.GetVariable(UserInfoPropertiesKey.STAMINA).GetIntValue();
+
+        if (oldStamina != Stamina)
+        {
+            GameEvent.UserStaminaChanged.Invoke(oldStamina, Stamina);
+        }
+
+    }
+
     public void OnUserVariablesUpdate(User user)
     {
 
-        Avatar = user.GetVariable(UserInforPropertiesKey.AVATAR).GetStringValue();
-        Username = user.Name;
-        Beri = (long)user.GetVariable(UserInforPropertiesKey.BERI).GetDoubleValue();
-        Stamina = user.GetVariable(UserInforPropertiesKey.STAMINA).GetIntValue();
-        Exp = (long)user.GetVariable(UserInforPropertiesKey.EXP).GetDoubleValue();
-        Level = user.GetVariable(UserInforPropertiesKey.LEVEL).GetIntValue();
-        LastCountStamina = (long)user.GetVariable(UserInforPropertiesKey.LAST_COUNT).GetDoubleValue();
-        TimeBuyStaminaToday = user.GetVariable(UserInforPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
-        GameEvent.UserDataChange.Invoke();
-   
+        OnUserVariablesUpdate(user, new List<string>());
+
     }
 
     public bool IsRecorveringStamina()
@@ -88,7 +112,12 @@ public class UserData : Singleton<UserData>
 
     public string GetCurrentStaminaFormat()
     {
-        return  $"{Stamina}/{StaminaConfig.max_stamina}";
+        return  GetStaminaFormat(Stamina);
+    }
+
+    public string GetStaminaFormat(int stamina)
+    {
+        return $"{stamina}/{StaminaConfig.max_stamina}";
     }
 
     public bool IsEnoughBeri(long beri)

@@ -1,4 +1,5 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,6 +70,38 @@ namespace Piratera.Utils
             float opacity = image.color.a;
             image.color -= new Color(0, 0, 0, opacity);
             return image.DOFade(opacity, duration).SetDelay(delay);
+        }
+
+        public static void UpdateNumber (Text nodeText, float oldValue, float newValue, float actionTime, Func<float, string> transform)
+        {
+
+            DOTween.Kill(nodeText);
+            DOTween.Kill(nodeText.transform);
+ 
+            Sequence s = DOTween.Sequence();
+            s.Insert(0, DOTween.To(() => oldValue, x =>
+            {
+                oldValue = x;
+                nodeText.text = transform(oldValue);
+            }, newValue - oldValue, actionTime));
+
+            s.Insert(0, nodeText.transform.DOScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f)).SetRelative();
+            s.Append(nodeText.transform.DOScale(new Vector3(-0.2f, -0.2f, -0.2f), 0.2f)).SetRelative();
+
+        }
+
+        public static void UpdateNumber(Text nodeText, float oldValue, float newValue, float actionTime = 1)
+        {
+
+            UpdateNumber(nodeText, oldValue, newValue, actionTime, x => x.ToString());
+
+        }
+
+        public static void UpdateNumber(Text nodeText, float oldValue, float newValue, Func<float, string> transform)
+        {
+
+            UpdateNumber(nodeText, oldValue, newValue, 1, transform);
+
         }
 
 

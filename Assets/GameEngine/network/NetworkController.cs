@@ -181,23 +181,7 @@ public class NetworkController : MonoBehaviour
 
 		SFSUser user = (SFSUser)evt.Params["user"];
 
-		if (changedVars.Contains("stamina"))
-		{
-			Debug.Log("stamina:" + user.GetVariable("stamina").GetIntValue());
-		}
-
-		if (changedVars.Contains("last_count"))
-		{
-			Debug.Log("last_count: " + user.GetVariable("last_count").GetDoubleValue());
-		}
-
-
-
-		if (changedVars.Contains("login_time"))
-		{
-			Debug.Log("login_time:" + user.GetVariable("login_time").GetDoubleValue());
-		}
-		UserData.Instance.OnUserVariablesUpdate(user);
+		UserData.Instance.OnUserVariablesUpdate(user, changedVars);
 	}
 
 	public static bool IsInitialized

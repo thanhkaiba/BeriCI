@@ -7,6 +7,8 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Piratera.Utils;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -48,28 +50,63 @@ public class LobbyUI : MonoBehaviour
 	[SerializeField]
 	private Image background;
 
-	// Start is called before the first frame update
-	void Start()
+ 
+
+    // Start is called before the first frame update
+    void Start()
     {
 		
 		StartLoadAvatar(UserData.Instance.Avatar);
 		UpdateUserInfo();
-		GameEvent.UserDataChange.AddListener(UpdateUserInfo);
+		GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
+		GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
+		GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
 		RunAppearAction();
 	}
 
-    private void OnDestroy()
+    private void OnBeriChanged(long oldValue, long newValue)
     {
-		GameEvent.UserDataChange.RemoveListener(UpdateUserInfo);
-    }
+		DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => ((int)x).ToString());
+	}
 
-    void UpdateUserInfo()
+	private void OnStaminaChanged(int oldValue, int newValue)
+	{
+		DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => UserData.Instance.GetStaminaFormat((int)x));
+	}
+
+	private void OnDestroy()
     {
+		GameEvent.UserDataChanged.RemoveListener(UpdateUserInfo);
+		GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
+		GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
+	}
+
+    void UpdateUserInfo(List<string> changedVars)
+    {
+		
+		if (changedVars.Contains(UserInfoPropertiesKey.USERNAME))
+        {
+			userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
+		}
+		if (changedVars.Contains(UserInfoPropertiesKey.LEVEL))
+		{
+			userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
+		}
+		if (changedVars.Contains(UserInfoPropertiesKey.EXP))
+		{
+			userExp.DOValue(UserData.Instance.GetExpProgress(), 0.6f);
+		}
+
+	}
+
+	void UpdateUserInfo()
+	{
 		userExp.DOValue(UserData.Instance.GetExpProgress(), 0.6f);
 		userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
 		userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
-		userBeri.DOText(UserData.Instance.Beri.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.InOutCubic);
-		userStamina.DOText(UserData.Instance.GetCurrentStaminaFormat(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.InOutCubic);
+
+		DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => ((int)x).ToString());
+		DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
 	}
 
 	void StartLoadAvatar(string url)

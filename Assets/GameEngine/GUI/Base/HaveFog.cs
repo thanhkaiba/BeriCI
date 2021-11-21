@@ -8,7 +8,7 @@ public class HaveFog : MonoBehaviour
     [SerializeField]
     private float fogOpacity = 0.5f;
     [SerializeField]
-    private bool blockTouchBehind = false;
+    private bool blockTouchBehind = true;
     void Start()
     {
         GameObject panel = new GameObject("PanelFog");

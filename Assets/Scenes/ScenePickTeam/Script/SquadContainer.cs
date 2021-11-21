@@ -31,13 +31,13 @@ public class SquadContainer : MonoBehaviour
         }
         
         OnUpdateSquad();
-        GameEvent.SquadChange.AddListener(OnUpdateSquad);
+        GameEvent.SquadChanged.AddListener(OnUpdateSquad);
 
     }
 
     private void OnDestroy()
     {
-        GameEvent.SquadChange.RemoveListener(OnUpdateSquad);
+        GameEvent.SquadChanged.RemoveListener(OnUpdateSquad);
     }
 
     public Sailor AddSubSailor(string sailorId)

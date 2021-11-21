@@ -38,6 +38,7 @@ namespace Piratera.GUI
             
             RectTransform rectTransform = panel.AddComponent<RectTransform>();
             rectTransform.sizeDelta = parentRectTransform.sizeDelta;
+            rectTransform.localScale = Vector3.one;
 
             layers.Add(panel);
         }
@@ -49,6 +50,7 @@ namespace Piratera.GUI
             if (layer != null)
             {
                 GameObject gui = Instantiate(prefap, layer.transform);
+               
                 if (guis.ContainsKey(guiId))
                 {
                     DestroyGui(guiId);
