@@ -346,13 +346,14 @@ public class NetworkController : MonoBehaviour
 
 			if (errorCode != SFSErrorCode.SUCCESS)
 			{
-				Debug.LogError($"Packet {action} Fail, Error Code: {errorCode}");
+				Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
 			}
 			OnReceiveServerAction(action, errorCode, packet);
 		}
 	}
 	public static void Send(SFSAction action, ISFSObject data)
 	{
+		Debug.Log("Send Action To Server: " + action);
 		if (sfs != null)
         {
 			data.PutInt(ACTION_INCORE, (int)action);

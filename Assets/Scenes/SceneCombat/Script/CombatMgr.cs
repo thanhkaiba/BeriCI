@@ -118,6 +118,8 @@ public class CombatMgr : MonoBehaviour
                     CombatSailor actor = GetActorAction(actionProcess);
                     CombatSailor target = GetTargetAction(actionProcess);
                     Debug.Log("actionProcess: " + actionCount);
+                    Debug.Log("actor id: " + actionProcess.actor);
+                    Debug.Log("target id: " + actionProcess.target);
                     float targetHealthLose = actionProcess._params[0];
                     float healthWildGain = 0;
                     if (actionProcess._params.Count > 1) healthWildGain = actionProcess._params[1];

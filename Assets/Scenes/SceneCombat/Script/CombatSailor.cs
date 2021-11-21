@@ -186,7 +186,7 @@ public class CombatSailor : Sailor
     public void CheckDeath()
     {
         if (IsDeath()) return;
-        Debug.Log("cs.CurHealth: " + cs.CurHealth);
+        //Debug.Log("cs.CurHealth: " + cs.CurHealth);
         if (cs.CurHealth <= 0)
         {
             AddStatus(new SailorStatus(SailorStatusType.DEATH));

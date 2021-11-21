@@ -1,5 +1,5 @@
 {
-  "root_name": "Herminia",
+  "root_name": "Scrub",
   "rank": 0,
   "power_base": 50.0,
   "power_base_step": 0.0,
@@ -7,20 +7,21 @@
   "power_plv_step": 0.0,
   "crit": 0.0,
   "crit_damage": 0.0,
-  "health_base": 260.0,
+  "health_base": 320.0,
   "health_base_step": 0.0,
   "health_plv": 0.0,
   "health_plv_step": 0.0,
-  "speed_base": 120.0,
+  "speed_base": 100.0,
   "speed_step": 0.0,
-  "armor": 10.0,
-  "magic_resist": 10.0,
-  "attack_type": 1,
-  "classes": [
-    3
-  ],
-  "skill_name": "",
+  "armor": 30.0,
+  "magic_resist": 20.0,
+  "attack_type": 0,
+  "classes": [],
+  "skill_name": "Scrub Attack",
   "start_fury": 0,
-  "max_fury": 10,
-  "skill_params": []
+  "max_fury": 20,
+  "skill_params": [
+    1.5,
+    0.5
+  ]
 }

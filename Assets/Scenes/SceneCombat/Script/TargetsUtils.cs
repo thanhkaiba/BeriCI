@@ -184,6 +184,22 @@ public class TargetsUtils
         });
         return result;
     }
+
+    public static List<CombatSailor> NearestColumn(List<CombatSailor> l)
+    {
+        var result = new List<CombatSailor>();
+        short x = 9999;
+        l.ForEach(s =>
+        {
+            if (s.cs.position.x < x) x = s.cs.position.x;
+        });
+        l.ForEach(s =>
+        {
+            if (s.cs.position.x == x) result.Add(s);
+        });
+        return result;
+    }
+
     public static Team OppositeTeam(Team t)
     {
         return (t == Team.A ? Team.B : Team.A);

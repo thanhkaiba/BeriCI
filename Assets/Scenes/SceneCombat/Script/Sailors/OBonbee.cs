@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Helti : CombatSailor
+public class Obonbee : CombatSailor
 {
     private GameObject wind;
     private Animator windAnimator;
-    public Helti()
+    public Obonbee()
     {
     }
     public override void Awake()
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
-
-        wind = Instantiate(Resources.Load<GameObject>("Characters/Helti/skill/skill"));
-        windAnimator = wind.transform.Find("eff").GetComponent<Animator>();
     }
     public override void GainFury(int value)
     {
@@ -26,9 +23,6 @@ public class Helti : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
-        Debug.Log("target: " + target);
-        Debug.Log("target id: " + target.Model.id);
-        Debug.Log("target id: " + target.Model.config_stats.root_name);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 4,
@@ -56,22 +50,15 @@ public class Helti : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float behind_damage_ratio = Model.config_stats.skill_params[1];
-        float main_damage = cs.Power * scale_damage_ratio;
-        float secondary_damage = cs.Power * behind_damage_ratio;
+        float physics_damage = cs.Power * Model.config_stats.skill_params[0];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor main_target = TargetsUtils.Melee(this, enermy);
-        List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
+        List<CombatSailor> listTargets = TargetsUtils.NearestColumn(enermy);
 
-        targets.Add(main_target.Model.id);
-        _params.Add( main_target.CalcDamageTake(new Damage() { physics = main_damage }) );
-
-        behind_targets.ForEach(t =>
+        listTargets.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = physics_damage }));
         });
 
         return ProcessSkill(targets, _params);
@@ -94,10 +81,6 @@ public class Helti : CombatSailor
             targetPos.y,
             targetPos.z - 0.1f
         );
-
-        wind.transform.position = targetPos;
-        wind.transform.localScale = new Vector3(cs.team == Team.A ? 2.0f : -2.0f, 2.0f, 2.0f);
-
         //var listHighlight = new List<CombatSailor>() { this };
         //listHighlight.AddRange(listTargets);
         CombatState.Instance.HighlightSailor2Step(this, listTargets, 0.45f, 2.5f);
@@ -110,21 +93,18 @@ public class Helti : CombatSailor
         {
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
-            windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
-            windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 4 / 10 });
-            windAnimator.SetTrigger("run");
         });
 
         seq.AppendInterval(0.8f);

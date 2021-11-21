@@ -151,4 +151,9 @@ public class LobbyUI : MonoBehaviour
 
 		DoTweenUtils.ButtonBigAppear(buttonFight, 0.5f, Vector3.one ,1f);
 	}
+
+	public void ShowGuiCheat()
+	{
+		GuiManager.Instance.AddGui<PopupCheatGame>("Cheat/PopupCheat");
+	}
 }
