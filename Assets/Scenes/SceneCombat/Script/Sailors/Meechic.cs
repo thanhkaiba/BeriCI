@@ -116,7 +116,7 @@ public class Meechic : CombatSailor
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[0] });
+            for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { physics = _params[i] });
         });
 
         seq.AppendInterval(0.3f);
