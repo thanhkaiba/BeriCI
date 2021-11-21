@@ -72,12 +72,14 @@ namespace Piratera.Utils
             return image.DOFade(opacity, duration).SetDelay(delay);
         }
 
-        public static void UpdateNumber (Text nodeText, float oldValue, float newValue, float actionTime, Func<float, string> transform)
+       
+
+        public static void UpdateNumber(Text nodeText, long oldValue, long newValue, float actionTime, Func<long, string> transform)
         {
 
             DOTween.Kill(nodeText);
             DOTween.Kill(nodeText.transform);
- 
+
             Sequence s = DOTween.Sequence();
             s.Insert(0, DOTween.To(() => oldValue, x =>
             {
@@ -90,14 +92,15 @@ namespace Piratera.Utils
 
         }
 
-        public static void UpdateNumber(Text nodeText, float oldValue, float newValue, float actionTime = 1)
+
+        public static void UpdateNumber(Text nodeText, long oldValue, long newValue, float actionTime = 1)
         {
 
             UpdateNumber(nodeText, oldValue, newValue, actionTime, x => x.ToString());
 
         }
 
-        public static void UpdateNumber(Text nodeText, float oldValue, float newValue, Func<float, string> transform)
+        public static void UpdateNumber(Text nodeText, long oldValue, long newValue, Func<long, string> transform)
         {
 
             UpdateNumber(nodeText, oldValue, newValue, 1, transform);
