@@ -154,7 +154,7 @@ public class DragableSailor : MonoBehaviour
             Spine.Skeleton skeleton = transform.GetComponentInChildren<SkeletonMecanim>().skeleton;
             Color color = skeleton.GetColor();
             skeleton.SetColor(new Color(color.r, color.g, color.b, opacity));
-        } catch (Exception e)
+        } catch 
         {
 
         }
