@@ -144,8 +144,8 @@ public class CombatMgr : MonoBehaviour
     }
     private CombatSailor GetActorAction(CombatAction action)
     {
-        Team team = yourTeamIndex == action.actorTeam ? Team.A : Team.B;
-        return combatState.GetSailor(team, action.actor);
+        //Team team = yourTeamIndex == action.actorTeam ? Team.A : Team.B;
+        return combatState.GetSailor(action.actor);
     }
     private CombatSailor GetTargetAction(CombatAction action)
     {

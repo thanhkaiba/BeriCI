@@ -69,8 +69,6 @@ public class Scrub : CombatSailor
             _params.Add(behind_target.CalcDamageTake(new Damage() { physics = secondary_damage }));
         }
 
-        
-
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
