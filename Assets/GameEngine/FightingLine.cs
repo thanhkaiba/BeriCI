@@ -98,6 +98,17 @@ public class FightingLine
         }
     }
 
+    internal bool UnEquip(string sailorId)
+    {
+        short slotIndex = SlotOf(sailorId);
+        if (slots.ContainsKey(slotIndex))
+        {
+            slots[slotIndex] = "";
+            return true;
+        }
+        return false;
+    }
+
     public bool IsInSquad(string id)
     {
         Dictionary<short, string>.ValueCollection values = slots.Values;

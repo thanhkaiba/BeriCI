@@ -140,8 +140,7 @@ public class LobbyUI : MonoBehaviour
 	}
 	public void OnStartNewGameButtonClick()
 	{
-		//SceneManager.LoadScene("SceneCombat2d");
-		NetworkController.Send(SFSAction.COMBAT_BOT);
+		SceneManager.LoadScene("SceneSelectMode");
 	}
 	public void OnButtonPickTeamClick()
 	{
