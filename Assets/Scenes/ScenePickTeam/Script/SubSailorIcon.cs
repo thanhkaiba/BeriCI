@@ -27,27 +27,23 @@ public class SubSailorIcon : MonoBehaviour
         Sailor sailor = squadContainer.AddSubSailor(model.id);
         DragableSubsailor drag = sailor.GetComponent<DragableSubsailor>();
 
-        Image dragImage = CreateDragSailorImage(model.id);
+        Image dragImage = CreateDragSailorImage(model, GetComponent<Transform>().parent.parent);
         iconSailor.SetVisible(false);
         dragImage.transform.position = iconSailor.icon.transform.position;
         drag.SetStartPosition(data.position, dragImage, this);
     }
 
    
-    private Image CreateDragSailorImage(string sailorId)
+    public static Image CreateDragSailorImage(SailorModel model, Transform parent)
     {
-        GameObject g = new GameObject("drag-" + sailorId);
+        GameObject g = new GameObject("drag-" + model.id);
         RectTransform trans = g.AddComponent<RectTransform>();
-       
         Image flyImage = g.AddComponent<Image>();
         flyImage.sprite = model.config_stats.avatar;
         flyImage.SetNativeSize();
-
-        trans.SetParent(GetComponent<Transform>().parent.parent);
-        trans.sizeDelta = iconSailor.icon.GetComponent<RectTransform>().sizeDelta;
+        trans.SetParent(parent);
         trans.localScale = Vector3.one;
-
-        flyImage.color = new Color(flyImage.color.r, flyImage.color.b, flyImage.color.g, 0.8f);
+        flyImage.color -= new Color(0, 0, 0, 0.2f);
         return flyImage;
     }
 

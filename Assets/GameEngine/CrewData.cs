@@ -1,5 +1,6 @@
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CrewData : Singleton<CrewData>
 {
@@ -15,6 +16,7 @@ public class CrewData : Singleton<CrewData>
 
     private void OnUpdateSquad()
     {
+        Debug.Log(FightingTeam.ToSFSObject().ToJson());
         NetworkController.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
     }
 
@@ -79,6 +81,19 @@ public class CrewData : Singleton<CrewData>
         }
         
         if (FightingTeam.Replace(subSailor, slot))
+        {
+            GameEvent.SquadChanged.Invoke();
+        }
+    }
+
+    public void UnEquip(string sailorId)
+    {
+        if (GetSailorModel(sailorId) == null)
+        {
+            return;
+        }
+
+        if (FightingTeam.UnEquip(sailorId))
         {
             GameEvent.SquadChanged.Invoke();
         }

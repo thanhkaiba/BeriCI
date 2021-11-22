@@ -1,36 +1,42 @@
-using Spine.Unity;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using Spine.Unity;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class DragableSailor : MonoBehaviour
 {
+    protected const int TransformHeight = 200;
     protected BoxCollider boxAround;
+    protected Canvas canvas;
     public SquadSlot[] slots { get; set; }
     [SerializeField]
     protected short selectingIndex = -1;
     protected Sailor sailor;
+    private GameObject model;
     [SerializeField]
     protected short originIndex = -1;
-
+    protected Image dragImage;
     protected bool draging = false;
     
-
     private Vector3 delta;
     private float originZ;
 
-    private void Start()
+    protected void Start()
     {
         boxAround = GetComponent<BoxCollider>();
         sailor = GetComponent<Sailor>();
+        canvas = FindObjectOfType<Canvas>();
+        Transform t = transform.Find("model");
+        if (t != null)
+        {
+            model = t.gameObject;
+        }
     }
 
     protected void OnMouseDown()
     {
         if (!SquadContainer.Draging)
         {
+            dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);
             SetSailorOpacity(0.8f);
             for (short i = 0; i < slots.Length; i++)
             {
@@ -52,8 +58,7 @@ public class DragableSailor : MonoBehaviour
         {
             draging = false;
         }
-   
-
+  
 
     }
 
@@ -63,38 +68,77 @@ public class DragableSailor : MonoBehaviour
 
         if (draging)
         {
-            Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            transform.position = movePos + delta;
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+            Vector2 mousePosition = Input.mousePosition;
+            if (mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
+            {
+                dragImage.enabled = false;
+                model.SetActive(true);
+                OnDragSailor(mousePosition);
+            } else
+            {
 
-            CheckNewSelecting(transform.position);
+                UpdateSlots(originIndex);
+                dragImage.enabled = true;
+                model.SetActive(false);
+                dragImage.transform.position = mousePosition;
+            }
+           
         }
 
     }
 
+    protected void OnDragSailor(Vector2 mousePosition)
+    {
+        Vector3 movePos = Camera.main.ScreenToWorldPoint(mousePosition);
+        transform.position = movePos + delta;
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, 0);
+
+        CheckNewSelecting(transform.position);
+    }
+
     protected void OnMouseUp()
     {
+      
         if (draging)
         {
             SquadContainer.Draging = false;
             draging = false;
-            SetSailorOpacity(1f);
-            for (short i = 0; i < slots.Length; i++)
+            if (!dragImage.enabled)
             {
-                if (slots[i].GetOwner() == sailor)
+                SetSailorOpacity(1f);
+                for (short i = 0; i < slots.Length; i++)
                 {
-                    originIndex = i;
+                    if (slots[i].GetOwner() == sailor)
+                    {
+                        originIndex = i;
+                    }
                 }
-            }
-            if (selectingIndex >= 0)
+                if (selectingIndex >= 0)
+                {
+                    OnMouseUpWithSlot();
+                }
+                else
+                {
+                    OnMouseUpEmpty();
+                }
+            } else
             {
-                OnMouseUpWithSlot();
-            }
-            else
-            {
-                OnMouseUpEmpty();
+                OnUnEquip();
             }
         }
+
+        if (dragImage != null)
+        {
+            Destroy(dragImage.gameObject);
+        }
+    }
+
+    private void OnUnEquip()
+    {
+        UpdateSlots(originIndex);
+        slots[originIndex].OnFree();
+        Destroy(gameObject);
+        CrewData.Instance.UnEquip(sailor.Model.id);
     }
 
     protected void OnMouseUpWithSlot()
@@ -138,12 +182,19 @@ public class DragableSailor : MonoBehaviour
 
     protected virtual void UpdateSlots(short newSelecting)
     {
+        // neu dang chiem 1 vi tri nao do => tra gia tri cho vi tri do
         if (selectingIndex >= 0)
         {
             slots[selectingIndex].Swap(slots[originIndex]);
         }
+
+        // doi quan tuong o vi tri moi sang vi tri ban dau cua tướng đang drag
         slots[originIndex].Swap(slots[newSelecting]);
+
+        // set trang thai cho vi tri moi
         slots[newSelecting].OnSelecting();
+
+        // luu lai vi tri moi
         selectingIndex = newSelecting;
     }
 

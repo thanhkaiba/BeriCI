@@ -3,21 +3,11 @@ using UnityEngine.UI;
 
 public class DragableSubsailor : DragableSailor
 {
-    private const int TransformHeight = 200;
-    private Image dragImage;
+   
     private SubSailorIcon subSailorIcon;
     private Sailor swapSailor;
     private GameObject model;
-    private Canvas canvas;
-
-    private void Start()
-    {
-        boxAround = GetComponent<BoxCollider>();
-        sailor = GetComponent<Sailor>();
-        canvas = FindObjectOfType<Canvas>();
-
-    }
-
+ 
     public void SetStartPosition(Vector2 mousePosition2D, Image d, SubSailorIcon subSailorIcon)
     {
         draging = true;
@@ -28,7 +18,6 @@ public class DragableSubsailor : DragableSailor
         {
             model = t.gameObject;
         }
-
         dragImage = d;
 
         Vector3 startPos = Camera.main.ScreenToWorldPoint(mousePosition2D);
@@ -103,11 +92,12 @@ public class DragableSubsailor : DragableSailor
     {
         if (Input.GetMouseButton(0))
         {
-            if (Input.mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
+            Vector2 mousePosition = Input.mousePosition;
+            if (mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
             {
                 dragImage.enabled = false;
                 model.SetActive(true);
-                OnMouseDrag();
+                OnDragSailor(mousePosition);
 
             }
             else
@@ -123,7 +113,7 @@ public class DragableSubsailor : DragableSailor
                 }
                 dragImage.enabled = true;
                 model.SetActive(false);
-                dragImage.transform.position = Input.mousePosition;
+                dragImage.transform.position = mousePosition;
             } 
         } else if (Input.GetMouseButtonUp(0))
         {
