@@ -32,7 +32,7 @@ public class Obonbee : CombatSailor
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.55f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return 0.6f;
+        return 0.5f;
     }
     public override void SetFaceDirection()
     {

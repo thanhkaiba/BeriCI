@@ -68,28 +68,45 @@ public class GameUtils : UnityEngine.Object
 
         return item;
     }
-    public static List<ClassBonusItem> CalculateClassBonus(List<SailorModel> sailorModels)
+    public static List<ClassBonusItem> CalculateClassBonus(List<SailorModel> t)
     {
         List<ClassBonusItem> result = new List<ClassBonusItem>();
-
         List<int> typeCount = new List<int>();
+        int assassinCount = 0;
         for (int i = 0; i < Enum.GetNames(typeof(SailorClass)).Length; i++)
         {
             typeCount.Add(0);
         }
-        sailorModels.ForEach(model =>
+
+        foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
         {
-            foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
+            List<string> countedSailor = new List<string>();
+            t.ForEach(model =>
             {
-                if (model.HaveType(type)) typeCount[(int)type] += 1;
-            }
+                string sailorName = model.config_stats.root_name;
+                // moi loai sailor chi tinh 1 lan
+                if (model.config_stats.HaveType(type) && !countedSailor.Contains(sailorName))
+                {
+                    typeCount[(int)type] += 1;
+                    countedSailor.Add(sailorName);
+                }
+            });
+        }
+
+        t.ForEach(model =>
+        {
+            // Dem so assassin, neu >= 2 thi khong kich hoat
+            if (model.config_stats.HaveType(SailorClass.ASSASSIN)) assassinCount++;
         });
 
         foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))
         {
+            // nhieu hon 1 assassin thi skip tinh assassin
+            if (type == SailorClass.ASSASSIN && assassinCount > 1) continue;
+
             ContainerClassBonus config = GlobalConfigs.ClassBonus;
             if (!config.HaveBonus(type)) continue;
-            var milestones = config.GetMilestones(type);
+            List<int> milestones = config.GetMilestones(type);
             for (int level = milestones.Count - 1; level >= 0; level--)
             {
                 int popNeed = milestones[level];
