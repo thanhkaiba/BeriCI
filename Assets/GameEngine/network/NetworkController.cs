@@ -360,8 +360,11 @@ public class NetworkController : MonoBehaviour
 		
 			case SFSAction.COMBAT_BOT:
 				{
-					TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-					SceneManager.LoadScene("SceneCombat2D");
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
+						SceneManager.LoadScene("SceneCombat2D");
+					}
 					break;
 				}
 			case SFSAction.LOAD_LIST_HERO_INFO:
