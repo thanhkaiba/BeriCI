@@ -94,6 +94,11 @@ public class CombatState : MonoBehaviour
     void CreateTeamA()
     {
         CreateCombatSailor("Obonbee", new CombatPosition(2, 2), Team.A);
+        CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
+
+        CreateCombatSailor("Herminia", new CombatPosition(2, 0), Team.A);
+
+        CreateCombatSailor("Meechic", new CombatPosition(2, 1), Team.A);
     }
     void CreateTeamB()
     {
@@ -101,7 +106,7 @@ public class CombatState : MonoBehaviour
         CreateCombatSailor("Herminia", new CombatPosition(2, 0), Team.B);
 
         CreateCombatSailor("Scrub", new CombatPosition(0, 2), Team.B);
-        CreateCombatSailor("Herminia", new CombatPosition(2, 2), Team.B);
+        CreateCombatSailor("Meechic", new CombatPosition(2, 2), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
@@ -213,16 +218,17 @@ public class CombatState : MonoBehaviour
     private List<ClassBonusItem> CalculateClassBonus(List<CombatSailor> t)
     {
         List<ClassBonusItem> result = new List<ClassBonusItem>();
-        List<string> countedSailor = new List<string>();
         List<int> typeCount = new List<int>();
         int assassinCount = 0;
         for (int i = 0; i < Enum.GetNames(typeof(SailorClass)).Length; i++)
         {
             typeCount.Add(0);
         }
-        t.ForEach(sailor =>
+        
+        foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
         {
-            foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
+            List<string> countedSailor = new List<string>();
+            t.ForEach(sailor =>
             {
                 string sailorName = sailor.Model.config_stats.root_name;
                 // moi loai sailor chi tinh 1 lan
@@ -231,10 +237,13 @@ public class CombatState : MonoBehaviour
                     typeCount[(int)type] += 1;
                     countedSailor.Add(sailorName);
                 }
-            }
+            });
+        }
+
+        t.ForEach(sailor =>
+        {
             // Dem so assassin, neu >= 2 thi khong kich hoat
             if (sailor.cs.HaveType(SailorClass.ASSASSIN)) assassinCount++;
-
         });
 
         foreach (SailorClass type in Enum.GetValues(typeof(SailorClass)))

@@ -16,7 +16,9 @@
   "armor": 20.0,
   "magic_resist": 20.0,
   "attack_type": 0,
-  "classes": [],
+  "classes": [
+    2
+  ],
   "skill_name": "ObonbeeSkill",
   "start_fury": 0,
   "max_fury": 20,

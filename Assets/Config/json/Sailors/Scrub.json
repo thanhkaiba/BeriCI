@@ -16,7 +16,9 @@
   "armor": 30.0,
   "magic_resist": 20.0,
   "attack_type": 0,
-  "classes": [],
+  "classes": [
+    8
+  ],
   "skill_name": "Scrub Attack",
   "start_fury": 0,
   "max_fury": 20,

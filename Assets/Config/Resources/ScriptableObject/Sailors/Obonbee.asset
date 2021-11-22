@@ -31,7 +31,7 @@ MonoBehaviour:
   armor: 20
   magic_resist: 20
   attack_type: 0
-  classes: 
+  classes: 02000000
   skill_name: ObonbeeSkill
   start_fury: 0
   max_fury: 20

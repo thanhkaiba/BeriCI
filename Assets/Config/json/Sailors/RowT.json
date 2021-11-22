@@ -16,7 +16,9 @@
   "armor": 10.0,
   "magic_resist": 10.0,
   "attack_type": 1,
-  "classes": [],
+  "classes": [
+    4
+  ],
   "skill_name": "RowTBoom",
   "start_fury": 0,
   "max_fury": 0,
