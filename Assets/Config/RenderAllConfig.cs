@@ -14,6 +14,7 @@ public class RenderAllConfig : MonoBehaviour
         RenderSailorConfig("ScriptableObject/Sailors/Herminia", "Herminia");
         RenderSailorConfig("ScriptableObject/Sailors/Obonbee", "Obonbee");
         RenderSailorConfig("ScriptableObject/Sailors/Scrub", "Scrub");
+        RenderSailorConfig("ScriptableObject/Sailors/RowT", "RowT");
         RenderCombatConfig("ScriptableObject/Combat", "Combat");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
     }

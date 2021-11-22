@@ -12,7 +12,7 @@
   "health_plv": 0.0,
   "health_plv_step": 0.0,
   "speed_base": 85.0,
-  "speed_step": 0.0,
+  "speed_step": 0.05,
   "armor": 20.0,
   "magic_resist": 20.0,
   "attack_type": 2,

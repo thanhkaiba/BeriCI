@@ -22,13 +22,12 @@ MonoBehaviour:
   power_plv_step: 0
   crit: 0
   crit_damage: 0
-  block_change: 0
   health_base: 190
   health_base_step: 0
   health_plv: 0
   health_plv_step: 0
   speed_base: 85
-  speed_step: 0
+  speed_step: 0.05
   armor: 0
   magic_resist: 0
   attack_type: 1

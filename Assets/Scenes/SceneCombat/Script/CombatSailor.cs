@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Newtonsoft.Json;
+using Spine.Unity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,9 +28,6 @@ public class CombatSailor : Sailor
     public CombatStats cs;
 
     public CharBarControl bar;
-    public virtual void Awake()
-    {
-    }
     public void CreateStatusBar()
     {
         var barPrefab = Resources.Load<GameObject>("characters/Bar/Bar2");
@@ -215,27 +213,21 @@ public class CombatSailor : Sailor
         // class bonus
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         bool activeMarksman = false;
+        ClassBonusItem marksman = combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
         if (cs.HaveType(SailorClass.MARKSMAN)
-            && combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN) != null)
+            && marksman != null)
         {
-            ClassBonusItem marksman = combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
-            if (marksman != null)
-            {
-                float healthRatio = config.GetParams(marksman.type, marksman.level)[0];
-                if (target.cs.GetCurrentHealthRatio() < healthRatio) activeMarksman = true;
-                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
-            }
+            float healthRatio = config.GetParams(marksman.type, marksman.level)[0];
+            if (target.cs.GetCurrentHealthRatio() < healthRatio) activeMarksman = true;
+            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
         }
         float healthGain = 0;
-        if (cs.HaveType(SailorClass.WILD))
+        ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.WILD);
+        if (cs.HaveType(SailorClass.WILD) && wild != null)
         {
-            ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.WILD);
-            if (wild != null)
-            {
-                float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
-                healthGain = percentHealthGain * cs.MaxHealth;
-                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.WILD, new List<float> { healthGain });
-            }
+            float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
+            healthGain = percentHealthGain * cs.MaxHealth;
+            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.WILD, new List<float> { healthGain });
         }
         // Deal damage
         float d = cs.Power;
@@ -260,15 +252,12 @@ public class CombatSailor : Sailor
 
         // Calc Class Active
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
-        if (cs.HaveType(SailorClass.CYBORG))
+        ClassBonusItem cyborg = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
+        if (cs.HaveType(SailorClass.CYBORG) && cyborg != null)
         {
-            ClassBonusItem berserk = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
-            if (berserk != null)
-            {
-                int furyAdd = (int) config.GetParams(berserk.type, berserk.level)[0];
-                GainFury(furyAdd);
-                CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
-            }
+            int furyAdd = (int) config.GetParams(cyborg.type, cyborg.level)[0];
+            GainFury(furyAdd);
+            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
         }
         GainHealth(wildHeal);
         // Deal damage
@@ -522,5 +511,24 @@ public class CombatSailor : Sailor
     public virtual bool CanActiveSkill(CombatState cbState)
     {
         return true;
+    }
+
+    private Color modelColor;
+    public virtual void Awake()
+    {
+        modelColor = Color.white;
+    }
+    public void DoModelColor(Color color)
+    {
+        modelColor = color;
+    }
+    private void LateUpdate()
+    {
+        var skel = modelObject.GetComponent<SkeletonMecanim>();
+        if (!skel) return;
+        Spine.Skeleton skeleton = skel.skeleton;
+        Color curColor = skeleton.GetColor();
+        if (curColor == modelColor) return;
+        skeleton.SetColor(Color.Lerp(curColor, modelColor, Mathf.PingPong(Time.time, 0.1f)));
     }
 };

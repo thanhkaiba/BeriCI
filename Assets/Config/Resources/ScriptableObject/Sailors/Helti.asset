@@ -17,17 +17,17 @@ MonoBehaviour:
   root_name: Helti
   rank: 2
   power_base: 65
-  power_base_step: 0
-  power_plv: 0
-  power_plv_step: 0
+  power_base_step: 0.25
+  power_plv: 1
+  power_plv_step: 0.001
   crit: 0
   crit_damage: 0
-  health_base: 380
-  health_base_step: 0
-  health_plv: 0
-  health_plv_step: 0
-  speed_base: 200
-  speed_step: 0
+  health_base: 320
+  health_base_step: 0.5
+  health_plv: 3
+  health_plv_step: 0.003
+  speed_base: 100
+  speed_step: 0.05
   armor: 20
   magic_resist: 20
   attack_type: 0

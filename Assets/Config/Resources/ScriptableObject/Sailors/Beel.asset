@@ -17,18 +17,17 @@ MonoBehaviour:
   root_name: Beel
   rank: 3
   power_base: 100
-  power_base_step: 0
-  power_plv: 0
-  power_plv_step: 0
+  power_base_step: 0.25
+  power_plv: 1
+  power_plv_step: 0.1
   crit: 0
   crit_damage: 0
-  block_change: 0
   health_base: 150
   health_base_step: 0
   health_plv: 0
   health_plv_step: 0
   speed_base: 95
-  speed_step: 0
+  speed_step: 0.05
   armor: 20
   magic_resist: 35
   attack_type: 1

@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class Obonbee : CombatSailor
 {
-    private GameObject wind;
-    private Animator windAnimator;
     public Obonbee()
     {
     }
@@ -30,11 +28,11 @@ public class Obonbee : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.25f);
+        seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.3f);
+        seq.AppendInterval(0.55f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return 0.5f;
+        return 0.6f;
     }
     public override void SetFaceDirection()
     {
@@ -74,29 +72,33 @@ public class Obonbee : CombatSailor
         Vector3 oriPos = transform.position;
         int offset = transform.position.x < mainTarget.transform.position.x ? -1 : 1;
 
-        var targetPos = mainTarget.transform.position;
-        targetPos.z -= 0.1f;
-        Vector3 desPos = new Vector3(
-            targetPos.x + offset * 4,
-            targetPos.y,
-            targetPos.z - 0.1f
-        );
-        //var listHighlight = new List<CombatSailor>() { this };
-        //listHighlight.AddRange(listTargets);
-        CombatState.Instance.HighlightSailor2Step(this, listTargets, 0.45f, 2.5f);
+        float y = 0;
+        float z = 0;
+        for (int i = 0; i < listTargets.Count; i++)
+        {
+            y += listTargets[i].transform.position.y;
+            z += listTargets[i].transform.position.z;
+        }
+        y /= listTargets.Count;
+        z /= listTargets.Count;
+
+        Vector3 desPos = new Vector3( listTargets[0].transform.position.x + offset * 4, y, z - 0.1f);
+        var listHighlight = new List<CombatSailor>() { this };
+        listHighlight.AddRange(listTargets);
+        CombatState.Instance.HighlightListSailor(listHighlight, 2.2f);
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.15f);
+        seq.AppendInterval(0.0f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.3f);
+        seq.AppendInterval(1.0f);
 
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
+                listTargets[i].LoseHealth(new Damage() { physics = _params[i] });
         });
 
-        seq.AppendInterval(0.8f);
+        seq.AppendInterval(0.6f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 3.2f;
+        return 2.5f;
     }
 }

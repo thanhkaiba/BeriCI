@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Obonbee
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  avatar: {fileID: 0}
+  model: {fileID: 3763836143558040732, guid: 2cc0f1a706e3406498ebac703e66245f, type: 3}
+  avatar: {fileID: 21300000, guid: 3b72b43e0798aba4ab7e858e62eb0eb1, type: 3}
   root_name: Obonbee
   rank: 1
   power_base: 55
@@ -27,7 +27,7 @@ MonoBehaviour:
   health_plv: 0
   health_plv_step: 0
   speed_base: 92
-  speed_step: 0
+  speed_step: 0.05
   armor: 20
   magic_resist: 20
   attack_type: 0

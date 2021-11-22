@@ -56,11 +56,23 @@ public class Herminia : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        var state = CombatState.Instance;
+
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
 
+        bool activeMarksman = false;
+        ClassBonusItem marksman = state.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
+        if (marksman != null)
+        {
+            float healthRatio = config.GetParams(marksman.type, marksman.level)[0];
+            if (target.cs.GetCurrentHealthRatio() < healthRatio) activeMarksman = true;
+            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
+        }
+
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { pure = cs.Power }));
+        _params.Add(target.CalcDamageTake(new Damage() { pure = cs.Power * (activeMarksman ? 1.5f : 1) }));
 
         return ProcessSkill(targets, _params);
     }
@@ -72,6 +84,7 @@ public class Herminia : CombatSailor
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 
+        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 1.4f);
         TriggerAnimation("Skill");
         Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
         relativePos.y += 1.5f;

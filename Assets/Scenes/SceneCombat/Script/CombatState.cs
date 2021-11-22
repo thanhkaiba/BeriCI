@@ -93,9 +93,7 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("Tons", new CombatPosition(2, 2), Team.A);
-        CreateCombatSailor("Helti", new CombatPosition(0, 1), Team.A);
-        CreateCombatSailor("Meechic", new CombatPosition(2, 0), Team.A);
+        CreateCombatSailor("Obonbee", new CombatPosition(2, 2), Team.A);
     }
     void CreateTeamB()
     {
@@ -326,17 +324,17 @@ public class CombatState : MonoBehaviour
             if (!sailors.Contains(sailor))
             {
                 Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
-                skeleton.SetColor(new Color(0.5f, 0.5f, 0.5f));
                 Sequence seq = DOTween.Sequence();
-                seq.AppendInterval(time);
-                seq.AppendCallback(() => skeleton.SetColor(Color.white));
+                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.4f, 0.4f, 0.4f)));
+                seq.AppendInterval(time - 0.2f);
+                seq.AppendCallback(() => sailor.DoModelColor(Color.white));
             }
         });
 
         SpriteRenderer bg = GameObject.Find("bg").GetComponent<SpriteRenderer>();
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(bg.DOColor(new Color(0.5f, 0.5f, 0.5f), 0.2f));
+        seq.Append(bg.DOColor(new Color(0.4f, 0.4f, 0.4f), 0.2f));
         seq.AppendInterval(time - 0.4f);
         seq.Append(bg.DOColor(Color.white, 0.2f));
     }
@@ -348,21 +346,18 @@ public class CombatState : MonoBehaviour
             if (sailor == main) { }
             else if (!sailors.Contains(sailor))
             {
-                Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
-                skeleton.SetColor(new Color(0.4f, 0.4f, 0.4f));
                 Sequence seq = DOTween.Sequence();
-                seq.AppendInterval(time1);
-                seq.AppendCallback(() => skeleton.SetColor(new Color(0.4f, 0.4f, 0.4f)));
-                seq.AppendInterval(time2);
-                seq.AppendCallback(() => skeleton.SetColor(Color.white));
+                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.4f, 0.4f, 0.4f)));
+                seq.AppendInterval(time1 + time2 - 0.2f);
+                seq.AppendCallback(() => sailor.DoModelColor(Color.white));
             }
             else
             {
                 Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
                 Sequence seq = DOTween.Sequence();
-                seq.AppendCallback(() => skeleton.SetColor(new Color(0.4f, 0.4f, 0.4f)));
-                seq.AppendInterval(time1);
-                seq.AppendCallback(() => skeleton.SetColor(Color.white));
+                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.4f, 0.4f, 0.4f)));
+                seq.AppendInterval(time1 - 0.2f);
+                seq.AppendCallback(() => sailor.DoModelColor(Color.white));
             }
         });
 

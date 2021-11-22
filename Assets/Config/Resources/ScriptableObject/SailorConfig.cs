@@ -11,20 +11,20 @@ public class SailorConfig : ScriptableObjectPro
     public SailorRank rank = SailorRank.S;
 
     public float power_base = 50;
-    public float power_base_step = 0;
-    public float power_plv = 0;
-    public float power_plv_step = 0;
+    public float power_base_step = 0.25f;
+    public float power_plv = 1;
+    public float power_plv_step = 0.001f;
 
     public float crit = 0;
     public float crit_damage = 0;
 
-    public float health_base = 300;
-    public float health_base_step = 0;
-    public float health_plv = 0;
-    public float health_plv_step = 0;
+    public float health_base = 250;
+    public float health_base_step = 0.5f;
+    public float health_plv = 3;
+    public float health_plv_step = 0.003f;
 
     public float speed_base = 100;
-    public float speed_step;
+    public float speed_step = 0.05f;
 
     public float armor = 10;
     public float magic_resist = 10;
