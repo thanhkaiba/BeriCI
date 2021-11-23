@@ -22,23 +22,25 @@ public class CharacterContainer : MonoBehaviour
     void RenderListSubSailor()
     {
         substituteSailors = CrewData.Instance.GetSubstituteSailors();
-
-        if (substituteSailors.Count < transform.childCount)
+        int childCount = transform.childCount;
+        if (substituteSailors.Count < childCount)
         {
-            for (int i = substituteSailors.Count; i < transform.childCount; i++)
+            for (int i = substituteSailors.Count + 1; i < childCount; i++)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
+            childCount = substituteSailors.Count;
         }
        
         for (int i = 0; i < substituteSailors.Count; i++)
         {
             GameObject imgObject;
             SubSailorIcon subSailorIcon;
-            if (i < transform.childCount)
+            if (i < childCount)
             {
                 imgObject = transform.GetChild(i).gameObject;
                 subSailorIcon = imgObject.GetComponent<SubSailorIcon>();
+                subSailorIcon.iconSailor.SetVisible(true);
             } else
             {
                 imgObject = Instantiate(iconSailorPrefap, transform);

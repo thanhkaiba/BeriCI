@@ -69,8 +69,6 @@ public class DragableSubsailor : DragableSailor
     new void OnMouseUpWithSlot()
     {
 
-        CrewData.Instance.Replace(sailor.Model.id, selectingIndex);
-
         if (swapSailor != null)
         {
             subSailorIcon.UpdateSailorImage(swapSailor.Model);
@@ -78,12 +76,14 @@ public class DragableSubsailor : DragableSailor
             Destroy(swapSailor.gameObject);
         } else
         {
-            Destroy(subSailorIcon.gameObject);
+            DestroyImmediate(subSailorIcon.gameObject);
         }
 
         DragableSailor dragable = gameObject.AddComponent<DragableSailor>();
         dragable.slots = slots;
         slots[selectingIndex].SetSelectedSailer(sailor);
+
+        CrewData.Instance.Replace(sailor.Model.id, selectingIndex);
         Destroy(this);
 
     }

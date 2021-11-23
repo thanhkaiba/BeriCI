@@ -8,11 +8,13 @@ public class SubSailorIcon : MonoBehaviour
     public SailorModel model;
     public IconSailor iconSailor;
     private SquadContainer squadContainer;
+    private Canvas canvas;
 
     void Start()
     {
         iconSailor = GetComponent<IconSailor>();
         squadContainer = FindObjectOfType<SquadContainer>();
+        canvas = FindObjectOfType<Canvas>();
 
         EventTrigger trigger = gameObject.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
@@ -27,7 +29,7 @@ public class SubSailorIcon : MonoBehaviour
         Sailor sailor = squadContainer.AddSubSailor(model.id);
         DragableSubsailor drag = sailor.GetComponent<DragableSubsailor>();
 
-        Image dragImage = CreateDragSailorImage(model, GetComponent<Transform>().parent.parent);
+        Image dragImage = CreateDragSailorImage(model, canvas.transform);
         iconSailor.SetVisible(false);
         dragImage.transform.position = iconSailor.icon.transform.position;
         drag.SetStartPosition(data.position, dragImage, this);
