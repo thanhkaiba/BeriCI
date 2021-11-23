@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
+using Random = System.Random;
 
 public class TargetsUtils
 {
@@ -198,6 +199,13 @@ public class TargetsUtils
             if (s.cs.position.x == x) result.Add(s);
         });
         return result;
+    }
+
+    public static CombatSailor Random(List<CombatSailor> l)
+    {
+        Random rnd = new Random();
+        int idx = rnd.Next(0, l.Count);
+        return l[idx];
     }
 
     public static Team OppositeTeam(Team t)

@@ -36,7 +36,7 @@ public class Herminia : CombatSailor
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            ArrowTarget(startPos, targetPos, 0.2f);
+            ArrowTarget(startPos, targetPos, 20f/Vector3.Distance(startPos, targetPos)*0.2f);
         });
         return 1.1f;
     }
@@ -99,7 +99,7 @@ public class Herminia : CombatSailor
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            ArrowTarget(startPos, targetPos, 0.3f, true);
+            ArrowTarget(startPos, targetPos, 20f / Vector3.Distance(startPos, targetPos) * 0.3f, true);
         });
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() => target.LoseHealth(new Damage() { pure = loseHealth }));
