@@ -17,28 +17,10 @@ public class RowT : CombatSailor
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
-        boneTarget = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("target");
-        boneArr = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("bow");
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
-        relativePos.y += 1.5f;
-        relativePos.x *= modelObject.transform.localScale.x;
-        TriggerAnimation("Attack");
-        boneTarget.SetLocalPosition(relativePos);
-
-        Vector3 targetPos = target.transform.position;
-        targetPos.y += 3.0f;
-
-        Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(1.0f);
-        seq.AppendCallback(() =>
-        {
-            Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            ArrowTarget(startPos, targetPos, 0.2f);
-        });
-        return 1.1f;
+        return 0f;
     }
 
     public override float TakeDamage(Damage d)
@@ -59,20 +41,13 @@ public class RowT : CombatSailor
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         var state = CombatState.Instance;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Range(this, enermy);
+        float magic_damage = cs.Power * Model.config_stats.skill_params[0];
 
-        bool activeMarksman = false;
-        ClassBonusItem marksman = state.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
-        if (marksman != null)
-        {
-            float healthRatio = config.GetParams(marksman.type, marksman.level)[0];
-            if (target.cs.GetCurrentHealthRatio() < healthRatio) activeMarksman = true;
-            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
-        }
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        CombatSailor target = TargetsUtils.Random(enermy);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { pure = cs.Power * (activeMarksman ? 1.5f : 1) }));
+        _params.Add(target.CalcDamageTake(new Damage() { magic = magic_damage }));
 
         return ProcessSkill(targets, _params);
     }
@@ -84,44 +59,21 @@ public class RowT : CombatSailor
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 
-        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 1.4f);
+        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this, target }, 2.1f);
         TriggerAnimation("Skill");
-        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
-        relativePos.y += 1.5f;
-        relativePos.x *= modelObject.transform.localScale.x;
-        boneTarget.SetLocalPosition(relativePos);
-
-        Vector3 targetPos = target.transform.position;
-        targetPos.y += 3.0f;
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(1.35f);
+        seq.AppendInterval(1.2f);
         seq.AppendCallback(() =>
         {
-            Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            ArrowTarget(startPos, targetPos, 0.3f, true);
+            Vector3 pos = target.transform.position;
+            pos.y += 5.2f;
+            pos.z -= 0.1f;
+            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/lazer/Lazer_blue"), pos, Quaternion.identity);
+            eff.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
         });
-        seq.AppendInterval(0.3f);
-        seq.AppendCallback(() => target.LoseHealth(new Damage() { pure = loseHealth }));
-        return 2.1f;
-    }
-    private void ArrowTarget(Vector3 startPos, Vector3 targetPos, float flyTime, bool haveAnims = false)
-    {
-        var arrGO = Instantiate(Resources.Load<GameObject>("Characters/Herminia/arrow/arrow"), startPos, Quaternion.identity);
-        arrGO.SetActive(false);
-
-        Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, targetPos);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-
-        float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
-        arrGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f);
-
-        Sequence seq = DOTween.Sequence();
-        seq.AppendCallback(() => arrGO.SetActive(true));
-        seq.Append(arrGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
-        seq.AppendCallback(() => Destroy(arrGO));
-
-        arrGO.transform.Find("eff").gameObject.SetActive(haveAnims);
+        seq.AppendInterval(0.45f);
+        seq.AppendCallback(() => target.LoseHealth(new Damage() { magic = loseHealth }));
+        return 2.0f;
     }
 }
