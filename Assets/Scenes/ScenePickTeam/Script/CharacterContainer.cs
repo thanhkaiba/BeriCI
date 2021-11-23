@@ -8,15 +8,47 @@ public class CharacterContainer : MonoBehaviour
     private List<SailorModel> substituteSailors;
     [SerializeField]
     private GameObject iconSailorPrefap;
+    [SerializeField]
+    private ScrollRect scrollRect;
+    [SerializeField]
+    private float speed = 600f;
+    private int scrollDirection = 0;
     void Start()
     {
         RenderListSubSailor();
         GameEvent.SquadChanged.AddListener(RenderListSubSailor);
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         GameEvent.SquadChanged.RemoveListener(RenderListSubSailor);
+    }
+
+    public void OnPointerDownRight()
+    {
+        scrollDirection = 1;
+    }
+
+    public void OnPointerDownLeft()
+    {
+        scrollDirection = -1;
+    }
+
+    public void OnPointerUp()
+    {
+        scrollDirection = 0;
+    }
+
+    private void Update()
+    {
+    
+        if (scrollDirection != 0)
+        {
+            float contentShift = speed * scrollDirection * Time.deltaTime;
+            scrollRect.content.offsetMin += new Vector2(contentShift, 0);
+            scrollRect.content.offsetMax += new Vector2(-contentShift, 0);
+           
+        }
     }
 
     void RenderListSubSailor()
@@ -45,6 +77,7 @@ public class CharacterContainer : MonoBehaviour
             {
                 imgObject = Instantiate(iconSailorPrefap, transform);
                 subSailorIcon = imgObject.AddComponent<SubSailorIcon>();
+              
             }
             subSailorIcon.model = substituteSailors[i];
             imgObject.GetComponent<IconSailor>().PresentData(substituteSailors[i]);
