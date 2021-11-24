@@ -8,13 +8,29 @@ public class RenderAllConfig : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        RenderSailorConfig("ScriptableObject/Sailors/Meechic", "Meechic");
-        RenderSailorConfig("ScriptableObject/Sailors/Helti", "Helti");
-        RenderSailorConfig("ScriptableObject/Sailors/Tons", "Tons");
-        RenderSailorConfig("ScriptableObject/Sailors/Herminia", "Herminia");
-        RenderSailorConfig("ScriptableObject/Sailors/Obonbee", "Obonbee");
-        RenderSailorConfig("ScriptableObject/Sailors/Scrub", "Scrub");
-        RenderSailorConfig("ScriptableObject/Sailors/RowT", "RowT");
+        //List<string> heroname = new List<string>()
+        //{
+        //    "Meechic",
+        //    "Helti",
+        //    "Tons",
+        //    "Herminia",
+        //    "Scrub",
+        //    "RowT",
+        //    "Sojeph",
+        //    "Alex",
+        //    "QChi",
+        //};
+
+        string[] files = System.IO.Directory.GetFiles("Assets/Config/Resources/ScriptableObject/Sailors");
+        foreach (string file in files)
+        {
+            //Do work on the files here
+            if (!file.Contains(".asset.meta") && file.Contains(".asset")) {
+                string nameAsset = file.Split('\\')[1];
+                string name = nameAsset.Split('.')[0];
+                RenderSailorConfig("ScriptableObject/Sailors/" + name, name);
+            }
+        }
         RenderCombatConfig("ScriptableObject/Combat", "Combat");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
     }
