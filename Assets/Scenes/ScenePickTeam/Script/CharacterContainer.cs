@@ -11,8 +11,10 @@ public class CharacterContainer : MonoBehaviour
     [SerializeField]
     private ScrollRect scrollRect;
     [SerializeField]
-    private float speed = 600f;
-    private int scrollDirection = 0;
+    public float Speed = 0;
+    private float Acceleration = 2f;
+    private float MaxSpeed = 600f;
+    private int direction = 0;
     void Start()
     {
         RenderListSubSailor();
@@ -26,28 +28,42 @@ public class CharacterContainer : MonoBehaviour
 
     public void OnPointerDownRight()
     {
-        scrollDirection = 1;
+        direction = 1;
+       
     }
 
     public void OnPointerDownLeft()
     {
-        scrollDirection = -1;
+        direction = -1;
+       
     }
 
     public void OnPointerUp()
     {
-        scrollDirection = 0;
+        direction = 0;
     }
 
     private void Update()
     {
-    
-        if (scrollDirection != 0)
+        
+      
+        if (direction != 0)
         {
-            float contentShift = speed * scrollDirection * Time.deltaTime;
-            scrollRect.content.offsetMin += new Vector2(contentShift, 0);
-            scrollRect.content.offsetMax += new Vector2(-contentShift, 0);
-           
+            Speed += Acceleration * direction * Time.deltaTime;
+
+            if (Mathf.Abs(Speed) >  MaxSpeed)
+            {
+                Speed = direction * MaxSpeed;
+            }
+
+            
+            float contentWidth = scrollRect.content.sizeDelta.x;
+            float curAmout = scrollRect.horizontalNormalizedPosition + Speed / contentWidth;
+            scrollRect.horizontalNormalizedPosition = Mathf.Clamp(curAmout, 0, 1);
+
+        } else
+        {
+            Speed = 0;
         }
     }
 
