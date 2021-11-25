@@ -32,6 +32,11 @@ public class TargetsUtils
         });
         return result;
     }
+    public static CombatSailor Self(CombatSailor actor)
+    {
+        CombatSailor result = actor; 
+        return result;
+    }
     public static CombatSailor Range(CombatSailor actor, List<CombatSailor> l)
     {
         CombatSailor result = null;
