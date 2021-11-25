@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Alex
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  avatar: {fileID: 0}
+  model: {fileID: 2117546187999679487, guid: 17f93e74ca7bf2841a69bf7ebe4eda6d, type: 3}
+  avatar: {fileID: 21300000, guid: d1537f7faacb8fc4896eb9ad5221c8a2, type: 3}
   root_name: Alex
   rank: 1
   power_base: 50
