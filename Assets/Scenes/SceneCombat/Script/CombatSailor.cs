@@ -401,6 +401,10 @@ public class CombatSailor : Sailor
         if (cs.CurHealth > cs.MaxHealth) cs.CurHealth = cs.MaxHealth;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
     }
+    public void GainArmor(float armor)
+    {
+        cs.BaseArmor += armor;
+    }
     public void LoseHealth(float health)
     {
         cs.CurHealth -= health;
