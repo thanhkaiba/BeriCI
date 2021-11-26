@@ -66,10 +66,7 @@ public class Tons : CombatSailor
     {
         if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1 : -1, 1, 1);
     }
-    //private void LateUpdate()
-    //{
-    //    if (cs != null) SetFaceDirection();
-    //}
+
     public override float TakeDamage(Damage d)
     {
         TriggerAnimation("Hurt");
@@ -87,45 +84,34 @@ public class Tons : CombatSailor
         float damage = cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Backstab(this, enermy);
-        List<CombatSailor> takeDamageUnit = TargetsUtils.SameRow(target, enermy);
-
-        return RunAnimation(target, takeDamageUnit, damage);
+        CombatSailor target = TargetsUtils.Melee(this, enermy);
+        return RunAnimation(target , damage);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> takeDamageUnit, float damage)
+    float RunAnimation(CombatSailor target, float damage)
     {
         TriggerAnimation("Skill");
-        Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d + 8.0f);
-        //desPos.z -= 1;
+        base.ProcessSkill();
+        Vector3 posEnemy = target.transform.position;
+        posEnemy.y += 1.7f;
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.35f);
+        seq.AppendInterval(.8f);
         seq.AppendCallback(() => {
             GameObject ex = Instantiate(
-                Resources.Load<GameObject>("Effect2D/typhoon/typhoon"),
-                Vector3.MoveTowards(oriPos, desPos, -1), modelObject.transform.rotation);
+                Resources.Load<GameObject>("Effect2D/Impact/Impact"),
+               posEnemy, modelObject.transform.rotation);
             Sequence seq2 = DOTween.Sequence();
-            seq2.AppendInterval(0.4f);
-            seq2.Append(ex.transform.DOMove(desPos, 0.5f).SetEase(Ease.InOutSine));
-            seq2.Append(ex.transform.DOMove(oriPos, 0.55f).SetEase(Ease.InOutSine));
-            seq2.AppendInterval(0.1f);
+            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendInterval(.2f);
+            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendInterval(.2f);
+            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendInterval(.2f);
+            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendInterval(.2f);
+            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendInterval(.2f);
             seq2.AppendCallback(() => Destroy(ex));
         });
-        seq.AppendInterval(2.2f);
-        seq.AppendInterval(0.62f);
-
-        Sequence seq3 = DOTween.Sequence();
-        seq3.AppendInterval(1.0f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
-        seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
-        seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
-        seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
-        seq3.AppendInterval(0.1f);
-        seq3.AppendCallback(() => takeDamageUnit.ForEach(s => s.TakeDamage(damage/5)));
-        return 2.0f;
+        return 2f;
     }
 }

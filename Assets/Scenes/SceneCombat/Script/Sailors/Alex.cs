@@ -74,6 +74,8 @@ public class Alex : CombatSailor
             Vector3 pos = transform.position;
             pos.y += 4f;
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
+            seq.AppendInterval(0.3f);
+            seq.AppendCallback(() => Destroy(eff));
         });
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.GainHealth(_params[0]));
