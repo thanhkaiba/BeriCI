@@ -1,0 +1,496 @@
+
+Q-Chi.png
+size: 892,640
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 2, 287
+  size: 176, 182
+  orig: 176, 182
+  offset: 0, 0
+  index: -1
+cloth 1
+  rotate: false
+  xy: 253, 187
+  size: 125, 111
+  orig: 126, 111
+  offset: 1, 0
+  index: -1
+cloth 2
+  rotate: false
+  xy: 375, 79
+  size: 103, 106
+  orig: 103, 106
+  offset: 0, 0
+  index: -1
+cloth 3
+  rotate: false
+  xy: 180, 301
+  size: 73, 82
+  orig: 73, 82
+  offset: 0, 0
+  index: -1
+cloth 4
+  rotate: false
+  xy: 739, 129
+  size: 34, 55
+  orig: 34, 55
+  offset: 0, 0
+  index: -1
+cloth 5
+  rotate: false
+  xy: 659, 79
+  size: 82, 48
+  orig: 82, 48
+  offset: 0, 0
+  index: -1
+cloth 6
+  rotate: false
+  xy: 2, 471
+  size: 257, 167
+  orig: 257, 167
+  offset: 0, 0
+  index: -1
+fx/Attack/Vlad_blood_attack0014
+  rotate: false
+  xy: 786, 24
+  size: 37, 31
+  orig: 256, 119
+  offset: 0, 21
+  index: -1
+fx/Attack/Vlad_blood_attack0015
+  rotate: false
+  xy: 775, 153
+  size: 43, 31
+  orig: 256, 119
+  offset: 0, 20
+  index: -1
+fx/Attack/Vlad_blood_attack0016
+  rotate: true
+  xy: 787, 310
+  size: 85, 36
+  orig: 256, 119
+  offset: 0, 14
+  index: -1
+fx/Attack/Vlad_blood_attack0017
+  rotate: false
+  xy: 667, 397
+  size: 133, 39
+  orig: 256, 119
+  offset: 5, 11
+  index: -1
+fx/Attack/Vlad_blood_attack0018
+  rotate: false
+  xy: 465, 392
+  size: 200, 62
+  orig: 256, 119
+  offset: 9, 0
+  index: -1
+fx/Attack/Vlad_blood_attack0019
+  rotate: true
+  xy: 106, 63
+  size: 222, 74
+  orig: 256, 119
+  offset: 10, 0
+  index: -1
+fx/Attack/Vlad_blood_attack0020
+  rotate: false
+  xy: 477, 456
+  size: 201, 80
+  orig: 256, 119
+  offset: 32, 3
+  index: -1
+fx/Attack/Vlad_blood_attack0021
+  rotate: false
+  xy: 261, 429
+  size: 202, 101
+  orig: 256, 119
+  offset: 35, 5
+  index: -1
+fx/Attack/Vlad_blood_attack0022
+  rotate: false
+  xy: 477, 538
+  size: 217, 100
+  orig: 256, 119
+  offset: 37, 10
+  index: -1
+fx/Attack/Vlad_blood_attack0023
+  rotate: true
+  xy: 2, 68
+  size: 217, 102
+  orig: 256, 119
+  offset: 39, 9
+  index: -1
+fx/Attack/Vlad_blood_attack0024
+  rotate: false
+  xy: 261, 532
+  size: 214, 106
+  orig: 256, 119
+  offset: 41, 10
+  index: -1
+fx/Attack/Vlad_blood_attack0025
+  rotate: true
+  xy: 487, 190
+  size: 115, 107
+  orig: 256, 119
+  offset: 139, 11
+  index: -1
+fx/Attack/Vlad_blood_attack0026
+  rotate: true
+  xy: 380, 187
+  size: 111, 105
+  orig: 256, 119
+  offset: 142, 14
+  index: -1
+fx/Attack/Vlad_blood_attack0027
+  rotate: false
+  xy: 676, 290
+  size: 109, 105
+  orig: 256, 119
+  offset: 145, 14
+  index: -1
+fx/Attack/Vlad_blood_attack0028
+  rotate: true
+  xy: 596, 198
+  size: 107, 70
+  orig: 256, 119
+  offset: 147, 17
+  index: -1
+fx/Attack/Vlad_blood_attack0029
+  rotate: false
+  xy: 383, 301
+  size: 50, 70
+  orig: 256, 119
+  offset: 174, 17
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0000
+  rotate: false
+  xy: 743, 68
+  size: 57, 59
+  orig: 57, 84
+  offset: 0, 1
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0001
+  rotate: false
+  xy: 825, 276
+  size: 54, 59
+  orig: 57, 84
+  offset: 2, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0002
+  rotate: true
+  xy: 770, 220
+  size: 52, 59
+  orig: 57, 84
+  offset: 3, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0003
+  rotate: true
+  xy: 477, 2
+  size: 53, 63
+  orig: 57, 84
+  offset: 3, 1
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0004
+  rotate: true
+  xy: 397, 375
+  size: 52, 66
+  orig: 57, 84
+  offset: 4, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0005
+  rotate: true
+  xy: 802, 57
+  size: 52, 69
+  orig: 57, 84
+  offset: 4, 1
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0006
+  rotate: true
+  xy: 814, 417
+  size: 52, 72
+  orig: 57, 84
+  offset: 5, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0007
+  rotate: false
+  xy: 422, 2
+  size: 53, 75
+  orig: 57, 84
+  offset: 4, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0008
+  rotate: false
+  xy: 825, 337
+  size: 53, 78
+  orig: 57, 84
+  offset: 3, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0009
+  rotate: true
+  xy: 101, 7
+  size: 54, 79
+  orig: 57, 84
+  offset: 2, 1
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0010
+  rotate: false
+  xy: 835, 471
+  size: 55, 81
+  orig: 57, 84
+  offset: 1, 1
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0011
+  rotate: false
+  xy: 835, 554
+  size: 55, 84
+  orig: 57, 84
+  offset: 0, 0
+  index: -1
+fx/Blood_idle/Vlad_blood_Spawn0012
+  rotate: true
+  xy: 599, 10
+  size: 55, 67
+  orig: 57, 84
+  offset: 0, 1
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0000
+  rotate: false
+  xy: 435, 300
+  size: 39, 5
+  orig: 60, 80
+  offset: 7, 5
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0001
+  rotate: true
+  xy: 814, 479
+  size: 44, 11
+  orig: 60, 80
+  offset: 6, 5
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0002
+  rotate: false
+  xy: 480, 76
+  size: 47, 22
+  orig: 60, 80
+  offset: 6, 3
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0003
+  rotate: false
+  xy: 831, 215
+  size: 59, 59
+  orig: 60, 80
+  offset: 1, 0
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0004
+  rotate: false
+  xy: 668, 10
+  size: 56, 67
+  orig: 60, 80
+  offset: 4, 0
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0005
+  rotate: true
+  xy: 820, 111
+  size: 50, 70
+  orig: 60, 80
+  offset: 6, 0
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0006
+  rotate: true
+  xy: 599, 67
+  size: 45, 58
+  orig: 60, 80
+  offset: 8, 15
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0007
+  rotate: false
+  xy: 787, 274
+  size: 36, 34
+  orig: 60, 80
+  offset: 14, 40
+  index: -1
+fx/Blood_respawn/Vlad_blood_Spawn0008
+  rotate: true
+  xy: 542, 2
+  size: 30, 33
+  orig: 60, 80
+  offset: 16, 44
+  index: -1
+fx/eff_glow_2
+  rotate: false
+  xy: 591, 307
+  size: 83, 83
+  orig: 83, 83
+  offset: 0, 0
+  index: -1
+hip
+  rotate: true
+  xy: 542, 34
+  size: 68, 55
+  orig: 68, 55
+  offset: 0, 0
+  index: -1
+left hand 1
+  rotate: true
+  xy: 261, 373
+  size: 54, 134
+  orig: 54, 134
+  offset: 0, 0
+  index: -1
+left hand 2
+  rotate: false
+  xy: 252, 79
+  size: 121, 106
+  orig: 121, 106
+  offset: 0, 0
+  index: -1
+left hand 3
+  rotate: false
+  xy: 364, 2
+  size: 56, 75
+  orig: 58, 75
+  offset: 0, 0
+  index: -1
+left leg 1
+  rotate: true
+  xy: 680, 438
+  size: 85, 132
+  orig: 85, 132
+  offset: 0, 0
+  index: -1
+left leg 2
+  rotate: true
+  xy: 182, 2
+  size: 75, 115
+  orig: 75, 115
+  offset: 0, 0
+  index: -1
+left leg 3
+  rotate: false
+  xy: 828, 163
+  size: 62, 50
+  orig: 63, 50
+  offset: 0, 0
+  index: -1
+right hand 1
+  rotate: false
+  xy: 182, 83
+  size: 68, 104
+  orig: 68, 104
+  offset: 0, 0
+  index: -1
+right hand 2
+  rotate: true
+  xy: 696, 525
+  size: 113, 137
+  orig: 113, 137
+  offset: 0, 0
+  index: -1
+right hand 3
+  rotate: false
+  xy: 659, 129
+  size: 78, 55
+  orig: 78, 55
+  offset: 0, 0
+  index: -1
+right hand 4
+  rotate: false
+  xy: 435, 314
+  size: 26, 59
+  orig: 26, 59
+  offset: 0, 0
+  index: -1
+right leg 1
+  rotate: true
+  xy: 465, 307
+  size: 83, 124
+  orig: 83, 124
+  offset: 0, 0
+  index: -1
+right leg 2
+  rotate: true
+  xy: 255, 300
+  size: 71, 126
+  orig: 83, 126
+  offset: 12, 0
+  index: -1
+right leg 3
+  rotate: true
+  xy: 480, 100
+  size: 85, 50
+  orig: 85, 50
+  offset: 0, 0
+  index: -1
+skull
+  rotate: true
+  xy: 180, 385
+  size: 84, 79
+  orig: 84, 79
+  offset: 0, 0
+  index: -1
+tentacle 1
+  rotate: false
+  xy: 668, 234
+  size: 100, 54
+  orig: 100, 54
+  offset: 0, 0
+  index: -1
+tentacle 2
+  rotate: true
+  xy: 764, 186
+  size: 32, 62
+  orig: 32, 62
+  offset: 0, 0
+  index: -1
+tentacle 3
+  rotate: false
+  xy: 299, 2
+  size: 63, 75
+  orig: 63, 75
+  offset: 0, 0
+  index: -1
+tentacle 4
+  rotate: true
+  xy: 532, 104
+  size: 84, 62
+  orig: 84, 62
+  offset: 0, 0
+  index: -1
+tentacle 5
+  rotate: false
+  xy: 726, 24
+  size: 58, 42
+  orig: 58, 42
+  offset: 0, 0
+  index: -1
+tentacle 6
+  rotate: true
+  xy: 2, 8
+  size: 58, 97
+  orig: 58, 97
+  offset: 0, 0
+  index: -1
+tentacle 7
+  rotate: false
+  xy: 182, 189
+  size: 69, 110
+  orig: 69, 110
+  offset: 0, 0
+  index: -1
+tentacle 8
+  rotate: true
+  xy: 596, 114
+  size: 82, 61
+  orig: 82, 61
+  offset: 0, 0
+  index: -1
+tentacle 9
+  rotate: false
+  xy: 668, 186
+  size: 94, 46
+  orig: 94, 46
+  offset: 0, 0
+  index: -1
