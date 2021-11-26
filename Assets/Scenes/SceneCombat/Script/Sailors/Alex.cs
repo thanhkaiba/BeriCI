@@ -21,7 +21,6 @@ public class Alex : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
-        Debug.LogError(cs.Armor);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 6,
@@ -31,9 +30,9 @@ public class Alex : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        seq.AppendInterval(.7f);
+        seq.AppendInterval(1.2f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return .8f;
+        return .9f;
     }
     public override float TakeDamage(Damage d)
     {
