@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: QChi
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  avatar: {fileID: 0}
+  model: {fileID: 3196385040236678011, guid: c704706ec9209d943b1e53af222e9d91, type: 3}
+  avatar: {fileID: 21300000, guid: d72bec73ea59fbb42849e495beb4f8f0, type: 3}
   root_name: QChi
   rank: 1
   power_base: 56
@@ -30,7 +30,7 @@ MonoBehaviour:
   speed_step: 0.05
   armor: 10
   magic_resist: 10
-  attack_type: 0
+  attack_type: 1
   classes: 0400000005000000
   skill_name: 
   start_fury: 0
