@@ -146,7 +146,7 @@ public class LobbyUI : MonoBehaviour
 	}
 	public void OnButtonPickTeamClick()
 	{
-		SceneManager.LoadScene("ScenePickTeam");
+		SceneManager.LoadScene("ScenePickTeamBattle");
 	}
 
 	public void ShowStaminaPack()

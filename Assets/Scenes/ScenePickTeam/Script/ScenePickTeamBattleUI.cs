@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneControls : MonoBehaviour
+public class ScenePickTeamBattleUI : MonoBehaviour
 {
     public void OnJoinBattle()
     {
