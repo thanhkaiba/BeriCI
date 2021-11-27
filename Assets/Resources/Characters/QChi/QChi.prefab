@@ -167,5 +167,5 @@ MonoBehaviour:
   disableRenderingOnOverride: 1
   translator:
     autoReset: 1
-    layerMixModes: 
-    layerBlendModes: 
+    layerMixModes: 00000000
+    layerBlendModes: 02000000
