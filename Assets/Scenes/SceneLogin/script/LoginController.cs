@@ -30,6 +30,9 @@ public class LoginController: MonoBehaviour
 	{
 		NetworkController.AddServerActionListener(OnReceiveServerAction);
 		enableLoginUI(true);
+
+		nameInput.text = PlayerPrefs.GetString("UserName");
+
 	}
 
 	private void OnConnection(BaseEvent evt)
@@ -76,6 +79,7 @@ public class LoginController: MonoBehaviour
 	{
 		if (errorCode == SFSErrorCode.SUCCESS)
 		{
+			PlayerPrefs.SetString("UserName", nameInput.text);
 			User user = NetworkController.Connection.MySelf;
 			GameTimeMgr.SetLoginTime((long)user.GetVariable("login_time").GetDoubleValue());
 			UserData.Instance.OnUserVariablesUpdate(user);

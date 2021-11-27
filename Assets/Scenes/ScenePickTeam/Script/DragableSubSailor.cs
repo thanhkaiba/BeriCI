@@ -17,6 +17,7 @@ public class DragableSubsailor : DragableSailor
         if (t != null)
         {
             model = t.gameObject;
+            model.SetActive(false);
         }
         dragImage = d;
 

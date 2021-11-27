@@ -18,7 +18,7 @@ public class LoginUI : MonoBehaviour
     {
         canvas = FindObjectOfType<Canvas>();
 		RunAppearAction();
-	}
+    }
 
 	private void RunAppearAction()
 	{

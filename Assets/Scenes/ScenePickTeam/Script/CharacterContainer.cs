@@ -12,7 +12,7 @@ public class CharacterContainer : MonoBehaviour
     private ScrollRect scrollRect;
     [SerializeField]
     public float Speed = 0;
-    private float Acceleration = 2f;
+    private float Acceleration = 20f;
     private float MaxSpeed = 600f;
     private int direction = 0;
     void Start()
@@ -49,7 +49,7 @@ public class CharacterContainer : MonoBehaviour
       
         if (direction != 0)
         {
-            Speed += Acceleration * direction * Time.deltaTime;
+            Speed += Acceleration * direction * Time.deltaTime ;
 
             if (Mathf.Abs(Speed) >  MaxSpeed)
             {

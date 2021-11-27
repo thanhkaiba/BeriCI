@@ -140,6 +140,8 @@ public class LobbyUI : MonoBehaviour
 	}
 	public void OnStartNewGameButtonClick()
 	{
+		OnButtonPickTeamClick();
+		return;
 		SceneManager.LoadScene("SceneSelectMode");
 	}
 	public void OnButtonPickTeamClick()
@@ -150,6 +152,16 @@ public class LobbyUI : MonoBehaviour
 	public void ShowStaminaPack()
     {
 		GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
+	}
+
+	public void OnBuyBeri()
+    {
+		Application.OpenURL("https://piratera.io/");
+	}
+
+	public void ShowCommingSoon()
+	{
+		GuiManager.Instance.ShowPopupNotification("Coming soon");
 
 	}
 
