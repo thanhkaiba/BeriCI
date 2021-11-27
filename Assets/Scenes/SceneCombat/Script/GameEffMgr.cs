@@ -77,6 +77,15 @@ public class GameEffMgr : MonoBehaviour
         ex.transform.localScale = new Vector3(flip ? 1 : -1, 1, 1);
         return ex;
     }
+    public GameObject ShowPurple(Vector3 position, bool flip)
+    {
+        GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple"), position, new Quaternion());
+        Sequence seq2 = DOTween.Sequence();
+        seq2.AppendInterval(.5f);
+        seq2.AppendCallback(() => Destroy(ex));
+        ex.transform.localScale = new Vector3(flip ? 1 : -1, 1, 1);
+        return ex;
+    }
     public void ShowExplosion(Vector3 position)
     {
         GameObject ex = Instantiate(Resources.Load<GameObject>("ParticleEffect/FireExplosionEffects/Prefabs/BigExplosion"), position, new Quaternion());

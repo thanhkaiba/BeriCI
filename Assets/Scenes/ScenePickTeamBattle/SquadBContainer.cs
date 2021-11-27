@@ -37,11 +37,9 @@ public class SquadBContainer : MonoBehaviour
     public Sailor AddSailor(string sailorId)
     {
         Sailor sailor = GameUtils.CreateSailor(sailorId);
-        DragableSailor drag = sailor.gameObject.AddComponent<DragableSailor>();
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
         sailor.transform.localPosition = Vector3.zero;
-        drag.slots = slots;
 
         return sailor;
     }
