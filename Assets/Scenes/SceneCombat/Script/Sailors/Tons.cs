@@ -84,7 +84,7 @@ public class Tons : CombatSailor
         float damage = cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Melee(this, enermy);
+        CombatSailor target = TargetsUtils.Backstab(this, enermy);
         return RunAnimation(target , damage);
     }
     float RunAnimation(CombatSailor target, float damage)
