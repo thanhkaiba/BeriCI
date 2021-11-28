@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 270321250}
   m_Layer: 5
-  m_Name: sailorB
+  m_Name: SailorB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1732,7 +1732,7 @@ PrefabInstance:
     - target: {fileID: 5254363927138611208, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
       propertyPath: m_Name
-      value: avatarA
+      value: AvatarA
       objectReference: {fileID: 0}
     - target: {fileID: 5254363927138611209, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
@@ -1779,14 +1779,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &976640438 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5254363927138611206, guid: 78004e3109f5f6444b87b9747c8f8e95,
+  m_CorrespondingSourceObject: {fileID: 3497941377210909549, guid: 78004e3109f5f6444b87b9747c8f8e95,
     type: 3}
   m_PrefabInstance: {fileID: 976640436}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: f74420b1c74f78a49985608cc6ca501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &979568861
@@ -2078,7 +2078,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1133007007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2c5e042d0d1e340b56c096e4db5e03, type: 3}
+  m_Script: {fileID: 11500000, guid: 1130d674093f5fc459dcc64a6b0484ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textCountDown: {fileID: 1490572364}
@@ -2116,7 +2116,7 @@ PrefabInstance:
     - target: {fileID: 5254363927138611208, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
       propertyPath: m_Name
-      value: avatarB
+      value: AvatarB
       objectReference: {fileID: 0}
     - target: {fileID: 5254363927138611209, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
@@ -2163,14 +2163,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1172286869 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5254363927138611206, guid: 78004e3109f5f6444b87b9747c8f8e95,
+  m_CorrespondingSourceObject: {fileID: 3497941377210909549, guid: 78004e3109f5f6444b87b9747c8f8e95,
     type: 3}
   m_PrefabInstance: {fileID: 1172286867}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: f74420b1c74f78a49985608cc6ca501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1245888907
@@ -3772,7 +3772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686014995}
   m_Layer: 5
-  m_Name: sailorA
+  m_Name: SailorA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4427,7 +4427,7 @@ GameObject:
   - component: {fileID: 1956083720}
   - component: {fileID: 1956083719}
   m_Layer: 5
-  m_Name: userNameA
+  m_Name: UserNameA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

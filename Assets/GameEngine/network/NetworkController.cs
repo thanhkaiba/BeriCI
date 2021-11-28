@@ -352,12 +352,13 @@ public class NetworkController : MonoBehaviour
 	}
 	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
 	{
-		foreach (NetworkActionListenerDelegate listener in serverActionListeners) {
+		foreach (NetworkActionListenerDelegate listener in serverActionListeners)
+		{
 			listener(action, errorCode, packet);
-        }
+		}
 		switch (action)
 		{
-		
+
 			case SFSAction.COMBAT_BOT:
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
@@ -373,6 +374,16 @@ public class NetworkController : MonoBehaviour
 					{
 						Debug.Log("Load List hero success");
 						CrewData.Instance.NewFromSFSObject(packet);
+					}
+					break;
+				}
+
+			case SFSAction.COMBAT_PREPARE:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
+						SceneManager.LoadScene("ScenePickTeamBattle");
 					}
 					break;
 				}
