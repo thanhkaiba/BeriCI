@@ -337,7 +337,7 @@ public class NetworkController : MonoBehaviour
 	}
 	public static void Send(SFSAction action, ISFSObject data)
 	{
-		Debug.Log("Send Action To Server: " + action);
+		Debug.Log("Send Action To Server: " + action + $" ({(int)action})");
 		if (sfs != null)
         {
 			data.PutInt(ACTION_INCORE, (int)action);
@@ -352,12 +352,13 @@ public class NetworkController : MonoBehaviour
 	}
 	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
 	{
-		foreach (NetworkActionListenerDelegate listener in serverActionListeners) {
+		foreach (NetworkActionListenerDelegate listener in serverActionListeners)
+		{
 			listener(action, errorCode, packet);
-        }
+		}
 		switch (action)
 		{
-		
+
 			case SFSAction.COMBAT_BOT:
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
@@ -373,6 +374,16 @@ public class NetworkController : MonoBehaviour
 					{
 						Debug.Log("Load List hero success");
 						CrewData.Instance.NewFromSFSObject(packet);
+					}
+					break;
+				}
+
+			case SFSAction.COMBAT_PREPARE:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
+						SceneManager.LoadScene("ScenePickTeamBattle");
 					}
 					break;
 				}

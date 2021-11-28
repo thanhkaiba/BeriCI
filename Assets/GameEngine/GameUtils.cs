@@ -40,7 +40,7 @@ public class GameUtils : UnityEngine.Object
         sailor.Model = model;
 
         return sailor;
-    }
+    } 
     public static Sailor CreateSailor(string id)
     {
         SailorModel sailorModel = CrewData.Instance.GetSailorModel(id);

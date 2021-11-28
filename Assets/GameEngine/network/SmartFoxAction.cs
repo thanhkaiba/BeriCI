@@ -9,6 +9,7 @@
     COMBAT_BOT = 7,
     LOAD_TEAM = 8,
     BUY_STAMINA = 9,
-
+    COMBAT_PREPARE = 10,
+    COMBAT_COMFIRM = 11,
     CHEAT_SAILOR = 101,
 }

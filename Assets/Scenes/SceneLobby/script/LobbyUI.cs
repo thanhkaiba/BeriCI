@@ -50,13 +50,16 @@ public class LobbyUI : MonoBehaviour
 	[SerializeField]
 	private Image background;
 
+	[SerializeField]
+	private LoadAvatarUtils loadAvatarUtils;
+
  
 
     // Start is called before the first frame update
     void Start()
     {
-		
-		StartLoadAvatar(UserData.Instance.Avatar);
+
+		loadAvatarUtils.LoadAvatar(userAvatar, UserData.Instance.Avatar);
 		UpdateUserInfo();
 		GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
 		GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
@@ -110,39 +113,13 @@ public class LobbyUI : MonoBehaviour
 		DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
 	}
 
-	void StartLoadAvatar(string url)
-	{
-		StartCoroutine(LoadAvatar(url));
-	}
-	IEnumerator LoadAvatar(string url)
-	{
-		using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
-		{
-			yield return uwr.SendWebRequest();
-
-			if (uwr.result != UnityWebRequest.Result.Success)
-			{
-				Debug.Log(uwr.error);
-			}
-			else
-			{
-				// Get downloaded asset bundle
-				Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-				userAvatar.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0));
-
-			}
-		}
-	}
-
 	public void OnLogoutButtonClick()
 	{
 		 NetworkController.Logout();
 	}
 	public void OnStartNewGameButtonClick()
 	{
-		OnButtonPickTeamClick();
-		return;
-		SceneManager.LoadScene("SceneSelectMode");
+		NetworkController.Send(SFSAction.COMBAT_PREPARE);
 	}
 	public void OnButtonPickTeamClick()
 	{

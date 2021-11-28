@@ -2501,6 +2501,7 @@ GameObject:
   - component: {fileID: 1521152365}
   - component: {fileID: 1521152364}
   - component: {fileID: 1521152366}
+  - component: {fileID: 1521152367}
   m_Layer: 0
   m_Name: LobbyManager
   m_TagString: Untagged
@@ -2535,6 +2536,7 @@ MonoBehaviour:
   - {fileID: 532395524}
   buttonFight: {fileID: 1830954499}
   background: {fileID: 397020118}
+  loadAvatarUtils: {fileID: 1521152367}
 --- !u!4 &1521152365
 Transform:
   m_ObjectHideFlags: 0
@@ -2559,6 +2561,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbc1509e7558e944994dd9603966cbf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1521152367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521152363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8807cf772a470634093137d1defc1d81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1586180697

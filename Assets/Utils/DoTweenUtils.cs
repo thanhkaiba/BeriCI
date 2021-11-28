@@ -14,6 +14,8 @@ namespace Piratera.Utils
             Sequence s = DOTween.Sequence();
             s.Insert(0, button.transform.DOMove(new Vector3(-distance, 0, 0), duration).SetRelative().SetEase(ease));
             s.Insert(0, FadeAppear(image, duration));
+            s.SetTarget(button);
+            s.SetLink(button.gameObject);
             return s;
         }
 
@@ -24,6 +26,7 @@ namespace Piratera.Utils
             Sequence s = DOTween.Sequence();
             s.Insert(0, button.transform.DOMove(new Vector3(0, -distance, 0), duration).SetRelative().SetEase(ease));
             s.Insert(0, FadeAppear(image, duration));
+            s.SetLink(button.gameObject);
             return s;
         }
 
@@ -33,6 +36,9 @@ namespace Piratera.Utils
             Sequence s = DOTween.Sequence();
             s.Insert(0, image.transform.DOMove(new Vector3(0, -distance, 0), duration).SetRelative().SetEase(ease));
             s.Insert(0, FadeAppear(image, duration));
+
+            s.SetTarget(image);
+            s.SetLink(image.gameObject);
             return s;
         }
 
@@ -63,6 +69,8 @@ namespace Piratera.Utils
             s.Insert(0, button.transform.DOScale(originScale, duration).SetEase(Ease.OutExpo));
             s.Insert(0, FadeAppear(image, duration));
             s.SetDelay(delay);
+            s.SetTarget(button);
+            s.SetLink(button.gameObject);
         }
 
         public static Tweener FadeAppear(Image image, float duration, float delay = 0 )
@@ -78,7 +86,6 @@ namespace Piratera.Utils
         {
 
             DOTween.Kill(nodeText);
-            DOTween.Kill(nodeText.transform);
 
             Sequence s = DOTween.Sequence();
             s.Insert(0, DOTween.To(() => oldValue, x =>
@@ -89,6 +96,8 @@ namespace Piratera.Utils
 
             s.Insert(0, nodeText.transform.DOScale(new Vector3(0.2f, 0.2f, 0.2f), 0.2f)).SetRelative();
             s.Append(nodeText.transform.DOScale(new Vector3(-0.2f, -0.2f, -0.2f), 0.2f)).SetRelative();
+            s.SetTarget(nodeText);
+            s.SetLink(nodeText.gameObject);
 
         }
 

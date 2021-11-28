@@ -509,7 +509,7 @@ GameObject:
   m_Component:
   - component: {fileID: 270321250}
   m_Layer: 5
-  m_Name: sailorB
+  m_Name: SailorB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1133007008}
         m_TargetAssemblyTypeName: ScenePickTeamBattleUI, Assembly-CSharp
-        m_MethodName: OnSurrender
+        m_MethodName: Surrender
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1232,9 +1232,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 680574077}
-  - component: {fileID: 680574076}
   - component: {fileID: 680574079}
   - component: {fileID: 680574078}
+  - component: {fileID: 680574076}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -1251,13 +1251,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 680574075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a39ad7490aa69f4380babfea18d9080, type: 3}
+  m_Script: {fileID: 11500000, guid: 597d25e7e77db8f4e8d22db7b19daf4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   iconSailorPrefap: {fileID: 7725597495769743507, guid: ac1b2cc54f78e714c94c55d0cc2e2b79,
     type: 3}
   scrollRect: {fileID: 1604218061}
   Speed: 0
+  Acceleration: 20
+  MaxSpeed: 600
+  squadAContainer: {fileID: 1745113250}
 --- !u!224 &680574077
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1732,7 +1735,7 @@ PrefabInstance:
     - target: {fileID: 5254363927138611208, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
       propertyPath: m_Name
-      value: avatarA
+      value: AvatarA
       objectReference: {fileID: 0}
     - target: {fileID: 5254363927138611209, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
@@ -1779,14 +1782,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &976640438 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5254363927138611206, guid: 78004e3109f5f6444b87b9747c8f8e95,
+  m_CorrespondingSourceObject: {fileID: 3497941377210909549, guid: 78004e3109f5f6444b87b9747c8f8e95,
     type: 3}
   m_PrefabInstance: {fileID: 976640436}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: f74420b1c74f78a49985608cc6ca501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &979568861
@@ -1844,7 +1847,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 680574076}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: CharacterContainer, Assembly-CSharp
           m_MethodName: OnPointerDownLeft
           m_Mode: 1
@@ -1860,7 +1863,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 680574076}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: CharacterContainer, Assembly-CSharp
           m_MethodName: OnPointerUp
           m_Mode: 1
@@ -2078,7 +2081,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1133007007}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf2c5e042d0d1e340b56c096e4db5e03, type: 3}
+  m_Script: {fileID: 11500000, guid: 1130d674093f5fc459dcc64a6b0484ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textCountDown: {fileID: 1490572364}
@@ -2116,7 +2119,7 @@ PrefabInstance:
     - target: {fileID: 5254363927138611208, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
       propertyPath: m_Name
-      value: avatarB
+      value: AvatarB
       objectReference: {fileID: 0}
     - target: {fileID: 5254363927138611209, guid: 78004e3109f5f6444b87b9747c8f8e95,
         type: 3}
@@ -2163,14 +2166,14 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1172286869 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5254363927138611206, guid: 78004e3109f5f6444b87b9747c8f8e95,
+  m_CorrespondingSourceObject: {fileID: 3497941377210909549, guid: 78004e3109f5f6444b87b9747c8f8e95,
     type: 3}
   m_PrefabInstance: {fileID: 1172286867}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: f74420b1c74f78a49985608cc6ca501e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1245888907
@@ -2980,7 +2983,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 680574076}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: CharacterContainer, Assembly-CSharp
           m_MethodName: OnPointerDownRight
           m_Mode: 1
@@ -2996,7 +2999,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 680574076}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: CharacterContainer, Assembly-CSharp
           m_MethodName: OnPointerUp
           m_Mode: 1
@@ -3772,7 +3775,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1686014995}
   m_Layer: 5
-  m_Name: sailorA
+  m_Name: SailorA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4023,7 +4026,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1745113249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45de89da81203b24aa292797321c373e, type: 3}
+  m_Script: {fileID: 11500000, guid: ce3ec74d7d4a3544cb0e0cfd28fd12c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   teamColor: {fileID: 1576203431}
@@ -4427,7 +4430,7 @@ GameObject:
   - component: {fileID: 1956083720}
   - component: {fileID: 1956083719}
   m_Layer: 5
-  m_Name: userNameA
+  m_Name: UserNameA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

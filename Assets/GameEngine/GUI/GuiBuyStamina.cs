@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiBuyStamina : MonoBehaviour
+    public class GuiBuyStamina : BaseGui
     {
         [SerializeField]
         private Text textBeriCost;
@@ -17,7 +17,11 @@ namespace Piratera.GUI
         [SerializeField]
         private Button buttonBuy;
 
-
+        protected override void Start()
+        {
+            base.Start();
+            InitPackData();
+        }
         public void InitPackData()
         {
             UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
@@ -69,14 +73,11 @@ namespace Piratera.GUI
 
         }
 
-        private void Start()
-        {
-            InitPackData();
-        }
+      
 
         public void OnClose()
         {
-            Destroy(gameObject);
+            RunDestroy();
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
         }
 

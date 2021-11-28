@@ -15,7 +15,7 @@ public class SquadBContainer : MonoBehaviour
             {
                 short key = FightingLine.Position2SlotIndex(i, j);
                 SquadSlot slot = slots[key];
-                string sailorId = CrewData.Instance.FightingTeam.SailorIdAt(i, j);
+                string sailorId = TeamCombatPrepareData.Instance.OpponentFightingLine.SailorIdAt(i, j);
 
                 if (sailorId.Length > 0)
                 {
@@ -36,7 +36,7 @@ public class SquadBContainer : MonoBehaviour
 
     public Sailor AddSailor(string sailorId)
     {
-        Sailor sailor = GameUtils.CreateSailor(sailorId);
+        Sailor sailor = GameUtils.CreateSailor(TeamCombatPrepareData.Instance.GetOpponentSailorModel(sailorId));
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
         sailor.transform.localPosition = Vector3.zero;

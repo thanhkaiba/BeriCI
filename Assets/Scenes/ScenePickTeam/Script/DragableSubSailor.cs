@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +8,9 @@ public class DragableSubsailor : DragableSailor
     private SubSailorIcon subSailorIcon;
     private Sailor swapSailor;
     private GameObject model;
+    public Action<string, short> ReplaceSailorAction;
+    public Func<bool> IsSquadFull;
+    public Action<GameObject> OnTransfromSailor;
  
     public void SetStartPosition(Vector2 mousePosition2D, Image d, SubSailorIcon subSailorIcon)
     {
@@ -35,7 +39,7 @@ public class DragableSubsailor : DragableSailor
         {
             if (slot.GetOwner() == null)
             {
-                slot.selectable = !CrewData.Instance.FightingTeam.IsFull();
+                slot.selectable = IsSquadFull();
             }
             else
             {
@@ -80,11 +84,11 @@ public class DragableSubsailor : DragableSailor
             DestroyImmediate(subSailorIcon.gameObject);
         }
 
-        DragableSailor dragable = gameObject.AddComponent<DragableSailor>();
-        dragable.slots = slots;
+        OnTransfromSailor(gameObject);
         slots[selectingIndex].SetSelectedSailer(sailor);
 
-        CrewData.Instance.Replace(sailor.Model.id, selectingIndex);
+
+        ReplaceSailorAction(sailor.Model.id, selectingIndex);
         Destroy(this);
 
     }

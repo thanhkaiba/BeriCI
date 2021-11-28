@@ -9,9 +9,11 @@ public class HaveFog : MonoBehaviour
     private float fogOpacity = 0.5f;
     [SerializeField]
     private bool blockTouchBehind = true;
+
+    public GameObject panel;
     void Start()
     {
-        GameObject panel = new GameObject("PanelFog");
+        panel = new GameObject("PanelFog");
         panel.transform.SetParent(transform);
         panel.transform.localPosition = Vector3.zero;
         panel.AddComponent<CanvasRenderer>();
@@ -22,5 +24,10 @@ public class HaveFog : MonoBehaviour
         image.color = new Color(0, 0, 0, fogOpacity);
         image.raycastTarget = blockTouchBehind;
 
+    }
+
+    public void VisibleFog(bool visible)
+    {
+        panel.SetActive(visible);
     }
 }

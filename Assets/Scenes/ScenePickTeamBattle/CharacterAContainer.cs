@@ -1,16 +1,15 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CharacterContainer : MonoBehaviour
+public class CharacterAContainer : MonoBehaviour
 {
     private List<SailorModel> substituteSailors;
     [SerializeField]
     private GameObject iconSailorPrefap;
     [SerializeField]
     private ScrollRect scrollRect;
-
     public float Speed = 0;
     [SerializeField]
     private float Acceleration = 20f;
@@ -19,28 +18,28 @@ public class CharacterContainer : MonoBehaviour
     private int direction = 0;
 
     [SerializeField]
-    private SquadContainer squadContainer;
+    private SquadAContainer squadAContainer;
     void Start()
     {
         RenderListSubSailor();
-        GameEvent.SquadChanged.AddListener(RenderListSubSailor);
+        GameEvent.PrepareSquadChanged.AddListener(RenderListSubSailor);
     }
 
     void OnDestroy()
     {
-        GameEvent.SquadChanged.RemoveListener(RenderListSubSailor);
+        GameEvent.PrepareSquadChanged.RemoveListener(RenderListSubSailor);
     }
 
     public void OnPointerDownRight()
     {
         direction = 1;
-       
+
     }
 
     public void OnPointerDownLeft()
     {
         direction = -1;
-       
+
     }
 
     public void OnPointerUp()
@@ -50,23 +49,24 @@ public class CharacterContainer : MonoBehaviour
 
     private void Update()
     {
-        
-      
+
+
         if (direction != 0)
         {
-            Speed += Acceleration * direction * Time.deltaTime ;
+            Speed += Acceleration * direction * Time.deltaTime;
 
-            if (Mathf.Abs(Speed) >  MaxSpeed)
+            if (Mathf.Abs(Speed) > MaxSpeed)
             {
                 Speed = direction * MaxSpeed;
             }
 
-            
+
             float contentWidth = scrollRect.content.sizeDelta.x;
             float curAmout = scrollRect.horizontalNormalizedPosition + Speed / contentWidth;
             scrollRect.horizontalNormalizedPosition = Mathf.Clamp(curAmout, 0, 1);
 
-        } else
+        }
+        else
         {
             Speed = 0;
         }
@@ -74,7 +74,7 @@ public class CharacterContainer : MonoBehaviour
 
     void RenderListSubSailor()
     {
-        substituteSailors = CrewData.Instance.GetSubstituteSailors();
+        substituteSailors = TeamCombatPrepareData.Instance.GetSubstituteSailors();
         int childCount = transform.childCount;
         if (substituteSailors.Count < childCount)
         {
@@ -84,7 +84,7 @@ public class CharacterContainer : MonoBehaviour
             }
             childCount = substituteSailors.Count;
         }
-       
+
         for (int i = 0; i < substituteSailors.Count; i++)
         {
             GameObject imgObject;
@@ -94,11 +94,13 @@ public class CharacterContainer : MonoBehaviour
                 imgObject = transform.GetChild(i).gameObject;
                 subSailorIcon = imgObject.GetComponent<SubSailorIcon>();
                 subSailorIcon.iconSailor.SetVisible(true);
-            } else
+            }
+            else
             {
                 imgObject = Instantiate(iconSailorPrefap, transform);
                 subSailorIcon = imgObject.AddComponent<SubSailorIcon>();
-                subSailorIcon.AddSubSailor = (id) => squadContainer.AddSubSailor(id);              
+                subSailorIcon.AddSubSailor = (id) => squadAContainer.AddSubSailor(id);
+
             }
             subSailorIcon.model = substituteSailors[i];
             imgObject.GetComponent<IconSailor>().PresentData(substituteSailors[i]);

@@ -17,7 +17,7 @@ public class UserAvatar : MonoBehaviour
 	}
 	private IEnumerator DoLoadAvatar(string url)
 	{
-		if (url == "") SetDefaultAvatar();
+		if (string.IsNullOrEmpty(url)) SetDefaultAvatar();
 		else using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
 		{
 			yield return uwr.SendWebRequest();
