@@ -12,10 +12,10 @@ public class GuiWaiting : MonoBehaviour
         float opacity = icon.color.a;
         icon.color -= new Color(0, 0, 0, icon.color.a);
         Sequence seq = DOTween.Sequence();
-        seq.Append(icon.DOFade(opacity, 0.2f));
+        seq.Append(icon.DOFade(opacity, 0.5f));
         seq.Join(icon.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.2f, 1, 0));
         seq.SetLink(gameObject);
 
-        icon.transform.DORotate(new Vector3(0, 0, 360), 1f).SetRelative().SetLoops(-1, LoopType.Incremental).SetLink(gameObject).SetEase(Ease.Linear);
+        icon.transform.DORotate(new Vector3(0, 0, 360), 2f, RotateMode.WorldAxisAdd).SetRelative().SetLoops(-1, LoopType.Incremental).SetLink(gameObject);
     }
 }
