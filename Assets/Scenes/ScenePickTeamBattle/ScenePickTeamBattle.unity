@@ -2021,7 +2021,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1010543137}
-  - component: {fileID: 1010543138}
   m_Layer: 3
   m_Name: Global Light 2D
   m_TagString: Untagged
@@ -2043,18 +2042,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1010543138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010543136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1133007007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2494,7 +2481,6 @@ GameObject:
   - component: {fileID: 1389122095}
   - component: {fileID: 1389122094}
   - component: {fileID: 1389122093}
-  - component: {fileID: 1389122092}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -2502,18 +2488,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1389122092
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1389122091}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!81 &1389122093
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3204,7 +3178,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.2842963}
   m_AnchorMax: {x: 1, y: 0.2842963}
   m_AnchoredPosition: {x: -27, y: -48}
-  m_SizeDelta: {x: 377.328, y: 102.89099}
+  m_SizeDelta: {x: 173, y: 117}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &1527190806
 MonoBehaviour:
@@ -3251,8 +3225,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1133007008}
-        m_TargetAssemblyTypeName: SceneControls, Assembly-CSharp
-        m_MethodName: OnJoinBattle
+        m_TargetAssemblyTypeName: ScenePickTeamBattleUI, Assembly-CSharp
+        m_MethodName: SendStartCombat
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3282,8 +3256,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: c73f2af3976da144fbff485d0a2d9d4c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4388,7 +4362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4396,7 +4370,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 83dfc4e701d99e24fa403cb5763d7bfa, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -4408,7 +4382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Chi\u1EBFn"
+  m_Text: START
 --- !u!222 &1928956657
 CanvasRenderer:
   m_ObjectHideFlags: 0

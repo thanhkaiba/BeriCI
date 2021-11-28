@@ -1237,6 +1237,9 @@ MonoBehaviour:
     type: 3}
   scrollRect: {fileID: 1433130410}
   Speed: 0
+  Acceleration: 20
+  MaxSpeed: 600
+  squadContainer: {fileID: 877664650}
 --- !u!114 &756254532
 MonoBehaviour:
   m_ObjectHideFlags: 0
