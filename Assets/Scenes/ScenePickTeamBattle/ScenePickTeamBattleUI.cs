@@ -76,7 +76,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     {
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
-        sfsObject.PutSFSObject("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSObject());
+        sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
     }
 

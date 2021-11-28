@@ -180,6 +180,13 @@ public class FightingLine
     public ISFSObject ToSFSObject()
     {
         SFSObject data = new SFSObject();
+        data.PutSFSArray("fighting_lines", ToSFSArray());
+
+        return data;
+    }
+
+    public ISFSArray ToSFSArray()
+    {
         ISFSArray fighting_lines = new SFSArray();
         foreach (KeyValuePair<short, string> slot in slots)
         {
@@ -196,10 +203,8 @@ public class FightingLine
                 fighting_lines.AddSFSObject(slotData);
             }
         }
+        return fighting_lines;
 
-        data.PutSFSArray("fighting_lines", fighting_lines);
-
-        return data;
     }
 
     public FightingLine NewFromSFSObject(ISFSArray sFSArray)
