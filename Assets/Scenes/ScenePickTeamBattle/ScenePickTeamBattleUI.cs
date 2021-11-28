@@ -48,6 +48,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void RunCountDown(byte countdown)
     {
+        textCountDown.text = "" + countdown;
         Sequence mySequence = DOTween.Sequence();
         mySequence.AppendInterval(1f)
             .AppendCallback(() =>

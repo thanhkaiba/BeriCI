@@ -1,14 +1,14 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public delegate void PopupNotificationOKDelegate();
-    public class PopupNotification : MonoBehaviour
+    public class PopupNotification : BaseGui
     {
         [SerializeField]
         private Text textNotification;
-        private PopupNotificationOKDelegate OKFunc;
+        private Action OKFunc;
 
         public void OnOK()
         {
@@ -16,7 +16,7 @@ namespace Piratera.GUI
             {
                 OKFunc();
             }
-            Destroy(gameObject);
+            RunDestroy();
         }
 
 
@@ -25,7 +25,7 @@ namespace Piratera.GUI
             textNotification.text = text;
         }
 
-        public void SetData(string text, PopupNotificationOKDelegate okFunc)
+        public void SetData(string text, Action okFunc)
         {
             SetData(text);
             OKFunc = okFunc;

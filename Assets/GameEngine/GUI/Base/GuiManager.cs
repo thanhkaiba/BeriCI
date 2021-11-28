@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Piratera.GUI
 {
@@ -31,7 +32,7 @@ namespace Piratera.GUI
             return gameObject;
         }
 
-        public GameObject ShowPopupNotification(string text, PopupNotificationOKDelegate oKDelegate)
+        public GameObject ShowPopupNotification(string text, Action oKDelegate)
         {
             GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotificaiton", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
@@ -52,11 +53,16 @@ namespace Piratera.GUI
 
         public void DestroyGui<T>()
         {
+            DestroyGui(typeof(T).Name);
+        }
+
+        public void DestroyGui(string guiName)
+        {
             GuiLayerSystem guiLayerSystem = FindObjectOfType<GuiLayerSystem>();
 
             if (guiLayerSystem != null)
             {
-                guiLayerSystem.DestroyGui(typeof(T).Name);
+                guiLayerSystem.DestroyGui(guiName);
             }
         }
     }
