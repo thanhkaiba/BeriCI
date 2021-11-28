@@ -1,4 +1,5 @@
 ﻿using Spine.Unity;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,11 @@ public class DragableSailor : MonoBehaviour
     
     private Vector3 delta;
     private float originZ;
+
+    public Action<string> UnEquipSailor;
+    public Func<short, bool> IsSlotEmpty;
+    public Action<string, short> OccupieSailor;
+    public Action<string, short> SwapSailor;
 
     protected void Start()
     {
@@ -138,19 +144,21 @@ public class DragableSailor : MonoBehaviour
         UpdateSlots(originIndex);
         slots[originIndex].OnFree();
         Destroy(gameObject);
-        CrewData.Instance.UnEquip(sailor.Model.id);
+        UnEquipSailor(sailor.Model.id);
+           
     }
 
     protected void OnMouseUpWithSlot()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, originZ);
 
-        if (CrewData.Instance.FightingTeam.IsSlotEmpty(selectingIndex)) {
-            CrewData.Instance.Occupie(sailor.Model.id, selectingIndex);
+        if (IsSlotEmpty(selectingIndex)) {
+            OccupieSailor(sailor.Model.id, selectingIndex);
+           
         } else
         {
+            SwapSailor(sailor.Model.id, selectingIndex);
            
-            CrewData.Instance.Swap(sailor.Model.id, CrewData.Instance.FightingTeam.OwnerOf(selectingIndex));
         }
 
         slots[selectingIndex].SetSelectedSailer(sailor);

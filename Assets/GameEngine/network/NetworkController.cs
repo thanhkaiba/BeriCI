@@ -337,7 +337,7 @@ public class NetworkController : MonoBehaviour
 	}
 	public static void Send(SFSAction action, ISFSObject data)
 	{
-		Debug.Log("Send Action To Server: " + action);
+		Debug.Log("Send Action To Server: " + action + $" ({(int)action})");
 		if (sfs != null)
         {
 			data.PutInt(ACTION_INCORE, (int)action);

@@ -119,9 +119,7 @@ public class LobbyUI : MonoBehaviour
 	}
 	public void OnStartNewGameButtonClick()
 	{
-		OnButtonPickTeamClick();
-		return;
-		SceneManager.LoadScene("SceneSelectMode");
+		NetworkController.Send(SFSAction.COMBAT_PREPARE);
 	}
 	public void OnButtonPickTeamClick()
 	{

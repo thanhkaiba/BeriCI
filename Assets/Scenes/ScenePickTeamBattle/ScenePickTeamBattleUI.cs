@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Utils;
+using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -68,21 +69,22 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnTimeOut()
     {
-
+        SendStartCombat();
     }
 
     public void SendStartCombat()
     {
-
+        SFSObject sfsObject = new SFSObject();
+        sfsObject.PutBool("accept", true);
+        sfsObject.PutSFSObject("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSObject());
+        NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
     }
 
-    public void StartCombat()
-    {
-
-    }
 
     public void Surrender()
     {
-
+        SFSObject sfsObject = new SFSObject();
+        sfsObject.PutBool("accept", false);
+        NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
     }
 }
