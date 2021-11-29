@@ -43,7 +43,8 @@ namespace Piratera.GUI
             {
                 case GuiEff.ZOOM:
                     {
-                        transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), appearTime, 2, 0);
+                        transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), appearTime, 2, 0).SetTarget(transform).SetLink(gameObject);
+                      
                     }
                     break;
                 case GuiEff.NONE:
@@ -74,6 +75,8 @@ namespace Piratera.GUI
                         Sequence s = DOTween.Sequence();
                         s.Append(transform.DOScale(new Vector3(0, 0, 0), disappearTime))
                             .AppendCallback(() => func());
+                        s.SetTarget(transform);
+                        s.SetLink(gameObject);
                     }
                     break;
                 case GuiEff.NONE:

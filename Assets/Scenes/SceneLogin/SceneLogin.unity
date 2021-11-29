@@ -716,6 +716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameInput: {fileID: 10826815}
+  passwordInput: {fileID: 8475617}
   loginButton: {fileID: 962814694}
   errorText: {fileID: 937110912}
 --- !u!4 &671366201

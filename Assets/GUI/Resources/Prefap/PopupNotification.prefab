@@ -171,7 +171,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 2
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 722372519354883176}
   - component: {fileID: 3262359728013146864}
   m_Layer: 5
-  m_Name: PopupNotificaiton
+  m_Name: PopupNotification
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.5
   blockTouchBehind: 1
+  panel: {fileID: 0}
 --- !u!114 &3262359728013146864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearEffect: 0
+  appearEffect: 1
   disappearEffect: 1
   appearTime: 0.6
   disappearTime: 0.2
