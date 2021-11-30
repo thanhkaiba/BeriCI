@@ -24,9 +24,6 @@ public class LobbyUI : MonoBehaviour
 	private Image userAvatar;
 
 	[SerializeField]
-	private Text userLevel;
-
-	[SerializeField]
 	private Text userBeri;
 
 	[SerializeField]
@@ -35,8 +32,6 @@ public class LobbyUI : MonoBehaviour
 	[SerializeField]
 	private Text userStaminaCountDown;
 
-	[SerializeField]
-	private Slider userExp;
 
 	[SerializeField]
 	private Button[] leftButtons;
@@ -45,7 +40,7 @@ public class LobbyUI : MonoBehaviour
 	private Button[] rightButtons;
 
 	[SerializeField]
-	private Button buttonFight;
+	private Button buttonAdventure;
 
 	[SerializeField]
 	private Image background;
@@ -92,23 +87,11 @@ public class LobbyUI : MonoBehaviour
         {
 			userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
 		}
-		if (changedVars.Contains(UserInfoPropertiesKey.LEVEL))
-		{
-			userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
-		}
-		if (changedVars.Contains(UserInfoPropertiesKey.EXP))
-		{
-			userExp.DOValue(UserData.Instance.GetExpProgress(), 0.6f);
-		}
-
 	}
 
 	void UpdateUserInfo()
 	{
-		userExp.DOValue(UserData.Instance.GetExpProgress(), 0.6f);
 		userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
-		userLevel.DOText(UserData.Instance.Level.ToString(), 0.5f, false, ScrambleMode.Numerals).SetEase(Ease.Linear);
-
 		DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => StringUtils.ShortNumber(x));
 		DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
 	}
@@ -175,7 +158,7 @@ public class LobbyUI : MonoBehaviour
 			DoTweenUtils.FadeAppearX(button, Screen.width/2, 1f, UnityEngine.Random.Range(0.4f, 0.5f));
 		}
 
-		DoTweenUtils.ButtonBigAppear(buttonFight, 0.5f, Vector3.one ,1f);
+		DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.5f, Vector3.one ,1f);
 	}
 
 	public void ShowGuiCheat()

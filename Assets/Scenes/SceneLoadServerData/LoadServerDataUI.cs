@@ -22,8 +22,8 @@ public class LoadServerDataUI : MonoBehaviour
 
     void Start()
     {
+        buttonReload.gameObject.SetActive(false);
         progressBar.value = 0;
-        SendGetData();
         ShowLoading(startingPoint, SendGetData);
     }
 
