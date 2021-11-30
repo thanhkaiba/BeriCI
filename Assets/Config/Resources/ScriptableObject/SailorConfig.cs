@@ -33,7 +33,6 @@ public class SailorConfig : ScriptableObjectPro
     public AttackType attack_type = AttackType.MELEE;
     public List<SailorClass> classes;
 
-    public string skill_name = "";
     public int start_fury = 0;
     public int max_fury = 20;
     public List<float> skill_params;
