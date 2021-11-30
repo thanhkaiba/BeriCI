@@ -95,6 +95,7 @@ public class CombatState : MonoBehaviour
     {
         CreateCombatSailor("Obonbee", new CombatPosition(2, 2), Team.A);
         CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("QChi", new CombatPosition(1, 0), Team.A);
 
         CreateCombatSailor("Herminia", new CombatPosition(2, 0), Team.A);
 

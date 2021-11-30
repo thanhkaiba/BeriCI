@@ -38,6 +38,7 @@ namespace Piratera.Utils
             {
 				return;
             }
+		
 			StartCoroutine(StartLoadAvatar(userAvatar, url));
 		}
 	}

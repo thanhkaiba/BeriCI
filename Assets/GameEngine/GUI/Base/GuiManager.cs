@@ -26,17 +26,17 @@ namespace Piratera.GUI
 
         public GameObject ShowPopupNotification(string text)
         {
-            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotificaiton", LayerId.POPUP);
+            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotification", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text);
             return gameObject;
         }
 
-        public GameObject ShowPopupNotification(string text, Action oKDelegate)
+        public GameObject ShowPopupNotification(string text, Action okAction)
         {
-            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotificaiton", LayerId.POPUP);
+            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotification", LayerId.POPUP);
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
-            popup.SetData(text, oKDelegate);
+            popup.SetData(text, okAction);
             return gameObject;
         }
 

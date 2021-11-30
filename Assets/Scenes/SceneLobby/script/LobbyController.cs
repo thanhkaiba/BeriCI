@@ -7,8 +7,7 @@ public class LobbyController : MonoBehaviour
 		NetworkController.RemoveServerActionListener(OnReceiveServerAction);
 	}
 	private void Awake()
-    {
-		NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
+    {		
 		NetworkController.AddServerActionListener(OnReceiveServerAction);
 	}
 	

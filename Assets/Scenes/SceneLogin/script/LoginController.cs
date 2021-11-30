@@ -18,6 +18,8 @@ public class LoginController: MonoBehaviour
 	[SerializeField]
 	private InputField nameInput;
 	[SerializeField]
+	private InputField passwordInput;
+	[SerializeField]
 	private Button loginButton;
 	[SerializeField]
 	private Text errorText;
@@ -71,7 +73,7 @@ public class LoginController: MonoBehaviour
 	public void OnLoginButtonClick()
 	{
 		enableLoginUI(false);
-		NetworkController.LoginToServer(new LoginData(nameInput.text, ""));
+		NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text));
 		NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
 		NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
 	}
@@ -105,7 +107,7 @@ public class LoginController: MonoBehaviour
 	}
 	private void OpenLobby()
     {
-		SceneManager.LoadScene("SceneLobby");
+		SceneManager.LoadScene("SceneLoadServerData");
 	}
     //----------------------------------------------------------
     // Private helper methods

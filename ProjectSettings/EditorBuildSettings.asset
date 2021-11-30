@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SceneLogin/SceneLogin.unity
-    guid: fb4e180a85202dc4b85a38d52b9ef6a5
-  - enabled: 1
     path: Assets/Scenes/SceneLoading/SceneLoading.unity
     guid: f34e9851453c8aa4aa979bef9b67da82
+  - enabled: 1
+    path: Assets/Scenes/SceneLogin/SceneLogin.unity
+    guid: fb4e180a85202dc4b85a38d52b9ef6a5
   - enabled: 1
     path: Assets/Scenes/SceneLobby/SceneLobby.unity
     guid: 3274908b4e5ca9e49941a2b4bc676f16
@@ -18,14 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/ScenePickTeam/ScenePickTeam.unity
     guid: f7bc780a865acb24c9d9e03c40cb65a2
   - enabled: 0
-    path: Assets/Scenes/SceneCombat/SceneGame.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/ScenePickTeamBattle/ScenePickTeamBattle.unity
     guid: ca503b04611424c498e71bcbc2bffb77
   - enabled: 1
     path: Assets/Scenes/SceneCombat/SceneCombat2D.unity
     guid: 228c65bb82644e749b0ff066e1d25488
+  - enabled: 1
+    path: Assets/Scenes/SceneLoadServerData/SceneLoadServerData.unity
+    guid: 0c0a8b9ac2991534ca32a30487b3618f
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 4b14029e76de3a2478e6be08c6eda9dc,
       type: 2}

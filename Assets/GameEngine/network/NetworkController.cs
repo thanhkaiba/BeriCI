@@ -263,11 +263,11 @@ public class NetworkController : MonoBehaviour
 			Debug.Log("Connection mode is: " + sfs.ConnectionMode);
 
 			SFSObject sfso = new SFSObject();
-			sfso.PutUtfString("passwd", "test");
+			sfso.PutUtfString("passwd", loginData.password);
 			sfso.PutInt("loginType", 1);
 			sfso.PutUtfString("client_info", "{}");
 			sfs.Send(new LoginRequest(loginData.username, "", Zone, sfso));
-			Debug.Log("Send Login");
+			Debug.Log("Send Login " + loginData.username + "-" + loginData.password);
 		}
 		else Debug.Log("Connection failed; is the server running at all?");
 	}

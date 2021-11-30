@@ -391,7 +391,6 @@ public class CombatSailor : Sailor
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(Model.config_stats.attack_type);
-        bar.SetIconSkill(Model.config_stats.skill_name);
         bar.SetName(Model.config_stats.root_name);
         SetFaceDirection();
     }
@@ -503,9 +502,6 @@ public class CombatSailor : Sailor
     }
     public virtual float ProcessSkill(List<string> targets = null, List<float> _params = null)
     {
-        string skill_name = Model.config_stats.skill_name;
-        Debug.Log(">>>>>>>>>>>>>>>" + Model.config_stats.root_name + " active " + skill_name);
-
         cs.CurrentSpeed -= cs.SpeedNeed;
         cs.Fury = 0;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
