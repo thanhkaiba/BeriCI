@@ -19,8 +19,10 @@ public class TempCombatData : Singleton<TempCombatData>
 	public FightingLine fgl0;
     public FightingLine fgl1;
 	public List<CombatAction> ca;
+	public CombatReward caReward;
 
-    public void LoadCombatDataFromSfs(ISFSObject packet)
+
+	public void LoadCombatDataFromSfs(ISFSObject packet)
     {
 		Debug.Log("Read Combat Data");
 		listSailor = new List<SailorModel>();
@@ -49,9 +51,15 @@ public class TempCombatData : Singleton<TempCombatData>
 
 		ca = new List<CombatAction>();
 		ISFSArray _ca = packet.GetSFSArray("ca");
+		int lastItem = 0;
 		foreach (ISFSObject obj in _ca)
 		{
+			lastItem++;
+			if (lastItem == _ca.Size())
+				caReward = new CombatReward(obj);
+			else
 			ca.Add(new CombatAction(obj));
+
 		}
 	}
 }
@@ -63,7 +71,10 @@ public enum CombatAcionType
 	GameResult,
 	GameState,
 }
-
+public enum RankBonus
+{
+	Excellent, Overpower, Quell, Close
+}
 public class FGL
 {
 	public CombatPosition pos;
@@ -75,8 +86,29 @@ public class FGL
 		id = packet.GetUtfString("sid");
 	}
 }
+public class CombatReward
+{
+	public RankBonus type;
+	public byte win_rank;
+	public int mode_reward;
+	public int win_rank_bonus;
+	public int hard_bonus;
+	public byte team_win;
 
-public class CombatAction
+	public CombatReward(ISFSObject packet)
+	{
+		type = (RankBonus)packet.GetByte("actionType");
+		ISFSObject detail = packet.GetSFSObject("detail");
+
+		win_rank = detail.GetByte("win_rank");
+		mode_reward = detail.GetInt("mode_reward");
+		win_rank_bonus = detail.GetInt("win_rank_bonus");
+		hard_bonus = detail.GetInt("hard_bonus");
+		team_win = detail.GetByte("team_win");
+
+	}
+}
+	public class CombatAction
 {
 	public CombatAcionType type;
 	public byte actorTeam;

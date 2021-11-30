@@ -28,12 +28,12 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnJoinBattle()
     {
-        SceneManager.LoadScene("SceneCombat2D");
+      //  SceneManager.LoadScene("SceneCombat2D");
     }
 
     public void OnSurrender()
     {
-        SceneManager.LoadScene("SceneLobby");
+       // NetworkController.OnExtentionResponse();
     }
 
     public void UpdateUI()
@@ -84,7 +84,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     public void Surrender()
     {
         SFSObject sfsObject = new SFSObject();
-        sfsObject.PutBool("accept", false);
-        NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+        sfsObject.PutBool("accept", true);
+        sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
+        NetworkController.Send(SFSAction.SURRENDER_CONFIRM, sfsObject);
     }
 }

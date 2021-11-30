@@ -364,7 +364,26 @@ public class NetworkController : MonoBehaviour
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
 						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
+		
 						SceneManager.LoadScene("SceneCombat2D");
+					}
+					break;
+				}
+			case SFSAction.COMBAT_COMFIRM:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
+						SceneManager.LoadScene("SceneCombat2D");
+					}
+					break;
+				}
+			case SFSAction.SURRENDER_CONFIRM:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
+						UIIngameMgr.Instance.re.SetReward(TempCombatData.Instance.caReward);
 					}
 					break;
 				}
