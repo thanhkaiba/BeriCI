@@ -651,6 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   percentText: {fileID: 23037049}
   buttonReload: {fileID: 338365944}
+  progressBar: {fileID: 1118888388}
   startingPoint: 0.3
 --- !u!1 &1118888386
 GameObject:
