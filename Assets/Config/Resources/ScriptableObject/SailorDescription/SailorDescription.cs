@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SailorSO : ScriptableObject
+public class SailorDescription : ScriptableObject
 {	
 	public List<Sheet> sheets = new List<Sheet> ();
 
@@ -17,7 +17,6 @@ public class SailorSO : ScriptableObject
 	public class Param
 	{
 		
-		public double no;
 		public string root_name;
 		public string present_name;
 		public string title;

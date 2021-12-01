@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3dc023b8f175444092532e9a975e833, type: 3}
+  m_Name: SailorDescription
+  m_EditorClassIdentifier: 
+  sheets:
+  - name: description
+    list:
+    - root_name: Helti
+      present_name: Helti
+      title: The amazing captain
+      skill_description: Use Ocean Wind power, attack enemy 3 times and deal damage
+        to all behinds.
+    - root_name: Meechik
+      present_name: Meechik
+      title: Eldest of the Pirate Family
+      skill_description: Fire an giant bullet bazooka, deal damage in 1-tile radius.
+    - root_name: Sojeph
+      present_name: Sojeph
+      title: The Surgeon captain
+      skill_description: Heal an lowest heal ally and throw his scalpels to enermy.
+    - root_name: Beel
+      present_name: Beel
+      title: Captain of Darkness pirate crew
+      skill_description: Summon Infestissue Ghost from Darkness from her Crystal
+        ball, deal magic damage to all enermy.
+    - root_name: Tons
+      present_name: Tons
+      title: Captain from Criminal-Land
+      skill_description: Walk through the darkness, deal massive damage to his target.
+    - root_name: Herminia
+      present_name: Herminia
+      title: The cute elf
+      skill_description: Shoot incantation arrow, deal true damage.
+    - root_name: Scrub
+      present_name: Scrub
+      title: The guard of Haisan
+      skill_description: Stab his weapon, deal damage to enermy and behind.
+    - root_name: RowT
+      present_name: RowT
+      title: Thunder wizard
+      skill_description: Deal magic damage to random enermy.
+    - root_name: Jenkins
+      present_name: Jenkins
+      title: 'The loney swordsman '
+      skill_description: 'He uses his special technique Consecutive Sadless: deal
+        damage to target depend on their health.'
+    - root_name: OBonbee
+      present_name: O-Bonbee
+      title: Baby scared
+      skill_description: Use his sword-arms, deal damage in a column.
+    - root_name: Kaibon
+      present_name: Kaibon
+      title: Epic story teller
+      skill_description: Buff all alies power and speed them up.
+    - root_name: Salvatafo
+      present_name: Salvatafo
+      title: The Salvage of the Wotafo
+      skill_description: Summon power of the sun, deal Magic Damage and heal depend
+        on number of victims.
+    - root_name: Scott_Papagal
+      present_name: Scott & Papagal
+      title: The elder Pirate
+      skill_description: When Papagal death, he becomes angry, uses his gun with
+        high speed.
+    - root_name: Tad
+      present_name: Tad
+      title: Beat tiger his bare hands
+      skill_description: Attack target three times with tiger technique.
+    - root_name: Alex
+      present_name: Alex
+      title: Acient weapon Defender
+      skill_description: His shield release the golden electrical power, heal him
+        and increase his defence.
+    - root_name: QChi
+      present_name: Q-CHI
+      title: The Death Mage
+      skill_description: Use hell power attack all enemies at the front.
+    - root_name: Galdalf
+      present_name: Galdalf
+      title: Aaboriginals Mage
+      skill_description: At start of combat, use the secret charm to buff the one
+        at the front power, fury and speed up them.
+    - root_name: Mealodo
+      present_name: Mealodo
+      title: A young sailor
+      skill_description: Slash his sword two times, deal damage to target.
+    - root_name: Geechoso
+      present_name: Geechoso
+      title: An old sailor
+      skill_description: Shot his target two times.

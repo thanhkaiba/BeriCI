@@ -20,11 +20,49 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private float startingPoint = 0.3f;
 
+    [SerializeField]
+    private SailorDescription sailorDescription;
+
+    [Header("tooltip")]
+    [SerializeField]
+    private Text sailorName;
+
+    [SerializeField]
+    private Text sailorBio;
+
+    [SerializeField]
+    private Text sailorDescripton;
+
+
+    [SerializeField]
+    private GameObject sailorNode;
+
+
     void Start()
     {
+        RandomTip();
         buttonReload.gameObject.SetActive(false);
         progressBar.value = 0;
-        ShowLoading(startingPoint, SendGetData);
+        SendGetData();
+        ShowLoading(15f, startingPoint, RandomTip);
+
+        progressBar.onValueChanged.AddListener(UpdateTextPercent);
+    }
+
+    void UpdateTextPercent(float value)
+    {
+        percentText.text = value.ToString("P1");
+    }
+
+    void RandomTip()
+    {
+        
+        SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
+
+        sailorName.text = param.present_name;
+        sailorBio.text = param.title;
+        sailorDescripton.text = param.skill_description;
+
     }
 
     public void SendGetData()
@@ -36,6 +74,7 @@ public class LoadServerDataUI : MonoBehaviour
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        progressBar.onValueChanged.RemoveListener(UpdateTextPercent);
     }
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -44,7 +83,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             if (errorCode == SFSErrorCode.SUCCESS)
             {
-                ShowLoading(1f, OnLoadSuccess);
+                ShowLoading(0.5f, 1f, OnLoadSuccess);
             } else
             {
                 OnLoadError(errorCode);
@@ -70,15 +109,11 @@ public class LoadServerDataUI : MonoBehaviour
 
  
 
-    public void ShowLoading(float value, Action action)
+    public void ShowLoading(float actionTime, float value, Action action)
     {
         DOTween.Kill(progressBar);
-        percentText.text = value.ToString("P");
-        DOTween.Kill(progressBar);
-        progressBar.DOValue(value, 0.4f).SetLink(progressBar.gameObject).SetTarget(progressBar);
-
         Sequence seq = DOTween.Sequence();
-        seq.Append(progressBar.DOValue(value, 0.4f));
+        seq.Append(progressBar.DOValue(value, actionTime));
         seq.AppendCallback(() => action());
         seq.SetLink(progressBar.gameObject);
         seq.SetTarget(progressBar);
