@@ -188,7 +188,7 @@ public class CombatMgr : MonoBehaviour
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
         //UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
-        StartCoroutine(WaitAndDo(2.0f, () => UIIngameMgr.Instance.re.SetReward(TempCombatData.Instance.caReward)));
+        StartCoroutine(WaitAndDo(2.0f, () => NetworkController.reward.SetReward(TempCombatData.Instance.caReward)));
     }
 
     int CalculateSpeedAddThisLoop()

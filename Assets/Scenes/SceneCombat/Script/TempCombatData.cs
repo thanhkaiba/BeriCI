@@ -20,7 +20,7 @@ public class TempCombatData : Singleton<TempCombatData>
     public FightingLine fgl1;
 	public List<CombatAction> ca;
 	public CombatReward caReward;
-
+	public bool showCombat;
 
 	public void LoadCombatDataFromSfs(ISFSObject packet)
     {

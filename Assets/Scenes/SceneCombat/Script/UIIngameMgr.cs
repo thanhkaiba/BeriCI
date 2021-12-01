@@ -12,7 +12,6 @@ public class UIIngameMgr : MonoBehaviour
     public Text actionCount;
     public List<SailorInQueue> listSailorInQueue;
     public Text timescale;
-    public UIPopupReward re;
     public UserAvatar avtA;
     public UserAvatar avtB;
     public void Awake()

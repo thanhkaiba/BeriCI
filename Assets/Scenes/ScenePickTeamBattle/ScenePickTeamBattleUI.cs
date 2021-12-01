@@ -77,6 +77,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
+        TempCombatData.Instance.showCombat = true;
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
     }
 
@@ -86,6 +87,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        NetworkController.Send(SFSAction.SURRENDER_CONFIRM, sfsObject);
+        TempCombatData.Instance.showCombat = false;
+        NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
     }
 }

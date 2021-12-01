@@ -118,6 +118,8 @@ public class NetworkController : MonoBehaviour
 {
 	//----------------------------------------------------------
 	// Editor public properties
+	[SerializeField]
+	public static UIPopupReward reward;
 	//----------------------------------------------------------
 	public static NetworkController Instance;
 
@@ -162,6 +164,7 @@ public class NetworkController : MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
+			reward = transform.GetChild(0).GetChild(0).GetComponent<UIPopupReward>();
 			Application.runInBackground = true;
 			ForceStartScene();
 		}
@@ -374,16 +377,8 @@ public class NetworkController : MonoBehaviour
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
 						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-						SceneManager.LoadScene("SceneCombat2D");
-					}
-					break;
-				}
-			case SFSAction.SURRENDER_CONFIRM:
-				{
-					if (errorCode == SFSErrorCode.SUCCESS)
-					{
-						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-						UIIngameMgr.Instance.re.SetReward(TempCombatData.Instance.caReward);
+						if(TempCombatData.Instance.showCombat)SceneManager.LoadScene("SceneCombat2D");
+						else reward.SetReward(TempCombatData.Instance.caReward);
 					}
 					break;
 				}
