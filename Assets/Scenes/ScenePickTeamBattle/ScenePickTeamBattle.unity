@@ -1556,7 +1556,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 784895266}
   m_HandleRect: {fileID: 784895264}
   m_Direction: 0
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -2074,6 +2074,7 @@ MonoBehaviour:
   textCountDown: {fileID: 1490572364}
   userNameA: {fileID: 1956083720}
   avatarA: {fileID: 976640438}
+  squaA: {fileID: 1745113250}
   userNameB: {fileID: 1768693683}
   avatarB: {fileID: 1172286869}
 --- !u!4 &1133007009

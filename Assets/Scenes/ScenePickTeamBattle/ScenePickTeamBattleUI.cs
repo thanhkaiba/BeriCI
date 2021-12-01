@@ -14,12 +14,14 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private Text userNameA;
     [SerializeField]
     private UserAvatar avatarA;
-
+    [SerializeField]
+    SquadAContainer squaA;
     [Header("UserB Info")]
     [SerializeField]
     private Text userNameB;
     [SerializeField]
     private UserAvatar avatarB;
+    private bool countDown = true;
 
     private void Start()
     {
@@ -44,6 +46,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
         avatarA.LoadAvatar(data.YourAvatar);
         avatarB.LoadAvatar(data.OpponentAvatar);
+
         RunCountDown(60);
     }
 
@@ -54,6 +57,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         mySequence.AppendInterval(1f)
             .AppendCallback(() =>
             {
+                if (!countDown)
+                    return;
                 if (countdown > 0)
                 {
                     countdown--;
@@ -77,8 +82,9 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        TempCombatData.Instance.showCombat = true;
+        TempCombatData.Instance.showCombat = squaA.HaveSailor();  
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+        countDown = false;
     }
 
 
@@ -89,5 +95,6 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
         TempCombatData.Instance.showCombat = false;
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+        countDown = false;
     }
 }

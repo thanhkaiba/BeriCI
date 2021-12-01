@@ -9,9 +9,6 @@ public class UIPopupReward : MonoBehaviour
     [SerializeField]
     Text[] texts;
 
-    [SerializeField]
-    GameObject overPower;
-
     public void SetReward(CombatReward r)
     {
         texts[0].text = r.team_win == 1 ? "lose" : "win";
@@ -22,26 +19,26 @@ public class UIPopupReward : MonoBehaviour
         switch (r.type)
         {
             case RankBonus.Excellent:
-                overPower.SetActive(true);
+                texts[5].text = "Excellent";
                 break;
             case RankBonus.Overpower:
-                overPower.SetActive(true);
+                texts[5].text = "Overpower";
                 break;
             case RankBonus.Quell:
-                overPower.SetActive(false);
+                texts[5].text = "Quell";
                 break;
             case RankBonus.Close:
-                overPower.SetActive(false);
+                texts[5].text = "Close";
                 break;
             default:
                 break;
         }
+        texts[5].transform.parent.gameObject.SetActive(r.team_win == 1 ? false : true);
         gameObject.SetActive(true);
     }
 
     private void OnDisable()
     {
-        overPower.SetActive(false);
         foreach (var item in texts)
         {
             item.text = "";
