@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Alex
   m_EditorClassIdentifier: 
   model: {fileID: 2117546187999679487, guid: 17f93e74ca7bf2841a69bf7ebe4eda6d, type: 3}
-  avatar: {fileID: 21300000, guid: d1537f7faacb8fc4896eb9ad5221c8a2, type: 3}
+  avatar: {fileID: 21300000, guid: 44c0adbc27b41854ab23ac05a2d0c17e, type: 3}
   root_name: Alex
   rank: 1
   power_base: 50
@@ -32,7 +32,6 @@ MonoBehaviour:
   magic_resist: 10
   attack_type: 0
   classes: 090000000b000000
-  skill_name: ElectricShield
   start_fury: 0
   max_fury: 35
   skill_params:
