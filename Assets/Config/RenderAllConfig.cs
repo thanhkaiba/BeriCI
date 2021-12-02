@@ -8,19 +8,6 @@ public class RenderAllConfig : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //List<string> heroname = new List<string>()
-        //{
-        //    "Meechic",
-        //    "Helti",
-        //    "Tons",
-        //    "Herminia",
-        //    "Scrub",
-        //    "RowT",
-        //    "Sojeph",
-        //    "Alex",
-        //    "QChi",
-        //};
-
         string[] files = System.IO.Directory.GetFiles("Assets/Config/Resources/ScriptableObject/Sailors");
         foreach (string file in files)
         {

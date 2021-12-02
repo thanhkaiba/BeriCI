@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Meechic : CombatSailor
+public class Meechik : CombatSailor
 {
     public SailorConfig config;
     private Spine.Bone boneTarget;
-    public Meechic()
+    public Meechik()
     {
     }
     public override void Awake()
