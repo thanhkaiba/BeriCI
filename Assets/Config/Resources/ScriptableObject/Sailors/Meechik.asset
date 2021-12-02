@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
-  m_Name: Meechic
+  m_Name: Meechik
   m_EditorClassIdentifier: 
   model: {fileID: 2373822207963307440, guid: 970555d7412b0464c851c6cd6fcb228e, type: 3}
   avatar: {fileID: 21300000, guid: 38d7c448d432f484eb3b2fee548abb78, type: 3}
-  root_name: Meechic
+  root_name: Meechik
   rank: 2
   power_base: 60
   power_base_step: 0.22
@@ -32,7 +32,6 @@ MonoBehaviour:
   magic_resist: 15
   attack_type: 1
   classes: 03000000
-  skill_name: MeechikBooommm
   start_fury: 0
   max_fury: 20
   skill_params:
