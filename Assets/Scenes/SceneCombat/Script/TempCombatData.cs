@@ -77,7 +77,7 @@ public enum CombatAcionType
 }
 public enum RankBonus
 {
-	Excellent, Overpower, Quell, Close
+	None, Excellent, Overpower, Quell, Close
 }
 public class FGL
 {
