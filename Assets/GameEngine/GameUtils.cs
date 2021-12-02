@@ -51,7 +51,15 @@ public class GameUtils : UnityEngine.Object
         return CreateSailor(sailorModel);
     }
 
-    public static Sailor CreateSailor(SailorModel sailorModel)
+    public static GameObject CreateFakeSailorObject(string name)
+    {
+        SailorModel model = new SailorModel(RandomId(), name);
+        SailorConfig config_stats = model.config_stats;
+        return Instantiate(config_stats.model);
+      
+    }
+
+        public static Sailor CreateSailor(SailorModel sailorModel)
     {
 
         GameObject characterGO = Instantiate(sailorModel.config_stats.model);

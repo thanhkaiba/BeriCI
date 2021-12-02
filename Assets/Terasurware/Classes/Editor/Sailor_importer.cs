@@ -18,9 +18,9 @@ public class Sailor_importer : AssetPostprocessor {
 			if (!filePath.Equals (asset))
 				continue;
 				
-			SailorSO data = (SailorSO)AssetDatabase.LoadAssetAtPath (exportPath, typeof(SailorSO));
+			SailorDescription data = (SailorDescription)AssetDatabase.LoadAssetAtPath (exportPath, typeof(SailorDescription));
 			if (data == null) {
-				data = ScriptableObject.CreateInstance<SailorSO> ();
+				data = ScriptableObject.CreateInstance<SailorDescription> ();
 				AssetDatabase.CreateAsset ((ScriptableObject)data, exportPath);
 				data.hideFlags = HideFlags.NotEditable;
 			}
@@ -41,16 +41,15 @@ public class Sailor_importer : AssetPostprocessor {
 						continue;
 					}
 
-					SailorSO.Sheet s = new SailorSO.Sheet ();
+					SailorDescription.Sheet s = new SailorDescription.Sheet ();
 					s.name = sheetName;
 				
 					for (int i=1; i<= sheet.LastRowNum; i++) {
 						IRow row = sheet.GetRow (i);
 						ICell cell = null;
 						
-						SailorSO.Param p = new SailorSO.Param ();
+						SailorDescription.Param p = new SailorDescription.Param ();
 						
-					cell = row.GetCell(0); p.no = (cell == null ? 0.0 : cell.NumericCellValue);
 					cell = row.GetCell(1); p.root_name = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(2); p.present_name = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(3); p.title = (cell == null ? "" : cell.StringCellValue);
