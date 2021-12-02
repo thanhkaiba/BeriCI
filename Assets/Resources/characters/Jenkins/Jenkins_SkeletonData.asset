@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b3b4b945939a54ea0b23d3396115fb, type: 3}
   m_Name: Jenkins_SkeletonData
   m_EditorClassIdentifier: 
-  atlasAssets: []
+  atlasAssets:
+  - {fileID: 11400000, guid: 3603f180df99f7f43bc92b64710332eb, type: 2}
   scale: 0.01
   skeletonJSON: {fileID: 4900000, guid: a1d1755f4aa800443886e4028f847727, type: 3}
   skeletonDataModifiers: []
@@ -20,4 +21,4 @@ MonoBehaviour:
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 0}
+  controller: {fileID: 9100000, guid: b393041aaba958641825256499a894a2, type: 2}
