@@ -63,11 +63,9 @@ public class ScenePickTeamBattleUI : MonoBehaviour
                 {
                     countdown--;
                     textCountDown.text = "" + countdown;
+                    if(countdown == 0) OnTimeOut();
                 }
-                else
-                {
-                    OnTimeOut();
-                }
+              
             })
             .SetLoops(countdown);
     }
@@ -79,10 +77,11 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void SendStartCombat()
     {
+        Debug.Log(NetworkController.showCombat);
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        TempCombatData.Instance.showCombat = squaA.HaveSailor();  
+        NetworkController.showCombat = squaA.HaveSailor();
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
         countDown = false;
     }
@@ -90,10 +89,11 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void Surrender()
     {
+        
         SFSObject sfsObject = new SFSObject();
-        sfsObject.PutBool("accept", true);
+        sfsObject.PutBool("accept", false);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        TempCombatData.Instance.showCombat = false;
+        NetworkController.showCombat = false;
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
         countDown = false;
     }
