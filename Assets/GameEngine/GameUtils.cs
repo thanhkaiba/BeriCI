@@ -32,6 +32,18 @@ public class GameUtils : UnityEngine.Object
 
         return sailor;
     }
+
+    public static GameObject AddSailorImage(string name, Transform parent)
+    {
+        SailorModel model = new SailorModel(RandomId(), name);
+        SailorConfig config_stats = model.config_stats;
+        if (config_stats != null && config_stats.model != null)
+        {
+            return Instantiate(config_stats.model, parent);
+
+        }
+        return null;
+    }
     public static CombatSailor CreateCombatSailor(SailorModel model)
     {
         SailorConfig config_stats = model.config_stats;
@@ -137,7 +149,6 @@ public class GameUtils : UnityEngine.Object
         {
             chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
         }
-        Debug.Log("Random: " + new string(chars));
         return new string(chars);
     }
 }

@@ -56,12 +56,20 @@ public class LoadServerDataUI : MonoBehaviour
 
     void RandomTip()
     {
-        
+
         SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
 
-        sailorName.text = param.present_name;
-        sailorBio.text = param.title;
-        sailorDescripton.text = param.skill_description;
+
+        if (GameUtils.AddSailorImage(param.root_name, sailorNode.transform) != null)
+        {
+
+            sailorName.text = param.present_name;
+            sailorBio.text = param.title;
+            sailorDescripton.text = param.skill_description;
+        } else
+        {
+            RandomTip();
+        }
 
     }
 
