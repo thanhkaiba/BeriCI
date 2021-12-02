@@ -21,7 +21,6 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private Text userNameB;
     [SerializeField]
     private UserAvatar avatarB;
-    private bool countDown = true;
 
     private void Start()
     {
@@ -57,7 +56,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         mySequence.AppendInterval(1f)
             .AppendCallback(() =>
             {
-                if (!countDown)
+                if (!NetworkController.Instance.countDownPickTeam)
                     return;
                 if (countdown > 0)
                 {
@@ -77,24 +76,23 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void SendStartCombat()
     {
-        Debug.Log(NetworkController.showCombat);
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        NetworkController.showCombat = squaA.HaveSailor();
+       // NetworkController.showCombat = squaA.HaveSailor();
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
-        countDown = false;
+        NetworkController.Instance.countDownPickTeam = false;
     }
 
 
     public void Surrender()
     {
-        
-        SFSObject sfsObject = new SFSObject();
+        NetworkController.reward.gameObject.SetActive(true);
+       /* SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", false);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
         NetworkController.showCombat = false;
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
-        countDown = false;
+        countDown = false;*/
     }
 }

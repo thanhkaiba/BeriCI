@@ -24,8 +24,7 @@ public class TempCombatData : Singleton<TempCombatData>
 
 	public void LoadCombatDataFromSfs(ISFSObject packet)
     {
-        if (NetworkController.showCombat)
-        {
+       
 
 			Debug.Log("Read Combat Data");
 			listSailor = new List<SailorModel>();
@@ -52,7 +51,7 @@ public class TempCombatData : Singleton<TempCombatData>
 
 			waitForAServerGame = true;
 
-		}
+		
 		ca = new List<CombatAction>();
 		ISFSArray _ca = packet.GetSFSArray("ca");
 		int lastItem = 0;
