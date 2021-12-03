@@ -7,6 +7,7 @@ using Sfs2X.Core;
 using Sfs2X.Entities; 
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
+using Piratera.GUI;
 
 public class LoginLogData
 {
@@ -286,12 +287,24 @@ public class NetworkController : MonoBehaviour
 
 		if (reason != ClientDisconnectionReason.MANUAL)
 		{
-			// Show error message
-			//errorText.text = "Connection was lost; reason is: " + reason;
+			string text = "Server Disconnected";
+			if (reason == ClientDisconnectionReason.BAN)
+            {
+				text = "You are banned from Server";
+            }
+
+			if (reason == ClientDisconnectionReason.KICK)
+            {
+				text = "You have been kicked by Server";
+			}
+
+			GuiManager.Instance.ShowPopupNotification(text, ForceStartScene);
+		} else
+        {
+			ForceStartScene();
 		}
 
-		// do something (popup disconnect,...)
-		ForceStartScene();
+		
 	}
 
 	private static void OnLogin(BaseEvent evt)
@@ -346,7 +359,6 @@ public class NetworkController : MonoBehaviour
         {
 			data.PutInt(ACTION_INCORE, (int)action);
 			ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
-			Debug.LogError(extensionRequest.ToString());
 			sfs.Send(extensionRequest);
 		}
 	
@@ -380,7 +392,6 @@ public class NetworkController : MonoBehaviour
 					{
 						
 						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-						Debug.LogError(showCombat);
 						if (showCombat)SceneManager.LoadScene("SceneCombat2D");
 						else reward.SetReward(TempCombatData.Instance.caReward);
 					}

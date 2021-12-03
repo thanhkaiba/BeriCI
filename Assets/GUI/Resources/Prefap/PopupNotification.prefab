@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearEffect: 4
+  appearEffect: 1
   disappearEffect: 2
   appearTime: 0.6
   disappearTime: 0.4

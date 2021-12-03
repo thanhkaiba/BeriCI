@@ -100,7 +100,7 @@ public class LoginController: MonoBehaviour
 			return;
 		}
 
-		GuiManager.Instance.ShowPopupNotification("Text");
+		GuiManager.Instance.ShowGuiWaiting(true);
 		enableLoginUI(false);
 		NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text));
 		NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
