@@ -1070,6 +1070,7 @@ GameObject:
   - component: {fileID: 5000402936686486139}
   - component: {fileID: 2275252784917688375}
   - component: {fileID: 2520588904212201184}
+  - component: {fileID: -6822633385308966067}
   m_Layer: 5
   m_Name: GuiBuyStamina
   m_TagString: Untagged
@@ -1155,10 +1156,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearEffect: 1
-  disappearEffect: 1
+  appearEffect: 3
+  disappearEffect: 2
   appearTime: 0.6
   disappearTime: 0.4
+--- !u!225 &-6822633385308966067
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7956002492378398338}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7956002492552251838
 GameObject:
   m_ObjectHideFlags: 0

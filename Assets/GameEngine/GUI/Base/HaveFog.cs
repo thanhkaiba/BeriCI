@@ -11,7 +11,7 @@ public class HaveFog : MonoBehaviour
     private bool blockTouchBehind = true;
 
     public GameObject panel;
-    void Start()
+    void Awake()
     {
         panel = new GameObject("PanelFog");
         panel.transform.SetParent(transform);

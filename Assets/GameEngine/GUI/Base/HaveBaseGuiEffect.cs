@@ -10,7 +10,9 @@ namespace Piratera.GUI
         ZOOM,
         FLY_UP,
         FALL,
-        FADE
+        FADE,
+        LEFT,
+        RIGHT,
     }
     public class HaveBaseGuiEffect: MonoBehaviour
     {
@@ -28,11 +30,13 @@ namespace Piratera.GUI
         private float disappearTime = 0.4f;
 
         private HaveFog haveFog;
-        private void Start()
+        private CanvasGroup canvasGroup;
+
+        private void Awake()
         {
             haveFog = GetComponent<HaveFog>();
+            canvasGroup = GetComponent<CanvasGroup>();
         }
-
 
 
         public void runAppearEffect(GuiEff eff)
@@ -43,14 +47,146 @@ namespace Piratera.GUI
             {
                 case GuiEff.ZOOM:
                     {
-                        transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), appearTime, 2, 0).SetTarget(transform).SetLink(gameObject);
-                      
+                        Sequence s = DOTween.Sequence();
+                        s.SetTarget(transform).SetLink(gameObject);
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
+                            s.AppendCallback(() => canvasGroup.interactable = true);
+                        }
+                        s.Insert(0, transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), appearTime, 2, 0));
+                       
+
                     }
                     break;
-                case GuiEff.NONE:
+                case GuiEff.FALL:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+                        Sequence s = DOTween.Sequence();
+                        s.SetTarget(transform).SetLink(gameObject);
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
+                            s.AppendCallback(() => canvasGroup.interactable = true);
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosY(Screen.height + (transform as RectTransform).sizeDelta.y, appearTime).From().SetEase(Ease.OutBack));
+                        s.AppendCallback(() =>
+                        {
+                            if (haveFog != null)
+                            {
+                                haveFog.VisibleFog(false);
+                            }
+                        });
+
+
+                    }
                     break;
                 case GuiEff.FLY_UP:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+                        Sequence s = DOTween.Sequence();
+                        s.SetTarget(transform).SetLink(gameObject);
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
+                            s.AppendCallback(() => canvasGroup.interactable = true);
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosY(-(transform as RectTransform).sizeDelta.y, appearTime).From().SetEase(Ease.OutBack));
+                        s.AppendCallback(() =>
+                        {
+                            if (haveFog != null)
+                            {
+                                haveFog.VisibleFog(false);
+                            }
+                        });
+
+                    }
                     break;
+
+                case GuiEff.LEFT:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+                        Sequence s = DOTween.Sequence();
+                        s.SetTarget(transform).SetLink(gameObject);
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
+                            s.AppendCallback(() => canvasGroup.interactable = true);
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosX(-(transform as RectTransform).sizeDelta.x, appearTime).From().SetEase(Ease.OutBack));
+                        s.AppendCallback(() =>
+                        {
+                            if (haveFog != null)
+                            {
+                                haveFog.VisibleFog(false);
+                            }
+                        });
+
+                    }
+                    break;
+                case GuiEff.RIGHT:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+                        Sequence s = DOTween.Sequence();
+                        s.SetTarget(transform).SetLink(gameObject);
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, appearTime / 2).From());
+                            s.AppendCallback(() => canvasGroup.interactable = true);
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosX(Screen.width + (transform as RectTransform).sizeDelta.x, appearTime).From().SetEase(Ease.OutBack));
+                        s.AppendCallback(() =>
+                        {
+                            if (haveFog != null)
+                            {
+                                haveFog.VisibleFog(false);
+                            }
+                        });
+
+                    }
+                    break;
+                case GuiEff.FADE:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+                        Sequence s = DOTween.Sequence();
+                        s.SetTarget(transform).SetLink(gameObject);
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, appearTime / 2).From());
+                            s.AppendCallback(() => canvasGroup.interactable = true);
+                        }
+                        s.AppendCallback(() =>
+                        {
+                            if (haveFog != null)
+                            {
+                                haveFog.VisibleFog(false);
+                            }
+                        });
+
+                    }
+                    break;
+
 
             }
         }
@@ -68,12 +204,17 @@ namespace Piratera.GUI
             {
                 case GuiEff.ZOOM:
                     {
-                        if (haveFog)
+                        if (haveFog != null)
                         {
                             haveFog.VisibleFog(false);
                         }
                         Sequence s = DOTween.Sequence();
-                        s.Append(transform.DOScale(new Vector3(0, 0, 0), disappearTime))
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, disappearTime));
+                        }
+                        s.Insert(0, transform.DOScale(new Vector3(3, 3, 3), disappearTime))
                             .AppendCallback(() => func());
                         s.SetTarget(transform);
                         s.SetLink(gameObject);
@@ -83,6 +224,116 @@ namespace Piratera.GUI
                     func();
                     break;
                 case GuiEff.FLY_UP:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+
+                      
+                        Sequence s = DOTween.Sequence();
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, disappearTime));
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosY(Screen.height / 2, disappearTime).SetRelative().SetEase(Ease.InBack))
+                            .AppendCallback(() => func());
+                        s.SetTarget(transform);
+                        s.SetLink(gameObject);
+
+                       
+                    }
+                    break;
+
+                case GuiEff.FALL:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+
+
+                        Sequence s = DOTween.Sequence();
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, disappearTime));
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosY(-Screen.height / 2, disappearTime).SetRelative().SetEase(Ease.InBack))
+                            .AppendCallback(() => func());
+                        s.SetTarget(transform);
+                        s.SetLink(gameObject);
+
+
+                    }
+                    break;
+
+                case GuiEff.LEFT:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+
+
+                        Sequence s = DOTween.Sequence();
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, disappearTime));
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosX(-Screen.width / 2, disappearTime).SetRelative().SetEase(Ease.InBack))
+                            .AppendCallback(() => func());
+                        s.SetTarget(transform);
+                        s.SetLink(gameObject);
+
+
+                    }
+                    break;
+                case GuiEff.RIGHT:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+
+
+                        Sequence s = DOTween.Sequence();
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, disappearTime));
+                        }
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosX(Screen.width / 2, disappearTime).SetRelative().SetEase(Ease.InBack))
+                            .AppendCallback(() => func());
+                        s.SetTarget(transform);
+                        s.SetLink(gameObject);
+
+
+                    }
+                    break;
+
+                case GuiEff.FADE:
+                    {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
+
+
+                        Sequence s = DOTween.Sequence();
+                        if (canvasGroup != null)
+                        {
+                            canvasGroup.interactable = false;
+                            s.Insert(0, canvasGroup.DOFade(0, disappearTime));
+                        }
+                        s.AppendCallback(() => func());
+                        s.SetTarget(transform);
+                        s.SetLink(gameObject);
+
+
+                    }
                     break;
 
             }
