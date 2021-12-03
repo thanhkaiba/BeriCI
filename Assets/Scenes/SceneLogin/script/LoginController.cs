@@ -24,6 +24,9 @@ public class LoginController: MonoBehaviour
 	[SerializeField]
 	private Text errorText;
 
+	[SerializeField]
+	private string signupLink = "https://piratera.io/";
+
 
 	//----------------------------------------------------------
 	// Unity callback methods
@@ -42,14 +45,15 @@ public class LoginController: MonoBehaviour
 		if (!(bool)evt.Params["success"])
 		{
 			
-			OnError("Connection failed; is the server running at all?");
+			OnError("DNS Server Not Responding");
 
 		}
 	}
 
 	private void OnLoginFail(BaseEvent evt)
     {
-		OnError("Login failed: " + (string)evt.Params["errorMessage"]);
+		OnError("Your username or password is incorrect");
+		Debug.Log("Login failed: " + (string)evt.Params["errorMessage"]);
 	}
 
 	private void OnError(string error)
@@ -72,11 +76,36 @@ public class LoginController: MonoBehaviour
 
 	public void OnLoginButtonClick()
 	{
+		if (string.IsNullOrEmpty(nameInput.text))
+        {
+			errorText.text = "Username field is empty";
+			return;
+
+		}
+
+		if (string.IsNullOrEmpty(passwordInput.text))
+		{
+			errorText.text = "Password field is empty";
+			return;
+
+		}
+
+		if (Application.internetReachability == NetworkReachability.NotReachable)
+		{
+			errorText.text = "Error. Check Internet connection!";
+			return;
+		}
 		enableLoginUI(false);
 		NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text));
 		NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
 		NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
 	}
+
+	public void OnButtonCreateOneClick()
+    {
+		Application.OpenURL(signupLink);
+	}
+
 	public void ReceiveJoinZoneSuccess(SFSErrorCode errorCode, ISFSObject packet)
 	{
 		if (errorCode == SFSErrorCode.SUCCESS)
@@ -89,7 +118,7 @@ public class LoginController: MonoBehaviour
 		}
 		else
 		{
-			errorText.text = "Login error: code " + errorCode;
+			errorText.text = "There was a problem. \nError code: " + errorCode;
 		}
 	}
 
