@@ -2461,6 +2461,7 @@ GameObject:
   - component: {fileID: 1830954501}
   - component: {fileID: 1830954500}
   - component: {fileID: 1830954499}
+  - component: {fileID: 1830954502}
   m_Layer: 5
   m_Name: ButtonAdventure
   m_TagString: Untagged
@@ -2582,6 +2583,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1830954497}
   m_CullTransparentMesh: 1
+--- !u!225 &1830954502
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1830954497}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1903324913
 GameObject:
   m_ObjectHideFlags: 0

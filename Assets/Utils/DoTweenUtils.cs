@@ -61,13 +61,12 @@ namespace Piratera.Utils
 
         public static void ButtonBigAppear(Button button, float duration, Vector3 delta, float delay = 0)
         {
-            Vector3 originScale = button.transform.localScale;
-            button.transform.localScale += delta;
-            Image image = button.GetComponent<Image>();
+            CanvasGroup image = button.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
 
-            s.Insert(0, button.transform.DOScale(originScale, duration).SetEase(Ease.OutExpo));
-            s.Insert(0, FadeAppear(image, duration));
+            s.Insert(0, button.transform.DOScale(button.transform.localScale + delta, duration).SetEase(Ease.InQuint).From());
+            s.Insert(0, image.DOFade(0, duration).From());
+            s.Insert(0, button.transform.DORotate(new Vector3(0, 0, -80), duration, RotateMode.WorldAxisAdd).From().SetEase(Ease.OutBack));
             s.SetDelay(delay);
             s.SetTarget(button);
             s.SetLink(button.gameObject);
