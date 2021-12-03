@@ -35,6 +35,10 @@ public class LoadServerDataUI : MonoBehaviour
 
 
     [SerializeField]
+    private Text sailorRank;
+
+
+    [SerializeField]
     private GameObject sailorNode;
 
 
@@ -58,14 +62,18 @@ public class LoadServerDataUI : MonoBehaviour
     {
 
         SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
-
-
-        if (GameUtils.AddSailorImage(param.root_name, sailorNode.transform) != null)
+        foreach (Transform child in sailorNode.transform)
+        {
+            DestroyImmediate(child.gameObject);
+        }
+        if (GameUtils.AddSailorImage(param.root_name, sailorNode.transform, out SailorConfig config_stats) != null)
         {
 
             sailorName.text = param.present_name;
             sailorBio.text = param.title;
             sailorDescripton.text = param.skill_description;
+          
+            sailorRank.text = config_stats.rank.ToString();
         } else
         {
             RandomTip();

@@ -33,10 +33,10 @@ public class GameUtils : UnityEngine.Object
         return sailor;
     }
 
-    public static GameObject AddSailorImage(string name, Transform parent)
+    public static GameObject AddSailorImage(string name, Transform parent, out SailorConfig config_stats)
     {
         SailorModel model = new SailorModel(RandomId(), name);
-        SailorConfig config_stats = model.config_stats;
+        config_stats = model.config_stats;
         if (config_stats != null && config_stats.model != null)
         {
             return Instantiate(config_stats.model, parent);
