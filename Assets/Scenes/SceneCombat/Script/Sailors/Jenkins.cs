@@ -21,6 +21,7 @@ public class Jenkins : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
+
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 6,

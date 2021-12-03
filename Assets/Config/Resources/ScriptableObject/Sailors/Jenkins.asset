@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Jenkins
   m_EditorClassIdentifier: 
-  model: {fileID: 5156821089360978322, guid: b95a7d052d8163c419a51cbe57963113, type: 3}
-  avatar: {fileID: 21300000, guid: ee1bc5bb98ce60b4d91fa2cdcb5fca40, type: 3}
-  root_name: Scrub
-  rank: 0
+  model: {fileID: 4340670092844833154, guid: 504b0f62211ab204b8fdd671e3a65f3d, type: 3}
+  avatar: {fileID: 21300000, guid: 47b90a969b4f00a4f9ef536c09f55af2, type: 3}
+  root_name: Jenkins
+  rank: 3
   power_base: 50
   power_base_step: 0.2
   power_plv: 1
@@ -32,7 +32,6 @@ MonoBehaviour:
   magic_resist: 20
   attack_type: 0
   classes: 08000000
-  skill_name: Scrub Attack
   start_fury: 0
   max_fury: 20
   skill_params:
