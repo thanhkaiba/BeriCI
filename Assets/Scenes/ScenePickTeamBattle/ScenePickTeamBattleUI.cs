@@ -64,7 +64,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
                 }
               
             })
-            .SetLoops(countdown);
+            .SetLoops(countdown).SetLink(gameObject).SetTarget(transform);
     }
 
     public void OnTimeOut()

@@ -217,7 +217,7 @@ public class NetworkController : MonoBehaviour
 	{
 		if (SceneManager.GetActiveScene().name != "SceneLogin" && SceneManager.GetActiveScene().name != "SceneLoading")
 		{
-			//SceneManager.LoadScene("SceneLogin");
+			SceneManager.LoadScene("SceneLogin");
 		}
 
 	}
