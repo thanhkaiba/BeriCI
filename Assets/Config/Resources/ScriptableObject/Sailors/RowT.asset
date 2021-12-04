@@ -16,23 +16,14 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 24e8c439066bfb844b4b5626eb49719c, type: 3}
   root_name: RowT
   rank: 2
-  power_base: 80
-  power_base_step: 0.25
-  power_plv: 1
-  power_plv_step: 0.001
-  crit: 0
-  crit_damage: 0
+  power_base: 68
   health_base: 250
-  health_base_step: 0.5
-  health_plv: 3
-  health_plv_step: 0.003
-  speed_base: 100
-  speed_step: 0.05
+  speed_base: 92
   armor: 10
-  magic_resist: 10
+  magic_resist: 50
+  crit: 0
   attack_type: 1
   classes: 04000000
-  skill_name: RowTBoom
   start_fury: 0
   max_fury: 0
   skill_params:

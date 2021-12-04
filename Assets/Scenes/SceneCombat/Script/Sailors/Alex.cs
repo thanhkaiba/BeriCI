@@ -27,13 +27,13 @@ public class Alex : CombatSailor
         Debug.LogError(" | position: " + target.cs.position.x + " y: " + target.cs.position.y);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
-            target.transform.position.x + offset * 4,
+            target.transform.position.x + offset * 5,
             target.transform.position.y,
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        seq.AppendInterval(1f);
+        seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return .95f;
     }

@@ -1,25 +1,16 @@
 {
-  "root_name": "Obonbee",
+  "root_name": "OBonbee",
   "rank": 1,
-  "power_base": 55.0,
-  "power_base_step": 0.0,
-  "power_plv": 0.0,
-  "power_plv_step": 0.0,
-  "crit": 0.0,
-  "crit_damage": 0.0,
+  "power_base": 60.0,
   "health_base": 240.0,
-  "health_base_step": 0.0,
-  "health_plv": 0.0,
-  "health_plv_step": 0.0,
   "speed_base": 92.0,
-  "speed_step": 0.05,
   "armor": 20.0,
   "magic_resist": 20.0,
+  "crit": 0.0,
   "attack_type": 0,
   "classes": [
     2
   ],
-  "skill_name": "ObonbeeSkill",
   "start_fury": 0,
   "max_fury": 20,
   "skill_params": [

@@ -17,22 +17,13 @@ MonoBehaviour:
   root_name: Herminia
   rank: 0
   power_base: 50
-  power_base_step: 0.2
-  power_plv: 1
-  power_plv_step: 0.001
-  crit: 0
-  crit_damage: 0
   health_base: 220
-  health_base_step: 0.4
-  health_plv: 2.5
-  health_plv_step: 0.002
   speed_base: 140
-  speed_step: 0.05
   armor: 10
   magic_resist: 10
+  crit: 0
   attack_type: 1
   classes: 03000000
-  skill_name: 
   start_fury: 0
   max_fury: 10
   skill_params: []

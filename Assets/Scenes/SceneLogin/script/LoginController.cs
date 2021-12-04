@@ -5,6 +5,7 @@ using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
+using Piratera.GUI;
 
 public class LoginController: MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class LoginController: MonoBehaviour
 	private InputField passwordInput;
 	[SerializeField]
 	private Button loginButton;
+	[SerializeField]
+	private Button signupButton;
 	[SerializeField]
 	private Text errorText;
 
@@ -45,7 +48,7 @@ public class LoginController: MonoBehaviour
 		if (!(bool)evt.Params["success"])
 		{
 			
-			OnError("DNS Server Not Responding");
+			OnError("Server Not Responding");
 
 		}
 	}
@@ -60,6 +63,7 @@ public class LoginController: MonoBehaviour
     {
 		Reset();
 		enableLoginUI(true);
+		GuiManager.Instance.ShowGuiWaiting(false);
 		errorText.text = error;
 
 	}
@@ -95,6 +99,8 @@ public class LoginController: MonoBehaviour
 			errorText.text = "Error. Check Internet connection!";
 			return;
 		}
+
+		GuiManager.Instance.ShowGuiWaiting(true);
 		enableLoginUI(false);
 		NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text));
 		NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
@@ -144,7 +150,9 @@ public class LoginController: MonoBehaviour
     private void enableLoginUI(bool enable)
 	{
 		nameInput.interactable = enable;
+		passwordInput.interactable = enable;
 		loginButton.interactable = enable;
+		signupButton.interactable = enable;
 		errorText.text = "";
 	}
 

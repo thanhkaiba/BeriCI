@@ -7,6 +7,8 @@ using Sfs2X.Core;
 using Sfs2X.Entities; 
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
+using Piratera.GUI;
+using Newtonsoft.Json;
 
 public class LoginLogData
 {
@@ -29,24 +31,11 @@ public class LoginLogData
 	 * thông số sim
 	 */
 	private string sim_serial;
-}
 
-public class LoginData {
-	public LoginData(string username, string password)
-	{
-		this.username = username;
-		this.password = password;
-	}
-	public string username = "";
-	public string password = "";
-
-	
-	
-	
 
 	/**
-	 * Chỉ dùng cho máy Android
-	 */
+ * Chỉ dùng cho máy Android
+ */
 	private string android_id;
 	/**
 	 * 
@@ -55,7 +44,7 @@ public class LoginData {
 	/**
 	 * platform : android, ios, web, windowsphone8
 	 */
-	private string platform;
+	private string platform = Application.platform.ToString();
 	/**
 	 * true/false . Máy iOS là dùng cho jailbreak
 	 */
@@ -67,8 +56,8 @@ public class LoginData {
 	/**
 	 * ios,windows phone, android, windows, mac
 	 */
-	private string os;
-	private string os_version;
+	private string os = SystemInfo.operatingSystem;
+	private string os_version = "";
 	/**
 	 * số tự sinh
 	 */
@@ -98,18 +87,34 @@ public class LoginData {
 	/**
 	 * ngôn ngữ đang sử dụng
 	 */
-	private string lang;
+	private string lang = "en";
 	/**
 	 * version của user
 	 */
-	private string app_version;
+	private string app_version = Application.version;
 
-	private int width;
-	private int height;
+	private int width = Screen.width;
+	private int height = Screen.width;
 	private string carrier;
 	private string bundle_id;
 	private string location;
-	private string network;
+	private string network = Application.internetReachability.ToString();
+
+	public string ToJson()
+    {
+		return JsonConvert.SerializeObject(this, Formatting.Indented);
+	}
+}
+
+public class LoginData {
+	public LoginData(string username, string password)
+	{
+		this.username = username;
+		this.password = password;
+	}
+	public string username = "";
+	public string password = "";
+
 };
 
 public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
@@ -269,7 +274,7 @@ public class NetworkController : MonoBehaviour
 			SFSObject sfso = new SFSObject();
 			sfso.PutUtfString("passwd", loginData.password);
 			sfso.PutInt("loginType", 1);
-			sfso.PutUtfString("client_info", "{}");
+			sfso.PutUtfString("client_info", new LoginLogData().ToJson());
 			sfs.Send(new LoginRequest(loginData.username, "", Zone, sfso));
 			Debug.Log("Send Login " + loginData.username + "-" + loginData.password);
 		}
@@ -287,12 +292,24 @@ public class NetworkController : MonoBehaviour
 
 		if (reason != ClientDisconnectionReason.MANUAL)
 		{
-			// Show error message
-			//errorText.text = "Connection was lost; reason is: " + reason;
+			string text = "Server Disconnected";
+			if (reason == ClientDisconnectionReason.BAN)
+            {
+				text = "You are banned from Server";
+            }
+
+			if (reason == ClientDisconnectionReason.KICK)
+            {
+				text = "You have been kicked by Server";
+			}
+
+			GuiManager.Instance.ShowPopupNotification(text, ForceStartScene);
+		} else
+        {
+			ForceStartScene();
 		}
 
-		// do something (popup disconnect,...)
-		ForceStartScene();
+		
 	}
 
 	private static void OnLogin(BaseEvent evt)

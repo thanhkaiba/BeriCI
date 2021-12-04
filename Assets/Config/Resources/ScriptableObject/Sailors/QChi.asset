@@ -17,23 +17,14 @@ MonoBehaviour:
   root_name: QChi
   rank: 1
   power_base: 56
-  power_base_step: 0.25
-  power_plv: 1
-  power_plv_step: 0.001
-  crit: 0
-  crit_damage: 0
   health_base: 250
-  health_base_step: 0.5
-  health_plv: 3
-  health_plv_step: 0.003
   speed_base: 86
-  speed_step: 0.05
-  armor: 10
-  magic_resist: 10
+  armor: 20
+  magic_resist: 20
+  crit: 0
   attack_type: 1
   classes: 0400000005000000
-  skill_name: 
-  start_fury: 0
-  max_fury: 20
+  start_fury: 5
+  max_fury: 25
   skill_params:
-  - 2
+  - 2.4

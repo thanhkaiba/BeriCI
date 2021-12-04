@@ -1,27 +1,18 @@
 {
   "root_name": "Tons",
   "rank": 3,
-  "power_base": 85.0,
-  "power_base_step": 0.0,
-  "power_plv": 0.0,
-  "power_plv_step": 0.0,
+  "power_base": 72.0,
+  "health_base": 270.0,
+  "speed_base": 72.0,
+  "armor": 27.0,
+  "magic_resist": 27.0,
   "crit": 0.0,
-  "crit_damage": 0.0,
-  "health_base": 300.0,
-  "health_base_step": 0.0,
-  "health_plv": 0.0,
-  "health_plv_step": 0.0,
-  "speed_base": 85.0,
-  "speed_step": 0.05,
-  "armor": 20.0,
-  "magic_resist": 20.0,
   "attack_type": 2,
   "classes": [
     6
   ],
-  "skill_name": "Huricane",
-  "start_fury": 0,
-  "max_fury": 120,
+  "start_fury": 50,
+  "max_fury": 70,
   "skill_params": [
     2.0
   ]

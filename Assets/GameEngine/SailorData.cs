@@ -34,6 +34,7 @@ public enum SailorClass
     CYBORG,
     SUPPORT,
     KNIGHT,
+    GRAPPLER,
 };
 
 public enum SailorRank

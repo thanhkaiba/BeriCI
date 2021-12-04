@@ -260,6 +260,8 @@ public class CombatSailor : Sailor
             CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
         }
         GainHealth(wildHeal);
+        target.CheckActiveGrappler();
+
         // Deal damage
         float delay = RunBaseAttack(target);
         Damage damage = new Damage()
@@ -275,6 +277,18 @@ public class CombatSailor : Sailor
             target.LoseHealth(damage);
         } ));
         return delay + 0.6f;
+    }
+    public void CheckActiveGrappler()
+    {
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        ClassBonusItem grappler = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.GRAPPLER);
+        if (cs.HaveType(SailorClass.GRAPPLER) && grappler != null)
+        {
+            float speedUpPercent = config.GetParams(SailorClass.GRAPPLER, 2)[0];
+            float speedAdd = speedUpPercent * cs.SpeedNeed;
+            SpeedUp((int) speedAdd);
+            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.GRAPPLER, new List<float> { speedAdd });
+        }
     }
     IEnumerator WaitAndDo(float time, Action action)
     {

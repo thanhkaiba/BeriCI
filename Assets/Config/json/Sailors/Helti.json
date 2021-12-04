@@ -1,28 +1,19 @@
 {
   "root_name": "Helti",
   "rank": 2,
-  "power_base": 65.0,
-  "power_base_step": 0.25,
-  "power_plv": 1.0,
-  "power_plv_step": 0.001,
-  "crit": 0.0,
-  "crit_damage": 0.0,
+  "power_base": 58.0,
   "health_base": 320.0,
-  "health_base_step": 0.5,
-  "health_plv": 3.0,
-  "health_plv_step": 0.003,
-  "speed_base": 100.0,
-  "speed_step": 0.05,
+  "speed_base": 90.0,
   "armor": 20.0,
   "magic_resist": 20.0,
+  "crit": 0.0,
   "attack_type": 0,
   "classes": [
     2,
     1
   ],
-  "skill_name": "WindSlash",
-  "start_fury": 0,
-  "max_fury": 40,
+  "start_fury": 20,
+  "max_fury": 50,
   "skill_params": [
     3.0,
     1.2

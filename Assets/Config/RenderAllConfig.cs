@@ -19,6 +19,7 @@ public class RenderAllConfig : MonoBehaviour
             }
         }
         RenderCombatConfig("ScriptableObject/Combat", "Combat");
+        RenderSailorGereralConfig("ScriptableObject/SailorGeneralConfig", "SailorGeneralConfig");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
     }
 
@@ -44,6 +45,17 @@ public class RenderAllConfig : MonoBehaviour
     {
         Debug.Log("RenderConfig " + src + " " + file_name);
         CombatConfig a = Resources.Load<CombatConfig>(src);
+        string json = a.Serialize(a);
+        string filesrc = "Assets/Config/json/" + file_name + ".json";
+        File.WriteAllText(filesrc, "");
+        StreamWriter writer = new StreamWriter(filesrc, true);
+        writer.WriteLine(json);
+        writer.Close();
+    }
+    void RenderSailorGereralConfig(string src, string file_name)
+    {
+        Debug.Log("RenderConfig " + src + " " + file_name);
+        SailorGeneralConfig a = Resources.Load<SailorGeneralConfig>(src);
         string json = a.Serialize(a);
         string filesrc = "Assets/Config/json/" + file_name + ".json";
         File.WriteAllText(filesrc, "");

@@ -93,21 +93,11 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("Obonbee", new CombatPosition(2, 2), Team.A);
-        CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
-        CreateCombatSailor("QChi", new CombatPosition(1, 0), Team.A);
-
-        CreateCombatSailor("Herminia", new CombatPosition(2, 0), Team.A);
-
-        CreateCombatSailor("Meechik", new CombatPosition(2, 1), Team.A);
+        CreateCombatSailor("Tons", new CombatPosition(1, 1), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("Scrub", new CombatPosition(0, 0), Team.B);
-        CreateCombatSailor("RowT", new CombatPosition(2, 0), Team.B);
-
-        CreateCombatSailor("Scrub", new CombatPosition(0, 2), Team.B);
-        CreateCombatSailor("RowT", new CombatPosition(2, 2), Team.B);
+        CreateCombatSailor("OBonbee", new CombatPosition(1, 1), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
@@ -126,8 +116,10 @@ public class CombatState : MonoBehaviour
         }
 
         CombatSailor sailor = GameUtils.CreateCombatSailor(name);
-        sailor.Model.quality = UnityEngine.Random.Range(1, 100 + 1);
-        sailor.Model.level = UnityEngine.Random.Range(1, 10 + 1);
+        // sailor.Model.quality = UnityEngine.Random.Range(1, 100 + 1);
+        // sailor.Model.level = UnityEngine.Random.Range(1, 10 + 1);
+        sailor.Model.quality = 0;
+        sailor.Model.level = 0;
 
         sailor.SetEquipItems(listItem);
         sailor.InitCombatData(pos, team);

@@ -64,9 +64,9 @@ public class Beel : CombatSailor
         CombatSailor target = TargetsUtils.Range(this, enermy);
         List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, true);
 
-        return RunAnimation(target, around_target, magic_damage, magic_damage);
+        return RunAnimation(target, around_target, magic_damage);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float physics_damage, float magic_damage)
+    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float magic_damage)
     {
         TriggerAnimation("Skill");
 
@@ -95,7 +95,6 @@ public class Beel : CombatSailor
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
-            target.TakeDamage(physics_damage);
             around_target.ForEach(s => s.TakeDamage(0, magic_damage));
         });
 
