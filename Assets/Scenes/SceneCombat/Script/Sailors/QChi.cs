@@ -17,9 +17,9 @@ public class QChi : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-     /*   Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
-        relativePos.y += 4.5f;
-        relativePos.x *= modelObject.transform.localScale.x;*/
+        /*   Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
+           relativePos.y += 4.5f;
+           relativePos.x *= modelObject.transform.localScale.x;*/
         TriggerAnimation("Attack");
 
         Vector3 targetPos = target.transform.position;
@@ -89,19 +89,23 @@ public class QChi : CombatSailor
         {
             for (int i = 0; i < listTargets.Count; i++)
             {
-              
-                Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("fx_ball_1");
-                Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
+                Spine.Bone bone = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("fx_ball_1");
+                Vector3 startPos = bone.GetWorldPosition(modelObject.transform);
                 Vector3 endPos = listTargets[i].transform.position;
                 endPos.y += 2;
-                var go = GameEffMgr.Instance.ShowPurple(endPos, startPos.x < listTargets[i].cs.position.x);
-                go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-                listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+                GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, endPos, 0, .4f,1 , 1f);
             }
-               
+
+
         });
-  
-        return 2.5f;
+        seq.AppendInterval(.5f);
+        seq.AppendCallback(() =>
+        {
+            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+
+        });
+
+        return 3.5f;
     }
 }
 

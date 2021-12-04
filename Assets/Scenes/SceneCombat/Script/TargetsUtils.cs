@@ -225,7 +225,24 @@ public class TargetsUtils
         if (row3.Count > 0) result.Add(row3[0]);
         return result;
     }
-
+    public static CombatSailor GetSailorFrontSameTeam(CombatSailor actor, List<CombatSailor> l)
+    {
+        var result = new CombatSailor();
+        var sameRow = new List<CombatSailor>();
+        for (int i = 0; i < l.Count; i++)if (l[i].cs.position.y == actor.cs.position.y && l[i].cs.position.x != actor.cs.position.x && l[i].cs.position.x < actor.cs.position.x) sameRow.Add(l[i]);
+        if (sameRow.Count == 1)
+        {
+            result = sameRow[0];
+            return result;
+        }
+        else if (sameRow.Count == 0) return null;
+        else
+        {
+            result = sameRow[0].cs.position.x > sameRow[1].cs.position.x ? sameRow[0] : sameRow[1];
+            return result;
+        }
+      
+    }
     public static CombatSailor Random(List<CombatSailor> l)
     {
         Random rnd = new Random();

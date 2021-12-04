@@ -106,11 +106,17 @@ public class CombatMgr : MonoBehaviour
     }
     private float ProcessAction()
     {
+        if (listActions.Count == 0)
+        {
+            GameOver(CheckTeamWin());
+            return 0;
+        }
         CombatAction actionProcess = listActions[actionCount];
         int speedAdd = CalculateSpeedAddThisLoop();
         SpeedUpAllSailors(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowActionCount(actionCount);
+
         switch (actionProcess.type)
         {
             case CombatAcionType.BaseAttack:
@@ -139,8 +145,13 @@ public class CombatMgr : MonoBehaviour
                 }
             case CombatAcionType.GameResult:
                 return 0;
+            case CombatAcionType.Lose:
+                return 0;
+            case CombatAcionType.GameState:
+                return 0;
+            default:
+                 return 0;
         }
-        return 0;
     }
     private CombatSailor GetActorAction(CombatAction action)
     {

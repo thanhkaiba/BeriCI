@@ -1,0 +1,22 @@
+{
+  "root_name": "Galdalf",
+  "rank": 1,
+  "power_base": 56.0,
+  "health_base": 2500.0,
+  "speed_base": 86.0,
+  "armor": 10.0,
+  "magic_resist": 10.0,
+  "crit": 0.0,
+  "attack_type": 1,
+  "classes": [
+    4,
+    7
+  ],
+  "start_fury": 0,
+  "max_fury": 1000,
+  "skill_params": [
+    20.0,
+    0.3,
+    20.0
+  ]
+}

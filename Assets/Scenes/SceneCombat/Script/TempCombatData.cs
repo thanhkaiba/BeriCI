@@ -24,8 +24,7 @@ public class TempCombatData : Singleton<TempCombatData>
 
 	public void LoadCombatDataFromSfs(ISFSObject packet)
     {
-        if (NetworkController.showCombat)
-        {
+       
 
 			Debug.Log("Read Combat Data");
 			listSailor = new List<SailorModel>();
@@ -44,6 +43,22 @@ public class TempCombatData : Singleton<TempCombatData>
 				listSailor.Add(model);
 			}
 
+			sFSSailors = packet.GetSFSArray("sailors_1");
+			foreach (ISFSObject obj in sFSSailors)
+			{
+				SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
+				{ quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+				listSailor.Add(model);
+			}
+
+			sFSSailors = packet.GetSFSArray("sailors_0");
+			foreach (ISFSObject obj in sFSSailors)
+			{
+				SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
+				{ quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+				listSailor.Add(model);
+			}
+
 			fgl0 = new FightingLine();
 			fgl1 = new FightingLine();
 
@@ -52,7 +67,7 @@ public class TempCombatData : Singleton<TempCombatData>
 
 			waitForAServerGame = true;
 
-		}
+		
 		ca = new List<CombatAction>();
 		ISFSArray _ca = packet.GetSFSArray("ca");
 		int lastItem = 0;
@@ -74,6 +89,7 @@ public enum CombatAcionType
 	UseSkill,
 	GameResult,
 	GameState,
+	Lose
 }
 public enum RankBonus
 {

@@ -1,3 +1,4 @@
+using Sfs2X.Entities.Data;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,7 @@ public class UIPopupReward : MonoBehaviour
                 break;
         }
         texts[5].transform.parent.gameObject.SetActive(r.team_win == 1 ? false : true);
+        transform.GetChild(1).gameObject.SetActive(true);
         gameObject.SetActive(true);
     }
 
@@ -43,9 +45,23 @@ public class UIPopupReward : MonoBehaviour
         {
             item.text = "";
         }
+        transform.GetChild(1).gameObject.SetActive(false);
+        texts[5].transform.parent.gameObject.SetActive(false);
     }
     public void ClickReceive()
     {
+        NetworkController.Instance.countDownPickTeam = true;
         SceneManager.LoadScene("SceneLobby");
+        transform.GetChild(1).gameObject.SetActive(false);
+    }
+    public void ConfirmSur()
+    {
+       SFSObject sfsObject = new SFSObject();
+       sfsObject.PutBool("accept", false);
+        NetworkController.showCombat = false;
+       sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
+       NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+       NetworkController.Instance.countDownPickTeam = false;
+       transform.GetChild(1).gameObject.SetActive(true);
     }
 }

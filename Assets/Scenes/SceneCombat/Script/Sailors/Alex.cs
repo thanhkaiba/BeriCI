@@ -21,6 +21,10 @@ public class Alex : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
+        Debug.Log("target: " + target);
+        Debug.Log("target id: " + target.Model.id);
+        Debug.Log("target id: " + target.Model.config_stats.root_name);
+        Debug.LogError(" | position: " + target.cs.position.x + " y: " + target.cs.position.y);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 5,
@@ -28,11 +32,10 @@ public class Alex : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return .7f;
+        return .95f;
     }
     public override float TakeDamage(Damage d)
     {
@@ -79,6 +82,7 @@ public class Alex : CombatSailor
         });
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.GainHealth(_params[0]));
+        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = 0 });
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.GainArmor((int)_params[1]));
         return 2f;
