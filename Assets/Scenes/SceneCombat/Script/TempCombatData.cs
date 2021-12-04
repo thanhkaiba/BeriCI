@@ -89,6 +89,7 @@ public enum CombatAcionType
 	UseSkill,
 	GameResult,
 	GameState,
+	Lose
 }
 public enum RankBonus
 {

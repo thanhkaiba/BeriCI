@@ -154,7 +154,7 @@ public class CombatSailor : Sailor
         });
     }
 
-    public virtual void ActiveStartPassive()
+    public virtual void ActiveStartPassive() 
     {
         // do nothing, se say ra o 1 so tuong skill passive
     }
@@ -431,6 +431,14 @@ public class CombatSailor : Sailor
         cs.Fury += value;
         if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
+    }
+    public virtual void GainPower(int value)
+    {
+        cs.BasePower += value;
+    }
+    public virtual void GainSpeed(int value)
+    {
+        cs.Speed += value;
     }
     public int GetSpeedNeeded()
     {

@@ -14,8 +14,6 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private Text userNameA;
     [SerializeField]
     private UserAvatar avatarA;
-    [SerializeField]
-    SquadAContainer squaA;
     [Header("UserB Info")]
     [SerializeField]
     private Text userNameB;
@@ -79,7 +77,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-       // NetworkController.showCombat = squaA.HaveSailor();
+        NetworkController.showCombat = true;
         NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
         NetworkController.Instance.countDownPickTeam = false;
     }
