@@ -4099,6 +4099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2016eb7ee93501446987a1f015c5c296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countDownPickTeam: 1
 --- !u!4 &1448217985
 Transform:
   m_ObjectHideFlags: 0

@@ -243,6 +243,16 @@ public class TargetsUtils
         }
       
     }
+    public static CombatSailor Front(CombatSailor actor, List<CombatSailor> l)
+    {
+        CombatSailor result = null;
+        l.ForEach(s =>
+        {
+            if (s.cs.position.y == actor.cs.position.y
+            && s.cs.position.x == actor.cs.position.x - 1) result = s;
+        });
+        return result;
+    }
     public static CombatSailor Random(List<CombatSailor> l)
     {
         Random rnd = new Random();

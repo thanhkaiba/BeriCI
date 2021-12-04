@@ -1,0 +1,188 @@
+
+Mealodo.png
+size: 1024,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1_belt
+  rotate: true
+  xy: 516, 30
+  size: 90, 63
+  orig: 90, 63
+  offset: 0, 0
+  index: -1
+1_body
+  rotate: false
+  xy: 217, 64
+  size: 126, 190
+  orig: 128, 190
+  offset: 2, 0
+  index: -1
+1_eye_1
+  rotate: true
+  xy: 345, 79
+  size: 17, 12
+  orig: 17, 12
+  offset: 0, 0
+  index: -1
+1_eye_2
+  rotate: false
+  xy: 504, 108
+  size: 10, 12
+  orig: 10, 12
+  offset: 0, 0
+  index: -1
+1_hand_1
+  rotate: true
+  xy: 217, 2
+  size: 60, 140
+  orig: 60, 140
+  offset: 0, 0
+  index: -1
+1_hand_2
+  rotate: false
+  xy: 451, 3
+  size: 63, 96
+  orig: 63, 96
+  offset: 0, 0
+  index: -1
+1_hand_3
+  rotate: true
+  xy: 722, 116
+  size: 66, 85
+  orig: 66, 85
+  offset: 0, 0
+  index: -1
+1_hand_4
+  rotate: false
+  xy: 907, 101
+  size: 23, 18
+  orig: 23, 18
+  offset: 0, 0
+  index: -1
+1_hand_5
+  rotate: false
+  xy: 1008, 231
+  size: 14, 23
+  orig: 14, 23
+  offset: 0, 0
+  index: -1
+1_hand_6
+  rotate: false
+  xy: 972, 213
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+1_hand_7
+  rotate: false
+  xy: 972, 171
+  size: 35, 40
+  orig: 35, 40
+  offset: 0, 0
+  index: -1
+1_hand_8
+  rotate: true
+  xy: 113, 7
+  size: 43, 92
+  orig: 43, 92
+  offset: 0, 0
+  index: -1
+1_leg_1
+  rotate: false
+  xy: 345, 98
+  size: 78, 156
+  orig: 78, 156
+  offset: 0, 0
+  index: -1
+1_leg_2
+  rotate: true
+  xy: 740, 184
+  size: 70, 133
+  orig: 70, 133
+  offset: 0, 0
+  index: -1
+1_leg_3
+  rotate: false
+  xy: 425, 101
+  size: 77, 153
+  orig: 77, 153
+  offset: 0, 0
+  index: -1
+1_leg_4
+  rotate: false
+  xy: 504, 122
+  size: 84, 132
+  orig: 84, 132
+  offset: 0, 0
+  index: -1
+1_sword
+  rotate: false
+  xy: 2, 52
+  size: 213, 202
+  orig: 213, 202
+  offset: 0, 0
+  index: -1
+1_voan
+  rotate: true
+  xy: 2, 19
+  size: 31, 109
+  orig: 31, 116
+  offset: 0, 6
+  index: -1
+2_leg_3
+  rotate: true
+  xy: 590, 123
+  size: 63, 130
+  orig: 63, 130
+  offset: 0, 0
+  index: -1
+2_leg_5
+  rotate: true
+  xy: 590, 188
+  size: 66, 148
+  orig: 66, 148
+  offset: 0, 0
+  index: -1
+Group 2
+  rotate: true
+  xy: 359, 2
+  size: 94, 90
+  orig: 96, 90
+  offset: 0, 0
+  index: -1
+Layer 11
+  rotate: true
+  xy: 872, 121
+  size: 54, 86
+  orig: 54, 86
+  offset: 0, 0
+  index: -1
+Layer 12
+  rotate: false
+  xy: 809, 101
+  size: 61, 81
+  orig: 61, 81
+  offset: 0, 0
+  index: -1
+Layer 6
+  rotate: false
+  xy: 872, 91
+  size: 33, 28
+  orig: 33, 29
+  offset: 0, 1
+  index: -1
+Layer 7
+  rotate: false
+  xy: 516, 9
+  size: 42, 19
+  orig: 42, 19
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 875, 177
+  size: 77, 95
+  orig: 77, 95
+  offset: 0, 0
+  index: -1

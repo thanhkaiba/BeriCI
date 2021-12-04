@@ -26,7 +26,7 @@ public class Jenkins : CombatSailor
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 6,
             target.transform.position.y,
-            target.transform.position.z
+            target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.1f);

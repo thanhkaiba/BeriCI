@@ -10,23 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
-  m_Name: Galdalf
+  m_Name: Mealodo
   m_EditorClassIdentifier: 
-  model: {fileID: 6114236096289693262, guid: 12afeaa7f446a324b9e272d4493bfc1d, type: 3}
-  avatar: {fileID: 21300000, guid: 41181920b766afd40ba793fcd6b95c15, type: 3}
-  root_name: Galdalf
-  rank: 1
-  power_base: 40
-  health_base: 200
-  speed_base: 50
-  armor: 35
-  magic_resist: 35
+  model: {fileID: 0}
+  avatar: {fileID: 21300000, guid: a66e358b52fe6614b9e80577133b96f4, type: 3}
+  root_name: Mealodo
+  rank: 0
+  power_base: 54
+  health_base: 250
+  speed_base: 70
+  armor: 25
+  magic_resist: 15
   crit: 0
-  attack_type: 1
-  classes: 0400000007000000
+  attack_type: 0
+  classes: 
   start_fury: 0
-  max_fury: 0
+  max_fury: 15
   skill_params:
-  - 20
-  - 0.3
-  - 0.2
+  - 2
