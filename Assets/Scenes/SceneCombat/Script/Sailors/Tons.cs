@@ -79,20 +79,30 @@ public class Tons : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
+
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         base.CastSkill(cbState);
         float damage = cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Backstab(this, enermy);
-        return RunAnimation(target , damage);
+
+        targets.Add(target.Model.id);
+        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }));
+
+        return ProcessSkill(targets, _params);
     }
-    float RunAnimation(CombatSailor target, float damage)
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
+        float damage = _params[0];
         TriggerAnimation("Skill");
         base.ProcessSkill();
         Vector3 posEnemy = target.transform.position;
         posEnemy.y += 1.7f;
+        posEnemy.z -= 0.1f;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.8f);
         seq.AppendCallback(() => {
@@ -100,18 +110,18 @@ public class Tons : CombatSailor
                 Resources.Load<GameObject>("Effect2D/Impact/Impact"),
                posEnemy, modelObject.transform.rotation);
             Sequence seq2 = DOTween.Sequence();
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
-            seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
-            seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
-            seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
-            seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
-            seq2.AppendInterval(.2f);
+            seq2.AppendCallback(() => target.LoseHealth(damage / 5));
+            seq2.AppendInterval(.18f);
+            seq2.AppendCallback(() => target.LoseHealth(damage / 5));
+            seq2.AppendInterval(.18f);
+            seq2.AppendCallback(() => target.LoseHealth(damage / 5));
+            seq2.AppendInterval(.18f);
+            seq2.AppendCallback(() => target.LoseHealth(damage / 5));
+            seq2.AppendInterval(.18f);
+            seq2.AppendCallback(() => target.LoseHealth(damage / 5));
+            seq2.AppendInterval(.18f);
             seq2.AppendCallback(() => Destroy(ex));
         });
-        return 2f;
+        return 2.6f;
     }
 }

@@ -4,17 +4,17 @@
   "power_base": 56.0,
   "health_base": 250.0,
   "speed_base": 86.0,
-  "armor": 10.0,
-  "magic_resist": 10.0,
+  "armor": 20.0,
+  "magic_resist": 20.0,
   "crit": 0.0,
   "attack_type": 1,
   "classes": [
     4,
     5
   ],
-  "start_fury": 0,
-  "max_fury": 20,
+  "start_fury": 5,
+  "max_fury": 25,
   "skill_params": [
-    2.0
+    2.4
   ]
 }

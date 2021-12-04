@@ -16,20 +16,12 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 38d7c448d432f484eb3b2fee548abb78, type: 3}
   root_name: Meechik
   rank: 2
-  power_base: 60
-  power_base_step: 0.22
-  power_plv: 1
-  power_plv_step: 0.001
-  crit: 0
-  crit_damage: 0
-  health_base: 260
-  health_base_step: 0.4
-  health_plv: 2.5
-  health_plv_step: 0.002
+  power_base: 68
+  health_base: 220
   speed_base: 105
-  speed_step: 0.05
   armor: 15
   magic_resist: 15
+  crit: 0
   attack_type: 1
   classes: 03000000
   start_fury: 0

@@ -1,9 +1,9 @@
 {
   "root_name": "Beel",
   "rank": 3,
-  "power_base": 100.0,
-  "health_base": 150.0,
-  "speed_base": 95.0,
+  "power_base": 85.0,
+  "health_base": 240.0,
+  "speed_base": 90.0,
   "armor": 20.0,
   "magic_resist": 35.0,
   "crit": 0.0,
@@ -12,7 +12,7 @@
     4
   ],
   "start_fury": 0,
-  "max_fury": 20,
+  "max_fury": 80,
   "skill_params": [
     5.0
   ]

@@ -17,14 +17,14 @@ MonoBehaviour:
   root_name: Alex
   rank: 0
   power_base: 50
-  health_base: 280
+  health_base: 300
   speed_base: 82
   armor: 30
   magic_resist: 25
   crit: 0
   attack_type: 0
   classes: 090000000b000000
-  start_fury: 0
+  start_fury: 20
   max_fury: 35
   skill_params:
   - 0.25

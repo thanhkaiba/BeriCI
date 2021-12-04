@@ -1,8 +1,8 @@
 {
   "root_name": "Meechik",
   "rank": 2,
-  "power_base": 60.0,
-  "health_base": 260.0,
+  "power_base": 68.0,
+  "health_base": 220.0,
   "speed_base": 105.0,
   "armor": 15.0,
   "magic_resist": 15.0,

@@ -16,24 +16,15 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 248f8edf19bdc1146ab7729bdfd89bec, type: 3}
   root_name: Tons
   rank: 3
-  power_base: 85
-  power_base_step: 0
-  power_plv: 0
-  power_plv_step: 0
+  power_base: 72
+  health_base: 270
+  speed_base: 72
+  armor: 27
+  magic_resist: 27
   crit: 0
-  crit_damage: 0
-  health_base: 300
-  health_base_step: 0
-  health_plv: 0
-  health_plv_step: 0
-  speed_base: 85
-  speed_step: 0.05
-  armor: 20
-  magic_resist: 20
   attack_type: 2
   classes: 06000000
-  skill_name: Huricane
-  start_fury: 0
-  max_fury: 120
+  start_fury: 50
+  max_fury: 70
   skill_params:
   - 2
