@@ -44,7 +44,7 @@ public class ContainerClassBonus : ScriptableObjectPro
 #endif
 
     // function
-    private ClassBonus GetPassiveConfig(SailorClass type)
+    public ClassBonus GetPassiveConfig(SailorClass type)
     {
         foreach (ClassBonus item in classBonusList)
         {

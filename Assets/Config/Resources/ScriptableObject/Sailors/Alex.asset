@@ -15,21 +15,13 @@ MonoBehaviour:
   model: {fileID: 2117546187999679487, guid: 17f93e74ca7bf2841a69bf7ebe4eda6d, type: 3}
   avatar: {fileID: 21300000, guid: 44c0adbc27b41854ab23ac05a2d0c17e, type: 3}
   root_name: Alex
-  rank: 1
+  rank: 0
   power_base: 50
-  power_base_step: 0.25
-  power_plv: 1
-  power_plv_step: 0.001
-  crit: 0
-  crit_damage: 0
-  health_base: 350
-  health_base_step: 0.5
-  health_plv: 3
-  health_plv_step: 0.003
+  health_base: 280
   speed_base: 82
-  speed_step: 0.05
-  armor: 10
-  magic_resist: 10
+  armor: 30
+  magic_resist: 25
+  crit: 0
   attack_type: 0
   classes: 090000000b000000
   start_fury: 0
