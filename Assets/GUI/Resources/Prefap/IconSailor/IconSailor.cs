@@ -20,7 +20,7 @@ public class IconSailor : MonoBehaviour
         gameObject.name = sailorModel.id;
         icon.sprite = sailorModel.config_stats.avatar;
         background.sprite = rankSprites[(int)sailorModel.config_stats.rank];
-        qualitySlider.value = 50f / GameConst.MAX_QUALITY;
+        qualitySlider.value = (sailorModel.quality * 1f) / GameConst.MAX_QUALITY;
 
     }
 

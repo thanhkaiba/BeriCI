@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
+using Piratera.GUI;
 
 public class GameUtils : UnityEngine.Object
 {
@@ -71,9 +72,13 @@ public class GameUtils : UnityEngine.Object
       
     }
 
-        public static Sailor CreateSailor(SailorModel sailorModel)
+    public static Sailor CreateSailor(SailorModel sailorModel)
     {
-
+        if (sailorModel.config_stats.model == null)
+        {
+            GuiManager.Instance.ShowPopupNotification($"{sailorModel.config_stats.root_name} is not have a model (Chua Code o Client)");
+            return null;
+        }
         GameObject characterGO = Instantiate(sailorModel.config_stats.model);
         Sailor sailor = characterGO.AddComponent<Sailor>();
         sailor.Model = sailorModel;

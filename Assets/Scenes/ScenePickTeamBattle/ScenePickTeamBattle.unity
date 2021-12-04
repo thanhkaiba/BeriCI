@@ -350,6 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2016eb7ee93501446987a1f015c5c296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  countDownPickTeam: 1
 --- !u!4 &118701285
 Transform:
   m_ObjectHideFlags: 0
@@ -2074,7 +2075,6 @@ MonoBehaviour:
   textCountDown: {fileID: 1490572364}
   userNameA: {fileID: 1956083720}
   avatarA: {fileID: 976640438}
-  squaA: {fileID: 1745113250}
   userNameB: {fileID: 1768693683}
   avatarB: {fileID: 1172286869}
 --- !u!4 &1133007009
@@ -2374,6 +2374,7 @@ GameObject:
   - component: {fileID: 1325217655}
   - component: {fileID: 1325217654}
   - component: {fileID: 1325217653}
+  - component: {fileID: 1325217657}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2471,6 +2472,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1325217657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1325217652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2285536e193a6454caf24c579263c41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1389122091
 GameObject:
   m_ObjectHideFlags: 0
