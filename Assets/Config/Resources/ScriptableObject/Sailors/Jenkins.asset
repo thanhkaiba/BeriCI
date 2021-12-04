@@ -27,5 +27,5 @@ MonoBehaviour:
   start_fury: 10
   max_fury: 30
   skill_params:
-  - 3.5
+  - 2.5
   - 0.3
