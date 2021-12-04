@@ -57,9 +57,10 @@ public class Galdalf : CombatSailor
     }
     public override void ActiveStartPassive()
     {
-        CombatSailor _targets = TargetsUtils.GetSailorFrontSameTeam(this, CombatState.Instance.GetAllTeamAliveSailors(cs.team));
-        if (_targets == null)
-            return;
+        CombatSailor _targets = TargetsUtils.Front(this, CombatState.Instance.GetAllTeamAliveSailors(cs.team));
+        if (_targets == null) return;
+
+        TriggerAnimation("Attack");
         float fury_buff = Model.config_stats.skill_params[0];
         float power_buff = cs.Power * Model.config_stats.skill_params[1];
         float speed_buff = Model.config_stats.skill_params[2];
