@@ -216,7 +216,7 @@ public class CombatMgr : MonoBehaviour
 
     CombatSailor SpeedUpAllSailors(int speedAdd)
     {
-        combatState.GetAllAliveCombatSailors().ForEach(character => character.SpeedUp(speedAdd));
+        combatState.GetAllAliveCombatSailors().ForEach(character => character.AddCurSpeed(speedAdd));
         return combatState.GetQueueNextActionSailor().First();
     }
     public Team CheckTeamWin()

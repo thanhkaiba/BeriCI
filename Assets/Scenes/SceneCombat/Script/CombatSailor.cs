@@ -285,9 +285,8 @@ public class CombatSailor : Sailor
         if (cs.HaveType(SailorClass.GRAPPLER) && grappler != null)
         {
             float speedUpPercent = config.GetParams(SailorClass.GRAPPLER, 2)[0];
-            float speedAdd = speedUpPercent * cs.SpeedNeed;
-            SpeedUp((int) speedAdd);
-            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.GRAPPLER, new List<float> { speedAdd });
+            SpeedUp(speedUpPercent);
+            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.GRAPPLER, new List<float> { speedUpPercent });
         }
     }
     IEnumerator WaitAndDo(float time, Action action)
@@ -446,7 +445,7 @@ public class CombatSailor : Sailor
         if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
     }
-    public virtual void GainPower(int value)
+    public virtual void GainPower(float value)
     {
         cs.BasePower += value;
     }
@@ -458,9 +457,14 @@ public class CombatSailor : Sailor
     {
         return cs.SpeedNeed - cs.CurrentSpeed;
     }
-    public virtual void SpeedUp(int speedAdd)
+    public void AddCurSpeed (int value)
     {
-        cs.CurrentSpeed += speedAdd;
+        cs.CurrentSpeed += value;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
+    }
+    public virtual void SpeedUp(float percent)
+    {
+        cs.CurrentSpeed += (int) (percent * cs.SpeedNeed);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
     }
     public void IncDisplaySpeed(float spInc)

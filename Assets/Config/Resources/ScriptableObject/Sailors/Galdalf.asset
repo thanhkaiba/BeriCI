@@ -16,25 +16,17 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 41181920b766afd40ba793fcd6b95c15, type: 3}
   root_name: Galdalf
   rank: 1
-  power_base: 56
-  power_base_step: 0.25
-  power_plv: 1
-  power_plv_step: 0.001
+  power_base: 40
+  health_base: 200
+  speed_base: 50
+  armor: 35
+  magic_resist: 35
   crit: 0
-  crit_damage: 0
-  health_base: 2500
-  health_base_step: 0.5
-  health_plv: 3
-  health_plv_step: 0.003
-  speed_base: 86
-  speed_step: 0.05
-  armor: 10
-  magic_resist: 10
   attack_type: 1
   classes: 0400000007000000
   start_fury: 0
-  max_fury: 1000
+  max_fury: 0
   skill_params:
   - 20
   - 0.3
-  - 20
+  - 0.2
