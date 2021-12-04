@@ -112,7 +112,6 @@ public class CombatMgr : MonoBehaviour
             return 0;
         }
         CombatAction actionProcess = listActions[actionCount];
-        Debug.LogError(actionProcess.type);
         int speedAdd = CalculateSpeedAddThisLoop();
         SpeedUpAllSailors(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
