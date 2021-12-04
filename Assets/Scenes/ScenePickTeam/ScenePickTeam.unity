@@ -2466,8 +2466,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: PickTeamController, Assembly-CSharp
+      - m_Target: {fileID: 1072998034}
+        m_TargetAssemblyTypeName: PickTeamUI, Assembly-CSharp
         m_MethodName: OnBackToLobby
         m_Mode: 1
         m_Arguments:
