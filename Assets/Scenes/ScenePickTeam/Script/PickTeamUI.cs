@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Piratera.Utils;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class PickTeamUI : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class PickTeamUI : MonoBehaviour
     {
         canvas = FindObjectOfType<Canvas>();
         RunAppearAction();
+        SquadContainer.Draging = false;
+
 
     }
 
@@ -26,5 +29,10 @@ public class PickTeamUI : MonoBehaviour
 
         float slotHeight = ((RectTransform)backgroundSailorList.transform).sizeDelta.y * 2 * scale;
         DoTweenUtils.FadeAppearY(backgroundSailorList, -slotHeight*1.5f, 0.5f, Ease.OutFlash);
+    }
+
+    public void OnBackToLobby()
+    {
+        SceneManager.LoadScene("SceneLobby");
     }
 }
