@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class Obonbee : CombatSailor
+public class OBonbee : CombatSailor
 {
-    public Obonbee()
+    public OBonbee()
     {
     }
     public override void Awake()
