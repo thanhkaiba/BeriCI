@@ -11,5 +11,6 @@
     BUY_STAMINA = 9,
     COMBAT_PREPARE = 10,
     COMBAT_COMFIRM = 11,
+    BUY_SLOT = 12,
     CHEAT_SAILOR = 101,
 }

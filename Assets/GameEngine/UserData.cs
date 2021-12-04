@@ -15,6 +15,7 @@ public class UserInfoPropertiesKey
     public const string LEVEL = "level";
     public const string AVATAR = "avatar";
     public const string TIME_BUY_STAMINA_TODAY = "time_buy_to_day";
+    public const string NUMBER_OF_POSITIONS = "number_of_positions";
 }
 
 public class UserData : Singleton<UserData>
@@ -43,6 +44,8 @@ public class UserData : Singleton<UserData>
 
     public int TimeBuyStaminaToday { get; set; }
 
+    public int NumSlot { get; set; }
+
 
     public void LoadExpConfig()
     {
@@ -64,6 +67,7 @@ public class UserData : Singleton<UserData>
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         LastCountStamina = (long)user.GetVariable(UserInfoPropertiesKey.LAST_COUNT).GetDoubleValue();
         TimeBuyStaminaToday = user.GetVariable(UserInfoPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
+        NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
         GameEvent.UserDataChanged.Invoke(changedVars);
 
         long oldBeri = Beri;

@@ -13,4 +13,7 @@
     STAMINA_BERI_NOT_ENOUGH = 10,	//ko đủ beri để mua
     COMBAT_STAMINA_NOT_ENOUGH =	11,	//ko du stamina de choi
     COMBAT_NOT_PREPARE = 12,	// chua chuan bi
+    BUY_SLOT_BERI_NOT_ENOUGH = 13,
+    BUY_SLOT_POSITION_SOLD_OUT = 14,
+    COMBAT_CONFIRM_SLOT_INVALID = 15
 }
