@@ -31,7 +31,7 @@ public class CharacterContainer : MonoBehaviour
     {
         RectTransform canvas = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
         RectTransform rect = (scrollRect.transform as RectTransform);
-        rect.sizeDelta = new Vector2(Mathf.Max(canvas.rect.width - 300, 1613), rect.sizeDelta.y); 
+        rect.sizeDelta = new Vector2(canvas.rect.width - 420, rect.sizeDelta.y); 
     }
 
     void OnDestroy()
