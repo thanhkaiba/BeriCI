@@ -65,11 +65,11 @@ public class PickTeamUI : MonoBehaviour
         if (UserData.Instance.NumSlot < lineUpSlotConfig.max)
         {
             ButtonBuySlot.gameObject.SetActive(true);
-            TextNewSlotCost.text = lineUpSlotConfig.costs[UserData.Instance.NumSlot].ToString();
+            TextNewSlotCost.text = lineUpSlotConfig.costs[UserData.Instance.NumSlot - 1].ToString();
         }
         else
         {
-            ButtonBuySlot.gameObject.SetActive(true);
+            ButtonBuySlot.gameObject.SetActive(false);
         }
 
     }
@@ -96,7 +96,7 @@ public class PickTeamUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Can't buy more slot");
             return;
         }
-        int cost = lineUpSlotConfig.costs[UserData.Instance.NumSlot];
+        int cost = lineUpSlotConfig.costs[UserData.Instance.NumSlot - 1];
         if (UserData.Instance.IsEnoughBeri(cost))
         {
             GuiManager.Instance.ShowGuiWaiting(true);

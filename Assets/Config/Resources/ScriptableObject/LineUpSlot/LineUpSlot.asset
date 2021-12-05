@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f164ef750cab247b8ba86e7cf732f5, type: 3}
   m_Name: LineUpSlot
   m_EditorClassIdentifier: 
-  max: 200
+  max: 5
   new_user_default: 1
   costs: 0a00000064000000c8000000f4010000
