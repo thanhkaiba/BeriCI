@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sfs2X.Entities.Data;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,12 +23,29 @@ namespace Piratera.GUI
             base.Start();
             InitPackData();
         }
+
+
         public void InitPackData()
         {
             UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
             textStaminaValue.text = "" + staminaConfig.statmina_buy_value;
             UpdateCurrentStamina();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
+            NetworkController.AddServerActionListener(OnReceiveServerAction);
+
+        }
+
+        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        {
+            GuiManager.Instance.ShowGuiWaiting(false);
+            if (action == SFSAction.BUY_STAMINA)
+            {
+                GuiManager.Instance.ShowGuiWaiting(false);
+                if (errorCode != SFSErrorCode.SUCCESS)
+                {
+                    GameUtils.ShowPopupPacketError(errorCode);
+                }
+            }
         }
 
         private void UpdateCurrentStamina(int arg0, int arg1)
@@ -37,7 +55,7 @@ namespace Piratera.GUI
 
         public void UpdateCurrentStamina()
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+          
             textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
 
             UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
@@ -79,6 +97,7 @@ namespace Piratera.GUI
         {
             RunDestroy();
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
+            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         }
 
         public void OnBuyStamina()
