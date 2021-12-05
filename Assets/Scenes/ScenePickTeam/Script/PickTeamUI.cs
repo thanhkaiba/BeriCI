@@ -5,8 +5,6 @@ using Piratera.Utils;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Piratera.GUI;
-using System.Collections.Generic;
-using System;
 using Sfs2X.Entities.Data;
 
 public class PickTeamUI : MonoBehaviour
@@ -24,6 +22,8 @@ public class PickTeamUI : MonoBehaviour
     private Text TextNewSlotCost;
     [SerializeField]
     private Button ButtonBuySlot;
+    [SerializeField]
+    private LineUpSlot lineUpSlotConfig;
 
     void Start()
     {
@@ -37,14 +37,15 @@ public class PickTeamUI : MonoBehaviour
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-       
+
         if (action == SFSAction.BUY_SLOT)
         {
             GuiManager.Instance.ShowGuiWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 GameUtils.ShowPopupPacketError(errorCode);
-            } else
+            }
+            else
             {
                 UpdateSlotMaxCapacity();
             }
@@ -56,13 +57,21 @@ public class PickTeamUI : MonoBehaviour
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
     }
 
- 
+
 
     void UpdateSlotMaxCapacity()
     {
         TextMaxCapacity.text = UserData.Instance.NumSlot.ToString();
-        ButtonBuySlot.gameObject.SetActive(UserData.Instance.NumSlot < 5);
-        TextNewSlotCost.text = "10000";
+        if (UserData.Instance.NumSlot < lineUpSlotConfig.max)
+        {
+            ButtonBuySlot.gameObject.SetActive(true);
+            TextNewSlotCost.text = lineUpSlotConfig.costs[UserData.Instance.NumSlot].ToString();
+        }
+        else
+        {
+            ButtonBuySlot.gameObject.SetActive(true);
+        }
+
     }
 
     private void RunAppearAction()
@@ -72,7 +81,7 @@ public class PickTeamUI : MonoBehaviour
         DoTweenUtils.FadeAppearY(title, titleHeight + 20, 0.5f, Ease.OutFlash);
 
         float slotHeight = ((RectTransform)backgroundSailorList.transform).sizeDelta.y * 2 * scale;
-        DoTweenUtils.FadeAppearY(backgroundSailorList, -slotHeight*1.5f, 0.5f, Ease.OutFlash);
+        DoTweenUtils.FadeAppearY(backgroundSailorList, -slotHeight * 1.5f, 0.5f, Ease.OutFlash);
     }
 
     public void OnBackToLobby()
@@ -82,10 +91,21 @@ public class PickTeamUI : MonoBehaviour
 
     public void OnBuySlot()
     {
-
-        GuiManager.Instance.ShowGuiWaiting(true);
-
-        NetworkController.Send(SFSAction.BUY_SLOT);
+        if (UserData.Instance.NumSlot >= lineUpSlotConfig.max)
+        {
+            GuiManager.Instance.ShowPopupNotification("Can't buy more slot");
+            return;
+        }
+        int cost = lineUpSlotConfig.costs[UserData.Instance.NumSlot];
+        if (UserData.Instance.IsEnoughBeri(cost))
+        {
+            GuiManager.Instance.ShowGuiWaiting(true);
+            NetworkController.Send(SFSAction.BUY_SLOT);
+        }
+        else
+        {
+            GuiManager.Instance.ShowPopupNotification("Not enough Beri");
+        }
 
     }
 }

@@ -2001,6 +2001,7 @@ MonoBehaviour:
   TextMaxCapacity: {fileID: 1833091284}
   TextNewSlotCost: {fileID: 1664093578}
   ButtonBuySlot: {fileID: 431218235}
+  lineUpSlotConfig: {fileID: 11400000, guid: 06b1cb403a87a15478c5a89b2b425769, type: 2}
 --- !u!1 &1220129522
 GameObject:
   m_ObjectHideFlags: 0
