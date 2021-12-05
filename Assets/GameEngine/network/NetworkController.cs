@@ -284,6 +284,7 @@ public class NetworkController : MonoBehaviour
 	protected static void OnConnectionLost(BaseEvent evt)
 	{
 		reset();
+		GuiManager.Instance.ShowGuiWaiting(false);
 		if (shuttingDown == true)
         {
 			return;
@@ -348,11 +349,6 @@ public class NetworkController : MonoBehaviour
 
 			SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
 			SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(ERROR_CODE);
-
-			if (errorCode != SFSErrorCode.SUCCESS)
-			{
-				Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
-			}
 			OnReceiveServerAction(action, errorCode, packet);
 		}
 	}
@@ -374,6 +370,10 @@ public class NetworkController : MonoBehaviour
 	}
 	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
 	{
+		if (errorCode != SFSErrorCode.SUCCESS)
+		{
+			Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
+		}
 		foreach (NetworkActionListenerDelegate listener in serverActionListeners)
 		{
 			listener(action, errorCode, packet);

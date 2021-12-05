@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.IO;
 using Piratera.GUI;
+using Piratera.Lib;
 
 public class GameUtils : UnityEngine.Object
 {
@@ -53,7 +54,7 @@ public class GameUtils : UnityEngine.Object
         sailor.Model = model;
 
         return sailor;
-    } 
+    }
     public static Sailor CreateSailor(string id)
     {
         SailorModel sailorModel = CrewData.Instance.GetSailorModel(id);
@@ -69,7 +70,7 @@ public class GameUtils : UnityEngine.Object
         SailorModel model = new SailorModel(RandomId(), name);
         SailorConfig config_stats = model.config_stats;
         return Instantiate(config_stats.model);
-      
+
     }
 
     public static Sailor CreateSailor(SailorModel sailorModel)
@@ -155,6 +156,12 @@ public class GameUtils : UnityEngine.Object
             chars[i] = allowedChars[rd.Next(0, allowedChars.Length)];
         }
         return new string(chars);
+    }
+
+    public static void ShowPopupPacketError(SFSErrorCode errorCode)
+    {
+        string description = EnumHelper.GetDescription(errorCode);
+        GuiManager.Instance.ShowPopupNotification(description);
     }
 }
  

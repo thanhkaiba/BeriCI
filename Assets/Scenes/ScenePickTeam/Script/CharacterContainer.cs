@@ -22,8 +22,16 @@ public class CharacterContainer : MonoBehaviour
     private SquadContainer squadContainer;
     void Start()
     {
+        HandleScreenSize();
         RenderListSubSailor();
         GameEvent.SquadChanged.AddListener(RenderListSubSailor);
+    }
+
+    void HandleScreenSize()
+    {
+        RectTransform canvas = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
+        RectTransform rect = (scrollRect.transform as RectTransform);
+        rect.sizeDelta = new Vector2(Mathf.Max(canvas.rect.width - 300, 1613), rect.sizeDelta.y); 
     }
 
     void OnDestroy()

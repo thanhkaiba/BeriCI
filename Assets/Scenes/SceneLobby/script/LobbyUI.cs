@@ -121,7 +121,7 @@ public class LobbyUI : MonoBehaviour
 
 	public void ShowCommingSoon()
 	{
-		// GuiManager.Instance.AddGui<GuiBuySlot>("Prefap/GuiBuySlot", LayerId.GUI);
+		GuiManager.Instance.AddGui<GuiBuySlot>("Prefap/GuiBuySlot", LayerId.GUI);
 		GuiManager.Instance.ShowPopupNotification("Coming soon");
 
 	}
