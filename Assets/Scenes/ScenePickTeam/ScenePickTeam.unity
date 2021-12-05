@@ -1414,9 +1414,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -230, y: 5}
+  m_AnchoredPosition: {x: -230, y: 181.5659}
   m_SizeDelta: {x: 240, y: 371}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &840859430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2002,6 +2002,7 @@ MonoBehaviour:
   TextNewSlotCost: {fileID: 1664093578}
   ButtonBuySlot: {fileID: 431218235}
   lineUpSlotConfig: {fileID: 11400000, guid: 06b1cb403a87a15478c5a89b2b425769, type: 2}
+  BgSlotCapacity: {fileID: 840859430}
 --- !u!1 &1220129522
 GameObject:
   m_ObjectHideFlags: 0
@@ -3244,7 +3245,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 0
 --- !u!222 &1833091285
 CanvasRenderer:
   m_ObjectHideFlags: 0

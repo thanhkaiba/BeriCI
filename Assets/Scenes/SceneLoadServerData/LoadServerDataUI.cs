@@ -41,6 +41,9 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private GameObject sailorNode;
 
+    [SerializeField]
+    private Image BgSlotCapacity;
+
 
     void Start()
     {

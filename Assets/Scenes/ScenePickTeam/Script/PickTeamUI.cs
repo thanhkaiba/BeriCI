@@ -24,6 +24,8 @@ public class PickTeamUI : MonoBehaviour
     private Button ButtonBuySlot;
     [SerializeField]
     private LineUpSlot lineUpSlotConfig;
+    [SerializeField]
+    private Image BgSlotCapacity;
 
     void Start()
     {
@@ -61,14 +63,16 @@ public class PickTeamUI : MonoBehaviour
 
     void UpdateSlotMaxCapacity()
     {
-        TextMaxCapacity.text = UserData.Instance.NumSlot.ToString();
-        if (UserData.Instance.NumSlot < lineUpSlotConfig.max)
+        DoTweenUtils.UpdateNumber(TextMaxCapacity, int.Parse(TextMaxCapacity.text), UserData.Instance.NumSlot);
+
+        if (UserData.Instance.NumSlot < lineUpSlotConfig.max && UserData.Instance.NumSlot > 0)
         {
             ButtonBuySlot.gameObject.SetActive(true);
             TextNewSlotCost.text = lineUpSlotConfig.costs[UserData.Instance.NumSlot - 1].ToString();
         }
         else
         {
+            TextMaxCapacity.fontSize += 10;
             ButtonBuySlot.gameObject.SetActive(false);
         }
 
@@ -82,6 +86,10 @@ public class PickTeamUI : MonoBehaviour
 
         float slotHeight = ((RectTransform)backgroundSailorList.transform).sizeDelta.y * 2 * scale;
         DoTweenUtils.FadeAppearY(backgroundSailorList, -slotHeight * 1.5f, 0.5f, Ease.OutFlash);
+
+        RectTransform slotCapacityRect = BgSlotCapacity.transform as RectTransform;
+        float height = slotCapacityRect.rect.height;
+        DOTween.To(x => slotCapacityRect.sizeDelta = new Vector2(slotCapacityRect.sizeDelta.x, x), 0, height, 1f).SetTarget(transform).SetLink(gameObject).SetEase(Ease.OutBack);
     }
 
     public void OnBackToLobby()
