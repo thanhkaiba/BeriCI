@@ -25,8 +25,8 @@ public class SailorConfig : ScriptableObjectPro
     public int start_fury = 0;
     public int max_fury = 20;
     public List<float> skill_params;
-
-    private int MAX_QUALITY = 200;
+    [HideInInspector]
+    public int MAX_QUALITY = 200;
     public float power_base_step
     {
         get { return power_base * GlobalConfigs.SailorGeneral.MAX_MIN_POWER_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }

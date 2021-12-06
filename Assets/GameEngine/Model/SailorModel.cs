@@ -17,12 +17,20 @@ public class SailorModel
     public int level { get; set; }
     public int exp { get; set; }
     public List<Item> items { get; set; }
-    public Sprite img;
+    public Sprite img, rank;
 
     public void LoadConfig()
     {
         config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + name);
-        img = Resources.Load("ScriptableObject/Character/" + name) as Sprite;
+        try
+        {
+            img = Resources.Load<Sprite>("Character/" + name);
+            rank = Resources.Load<Sprite>("Crew/class" + config_stats.rank.ToString());
+        }
+        catch
+        {
+            Debug.LogError("Sailor null");
+        }
     }
 
     public bool HaveType(SailorClass type)

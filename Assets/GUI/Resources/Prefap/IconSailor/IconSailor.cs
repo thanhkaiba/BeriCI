@@ -13,7 +13,8 @@ public class IconSailor : MonoBehaviour
     private Image background;
     [SerializeField]
     private Slider qualitySlider;
-
+    public CrewManager crew;
+    private SailorModel thisModel;
 
     public void PresentData(SailorModel sailorModel)
     {
@@ -21,6 +22,7 @@ public class IconSailor : MonoBehaviour
         icon.sprite = sailorModel.config_stats.avatar;
         background.sprite = rankSprites[(int)sailorModel.config_stats.rank];
         qualitySlider.value = (sailorModel.quality * 1f) / GameConst.MAX_QUALITY;
+        thisModel = sailorModel;
 
     }
 
@@ -31,5 +33,11 @@ public class IconSailor : MonoBehaviour
         qualitySlider.transform.localScale = visible ? Vector3.one : Vector3.zero;
 
 
+    }
+    public void ClickSailor()
+    {
+        if (crew == null)
+            return;
+        crew.SetData(thisModel);
     }
 }

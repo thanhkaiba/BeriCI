@@ -10,47 +10,38 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private GameObject iconSailorPrefap;
     [SerializeField]
-    private Transform list;
+    private Transform listSailors;
     [SerializeField]
-    private Text[] texts;
+    private Text[] texts; // 0 name 1 id 2 title 3 power 4 health 5 speed 6 armor 7 magic resist 8 des
     [SerializeField]
     private SailorDescription sailorDes;
     [SerializeField]
-    private Image img;
+    private Image quality,rank;
+    [SerializeField]
+    private Image [] classImgs;
+    public Transform sailorPos;
+    private GameObject sailor;
     // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
         RenderListSubSailor();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     void RenderListSubSailor()
     {
         sailors = CrewData.Instance.GetSubstituteSailors();
-        Debug.LogError(sailors);
-
+ 
         for (int i = 0; i < sailors.Count; i++)
         {
-
-
-            
-           Instantiate(iconSailorPrefap, list);
-                //subSailorIcon = imgObject.AddComponent<SubSailorIcon>();
-    
-
-            
- 
+            GameObject go = Instantiate(iconSailorPrefap, listSailors);
+            go.GetComponent<IconSailor>().PresentData(sailors[i]);
+            go.GetComponent<IconSailor>().crew = this;
         }
         SetData(sailors[0]);
     }
 
-
-    void SetData(SailorModel model) 
+    public void SetData(SailorModel model) 
     {
         texts[0].text = model.name;
         texts[1].text = model.id;
@@ -60,18 +51,32 @@ public class CrewManager : MonoBehaviour
             {
                 texts[2].text = item.title;
                 texts[8].text = item.skill_description;
-            }
-               
+            }             
         }
- 
+        quality.fillAmount = (float)model.quality / model.config_stats.MAX_QUALITY;
         texts[3].text = model.config_stats.power_base.ToString();
         texts[4].text = model.config_stats.health_base.ToString();
         texts[5].text = model.config_stats.speed_base.ToString();
         texts[6].text = model.config_stats.armor.ToString();
         texts[7].text = model.config_stats.magic_resist.ToString();
-        img.sprite = model.img;
-
-
+        if (sailor != null) Destroy(sailor);
+        sailor = Instantiate(model.config_stats.model, sailorPos);
+        rank.sprite = model.rank;
+        rank.rectTransform.sizeDelta = new Vector2(model.rank.rect.width, model.rank.rect.height);
+        int classCount = model.config_stats.classes.Count - classImgs.Length;
+        for (int i = 0; i < classImgs.Length; i++)
+        {
+            if (i > classCount - 1) classImgs[i].gameObject.SetActive(false);
+        }
+        for (int i = 0; i < model.config_stats.classes.Count; i++)
+        {
+            classImgs[i].gameObject.SetActive(true);
+            Sprite s = Resources.Load<Sprite>("Icons/SailorType/" + model.config_stats.classes[i]);
+            classImgs[i].sprite = s;
+            classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
+        }
+    
+     
 
     }
     public void BackToLobby()
