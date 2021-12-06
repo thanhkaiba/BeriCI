@@ -121,7 +121,7 @@ public class LobbyUI : MonoBehaviour
 
 	public void ShowCommingSoon()
 	{
-		GuiManager.Instance.ShowPopupNotification("Coming soon");
+		SceneManager.LoadScene("SceneCrew");
 	}
 
 	private void Update()
