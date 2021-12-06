@@ -241,6 +241,7 @@ MonoBehaviour:
   - {fileID: 2103594120}
   - {fileID: 1743905439}
   sailorDes: {fileID: 11400000, guid: a3a0080a2ebd8ca4da0004cb0994dd10, type: 2}
+  img: {fileID: 1829933298}
 --- !u!4 &123701349
 Transform:
   m_ObjectHideFlags: 0

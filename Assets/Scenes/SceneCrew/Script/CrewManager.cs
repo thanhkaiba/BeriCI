@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CrewManager : MonoBehaviour
 {
-    private List<SailorModel> substituteSailors;
+    private List<SailorModel> sailors;
     [SerializeField]
     private GameObject iconSailorPrefap;
     [SerializeField]
@@ -14,7 +14,9 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private Text[] texts;
     [SerializeField]
-    private ScriptableObject sailorDes;
+    private SailorDescription sailorDes;
+    [SerializeField]
+    private Image img;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,10 +31,10 @@ public class CrewManager : MonoBehaviour
 
     void RenderListSubSailor()
     {
-        substituteSailors = CrewData.Instance.GetSubstituteSailors();
-        Debug.LogError(substituteSailors);
+        sailors = CrewData.Instance.GetSubstituteSailors();
+        Debug.LogError(sailors);
 
-        for (int i = 0; i < substituteSailors.Count; i++)
+        for (int i = 0; i < sailors.Count; i++)
         {
 
 
@@ -44,6 +46,7 @@ public class CrewManager : MonoBehaviour
             
  
         }
+        SetData(sailors[0]);
     }
 
 
@@ -51,13 +54,23 @@ public class CrewManager : MonoBehaviour
     {
         texts[0].text = model.name;
         texts[1].text = model.id;
-        texts[2].text = model.name;
-        texts[3].text = model.name;
-        texts[4].text = model.name;
-        texts[5].text = model.name;
-        texts[6].text = model.name;
-        texts[7].text = model.name;
-        texts[8].text = model.name;
+        foreach (var item in sailorDes.sheets[0].list)
+        {
+            if(model.name == item.root_name)
+            {
+                texts[2].text = item.title;
+                texts[8].text = item.skill_description;
+            }
+               
+        }
+ 
+        texts[3].text = model.config_stats.power_base.ToString();
+        texts[4].text = model.config_stats.health_base.ToString();
+        texts[5].text = model.config_stats.speed_base.ToString();
+        texts[6].text = model.config_stats.armor.ToString();
+        texts[7].text = model.config_stats.magic_resist.ToString();
+        img.sprite = model.img;
+
 
 
     }
