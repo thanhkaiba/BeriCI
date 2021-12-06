@@ -24,7 +24,6 @@ public class Alex : CombatSailor
         Debug.Log("target: " + target);
         Debug.Log("target id: " + target.Model.id);
         Debug.Log("target id: " + target.Model.config_stats.root_name);
-        Debug.LogError(" | position: " + target.cs.position.x + " y: " + target.cs.position.y);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 5,
