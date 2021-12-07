@@ -14,6 +14,8 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private Text[] texts; // 0 name 1 id 2 title 3 power 4 health 5 speed 6 armor 7 magic resist 8 des
     [SerializeField]
+    private Text qualityText;
+    [SerializeField]
     private SailorDescription sailorDes;
     [SerializeField]
     private Image quality,rank;
@@ -61,8 +63,7 @@ public class CrewManager : MonoBehaviour
         texts[7].text = model.config_stats.magic_resist.ToString();
         if (sailor != null) Destroy(sailor);
         sailor = Instantiate(model.config_stats.model, sailorPos);
-        rank.sprite = model.rank;
-        rank.rectTransform.sizeDelta = new Vector2(model.rank.rect.width, model.rank.rect.height);
+        rank.sprite = Resources.Load<Sprite>("Icons/IconRank/" + model.config_stats.rank.ToString());
         int classCount = model.config_stats.classes.Count - classImgs.Length;
         for (int i = 0; i < classImgs.Length; i++)
         {
@@ -75,9 +76,7 @@ public class CrewManager : MonoBehaviour
             classImgs[i].sprite = s;
             //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
-    
-     
-
+        qualityText.text = "" + model.quality + "/" + model.config_stats.MAX_QUALITY;
     }
     public void BackToLobby()
     {
