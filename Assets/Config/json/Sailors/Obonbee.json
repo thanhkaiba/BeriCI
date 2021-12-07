@@ -1,0 +1,19 @@
+{
+  "root_name": "OBonbee",
+  "rank": 1,
+  "power_base": 70.0,
+  "health_base": 240.0,
+  "speed_base": 92.0,
+  "armor": 20.0,
+  "magic_resist": 20.0,
+  "crit": 0.0,
+  "attack_type": 0,
+  "classes": [
+    2
+  ],
+  "start_fury": 0,
+  "max_fury": 20,
+  "skill_params": [
+    1.8
+  ]
+}

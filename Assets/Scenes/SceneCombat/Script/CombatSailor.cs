@@ -412,6 +412,7 @@ public class CombatSailor : Sailor
         cs.CurHealth += health;
         if (cs.CurHealth > cs.MaxHealth) cs.CurHealth = cs.MaxHealth;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        CombatEvents.Instance.gainHealth.Invoke(this, health);
     }
     public void GainArmor(float armor)
     {

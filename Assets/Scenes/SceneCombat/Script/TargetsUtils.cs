@@ -114,6 +114,19 @@ public class TargetsUtils
         });
         return result;
     }
+    public static List<CombatSailor> AroundPlus(CombatSailor actor, List<CombatSailor> l)
+    {
+        List<CombatSailor> result = new List<CombatSailor>();
+        CombatPosition p = actor.cs.position;
+        l.ForEach(cha =>
+        {
+            if (
+            Math.Abs(cha.cs.position.x - actor.cs.position.x)
+            + Math.Abs(cha.cs.position.y - actor.cs.position.y)
+            == 1) result.Add(cha);
+        });
+        return result;
+    }
     public static List<CombatSailor> Random(List<CombatSailor> l, int number = 1)
     {
         if (number > l.Count) number = l.Count;

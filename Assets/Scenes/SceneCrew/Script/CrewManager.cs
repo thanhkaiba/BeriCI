@@ -58,7 +58,7 @@ public class CrewManager : MonoBehaviour
                 texts[8].text = item.skill_description;
             }             
         }
-        quality.fillAmount = (float)model.quality / model.config_stats.MAX_QUALITY;
+        quality.fillAmount = (float)model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
         texts[3].text = model.config_stats.power_base.ToString();
         texts[4].text = model.config_stats.health_base.ToString();
         texts[5].text = model.config_stats.speed_base.ToString();
@@ -79,7 +79,7 @@ public class CrewManager : MonoBehaviour
             classImgs[i].sprite = s;
             //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
-        qualityText.text = "" + model.quality + "/" + model.config_stats.MAX_QUALITY;
+        qualityText.text = "" + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
     }
     public void BackToLobby()
     {

@@ -1,0 +1,21 @@
+{
+  "root_name": "Alex",
+  "rank": 0,
+  "power_base": 50.0,
+  "health_base": 335.0,
+  "speed_base": 82.0,
+  "armor": 30.0,
+  "magic_resist": 35.0,
+  "crit": 0.0,
+  "attack_type": 0,
+  "classes": [
+    9,
+    11
+  ],
+  "start_fury": 20,
+  "max_fury": 35,
+  "skill_params": [
+    0.25,
+    5.0
+  ]
+}

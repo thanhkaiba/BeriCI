@@ -1,0 +1,17 @@
+{
+  "root_name": "Herminia",
+  "rank": 0,
+  "power_base": 52.0,
+  "health_base": 220.0,
+  "speed_base": 160.0,
+  "armor": 10.0,
+  "magic_resist": 10.0,
+  "crit": 0.0,
+  "attack_type": 1,
+  "classes": [
+    3
+  ],
+  "start_fury": 0,
+  "max_fury": 20,
+  "skill_params": []
+}

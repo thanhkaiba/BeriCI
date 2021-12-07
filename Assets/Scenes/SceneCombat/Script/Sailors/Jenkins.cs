@@ -70,8 +70,9 @@ public class Jenkins : CombatSailor
         );
         desPos.z -= 0.1f;
         Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(.4f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
-        seq.AppendInterval(.6f);
+        seq.AppendInterval(.2f);
         seq.AppendCallback(() =>
         {
             Sequence seq2 = DOTween.Sequence();
@@ -87,8 +88,8 @@ public class Jenkins : CombatSailor
             seq2.AppendInterval(.22f);
 
         });
-        seq.AppendInterval(1.7f);
+        seq.AppendInterval(1.2f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 3;
+        return 2.8f;
     }
 }

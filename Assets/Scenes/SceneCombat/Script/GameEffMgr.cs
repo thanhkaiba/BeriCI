@@ -27,7 +27,7 @@ public class GameEffMgr : MonoBehaviour
     public GameObject fieldRight;
     public void BulletToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
     {
-        var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/FX/meechik_projectile"), startPos, Quaternion.identity);
+        var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/meechik_projectile"), startPos, Quaternion.identity);
         bulletGO.SetActive(false);
 
         Vector3 oriPos = transform.position;
