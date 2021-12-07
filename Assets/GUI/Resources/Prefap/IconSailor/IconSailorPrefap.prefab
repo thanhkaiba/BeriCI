@@ -527,7 +527,6 @@ MonoBehaviour:
   icon: {fileID: 7725597496263003581}
   background: {fileID: 7725597495769743505}
   qualitySlider: {fileID: 5983007453264011779}
-  crew: {fileID: 0}
 --- !u!114 &9112739189552905285
 MonoBehaviour:
   m_ObjectHideFlags: 0

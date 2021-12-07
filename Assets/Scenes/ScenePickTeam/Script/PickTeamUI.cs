@@ -97,6 +97,11 @@ public class PickTeamUI : MonoBehaviour
         SceneManager.LoadScene("SceneLobby");
     }
 
+    public void OpenSceneCrew()
+    {
+        SceneManager.LoadScene("SceneCrew");
+    }
+
     public void OnBuySlot()
     {
         if (UserData.Instance.NumSlot >= lineUpSlotConfig.max)

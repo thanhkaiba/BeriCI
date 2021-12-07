@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Piratera.Constance;
+using System;
+using UnityEngine.EventSystems;
 
 public class IconSailor : MonoBehaviour
 {
@@ -13,16 +15,17 @@ public class IconSailor : MonoBehaviour
     private Image background;
     [SerializeField]
     private Slider qualitySlider;
-    public CrewManager crew;
-    private SailorModel thisModel;
+    public Action<SailorModel> OnClick;
+    private SailorModel sailorModel;
 
-    public void PresentData(SailorModel sailorModel)
+
+    public void PresentData(SailorModel model)
     {
-        gameObject.name = sailorModel.id;
-        icon.sprite = sailorModel.config_stats.avatar;
-        background.sprite = rankSprites[(int)sailorModel.config_stats.rank];
-        qualitySlider.value = (sailorModel.quality * 1f) / GameConst.MAX_QUALITY;
-        thisModel = sailorModel;
+        gameObject.name = model.id;
+        icon.sprite = model.config_stats.avatar;
+        background.sprite = rankSprites[(int)model.config_stats.rank];
+        qualitySlider.value = (model.quality * 1f) / GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        sailorModel = model;
 
     }
 
@@ -36,8 +39,11 @@ public class IconSailor : MonoBehaviour
     }
     public void ClickSailor()
     {
-        if (crew == null)
-            return;
-        crew.SetData(thisModel);
+       
+        if (OnClick != null)
+        {
+            OnClick(sailorModel);
+        }
     }
+ 
 }

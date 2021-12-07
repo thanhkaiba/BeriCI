@@ -38,9 +38,12 @@ public class CrewManager : MonoBehaviour
         {
             GameObject go = Instantiate(iconSailorPrefap, listSailors);
             go.GetComponent<IconSailor>().PresentData(sailors[i]);
-            go.GetComponent<IconSailor>().crew = this;
+            go.GetComponent<IconSailor>().OnClick = model => SetData(model);
         }
-        SetData(sailors[0]);
+        if (sailors.Count > 0)
+        {
+            SetData(sailors[0]);
+        }
     }
 
     public void SetData(SailorModel model) 

@@ -157,10 +157,10 @@ RectTransform:
   m_Father: {fileID: 1063658898}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.82033336}
-  m_AnchorMax: {x: 0.5133629, y: 1}
-  m_AnchoredPosition: {x: 438, y: -13.5}
-  m_SizeDelta: {x: -729, y: -29}
+  m_AnchorMin: {x: 0, y: 0.89837044}
+  m_AnchorMax: {x: 0, y: 0.89837044}
+  m_AnchoredPosition: {x: 904, y: -0.45999146}
+  m_SizeDelta: {x: 159, y: 164}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &8697842
 MonoBehaviour:
@@ -702,7 +702,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1521152364}
         m_TargetAssemblyTypeName: LobbyUI, Assembly-CSharp
-        m_MethodName: ShowCommingSoon
+        m_MethodName: ShowSceneCrew
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
