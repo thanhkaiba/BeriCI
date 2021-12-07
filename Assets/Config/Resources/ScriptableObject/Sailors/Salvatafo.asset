@@ -16,16 +16,16 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: c1da1d90c2a4e0141baebcd2189eba46, type: 3}
   root_name: Salvatafo
   rank: 4
-  power_base: 72
-  health_base: 350
+  power_base: 92
+  health_base: 320
   speed_base: 98
-  armor: 35
-  magic_resist: 25
+  armor: 24
+  magic_resist: 24
   crit: 0
   attack_type: 0
   classes: 
-  start_fury: 5
-  max_fury: 25
+  start_fury: 10
+  max_fury: 35
   skill_params:
-  - 1.6
-  - 0.5
+  - 1.4
+  - 0.6

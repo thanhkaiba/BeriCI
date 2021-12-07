@@ -1,11 +1,11 @@
 {
   "root_name": "Meechik",
   "rank": 2,
-  "power_base": 68.0,
+  "power_base": 75.0,
   "health_base": 220.0,
   "speed_base": 105.0,
-  "armor": 15.0,
-  "magic_resist": 15.0,
+  "armor": 20.0,
+  "magic_resist": 20.0,
   "crit": 0.0,
   "attack_type": 1,
   "classes": [
@@ -15,6 +15,6 @@
   "max_fury": 20,
   "skill_params": [
     2.0,
-    0.5
+    1.6
   ]
 }

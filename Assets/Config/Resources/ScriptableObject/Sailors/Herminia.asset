@@ -16,14 +16,14 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 09a258d0c91e3d94daf23f5a156565b4, type: 3}
   root_name: Herminia
   rank: 0
-  power_base: 50
+  power_base: 52
   health_base: 220
-  speed_base: 140
+  speed_base: 160
   armor: 10
   magic_resist: 10
   crit: 0
   attack_type: 1
   classes: 03000000
   start_fury: 0
-  max_fury: 10
+  max_fury: 20
   skill_params: []
