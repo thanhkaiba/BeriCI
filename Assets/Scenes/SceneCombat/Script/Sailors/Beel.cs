@@ -79,18 +79,27 @@ public class Beel : CombatSailor
         seq.AppendInterval(1.6f);
         seq.AppendCallback(() =>
         {
+            Debug.LogError(around_target.Count);
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
-            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            startPos.y -= 0.0f;
+            //Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
+           // startPos.y -= 0.0f;
             Vector3 targetPos = target.transform.position;
             targetPos.y += 3.4f;
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
+            for (int i = 0; i < around_target.Count; i++)
+            {
+               // Spine.Bone bone = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("fx_ball_1");
+               // Vector3 startPos = bone.GetWorldPosition(modelObject.transform);
+                Vector3 endPos = around_target[i].transform.position;
+                endPos.y += 2;
+                GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", transform.position, endPos, 0, .4f, 1, 1f);
+            }
+            //GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
         });
         seq.AppendInterval(0.4f);
         seq.AppendCallback(() => {
             Vector3 explorePos = target.transform.position;
             explorePos.y += 3.4f;
-            GameEffMgr.Instance.ShowSmallExplosion(explorePos);
+           // GameEffMgr.Instance.ShowSmallExplosion(explorePos);
         });
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
