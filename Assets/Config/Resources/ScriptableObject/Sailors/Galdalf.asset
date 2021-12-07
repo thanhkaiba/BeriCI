@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Galdalf
   m_EditorClassIdentifier: 
   model: {fileID: 6114236096289693262, guid: 12afeaa7f446a324b9e272d4493bfc1d, type: 3}
-  avatar: {fileID: 21300000, guid: 41181920b766afd40ba793fcd6b95c15, type: 3}
+  avatar: {fileID: 21300000, guid: 2cf172b42a1419f4c96dbf09b48d88ae, type: 3}
   root_name: Galdalf
   rank: 1
   power_base: 40

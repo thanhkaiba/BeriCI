@@ -63,7 +63,7 @@ public class QChi : CombatSailor
         float magic_damage = cs.Power * Model.config_stats.skill_params[0];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        List<CombatSailor> listTargets = TargetsUtils.AllFistRow(enermy);
+        List<CombatSailor> listTargets = TargetsUtils.AllFirstRow(enermy);
 
         listTargets.ForEach(t =>
         {

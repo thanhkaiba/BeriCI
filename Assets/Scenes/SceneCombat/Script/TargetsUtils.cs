@@ -205,17 +205,17 @@ public class TargetsUtils
         });
         return result;
     }
-    public static List<CombatSailor> AllFistRow(List<CombatSailor> l)
+    public static List<CombatSailor> AllFirstRow(List<CombatSailor> l)
     {
         var result = new List<CombatSailor>();
         var row1 = new List<CombatSailor>();
         var row2 = new List<CombatSailor>();
         var row3 = new List<CombatSailor>();
-        for (int i = 0; i <  l.Count; i++)
+        for (int i = 0; i < l.Count; i++)
         {
-            if (l[i].cs.position.y == 0)row1.Add(l[i]);
-            if (l[i].cs.position.y == 1)row2.Add(l[i]);           
-            if (l[i].cs.position.y == 2)row3.Add(l[i]);
+            if (l[i].cs.position.y == 0) row1.Add(l[i]);
+            if (l[i].cs.position.y == 1) row2.Add(l[i]);           
+            if (l[i].cs.position.y == 2) row3.Add(l[i]);
         }
         row1.Sort((s1, s2) => s1.cs.position.x.CompareTo(s2.cs.position.x));
         row2.Sort((s1, s2) => s1.cs.position.x.CompareTo(s2.cs.position.x));

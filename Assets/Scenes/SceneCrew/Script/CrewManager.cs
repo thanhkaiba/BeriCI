@@ -73,7 +73,7 @@ public class CrewManager : MonoBehaviour
             classImgs[i].gameObject.SetActive(true);
             Sprite s = Resources.Load<Sprite>("Icons/SailorType/" + model.config_stats.classes[i]);
             classImgs[i].sprite = s;
-            classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
+            //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
     
      
