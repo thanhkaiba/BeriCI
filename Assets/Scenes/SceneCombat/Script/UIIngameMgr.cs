@@ -102,6 +102,7 @@ public class UIIngameMgr : MonoBehaviour
         //Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);
         //GameEvents.Instance.attackOneTarget.AddListener(ShowHighlightConfrontation);
         CombatEvents.Instance.takeDamage.AddListener(UpdateTotalHealth);
+        CombatEvents.Instance.gainHealth.AddListener(UpdateTotalHealth);
         //GameEvents.Instance.castSkill.AddListener(ShowHighLightCastSkill);
         //GameEvents.Instance.highlightTarget.AddListener(ShowHighlightInfo);
     }
@@ -111,6 +112,13 @@ public class UIIngameMgr : MonoBehaviour
         ShowHighlightInfo(b);
     }
     public void UpdateTotalHealth(CombatSailor s, Damage damage)
+    {
+        //if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
+        //if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);
+        UpdateTotalHealth(Team.A);
+        UpdateTotalHealth(Team.B);
+    }
+    public void UpdateTotalHealth(CombatSailor s, float heal)
     {
         //if (s.cs.team == Team.A && currentA == s) ShowTakeDamage(s);
         //if (s.cs.team == Team.B && currentB == s) ShowTakeDamage(s);
