@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jenkins
   m_EditorClassIdentifier: 
   model: {fileID: 4340670092844833154, guid: 504b0f62211ab204b8fdd671e3a65f3d, type: 3}
-  avatar: {fileID: 21300000, guid: 47b90a969b4f00a4f9ef536c09f55af2, type: 3}
+  avatar: {fileID: 21300000, guid: a76d968055be90a478ddc86eff402287, type: 3}
   root_name: Jenkins
   rank: 3
   power_base: 82
@@ -29,3 +29,4 @@ MonoBehaviour:
   skill_params:
   - 2.5
   - 0.3
+  MAX_QUALITY: 200
