@@ -1,7 +1,7 @@
 {
   "root_name": "QChi",
   "rank": 1,
-  "power_base": 56.0,
+  "power_base": 35.0,
   "health_base": 250.0,
   "speed_base": 86.0,
   "armor": 20.0,
@@ -15,6 +15,6 @@
   "start_fury": 5,
   "max_fury": 25,
   "skill_params": [
-    1.6
+    3.0
   ]
 }

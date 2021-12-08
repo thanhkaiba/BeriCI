@@ -75,8 +75,6 @@ public class QChi : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
-        Debug.Log("targets " + targets.Count);
-        Debug.Log("_params " + _params.Count);
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var listTargets = CombatState.Instance.GetSailors(targets);
