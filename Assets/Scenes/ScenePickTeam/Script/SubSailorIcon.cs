@@ -9,7 +9,6 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public IconSailor iconSailor;
     public System.Func<string, Sailor> AddSubSailor;
     private Canvas canvas;
-    private bool draggingSlot;
     private bool showedSubsailor;
     private Vector2 beginPos = Vector2.zero;
     public ScrollRect scrollRect;
@@ -58,26 +57,19 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         showedSubsailor = false;
         beginPos = eventData.position;
-        StartCoroutine(StartTimer());
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         beginPos = Vector2.zero;
-        StopAllCoroutines();
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
         showedSubsailor = false;
-        StopAllCoroutines();
     }
 
-    private IEnumerator StartTimer()
-    {
-        yield return new WaitForSeconds(0.25f);
-        draggingSlot = true;
-    }
+  
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -87,7 +79,8 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnDrag(PointerEventData eventData)
     {
-        if ((draggingSlot && Vector2.Distance(eventData.position, beginPos) < 130 * canvas.transform.localScale.x))
+        Vector2 movePos = eventData.position;
+        if (Mathf.Abs(movePos.x - beginPos.x) < Mathf.Abs(movePos.y - beginPos.y))
         {
             showedSubsailor = true;
             OnSelectSubSailor(eventData);
@@ -102,7 +95,6 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
-        draggingSlot = false;
         beginPos = Vector2.zero;
     }
 
