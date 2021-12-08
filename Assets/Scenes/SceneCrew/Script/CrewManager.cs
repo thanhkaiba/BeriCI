@@ -32,7 +32,7 @@ public class CrewManager : MonoBehaviour
 
     void RenderListSubSailor()
     {
-        sailors = CrewData.Instance.GetSubstituteSailors();
+        sailors = CrewData.Instance.Sailors;
  
         for (int i = 0; i < sailors.Count; i++)
         {
