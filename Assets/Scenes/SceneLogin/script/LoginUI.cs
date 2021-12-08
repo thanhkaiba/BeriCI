@@ -83,6 +83,8 @@ public class LoginUI : MonoBehaviour
             seq.Insert(1, monter.transform.DOScale(new Vector3(0, 0, 0), 0.4f).From().SetEase(Ease.OutQuad));
         }
 
+        seq.SetTarget(transform).SetLink(gameObject);
+
     }
     private void RunAppearAction()
     {
