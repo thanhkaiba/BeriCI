@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SailorModel
+public class SailorModel : IEquatable<SailorModel> , IComparable<SailorModel>
 {
     public SailorModel(string _id, string _name)
     {
@@ -45,5 +46,41 @@ public class SailorModel
         }
 
         return result;
+    }
+
+    bool IEquatable<SailorModel>.Equals(SailorModel other)
+    {
+       if (other == null)
+       {
+            return false;
+       }
+
+        return name == other.name && quality == other.quality && level == other.level && exp == other.exp;
+
+    }
+
+    int IComparable<SailorModel>.CompareTo(SailorModel other)
+    {
+        if (config_stats.rank.Equals(other.config_stats.rank))
+        {
+            if (quality == other.quality)
+            {
+                if (level == other.level)
+                {
+                    return name.CompareTo(other.name);
+                }
+                else
+                {
+                    return level.CompareTo(other.level);
+                }
+            } else
+            {
+                return quality.CompareTo(other.quality);
+            }
+        } 
+        else
+        {
+            return config_stats.rank.CompareTo(other.config_stats.rank);
+        }
     }
 }

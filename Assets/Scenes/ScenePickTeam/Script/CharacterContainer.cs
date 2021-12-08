@@ -109,8 +109,8 @@ public class CharacterContainer : MonoBehaviour
                 subSailorIcon.AddSubSailor = (id) => squadContainer.AddSubSailor(id);              
             }
             subSailorIcon.scrollRect = scrollRect;
-            subSailorIcon.model = substituteSailors[i];
-            imgObject.GetComponent<IconSailor>().PresentData(substituteSailors[i]);
+            subSailorIcon.Model = substituteSailors[i];
+          
         }
     }
 }

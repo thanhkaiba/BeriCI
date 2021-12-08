@@ -5,7 +5,14 @@ using System.Collections;
 
 public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
-    public SailorModel model;
+    private SailorModel model;
+    public SailorModel Model
+    {
+        set
+        {
+            UpdateSailorImage(value);
+        }
+    }
     public IconSailor iconSailor;
     public System.Func<string, Sailor> AddSubSailor;
     private Canvas canvas;
@@ -14,10 +21,11 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public ScrollRect scrollRect;
 
 
-    void Start()
+    void Awake()
     {
         iconSailor = GetComponent<IconSailor>();
         canvas = FindObjectOfType<Canvas>();
+        iconSailor.ShowClass = true;
     }
 
     public void OnSelectSubSailor(PointerEventData data)
@@ -80,10 +88,14 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnDrag(PointerEventData eventData)
     {
         Vector2 movePos = eventData.position;
-        if (Mathf.Abs(movePos.x - beginPos.x) < Mathf.Abs(movePos.y - beginPos.y))
+        Vector2 delta = movePos - beginPos;
+        if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y) && delta.y > 10 * canvas.transform.localScale.x)
         {
-            showedSubsailor = true;
-            OnSelectSubSailor(eventData);
+            if (!showedSubsailor)
+            {
+                showedSubsailor = true;
+                OnSelectSubSailor(eventData);
+            }
         }
         else if (!showedSubsailor)
         {

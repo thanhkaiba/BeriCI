@@ -124,6 +124,8 @@ public class CrewData : Singleton<CrewData>
                 result.Add(model);
             }
         }
+        result.Sort();
+        result.Reverse();
         return result;
     }
 
