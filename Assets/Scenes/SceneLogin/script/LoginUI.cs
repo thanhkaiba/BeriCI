@@ -15,7 +15,7 @@ public class LoginUI : MonoBehaviour
     private Image buttonLogin;
 
     [SerializeField]
-    private Image buttonSingup;
+    private Image buttonSignup;
 
     [SerializeField]
     private Image[] textboxs;
@@ -32,7 +32,7 @@ public class LoginUI : MonoBehaviour
 		RunAppearAction();
     }
 
-	private void RunAppearAction()
+	private void RunAppearAction2()
 	{
      
         Sequence seq = DOTween.Sequence();
@@ -68,10 +68,10 @@ public class LoginUI : MonoBehaviour
         seq.AppendInterval(0.2f);
         seq.Append(textOr.DOFade(0, 0.2f).From().SetEase(Ease.OutBack));
         Sequence buttonSeq2 = DOTween.Sequence();
-        buttonSingup.color -= new Color(0, 0, 0, buttonSingup.color.a);
-        buttonSeq2.Insert(0, buttonSingup.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.4f, 10, 0));
-        buttonSeq2.Insert(0, buttonSingup.DOFade(1, 0.4f));
-        buttonSeq2.Insert(0, buttonSingup.transform.DOMoveY(-200, 0.4f).From());
+        buttonSignup.color -= new Color(0, 0, 0, buttonSignup.color.a);
+        buttonSeq2.Insert(0, buttonSignup.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.4f, 10, 0));
+        buttonSeq2.Insert(0, buttonSignup.DOFade(1, 0.4f));
+        buttonSeq2.Insert(0, buttonSignup.transform.DOMoveY(-200, 0.4f).From());
         seq.Append(buttonSeq2);
        
 
@@ -83,5 +83,51 @@ public class LoginUI : MonoBehaviour
             seq.Insert(1, monter.transform.DOScale(new Vector3(0, 0, 0), 0.4f).From().SetEase(Ease.OutQuad));
         }
 
+    }
+    private void RunAppearAction()
+    {
+        {
+            Sequence seq = DOTween.Sequence();
+            RectTransform chainTrasform = (chain.transform as RectTransform);
+            seq.Insert(1.0f, chainTrasform.DOAnchorPosY(chainTrasform.anchoredPosition.y + 500, 0.6f).From().SetEase(Ease.OutQuint));
+            seq.Insert(1.0f, chain.DOFade(0, 0.6f).From());
+            seq.Insert(1.0f, chain.transform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.6f).From());
+        }
+        {
+            Sequence seq = DOTween.Sequence();
+            var image = loginBox.GetComponent<CanvasGroup>();
+            seq.Append(image.DOFade(0, 0));
+            seq.AppendInterval(0.0f);
+            seq.Append(image.DOFade(1, 0.4f));
+        }
+        foreach (Image element in textboxs)
+        {
+            Sequence seq = DOTween.Sequence();
+            element.transform.localScale -= new Vector3(element.transform.localScale.x, 0, 0);
+            seq.AppendInterval(0.2f);
+            seq.Append(element.transform.DOScaleX(1, 0.4f));
+        }
+        {
+            buttonLogin.color -= new Color(0, 0, 0, buttonLogin.color.a);
+            Sequence seq = DOTween.Sequence();
+            seq.AppendInterval(0.2f);
+            seq.AppendCallback(() => buttonLogin.DOFade(1, 0.4f));
+            seq.Append(buttonLogin.transform.DOScale(0.4f, 0));
+            seq.Append(buttonLogin.transform.DOScale(1, 0.4f));
+        }
+        {
+            buttonSignup.color -= new Color(0, 0, 0, buttonSignup.color.a);
+            Sequence seq = DOTween.Sequence();
+            seq.AppendInterval(0.2f);
+            seq.AppendCallback(() => buttonSignup.DOFade(1, 0.4f));
+            seq.Append(buttonSignup.transform.DOScale(0.4f, 0));
+            seq.Append(buttonSignup.transform.DOScale(1, 0.4f));
+        }
+        foreach (Image monter in monters)
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.Insert(0.2f, monter.DOFade(0, 0.2f).From());
+            seq.Insert(0.2f, monter.transform.DOScale(new Vector3(0, 0, 0), 0.4f).From().SetEase(Ease.OutQuad));
+        }
     }
 }

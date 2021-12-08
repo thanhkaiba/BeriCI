@@ -777,7 +777,7 @@ MonoBehaviour:
   - {fileID: 1864840700}
   - {fileID: 2031634386}
   buttonLogin: {fileID: 962814692}
-  buttonSingup: {fileID: 1966144557}
+  buttonSignup: {fileID: 1966144557}
   textboxs:
   - {fileID: 10826816}
   - {fileID: 8475618}
@@ -1199,6 +1199,7 @@ GameObject:
   - component: {fileID: 1155920728}
   - component: {fileID: 1155920730}
   - component: {fileID: 1155920729}
+  - component: {fileID: 1155920731}
   m_Layer: 5
   m_Name: LoginBox
   m_TagString: Untagged
@@ -1269,6 +1270,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1155920727}
   m_CullTransparentMesh: 1
+--- !u!225 &1155920731
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1155920727}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1180959202
 GameObject:
   m_ObjectHideFlags: 0

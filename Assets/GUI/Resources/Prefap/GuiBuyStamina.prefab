@@ -1156,9 +1156,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  appearEffect: 3
+  appearEffect: 1
   disappearEffect: 2
-  appearTime: 0.6
+  appearTime: 0.4
   disappearTime: 0.4
 --- !u!225 &-6822633385308966067
 CanvasGroup:

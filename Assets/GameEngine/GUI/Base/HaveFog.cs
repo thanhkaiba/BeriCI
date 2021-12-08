@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HaveFog : MonoBehaviour
 {
@@ -29,5 +30,13 @@ public class HaveFog : MonoBehaviour
     public void VisibleFog(bool visible)
     {
         panel.SetActive(visible);
+    }
+    public void FadeIn(float time = 0.4f)
+    {
+        var image = panel.GetComponent<Image>();
+        var tempColor = image.color;
+        tempColor.a = 0f;
+        image.color = tempColor;
+        panel.GetComponent<Image>().DOFade(fogOpacity, time);
     }
 }
