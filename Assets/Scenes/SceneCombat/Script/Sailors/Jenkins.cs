@@ -47,18 +47,25 @@ public class Jenkins : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
+
         float damage;
         float dame_health = Model.config_stats.skill_params[0];
         float scale_health = Model.config_stats.skill_params[1];
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor target = TargetsUtils.Melee(this, enermy);
         damage = (cs.Power * dame_health) + (scale_health * target.cs.MaxHealth);
-        return RunAnimation(target, damage);
+        targets.Add(target.Model.id);
+        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }));
+
+        return ProcessSkill(targets, _params);
     }
-    float RunAnimation(CombatSailor target, float damage)
+    public override float ProcessSkill(List<string> targets = null, List<float> _params = null)
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
+        var target = CombatState.Instance.GetSailor(targets[0]);
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;
 
