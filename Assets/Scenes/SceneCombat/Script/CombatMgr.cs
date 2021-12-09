@@ -106,11 +106,7 @@ public class CombatMgr : MonoBehaviour
     }
     private float ProcessAction()
     {
-        if (listActions.Count == 0)
-        {
-            GameOver(CheckTeamWin());
-            return 0;
-        }
+        if (listActions.Count == 0) return 0;
         CombatAction actionProcess = listActions[actionCount];
         int speedAdd = CalculateSpeedAddThisLoop();
         SpeedUpAllSailors(speedAdd);
@@ -168,7 +164,9 @@ public class CombatMgr : MonoBehaviour
     IEnumerator NextLoopServer(float delay)
     {
         yield return new WaitForSeconds(delay);
+        Debug.LogError(actionCount + "," + listActions.Count);
         if (actionCount < listActions.Count) CombatLoopServer();
+        else if (actionCount == 1 && listActions.Count == 0) GameOver(Team.B);
         else GameOver(Team.A);
     }
     //server game
@@ -199,7 +197,8 @@ public class CombatMgr : MonoBehaviour
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
         //UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
-        StartCoroutine(WaitAndDo(2.0f, () => NetworkController.reward.SetReward(TempCombatData.Instance.caReward)));
+        StartCoroutine(WaitAndDo(2.0f, () => UIManager.Instance.reward.SetReward(TempCombatData.Instance.caReward)));
+        Debug.LogError("a");
     }
 
     int CalculateSpeedAddThisLoop()

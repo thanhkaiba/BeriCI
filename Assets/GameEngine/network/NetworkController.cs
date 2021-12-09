@@ -123,8 +123,6 @@ public class NetworkController : MonoBehaviour
 {
 	//----------------------------------------------------------
 	// Editor public properties
-	[SerializeField]
-	public static UIPopupReward reward;
 	//----------------------------------------------------------
 	public static NetworkController Instance;
 
@@ -170,7 +168,6 @@ public class NetworkController : MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
-			reward = transform.GetChild(0).GetChild(0).GetComponent<UIPopupReward>();
 			Application.runInBackground = true;
 			ForceStartScene();
 		}
@@ -366,6 +363,7 @@ public class NetworkController : MonoBehaviour
 	}
 	public static void Send(SFSAction action)
 	{
+		Debug.LogError(action.ToString());
 		Send(action, new SFSObject());
 	}
 	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -395,9 +393,10 @@ public class NetworkController : MonoBehaviour
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
+						Debug.LogError(showCombat);
 						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
 						if (showCombat) SceneManager.LoadScene("SceneCombat2D");
-						else reward.SetReward(TempCombatData.Instance.caReward);				
+						else UIManager.Instance.reward.SetReward(TempCombatData.Instance.caReward);				
 					}
 					break;
 				}
