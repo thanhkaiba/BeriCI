@@ -61,11 +61,12 @@ public class Jenkins : CombatSailor
 
         return ProcessSkill(targets, _params);
     }
-    public override float ProcessSkill(List<string> targets = null, List<float> _params = null)
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var target = CombatState.Instance.GetSailor(targets[0]);
+        var damage = _params[0];
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Vector3 oriPos = transform.position;
 
