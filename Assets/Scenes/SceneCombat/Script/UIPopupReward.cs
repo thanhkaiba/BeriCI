@@ -10,9 +10,11 @@ public class UIPopupReward : MonoBehaviour
     [SerializeField]
     Text[] texts;
 
-    public void SetReward(CombatReward r)
+    public void SetReward(byte yourTeamIndex, GameEndData r)
     {
-        texts[0].text = r.team_win == 1 ? "lose" : "win";
+        Debug.Log("yourTeamIndex " + yourTeamIndex);
+        Debug.Log("r.team_win " + r.team_win);
+        texts[0].text = r.team_win == yourTeamIndex ? "win" : "lose";
         texts[1].text = "x" + (r.mode_reward + r.hard_bonus + r.win_rank_bonus).ToString();
         texts[2].text = "win:   "+ r.mode_reward.ToString();
         texts[3].text = "overpower:   " + r.win_rank_bonus.ToString();
@@ -58,9 +60,8 @@ public class UIPopupReward : MonoBehaviour
     {
        SFSObject sfsObject = new SFSObject();
        sfsObject.PutBool("accept", false);
-        NetworkController.showCombat = false;
        sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-       NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+       NetworkController.Send(SFSAction.COMBAT_DATA, sfsObject);
        NetworkController.Instance.countDownPickTeam = false;
        transform.GetChild(1).gameObject.SetActive(true);
     }

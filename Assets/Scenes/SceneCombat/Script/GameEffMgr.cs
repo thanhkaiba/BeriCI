@@ -43,9 +43,10 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendCallback(() => {
             //ShowSmallExplosion(bulletGO.transform.position);
             //ShowSmoke4(bulletGO.transform.position, startPos.x > targetPos.x);
-            Destroy(bulletGO);
+         
 
             GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/bullet_explore/bullet_explore"), bulletGO.transform.position, new Quaternion());
+            Destroy(bulletGO);
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendInterval(2.0f);
             seq2.AppendCallback(() => Destroy(ex));
@@ -60,8 +61,7 @@ public class GameEffMgr : MonoBehaviour
 
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-        desPos.x -= 3.2f;
+        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1);
         int isFlip = 1;
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         bulletGO.transform.localScale = new Vector3(isFlip * scaleTrail, scaleTrail, scaleTrail);
@@ -70,11 +70,7 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendCallback(() => bulletGO.SetActive(true));
         seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
         seq.AppendCallback(() => {
-            //ShowSmallExplosion(bulletGO.transform.position);
-            //ShowSmoke4(bulletGO.transform.position, startPos.x > targetPos.x);
             Vector3 pos = bulletGO.transform.position;
-            pos.x += 2.5f;
-
             GameObject ex = Instantiate(Resources.Load<GameObject>(explore), pos, new Quaternion());
             ex.transform.localScale = new Vector3(isFlip * scaleExplore, scaleExplore, scaleExplore);
             Destroy(bulletGO);
@@ -89,6 +85,7 @@ public class GameEffMgr : MonoBehaviour
         GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/rocket_explore/Rocket_normal"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
         ex.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+        ex.transform.localPosition += new Vector3(0, 0, -3f);
         seq2.AppendInterval(2.0f);
         seq2.AppendCallback(() => Destroy(ex));
     }

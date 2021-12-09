@@ -69,23 +69,21 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnTimeOut()
     {
-        SendStartCombat();
+        NetworkController.Send(SFSAction.PVE_SURRENDER);
     }
 
     public void SendStartCombat()
     {
         SFSObject sfsObject = new SFSObject();
-        sfsObject.PutBool("accept", true);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        NetworkController.showCombat = true;
-        NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+        NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
         NetworkController.Instance.countDownPickTeam = false;
     }
 
 
     public void Surrender()
     {
-        NetworkController.reward.gameObject.SetActive(true);
+        UIManager.Instance.reward.gameObject.SetActive(true);
        /* SFSObject sfsObject = new SFSObject();
         sfsObject.PutBool("accept", false);
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());

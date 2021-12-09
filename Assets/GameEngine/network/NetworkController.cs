@@ -123,8 +123,6 @@ public class NetworkController : MonoBehaviour
 {
 	//----------------------------------------------------------
 	// Editor public properties
-	[SerializeField]
-	public static UIPopupReward reward;
 	//----------------------------------------------------------
 	public static NetworkController Instance;
 
@@ -157,7 +155,6 @@ public class NetworkController : MonoBehaviour
 	private static SmartFox sfs;
 	private static LoginData loginData;
 	private static bool shuttingDown;
-	public static bool showCombat;
 	public bool countDownPickTeam = true;
 	//----------------------------------------------------------
 	// Unity callback methods
@@ -170,7 +167,6 @@ public class NetworkController : MonoBehaviour
 		{
 			Instance = this;
 			DontDestroyOnLoad(gameObject);
-			reward = transform.GetChild(0).GetChild(0).GetComponent<UIPopupReward>();
 			Application.runInBackground = true;
 			ForceStartScene();
 		}
@@ -366,6 +362,7 @@ public class NetworkController : MonoBehaviour
 	}
 	public static void Send(SFSAction action)
 	{
+		Debug.LogError(action.ToString());
 		Send(action, new SFSObject());
 	}
 	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -391,13 +388,12 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
-			case SFSAction.COMBAT_COMFIRM:
+			case SFSAction.COMBAT_DATA:
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
 						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-						if (showCombat) SceneManager.LoadScene("SceneCombat2D");
-						else reward.SetReward(TempCombatData.Instance.caReward);				
+						SceneManager.LoadScene("SceneCombat2D");			
 					}
 					break;
 				}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 {
+	private ModeID modeID;
 	private byte yourTeamIndex;
 	private string userName0;
 	private string userName1;
@@ -136,7 +137,7 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 	public void NewFromSFSObject(ISFSObject packet)
 	{
 		Clean();
-
+		modeID = (ModeID)packet.GetByte("mode_id");
 		yourTeamIndex = packet.GetByte("your_team_idx");
 		userName0 = packet.GetUtfString("username_0");
 		userName1 = packet.GetUtfString("username_1");

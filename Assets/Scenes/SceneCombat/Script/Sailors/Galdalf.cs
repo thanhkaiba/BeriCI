@@ -7,6 +7,7 @@ using UnityEngine;
 public class Galdalf : CombatSailor
 {
     public SailorConfig config;
+    private Spine.Bone boneTarget;
     public Galdalf()
     {
     }
@@ -14,13 +15,16 @@ public class Galdalf : CombatSailor
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
+        boneTarget = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("shoot");
     }
     public override float RunBaseAttack(CombatSailor target)
     {
+     
+        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
+        relativePos.y += 4.5f;
+        relativePos.x *= modelObject.transform.localScale.x;
         TriggerAnimation("Attack");
-        Vector3 targetPos = target.transform.position;
-        targetPos.y += 3.4f;
-
+        boneTarget.SetLocalPosition(relativePos);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.68f);
         seq.AppendCallback(() =>
