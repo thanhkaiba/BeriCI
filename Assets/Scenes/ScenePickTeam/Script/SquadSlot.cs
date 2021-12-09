@@ -8,9 +8,32 @@ public class SquadSlot : MonoBehaviour
     }
     public Bounds boxAround;
     private Sailor sailor;
+
+    [SerializeField]
+    private Sprite spriteOpen;
+
+    [SerializeField]
+    private Sprite spriteLock;
+
+    [SerializeField]
+    private GameObject blackCircle;
+
     [SerializeField]
     private State state = State.AVAIABLE;
-    public bool selectable { get; set; }
+
+    private bool selectable;
+    public bool Selectable
+    {
+        get
+        {
+            return selectable;
+        }
+        set
+        {
+            selectable = value;
+            GetComponent<SpriteRenderer>().sprite = value ? spriteOpen : spriteLock;
+        }
+    }
 
     private void Start()
     {
@@ -20,14 +43,23 @@ public class SquadSlot : MonoBehaviour
     {
         sailor = null;
         state = State.SELECTING;
-        GetComponent<SpriteRenderer>().color = Color.blue;
+        if (blackCircle != null)
+        {
+            blackCircle.SetActive(true);
+            blackCircle.GetComponent<SpriteRenderer>().color = Color.magenta;
+        }
+     
     }
 
     public void OnFree()
     {
         sailor = null;
         state = State.AVAIABLE;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        if (blackCircle != null)
+        {
+            blackCircle.SetActive(false);
+        }
+
     }
 
     public void SetSelectedSailer(Sailor s)
@@ -37,7 +69,12 @@ public class SquadSlot : MonoBehaviour
             state = State.SELECTED;
             sailor = s;
             sailor.transform.position = new Vector3(transform.position.x, transform.position.y, -4 - transform.localPosition.z / 4);
-            GetComponent<SpriteRenderer>().color = Color.red;
+            if (blackCircle != null)
+            {
+                blackCircle.SetActive(true);
+                blackCircle.GetComponent<SpriteRenderer>().color = Color.white;
+            }
+          
         } else
         {
             OnFree();

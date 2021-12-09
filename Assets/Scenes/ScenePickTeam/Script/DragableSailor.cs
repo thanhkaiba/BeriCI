@@ -46,7 +46,7 @@ public class DragableSailor : MonoBehaviour
             SetSailorOpacity(0.8f);
             for (short i = 0; i < slots.Length; i++)
             {
-                slots[i].selectable = true;
+                slots[i].Selectable = true;
                 if (slots[i].GetOwner() == sailor)
                 {
                     originIndex = i;
@@ -177,7 +177,7 @@ public class DragableSailor : MonoBehaviour
         for (short i = 0; i < slots.Length; i++)
         {
             SquadSlot slot = slots[i];
-            if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot.selectable)
+            if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot.Selectable)
             {
                 if (i != selectingIndex)
                 {
