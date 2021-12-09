@@ -1,7 +1,7 @@
 {
   "root_name": "Jenkins",
   "rank": 3,
-  "power_base": 82.0,
+  "power_base": 88.0,
   "health_base": 280.0,
   "speed_base": 82.0,
   "armor": 28.0,
@@ -14,7 +14,7 @@
   "start_fury": 10,
   "max_fury": 30,
   "skill_params": [
-    2.5,
+    2.0,
     0.3
   ]
 }

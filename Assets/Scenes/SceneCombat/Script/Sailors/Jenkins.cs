@@ -90,6 +90,6 @@ public class Jenkins : CombatSailor
         });
         seq.AppendInterval(1.2f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 3;
+        return 2.8f;
     }
 }

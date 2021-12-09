@@ -16,7 +16,7 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 3b72b43e0798aba4ab7e858e62eb0eb1, type: 3}
   root_name: OBonbee
   rank: 1
-  power_base: 60
+  power_base: 70
   health_base: 240
   speed_base: 92
   armor: 20
@@ -27,4 +27,4 @@ MonoBehaviour:
   start_fury: 0
   max_fury: 20
   skill_params:
-  - 2
+  - 1.8

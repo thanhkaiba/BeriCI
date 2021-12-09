@@ -163,5 +163,6 @@ public class GameUtils : UnityEngine.Object
         string description = EnumHelper.GetDescription(errorCode);
         GuiManager.Instance.ShowPopupNotification(description);
     }
+
 }
  

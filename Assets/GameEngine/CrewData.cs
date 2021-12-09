@@ -40,6 +40,9 @@ public class CrewData : Singleton<CrewData>
             Sailors.Add(model);
         }
 
+        Sailors.Sort();
+        Sailors.Reverse();
+
         FightingTeam.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
     }
 
@@ -124,6 +127,8 @@ public class CrewData : Singleton<CrewData>
                 result.Add(model);
             }
         }
+        result.Sort();
+        result.Reverse();
         return result;
     }
 

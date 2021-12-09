@@ -12,9 +12,9 @@
     4,
     5
   ],
-  "start_fury": 5,
+  "start_fury": 0,
   "max_fury": 25,
   "skill_params": [
-    3.0
+    4.0
   ]
 }

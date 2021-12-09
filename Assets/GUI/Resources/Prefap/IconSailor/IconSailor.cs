@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Piratera.Constance;
+using System;
+using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class IconSailor : MonoBehaviour
 {
@@ -13,17 +16,45 @@ public class IconSailor : MonoBehaviour
     private Image background;
     [SerializeField]
     private Slider qualitySlider;
-    public CrewManager crew;
-    private SailorModel thisModel;
+    [SerializeField]
+    private GameObject nodeClass;
+    public Action<SailorModel> OnClick;
+    private SailorModel sailorModel;
+    public bool ShowClass = false;
 
-    public void PresentData(SailorModel sailorModel)
+
+
+    public void PresentData(SailorModel model)
     {
-        gameObject.name = sailorModel.id;
-        icon.sprite = sailorModel.config_stats.avatar;
-        background.sprite = rankSprites[(int)sailorModel.config_stats.rank];
-        qualitySlider.value = (sailorModel.quality * 1f) / GameConst.MAX_QUALITY;
-        thisModel = sailorModel;
+        gameObject.name = model.id;
+        icon.sprite = model.config_stats.avatar;
+        background.sprite = rankSprites[(int)model.config_stats.rank];
+        qualitySlider.value = (model.quality * 1f) / GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        sailorModel = model;
+        if (ShowClass)
+        {
+            RenderClass(model.config_stats.classes);
+        }
+    }
 
+    private void RenderClass(List<SailorClass> classes)
+    {
+
+        foreach (Transform child in nodeClass.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        for (int i = 0; i < classes.Count; i++)
+        {
+            GameObject GO = new GameObject();
+            GO.AddComponent<Image>();
+            GO.transform.SetParent(nodeClass.transform);
+            Image image = GO.GetComponent<Image>();
+            Sprite s = Resources.Load<Sprite>("Icons/SailorType/" + classes[i]);
+            image.sprite = s;
+            image.rectTransform.sizeDelta = new Vector2(30, 30);
+        }
     }
 
     public void SetVisible(bool visible)
@@ -31,13 +62,17 @@ public class IconSailor : MonoBehaviour
         icon.enabled = visible;
         background.enabled = visible;
         qualitySlider.transform.localScale = visible ? Vector3.one : Vector3.zero;
+        nodeClass.SetActive(visible);
 
 
     }
     public void ClickSailor()
     {
-        if (crew == null)
-            return;
-        crew.SetData(thisModel);
+       
+        if (OnClick != null)
+        {
+            OnClick(sailorModel);
+        }
     }
+ 
 }
