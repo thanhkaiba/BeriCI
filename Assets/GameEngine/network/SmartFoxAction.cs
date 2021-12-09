@@ -10,7 +10,10 @@
     LOAD_TEAM = 8,
     BUY_STAMINA = 9,
     COMBAT_PREPARE = 10,
-    COMBAT_COMFIRM = 11,
-    BUY_SLOT = 12,
+    COMBAT_DATA = 11,
+    PVE_SURRENDER = 12,
+    PVE_CONFIRM = 13,
+    PVE_PLAY = 14,
+    BUY_SLOT = 20,
     CHEAT_SAILOR = 101,
 }

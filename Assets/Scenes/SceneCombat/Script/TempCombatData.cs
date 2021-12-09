@@ -25,7 +25,7 @@ public class TempCombatData : Singleton<TempCombatData>
 	public void LoadCombatDataFromSfs(ISFSObject packet)
     {
 		Debug.Log("Read Combat Data");
-		modeID = ModeID.PvE;
+		modeID = (ModeID) packet.GetByte("mode_id");
 		listSailor = new List<SailorModel>();
 			
 		yourTeamIndex = packet.GetByte("your_team_idx");

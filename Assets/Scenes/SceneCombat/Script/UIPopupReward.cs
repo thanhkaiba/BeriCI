@@ -61,7 +61,7 @@ public class UIPopupReward : MonoBehaviour
        SFSObject sfsObject = new SFSObject();
        sfsObject.PutBool("accept", false);
        sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-       NetworkController.Send(SFSAction.COMBAT_COMFIRM, sfsObject);
+       NetworkController.Send(SFSAction.COMBAT_DATA, sfsObject);
        NetworkController.Instance.countDownPickTeam = false;
        transform.GetChild(1).gameObject.SetActive(true);
     }

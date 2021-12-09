@@ -27,7 +27,7 @@ public class CombatMgr : MonoBehaviour
     public int actionCount = 0;
     public static CombatMgr Instance;
     private bool serverGame = false;
-    private ModeID modeId = ModeID.PvE;
+    private ModeID modeId = ModeID.Test;
     private List<CombatAction> listActions;
     public byte yourTeamIndex = 0;
     private void Start()

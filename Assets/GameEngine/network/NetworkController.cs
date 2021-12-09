@@ -388,7 +388,7 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
-			case SFSAction.COMBAT_COMFIRM:
+			case SFSAction.COMBAT_DATA:
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
