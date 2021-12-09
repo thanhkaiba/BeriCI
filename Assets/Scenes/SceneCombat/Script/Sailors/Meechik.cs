@@ -105,9 +105,9 @@ public class Meechik : CombatSailor
             startPos.y -= 0.0f;
             Vector3 targetPos = mainTarget.transform.position;
             targetPos.y += 3.0f;
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.3f);
         });
-        seq.AppendInterval(0.4f);
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() => {
             Vector3 explorePos = mainTarget.transform.position;
             explorePos.y += 3.4f;

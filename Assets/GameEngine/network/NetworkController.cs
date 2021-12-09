@@ -155,7 +155,6 @@ public class NetworkController : MonoBehaviour
 	private static SmartFox sfs;
 	private static LoginData loginData;
 	private static bool shuttingDown;
-	public static bool showCombat;
 	public bool countDownPickTeam = true;
 	//----------------------------------------------------------
 	// Unity callback methods
@@ -393,10 +392,8 @@ public class NetworkController : MonoBehaviour
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
-						Debug.LogError(showCombat);
 						TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-						if (showCombat) SceneManager.LoadScene("SceneCombat2D");
-						else UIManager.Instance.reward.SetReward(TempCombatData.Instance.caReward);				
+						SceneManager.LoadScene("SceneCombat2D");			
 					}
 					break;
 				}

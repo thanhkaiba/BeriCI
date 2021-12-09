@@ -5,6 +5,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+public enum ModeID
+{
+    Test,
+    PvE,
+    Arena,
+};
+
 public enum Team
 {
     A,
@@ -20,6 +27,7 @@ public class CombatMgr : MonoBehaviour
     public int actionCount = 0;
     public static CombatMgr Instance;
     private bool serverGame = false;
+    private ModeID modeId = ModeID.PvE;
     private List<CombatAction> listActions;
     public byte yourTeamIndex = 0;
     private void Start()
@@ -27,7 +35,6 @@ public class CombatMgr : MonoBehaviour
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
         Time.timeScale = 1;
-
         //return;
         PreparingGame();
         StartCoroutine(StartGame());
@@ -39,6 +46,7 @@ public class CombatMgr : MonoBehaviour
         {
             combatState.CreateTeamFromServer();
             TempCombatData.Instance.waitForAServerGame = false;
+            modeId = TempCombatData.Instance.modeID;
             listActions = TempCombatData.Instance.ca;
             yourTeamIndex = TempCombatData.Instance.yourTeamIndex;
             serverGame = true;
@@ -73,34 +81,11 @@ public class CombatMgr : MonoBehaviour
             sailor.ActiveStartPassive();
         });
     }
-    void CombatLoop()
-    {
-        int speedAdd = CalculateSpeedAddThisLoop();
-        //Debug.Log(" ----> speedAdd: " + speedAdd);
-        CombatSailor actionChar = SpeedUpAllSailors(speedAdd);
-        actionCount++;
-        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCount) ));
-        Debug.Log(
-            " ----> combat action character: " + actionChar.Model.config_stats.root_name
-            + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
-            + " | position: " + actionChar.cs.position
-        );
-        float delayTime = actionChar.DoCombatAction(combatState) + 0.2f;
-        combatState.lastTeamAction = actionChar.cs.team;
-        StartCoroutine(WaitAndDo(2*delayTime/3, () => UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor()) ));
-        StartCoroutine(EndLoop(actionChar, delayTime));
-        StartCoroutine(NextLoop(delayTime));
-    }
-
     // serverGame
     void CombatLoopServer()
     {
-        //Debug.Log(" ----> speedAdd: " + speedAdd);
         float delayTime = ProcessAction();
-
         actionCount++;
-
         StartCoroutine(WaitAndDo(2 * delayTime / 3, () => UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor())));
         StartCoroutine(NextLoopServer(delayTime));
     }
@@ -109,7 +94,7 @@ public class CombatMgr : MonoBehaviour
         if (listActions.Count == 0) return 0;
         CombatAction actionProcess = listActions[actionCount];
         int speedAdd = CalculateSpeedAddThisLoop();
-        SpeedUpAllSailors(speedAdd);
+        AddCurSpeedAllSailor(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowActionCount(actionCount);
 
@@ -140,43 +125,63 @@ public class CombatMgr : MonoBehaviour
                     return delayTime;
                 }
             case CombatAcionType.GameResult:
-                return 0;
-            case CombatAcionType.Lose:
-                return 0;
-            case CombatAcionType.GameState:
-                return 0;
+                {
+                    Time.timeScale = 1;
+                    GameEndData data = actionProcess.gameEndData;
+                    switch(modeId)
+                    {
+                        case ModeID.PvE:
+                            {
+                                StartCoroutine(WaitAndDo(1.0f, () => UIManager.Instance.reward.SetReward(yourTeamIndex, data)));
+                                break;
+                            }
+                    }
+                    return 0;
+                }
             default:
                  return 0;
         }
     }
     private CombatSailor GetActorAction(CombatAction action)
     {
-        //Team team = yourTeamIndex == action.actorTeam ? Team.A : Team.B;
         return combatState.GetSailor(action.actor);
     }
     private CombatSailor GetTargetAction(CombatAction action)
     {
-        //Debug.Log("action.target.id: " + action.target);
-        //Debug.Log("action.actorTeam: " + action.actorTeam);
-        //Team team = yourTeamIndex != action.actorTeam ? Team.A : Team.B;
         return combatState.GetSailor(action.target);
     }
     IEnumerator NextLoopServer(float delay)
     {
         yield return new WaitForSeconds(delay);
-        Debug.LogError(actionCount + "," + listActions.Count);
         if (actionCount < listActions.Count) CombatLoopServer();
-        else if (actionCount == 1 && listActions.Count == 0) GameOver(Team.B);
-        else GameOver(Team.A);
     }
-    //server game
+    // end server game
 
+    // client game
+    void CombatLoop()
+    {
+        int speedAdd = CalculateSpeedAddThisLoop();
+        //Debug.Log(" ----> speedAdd: " + speedAdd);
+        CombatSailor actionChar = AddCurSpeedAllSailor(speedAdd);
+        actionCount++;
+        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
+        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCount)));
+        Debug.Log(
+            " ----> combat action character: " + actionChar.Model.config_stats.root_name
+            + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
+            + " | position: " + actionChar.cs.position
+        );
+        float delayTime = actionChar.DoCombatAction(combatState) + 0.2f;
+        combatState.lastTeamAction = actionChar.cs.team;
+        StartCoroutine(WaitAndDo(2 * delayTime / 3, () => UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor())));
+        StartCoroutine(EndLoop(actionChar, delayTime));
+        StartCoroutine(NextLoop(delayTime));
+    }
     IEnumerator EndLoop(CombatSailor actor, float delay)
     {
         yield return new WaitForSeconds(delay);
         combatState.RunEndAction(actor);
     }
-
     IEnumerator NextLoop(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -184,21 +189,19 @@ public class CombatMgr : MonoBehaviour
         if (winTeam == Team.NONE) CombatLoop();
         else GameOver(winTeam);
     }
-    IEnumerator WaitAndDo(float time, Action action)
-    {
-        yield return new WaitForSeconds(time);
-        action();
-    }
-
     void GameOver(Team winTeam)
     {
         Time.timeScale = 1;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
-        //UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
-        StartCoroutine(WaitAndDo(2.0f, () => UIManager.Instance.reward.SetReward(TempCombatData.Instance.caReward)));
-        Debug.LogError("a");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
+    }
+    // end client game
+    IEnumerator WaitAndDo(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action();
     }
 
     int CalculateSpeedAddThisLoop()
@@ -212,8 +215,7 @@ public class CombatMgr : MonoBehaviour
 
         return Math.Max(speedAdd, 0);
     }
-
-    CombatSailor SpeedUpAllSailors(int speedAdd)
+    CombatSailor AddCurSpeedAllSailor(int speedAdd)
     {
         combatState.GetAllAliveCombatSailors().ForEach(character => character.AddCurSpeed(speedAdd));
         return combatState.GetQueueNextActionSailor().First();
