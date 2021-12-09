@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Geechoso
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
+  model: {fileID: 5828454051672516699, guid: 08c4dc547197c464c9ace9c528b0b3b2, type: 3}
   avatar: {fileID: 21300000, guid: 80e20952244cb0744815047b143c054e, type: 3}
   root_name: Geechoso
   rank: 0

@@ -7,6 +7,10 @@ using UnityEngine;
 public class Geechoso : CombatSailor
 {
     public SailorConfig config;
+    Vector3 startPos;
+    Vector3 targetPos;
+    CombatSailor mainTarget;
+    float dame;
     //private Spine.Bone boneTarget;
     public Geechoso()
     {
@@ -23,7 +27,7 @@ public class Geechoso : CombatSailor
         TriggerAnimation("Attack");
         //boneTarget.SetLocalPosition(relativePos);
 
-        Vector3 targetPos = target.transform.position;
+        targetPos = target.transform.position;
         targetPos.y += 2f;
 
         Sequence seq = DOTween.Sequence();
@@ -32,11 +36,7 @@ public class Geechoso : CombatSailor
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            //startPos.y -= 0.4f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
-
-            //var go = GameEffMgr.Instance.ShowSmokeSide(startPos, startPos.x < targetPos.x);
-            //go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
         return 0.6f;
     }
@@ -73,36 +73,28 @@ public class Geechoso : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
-        var mainTarget = CombatState.Instance.GetSailor(targets[0]);
+        mainTarget = CombatState.Instance.GetSailor(targets[0]);
         CombatEvents.Instance.highlightTarget.Invoke(mainTarget);
         Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
-        Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-        Vector3 targetPos = mainTarget.transform.position;
+        startPos = gun2.GetWorldPosition(modelObject.transform);
+        targetPos = mainTarget.transform.position;
         targetPos.y += 2;
-        Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.4f);
-        seq.AppendCallback(() =>
-        {
-           
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
-        });
-        seq.AppendInterval(0.1f);
-        seq.AppendCallback(() =>
-        {
-            mainTarget.LoseHealth(new Damage() { physics = (_params[0] /2)});
-        });
-        seq.AppendInterval(0.8f);
-        seq.AppendCallback(() =>
-        {          
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
-        });
-        seq.AppendInterval(0.2f);
-        seq.AppendCallback(() =>
-        {
-            mainTarget.LoseHealth(new Damage() { physics = (_params[0]/2) });
-        });
-
-
+        dame = _params[0];
+      
         return 2f;
+    }
+    public void StartEff()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.AppendCallback(() =>
+        {
+
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
+        });
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() =>
+        {
+            mainTarget.LoseHealth(new Damage() { physics = (dame / 2) });
+        });
     }
 }
