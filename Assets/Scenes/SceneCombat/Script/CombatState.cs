@@ -94,17 +94,36 @@ public class CombatState : MonoBehaviour
     void CreateTeamA()
     {
         //CreateCombatSailor("QChi", new CombatPosition(0, 1), Team.A);
-        //CreateCombatSailor("Galdalf", new CombatPosition(2, 1), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(2, 1), Team.A);
         //CreateCombatSailor("QChi", new CombatPosition(1, 1), Team.A);
         //CreateCombatSailor("QChi", new CombatPosition(2, 0), Team.A);
         //CreateCombatSailor("Galdalf", new CombatPosition(1, 2), Team.A);
-        CreateCombatSailor("Salvatafo", new CombatPosition(1, 1), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(1, 0), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(1, 2), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(1, 1), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(2, 0), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(2, 2), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 1), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Salvatafo", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Salvatafo", new CombatPosition(0, 0), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("Scrub", new CombatPosition(1, 2), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(2, 1), Team.B);
+        //CreateCombatSailor("QChi", new CombatPosition(1, 1), Team.A);
+        //CreateCombatSailor("QChi", new CombatPosition(2, 0), Team.A);
+        //CreateCombatSailor("Galdalf", new CombatPosition(1, 2), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(1, 0), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(1, 2), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(1, 1), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(2, 0), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(2, 2), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 0), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 1), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 2), Team.B);
+        // CreateCombatSailor("Scrub", new CombatPosition(1, 2), Team.B);
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 2), Team.B);
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.B);
         //CreateCombatSailor("Jenkins", new CombatPosition(1, 1), Team.B);
@@ -191,6 +210,16 @@ public class CombatState : MonoBehaviour
         CTeam.ForEach(delegate (CombatSailor character)
         {
             if (!character.IsDeath()) result.Add(character);
+        });
+        return result;
+    }
+    public List<CombatSailor> GetAllTeamAliveExceptSelfSailors(Team t , CombatSailor m)
+    {
+        List<CombatSailor> result = new List<CombatSailor>();
+        List<CombatSailor> CTeam = t == Team.A ? sailorsTeamA : sailorsTeamB;
+        CTeam.ForEach(delegate (CombatSailor character)
+        {
+            if (!character.IsDeath() && character.cs != m.cs) result.Add(character);
         });
         return result;
     }
