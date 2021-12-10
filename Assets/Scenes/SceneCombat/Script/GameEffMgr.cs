@@ -35,7 +35,6 @@ public class GameEffMgr : MonoBehaviour
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
         int isFlip = 1;
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
-
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => bulletGO.SetActive(true));

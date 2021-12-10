@@ -345,6 +345,10 @@ public class NetworkController : MonoBehaviour
 
 			SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
 			SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(ERROR_CODE);
+			if (errorCode != SFSErrorCode.SUCCESS)
+			{
+				GameUtils.ShowPopupPacketError(errorCode);
+			}
 			OnReceiveServerAction(action, errorCode, packet);
 		}
 	}
@@ -413,6 +417,23 @@ public class NetworkController : MonoBehaviour
 					{
 						TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
 						SceneManager.LoadScene("ScenePickTeamBattle");
+					}
+					break;
+				}
+			case SFSAction.PVE_PLAY:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
+						SceneManager.LoadScene("ScenePickTeamBattle");
+					}
+					break;
+				}
+			case SFSAction.PVE_SURRENDER:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						TempCombatData.Instance.LoadSurenderDataFromSfs(packet);
 					}
 					break;
 				}
