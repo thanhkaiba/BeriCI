@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIPopupReward : MonoBehaviour
 {
@@ -20,27 +21,37 @@ public class UIPopupReward : MonoBehaviour
         texts[3].text = r.hard_bonus.ToString();
         if (r.team_win == 0)
         {
+            GameObject _typeWin = null;
             switch (r.type)
             {
                 case RankBonus.Excellent:
-                    typeWin[0].SetActive(true);
-                    typeWin[0].transform.DOPunchScale(new Vector3(1.5f, 1.5f), 1);
+                    _typeWin = typeWin[0];
                     break;
                 case RankBonus.Overpower:
-                    typeWin[1].SetActive(true);
-                    typeWin[1].transform.DOPunchScale(new Vector3(1.5f, 1.5f), 1);
+                    _typeWin = typeWin[1];
                     break;
                 case RankBonus.Quell:
-                    typeWin[2].SetActive(true);
-                    typeWin[2].transform.DOPunchScale(new Vector3(1.5f, 1.5f), 1);
+                    _typeWin = typeWin[2];
                     break;
                 case RankBonus.Close:
-                    typeWin[3].SetActive(true);
-                    typeWin[3].transform.DOPunchScale(new Vector3(1.5f, 1.5f), 1);
+                    _typeWin = typeWin[3];
                     break;
                 default:
                     break;
             }
+            if (_typeWin != null)
+            {
+                _typeWin.SetActive(true);
+                _typeWin.transform.localScale = new Vector3(3, 3, 3);
+                var image = _typeWin.GetComponent<Image>();
+                var color = image.color;
+                color.a = 0;
+                image.color = color;
+                Sequence seq = DOTween.Sequence();
+                seq.Insert(0.5f, _typeWin.transform.DOScale(1, 0.6f).SetEase(Ease.InCirc));
+                seq.Insert(0.5f, image.DOFade(1, 0.3f).SetEase(Ease.InSine));
+            }
+
             results[0].SetActive(true);
             backLight[0].SetActive(true);
         }
