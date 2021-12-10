@@ -98,7 +98,7 @@ public class LobbyUI : MonoBehaviour
 
 	public void OnLogoutButtonClick()
 	{
-		 NetworkController.Logout();
+		GuiManager.Instance.AddGui<GuiSetting>("Prefap/GuiSetting", LayerId.GUI);
 	}
 	public void OnStartNewGameButtonClick()
 	{

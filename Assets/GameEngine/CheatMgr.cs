@@ -21,5 +21,13 @@ namespace Piratera.Cheat
             NetworkController.Send(SFSAction.CHEAT_SAILOR, data);
             NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
         }
+
+        public static void CheatResource(string resource, int quantity)
+        {
+            SFSObject data = new SFSObject();
+            data.PutUtfString("resource", resource);
+            data.PutInt("quantity", quantity);
+            NetworkController.Send(SFSAction.CHEAT_RESOURCE, data);
+        }
     }
 }

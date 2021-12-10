@@ -16,4 +16,5 @@
     PVE_PLAY = 14,
     BUY_SLOT = 20,
     CHEAT_SAILOR = 101,
+    CHEAT_RESOURCE = 102,
 }
