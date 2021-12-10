@@ -141,11 +141,11 @@ public class Salvatafo : CombatSailor
         {
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
-            GainHealth(_params[listTargets.Count]);
         });
         seq.AppendInterval(0.4f);
         seq.AppendCallback(() =>
         {
+            GainHealth(_params[listTargets.Count]);
             shadow.SetActive(true);
             bar.gameObject.SetActive(true);
         });

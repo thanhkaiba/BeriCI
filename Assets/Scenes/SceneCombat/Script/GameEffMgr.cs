@@ -85,6 +85,7 @@ public class GameEffMgr : MonoBehaviour
         GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/rocket_explore/Rocket_normal"), position, new Quaternion());
         Sequence seq2 = DOTween.Sequence();
         ex.transform.localScale = new Vector3(2.0f, 2.0f, 2.0f);
+        ex.transform.localPosition += new Vector3(0, 0, -3f);
         seq2.AppendInterval(2.0f);
         seq2.AppendCallback(() => Destroy(ex));
     }

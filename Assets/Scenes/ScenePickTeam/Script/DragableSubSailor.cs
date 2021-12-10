@@ -39,11 +39,11 @@ public class DragableSubsailor : DragableSailor
         {
             if (slot.GetOwner() == null)
             {
-                slot.selectable = IsSquadFull();
+                slot.Selectable = IsSquadFull();
             }
             else
             {
-                slot.selectable = true;
+                slot.Selectable = true;
             }
         }
     }
@@ -58,7 +58,6 @@ public class DragableSubsailor : DragableSailor
     new void OnMouseUp()
     {
         SetSailorOpacity(1f);
-
         Destroy(dragImage.gameObject);
 
         if (selectingIndex >= 0 && !dragImage.enabled)
@@ -68,6 +67,11 @@ public class DragableSubsailor : DragableSailor
         else
         {
             OnMouseUpEmpty();
+        }
+
+        foreach (SquadSlot slot in slots)
+        {
+            slot.Selectable = true;
         }
     }
 
