@@ -64,6 +64,8 @@ public class IconSailor : MonoBehaviour
             Sprite s = Resources.Load<Sprite>("Icons/SailorType/" + classes[i]);
             image.sprite = s;
             image.rectTransform.sizeDelta = new Vector2(30, 30);
+            image.color = new Color(0.1f, 0.1f, 0.1f);
+            image.transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
 

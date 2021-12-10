@@ -102,6 +102,7 @@ public class LobbyUI : MonoBehaviour
 	}
 	public void OnStartNewGameButtonClick()
 	{
+		//NetworkController.Send(SFSAction.COMBAT_PREPARE);
 		NetworkController.Send(SFSAction.PVE_PLAY);
 	}
 	public void OnButtonPickTeamClick()
