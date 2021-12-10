@@ -11,7 +11,7 @@ public class GeechosoAnim : MonoBehaviour
         parent = transform.parent.GetComponent<Geechoso>();
     }
 
-    public void SkillAttack()
+    public void StartEff()
     {
         parent.StartEff();
     }
