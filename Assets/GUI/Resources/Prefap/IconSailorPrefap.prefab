@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 5306131625230974963}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 19, y: 156}
+  m_SizeDelta: {x: 3, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4648878043438113125
 CanvasRenderer:
@@ -173,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -18.6, y: 0}
-  m_SizeDelta: {x: 15, y: 152}
+  m_AnchoredPosition: {x: -20.9, y: 0}
+  m_SizeDelta: {x: 15, y: 144.27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5983007453264011779
 MonoBehaviour:
@@ -262,7 +262,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 162, y: 162}
+  m_SizeDelta: {x: 154, y: 154}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2627937962585905772
 CanvasRenderer:
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.6396222, b: 0, a: 1}
+  m_Color: {r: 0.254717, g: 0.17970763, b: 0.17902279, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -471,7 +471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.96324027, b: 0, a: 1}
+  m_Color: {r: 0.87058127, g: 0.9245283, b: 0.20496617, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -658,11 +658,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rankColor:
-  - {r: 0.9150943, g: 0.9150943, b: 0.9150943, a: 1}
-  - {r: 0.6776052, g: 0.9245283, b: 0.6672303, a: 1}
-  - {r: 0.47209862, g: 0.47209862, b: 0.9716981, a: 1}
-  - {r: 0.7372549, g: 0, b: 0.7331098, a: 1}
-  - {r: 0.99215686, g: 0.5415881, b: 0, a: 1}
+  - {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+  - {r: 0.5414939, g: 0.7830189, b: 0.5281684, a: 1}
+  - {r: 0.46262014, g: 0.65521157, b: 0.8679245, a: 1}
+  - {r: 0.990566, g: 0.1541919, b: 0.8798133, a: 1}
+  - {r: 1, g: 0.5923684, b: 0.08962262, a: 1}
+  rankColorInside:
+  - {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
+  - {r: 0.2971698, g: 0.3962264, b: 0.2971698, a: 1}
+  - {r: 0.11213957, g: 0.11213957, b: 0.5283019, a: 1}
+  - {r: 0.33962262, g: 0.04645782, b: 0.33962262, a: 1}
+  - {r: 0.3490566, g: 0.19039452, b: 0, a: 1}
   spriteRanks:
   - {fileID: 21300000, guid: a3647748c1eeaa04d93ab44c0b90c878, type: 3}
   - {fileID: 21300000, guid: 2f8674936dbfbcd48b23b914661235d2, type: 3}
@@ -672,6 +678,7 @@ MonoBehaviour:
   icon: {fileID: 7725597496263003581}
   iconRank: {fileID: 5985670163769306262}
   background: {fileID: 7434028353638587464}
+  border: {fileID: 7725597495769743505}
   qualitySlider: {fileID: 5983007453264011779}
   nodeClass: {fileID: 440420342804999034}
   ShowClass: 0
@@ -767,7 +774,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 158, y: 158}
+  m_SizeDelta: {x: 152, y: 152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7725597496263003580
 CanvasRenderer:

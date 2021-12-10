@@ -10,6 +10,8 @@ public class IconSailor : MonoBehaviour
     [SerializeField]
     private Color[] rankColor;
     [SerializeField]
+    private Color[] rankColorInside;
+    [SerializeField]
     private Sprite[] spriteRanks;
     [SerializeField]
     public Image icon;
@@ -17,6 +19,8 @@ public class IconSailor : MonoBehaviour
     public Image iconRank;
     [SerializeField]
     private Image background;
+    [SerializeField]
+    private Image border;
     [SerializeField]
     private Slider qualitySlider;
     [SerializeField]
@@ -32,7 +36,8 @@ public class IconSailor : MonoBehaviour
     {
         gameObject.name = model.id;
         icon.sprite = model.config_stats.avatar;
-        background.color = rankColor[(int)model.config_stats.rank];
+        border.color = rankColor[(int)model.config_stats.rank];
+        background.color = rankColorInside[(int)model.config_stats.rank];
 
         iconRank.gameObject.SetActive(ShowRank);
         if (ShowRank)
@@ -64,7 +69,7 @@ public class IconSailor : MonoBehaviour
             Sprite s = Resources.Load<Sprite>("Icons/SailorType/" + classes[i]);
             image.sprite = s;
             image.rectTransform.sizeDelta = new Vector2(30, 30);
-            image.color = new Color(0.1f, 0.1f, 0.1f);
+            image.color = Color.grey;
             image.transform.localScale = new Vector3(1f, 1f, 1f);
         }
     }
