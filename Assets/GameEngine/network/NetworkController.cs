@@ -362,7 +362,7 @@ public class NetworkController : MonoBehaviour
 	}
 	public static void Send(SFSAction action)
 	{
-		Debug.LogError(action.ToString());
+		Debug.Log(action.ToString());
 		Send(action, new SFSObject());
 	}
 	protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)

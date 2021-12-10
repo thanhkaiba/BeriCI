@@ -7,11 +7,14 @@ using System.Collections.Generic;
 
 public class IconSailor : MonoBehaviour
 {
-   
     [SerializeField]
-    private Sprite[] rankSprites;
+    private Color[] rankColor;
+    [SerializeField]
+    private Sprite[] spriteRanks;
     [SerializeField]
     public Image icon;
+    [SerializeField]
+    public Image iconRank;
     [SerializeField]
     private Image background;
     [SerializeField]
@@ -21,6 +24,7 @@ public class IconSailor : MonoBehaviour
     public Action<SailorModel> OnClick;
     private SailorModel sailorModel;
     public bool ShowClass = false;
+    public bool ShowRank = false;
 
 
 
@@ -28,7 +32,13 @@ public class IconSailor : MonoBehaviour
     {
         gameObject.name = model.id;
         icon.sprite = model.config_stats.avatar;
-        background.sprite = rankSprites[(int)model.config_stats.rank];
+        background.color = rankColor[(int)model.config_stats.rank];
+
+        iconRank.gameObject.SetActive(ShowRank);
+        if (ShowRank)
+        {
+            iconRank.sprite = spriteRanks[(int)model.config_stats.rank];
+        }
         qualitySlider.value = (model.quality * 1f) / GlobalConfigs.SailorGeneral.MAX_QUALITY;
         sailorModel = model;
         if (ShowClass)
@@ -62,7 +72,8 @@ public class IconSailor : MonoBehaviour
         icon.enabled = visible;
         background.enabled = visible;
         qualitySlider.transform.localScale = visible ? Vector3.one : Vector3.zero;
-        nodeClass.SetActive(visible);
+        nodeClass.SetActive(visible && ShowClass);
+        iconRank.gameObject.SetActive(visible && ShowRank);
 
 
     }

@@ -37,8 +37,11 @@ public class CrewManager : MonoBehaviour
         for (int i = 0; i < sailors.Count; i++)
         {
             GameObject go = Instantiate(iconSailorPrefap, listSailors);
-            go.GetComponent<IconSailor>().PresentData(sailors[i]);
-            go.GetComponent<IconSailor>().OnClick = model => SetData(model);
+            IconSailor icon = go.GetComponent<IconSailor>();
+            icon.OnClick = model => SetData(model);
+            icon.ShowRank = true;
+            icon.PresentData(sailors[i]);
+          
         }
         if (sailors.Count > 0)
         {
