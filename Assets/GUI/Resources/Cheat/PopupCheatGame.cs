@@ -14,6 +14,10 @@ namespace Piratera.GUI
         private Text textCheatSailor_level;
         [SerializeField]
         private Text textCheatSailor_quality;
+        [SerializeField]
+        private InputField textCheatBeri_quality;
+        [SerializeField]
+        private InputField textCheatStamina_quality;
 
 
         public void SendCheatSailor()
@@ -23,6 +27,24 @@ namespace Piratera.GUI
             CheatMgr.CheatSailor(textCheatSailor_name.text, textCheatSailor_quality.text, textCheatSailor_level.text);
 
 
+        }
+
+        public void SendCheatStamina()
+        {
+            if (string.IsNullOrEmpty(textCheatStamina_quality.text))
+            {
+                return;
+            }
+            CheatMgr.CheatResource("stamina", int.Parse(textCheatStamina_quality.text));
+        }
+
+        public void SendCheatBeri()
+        {
+            if (string.IsNullOrEmpty(textCheatBeri_quality.text))
+            {
+                return;
+            }
+            CheatMgr.CheatResource("beri", int.Parse(textCheatBeri_quality.text));
         }
 
         public void CheatBot()
