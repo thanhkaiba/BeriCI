@@ -7,28 +7,21 @@ public class CrewData : Singleton<CrewData>
     public List<SailorModel> Sailors = new List<SailorModel>();
     public FightingLine FightingTeam = new FightingLine();
 
-
     protected override void OnAwake()
     {
         ResetData();
         GameEvent.SquadChanged.AddListener(OnUpdateSquad);
     }
-
     private void OnUpdateSquad()
     {
         NetworkController.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
     }
-
-
-
     private void ResetData()
     {
         Sailors.Clear();
         FightingTeam.Clean();
         
     }
-
-
     public void NewFromSFSObject(ISFSObject packet)
     {
         ResetData();
@@ -45,13 +38,10 @@ public class CrewData : Singleton<CrewData>
 
         FightingTeam.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
     }
-
-
     public SailorModel GetSailorModel(string id)
     {
         return Sailors.Find(s => s.id == id);
     }
-
     public void Swap(string sailorA, string sailorB)
     {
         if (FightingTeam.Swap(sailorA, sailorB))
@@ -60,21 +50,17 @@ public class CrewData : Singleton<CrewData>
         }
 
     }
-
     public void Occupie(string sailorId,short slot)
     {
         if (GetSailorModel(sailorId) == null)
         {
             return;
         }
-
         if (FightingTeam.Occupie(sailorId, slot))
         {
             GameEvent.SquadChanged.Invoke();
         }
-
     }
-
     public void Replace(string subSailor, short slot)
     {
         if (GetSailorModel(subSailor) == null)
@@ -100,9 +86,6 @@ public class CrewData : Singleton<CrewData>
             GameEvent.SquadChanged.Invoke();
         }
     }
-
-
-    
     public List<SailorModel> GetSquadModelList()
     {
         List<SailorModel> result = new List<SailorModel>();
@@ -116,7 +99,6 @@ public class CrewData : Singleton<CrewData>
         }
         return result;
     }
-
     public List<SailorModel> GetSubstituteSailors()
     {
         List<SailorModel> result = new List<SailorModel>();
@@ -141,8 +123,4 @@ public class CrewData : Singleton<CrewData>
     {  
         return GetSailorModel(FightingTeam.SailorIdAt(combatPosition));
     }
-
-   
-
- 
 }

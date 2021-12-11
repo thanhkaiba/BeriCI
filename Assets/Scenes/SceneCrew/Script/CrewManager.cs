@@ -23,6 +23,7 @@ public class CrewManager : MonoBehaviour
     private Image [] classImgs;
     public Transform sailorPos;
     private GameObject sailor;
+    private List<IconSailor> listIcon;
     // Start is called before the first frame update
 
     private void OnEnable()
@@ -33,19 +34,25 @@ public class CrewManager : MonoBehaviour
     void RenderListSubSailor()
     {
         sailors = CrewData.Instance.Sailors;
- 
+        listIcon = new List<IconSailor>();
         for (int i = 0; i < sailors.Count; i++)
         {
             GameObject go = Instantiate(iconSailorPrefap, listSailors);
             IconSailor icon = go.GetComponent<IconSailor>();
-            icon.OnClick = model => SetData(model);
+            icon.OnClick = model =>
+            {
+                listIcon.ForEach(_icon => _icon.ShowFocus(false));
+                icon.ShowFocus(true);
+                SetData(model);
+            };
             icon.ShowRank = true;
             icon.PresentData(sailors[i]);
-          
+            listIcon.Add(icon);
         }
         if (sailors.Count > 0)
         {
             SetData(sailors[0]);
+            listIcon[0].ShowFocus(true);
         }
     }
 
