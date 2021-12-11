@@ -25,12 +25,12 @@ public class IconSailor : MonoBehaviour
     private Slider qualitySlider;
     [SerializeField]
     private GameObject nodeClass;
+    [SerializeField]
+    private GameObject GOClass;
     public Action<SailorModel> OnClick;
     private SailorModel sailorModel;
     public bool ShowClass = false;
     public bool ShowRank = false;
-
-
 
     public void PresentData(SailorModel model)
     {
@@ -59,18 +59,11 @@ public class IconSailor : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
         for (int i = 0; i < classes.Count; i++)
         {
-            GameObject GO = new GameObject();
-            GO.AddComponent<Image>();
-            GO.transform.SetParent(nodeClass.transform);
-            Image image = GO.GetComponent<Image>();
-            Sprite s = Resources.Load<Sprite>("Icons/SailorType/" + classes[i]);
-            image.sprite = s;
-            image.rectTransform.sizeDelta = new Vector2(30, 30);
-            image.color = Color.grey;
-            image.transform.localScale = new Vector3(1f, 1f, 1f);
+            GameObject GO = Instantiate(GOClass, nodeClass.transform);
+            GO.GetComponent<IconClassInAvt>().SetClass(classes[i]);
+            GO.transform.localPosition -= new Vector3(0, i * 52, 0);
         }
     }
 

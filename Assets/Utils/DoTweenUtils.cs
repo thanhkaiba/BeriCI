@@ -42,13 +42,13 @@ namespace Piratera.Utils
             return s;
         }
 
-        public static void FadeAppearX(Button button, float distance, float duration, float delay = 0, Ease ease = Ease.OutQuint)
+        public static void FadeAppearX(Button button, float distance, float duration, float delay = 0, Ease ease = Ease.InOutSine)
         {
             FadeAppearX(button, distance, duration, ease).SetDelay(delay);
         }
 
 
-        public static void FadeAppearY(Button button, float distance, float duration, float delay = 0, Ease ease = Ease.OutQuint)
+        public static void FadeAppearY(Button button, float distance, float duration, float delay = 0, Ease ease = Ease.InOutSine)
         {
             FadeAppearY(button, distance, duration, ease).SetDelay(delay);
         }
@@ -66,7 +66,7 @@ namespace Piratera.Utils
 
             s.Insert(0, button.transform.DOScale(button.transform.localScale + delta, duration).SetEase(Ease.InQuint).From());
             s.Insert(0, image.DOFade(0, duration).From());
-            s.Insert(0, button.transform.DORotate(new Vector3(0, 0, -80), duration, RotateMode.WorldAxisAdd).From().SetEase(Ease.OutBack));
+            s.Insert(0, button.transform.DORotate(new Vector3(0, 0, -80), duration, RotateMode.WorldAxisAdd).From().SetEase(Ease.InOutSine));
             s.SetDelay(delay);
             s.SetTarget(button);
             s.SetLink(button.gameObject);

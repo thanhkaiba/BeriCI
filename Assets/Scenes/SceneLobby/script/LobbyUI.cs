@@ -43,15 +43,20 @@ public class LobbyUI : MonoBehaviour
 	private Button buttonAdventure;
 
 	[SerializeField]
-	private Image background;
-
-	[SerializeField]
 	private LoadAvatarUtils loadAvatarUtils;
 
- 
+	[SerializeField]
+	private List<Transform> nodeSailors;
 
-    // Start is called before the first frame update
-    void Start()
+	[SerializeField]
+	private Transform buttonCol;
+	[SerializeField]
+	private Transform sail;
+	[SerializeField]
+	private Transform background;
+
+	// Start is called before the first frame update
+	void Start()
     {
 
 		loadAvatarUtils.LoadAvatar(userAvatar, UserData.Instance.Avatar);
@@ -60,6 +65,7 @@ public class LobbyUI : MonoBehaviour
 		GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
 		GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
 		RunAppearAction();
+		ShowListSailors();
 	}
 
     private void OnBeriChanged(long oldValue, long newValue)
@@ -145,27 +151,32 @@ public class LobbyUI : MonoBehaviour
 
 	private void RunAppearAction()
     {
-
-		Vector3 originScale = background.transform.localScale;
-		background.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
-		background.transform.DOScale(originScale, 0.4f);
-		
-        foreach (Button button in leftButtons)
-        {
-
-			DoTweenUtils.FadeAppearX(button, -Screen.width/2, 1f, UnityEngine.Random.Range(0.4f, 0.5f));
-			
-			
-        }
-
-		foreach (Button button in rightButtons)
+		for (int i = 0; i < leftButtons.Length; i++)
 		{
-			DoTweenUtils.FadeAppearX(button, Screen.width/2, 1f, UnityEngine.Random.Range(0.4f, 0.5f));
+			DoTweenUtils.FadeAppearY(leftButtons[i], -200, 0.4f, 1.2f + i * 0.2f, Ease.OutCirc);
 		}
 
-		DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.5f, Vector3.one ,1f);
-	}
+		DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.6f, Vector3.one, 0.7f);
 
+		buttonCol.Translate(200, 0, 0);
+		buttonCol.DOMove(new Vector3(-200, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
+
+		sail.Translate(50, 180, 0);
+		sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
+
+		var scale = new Vector3(0.6f, 0.6f, 0.6f);
+		background.localScale += scale;
+		background.DOScale(-scale, 0.8f).SetRelative().SetEase(Ease.OutCirc);
+	}
+	private void ShowListSailors()
+	{
+		for (int i = 0; i < nodeSailors.Count; i++)
+		{
+			if (i >= CrewData.Instance.Sailors.Count) break;
+			var model = CrewData.Instance.Sailors[i];
+			Instantiate(model.config_stats.model, nodeSailors[i]);
+		}
+	}
 	public void ShowGuiCheat()
 	{
 		GuiManager.Instance.AddGui<PopupCheatGame>("Cheat/PopupCheat");
