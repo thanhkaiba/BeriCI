@@ -33,8 +33,8 @@ public enum SFSErrorCode
     [Description("Slot sold out")]
     BUY_SLOT_POSITION_SOLD_OUT = 14,
     [Description("Invalid data")]
-    COMBAT_CONFIRM_SLOT_INVALID = 15
-    
- 
-
+    COMBAT_CONFIRM_SLOT_INVALID = 15,
+    [Description("Invalid Game State")]
+    INVALID_GAME_STATE = 69,
+   
 }

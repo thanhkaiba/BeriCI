@@ -668,7 +668,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 316249761}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 55f418408a9cf6448863ad7934e37483, type: 3}
   m_Name: 
@@ -3010,7 +3010,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2016eb7ee93501446987a1f015c5c296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownPickTeam: 1
 --- !u!4 &1448217985
 Transform:
   m_ObjectHideFlags: 0
