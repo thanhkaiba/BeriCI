@@ -155,7 +155,6 @@ public class NetworkController : MonoBehaviour
 	private static SmartFox sfs;
 	private static LoginData loginData;
 	private static bool shuttingDown;
-	public bool countDownPickTeam = true;
 	//----------------------------------------------------------
 	// Unity callback methods
 	//----------------------------------------------------------

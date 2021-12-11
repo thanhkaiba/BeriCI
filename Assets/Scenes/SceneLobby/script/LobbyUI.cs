@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using Piratera.Utils;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using Piratera.Sound;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -53,7 +54,7 @@ public class LobbyUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+		SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
 		loadAvatarUtils.LoadAvatar(userAvatar, UserData.Instance.Avatar);
 		UpdateUserInfo();
 		GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
