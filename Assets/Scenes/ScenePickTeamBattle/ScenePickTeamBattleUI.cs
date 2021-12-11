@@ -85,6 +85,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
         NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
+        UIManager.Instance.reward.gameObject.SetActive(false);
     }
 
 
