@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using Piratera.Utils;
 using DG.Tweening;
+using Piratera.Sound;
 
 public class LoginUI : MonoBehaviour
 {
@@ -29,6 +30,7 @@ public class LoginUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundMgr.PlayBGMusic(PirateraMusic.LOGIN);
 		RunAppearAction();
     }
 

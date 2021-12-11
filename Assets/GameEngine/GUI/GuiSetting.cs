@@ -1,4 +1,5 @@
-﻿using Sfs2X.Entities.Data;
+﻿using Piratera.Sound;
+using Sfs2X.Entities.Data;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,7 +43,12 @@ namespace Piratera.GUI
 
         public void ToggleSound()
         {
-            AudioListener.pause = !AudioListener.pause;
+            SoundMgr.SoundOn = !SoundMgr.SoundOn;
+        }
+
+        public void ToggleMusic()
+        {
+            SoundMgr.MusicOn = !SoundMgr.MusicOn;
         }
 
         public void OpenWhitePaper()

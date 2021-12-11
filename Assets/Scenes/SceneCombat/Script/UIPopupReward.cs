@@ -98,7 +98,6 @@ public class UIPopupReward : MonoBehaviour
     }
     public void ClickReceive()
     {
-        NetworkController.Instance.countDownPickTeam = true;
         SceneManager.LoadScene("SceneLobby");
     }
     public void ConfirmSur()
@@ -106,7 +105,5 @@ public class UIPopupReward : MonoBehaviour
        SFSObject sfsObject = new SFSObject();
        sfsObject.PutBool("accept", false);
        NetworkController.Send(SFSAction.PVE_SURRENDER, sfsObject);
-       NetworkController.Instance.countDownPickTeam = false;
-
     }
 }

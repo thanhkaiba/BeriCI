@@ -132,6 +132,7 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 		countdown = 0;
 		sailors_0.Clear();
 		sailors_1.Clear();
+		countdown = 0;
     }
 
 	public void NewFromSFSObject(ISFSObject packet)

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
 using UnityEngine;
@@ -22,6 +23,10 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     private void Start()
     {
+        if (SoundMgr.Instance != null)
+        {
+            SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
+        }
         UpdateUI();
     }
 
@@ -38,13 +43,16 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     public void UpdateUI()
     {
         TeamCombatPrepareData data = TeamCombatPrepareData.Instance;
-        userNameA.text = data.YourName; 
-        userNameB.text = data.OpponentName;
+        if (data.countdown > 0)
+        {
+            userNameA.text = data.YourName;
+            userNameB.text = data.OpponentName;
 
-        avatarA.LoadAvatar(data.YourAvatar);
-        avatarB.LoadAvatar(data.OpponentAvatar);
+            avatarA.LoadAvatar(data.YourAvatar);
+            avatarB.LoadAvatar(data.OpponentAvatar);
 
-        RunCountDown(60);
+            RunCountDown(data.countdown);
+        }
     }
 
     public void RunCountDown(byte countdown)
@@ -54,8 +62,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         mySequence.AppendInterval(1f)
             .AppendCallback(() =>
             {
-                if (!NetworkController.Instance.countDownPickTeam)
-                    return;
+                
                 if (countdown > 0)
                 {
                     countdown--;
@@ -78,7 +85,6 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
         NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
-        NetworkController.Instance.countDownPickTeam = false;
         UIManager.Instance.reward.gameObject.SetActive(false);
     }
 
