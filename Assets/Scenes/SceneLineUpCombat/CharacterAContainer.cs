@@ -24,47 +24,36 @@ public class CharacterAContainer : MonoBehaviour
         RenderListSubSailor();
         GameEvent.PrepareSquadChanged.AddListener(RenderListSubSailor);
     }
-
     void OnDestroy()
     {
         GameEvent.PrepareSquadChanged.RemoveListener(RenderListSubSailor);
     }
-
     public void OnPointerDownRight()
     {
         direction = 1;
 
     }
-
     public void OnPointerDownLeft()
     {
         direction = -1;
 
     }
-
     public void OnPointerUp()
     {
         direction = 0;
     }
-
     private void Update()
     {
-
-
         if (direction != 0)
         {
             Speed += Acceleration * direction * Time.deltaTime;
-
             if (Mathf.Abs(Speed) > MaxSpeed)
             {
                 Speed = direction * MaxSpeed;
             }
-
-
             float contentWidth = scrollRect.content.sizeDelta.x;
             float curAmout = scrollRect.horizontalNormalizedPosition + Speed / contentWidth;
             scrollRect.horizontalNormalizedPosition = Mathf.Clamp(curAmout, 0, 1);
-
         }
         else
         {
