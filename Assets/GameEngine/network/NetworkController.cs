@@ -355,12 +355,15 @@ public class NetworkController : MonoBehaviour
 	public static void Send(SFSAction action, ISFSObject data)
 	{
 	
-		Debug.Log("Send Action To Server: " + action + $" ({(int)action})");
 		if (sfs != null)
         {
+			Debug.Log("Send Action To Server: " + action + $" ({(int)action})");
 			data.PutInt(ACTION_INCORE, (int)action);
 			ExtensionRequest extensionRequest = new ExtensionRequest(CLIENT_REQUEST, data);
 			sfs.Send(extensionRequest);
+		} else
+        {
+			GuiManager.Instance.ShowPopupNotification("Server Disconnected", ForceStartScene);
 		}
 	
 	}
@@ -437,6 +440,15 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
+			case SFSAction.CHEAT_RESOURCE:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						UserData.Instance.OnUserVariablesUpdate(sfs.MySelf);
+					}
+					break;
+				}
+
 		}
 	}
 
