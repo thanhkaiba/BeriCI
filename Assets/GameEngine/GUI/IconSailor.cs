@@ -27,6 +27,8 @@ public class IconSailor : MonoBehaviour
     private GameObject nodeClass;
     [SerializeField]
     private GameObject GOClass;
+    [SerializeField]
+    private GameObject GOFocus;
     public Action<SailorModel> OnClick;
     private SailorModel sailorModel;
     public bool ShowClass = false;
@@ -51,7 +53,10 @@ public class IconSailor : MonoBehaviour
             RenderClass(model.config_stats.classes);
         }
     }
-
+    public void ShowFocus(bool b)
+    {
+        GOFocus.SetActive(b);
+    }
     private void RenderClass(List<SailorClass> classes)
     {
 
@@ -79,7 +84,6 @@ public class IconSailor : MonoBehaviour
     }
     public void ClickSailor()
     {
-       
         if (OnClick != null)
         {
             OnClick(sailorModel);
