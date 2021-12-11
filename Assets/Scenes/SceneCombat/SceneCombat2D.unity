@@ -2087,7 +2087,7 @@ PrefabInstance:
     - target: {fileID: 2321160139256091199, guid: 54a9b9ed8fd201d4face3ea8153844d2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2321160139256091199, guid: 54a9b9ed8fd201d4face3ea8153844d2,
         type: 3}
@@ -2369,6 +2369,7 @@ GameObject:
   - component: {fileID: 1260769656}
   - component: {fileID: 1260769655}
   - component: {fileID: 1260769654}
+  - component: {fileID: 1260769659}
   m_Layer: 5
   m_Name: GameCanvas
   m_TagString: Untagged
@@ -2474,6 +2475,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1260769659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260769653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2285536e193a6454caf24c579263c41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1281711772 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4546431341683246571, guid: 942fd14179b01464a82c574fab41f53a,
@@ -3385,7 +3398,7 @@ PrefabInstance:
     - target: {fileID: 4546431341683246571, guid: 942fd14179b01464a82c574fab41f53a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4546431341683246571, guid: 942fd14179b01464a82c574fab41f53a,
         type: 3}

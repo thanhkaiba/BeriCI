@@ -79,6 +79,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
         NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
         NetworkController.Instance.countDownPickTeam = false;
+        UIManager.Instance.reward.gameObject.SetActive(false);
     }
 
 
