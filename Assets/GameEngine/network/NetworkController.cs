@@ -181,6 +181,7 @@ public class NetworkController : MonoBehaviour
 
     private static void OnUserDataUpdate(BaseEvent evt)
     {
+		Debug.Log("da vao day");
 		List<string> changedVars = (List<string>)evt.Params["changedVars"];
 
 		SFSUser user = (SFSUser)evt.Params["user"];
@@ -436,14 +437,6 @@ public class NetworkController : MonoBehaviour
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
 						TempCombatData.Instance.LoadSurenderDataFromSfs(packet);
-					}
-					break;
-				}
-			case SFSAction.CHEAT_RESOURCE:
-				{
-					if (errorCode == SFSErrorCode.SUCCESS)
-					{
-						UserData.Instance.OnUserVariablesUpdate(sfs.MySelf);
 					}
 					break;
 				}
