@@ -12,27 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
   m_Name: Sojeph
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  avatar: {fileID: 0}
+  model: {fileID: 8848435913944466415, guid: 2ea977362f311214aa558c8dc429c1da, type: 3}
+  avatar: {fileID: 21300000, guid: 178155ca17c12fb41bab1985672f8cf2, type: 3}
   root_name: Sojeph
   rank: 1
   power_base: 50
-  power_base_step: 0.25
-  power_plv: 1
-  power_plv_step: 0.001
-  crit: 0
-  crit_damage: 0
   health_base: 250
-  health_base_step: 0.5
-  health_plv: 3
-  health_plv_step: 0.003
   speed_base: 110
-  speed_step: 0.05
   armor: 10
   magic_resist: 10
+  crit: 0
   attack_type: 0
   classes: 
-  skill_name: Sojeph Skill
   start_fury: 0
   max_fury: 10
   skill_params:
