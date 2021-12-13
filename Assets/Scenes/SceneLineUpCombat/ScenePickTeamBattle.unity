@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2016eb7ee93501446987a1f015c5c296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownPickTeam: 1
 --- !u!4 &118701285
 Transform:
   m_ObjectHideFlags: 0
@@ -2059,6 +2058,7 @@ MonoBehaviour:
   avatarA: {fileID: 976640438}
   userNameB: {fileID: 1768693683}
   avatarB: {fileID: 1172286869}
+  squaA: {fileID: 1745113250}
 --- !u!4 &1133007009
 Transform:
   m_ObjectHideFlags: 0

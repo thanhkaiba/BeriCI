@@ -12,6 +12,16 @@ public class UIPopupReward : MonoBehaviour
     TextMeshProUGUI[] texts;
     [SerializeField]
     GameObject[] results, typeWin, backLight;
+    [SerializeField]
+    GameObject beri, overlay;
+    [SerializeField]
+    Vector3 posBeri;
+
+
+    private void Start()
+    {
+        posBeri = beri.transform.position;
+    }
     public void SetReward(byte yourTeamIndex, GameEndData r)
     {
         transform.GetChild(0).gameObject.SetActive(false);
@@ -67,6 +77,7 @@ public class UIPopupReward : MonoBehaviour
 
     private void OnDisable()
     {
+        overlay.SetActive(false);
         foreach (var item in texts)
         {
             item.text = "";
@@ -85,17 +96,28 @@ public class UIPopupReward : MonoBehaviour
         {
             item.SetActive(false);
         }
+        beri.transform.position = posBeri;
+    
     }
   
     public void ClickReceive()
     {
+        gameObject.SetActive(false);
         SceneManager.LoadScene("SceneLobby");
     }
     public void ConfirmSur()
     {
-       SFSObject sfsObject = new SFSObject();
-       sfsObject.PutBool("accept", false);
-       NetworkController.Send(SFSAction.PVE_SURRENDER, sfsObject);
-       gameObject.SetActive(false);
+        overlay.SetActive(true);
+        float jumPower = 40;
+        Vector3 pos = beri.transform.position;
+        pos.y += jumPower;
+        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() =>SendSurrenderToSever());
+    }
+    public void SendSurrenderToSever()
+    {
+        SFSObject sfsObject = new SFSObject();
+        sfsObject.PutBool("accept", false);
+        NetworkController.Send(SFSAction.PVE_SURRENDER, sfsObject);
+        gameObject.SetActive(false);
     }
 }

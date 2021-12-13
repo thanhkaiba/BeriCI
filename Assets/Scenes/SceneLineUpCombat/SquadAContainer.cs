@@ -82,7 +82,7 @@ public class SquadAContainer : MonoBehaviour
 
         return sailor;
     }
-  /*  public bool HaveSailor()
+    public bool HaveSailor()
     {
         bool result = false;
         foreach (var s in slots)
@@ -90,9 +90,8 @@ public class SquadAContainer : MonoBehaviour
             if (s.GetState() == SquadSlot.State.SELECTED)
                 result = true;
         }
-        Debug.LogError(result);
         return result;
-    }*/
+    }
     public void OnUpdateSquad()
     {
         teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));

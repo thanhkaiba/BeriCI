@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.GUI;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
@@ -20,7 +21,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private Text userNameB;
     [SerializeField]
     private UserAvatar avatarB;
-
+    public SquadAContainer squaA;
     private void Start()
     {
         if (SoundMgr.Instance != null)
@@ -32,12 +33,12 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnJoinBattle()
     {
-      //  SceneManager.LoadScene("SceneCombat2D");
+        //  SceneManager.LoadScene("SceneCombat2D");
     }
 
     public void OnSurrender()
     {
-       // NetworkController.OnExtentionResponse();
+        // NetworkController.OnExtentionResponse();
     }
 
     public void UpdateUI()
@@ -62,14 +63,14 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         mySequence.AppendInterval(1f)
             .AppendCallback(() =>
             {
-                
+
                 if (countdown > 0)
                 {
                     countdown--;
                     textCountDown.text = "" + countdown;
-                    if(countdown == 0) OnTimeOut();
+                    if (countdown == 0) OnTimeOut();
                 }
-              
+
             })
             .SetLoops(countdown).SetLink(gameObject).SetTarget(transform);
     }
@@ -78,18 +79,22 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     {
         if (UIManager.Instance.reward.gameObject.activeInHierarchy)
             UIManager.Instance.reward.ConfirmSur();
+        else if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors", UIManager.Instance.reward.SendSurrenderToSever);
         else
-        SendStartCombat();
+            SendStartCombat();
     }
 
     public void SendStartCombat()
     {
-        SFSObject sfsObject = new SFSObject();
-        sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-        NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
-        UIManager.Instance.reward.gameObject.SetActive(false);
+        if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Need at least one Sailor");
+        else
+        {
+            SFSObject sfsObject = new SFSObject();
+            sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
+            NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
+            UIManager.Instance.reward.gameObject.SetActive(false);
+        }
     }
-
 
     public void Surrender()
     {
