@@ -117,12 +117,14 @@ public class Sojeph : CombatSailor
     }
     public void StartEffDame()
     {
+        float time = 0;
+        time = 5f / Vector3.Distance(startPos, targetPos);
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, .5f, 0.4f);
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0, time);
         });
-        seq.AppendInterval(0.7f);
+        seq.AppendInterval(time);
         seq.AppendCallback(() =>
         {
             mainTarget.LoseHealth(new Damage() { physics = (dame) });

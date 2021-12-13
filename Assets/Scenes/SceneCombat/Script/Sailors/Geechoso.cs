@@ -81,13 +81,15 @@ public class Geechoso : CombatSailor
     }
     public void StartEff()
     {
+        float time = 0;
+        time = 5f / Vector3.Distance(startPos, targetPos);
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
 
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, time);
         });
-        seq.AppendInterval(0.5f);
+        seq.AppendInterval(time);
         seq.AppendCallback(() =>
         {
             mainTarget.LoseHealth(new Damage() { physics = (dame / 2) });
