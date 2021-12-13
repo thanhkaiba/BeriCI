@@ -17,7 +17,6 @@ public class TempCombatData : Singleton<TempCombatData>
     public string avt0;
     public string avt1;
     public int combatId;
-	public int beri;
 	public List<SailorModel> listSailor;
 	public FightingLine fgl0;
     public FightingLine fgl1;
@@ -71,11 +70,7 @@ public class TempCombatData : Singleton<TempCombatData>
 		ISFSArray _ca = packet.GetSFSArray("ca");
 		foreach (ISFSObject obj in _ca) ca.Add(new CombatAction(obj));
 	}
-	public void LoadSurenderDataFromSfs(ISFSObject packet)
-	{
-		beri = packet.GetInt("beri");
-		UIManager.Instance.reward.SetRewardSurrender();
-	}
+
 }
 
 public enum CombatAcionType

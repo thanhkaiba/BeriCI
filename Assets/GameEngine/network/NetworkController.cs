@@ -435,7 +435,7 @@ public class NetworkController : MonoBehaviour
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
-						TempCombatData.Instance.LoadSurenderDataFromSfs(packet);
+						SceneManager.LoadScene("SceneLobby");
 					}
 					break;
 				}
