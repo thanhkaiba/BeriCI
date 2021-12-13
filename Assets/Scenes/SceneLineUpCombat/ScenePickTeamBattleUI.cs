@@ -76,7 +76,9 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnTimeOut()
     {
-        //NetworkController.Send(SFSAction.PVE_SURRENDER);
+        if (UIManager.Instance.reward.gameObject.activeInHierarchy)
+            UIManager.Instance.reward.ConfirmSur();
+        else
         SendStartCombat();
     }
 

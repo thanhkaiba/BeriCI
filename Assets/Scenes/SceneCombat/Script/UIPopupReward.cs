@@ -86,16 +86,7 @@ public class UIPopupReward : MonoBehaviour
             item.SetActive(false);
         }
     }
-    public void SetRewardSurrender()
-    {
-        transform.GetChild(0).gameObject.SetActive(false);
-        texts[0].text = "x" + TempCombatData.Instance.beri;
-        texts[1].text = "0";
-        texts[2].text = "0";
-        texts[3].text = "0";
-        results[1].SetActive(true);
-        transform.GetChild(1).gameObject.SetActive(true);
-    }
+  
     public void ClickReceive()
     {
         SceneManager.LoadScene("SceneLobby");
@@ -105,5 +96,6 @@ public class UIPopupReward : MonoBehaviour
        SFSObject sfsObject = new SFSObject();
        sfsObject.PutBool("accept", false);
        NetworkController.Send(SFSAction.PVE_SURRENDER, sfsObject);
+       gameObject.SetActive(false);
     }
 }
