@@ -10,7 +10,6 @@ public class TeamColor : MonoBehaviour
 
         ClearChildren();
 
-
         for (int i = 0; i < passiveType.Count; i++)
         {
             GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");

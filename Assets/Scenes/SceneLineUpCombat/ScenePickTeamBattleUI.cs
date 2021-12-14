@@ -22,6 +22,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     [SerializeField]
     private UserAvatar avatarB;
     public SquadAContainer squaA;
+    [SerializeField]
+    private Button[] buttons;
     private void Start()
     {
         if (SoundMgr.Instance != null)
@@ -51,7 +53,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
             avatarA.LoadAvatar(data.YourAvatar);
             avatarB.LoadAvatar(data.OpponentAvatar);
-
+            buttons[0].interactable = true;
+            buttons[1].interactable = true;
             RunCountDown(data.countdown);
         }
     }
@@ -68,6 +71,11 @@ public class ScenePickTeamBattleUI : MonoBehaviour
                 {
                     countdown--;
                     textCountDown.text = "" + countdown;
+                    if(countdown < 3)
+                    {
+                        buttons[0].interactable = false;
+                        buttons[1].interactable = false;
+                    }
                     if (countdown == 0) OnTimeOut();
                 }
 
@@ -80,8 +88,9 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         if (UIManager.Instance.reward.gameObject.activeInHierarchy)
             UIManager.Instance.reward.ConfirmSur();
         else if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors", UIManager.Instance.reward.SendSurrenderToSever);
-        else
-            SendStartCombat();
+        else SendStartCombat();
+
+           
     }
 
     public void SendStartCombat()

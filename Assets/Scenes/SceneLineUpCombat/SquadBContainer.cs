@@ -16,7 +16,7 @@ public class SquadBContainer : MonoBehaviour
                 short key = FightingLine.Position2SlotIndex(i, j);
                 SquadSlot slot = slots[key];
                 string sailorId = TeamCombatPrepareData.Instance.OpponentFightingLine.SailorIdAt(i, j);
-
+                
                 if (sailorId.Length > 0)
                 {
 
@@ -30,7 +30,7 @@ public class SquadBContainer : MonoBehaviour
             }
         }
 
-        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));
+        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.OpponentSailors));
 
     }
 

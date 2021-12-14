@@ -97,6 +97,7 @@ public class CrewData : Singleton<CrewData>
                 result.Add(GetSailorModel(val));
             }
         }
+        Debug.LogError(result.Count);
         return result;
     }
     public List<SailorModel> GetSubstituteSailors()

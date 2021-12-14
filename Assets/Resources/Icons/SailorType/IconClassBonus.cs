@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class IconClassBonus : MonoBehaviour
 {
@@ -22,12 +23,11 @@ public class IconClassBonus : MonoBehaviour
         if (clickable)
         {
             Button b = gameObject.AddComponent<Button>() as Button;
-            b.onClick.AddListener(() => OnClickIcon(Input.mousePosition));
+            b.onClick.AddListener(() => OnClickIcon(SceneManager.GetActiveScene().name == "SceneCombat2D" ? b.transform.GetChild(1).transform : b.transform.GetChild(0).transform));
         }
     }
     public void ChangeIcon(SailorClass type)
     {
-        //Debug.Log("ChangeIcon SailorType: " + type + "   |||| " + "Icons/SailorType/type_" + type);
         icon.sprite = Resources.Load<Sprite>("Icons/SailorType/" + type);
     }
     public void ChangeText(string _text)
@@ -51,12 +51,12 @@ public class IconClassBonus : MonoBehaviour
 
         ChangeText("" + data.current + "/" + maxPop);
     }
-    private void OnClickIcon(Vector2 mousePos)
+    private void OnClickIcon(Transform pos)
     {
         if (data == null) return;
         if (TooltipClassBonus.Instance != null)
         {
-            TooltipClassBonus.Instance.ShowTooltipPassiveType(data, mousePos);
+            TooltipClassBonus.Instance.ShowTooltipPassiveType(data, pos);
         }
     }
 }

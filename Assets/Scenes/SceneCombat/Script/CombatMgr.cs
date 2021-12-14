@@ -62,6 +62,7 @@ public class CombatMgr : MonoBehaviour
         // ui
         UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
+        Debug.LogError(combatState.classBonusA.Count + "," + combatState.classBonusB.Count);
         UIMgr.ShowClassBonus(combatState.classBonusA, combatState.classBonusB);
         UIMgr.ShowActionCount(actionCount);
     }

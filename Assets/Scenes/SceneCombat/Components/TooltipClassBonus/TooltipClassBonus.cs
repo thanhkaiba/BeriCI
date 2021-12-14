@@ -36,23 +36,13 @@ public class TooltipClassBonus : MonoBehaviour
             else gameObject.SetActive(false);
         }
     }
-    public void ShowTooltipPassiveType(ClassBonusItem data, Vector2 _pos)
+    public void ShowTooltipPassiveType(ClassBonusItem data, Transform _pos)
     {
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
-
         gameObject.SetActive(true);
-
-        var canvas = transform.parent.GetComponent<RectTransform>();
-
-        GetComponent<RectTransform>().anchoredPosition = Input.mousePosition;
-        Vector2 pos = Input.mousePosition;
-        // dong thanh ham limit width height
-        //float width = GetComponent<RectTransform>().rect.width;
-        //float height = GetComponent<RectTransform>().rect.height;
-        //if (pos.x < Screen.width/12) pos.x = Screen.width / 12;
-        //if (pos.x > Screen.width * 11f /12f - width/2) pos.x = Screen.width * 11f / 12f - width/2;
-        //transform.position = pos;
-
+        gameObject.transform.SetParent(_pos);
+        gameObject.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
+        gameObject.transform.localScale = Vector3.one;
         int maxPop = config.GetMaxPopNeed(data.type);
         List<float> para = config.GetParams(data.type, data.level);
         iconType.SetData(data);
