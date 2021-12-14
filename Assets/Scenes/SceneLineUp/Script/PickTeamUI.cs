@@ -32,6 +32,7 @@ public class PickTeamUI : MonoBehaviour
         canvas = FindObjectOfType<Canvas>();
         RunAppearAction();
         SquadContainer.Draging = false;
+        SquadAContainer.Draging = false;
         UpdateSlotMaxCapacity();
         NetworkController.AddServerActionListener(OnReceiveServerAction);
 

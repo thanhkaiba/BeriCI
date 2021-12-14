@@ -30,14 +30,14 @@ public class SquadAContainer : MonoBehaviour
             }
         }
 
-        OnUpdateSquad();
-        GameEvent.SquadChanged.AddListener(OnUpdateSquad);
+        OnUpdateSquadA();
+        GameEvent.PrepareSquadChanged.AddListener(OnUpdateSquadA);
 
     }
 
     private void OnDestroy()
     {
-        GameEvent.SquadChanged.RemoveListener(OnUpdateSquad);
+        GameEvent.PrepareSquadChanged.RemoveListener(OnUpdateSquadA);
     }
 
     public Sailor AddSubSailor(string sailorId)
@@ -92,8 +92,8 @@ public class SquadAContainer : MonoBehaviour
         }
         return result;
     }
-    public void OnUpdateSquad()
+    public void OnUpdateSquadA()
     {
-        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(CrewData.Instance.GetSquadModelList()));
+        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.GetSquadModelList(true)));
     }
 }
