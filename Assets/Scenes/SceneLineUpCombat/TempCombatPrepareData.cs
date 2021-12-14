@@ -1,5 +1,6 @@
 ﻿using Sfs2X.Entities.Data;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 {
@@ -15,6 +16,17 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 	private FightingLine fgl0 = new FightingLine();
 	private FightingLine fgl1 = new FightingLine();
 	public byte countdown;
+
+
+	protected override void OnAwake()
+	{
+		GameEvent.PrepareSquadChanged.AddListener(OnUpdateSquadA);
+	}
+	private void OnUpdateSquadA()
+	{
+		Debug.LogError("a");
+		NetworkController.Send(SFSAction.TEAM_COMMIT, fgl0.ToSFSObject());
+	}
 
 
 	public string YourName { get
@@ -223,6 +235,19 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 		{
 			GameEvent.PrepareSquadChanged.Invoke();
 		}
+	}
+	public List<SailorModel> GetSquadModelList(bool yourTeam)
+	{
+		List<SailorModel> result = new List<SailorModel>();
+		List<string> values = yourTeam?  fgl0.GetValues() : fgl1.GetValues();
+		foreach (string val in values)
+		{
+			if (val != "")
+			{
+				result.Add(yourTeam ? GetYourSailorModel(val) : GetOpponentSailorModel(val));
+			}
+		}
+		return result;
 	}
 
 	public List<SailorModel> GetSubstituteSailors()

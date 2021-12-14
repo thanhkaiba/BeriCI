@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SquadBContainer : MonoBehaviour
@@ -30,7 +31,7 @@ public class SquadBContainer : MonoBehaviour
             }
         }
 
-        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.OpponentSailors));
+        OnUpdateSquadB();
 
     }
 
@@ -40,7 +41,11 @@ public class SquadBContainer : MonoBehaviour
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
         sailor.transform.localPosition = Vector3.zero;
-
         return sailor;
+    }
+
+    public void OnUpdateSquadB()
+    { 
+        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.GetSquadModelList(false)));
     }
 }
