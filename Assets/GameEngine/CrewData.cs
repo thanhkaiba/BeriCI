@@ -92,6 +92,19 @@ public class CrewData : Singleton<CrewData>
         List<string> values = FightingTeam.GetValues();
         foreach (string val in values)
         {
+            {
+                result.Add(GetSailorModel(val));
+            }
+        }
+        return result;
+    }
+    public List<SailorModel> GetSquadOpponentModelList(FightingLine f)
+    {
+        List<SailorModel> result = new List<SailorModel>();
+        List<string> values = f.GetValues();
+        foreach (string val in values)
+        {
+         //   Debug.LogError(val);
            if (val != "")
             {
                 result.Add(GetSailorModel(val));

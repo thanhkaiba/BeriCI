@@ -40,7 +40,7 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        if (!SquadContainer.Draging)
+        if (!SquadContainer.Draging || !SquadAContainer.Draging)
         {
             dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);
             SetSailorOpacity(0.8f);
@@ -59,6 +59,7 @@ public class DragableSailor : MonoBehaviour
             originZ = transform.position.z;
             delta = transform.position - movePos;
             SquadContainer.Draging = true;
+            SquadAContainer.Draging = true;
             draging = true;
         } else
         {
@@ -108,6 +109,7 @@ public class DragableSailor : MonoBehaviour
         if (draging)
         {
             SquadContainer.Draging = false;
+            SquadAContainer.Draging = false;
             draging = false;
             if (!dragImage.enabled)
             {
