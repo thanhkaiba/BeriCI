@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TooltipClassBonus : MonoBehaviour
@@ -40,9 +41,8 @@ public class TooltipClassBonus : MonoBehaviour
     {
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         gameObject.SetActive(true);
-        gameObject.transform.SetParent(_pos);
-        gameObject.transform.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,0);
-        gameObject.transform.localScale = Vector3.one;
+        gameObject.transform.position = _pos.position;
+        gameObject.transform.localScale = SceneManager.GetActiveScene().name == "SceneCombat2D" ? new Vector3(.6f,.6f,.6f) : Vector3.one;
         int maxPop = config.GetMaxPopNeed(data.type);
         List<float> para = config.GetParams(data.type, data.level);
         iconType.SetData(data);

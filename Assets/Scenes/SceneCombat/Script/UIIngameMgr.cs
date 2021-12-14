@@ -83,6 +83,8 @@ public class UIIngameMgr : MonoBehaviour
         {
             GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
             IconClassBonus s = Instantiate(GO, nodeRight).GetComponent<IconClassBonus>();
+            Vector3 pos = s.transform.GetChild(1).transform.localPosition;
+            s.transform.GetChild(1).transform.localPosition = new Vector3(-pos.x, pos.y, pos.z);
             s.SetData(passiveTypeB[i]);
             s.transform.localScale = new Vector3(0.6f, 0.6f, 1);
             s.transform.DOLocalMoveX(-72 * i, 0.5f);
