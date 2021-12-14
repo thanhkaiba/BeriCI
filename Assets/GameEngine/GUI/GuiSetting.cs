@@ -17,7 +17,19 @@ namespace Piratera.GUI
         [SerializeField]
         private string whitePaperUrl = "https://piratera.io/";
         private string website = "https://piratera.io/";
- 
+
+        [SerializeField]
+        private Sprite[] iconSoundSprites;
+
+        [SerializeField]
+        private Sprite[] iconMusicSprites;
+
+        [SerializeField]
+        private Image iconSound;
+
+        [SerializeField]
+        private Image iconMusic;
+
 
         protected override void Start()
         {
@@ -41,14 +53,20 @@ namespace Piratera.GUI
             RunDestroy();
         }
 
+
         public void ToggleSound()
         {
+
             SoundMgr.SoundOn = !SoundMgr.SoundOn;
+            iconSound.sprite = SoundMgr.SoundOn ? iconSoundSprites[1] : iconSoundSprites[0];
+            iconMusic.SetNativeSize();
         }
 
         public void ToggleMusic()
         {
             SoundMgr.MusicOn = !SoundMgr.MusicOn;
+            iconMusic.sprite = SoundMgr.MusicOn ? iconMusicSprites[1] : iconMusicSprites[0];
+            iconMusic.SetNativeSize();
         }
 
         public void OpenWhitePaper()
