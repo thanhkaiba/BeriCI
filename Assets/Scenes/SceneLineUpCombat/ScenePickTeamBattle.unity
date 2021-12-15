@@ -592,6 +592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 270321250}
+  - component: {fileID: 270321251}
   m_Layer: 5
   m_Name: SailorB
   m_TagString: Untagged
@@ -620,6 +621,23 @@ RectTransform:
   m_AnchoredPosition: {x: -539, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &270321251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270321249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0
+  duration: 0.4
+  x: 500
+  y: 0
+  ease: 21
 --- !u!1 &296372638
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +650,7 @@ GameObject:
   - component: {fileID: 296372642}
   - component: {fileID: 296372641}
   - component: {fileID: 296372640}
+  - component: {fileID: 296372643}
   m_Layer: 5
   m_Name: ButtonSurrender
   m_TagString: Untagged
@@ -753,6 +772,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296372638}
   m_CullTransparentMesh: 1
+--- !u!114 &296372643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296372638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.2
+  duration: 0.4
+  x: 0
+  y: -200
+  ease: 21
 --- !u!1 &357779361
 GameObject:
   m_ObjectHideFlags: 0
@@ -1097,6 +1133,7 @@ GameObject:
   - component: {fileID: 471134605}
   - component: {fileID: 471134607}
   - component: {fileID: 471134606}
+  - component: {fileID: 471134608}
   m_Layer: 5
   m_Name: head_board
   m_TagString: Untagged
@@ -1165,6 +1202,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 471134604}
   m_CullTransparentMesh: 1
+--- !u!114 &471134608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 471134604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.2
+  duration: 0.4
+  x: 0
+  y: 180
+  ease: 21
 --- !u!1 &475730538
 GameObject:
   m_ObjectHideFlags: 0
@@ -3574,7 +3628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 14.6}
+  m_AnchoredPosition: {x: 0, y: 13.3}
   m_SizeDelta: {x: 166, y: 159.49997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1490572364
@@ -3599,7 +3653,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 83dfc4e701d99e24fa403cb5763d7bfa, type: 3}
-    m_FontSize: 88
+    m_FontSize: 86
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -3749,6 +3803,7 @@ GameObject:
   - component: {fileID: 1527190808}
   - component: {fileID: 1527190807}
   - component: {fileID: 1527190806}
+  - component: {fileID: 1527190809}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -3870,6 +3925,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527190804}
   m_CullTransparentMesh: 1
+--- !u!114 &1527190809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527190804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.2
+  duration: 0.4
+  x: 0
+  y: -200
+  ease: 21
 --- !u!1 &1555965856
 GameObject:
   m_ObjectHideFlags: 0
@@ -4165,6 +4237,7 @@ GameObject:
   - component: {fileID: 1604218063}
   - component: {fileID: 1604218062}
   - component: {fileID: 1604218061}
+  - component: {fileID: 1604218064}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -4261,6 +4334,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1604218059}
   m_CullTransparentMesh: 1
+--- !u!114 &1604218064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1604218059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.2
+  duration: 0.4
+  x: 0
+  y: -200
+  ease: 21
 --- !u!1 &1686014994
 GameObject:
   m_ObjectHideFlags: 0
@@ -4270,6 +4360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1686014995}
+  - component: {fileID: 1686014996}
   m_Layer: 5
   m_Name: SailorA
   m_TagString: Untagged
@@ -4298,6 +4389,23 @@ RectTransform:
   m_AnchoredPosition: {x: 546, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1686014996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1686014994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0
+  duration: 0.4
+  x: -500
+  y: 0
+  ease: 21
 --- !u!1 &1735566768
 GameObject:
   m_ObjectHideFlags: 0

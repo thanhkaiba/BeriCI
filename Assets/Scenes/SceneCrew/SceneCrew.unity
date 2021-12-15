@@ -948,7 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayTime: 0
   duration: 0.4
-  x: -250
+  x: -150
   y: 0
   ease: 21
 --- !u!1 &505635007
@@ -3790,7 +3790,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -185, y: 333}
-  m_SizeDelta: {x: 237.1, y: 143.06}
+  m_SizeDelta: {x: 285.47, y: 143.06}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &2020860293
 MonoBehaviour:
