@@ -25,7 +25,7 @@ namespace Piratera.GUI
             }
         }
 
-        private void DestroySelf()
+        public void DestroySelf()
         {
             GuiManager.Instance.DestroyGui(GetType().Name);
         }

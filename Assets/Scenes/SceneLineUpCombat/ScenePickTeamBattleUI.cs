@@ -11,6 +11,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 {
     [SerializeField]
     private Text textCountDown;
+    [SerializeField]
+    private Slider sliderCountDown;
     [Header("UserA Info")]
     [SerializeField]
     private Text userNameA;
@@ -24,13 +26,14 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     public SquadAContainer squaA;
     [SerializeField]
     private Button[] buttons;
+
+    private float remainTime;
+    private float maxTime;
+    private bool counting = false;
     private void Start()
     {
-        if (SoundMgr.Instance != null)
-        {
-            SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
-        }
-        UpdateUI();
+        if (SoundMgr.Instance != null) SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
+        Init();
     }
 
     public void OnJoinBattle()
@@ -43,9 +46,10 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         // NetworkController.OnExtentionResponse();
     }
 
-    public void UpdateUI()
+    public void Init()
     {
         TeamCombatPrepareData data = TeamCombatPrepareData.Instance;
+        remainTime = maxTime = data.countdown;
         if (data.countdown > 0)
         {
             userNameA.text = data.YourName;
@@ -55,32 +59,23 @@ public class ScenePickTeamBattleUI : MonoBehaviour
             avatarB.LoadAvatar(data.OpponentAvatar);
             buttons[0].interactable = true;
             buttons[1].interactable = true;
-            RunCountDown(data.countdown);
         }
+        counting = true;
     }
-
-    public void RunCountDown(byte countdown)
+    private void LateUpdate()
     {
-        textCountDown.text = "" + countdown;
-        Sequence mySequence = DOTween.Sequence();
-        mySequence.AppendInterval(1f)
-            .AppendCallback(() =>
-            {
-
-                if (countdown > 0)
-                {
-                    countdown--;
-                    textCountDown.text = "" + countdown;
-                    if(countdown < 3)
-                    {
-                        buttons[0].interactable = false;
-                        buttons[1].interactable = false;
-                    }
-                    if (countdown == 0) OnTimeOut();
-                }
-
-            })
-            .SetLoops(countdown).SetLink(gameObject).SetTarget(transform);
+        if (!counting) return;
+        if (remainTime > 0)
+        {
+            remainTime -= Time.deltaTime;
+            textCountDown.text = "" + Mathf.Ceil(remainTime);
+            sliderCountDown.value = remainTime / maxTime;
+        }
+        else
+        {
+            OnTimeOut();
+            counting = false;
+        }
     }
 
     public void OnTimeOut()

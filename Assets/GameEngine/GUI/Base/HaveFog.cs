@@ -11,32 +11,37 @@ public class HaveFog : MonoBehaviour
     [SerializeField]
     private bool blockTouchBehind = true;
 
-    public GameObject panel;
+    public GameObject fog;
     void Awake()
     {
-        panel = new GameObject("PanelFog");
-        panel.transform.SetParent(transform);
-        panel.transform.localPosition = Vector3.zero;
-        panel.AddComponent<CanvasRenderer>();
-        RectTransform rectTransform = panel.AddComponent<RectTransform>();
+        fog = new GameObject("PanelFog");
+        fog.transform.SetParent(transform);
+        fog.transform.localPosition = Vector3.zero;
+        fog.AddComponent<CanvasRenderer>();
+        RectTransform rectTransform = fog.AddComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
-        panel.transform.SetAsFirstSibling();
-        Image image = panel.AddComponent<Image>();
+        fog.transform.SetAsFirstSibling();
+        Image image = fog.AddComponent<Image>();
         image.color = new Color(0, 0, 0, fogOpacity);
         image.raycastTarget = blockTouchBehind;
-
     }
-
     public void VisibleFog(bool visible)
     {
-        panel.SetActive(visible);
+        fog.SetActive(visible);
     }
     public void FadeIn(float time = 0.4f)
     {
-        var image = panel.GetComponent<Image>();
+        var image = fog.GetComponent<Image>();
         var tempColor = image.color;
         tempColor.a = 0f;
         image.color = tempColor;
-        panel.GetComponent<Image>().DOFade(fogOpacity, time);
+        fog.GetComponent<Image>().DOFade(fogOpacity, time);
+    }
+    public void FadeOut(float time = 0.4f)
+    {
+        var image = fog.GetComponent<Image>();
+        var tempColor = image.color;
+        image.color = tempColor;
+        fog.GetComponent<Image>().DOFade(0, time);
     }
 }

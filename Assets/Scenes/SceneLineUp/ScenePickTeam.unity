@@ -2482,7 +2482,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a73d5940dd7f40e4badd1873392ad2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  title: {fileID: 0}
+  title: {fileID: 1413148341}
   backgroundSailorList: {fileID: 1433130411}
   TextMaxCapacity: {fileID: 1833091284}
   TextNewSlotCost: {fileID: 1664093578}
