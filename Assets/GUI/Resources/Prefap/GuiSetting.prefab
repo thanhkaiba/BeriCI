@@ -482,7 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.5
   blockTouchBehind: 1
-  panel: {fileID: 0}
+  fog: {fileID: 0}
 --- !u!114 &5992000369517596873
 MonoBehaviour:
   m_ObjectHideFlags: 0

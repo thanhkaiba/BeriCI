@@ -11,7 +11,7 @@ public class HaveFog : MonoBehaviour
     [SerializeField]
     private bool blockTouchBehind = true;
 
-    public GameObject fog;
+    private GameObject fog;
     void Awake()
     {
         fog = new GameObject("PanelFog");
