@@ -396,7 +396,6 @@ GameObject:
   - component: {fileID: 2130733648217388941}
   - component: {fileID: 4259833779625835403}
   - component: {fileID: 722372519354883176}
-  - component: {fileID: 3020921350862013975}
   m_Layer: 5
   m_Name: PopupNotification
   m_TagString: Untagged
@@ -461,18 +460,6 @@ MonoBehaviour:
   fogOpacity: 0.6
   blockTouchBehind: 1
   fog: {fileID: 0}
---- !u!225 &3020921350862013975
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2130733648217388978}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &4291724934757070048
 GameObject:
   m_ObjectHideFlags: 0
