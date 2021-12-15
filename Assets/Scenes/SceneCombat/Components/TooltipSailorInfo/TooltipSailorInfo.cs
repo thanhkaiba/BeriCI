@@ -115,7 +115,7 @@ public class TooltipSailorInfo : MonoBehaviour
             else iconTypes[i].gameObject.SetActive(false);
         }
         var attackType = model.config_stats.attack_type;
-        iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackTypeToolTip/" + attackType);
+        iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + attackType);
         textLevel.text = model.level.ToString();
         foreach (var item in sailorDes.sheets[0].list)
         {

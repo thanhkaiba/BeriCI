@@ -93,9 +93,9 @@ public class LoginUI : MonoBehaviour
         {
             Sequence seq = DOTween.Sequence();
             RectTransform chainTrasform = (chain.transform as RectTransform);
-            seq.Insert(0.2f, chainTrasform.DOAnchorPosY(chainTrasform.anchoredPosition.y + 500, 0.6f).From().SetEase(Ease.OutQuint));
-            seq.Insert(0.2f, chain.DOFade(0, 0.6f).From());
-            seq.Insert(0.2f, chain.transform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.6f).From());
+            seq.Insert(0.4f, chainTrasform.DOAnchorPosY(chainTrasform.anchoredPosition.y + 500, 0.6f).From().SetEase(Ease.OutQuint));
+            seq.Insert(0.4f, chain.DOFade(0, 0.6f).From());
+            seq.Insert(0.4f, chain.transform.DOScale(new Vector3(1.4f, 1.4f, 1.4f), 0.6f).From());
         }
         {
             Sequence seq = DOTween.Sequence();
@@ -131,7 +131,7 @@ public class LoginUI : MonoBehaviour
         {
             Sequence seq = DOTween.Sequence();
             seq.Insert(0.2f, monter.DOFade(0, 0.2f).From());
-            seq.Insert(0.2f, monter.transform.DOScale(new Vector3(0, 0, 0), 0.4f).From().SetEase(Ease.OutQuad));
+            seq.Insert(0.2f, monter.transform.DOScale(new Vector3(0, 0, 0), 0.6f).From().SetEase(Ease.OutQuad));
         }
     }
 }
