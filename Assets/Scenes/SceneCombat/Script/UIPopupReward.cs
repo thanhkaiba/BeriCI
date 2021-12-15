@@ -24,6 +24,7 @@ public class UIPopupReward : MonoBehaviour
     }
     public void SetReward(byte yourTeamIndex, GameEndData r)
     {
+        Time.timeScale = 1;
         transform.GetChild(0).gameObject.SetActive(false);
         texts[0].text = "x" + (r.mode_reward + r.hard_bonus + r.win_rank_bonus).ToString();
         texts[1].text = r.mode_reward.ToString();
@@ -73,6 +74,7 @@ public class UIPopupReward : MonoBehaviour
       
         transform.GetChild(1).gameObject.SetActive(true);
         gameObject.SetActive(true);
+        gameObject.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), .5f, 2, 0);
     }
 
     private void OnDisable()

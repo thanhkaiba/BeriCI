@@ -24,7 +24,6 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 	}
 	private void OnUpdateSquadA()
 	{
-		Debug.LogError("a");
 		NetworkController.Send(SFSAction.TEAM_COMMIT, fgl0.ToSFSObject());
 	}
 

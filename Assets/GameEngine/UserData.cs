@@ -123,7 +123,10 @@ public class UserData : Singleton<UserData>
     {
         return $"{stamina}/{StaminaConfig.max_stamina}";
     }
-
+    public int GetStamina()
+    {
+        return Stamina;
+    }
     public bool IsEnoughBeri(long beri)
     {
         return Beri >= beri;

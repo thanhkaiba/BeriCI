@@ -2,29 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TooltipSailorInfo : MonoBehaviour
 {
     private Transform follow;
     private CombatSailor sailor;
+    private Sailor sailorPrepe;
+    private SailorModel model;
     public static TooltipSailorInfo Instance;
     private bool justOpen = false;
-
+    [SerializeField]
+    private Color[] rankColorInside;
     public Image avtSailor;
     public List<Image> iconTypes;
-    public Image iconAttackType;
-
+    public Image iconAttackType, background;
+    [SerializeField]
+    private SailorDescription sailorDes;
     public Slider healthSlider;
     public Slider furySlider;
     public Slider qualityBar;
 
     public Text textLevel;
     public Text textPower;
-    public Text textCrit;
     public Text textSpeed;
     public Text textArmor;
     public Text textMagicResist;
+    public Text textDes;
 
     public List<Image> iconItems;
     void Awake()
@@ -64,9 +69,9 @@ public class TooltipSailorInfo : MonoBehaviour
             if (pos.y < 20 + height / 2) pos.y = 20 + height / 2;
             if (pos.y > Screen.height - 20 - height / 2) pos.y = Screen.height - 20 - height / 2;
             transform.position = pos;
-
+            if (SceneManager.GetActiveScene().name != "SceneCombat2D")
+                return;
             textPower.text = ((int) sailor.cs.Power).ToString();
-            textCrit.text = (sailor.cs.Crit*100).ToString() + "%";
             textSpeed.text = ((int)sailor.cs.Speed).ToString();
             textArmor.text = ((int)sailor.cs.Armor).ToString();
             textMagicResist.text = ((int)sailor.cs.MagicResist).ToString();
@@ -80,14 +85,26 @@ public class TooltipSailorInfo : MonoBehaviour
     }
     public void ShowTooltip(GameObject sailorGO, bool clickFromUI = false)
     {
-        //if (gameObject.activeSelf) return;
-        sailor = sailorGO.GetComponent<CombatSailor>();
+        if (SceneManager.GetActiveScene().name == "SceneCombat2D")
+        {
+           sailor = sailorGO.GetComponent<CombatSailor>();
+            model = sailor.Model;
+        }
+        else
+        {
+            sailorPrepe = sailorGO.GetComponent<Sailor>();
+            model = sailorPrepe.Model;
+            furySlider.transform.Find("Text").GetComponent<Text>().text = (model.config_stats.max_fury).ToString() + "/" + (model.config_stats.max_fury).ToString();
+            furySlider.value = 1;
+            healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)model.config_stats.health_base).ToString() + "/" + ((int)model.config_stats.health_base).ToString();
+            healthSlider.value = 1;
+        }
         follow = sailorGO.transform.Find("nodeBar");
         gameObject.SetActive(true);
         justOpen = !clickFromUI;
-
-        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.Model.config_stats.root_name);
-        var listType = sailor.Model.config_stats.classes;
+        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + model.config_stats.root_name);
+        background.color = rankColorInside[(int)model.config_stats.rank];
+        var listType = model.config_stats.classes;
         for (int i = 0; i < 3; i++)
         {
             if (listType.Count > i)
@@ -97,10 +114,16 @@ public class TooltipSailorInfo : MonoBehaviour
             }
             else iconTypes[i].gameObject.SetActive(false);
         }
-        var attackType = sailor.Model.config_stats.attack_type;
-        iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + attackType);
-        textLevel.text = sailor.Model.level.ToString();
-
-        qualityBar.value = (float) sailor.Model.quality / 200;
+        var attackType = model.config_stats.attack_type;
+        iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackTypeToolTip/" + attackType);
+        textLevel.text = model.level.ToString();
+        foreach (var item in sailorDes.sheets[0].list)
+        {
+            if (model.name == item.root_name)
+            {
+                textDes.text = item.skill_description;
+            }
+        }
+        qualityBar.value = (float)model.quality / 200;
     }
 }
