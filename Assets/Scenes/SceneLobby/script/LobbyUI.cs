@@ -54,6 +54,8 @@ public class LobbyUI : MonoBehaviour
     [SerializeField]
     private Transform sail;
     [SerializeField]
+    private Transform nodeUser;
+    [SerializeField]
     private Transform background;
 
     // Start is called before the first frame update
@@ -61,7 +63,7 @@ public class LobbyUI : MonoBehaviour
     {
         SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
         loadAvatarUtils.LoadAvatar(userAvatar, UserData.Instance.Avatar);
-        UpdateUserInfo();
+        PresentData();
         GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
@@ -89,34 +91,25 @@ public class LobbyUI : MonoBehaviour
 
     void UpdateUserInfo(List<string> changedVars)
     {
-
-        if (changedVars.Contains(UserInfoPropertiesKey.USERNAME))
-        {
-            userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
-        }
-    }
-
-    void UpdateUserInfo()
-    {
         userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
         DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => StringUtils.ShortNumber(x));
         DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
+    }
+
+    void PresentData()
+    {
+        userName.text = UserData.Instance.Username.LimitLength(11);
+        userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
+        userStamina.text = StringUtils.ShortNumber(UserData.Instance.Stamina);
     }
 
     public void OnLogoutButtonClick()
     {
         GuiManager.Instance.AddGui<GuiSetting>("Prefap/GuiSetting", LayerId.GUI);
     }
-    public void OnStartNewGameButtonClick(GameObject g)
-    {
-        if (UserData.Instance.GetStamina() < 5)
-            GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
-        else
-        {
-            g.SetActive(false);
-            NetworkController.Send(SFSAction.PVE_PLAY);
-        }
-            
+    public void OnStartPVEMode()
+    {       
+        GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
     }
     public void OnButtonPickTeamClick()
     {
@@ -161,13 +154,16 @@ public class LobbyUI : MonoBehaviour
     {
         for (int i = 0; i < leftButtons.Length; i++)
         {
-            DoTweenUtils.FadeAppearY(leftButtons[i], -200, 0.4f, 1.2f + i * 0.2f, Ease.OutCirc);
+            DoTweenUtils.FadeAppearY(leftButtons[i], -200, 0.4f, 0.2f + i * 0.1f, Ease.OutCirc);
         }
+
+        nodeUser.Translate(-250, 0, 0);
+        nodeUser.DOMove(new Vector3(250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
 
         DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.6f, Vector3.one, 0.7f);
 
-        buttonCol.Translate(200, 0, 0);
-        buttonCol.DOMove(new Vector3(-200, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
+        buttonCol.Translate(250, 0, 0);
+        buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
 
         sail.Translate(50, 180, 0);
         sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);

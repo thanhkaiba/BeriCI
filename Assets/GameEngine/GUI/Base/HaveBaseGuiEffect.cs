@@ -55,9 +55,8 @@ namespace Piratera.GUI
                             s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
-                        s.Insert(0, transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), appearTime, 2, 0));
-                       
-
+                        transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+                        s.Insert(0, transform.DOScale(new Vector3(1f, 1f, 1f), appearTime));
                     }
                     break;
                 case GuiEff.FALL:
