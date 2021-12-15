@@ -12,6 +12,7 @@ namespace Piratera.Utils
 {
     public class LoadAvatarUtils: MonoBehaviour
     {
+
 		private IEnumerator StartLoadAvatar(Image userAvatar, string url)
 		{
 			using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))

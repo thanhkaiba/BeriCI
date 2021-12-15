@@ -1,6 +1,5 @@
 ﻿using Piratera.Sound;
-using Sfs2X.Entities.Data;
-using System;
+using Piratera.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,9 +13,22 @@ namespace Piratera.GUI
         private Text textVersion;
         [SerializeField]
         private Text textUID;
+
+        [SerializeField]
+        private Image userAvatar;
+
+        [Header("Social")]
         [SerializeField]
         private string whitePaperUrl = "https://piratera.io/";
+        [SerializeField]
         private string website = "https://piratera.io/";
+        [SerializeField]
+        private string facebookUrl = "https://piratera.io/";
+        [SerializeField]
+        private string telegramUrl = "https://piratera.io/";
+        [SerializeField]
+        private string twitterUrl = "https://piratera.io/";
+
 
         [SerializeField]
         private Sprite[] iconSoundSprites;
@@ -30,12 +42,20 @@ namespace Piratera.GUI
         [SerializeField]
         private Image iconMusic;
 
+        private LoadAvatarUtils loadAvatar;
+
+
 
         protected override void Start()
         {
             base.Start();
+            loadAvatar = GetComponent<LoadAvatarUtils>();
             textName.text = UserData.Instance.Username;
             textUID.text = UserData.Instance.UID;
+            loadAvatar.LoadAvatar(userAvatar, UserData.Instance.Avatar);
+            UpdateSoundIcon();
+            UpdateMusicIcon();
+            
         }
 
         public void Logout()
@@ -58,6 +78,11 @@ namespace Piratera.GUI
         {
 
             SoundMgr.SoundOn = !SoundMgr.SoundOn;
+            UpdateSoundIcon();
+        }
+
+        private void UpdateSoundIcon()
+        {
             iconSound.sprite = SoundMgr.SoundOn ? iconSoundSprites[1] : iconSoundSprites[0];
             iconMusic.SetNativeSize();
         }
@@ -65,6 +90,11 @@ namespace Piratera.GUI
         public void ToggleMusic()
         {
             SoundMgr.MusicOn = !SoundMgr.MusicOn;
+            UpdateMusicIcon();
+        }
+
+        private void UpdateMusicIcon()
+        {
             iconMusic.sprite = SoundMgr.MusicOn ? iconMusicSprites[1] : iconMusicSprites[0];
             iconMusic.SetNativeSize();
         }
@@ -79,5 +109,20 @@ namespace Piratera.GUI
             Application.OpenURL(website);
         }
 
+
+        public void OpenFacebook()
+        {
+            Application.OpenURL(facebookUrl);
+        }
+
+        public void OpenTwitter()
+        {
+            Application.OpenURL(twitterUrl);
+        }
+
+        public void OpenTelegram()
+        {
+            Application.OpenURL(telegramUrl);
+        }
     }
 }
