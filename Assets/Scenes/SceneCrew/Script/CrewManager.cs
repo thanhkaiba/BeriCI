@@ -21,7 +21,9 @@ public class CrewManager : MonoBehaviour
     private Image quality,rank;
     [SerializeField]
     private Image [] classImgs;
-    public Transform sailorPos;
+    [SerializeField]
+    private Transform sailorPos;
+
     private GameObject sailor;
     private List<IconSailor> listIcon;
     // Start is called before the first frame update

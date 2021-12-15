@@ -161,7 +161,7 @@ public class LobbyUI : MonoBehaviour
     {
         for (int i = 0; i < leftButtons.Length; i++)
         {
-            DoTweenUtils.FadeAppearY(leftButtons[i], -200, 0.4f, 1.2f + i * 0.2f, Ease.OutCirc);
+            DoTweenUtils.FadeAppearY(leftButtons[i], -200, 0.4f, 0.2f + i * 0.1f, Ease.OutCirc);
         }
 
         nodeUser.Translate(-250, 0, 0);

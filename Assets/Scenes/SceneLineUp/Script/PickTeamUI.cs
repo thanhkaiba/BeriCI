@@ -9,12 +9,6 @@ using Sfs2X.Entities.Data;
 
 public class PickTeamUI : MonoBehaviour
 {
-    [SerializeField]
-    private Image title;
-    [SerializeField]
-    private Image backgroundSailorList;
-    private Canvas canvas;
-
     [Header("Slot Capacity")]
     [SerializeField]
     private Text TextMaxCapacity;
@@ -24,13 +18,9 @@ public class PickTeamUI : MonoBehaviour
     private Button ButtonBuySlot;
     [SerializeField]
     private LineUpSlot lineUpSlotConfig;
-    [SerializeField]
-    private Image BgSlotCapacity;
 
     void Start()
     {
-        canvas = FindObjectOfType<Canvas>();
-        RunAppearAction();
         SquadContainer.Draging = false;
         SquadAContainer.Draging = false;
         UpdateSlotMaxCapacity();
@@ -64,7 +54,7 @@ public class PickTeamUI : MonoBehaviour
 
     void UpdateSlotMaxCapacity()
     {
-        DoTweenUtils.UpdateNumber(TextMaxCapacity, int.Parse(TextMaxCapacity.text), UserData.Instance.NumSlot);
+        TextMaxCapacity.text = "" + UserData.Instance.NumSlot;
 
         if (UserData.Instance.NumSlot < lineUpSlotConfig.max && UserData.Instance.NumSlot > 0)
         {
@@ -78,21 +68,6 @@ public class PickTeamUI : MonoBehaviour
         }
 
     }
-
-    private void RunAppearAction()
-    {
-        float scale = canvas.transform.localScale.x;
-        float titleHeight = ((RectTransform)title.transform).sizeDelta.y * scale;
-        DoTweenUtils.FadeAppearY(title, titleHeight + 20, 0.5f, Ease.OutFlash);
-
-        float slotHeight = ((RectTransform)backgroundSailorList.transform).sizeDelta.y * 2 * scale;
-        DoTweenUtils.FadeAppearY(backgroundSailorList, -slotHeight * 1.5f, 0.5f, Ease.OutFlash);
-
-        RectTransform slotCapacityRect = BgSlotCapacity.transform as RectTransform;
-        float height = slotCapacityRect.rect.height;
-        DOTween.To(x => slotCapacityRect.sizeDelta = new Vector2(slotCapacityRect.sizeDelta.x, x), 0, height, 1f).SetTarget(transform).SetLink(gameObject).SetEase(Ease.OutBack);
-    }
-
     public void OnBackToLobby()
     {
         SceneManager.LoadScene("SceneLobby");
