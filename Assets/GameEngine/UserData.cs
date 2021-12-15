@@ -88,6 +88,11 @@ public class UserData : Singleton<UserData>
 
     }
 
+    public void MinusStamina(int value)
+    {
+        GameEvent.UserStaminaChanged.Invoke(Stamina, Stamina - value);
+    }
+
     public void OnUserVariablesUpdate(User user)
     {
 
@@ -122,6 +127,10 @@ public class UserData : Singleton<UserData>
     public string GetStaminaFormat(int stamina)
     {
         return $"{stamina}/{StaminaConfig.max_stamina}";
+    }
+    public string _GetStaminaFormat(int stamina)
+    {
+        return $"{stamina}";
     }
     public int GetStamina()
     {

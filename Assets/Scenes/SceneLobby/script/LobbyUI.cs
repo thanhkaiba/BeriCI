@@ -107,16 +107,9 @@ public class LobbyUI : MonoBehaviour
     {
         GuiManager.Instance.AddGui<GuiSetting>("Prefap/GuiSetting", LayerId.GUI);
     }
-    public void OnStartNewGameButtonClick(GameObject g)
-    {
-        if (UserData.Instance.GetStamina() < 5)
-            GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
-        else
-        {
-            g.SetActive(false);
-            NetworkController.Send(SFSAction.PVE_PLAY);
-        }
-            
+    public void OnStartPVEMode()
+    {       
+        GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
     }
     public void OnButtonPickTeamClick()
     {
