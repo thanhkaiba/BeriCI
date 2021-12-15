@@ -71,10 +71,10 @@ public class TooltipSailorInfo : MonoBehaviour
             transform.position = pos;
             if (SceneManager.GetActiveScene().name != "SceneCombat2D")
                 return;
-            textPower.text = ((int) sailor.cs.Power).ToString();
-            textSpeed.text = ((int)sailor.cs.Speed).ToString();
-            textArmor.text = ((int)sailor.cs.Armor).ToString();
-            textMagicResist.text = ((int)sailor.cs.MagicResist).ToString();
+            textPower.text = sailor.cs.Power.ToString();
+            textSpeed.text = sailor.cs.Speed.ToString();
+            textArmor.text = sailor.cs.Armor.ToString();
+            textMagicResist.text = sailor.cs.MagicResist.ToString();
 
             healthSlider.value = sailor.cs.CurHealth / sailor.cs.MaxHealth;
             healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)sailor.cs.CurHealth).ToString() + "/" + ((int)sailor.cs.MaxHealth).ToString();
@@ -98,6 +98,11 @@ public class TooltipSailorInfo : MonoBehaviour
             furySlider.value = 1;
             healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)model.config_stats.health_base).ToString() + "/" + ((int)model.config_stats.health_base).ToString();
             healthSlider.value = 1;
+            textPower.text = model.config_stats.power_base.ToString();
+            textSpeed.text = model.config_stats.speed_base.ToString();
+            textArmor.text = model.config_stats.armor.ToString();
+            textMagicResist.text = model.config_stats.magic_resist.ToString();
+
         }
         follow = sailorGO.transform.Find("nodeBar");
         gameObject.SetActive(true);
