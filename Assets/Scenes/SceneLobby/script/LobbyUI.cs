@@ -90,15 +90,17 @@ public class LobbyUI : MonoBehaviour
     void UpdateUserInfo(List<string> changedVars)
     {
 
-        if (changedVars.Contains(UserInfoPropertiesKey.USERNAME))
-        {
-            userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
-        }
+        //if (changedVars.Contains(UserInfoPropertiesKey.USERNAME))
+        //{
+        //    userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
+        //}
+        userName.text = UserData.Instance.Username.LimitLength(11);
     }
 
     void UpdateUserInfo()
     {
-        userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
+        //userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
+        userName.text = UserData.Instance.Username.LimitLength(11);
         DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => StringUtils.ShortNumber(x));
         DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
     }
