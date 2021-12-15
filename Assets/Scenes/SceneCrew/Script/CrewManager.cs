@@ -89,7 +89,7 @@ public class CrewManager : MonoBehaviour
             classImgs[i].sprite = s;
             //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
-        qualityText.text = "" + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        qualityText.text = "Qua: " + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
     }
     public void BackToLobby()
     {
