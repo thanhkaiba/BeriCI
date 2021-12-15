@@ -6,7 +6,7 @@ using UnityEngine;
 public class UserInfoPropertiesKey
 {
 
-    public const string UID = "uid";
+    public const string UID = "id";
     public const string USERNAME = "username";
     public const string BERI = "beri";
     public const string STAMINA = "stamina";
@@ -62,6 +62,7 @@ public class UserData : Singleton<UserData>
     {
 
         Avatar = user.GetVariable(UserInfoPropertiesKey.AVATAR).GetStringValue();
+        UID = user.GetVariable(UserInfoPropertiesKey.UID).GetStringValue();
         Username = user.Name;
         Exp = (long)user.GetVariable(UserInfoPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();

@@ -12,7 +12,8 @@ namespace Piratera.Sound
 	class SoundMgr : MonoBehaviour
     {
 
-		
+		private static string MUSIC_TOGGLE_KEY = "music-toggle";
+		private static string SOUND_FX_TOGGLE_KEY = "sound-fx-toggle";
 
 		[Header("Sound Effect")]
 		[SerializeField]
@@ -79,6 +80,7 @@ namespace Piratera.Sound
 			{
 				if (Instance != null)
 				{
+					PlayerPrefs.SetInt(SOUND_FX_TOGGLE_KEY, value ? 1 : 0);
 					Instance.soundOn = value;
 					if (value)
 					{
@@ -105,6 +107,7 @@ namespace Piratera.Sound
 			set {
 				if (Instance != null)
                 {
+					PlayerPrefs.SetInt(MUSIC_TOGGLE_KEY, value ? 1 : 0);
 					Instance.musicOn = value;
 					if (value)
 					{
@@ -132,7 +135,8 @@ namespace Piratera.Sound
 
 			if (Instance == null)
 			{
-				
+				musicOn = PlayerPrefs.GetInt(MUSIC_TOGGLE_KEY, 1) == 1;
+				soundOn = PlayerPrefs.GetInt(SOUND_FX_TOGGLE_KEY, 1) == 1;
 				Instance = this;
 				DontDestroyOnLoad(gameObject);
 			}
