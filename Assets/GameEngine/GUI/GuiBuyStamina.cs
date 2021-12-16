@@ -21,20 +21,24 @@ namespace Piratera.GUI
         [SerializeField]
         private Button buttonBuy;
 
+        private long cost;
+
         protected override void Start()
         {
-            InitPackData();
             Appear();
         }
-        public void InitPackData()
+        public void InitPackData(long cost, long quantity)
         {
-            UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
-            textStaminaValue.text = "+" + staminaConfig.statmina_buy_value;
-            UpdateCurrentStamina();
+            this.cost = cost;
+            textStaminaValue.text = "+" + quantity;
+            textBeriCost.text = "" + cost;
+            EnableButtonBuy(cost >= 0);
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
             NetworkController.AddServerActionListener(OnReceiveServerAction);
 
         }
+
+       
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
             GuiManager.Instance.ShowGuiWaiting(false);
@@ -44,29 +48,18 @@ namespace Piratera.GUI
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);
+                } else
+                {
+                    RunDestroy();
                 }
             }
         }
         private void UpdateCurrentStamina(int arg0, int arg1)
         {
-            UpdateCurrentStamina();
-        }
-        public void UpdateCurrentStamina()
-        {
             textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
 
-            UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
-            if (UserData.Instance.TimeBuyStaminaToday < staminaConfig.costs.Length)
-            {
-                textBeriCost.text = "" + staminaConfig.costs[UserData.Instance.TimeBuyStaminaToday];
-                EnableButtonBuy(true);
-
-            }
-            else
-            {
-                EnableButtonBuy(false);
-            }
         }
+ 
         private void EnableButtonBuy(bool enabled)
         {
             buttonBuy.interactable = enabled;
@@ -92,8 +85,7 @@ namespace Piratera.GUI
         }
         public void OnBuyStamina()
         {
-            UserStaminaConfig staminaConfig = UserData.Instance.StaminaConfig;
-            if (UserData.Instance.IsEnoughBeri(staminaConfig.costs[UserData.Instance.TimeBuyStaminaToday]))
+            if (UserData.Instance.IsEnoughBeri(cost))
             {
                 GuiManager.Instance.ShowGuiWaiting(true);
                 NetworkController.Send(SFSAction.BUY_STAMINA);

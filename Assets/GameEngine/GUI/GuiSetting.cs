@@ -1,5 +1,6 @@
 ﻿using Piratera.Sound;
 using Piratera.Utils;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ namespace Piratera.GUI
         private Text textVersion;
         [SerializeField]
         private Text textUID;
+        [SerializeField]
+        private Text textCreateAt;
 
         [SerializeField]
         private Image userAvatar;
@@ -53,6 +56,9 @@ namespace Piratera.GUI
             textName.text = UserData.Instance.Username;
             textUID.text = UserData.Instance.UID;
             loadAvatar.LoadAvatar(userAvatar, UserData.Instance.Avatar);
+
+            DateTime date = (new DateTime(1970, 1, 1)).AddMilliseconds(UserData.Instance.CreateAt);
+            textCreateAt.text = date.ToString("MM/dd/yyyy");
             UpdateSoundIcon();
             UpdateMusicIcon();
             

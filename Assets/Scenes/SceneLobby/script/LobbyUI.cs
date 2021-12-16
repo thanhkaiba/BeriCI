@@ -118,7 +118,9 @@ public class LobbyUI : MonoBehaviour
 
     public void ShowStaminaPack()
     {
-        GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
+        GuiManager.Instance.ShowGuiWaiting(true);
+        NetworkController.Send(SFSAction.GET_STAMINA_PACK);
+        
     }
 
     public void OnBuyBeri()

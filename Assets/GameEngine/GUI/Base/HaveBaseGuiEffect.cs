@@ -47,6 +47,10 @@ namespace Piratera.GUI
             {
                 case GuiEff.ZOOM:
                     {
+                        if (haveFog != null)
+                        {
+                            haveFog.VisibleFog(false);
+                        }
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -57,6 +61,15 @@ namespace Piratera.GUI
                         }
                         transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
                         s.Insert(0, transform.DOScale(new Vector3(1f, 1f, 1f), appearTime));
+
+                        s.AppendCallback(() =>
+                        {
+                            if (haveFog != null)
+                            {
+                                haveFog.VisibleFog(true);
+                                haveFog.FadeIn(appearTime);
+                            }
+                        });
                     }
                     break;
                 case GuiEff.FALL:
@@ -78,7 +91,7 @@ namespace Piratera.GUI
                         {
                             if (haveFog != null)
                             {
-                                haveFog.VisibleFog(false);
+                                haveFog.VisibleFog(true);
                             }
                         });
 
@@ -104,7 +117,7 @@ namespace Piratera.GUI
                         {
                             if (haveFog != null)
                             {
-                                haveFog.VisibleFog(false);
+                                haveFog.VisibleFog(true);
                             }
                         });
 
@@ -130,7 +143,7 @@ namespace Piratera.GUI
                         {
                             if (haveFog != null)
                             {
-                                haveFog.VisibleFog(false);
+                                haveFog.VisibleFog(true);
                             }
                         });
 
@@ -155,7 +168,7 @@ namespace Piratera.GUI
                         {
                             if (haveFog != null)
                             {
-                                haveFog.VisibleFog(false);
+                                haveFog.VisibleFog(true);
                             }
                         });
 
@@ -179,7 +192,7 @@ namespace Piratera.GUI
                         {
                             if (haveFog != null)
                             {
-                                haveFog.VisibleFog(false);
+                                haveFog.VisibleFog(true);
                             }
                         });
 
