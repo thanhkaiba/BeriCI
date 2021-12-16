@@ -2554,6 +2554,7 @@ GameObject:
   - component: {fileID: 1527190806}
   - component: {fileID: 1527190809}
   - component: {fileID: 1527190810}
+  - component: {fileID: 1527190811}
   m_Layer: 5
   m_Name: ButtonLineUp
   m_TagString: Untagged
@@ -2707,6 +2708,18 @@ MonoBehaviour:
   delayTime: 0
   duration: 0.4
   fadeValue: 1
+--- !u!114 &1527190811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527190804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1604218059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3521,6 +3534,7 @@ GameObject:
   - component: {fileID: 1976489165}
   - component: {fileID: 1976489164}
   - component: {fileID: 1976489163}
+  - component: {fileID: 1976489166}
   m_Layer: 5
   m_Name: ButtonBack
   m_TagString: Untagged
@@ -3643,6 +3657,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1976489161}
   m_CullTransparentMesh: 1
+--- !u!114 &1976489166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976489161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2005298829
 GameObject:
   m_ObjectHideFlags: 0

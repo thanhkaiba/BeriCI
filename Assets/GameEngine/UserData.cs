@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using Sfs2X.Entities;
 using UnityEngine;
@@ -46,6 +47,8 @@ public class UserData : Singleton<UserData>
 
     public int NumSlot { get; set; }
 
+    public long CreateAt { get; set; }
+
 
     public void LoadExpConfig()
     {
@@ -69,6 +72,7 @@ public class UserData : Singleton<UserData>
         LastCountStamina = (long)user.GetVariable(UserInfoPropertiesKey.LAST_COUNT).GetDoubleValue();
         TimeBuyStaminaToday = user.GetVariable(UserInfoPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
+        CreateAt = DateTimeOffset.Now.ToUnixTimeMilliseconds();
         GameEvent.UserDataChanged.Invoke(changedVars);
 
         long oldBeri = Beri;

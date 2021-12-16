@@ -509,7 +509,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1790,7 +1790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d35badf07d5a0e34081f6e63be1f83b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonTapSound: {fileID: 8300000, guid: 02f92b7e43aebb049a2fced819b1d8fc, type: 3}
+  buttonTapSound: {fileID: 8300000, guid: f331904dfdfa6ad48ba450852733da9c, type: 3}
   LobbyMusic: {fileID: 8300000, guid: b685f1635c2a2a84db81fc0daedea0d9, type: 3}
   LoginMusic: {fileID: 8300000, guid: 580d75d39d6200549b64e37cf729ebd6, type: 3}
   CombatMusic: {fileID: 8300000, guid: 652cea6c4c8ba9848b50c00bb0c4ca12, type: 3}
@@ -2802,7 +2802,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

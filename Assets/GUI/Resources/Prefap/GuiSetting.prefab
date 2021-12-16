@@ -454,6 +454,7 @@ MonoBehaviour:
   textName: {fileID: 2512123057050955532}
   textVersion: {fileID: 338197008205293713}
   textUID: {fileID: 1486925667535028758}
+  textCreateAt: {fileID: 6408261082516960292}
   userAvatar: {fileID: 7984192139952303959}
   whitePaperUrl: https://piratera.io/
   website: https://piratera.io/
@@ -482,7 +483,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.5
   blockTouchBehind: 1
-  panel: {fileID: 0}
 --- !u!114 &5992000369517596873
 MonoBehaviour:
   m_ObjectHideFlags: 0

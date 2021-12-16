@@ -440,6 +440,17 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
+			case SFSAction.GET_STAMINA_PACK:
+                {
+					GuiManager.Instance.ShowGuiWaiting(false);
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+					 	GameObject GO = GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
+						GuiBuyStamina popup = GO.GetComponent<GuiBuyStamina>();
+						popup.InitPackData(packet.GetLong("cost"), packet.GetLong("quantity"));
+					}
+					break;
+				}
 
 		}
 	}
