@@ -23,6 +23,10 @@ public class FightingLine
 
     public bool Swap(string sailorA, string sailorB)
     {
+        if (sailorA == sailorB)
+        {
+            return false;
+        }
         short slotA = SlotOf(sailorA);
         short slotB = SlotOf(sailorB);
 

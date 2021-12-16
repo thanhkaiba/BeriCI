@@ -50,7 +50,7 @@ namespace Piratera.GUI
                     GameUtils.ShowPopupPacketError(errorCode);
                 } else
                 {
-                    RunDestroy();
+                    OnClose();
                 }
             }
         }

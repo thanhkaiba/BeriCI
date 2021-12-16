@@ -13,8 +13,6 @@ public class PickTeamUI : MonoBehaviour
     [SerializeField]
     private Text TextMaxCapacity;
     [SerializeField]
-    private Text TextNewSlotCost;
-    [SerializeField]
     private Button ButtonBuySlot;
     [SerializeField]
     private LineUpSlot lineUpSlotConfig;
@@ -59,7 +57,6 @@ public class PickTeamUI : MonoBehaviour
         if (UserData.Instance.NumSlot < lineUpSlotConfig.max && UserData.Instance.NumSlot > 0)
         {
             ButtonBuySlot.gameObject.SetActive(true);
-            TextNewSlotCost.text = lineUpSlotConfig.costs[UserData.Instance.NumSlot - 1].ToString();
         }
         else
         {
@@ -85,16 +82,8 @@ public class PickTeamUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Can't buy more slot");
             return;
         }
-        int cost = lineUpSlotConfig.costs[UserData.Instance.NumSlot - 1];
-        if (UserData.Instance.IsEnoughBeri(cost))
-        {
-            GuiManager.Instance.ShowGuiWaiting(true);
-            NetworkController.Send(SFSAction.BUY_SLOT);
-        }
-        else
-        {
-            GuiManager.Instance.ShowPopupNotification("Not enough Beri");
-        }
+        GuiManager.Instance.ShowGuiWaiting(true);
+        NetworkController.Send(SFSAction.GET_LINEUP_SLOT_PACK);
 
     }
 }

@@ -1092,6 +1092,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   percentText: {fileID: 23037049}
   buttonReload: {fileID: 338365944}
+  buttonLogout: {fileID: 1673866948}
   progressBar: {fileID: 1118888388}
   startingPoint: 0.9
   sailorDescription: {fileID: 11400000, guid: a3a0080a2ebd8ca4da0004cb0994dd10, type: 2}

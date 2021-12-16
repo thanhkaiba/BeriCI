@@ -35,13 +35,13 @@ public class HaveFog : MonoBehaviour
         var tempColor = image.color;
         tempColor.a = 0f;
         image.color = tempColor;
-        fog.GetComponent<Image>().DOFade(fogOpacity, time);
+        fog.GetComponent<Image>().DOFade(fogOpacity, time).SetTarget(transform).SetLink(gameObject);
     }
     public void FadeOut(float time = 0.4f)
     {
         var image = fog.GetComponent<Image>();
         var tempColor = image.color;
         image.color = tempColor;
-        fog.GetComponent<Image>().DOFade(0, time);
+        fog.GetComponent<Image>().DOFade(0, time).SetTarget(transform).SetLink(gameObject);
     }
 }

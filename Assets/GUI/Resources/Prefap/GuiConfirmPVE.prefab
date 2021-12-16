@@ -1367,7 +1367,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.6
   blockTouchBehind: 1
-  fog: {fileID: 0}
 --- !u!225 &-6822633385308966067
 CanvasGroup:
   m_ObjectHideFlags: 0

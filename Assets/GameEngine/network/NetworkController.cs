@@ -451,6 +451,17 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
+			case SFSAction.GET_LINEUP_SLOT_PACK:
+				{
+					GuiManager.Instance.ShowGuiWaiting(false);
+					if (errorCode == SFSErrorCode.SUCCESS)
+					{
+						GameObject GO = GuiManager.Instance.AddGui<GuiBuySlot>("Prefap/GuiBuySlot", LayerId.GUI);
+						GuiBuySlot popup = GO.GetComponent<GuiBuySlot>();
+						popup.InitPackData(packet.GetLong("cost"));
+					}
+					break;
+				}
 
 		}
 	}
