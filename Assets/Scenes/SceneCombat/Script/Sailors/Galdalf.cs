@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,6 +26,7 @@ public class Galdalf : CombatSailor
         relativePos.x *= modelObject.transform.localScale.x;
         TriggerAnimation("Attack");
         boneTarget.SetLocalPosition(relativePos);
+        SoundMgr.PlaySoundAttackSailor(1);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.68f);
         seq.AppendCallback(() =>
@@ -65,6 +67,7 @@ public class Galdalf : CombatSailor
         if (_targets == null) return;
 
         TriggerAnimation("Attack");
+        SoundMgr.PlaySoundSkillSailor(1);
         float fury_buff = Model.config_stats.skill_params[0];
         float power_buff = cs.Power * Model.config_stats.skill_params[1];
         float speed_buff = Model.config_stats.skill_params[2];
@@ -76,6 +79,7 @@ public class Galdalf : CombatSailor
         {
             Vector3 pos = _targets.transform.position;
             pos.y += 4f;
+       
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_7_purple"), pos, Quaternion.identity);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));

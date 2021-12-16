@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections.Generic;
 using System.IO;
@@ -42,6 +43,7 @@ public class Meechik : CombatSailor
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
         seq.AppendInterval(0.1f);
+        SoundMgr.PlaySoundAttackSailor(5);
         return 0.9f;
     }
     
@@ -87,6 +89,7 @@ public class Meechik : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
+        SoundMgr.PlaySoundSkillSailor(5);
         var listTargets = CombatState.Instance.GetSailors(targets);
         var mainTarget = CombatState.Instance.GetSailor(targets[0]);
 
@@ -106,6 +109,7 @@ public class Meechik : CombatSailor
             Vector3 targetPos = mainTarget.transform.position;
             targetPos.y += 3.0f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.3f);
+     
         });
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() => {

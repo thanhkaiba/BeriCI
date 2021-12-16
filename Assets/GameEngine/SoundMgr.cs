@@ -30,6 +30,11 @@ namespace Piratera.Sound
 		[SerializeField]
 		public AudioClip CombatMusic;
 
+		[Header("Sound Sailor")]
+		[SerializeField]
+		private AudioClip[] skills; 
+		[SerializeField]               // sắp xếp theo thứ tự trong bảng chữ cái Alex , Galdalf , Helti .......
+		private AudioClip[] attacks;
 
 		[Header("Volume")]
 		[SerializeField] [Range(0.0f, 1.0f)]
@@ -160,8 +165,20 @@ namespace Piratera.Sound
 				soundEfectPlayer.PlayOneShot(audioClip, soundVolume);
 			}
 		}
-
-
+		public static void PlaySoundSkillSailor(int index)
+        {
+			if (Instance != null)
+			{
+				Instance.PlaySoundEffect(Instance.skills[index]);
+			}
+		}
+		public static void PlaySoundAttackSailor(int index)
+		{
+			if (Instance != null)
+			{
+				Instance.PlaySoundEffect(Instance.attacks[index]);
+			}
+		}
 		private void PlayBackgroundMusic(AudioClip music)
         {
 			musicPlayer.clip = music;

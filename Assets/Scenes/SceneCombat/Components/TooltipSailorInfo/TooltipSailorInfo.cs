@@ -48,33 +48,27 @@ public class TooltipSailorInfo : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Rect size = GetComponent<RectTransform>().rect;
-            Vector2 posInImage = transform.position - Input.mousePosition;
-            if (posInImage.x >= -size.width / 2 && posInImage.x < size.width / 2 &&
-                 posInImage.y >= -size.height / 2 && posInImage.y < size.height / 2)
+            if (Input.GetMouseButton(0) && gameObject.activeSelf &&
+             !RectTransformUtility.RectangleContainsScreenPoint(
+                 gameObject.GetComponent<RectTransform>(),
+                 Input.mousePosition,
+                 Camera.main))
             {
-                // click inside
+                if (!justOpen) gameObject.SetActive(false);
+                else justOpen = false;
+
             }
-            else if (!justOpen) gameObject.SetActive(false);
-            else justOpen = false;
         }
         if (gameObject.activeSelf)
         {
-            Vector3 pos = Camera.main.GetComponent<Camera>().WorldToScreenPoint(follow.transform.position) + new Vector3(0, 110, 0);
-
-            float width = GetComponent<RectTransform>().rect.width;
-            float height = GetComponent<RectTransform>().rect.height;
-            if (pos.x < 20 + width / 2) pos.x = 20 + width / 2;
-            if (pos.x > Screen.width - 20 - width / 2) pos.x = Screen.width - 20 - width / 2;
-            if (pos.y < 20 + height / 2) pos.y = 20 + height / 2;
-            if (pos.y > Screen.height - 20 - height / 2) pos.y = Screen.height - 20 - height / 2;
+            Vector3 pos = Camera.main.GetComponent<Camera>().WorldToScreenPoint(follow.transform.position) + new Vector3(0, Screen.height/10, 0);
             transform.position = pos;
             if (SceneManager.GetActiveScene().name != "SceneCombat2D")
                 return;
-            textPower.text = sailor.cs.Power.ToString();
-            textSpeed.text = sailor.cs.Speed.ToString();
-            textArmor.text = sailor.cs.Armor.ToString();
-            textMagicResist.text = sailor.cs.MagicResist.ToString();
+            textPower.text = ((int)sailor.cs.Power).ToString();
+            textSpeed.text = ((int)sailor.cs.Speed).ToString();
+            textArmor.text = ((int)sailor.cs.Armor).ToString();
+            textMagicResist.text = ((int)sailor.cs.MagicResist).ToString();
 
             healthSlider.value = sailor.cs.CurHealth / sailor.cs.MaxHealth;
             healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)sailor.cs.CurHealth).ToString() + "/" + ((int)sailor.cs.MaxHealth).ToString();
@@ -98,10 +92,10 @@ public class TooltipSailorInfo : MonoBehaviour
             furySlider.value = 1;
             healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)model.config_stats.health_base).ToString() + "/" + ((int)model.config_stats.health_base).ToString();
             healthSlider.value = 1;
-            textPower.text = model.config_stats.power_base.ToString();
-            textSpeed.text = model.config_stats.speed_base.ToString();
-            textArmor.text = model.config_stats.armor.ToString();
-            textMagicResist.text = model.config_stats.magic_resist.ToString();
+            textPower.text = ((int)model.config_stats.power_base).ToString();
+            textSpeed.text = ((int)model.config_stats.speed_base).ToString();
+            textArmor.text = ((int)model.config_stats.armor).ToString();
+            textMagicResist.text = ((int)model.config_stats.magic_resist).ToString();
 
         }
         follow = sailorGO.transform.Find("nodeBar");

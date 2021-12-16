@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System;
 using System.Collections.Generic;
@@ -30,12 +31,14 @@ public class Herminia : CombatSailor
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
-
-        Sequence seq = DOTween.Sequence();
+     
+        Sequence seq = DOTween.Sequence(); 
+        SoundMgr.PlaySoundAttackSailor(3);
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
+
             ArrowTarget(startPos, targetPos, 2f/Vector3.Distance(startPos, targetPos));
         });
         return 1.1f;
@@ -99,6 +102,7 @@ public class Herminia : CombatSailor
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
+            SoundMgr.PlaySoundSkillSailor(3);
             ArrowTarget(startPos, targetPos, 2f / Vector3.Distance(startPos, targetPos), true);
         });
         seq.AppendInterval(0.3f);

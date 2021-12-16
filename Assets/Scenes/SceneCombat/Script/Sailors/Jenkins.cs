@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -28,9 +29,13 @@ public class Jenkins : CombatSailor
             target.transform.position.y,
             target.transform.position.z - 0.1f
         );
+        Sequence s = DOTween.Sequence();
+        s.AppendInterval(0.3f);
+        s.AppendCallback(() => SoundMgr.PlaySoundAttackSailor(4));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+
         seq.AppendInterval(1.2f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return .9f;
@@ -80,18 +85,25 @@ public class Jenkins : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.4f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
+        seq.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
         seq.AppendInterval(.2f);
         seq.AppendCallback(() =>
         {
             Sequence seq2 = DOTween.Sequence();
+
+            seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
             seq2.AppendCallback(() => target.TakeDamage(damage / 5));
             seq2.AppendInterval(.22f);
+            seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
             seq2.AppendCallback(() => target.TakeDamage(damage / 5));
             seq2.AppendInterval(.22f);
+            seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
             seq2.AppendCallback(() => target.TakeDamage(damage / 5));
             seq2.AppendInterval(.22f);
+            seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
             seq2.AppendCallback(() => target.TakeDamage(damage / 5));
             seq2.AppendInterval(.22f);
+
             seq2.AppendCallback(() => target.TakeDamage(damage / 5));
             seq2.AppendInterval(.22f);
 

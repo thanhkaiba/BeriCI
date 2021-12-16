@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections.Generic;
 using System.IO;
@@ -33,6 +34,7 @@ public class Salvatafo : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.4f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+        SoundMgr.PlaySoundAttackSailor(8);
         seq.AppendInterval(0.5f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.8f;
@@ -80,6 +82,7 @@ public class Salvatafo : CombatSailor
         Debug.Log("_params " + _params.Count);
         base.ProcessSkill();
         TriggerAnimation("Skill");
+        SoundMgr.PlaySoundSkillSailor(9);
         var listTargets = CombatState.Instance.GetSailors(targets);
         var mainTarget = listTargets[0];
         Vector3 oriPos = transform.position;
@@ -101,6 +104,7 @@ public class Salvatafo : CombatSailor
         }
         CombatState.Instance.HighlightSailor2Step(this, listTargets, 1.0f, 2.2f);
         Sequence seq = DOTween.Sequence();
+
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
         {

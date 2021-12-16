@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using Piratera.Sound;
 
 public class Alex : CombatSailor
 {
@@ -32,6 +33,11 @@ public class Alex : CombatSailor
         );
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+        seq.AppendInterval(.3f);
+        seq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundAttackSailor(0);
+        });
         seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return .65f;
@@ -70,6 +76,7 @@ public class Alex : CombatSailor
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         CombatEvents.Instance.highlightTarget.Invoke(target);
         Sequence seq = DOTween.Sequence();
+        SoundMgr.PlaySoundSkillSailor(0);
         seq.AppendInterval(1.8f);
         seq.AppendCallback(() =>
         {
