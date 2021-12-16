@@ -1,18 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Piratera.Sound;
+using UnityEngine.EventSystems;
 
 namespace Piratera.GUI
 {
-    class HaveButtonTapSound : MonoBehaviour
-    {
-        private void Start()
-        {
-            Button button = GetComponent<Button>();
-            button.onClick.AddListener(PlaySound);
-        }
-
-        private void PlaySound()
+    class HaveButtonTapSound : MonoBehaviour, IPointerDownHandler
+    {  
+        public void OnPointerDown(PointerEventData eventData)
         {
             SoundMgr.PlayTabSound();
         }

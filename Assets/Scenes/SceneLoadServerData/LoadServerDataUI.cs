@@ -15,6 +15,9 @@ public class LoadServerDataUI : MonoBehaviour
     private Button buttonReload;
 
     [SerializeField]
+    private Button buttonLogout;
+
+    [SerializeField]
     private Slider progressBar;
 
     [SerializeField]
@@ -33,10 +36,12 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private Text sailorDescripton;
 
+    [SerializeField]
+    private Sprite[] spriteRanks;
+
 
     [SerializeField]
-    private Text sailorRank;
-
+    private Image sailorRank;
 
     [SerializeField]
     private GameObject sailorNode;
@@ -44,12 +49,12 @@ public class LoadServerDataUI : MonoBehaviour
 
     void Start()
     {
+
         RandomTip();
         buttonReload.gameObject.SetActive(false);
-        progressBar.value = 0;
+        sailorRank.transform.position = Camera.main.WorldToScreenPoint(sailorNode.transform.position) - new Vector3(40, -20, 0);
         SendGetData();
         ShowLoading(15f, startingPoint, RandomTip);
-
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
     }
 
@@ -72,8 +77,7 @@ public class LoadServerDataUI : MonoBehaviour
             sailorName.text = param.present_name;
             sailorBio.text = param.title;
             sailorDescripton.text = param.skill_description;
-          
-            sailorRank.text = config_stats.rank.ToString();
+            sailorRank.sprite = spriteRanks[(int)config_stats.rank];
         } else
         {
             RandomTip();
@@ -83,7 +87,11 @@ public class LoadServerDataUI : MonoBehaviour
 
     public void SendGetData()
     {
+        progressBar.value = 0;
+        progressBar.gameObject.SetActive(true);
         buttonReload.gameObject.SetActive(false);
+        percentText.gameObject.SetActive(false);
+        buttonLogout.gameObject.SetActive(false);
         NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
     }
 
@@ -99,7 +107,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             if (errorCode == SFSErrorCode.SUCCESS)
             {
-                ShowLoading(0.5f, 1f, OnLoadSuccess);
+                ShowLoading(1f, 1f, OnLoadSuccess);
             } else
             {
                 OnLoadError(errorCode);
@@ -111,18 +119,24 @@ public class LoadServerDataUI : MonoBehaviour
     private void OnLoadError(SFSErrorCode errorCode)
     {
         GuiManager.Instance.ShowPopupNotification($"Load list hero fail! \n {errorCode}: {(int)errorCode}");
-        
-        buttonReload.gameObject.SetActive(true);
 
-        /*GuiManager.Instance.ShowPopupNotification($"Load list hero fail! \n {errorCode}: {(int)errorCode}", () => {
-            Debug.Log("da load scene moi");
-            SceneManager.LoadScene("SceneLogin");
-                    
-          }
-        );*/
+        DOTween.Kill(progressBar);
+        buttonReload.gameObject.SetActive(true);
+        progressBar.gameObject.SetActive(false);
+        percentText.gameObject.SetActive(false);
+        buttonLogout.gameObject.SetActive(true);
+
+        /* GuiManager.Instance.ShowPopupNotification($"Load list hero fail! \n {errorCode}: {(int)errorCode}", () => {
+             SceneManager.LoadScene("SceneLogin");
+           }
+         );*/
 
     }
 
+    public void OnLogout()
+    {
+        NetworkController.Logout();
+    }
  
 
     public void ShowLoading(float actionTime, float value, Action action)
