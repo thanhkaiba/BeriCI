@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -37,7 +38,9 @@ public class Tons : CombatSailor
             seq2.AppendInterval(1.0f);
             seq2.AppendCallback(() => Destroy(ex));
         });
+
         seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => SoundMgr.PlaySoundAttackSailor(10));
         seq.AppendCallback(() => {
             GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/tele/tele"), desPos, new Quaternion());
             Sequence seq2 = DOTween.Sequence();
@@ -109,6 +112,7 @@ public class Tons : CombatSailor
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/Impact/Impact"),
                posEnemy, modelObject.transform.rotation);
+            SoundMgr.PlaySoundSkillSailor(11);
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
             seq2.AppendInterval(.18f);

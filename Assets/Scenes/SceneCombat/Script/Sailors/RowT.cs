@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System;
 using System.Collections.Generic;
@@ -63,6 +64,7 @@ public class RowT : CombatSailor
         TriggerAnimation("Skill");
 
         Sequence seq = DOTween.Sequence();
+        SoundMgr.PlaySoundSkillSailor(8);
         seq.AppendInterval(1.2f);
         seq.AppendCallback(() =>
         {

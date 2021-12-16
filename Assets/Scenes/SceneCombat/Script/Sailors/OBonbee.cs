@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -30,6 +31,10 @@ public class OBonbee : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+        seq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundAttackSailor(6);
+        });
         seq.AppendInterval(0.55f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.5f;
@@ -86,6 +91,7 @@ public class OBonbee : CombatSailor
         var listHighlight = new List<CombatSailor>() { this };
         listHighlight.AddRange(listTargets);
         CombatState.Instance.HighlightListSailor(listHighlight, 2.2f);
+        SoundMgr.PlaySoundSkillSailor(6);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.0f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));

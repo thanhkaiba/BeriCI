@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ public class QChi : CombatSailor
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             Vector3 endPos = target.transform.position;
             endPos.y += 2;
+            SoundMgr.PlaySoundAttackSailor(7);
             var go = GameEffMgr.Instance.ShowPurple(endPos, startPos.x < targetPos.x);
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
@@ -85,8 +87,10 @@ public class QChi : CombatSailor
         seq.AppendInterval(1f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundSkillSailor(7);
             for (int i = 0; i < listTargets.Count; i++)
             {
+
                 Spine.Bone bone = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("fx_ball_1");
                 Vector3 startPos = bone.GetWorldPosition(modelObject.transform);
                 Vector3 endPos = listTargets[i].transform.position;

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -31,6 +32,7 @@ public class Scrub : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+        SoundMgr.PlaySoundAttackSailor(9);
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.4f;
@@ -96,6 +98,7 @@ public class Scrub : CombatSailor
         seq.AppendInterval(0.35f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundSkillSailor(10);
             target.LoseHealth(new Damage() { physics = _params[0] });
             if (behind_target) behind_target.LoseHealth(new Damage() { physics = _params[1] });
         });
