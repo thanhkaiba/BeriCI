@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using Piratera.Sound;
 
 public class UIPopupReward : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class UIPopupReward : MonoBehaviour
         texts[3].text = r.hard_bonus.ToString();
         if (r.team_win == 0)
         {
+            SoundMgr.PlaySound(PirateraSoundEffect.WIN);
             GameObject _typeWin = null;
             switch (r.type)
             {
@@ -68,11 +70,17 @@ public class UIPopupReward : MonoBehaviour
         }
         else if (r.team_win == 1)
         {
+            SoundMgr.PlaySound(PirateraSoundEffect.LOSE);
             results[1].SetActive(true);
         }
-        else results[2].SetActive(true);
-      
-        transform.GetChild(1).gameObject.SetActive(true);
+        else
+        {
+            SoundMgr.PlaySound(PirateraSoundEffect.DRAW);
+            results[2].SetActive(true);
+        }
+
+
+            transform.GetChild(1).gameObject.SetActive(true);
         gameObject.SetActive(true);
         gameObject.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), .5f, 2, 0);
     }

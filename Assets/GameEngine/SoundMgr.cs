@@ -9,6 +9,13 @@ namespace Piratera.Sound
 		COMBAT
 	}
 
+	public enum PirateraSoundEffect
+    {
+		WIN,
+		LOSE,
+		DRAW,
+    }
+
 	class SoundMgr : MonoBehaviour
     {
 
@@ -18,6 +25,13 @@ namespace Piratera.Sound
 		[Header("Sound Effect")]
 		[SerializeField]
 		private AudioClip buttonTapSound;
+		[SerializeField]
+		private AudioClip win;
+		[SerializeField]
+		private AudioClip lose;
+		[SerializeField]
+		private AudioClip draw;
+		
 
 
 		[Header("Background Music")]
@@ -155,6 +169,26 @@ namespace Piratera.Sound
 			if (Instance != null)
             {
 				Instance.PlaySoundEffect(Instance.buttonTapSound);
+			}
+		}
+
+		public static void PlaySound(PirateraSoundEffect sound)
+		{
+			if (Instance != null)
+			{
+				switch (sound)
+                {
+					case PirateraSoundEffect.DRAW:
+						Instance.PlaySoundEffect(Instance.draw);
+						break;
+					case PirateraSoundEffect.WIN:
+						Instance.PlaySoundEffect(Instance.win);
+						break;
+					case PirateraSoundEffect.LOSE:
+						Instance.PlaySoundEffect(Instance.lose);
+						break;
+				}
+				
 			}
 		}
 
