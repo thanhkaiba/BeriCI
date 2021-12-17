@@ -17,6 +17,7 @@ namespace Piratera.GUI
         private int priceStamina = 5;
         [SerializeField]
         private GameObject fight, find, finding;
+        public LobbyUI lobby;
 
         protected override void Start()
         {
@@ -46,7 +47,8 @@ namespace Piratera.GUI
 
                 Sequence s = DOTween.Sequence();
                 DoTweenUtils.UpdateNumber(textCurrentStamina, UserData.Instance.GetStamina(), (UserData.Instance.GetStamina() - priceStamina), x => UserData.Instance._GetStaminaFormat((int)x));
-                UserData.Instance.MinusStamina(priceStamina);
+                // UserData.Instance.MinusStamina(priceStamina);
+                lobby.OnStaminaChanged(UserData.Instance.GetStamina(), (UserData.Instance.GetStamina() - priceStamina));
                 s.AppendInterval(1.5f);
                 s.AppendCallback(() => fight.SetActive(false));
                 s.AppendCallback(() => find.SetActive(true));

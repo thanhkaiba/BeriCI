@@ -77,7 +77,7 @@ public class LobbyUI : MonoBehaviour
 
     }
 
-    private void OnStaminaChanged(int oldValue, int newValue)
+    public void OnStaminaChanged(int oldValue, int newValue)
     {
         DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => UserData.Instance.GetStaminaFormat((int)x));
     }
@@ -109,7 +109,8 @@ public class LobbyUI : MonoBehaviour
     }
     public void OnStartPVEMode()
     {       
-        GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
+       GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
+        go.GetComponent<GuiConfirmPVE>().lobby = this;
     }
     public void OnButtonPickTeamClick()
     {
