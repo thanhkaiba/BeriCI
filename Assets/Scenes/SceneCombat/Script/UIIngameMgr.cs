@@ -14,11 +14,17 @@ public class UIIngameMgr : MonoBehaviour
     public Text timescale;
     public UserAvatar avtA;
     public UserAvatar avtB;
+
+    public Text usernameA;
+    public Text usernameB;
+
     public void Awake()
     {
         Instance = this;
-        avtA.LoadAvatar("");
-        avtB.LoadAvatar("");
+        avtA.LoadAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt0 : TempCombatData.Instance.avt1);
+        avtB.LoadAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt1 : TempCombatData.Instance.avt0);
+        usernameA.text = TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.userName0 : TempCombatData.Instance.userName1;
+        usernameB.text = TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.userName1 : TempCombatData.Instance.userName0;
     }
     public void OnDestroy()
     {
