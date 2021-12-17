@@ -100,7 +100,7 @@ public class LobbyUI : MonoBehaviour
     {
         userName.text = UserData.Instance.Username.LimitLength(11);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
-        userStamina.text = StringUtils.ShortNumber(UserData.Instance.Stamina);
+        userStamina.text = UserData.Instance.GetCurrentStaminaFormat();
     }
 
     public void OnLogoutButtonClick()

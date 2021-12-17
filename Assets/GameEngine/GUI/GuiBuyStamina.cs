@@ -33,6 +33,7 @@ namespace Piratera.GUI
             textStaminaValue.text = "+" + quantity;
             textBeriCost.text = "" + cost;
             EnableButtonBuy(cost >= 0);
+            textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
             NetworkController.AddServerActionListener(OnReceiveServerAction);
 
