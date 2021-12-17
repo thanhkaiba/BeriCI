@@ -18,6 +18,8 @@ namespace Piratera.GUI
         private InputField textCheatBeri_quality;
         [SerializeField]
         private InputField textCheatStamina_quality;
+        [SerializeField]
+        private InputField textCheatRank_quality;
 
 
         public void SendCheatSailor()
@@ -45,6 +47,15 @@ namespace Piratera.GUI
                 return;
             }
             CheatMgr.CheatResource("beri", int.Parse(textCheatBeri_quality.text));
+        }
+
+        public void SendCheatRank()
+        {
+            if (string.IsNullOrEmpty(textCheatRank_quality.text))
+            {
+                return;
+            }
+            CheatMgr.CheatRank(int.Parse(textCheatRank_quality.text));
         }
 
         public void CheatBot()

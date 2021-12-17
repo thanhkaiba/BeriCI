@@ -15,8 +15,12 @@
     PVE_CONFIRM = 13,
     PVE_PLAY = 14,
     BUY_SLOT = 20,
-    CHEAT_SAILOR = 101,
-    CHEAT_RESOURCE = 102,
     GET_STAMINA_PACK = 21,
     GET_LINEUP_SLOT_PACK = 22,
+
+
+    // cheat
+    CHEAT_SAILOR = 101,
+    CHEAT_RESOURCE = 102,
+    CHEAT_RANK = 103,
 }

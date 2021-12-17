@@ -29,5 +29,12 @@ namespace Piratera.Cheat
             data.PutInt("quantity", quantity);
             NetworkController.Send(SFSAction.CHEAT_RESOURCE, data);
         }
+
+        public static void CheatRank(int rank)
+        {
+            SFSObject data = new SFSObject();
+            data.PutInt("rank", rank);
+            NetworkController.Send(SFSAction.CHEAT_RANK, data);
+        }
     }
 }
