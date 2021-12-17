@@ -8,6 +8,22 @@ public class FightingLine
 {
     public static readonly byte MAX_SQUAD_SLOT = 9;
     public static readonly byte NUM_SQUAD_COL = 3;
+
+    private int numSlot = -1;
+    public int NumSlot { 
+        get { 
+            if (numSlot > 0)
+            {
+                return numSlot;
+            }
+            return UserData.Instance.NumSlot;
+        }
+
+        set
+        {
+            numSlot = value;
+        }
+    }
     private Dictionary<short, string> slots = new Dictionary<short, string> 
     {
             {0,  ""},
@@ -153,7 +169,7 @@ public class FightingLine
                 count++;
             }
         }
-        return count >= UserData.Instance.NumSlot;
+        return count >= NumSlot;
     }
 
 
@@ -233,5 +249,6 @@ public class FightingLine
         {
             slots[i] = "";
         }
+        NumSlot = -1;
     }
 }

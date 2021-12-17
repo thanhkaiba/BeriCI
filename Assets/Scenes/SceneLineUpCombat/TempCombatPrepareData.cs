@@ -174,6 +174,9 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 		fgl0.NewFromSFSObject(packet.GetSFSArray("fgl_0"));
 		fgl1.NewFromSFSObject(packet.GetSFSArray("fgl_1"));
 
+		fgl0.NumSlot = packet.GetInt("num_positions_0");
+		fgl1.NumSlot = packet.GetInt("num_positions_1");
+
 		countdown = packet.GetByte("countdown");
 	}
 

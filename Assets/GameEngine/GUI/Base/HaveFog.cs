@@ -19,7 +19,7 @@ public class HaveFog : MonoBehaviour
         fog.transform.localPosition = Vector3.zero;
         fog.AddComponent<CanvasRenderer>();
         RectTransform rectTransform = fog.AddComponent<RectTransform>();
-        rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+        rectTransform.sizeDelta = new Vector2(Screen.width * 2, Screen.height * 2);
         fog.transform.SetAsFirstSibling();
         Image image = fog.AddComponent<Image>();
         image.color = new Color(0, 0, 0, fogOpacity);

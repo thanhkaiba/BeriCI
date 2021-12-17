@@ -181,7 +181,6 @@ public class NetworkController : MonoBehaviour
 
     private static void OnUserDataUpdate(BaseEvent evt)
     {
-		Debug.Log("da vao day");
 		List<string> changedVars = (List<string>)evt.Params["changedVars"];
 
 		SFSUser user = (SFSUser)evt.Params["user"];
@@ -378,10 +377,12 @@ public class NetworkController : MonoBehaviour
 		{
 			Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
 		}
-		foreach (NetworkActionListenerDelegate listener in serverActionListeners)
+		foreach (NetworkActionListenerDelegate listener in new List<NetworkActionListenerDelegate>(serverActionListeners))
 		{
 			listener(action, errorCode, packet);
 		}
+
+
 		switch (action)
 		{
 

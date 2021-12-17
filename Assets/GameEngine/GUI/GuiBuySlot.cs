@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Piratera.Utils;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,7 @@ namespace Piratera.GUI
             this.cost = cost;
             textBeriCost.text = "" + cost;
             buttonBuy.interactable = cost >= 0;
-            textCurrentBeri.text = UserData.Instance.Beri.ToString();
+            textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
             GameEvent.UserBeriChanged.AddListener(UpdateCurrentBeri);
             NetworkController.AddServerActionListener(OnReceiveServerAction);
 
@@ -40,7 +41,7 @@ namespace Piratera.GUI
 
         private void UpdateCurrentBeri(long arg0, long arg1)
         {
-            textCurrentBeri.text = UserData.Instance.Beri.ToString();
+            textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
         }
 
         public void OnClose()

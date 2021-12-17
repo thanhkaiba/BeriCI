@@ -47,37 +47,22 @@ namespace Piratera.GUI
             {
                 case GuiEff.ZOOM:
                     {
-                        if (haveFog != null)
-                        {
-                            haveFog.VisibleFog(false);
-                        }
+                        
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
-                        if (canvasGroup != null)
-                        {
-                            canvasGroup.interactable = false;
-                            s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
-                            s.AppendCallback(() => canvasGroup.interactable = true);
-                        }
+                       
                         transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
                         s.Insert(0, transform.DOScale(new Vector3(1f, 1f, 1f), appearTime));
 
-                        s.AppendCallback(() =>
+                        if (haveFog != null)
                         {
-                            if (haveFog != null)
-                            {
-                                haveFog.VisibleFog(true);
-                                haveFog.FadeIn(appearTime);
-                            }
-                        });
+                            haveFog.FadeIn(appearTime);
+                        }
                     }
                     break;
                 case GuiEff.FALL:
                     {
-                        if (haveFog != null)
-                        {
-                            haveFog.VisibleFog(false);
-                        }
+                       
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -87,23 +72,17 @@ namespace Piratera.GUI
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
                         s.Insert(0, (transform as RectTransform).DOAnchorPosY(Screen.height + (transform as RectTransform).sizeDelta.y, appearTime).From().SetEase(Ease.OutBack));
-                        s.AppendCallback(() =>
+                        if (haveFog != null)
                         {
-                            if (haveFog != null)
-                            {
-                                haveFog.VisibleFog(true);
-                            }
-                        });
+                            haveFog.FadeIn(appearTime);
+                        }
 
 
                     }
                     break;
                 case GuiEff.FLY_UP:
                     {
-                        if (haveFog != null)
-                        {
-                            haveFog.VisibleFog(false);
-                        }
+                     
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -113,23 +92,17 @@ namespace Piratera.GUI
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
                         s.Insert(0, (transform as RectTransform).DOAnchorPosY(-(transform as RectTransform).sizeDelta.y, appearTime).From().SetEase(Ease.OutBack));
-                        s.AppendCallback(() =>
+                        if (haveFog != null)
                         {
-                            if (haveFog != null)
-                            {
-                                haveFog.VisibleFog(true);
-                            }
-                        });
+                            haveFog.FadeIn(appearTime);
+                        }
 
                     }
                     break;
 
                 case GuiEff.LEFT:
                     {
-                        if (haveFog != null)
-                        {
-                            haveFog.VisibleFog(false);
-                        }
+                       
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -139,22 +112,16 @@ namespace Piratera.GUI
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
                         s.Insert(0, (transform as RectTransform).DOAnchorPosX(-(transform as RectTransform).sizeDelta.x, appearTime).From().SetEase(Ease.OutBack));
-                        s.AppendCallback(() =>
+                        if (haveFog != null)
                         {
-                            if (haveFog != null)
-                            {
-                                haveFog.VisibleFog(true);
-                            }
-                        });
+                            haveFog.FadeIn(appearTime);
+                        }
 
                     }
                     break;
                 case GuiEff.RIGHT:
                     {
-                        if (haveFog != null)
-                        {
-                            haveFog.VisibleFog(false);
-                        }
+                      
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -164,22 +131,15 @@ namespace Piratera.GUI
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
                         s.Insert(0, (transform as RectTransform).DOAnchorPosX(Screen.width + (transform as RectTransform).sizeDelta.x, appearTime).From().SetEase(Ease.OutBack));
-                        s.AppendCallback(() =>
+                        if (haveFog != null)
                         {
-                            if (haveFog != null)
-                            {
-                                haveFog.VisibleFog(true);
-                            }
-                        });
+                            haveFog.FadeIn(appearTime);
+                        }
 
                     }
                     break;
                 case GuiEff.FADE:
                     {
-                        if (haveFog != null)
-                        {
-                            haveFog.VisibleFog(false);
-                        }
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -188,13 +148,10 @@ namespace Piratera.GUI
                             s.Insert(0, canvasGroup.DOFade(0, appearTime / 2).From());
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
-                        s.AppendCallback(() =>
+                        if (haveFog != null)
                         {
-                            if (haveFog != null)
-                            {
-                                haveFog.VisibleFog(true);
-                            }
-                        });
+                            haveFog.FadeIn(appearTime);
+                        }
 
                     }
                     break;
