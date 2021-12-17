@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using System;
+using System.Collections.Generic;
 
 public class LoadServerDataUI : MonoBehaviour
 {
@@ -47,6 +48,13 @@ public class LoadServerDataUI : MonoBehaviour
     private GameObject sailorNode;
 
 
+    [SerializeField]
+    private GameObject sailorClass;
+
+    [SerializeField]
+    private Text errorText;
+
+
     void Start()
     {
 
@@ -78,6 +86,7 @@ public class LoadServerDataUI : MonoBehaviour
             sailorBio.text = param.title;
             sailorDescripton.text = param.skill_description;
             sailorRank.sprite = spriteRanks[(int)config_stats.rank];
+            RenderClass(config_stats.classes);
         } else
         {
             RandomTip();
@@ -92,6 +101,7 @@ public class LoadServerDataUI : MonoBehaviour
         buttonReload.gameObject.SetActive(false);
         percentText.gameObject.SetActive(false);
         buttonLogout.gameObject.SetActive(false);
+        errorText.gameObject.SetActive(false);
         NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
     }
 
@@ -101,13 +111,39 @@ public class LoadServerDataUI : MonoBehaviour
         progressBar.onValueChanged.RemoveListener(UpdateTextPercent);
     }
 
+    private void RenderClass(List<SailorClass> classes)
+    {
+
+        foreach (Transform child in sailorClass.transform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        float size = 75;
+        float margin = 10;
+        float totalSize = size * classes.Count;
+        for (int i = 0; i < classes.Count; i++)
+        {
+            GameObject GO = new GameObject(classes[i].ToString()); 
+            Image image = GO.AddComponent<Image>();
+            image.sprite = Resources.Load<Sprite>("Icons/SailorType/" + classes[i]);
+            image.color = new Color32(202, 202, 202, 255);
+            RectTransform rectTransform = GO.GetComponent<RectTransform>();
+            rectTransform.sizeDelta = new Vector2(size - margin, size - margin);
+            rectTransform.SetParent(sailorClass.transform);
+
+            rectTransform.anchoredPosition = new Vector2(-totalSize / 2 + size * i * 2, 0);
+
+        }
+    }
+
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         if (action == SFSAction.LOAD_LIST_HERO_INFO)
         {
             if (errorCode == SFSErrorCode.SUCCESS)
             {
-                ShowLoading(1f, 1f, OnLoadSuccess);
+                OnLoadError(errorCode);
             } else
             {
                 OnLoadError(errorCode);
@@ -125,6 +161,7 @@ public class LoadServerDataUI : MonoBehaviour
         progressBar.gameObject.SetActive(false);
         percentText.gameObject.SetActive(false);
         buttonLogout.gameObject.SetActive(true);
+        errorText.gameObject.SetActive(true);
 
         /* GuiManager.Instance.ShowPopupNotification($"Load list hero fail! \n {errorCode}: {(int)errorCode}", () => {
              SceneManager.LoadScene("SceneLogin");
