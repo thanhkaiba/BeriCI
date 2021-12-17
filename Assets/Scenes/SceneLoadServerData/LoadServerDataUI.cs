@@ -119,8 +119,8 @@ public class LoadServerDataUI : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        float size = 75;
-        float margin = 10;
+        float size = 125;
+        float margin = 15;
         float totalSize = size * classes.Count;
         for (int i = 0; i < classes.Count; i++)
         {
@@ -132,7 +132,7 @@ public class LoadServerDataUI : MonoBehaviour
             rectTransform.sizeDelta = new Vector2(size - margin, size - margin);
             rectTransform.SetParent(sailorClass.transform);
 
-            rectTransform.anchoredPosition = new Vector2(-totalSize / 2 + size * i * 2, 0);
+            rectTransform.anchoredPosition = new Vector2(-totalSize / 2 + size * ( i + 0.5f), 10);
 
         }
     }

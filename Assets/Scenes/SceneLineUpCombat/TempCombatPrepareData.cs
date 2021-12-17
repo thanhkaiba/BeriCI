@@ -262,6 +262,8 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 				result.Add(model);
 			}
 		}
+		result.Sort();
+		result.Reverse();
 		return result;
 	}
 }

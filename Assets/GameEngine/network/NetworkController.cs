@@ -463,6 +463,14 @@ public class NetworkController : MonoBehaviour
 					}
 					break;
 				}
+			case SFSAction.CHEAT_RANK:
+				{
+					if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+						GuiManager.Instance.ShowPopupNotification($"Cheat Rank Success, Rank {packet.GetInt("rank")}");
+					}
+					break;
+				}
 
 		}
 	}
