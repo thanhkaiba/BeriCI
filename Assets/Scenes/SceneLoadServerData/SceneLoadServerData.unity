@@ -1507,9 +1507,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 861855170}
-        m_TargetAssemblyTypeName: Piratera.GUI.GuiSetting, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 861855172}
+        m_TargetAssemblyTypeName: LoadServerDataUI, Assembly-CSharp
+        m_MethodName: OnLogout
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

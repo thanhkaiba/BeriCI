@@ -143,7 +143,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             if (errorCode == SFSErrorCode.SUCCESS)
             {
-                OnLoadError(errorCode);
+                ShowLoading(1f, 1f, OnLoadSuccess);
             } else
             {
                 OnLoadError(errorCode);

@@ -456,11 +456,11 @@ MonoBehaviour:
   textUID: {fileID: 1486925667535028758}
   textCreateAt: {fileID: 6408261082516960292}
   userAvatar: {fileID: 7984192139952303959}
-  whitePaperUrl: https://piratera.io/
+  whitePaperUrl: https://whitepaper.piratera.io/piratera/
   website: https://piratera.io/
-  facebookUrl: https://piratera.io/
-  telegramUrl: https://piratera.io/
-  twitterUrl: https://piratera.io/
+  facebookUrl: http://facebook.com/piratera.official
+  telegramUrl: http://t.me/officialpiratera
+  twitterUrl: http://twitter.com/PirateraBay
   iconSoundSprites:
   - {fileID: 21300000, guid: 1af8f511207fd88459f25f3ec739634a, type: 3}
   - {fileID: 21300000, guid: 7a99dcad8d9b5724eb8afcdcd5917b00, type: 3}
