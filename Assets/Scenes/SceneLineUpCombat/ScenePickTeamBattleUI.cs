@@ -82,7 +82,11 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     {
         if (UIManager.Instance.reward.gameObject.activeInHierarchy)
             UIManager.Instance.reward.ConfirmSur();
-        else if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors", UIManager.Instance.reward.SendSurrenderToSever);
+        else if (!squaA.HaveSailor())
+        {
+            UIManager.Instance.reward.SendSurrenderToSever();
+            GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors");
+        }
         else SendStartCombat();
 
            

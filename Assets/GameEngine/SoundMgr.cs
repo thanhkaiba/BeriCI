@@ -39,9 +39,6 @@ namespace Piratera.Sound
 		public AudioClip LobbyMusic;
 
 		[SerializeField]
-		public AudioClip LoginMusic;
-
-		[SerializeField]
 		public AudioClip CombatMusic;
 
 		[Header("Sound Sailor")]
@@ -215,6 +212,10 @@ namespace Piratera.Sound
 		}
 		private void PlayBackgroundMusic(AudioClip music)
         {
+			if (music == musicPlayer.clip)
+            {
+				return;
+            }
 			musicPlayer.clip = music;
 			musicPlayer.Stop();
 			musicPlayer.loop = true;
@@ -240,13 +241,13 @@ namespace Piratera.Sound
 				switch (music)
 				{
 					case PirateraMusic.LOBBY:
-						Instance.PlayBackgroundMusic(Instance.LobbyMusic);
+						Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.8f);
 						break;
 					case PirateraMusic.LOGIN:
-						Instance.PlayBackgroundMusic(Instance.LoginMusic);
+						Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.7f);
 						break;
 					case PirateraMusic.COMBAT:
-						Instance.PlayBackgroundMusic(Instance.CombatMusic);
+						Instance.PlayBackgroundMusic(Instance.CombatMusic, 0.6f);
 						break;
 
 				}

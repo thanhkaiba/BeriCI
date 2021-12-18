@@ -437,7 +437,7 @@ public class NetworkController : MonoBehaviour
 				{
 					if (errorCode == SFSErrorCode.SUCCESS)
 					{
-						SceneManager.LoadScene("SceneLobby");
+						// SceneManager.LoadScene("SceneLobby");
 					}
 					break;
 				}
