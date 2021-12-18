@@ -241,13 +241,13 @@ namespace Piratera.Sound
 				switch (music)
 				{
 					case PirateraMusic.LOBBY:
-						Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.8f);
+						Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.45f);
 						break;
 					case PirateraMusic.LOGIN:
-						Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.7f);
+						Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.4f);
 						break;
 					case PirateraMusic.COMBAT:
-						Instance.PlayBackgroundMusic(Instance.CombatMusic, 0.6f);
+						Instance.PlayBackgroundMusic(Instance.CombatMusic, 0.5f);
 						break;
 
 				}
