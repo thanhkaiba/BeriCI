@@ -19,6 +19,7 @@ public class Mealodo : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
+        DOTween.Kill(transform);
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
@@ -32,6 +33,7 @@ public class Mealodo : CombatSailor
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(.6f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
+        seq.SetTarget(transform).SetLink(gameObject);
         return .5f;
     }
     public override float TakeDamage(Damage d)
@@ -53,8 +55,18 @@ public class Mealodo : CombatSailor
         damage = cs.Power * dame_health;
         return RunAnimation(target, damage);
     }
+
+    public override float ProcessSkill(List<string> targets, List<float> _params)
+    {
+        CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
+        float loseHealth = _params[0];
+        return RunAnimation(target, loseHealth);
+
+    }
+
     float RunAnimation(CombatSailor target, float damage)
     {
+        DOTween.Kill(transform);
         base.ProcessSkill();
         TriggerAnimation("Skill");
         CombatEvents.Instance.highlightTarget.Invoke(target);
@@ -79,6 +91,7 @@ public class Mealodo : CombatSailor
         });
         seq.AppendInterval(.6f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 1.2f;
+        seq.SetTarget(transform).SetLink(gameObject);
+        return 1.5f;
     }
 }
