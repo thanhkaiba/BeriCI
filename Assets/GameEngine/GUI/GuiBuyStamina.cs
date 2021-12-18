@@ -33,7 +33,7 @@ namespace Piratera.GUI
             textStaminaValue.text = "+" + quantity;
             textBeriCost.text = "" + cost;
             EnableButtonBuy(cost >= 0);
-            textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
+            textCurrentStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
             NetworkController.AddServerActionListener(OnReceiveServerAction);
 
@@ -57,7 +57,7 @@ namespace Piratera.GUI
         }
         private void UpdateCurrentStamina(int arg0, int arg1)
         {
-            textCurrentStamina.text = UserData.Instance.GetCurrentStaminaFormat();
+            textCurrentStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
 
         }
  
@@ -99,9 +99,9 @@ namespace Piratera.GUI
         }
         void Update()
         {
-            if (UserData.Instance.IsRecorveringStamina())
+            if (StaminaData.Instance.IsRecorveringStamina())
             {
-                TimeSpan remaining = TimeSpan.FromMilliseconds(UserData.Instance.TimeToHaveNewStamina());
+                TimeSpan remaining = TimeSpan.FromMilliseconds(StaminaData.Instance.TimeToHaveNewStamina());
                 textCountDownStamina.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
             }
             else

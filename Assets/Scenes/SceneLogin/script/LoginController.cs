@@ -120,6 +120,7 @@ public class LoginController: MonoBehaviour
 			User user = NetworkController.Connection.MySelf;
 			GameTimeMgr.SetLoginTime((long)user.GetVariable("login_time").GetDoubleValue());
 			UserData.Instance.OnUserVariablesUpdate(user);
+			StaminaData.Instance.OnUserVariablesUpdate(user);
 			OpenLobby();
 		}
 		else

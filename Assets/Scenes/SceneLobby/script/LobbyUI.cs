@@ -76,7 +76,7 @@ public class LobbyUI : MonoBehaviour
 
     public void OnStaminaChanged(int oldValue, int newValue)
     {
-        DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => UserData.Instance.GetStaminaFormat((int)x));
+        DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat((int)x));
     }
 
     private void OnDestroy()
@@ -90,14 +90,14 @@ public class LobbyUI : MonoBehaviour
     {
         userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
         DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => StringUtils.ShortNumber(x));
-        DoTweenUtils.UpdateNumber(userStamina, 0, UserData.Instance.Stamina, x => UserData.Instance.GetStaminaFormat((int)x));
+        DoTweenUtils.UpdateNumber(userStamina, 0, StaminaData.Instance.Stamina, x => StaminaData.Instance.GetStaminaFormat((int)x));
     }
 
     void PresentData()
     {
         userName.text = UserData.Instance.Username.LimitLength(11);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
-        userStamina.text = UserData.Instance.GetCurrentStaminaFormat();
+        userStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
     }
 
     public void OnLogoutButtonClick()
@@ -138,9 +138,9 @@ public class LobbyUI : MonoBehaviour
 
     private void Update()
     {
-        if (UserData.Instance.IsRecorveringStamina())
+        if (StaminaData.Instance.IsRecorveringStamina())
         {
-            TimeSpan remaining = TimeSpan.FromMilliseconds(UserData.Instance.TimeToHaveNewStamina());
+            TimeSpan remaining = TimeSpan.FromMilliseconds(StaminaData.Instance.TimeToHaveNewStamina());
             userStaminaCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
         }
         else

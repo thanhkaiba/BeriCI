@@ -35,12 +35,12 @@ namespace Piratera.GUI
 
         private void UpdateCurrentStamina()
         {
-            textCurrentStamina.text = UserData.Instance.GetStamina().ToString();
+            textCurrentStamina.text = StaminaData.Instance.Stamina.ToString();
         }
 
         public void OnStartFindGame()
         {
-            if (UserData.Instance.GetStamina() < priceStamina)
+            if (StaminaData.Instance.Stamina < priceStamina)
             {
                 GuiManager.Instance.ShowGuiWaiting(true);
                 NetworkController.Send(SFSAction.GET_STAMINA_PACK);
@@ -49,9 +49,9 @@ namespace Piratera.GUI
             {
 
                 Sequence s = DOTween.Sequence();
-                DoTweenUtils.UpdateNumber(textCurrentStamina, UserData.Instance.GetStamina(), (UserData.Instance.GetStamina() - priceStamina), x => UserData.Instance._GetStaminaFormat((int)x));
+                DoTweenUtils.UpdateNumber(textCurrentStamina, StaminaData.Instance.Stamina, (StaminaData.Instance.Stamina - priceStamina), x => StaminaData.Instance._GetStaminaFormat((int)x));
                 // UserData.Instance.MinusStamina(priceStamina);
-                lobby.OnStaminaChanged(UserData.Instance.GetStamina(), (UserData.Instance.GetStamina() - priceStamina));
+                lobby.OnStaminaChanged(StaminaData.Instance.Stamina, (StaminaData.Instance.Stamina - priceStamina));
                 s.AppendInterval(1.5f);
                 s.AppendCallback(() => fight.SetActive(false));
                 s.AppendCallback(() => find.SetActive(true));

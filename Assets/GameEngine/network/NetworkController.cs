@@ -186,6 +186,7 @@ public class NetworkController : MonoBehaviour
 		SFSUser user = (SFSUser)evt.Params["user"];
 
 		UserData.Instance.OnUserVariablesUpdate(user, changedVars);
+		StaminaData.Instance.OnUserVariablesUpdate(user);
 	}
 
 	public static bool IsInitialized
