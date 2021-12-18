@@ -22,7 +22,7 @@ public class LobbyUI : MonoBehaviour
     private Text userName;
 
     [SerializeField]
-    private Image userAvatar;
+    private UserAvatar userAvatar;
 
     [SerializeField]
     private Text userBeri;
@@ -44,9 +44,6 @@ public class LobbyUI : MonoBehaviour
     private Button buttonAdventure;
 
     [SerializeField]
-    private LoadAvatarUtils loadAvatarUtils;
-
-    [SerializeField]
     private List<Transform> nodeSailors;
 
     [SerializeField]
@@ -62,7 +59,7 @@ public class LobbyUI : MonoBehaviour
     void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
-        loadAvatarUtils.LoadAvatar(userAvatar, UserData.Instance.Avatar);
+        userAvatar.LoadAvatar(UserData.Instance.Avatar);
         PresentData();
         GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);

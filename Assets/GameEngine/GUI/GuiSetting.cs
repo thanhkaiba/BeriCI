@@ -18,7 +18,7 @@ namespace Piratera.GUI
         private Text textCreateAt;
 
         [SerializeField]
-        private Image userAvatar;
+        private UserAvatar userAvatar;
 
         [Header("Social")]
         [SerializeField]
@@ -45,17 +45,15 @@ namespace Piratera.GUI
         [SerializeField]
         private Image iconMusic;
 
-        private LoadAvatarUtils loadAvatar;
 
 
 
         protected override void Start()
         {
             base.Start();
-            loadAvatar = GetComponent<LoadAvatarUtils>();
             textName.text = UserData.Instance.Username;
             textUID.text = UserData.Instance.UID;
-            loadAvatar.LoadAvatar(userAvatar, UserData.Instance.Avatar);
+            userAvatar.LoadAvatar(UserData.Instance.Avatar);
 
             DateTime date = (new DateTime(1970, 1, 1)).AddMilliseconds(UserData.Instance.CreateAt);
             textCreateAt.text = date.ToString("MM/dd/yyyy");

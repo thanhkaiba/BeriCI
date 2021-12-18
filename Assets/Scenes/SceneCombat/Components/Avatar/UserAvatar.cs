@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,36 +7,50 @@ using UnityEngine.UI;
 
 public class UserAvatar : MonoBehaviour
 {
-	[SerializeField]
 	private Image userAvatar;
 
 	[SerializeField]
 	private Sprite defaultAvt;
-	public void LoadAvatar(string url)
+
+    private void Awake()
+    {
+		userAvatar = GetComponent<Image>();
+    }
+    public void LoadAvatar(string url)
 	{
-		StartCoroutine(DoLoadAvatar(url));
-	}
-	private IEnumerator DoLoadAvatar(string url)
-	{
-		if (string.IsNullOrEmpty(url)) SetDefaultAvatar();
-		else using (UnityWebRequest uwr = UnityWebRequestTexture.GetTexture(url))
+		
+		if (Uri.IsWellFormedUriString(url, UriKind.Absolute))
 		{
-			yield return uwr.SendWebRequest();
-
-			if (uwr.result != UnityWebRequest.Result.Success)
-			{
-				Debug.Log(uwr.error);
-				SetDefaultAvatar();
-			}
-			else
-			{
-				// Get downloaded asset bundle
-				Texture2D texture = DownloadHandlerTexture.GetContent(uwr);
-				userAvatar.sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0));
-
-			}
+			DoLoadAvatar(url);
+		} else if (string.IsNullOrEmpty(url))
+        {
+			SetDefaultAvatar();
+		} else
+        {
+			SailorConfig config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + url);
+			if (config_stats != null)
+            {
+				userAvatar.sprite = config_stats.avatar;
+            }
+			
 		}
+
 	}
+	private void DoLoadAvatar(string url)
+	{
+		Davinci.get()
+		 .load(url)
+		 .into(userAvatar)
+		 .withErrorAction(OnLoadImageError)
+		 .setFadeTime(0.2f)
+		 .setCached(true)
+		 .start();
+	}
+	private void OnLoadImageError(string err)
+	{
+		SetDefaultAvatar();
+	}
+
 	private void SetDefaultAvatar()
 	{
 		userAvatar.sprite = defaultAvt;
