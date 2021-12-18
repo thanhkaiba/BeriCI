@@ -41,7 +41,10 @@ namespace Piratera.GUI
         public void OnStartFindGame()
         {
             if (UserData.Instance.GetStamina() < priceStamina)
-                GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
+            {
+                GuiManager.Instance.ShowGuiWaiting(true);
+                NetworkController.Send(SFSAction.GET_STAMINA_PACK);
+            }
             else
             {
 

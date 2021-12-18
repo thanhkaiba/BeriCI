@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Piratera.Utils;
 using Sfs2X.Entities;
 using UnityEngine;
 
@@ -131,11 +132,11 @@ public class UserData : Singleton<UserData>
 
     public string GetStaminaFormat(int stamina)
     {
-        return $"{stamina}/{StaminaConfig.max_stamina}";
+        return $"{StringUtils.ShortNumber(stamina)}/{StaminaConfig.max_stamina}";
     }
     public string _GetStaminaFormat(int stamina)
     {
-        return $"{stamina}";
+        return $"{StringUtils.ShortNumber(stamina)}";
     }
     public int GetStamina()
     {
