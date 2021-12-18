@@ -79,15 +79,17 @@ public class Mealodo : CombatSailor
             target.transform.position.z
         );
         desPos.z -= 0.1f;
+
+        var x = damage / 2;
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(.3f);
         seq.AppendCallback(() =>
         {
             Sequence seq2 = DOTween.Sequence();
-            seq2.AppendCallback(() => target.TakeDamage(damage / 2));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 2 }));
             seq2.AppendInterval(.45f);
-            seq2.AppendCallback(() => target.TakeDamage(damage / 2));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 2 }));
         });
         seq.AppendInterval(.6f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));

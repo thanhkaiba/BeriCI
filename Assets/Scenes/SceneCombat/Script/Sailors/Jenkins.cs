@@ -92,19 +92,19 @@ public class Jenkins : CombatSailor
             Sequence seq2 = DOTween.Sequence();
 
             seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5 }));
             seq2.AppendInterval(.22f);
             seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5 }));
             seq2.AppendInterval(.22f);
             seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5 }));
             seq2.AppendInterval(.22f);
             seq2.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(4));
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5 }));
             seq2.AppendInterval(.22f);
 
-            seq2.AppendCallback(() => target.TakeDamage(damage / 5));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5 }));
             seq2.AppendInterval(.22f);
 
         });

@@ -85,6 +85,7 @@ namespace Piratera.Utils
         {
 
             DOTween.Kill(nodeText);
+            nodeText.transform.localScale = Vector3.one;
 
             Sequence s = DOTween.Sequence();
             s.Insert(0, DOTween.To(() => oldValue, x =>
