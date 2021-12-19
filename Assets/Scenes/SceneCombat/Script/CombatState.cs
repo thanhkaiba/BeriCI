@@ -98,14 +98,14 @@ public class CombatState : MonoBehaviour
         //CreateCombatSailor("QChi", new CombatPosition(1, 1), Team.A);
         //CreateCombatSailor("QChi", new CombatPosition(2, 0), Team.A);
         //CreateCombatSailor("Galdalf", new CombatPosition(1, 2), Team.A);
-        CreateCombatSailor("Sojeph", new CombatPosition(1, 0), Team.A);
+       /* CreateCombatSailor("Sojeph", new CombatPosition(1, 0), Team.A);
         CreateCombatSailor("Sojeph", new CombatPosition(1, 2), Team.A);
         CreateCombatSailor("Sojeph", new CombatPosition(1, 1), Team.A);
         CreateCombatSailor("Sojeph", new CombatPosition(2, 0), Team.A);
         CreateCombatSailor("Sojeph", new CombatPosition(2, 2), Team.A);
         CreateCombatSailor("Sojeph", new CombatPosition(0, 0), Team.A);
         CreateCombatSailor("Sojeph", new CombatPosition(0, 1), Team.A);
-        CreateCombatSailor("Sojeph", new CombatPosition(0, 2), Team.A);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 2), Team.A);*/
         //CreateCombatSailor("Salvatafo", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Salvatafo", new CombatPosition(0, 0), Team.A);
     }
@@ -115,14 +115,14 @@ public class CombatState : MonoBehaviour
         //CreateCombatSailor("QChi", new CombatPosition(1, 1), Team.A);
         //CreateCombatSailor("QChi", new CombatPosition(2, 0), Team.A);
         //CreateCombatSailor("Galdalf", new CombatPosition(1, 2), Team.A);
-        CreateCombatSailor("Sojeph", new CombatPosition(1, 0), Team.B);
+        /*CreateCombatSailor("Sojeph", new CombatPosition(1, 0), Team.B);
         CreateCombatSailor("Sojeph", new CombatPosition(1, 2), Team.B);
         CreateCombatSailor("Sojeph", new CombatPosition(1, 1), Team.B);
         CreateCombatSailor("Sojeph", new CombatPosition(2, 0), Team.B);
         CreateCombatSailor("Sojeph", new CombatPosition(2, 2), Team.B);
         CreateCombatSailor("Sojeph", new CombatPosition(0, 0), Team.B);
         CreateCombatSailor("Sojeph", new CombatPosition(0, 1), Team.B);
-        CreateCombatSailor("Sojeph", new CombatPosition(0, 2), Team.B);
+        CreateCombatSailor("Sojeph", new CombatPosition(0, 2), Team.B);*/
         // CreateCombatSailor("Scrub", new CombatPosition(1, 2), Team.B);
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 2), Team.B);
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.B);

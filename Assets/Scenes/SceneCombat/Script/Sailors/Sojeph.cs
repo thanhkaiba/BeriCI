@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,8 +32,10 @@ public class Sojeph : CombatSailor
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.8f);
+ 
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundAttackSailor(13);
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
@@ -100,6 +103,7 @@ public class Sojeph : CombatSailor
     }
     public void StartEffHealth()
     {
+        SoundMgr.PlaySoundSkillSailor(14);
         if (healthGain < 0)
             return;
         Sequence seq = DOTween.Sequence();
@@ -108,6 +112,7 @@ public class Sojeph : CombatSailor
             Vector3 pos = targetHealPos;
             pos.y += 4f;
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
+    
             healthTarget.GainHealth(healthGain);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));
@@ -127,6 +132,7 @@ public class Sojeph : CombatSailor
         seq.AppendInterval(time);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundAttackSailor(13);
             mainTarget.LoseHealth(new Damage() { physics = (dame) });
         });
     }

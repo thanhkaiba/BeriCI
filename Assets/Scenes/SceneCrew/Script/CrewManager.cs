@@ -71,11 +71,11 @@ public class CrewManager : MonoBehaviour
             }             
         }
         quality.fillAmount = (float)model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
-        texts[3].text = model.config_stats.GetPower(model.level, model.quality).ToString();
-        texts[4].text = model.config_stats.GetHealth(model.level, model.quality).ToString();
-        texts[5].text = model.config_stats.GetSpeed(model.level, model.quality).ToString();
-        texts[6].text = model.config_stats.GetArmor().ToString();
-        texts[7].text = model.config_stats.GetMagicResist().ToString();
+        texts[3].text = Mathf.Round(model.config_stats.GetPower(model.level, model.quality)).ToString();
+        texts[4].text = Mathf.Round(model.config_stats.GetHealth(model.level, model.quality)).ToString();
+        texts[5].text = Mathf.Round(model.config_stats.GetSpeed(model.level, model.quality)).ToString();
+        texts[6].text = Mathf.Round(model.config_stats.GetArmor()).ToString();
+        texts[7].text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
         if (sailor != null) Destroy(sailor);
         sailor = Instantiate(model.config_stats.model, sailorPos);
         rank.sprite = Resources.Load<Sprite>("Icons/IconRank/" + model.config_stats.rank.ToString());

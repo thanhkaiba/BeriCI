@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,7 @@ public class Geechoso : CombatSailor
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
+            SoundMgr.PlaySoundAttackSailor(12);
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
         });
         return 0.6f;
@@ -86,7 +88,7 @@ public class Geechoso : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-
+            SoundMgr.PlaySoundAttackSailor(12);
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, time);
         });
         seq.AppendInterval(time);

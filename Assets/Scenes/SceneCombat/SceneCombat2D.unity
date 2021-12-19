@@ -3420,16 +3420,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TooltipSailorInfo
       objectReference: {fileID: 0}
-    - target: {fileID: 8650428928639282743, guid: 942fd14179b01464a82c574fab41f53a,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8650428928639282743, guid: 942fd14179b01464a82c574fab41f53a,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 942fd14179b01464a82c574fab41f53a, type: 3}
 --- !u!1 &1739183714

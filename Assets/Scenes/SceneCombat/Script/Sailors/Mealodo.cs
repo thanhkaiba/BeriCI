@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,6 +29,9 @@ public class Mealodo : CombatSailor
             target.transform.position.y,
             target.transform.position.z - 0.1f
         );
+        Sequence seq1 = DOTween.Sequence();
+        seq1.AppendInterval(0.4f);
+        seq1.AppendCallback(() => SoundMgr.PlaySoundAttackSailor(11));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
@@ -79,7 +83,7 @@ public class Mealodo : CombatSailor
             target.transform.position.z
         );
         desPos.z -= 0.1f;
-
+        SoundMgr.PlaySoundSkillSailor(12);
         var x = damage / 2;
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
