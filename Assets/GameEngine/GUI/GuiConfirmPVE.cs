@@ -57,6 +57,7 @@ namespace Piratera.GUI
                 s.AppendCallback(() => find.SetActive(true));
                 s.AppendInterval(1.5f);
                 s.AppendCallback(() => NetworkController.Send(SFSAction.PVE_PLAY));
+                s.SetLink(gameObject).SetTarget(transform);
 
             }
 
@@ -75,22 +76,22 @@ namespace Piratera.GUI
             canvasGroup.DOFade(1, 0.2f);
             s.AppendCallback(() => canvasGroup.interactable = true);
 
-            background.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-            background.DOScale(new Vector3(1f, 1f, 1f), 0.4f).SetEase(Ease.OutBack);
+            background.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+            background.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack);
 
             var fog = GetComponent<HaveFog>();
-            if (fog) fog.FadeIn(0.4f);
+            if (fog) fog.FadeIn(0.3f);
         }
         private void ClosePopup()
         {
-            background.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.2f).SetEase(Ease.OutSine);
+            background.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.1f).SetEase(Ease.OutSine);
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
-            s.Append(canvasGroup.DOFade(0, 0.2f));
+            s.Append(canvasGroup.DOFade(0, 0.1f));
             s.AppendCallback(DestroySelf);
 
             var fog = GetComponent<HaveFog>();
-            if (fog) fog.FadeOut(0.2f);
+            if (fog) fog.FadeOut(0.1f);
         }
     }
 }

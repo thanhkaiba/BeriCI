@@ -37,10 +37,9 @@ public class Helti : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-      
+        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
         seq.AppendInterval(0.25f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        SoundMgr.PlaySoundAttackSailor(2);
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.5f;
@@ -104,18 +103,12 @@ public class Helti : CombatSailor
         //var listHighlight = new List<CombatSailor>() { this };
         //listHighlight.AddRange(listTargets);
         CombatState.Instance.HighlightSailor2Step(this, listTargets, 0.45f, 2.5f);
+
         Sequence seq = DOTween.Sequence();
-
+        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundSkillSailor(2)));
         seq.AppendInterval(0.15f);
-
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.2f);
-        seq.AppendCallback(() =>
-        {
-            SoundMgr.PlaySoundSkillSailor(2);
-        });
         seq.AppendInterval(0.3f);
-
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)

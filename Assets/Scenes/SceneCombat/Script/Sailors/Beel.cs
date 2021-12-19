@@ -104,7 +104,7 @@ public class Beel : CombatSailor
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
-            around_target.ForEach(s => s.TakeDamage(0, magic_damage));
+            around_target.ForEach(s => s.LoseHealth(new Damage() { magic = magic_damage }));
         });
 
         seq.AppendInterval(0.3f);

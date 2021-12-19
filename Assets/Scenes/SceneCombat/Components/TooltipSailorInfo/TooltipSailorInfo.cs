@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class TooltipSailorInfo : MonoBehaviour
 {
     private Transform follow;
-    private CombatSailor sailor;
+    private CombatStats stats;
     private Sailor sailorPrepe;
     private SailorModel model;
     public static TooltipSailorInfo Instance;
@@ -65,23 +65,24 @@ public class TooltipSailorInfo : MonoBehaviour
             transform.position = pos;
             if (SceneManager.GetActiveScene().name != "SceneCombat2D")
                 return;
-            textPower.text = ((int)sailor.cs.Power).ToString();
-            textSpeed.text = ((int)sailor.cs.Speed).ToString();
-            textArmor.text = ((int)sailor.cs.Armor).ToString();
-            textMagicResist.text = ((int)sailor.cs.MagicResist).ToString();
+            textPower.text = ((int)stats.Power).ToString();
+            textSpeed.text = ((int)stats.Speed).ToString();
+            textArmor.text = ((int)stats.Armor).ToString();
+            textMagicResist.text = ((int)stats.MagicResist).ToString();
 
-            healthSlider.value = sailor.cs.CurHealth / sailor.cs.MaxHealth;
-            healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)sailor.cs.CurHealth).ToString() + "/" + ((int)sailor.cs.MaxHealth).ToString();
-            if (sailor.cs.MaxFury == 0) furySlider.value = 1;
-            else furySlider.value = (float)sailor.cs.Fury / (float)sailor.cs.MaxFury;
-            furySlider.transform.Find("Text").GetComponent<Text>().text = (sailor.cs.Fury).ToString() + "/" + (sailor.cs.MaxFury).ToString();
+            healthSlider.value = stats.CurHealth / stats.MaxHealth;
+            healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)stats.CurHealth).ToString() + "/" + ((int)stats.MaxHealth).ToString();
+            if (stats.MaxFury == 0) furySlider.value = 1;
+            else furySlider.value = (float)stats.Fury / (float)stats.MaxFury;
+            furySlider.transform.Find("Text").GetComponent<Text>().text = (stats.Fury).ToString() + "/" + (stats.MaxFury).ToString();
         }
     }
     public void ShowTooltip(GameObject sailorGO, bool clickFromUI = false)
     {
         if (SceneManager.GetActiveScene().name == "SceneCombat2D")
         {
-           sailor = sailorGO.GetComponent<CombatSailor>();
+            var sailor = sailorGO.GetComponent<CombatSailor>();
+            stats = sailor.cs;
             model = sailor.Model;
         }
         else
