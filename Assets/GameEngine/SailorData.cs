@@ -113,6 +113,7 @@ public class CombatStats
             BaseMagicResist += item.MagicResist;
             Speed += item.Speed;
             Crit += item.Crit;
+            Fury += item.Fury;
             if (item.class_buff != SailorClass.NONE) types.Add(item.class_buff);
         });
     }
