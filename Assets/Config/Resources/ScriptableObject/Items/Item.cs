@@ -4,63 +4,85 @@ using UnityEngine;
 
 public enum ItemPosition
 {
-    HAT,
-    NECKLACE,
-    ARMOR,
     WEAPON,
-    BELT,
+    COAT,
     SHOES,
+    ACCESSORY,
+}
+public enum ItemColor
+{
+    WHITE,
+    GREEN,
+    BLUE,
+    PURPLE,
+    ORANGE,
 }
 
 [CreateAssetMenu(fileName = "New Item", menuName = "config/Item")]
 public class Item : ScriptableObjectPro
 {
-    public string item_name = "";
-
-    public float rank = 0;
-    public ItemPosition pos = ItemPosition.NECKLACE;
-    public float power_base = 50;
-    public float power_step = 0;
-
-    public float health_base = 0;
-    public float health_step = 0;
-
-    public float speed_base = 0;
-    public float speed_step = 0;
-
-    public float crit_base = 0;
-    public float crit_step = 0;
-
-    public float armor_base = 0;
-    public float armor_step = 0;
-    public float magic_resist_base = 0;
-    public float magic_resist_step = 0;
+    [SerializeField]
+    private string item_name = "";
+    [SerializeField]
+    private ItemColor color = ItemColor.WHITE;
+    [SerializeField]
+    private ItemPosition pos = ItemPosition.ACCESSORY;
+    [SerializeField]
+    private float power = 50;
+    [SerializeField]
+    private float health = 0;
+    [SerializeField]
+    private float speed = 0;
+    [SerializeField]
+    private float crit = 0;
+    [SerializeField]
+    private float armor = 0;
+    [SerializeField]
+    private float magic_resist = 0;
+    [SerializeField]
+    private int fury = 0;
 
     public SailorClass class_buff = SailorClass.CYBORG;
 
     public int quality = 0;
+    public string Name
+    {
+        get { return item_name; }
+    }
+    public ItemColor Color
+    {
+        get { return color; }
+    }
+    public ItemPosition Position
+    {
+        get { return pos; }
+    }
     public float Power
     {
-        get { return power_base + quality * power_step; }
+        get { return power; }
     }
     public float Health
     {
-        get { return health_base + quality * health_step; }
+        get { return health; }
     }
     public float Speed
     {
-        get { return speed_base + quality * speed_step; }
+        get { return speed; }
     }
     public float Crit
     {
-        get { return crit_base + quality * crit_step; }
+        get { return crit; }
     }
     public float Armor
     {
-        get { return armor_base + quality * armor_step; }
+        get { return armor; }
     }
     public float MagicResist
     {
-        get { return magic_resist_base + quality * magic_resist_step; }
+        get { return magic_resist; }
+    }
+    public int Fury
+    {
+        get { return fury; }
     }
 }

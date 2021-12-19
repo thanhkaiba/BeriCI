@@ -13,19 +13,14 @@ MonoBehaviour:
   m_Name: DemoItem
   m_EditorClassIdentifier: 
   item_name: Fun Item
-  rank: 0
-  pos: 1
-  power_base: 10
-  power_step: 0
-  health_base: 0
-  health_step: 0
-  speed_base: 0
-  speed_step: 0
-  crit_base: 0
-  crit_step: 0
-  armor_base: 0
-  armor_step: 0
-  magic_resist_base: 0
-  magic_resist_step: 0
-  type_buff: 5
+  color: 0
+  pos: 3
+  power: 50
+  health: 0
+  speed: 0
+  crit: 0
+  armor: 0
+  magic_resist: 0
+  fury: 0
+  class_buff: 0
   quality: 20
