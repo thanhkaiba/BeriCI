@@ -52,8 +52,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         remainTime = maxTime = data.countdown;
         if (data.countdown > 0)
         {
-            userNameA.text = data.YourName;
-            userNameB.text = data.OpponentName;
+            userNameA.text = data.YourName.LimitLength(30);
+            userNameB.text = data.OpponentName.LimitLength(30);
 
             avatarA.LoadAvatar(data.YourAvatar);
             avatarB.LoadAvatar(data.OpponentAvatar);

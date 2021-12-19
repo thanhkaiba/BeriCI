@@ -41,7 +41,9 @@ public class GameUtils : UnityEngine.Object
         config_stats = model.config_stats;
         if (config_stats != null && config_stats.model != null)
         {
-            return Instantiate(config_stats.model, parent);
+            GameObject sailor = Instantiate(config_stats.model, parent);
+            sailor.transform.localPosition = Vector3.zero;
+            return sailor;
 
         }
         return null;
