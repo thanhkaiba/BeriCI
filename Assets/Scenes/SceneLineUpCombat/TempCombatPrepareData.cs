@@ -17,17 +17,6 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 	private FightingLine fgl1 = new FightingLine();
 	public byte countdown;
 
-
-	protected override void OnAwake()
-	{
-		GameEvent.PrepareSquadChanged.AddListener(OnUpdateSquadA);
-	}
-	private void OnUpdateSquadA()
-	{
-		NetworkController.Send(SFSAction.TEAM_COMMIT, fgl0.ToSFSObject());
-	}
-
-
 	public string YourName { get
 		{
 			if (yourTeamIndex == 0)

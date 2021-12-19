@@ -16,6 +16,7 @@ public class UserInfoPropertiesKey
     public const string AVATAR = "avatar";
     public const string TIME_BUY_STAMINA_TODAY = "time_buy_to_day";
     public const string NUMBER_OF_POSITIONS = "number_of_positions";
+    public const string CREATE_AT = "createdAt";
 }
 
 public class UserData : Singleton<UserData>
@@ -62,7 +63,7 @@ public class UserData : Singleton<UserData>
         Exp = (long)user.GetVariable(UserInfoPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
-        CreateAt = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        CreateAt = (long)user.GetVariable(UserInfoPropertiesKey.CREATE_AT).GetDoubleValue();
         GameEvent.UserDataChanged.Invoke(changedVars);
 
         long oldBeri = Beri;
