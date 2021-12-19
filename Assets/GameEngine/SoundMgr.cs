@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Piratera.Sound
 {
@@ -253,7 +255,5 @@ namespace Piratera.Sound
 				}
 			}
         }
-
-		
 	}
 }

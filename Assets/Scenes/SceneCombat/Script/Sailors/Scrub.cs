@@ -30,9 +30,9 @@ public class Scrub : CombatSailor
             target.transform.position.z
         );
         Sequence seq = DOTween.Sequence();
+        StartCoroutine(GameUtils.WaitAndDo(0.1f, () => SoundMgr.PlaySoundAttackSailor(9)));
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        SoundMgr.PlaySoundAttackSailor(9);
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.4f;
@@ -96,14 +96,14 @@ public class Scrub : CombatSailor
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.35f);
+        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
         seq.AppendCallback(() =>
         {
-            SoundMgr.PlaySoundSkillSailor(10);
             target.LoseHealth(new Damage() { physics = _params[0] });
             if (behind_target) behind_target.LoseHealth(new Damage() { physics = _params[1] });
         });
         seq.AppendInterval(0.45f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 1.5f;
+        return 2.0f;
     }
 }

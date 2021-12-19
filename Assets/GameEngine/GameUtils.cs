@@ -163,6 +163,10 @@ public class GameUtils : UnityEngine.Object
         string description = EnumHelper.GetDescription(errorCode);
         GuiManager.Instance.ShowPopupNotification(description);
     }
-
+    public static IEnumerator WaitAndDo(float time, Action action)
+    {
+        yield return new WaitForSeconds(time);
+        action();
+    }
 }
  

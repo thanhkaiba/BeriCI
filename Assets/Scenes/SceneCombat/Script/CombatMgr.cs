@@ -24,7 +24,8 @@ public class CombatMgr : MonoBehaviour
 {
     public CombatState combatState;
     public UIIngameMgr UIMgr;
-    public int actionCount = 0;
+    private int actionCount = 0;
+    public int actionCountShow = 0;
     public static CombatMgr Instance;
     private bool serverGame = false;
     private ModeID modeId = ModeID.Test;
@@ -42,6 +43,7 @@ public class CombatMgr : MonoBehaviour
     public void PreparingGame()
     {
         actionCount = 0;
+        actionCountShow = 0;
         if (TempCombatData.Instance.waitForAServerGame)
         {
             combatState.CreateTeamFromServer();
@@ -63,7 +65,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.UpdateTotalHealth();
         UIMgr.InitListSailorInQueue(combatState.GetQueueNextActionSailor());
         UIMgr.ShowClassBonus(combatState.classBonusA, combatState.classBonusB);
-        UIMgr.ShowActionCount(actionCount);
+        UIMgr.ShowActionCount(actionCountShow);
     }
     IEnumerator StartGame()
     {
@@ -96,7 +98,11 @@ public class CombatMgr : MonoBehaviour
         int speedAdd = CalculateSpeedAddThisLoop();
         AddCurSpeedAllSailor(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        UIMgr.ShowActionCount(actionCount);
+        if (actionProcess.type == CombatAcionType.BaseAttack || actionProcess.type == CombatAcionType.UseSkill)
+        {
+            actionCountShow++;
+        }
+        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCountShow)));
 
         switch (actionProcess.type)
         {
@@ -164,8 +170,9 @@ public class CombatMgr : MonoBehaviour
         //Debug.Log(" ----> speedAdd: " + speedAdd);
         CombatSailor actionChar = AddCurSpeedAllSailor(speedAdd);
         actionCount++;
+        actionCountShow++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCount)));
+        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCountShow)));
         Debug.Log(
             " ----> combat action character: " + actionChar.Model.config_stats.root_name
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")
