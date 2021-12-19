@@ -57,6 +57,7 @@ namespace Piratera.GUI
                 s.AppendCallback(() => find.SetActive(true));
                 s.AppendInterval(1.5f);
                 s.AppendCallback(() => NetworkController.Send(SFSAction.PVE_PLAY));
+                s.SetLink(gameObject).SetTarget(transform);
 
             }
 
