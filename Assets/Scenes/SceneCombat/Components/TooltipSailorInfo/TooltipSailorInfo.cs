@@ -93,10 +93,10 @@ public class TooltipSailorInfo : MonoBehaviour
             furySlider.value = 1;
             healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)model.config_stats.health_base).ToString() + "/" + ((int)model.config_stats.health_base).ToString();
             healthSlider.value = 1;
-            textPower.text = ((int)model.config_stats.power_base).ToString();
-            textSpeed.text = ((int)model.config_stats.speed_base).ToString();
-            textArmor.text = ((int)model.config_stats.armor).ToString();
-            textMagicResist.text = ((int)model.config_stats.magic_resist).ToString();
+            textPower.text = model.config_stats.GetPower(model.level , model.quality).ToString();
+            textSpeed.text = model.config_stats.GetSpeed(model.level, model.quality).ToString();
+            textArmor.text = model.config_stats.GetArmor().ToString();
+            textMagicResist.text = model.config_stats.GetMagicResist().ToString();
 
         }
         follow = sailorGO.transform.Find("nodeBar");
