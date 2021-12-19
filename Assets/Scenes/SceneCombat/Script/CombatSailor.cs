@@ -40,42 +40,9 @@ public class CombatSailor : Sailor
     }
     public void InitCombatData(CombatPosition p, Team t)
     {
-        int level = Model.level;
-        int quality = Model.quality;
-        cs = new CombatStats()
-        {
-            BasePower = Model.config_stats.GetPower(level, quality),
-            MaxHealth = Model.config_stats.GetHealth(level, quality),
-            CurHealth = Model.config_stats.GetHealth(level, quality),
-            BaseArmor = Model.config_stats.GetArmor(),
-            BaseMagicResist = Model.config_stats.GetMagicResist(),
-            Speed = Model.config_stats.GetSpeed(level, quality),
-            CurrentSpeed = 0,
-            Crit = Model.config_stats.GetCrit(),
-            CritDamage = GlobalConfigs.Combat.base_crit_damage,
-            BaseFury = Model.config_stats.max_fury,
-            Fury = Model.config_stats.start_fury,
-            position = p,
-            team = t,
-        };
-        foreach (SailorClass type in Model.config_stats.classes)
-        {
-            cs.types.Add(type);
-        }
-
-        if (Model.items != null) Model.items.ForEach(item =>
-        {
-            cs.BasePower += item.Power;
-            cs.MaxHealth += item.Health;
-            cs.BaseArmor += item.Armor;
-            cs.BaseMagicResist += item.MagicResist;
-            cs.Speed += item.Speed;
-            cs.Crit += item.Crit;
-            if (item.class_buff != SailorClass.NONE) cs.types.Add(item.class_buff);
-        });
-
-        Model.level = level;
-        Model.quality = quality;
+        cs = new CombatStats(Model);
+        cs.position = p;
+        cs.team = t;
 
         //Debug.Log("-----------------------------------");
         //Debug.Log(" > Model.id" + Model.id);

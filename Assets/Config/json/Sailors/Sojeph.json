@@ -8,7 +8,9 @@
   "magic_resist": 10.0,
   "crit": 0.0,
   "attack_type": 0,
-  "classes": [],
+  "classes": [
+    10
+  ],
   "start_fury": 0,
   "max_fury": 10,
   "skill_params": [

@@ -81,7 +81,7 @@ public class TooltipSailorInfo : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "SceneCombat2D")
         {
-           sailor = sailorGO.GetComponent<CombatSailor>();
+            sailor = sailorGO.GetComponent<CombatSailor>();
             model = sailor.Model;
         }
         else

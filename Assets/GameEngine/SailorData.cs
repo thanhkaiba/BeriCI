@@ -84,6 +84,38 @@ public class CombatPosition
 
 public class CombatStats
 {
+    public CombatStats(SailorModel model)
+    {
+        int level = model.level;
+        int quality = model.quality;
+        BasePower = model.config_stats.GetPower(level, quality);
+        MaxHealth = model.config_stats.GetHealth(level, quality);
+        CurHealth = model.config_stats.GetHealth(level, quality);
+        BaseArmor = model.config_stats.GetArmor();
+        BaseMagicResist = model.config_stats.GetMagicResist();
+        Speed = model.config_stats.GetSpeed(level, quality);
+        CurrentSpeed = 0;
+        Crit = model.config_stats.GetCrit();
+        CritDamage = GlobalConfigs.Combat.base_crit_damage;
+        BaseFury = model.config_stats.max_fury;
+        Fury = model.config_stats.start_fury;
+
+        foreach (SailorClass type in model.config_stats.classes)
+        {
+            types.Add(type);
+        }
+
+        if (model.items != null) model.items.ForEach(item =>
+        {
+            BasePower += item.Power;
+            MaxHealth += item.Health;
+            BaseArmor += item.Armor;
+            BaseMagicResist += item.MagicResist;
+            Speed += item.Speed;
+            Crit += item.Crit;
+            if (item.class_buff != SailorClass.NONE) types.Add(item.class_buff);
+        });
+    }
     public float BasePower;
     public float Power
     {

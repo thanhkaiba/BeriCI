@@ -787,7 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combatState: {fileID: 1474338612}
   UIMgr: {fileID: 0}
-  actionCount: 0
+  actionCountShow: 0
   yourTeamIndex: 0
 --- !u!4 &483448683
 Transform:
