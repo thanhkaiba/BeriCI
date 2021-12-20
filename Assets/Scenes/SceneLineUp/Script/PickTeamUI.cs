@@ -6,6 +6,7 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 using Piratera.GUI;
 using Sfs2X.Entities.Data;
+using Piratera.Network;
 
 public class PickTeamUI : MonoBehaviour
 {

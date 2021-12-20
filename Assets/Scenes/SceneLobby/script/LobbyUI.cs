@@ -10,6 +10,7 @@ using Piratera.Utils;
 using System.Collections.Generic;
 using UnityEngine.Events;
 using Piratera.Sound;
+using Piratera.Network;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -55,7 +56,18 @@ public class LobbyUI : MonoBehaviour
     [SerializeField]
     private Transform background;
 
+    [SerializeField]
+    private Button buttonCheat;
+
     // Start is called before the first frame update
+    private void Awake()
+    {
+#if PIRATERA_DEV
+        buttonCheat.gameObject.SetActive(true);
+#else
+        buttonCheat.gameObject.SetActive(false);
+#endif
+    }
     void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
@@ -183,6 +195,8 @@ public class LobbyUI : MonoBehaviour
     }
     public void ShowGuiCheat()
     {
+#if PIRATERA_DEV
         GuiManager.Instance.AddGui<PopupCheatGame>("Cheat/PopupCheat");
+#endif
     }
 }

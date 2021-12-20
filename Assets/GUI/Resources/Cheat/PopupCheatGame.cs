@@ -4,8 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
+#if PIRATERA_DEV
 namespace Piratera.GUI
 {
+
     public class PopupCheatGame : BaseGui
     {
         [SerializeField]
@@ -92,8 +94,5 @@ namespace Piratera.GUI
         }
 
     }
-
-
 }
-
-
+#endif

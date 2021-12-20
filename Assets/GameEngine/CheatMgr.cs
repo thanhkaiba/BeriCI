@@ -1,5 +1,6 @@
 ﻿
 
+using Piratera.Network;
 using Sfs2X.Entities.Data;
 
 namespace Piratera.Cheat

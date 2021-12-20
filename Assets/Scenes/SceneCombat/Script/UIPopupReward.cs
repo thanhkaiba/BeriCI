@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using Piratera.Sound;
+using Piratera.Network;
 
 public class UIPopupReward : MonoBehaviour
 {

@@ -273,7 +273,7 @@ public class Davinci : MonoBehaviour
             Uri uri = new Uri(url);
             this.url = uri.AbsoluteUri;
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             error("Url is not correct.");
             return;

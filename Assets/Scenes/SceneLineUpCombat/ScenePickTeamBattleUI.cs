@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.GUI;
+using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
