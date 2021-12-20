@@ -552,7 +552,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!1 &217193132
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,8 +864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1.9999943, y: 40}
+  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
+  m_SizeDelta: {x: -2, y: 0.000015259}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &518252576
 MonoBehaviour:
@@ -889,7 +889,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8ec3b3fa00e5aa34c81ccf5c7c7c162b, type: 3}
-    m_FontSize: 68
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -1098,6 +1098,7 @@ MonoBehaviour:
   loginButton: {fileID: 962814694}
   signupButton: {fileID: 1966144556}
   errorText: {fileID: 937110912}
+  loginTypeToggle: {fileID: 43850231}
   signupLink: https://piratera.io/
 --- !u!4 &671366201
 Transform:
@@ -2294,8 +2295,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -20.000004, y: 40}
+  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
+  m_SizeDelta: {x: -20, y: -0.000022888}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1625113415
 MonoBehaviour:
@@ -2319,7 +2320,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8ec3b3fa00e5aa34c81ccf5c7c7c162b, type: 3}
-    m_FontSize: 68
+    m_FontSize: 45
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

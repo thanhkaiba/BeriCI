@@ -179,6 +179,7 @@ namespace Piratera.Network
 
 		protected static void OnConnectionLost(BaseEvent evt)
 		{
+			Debug.Log("Disconnect");
 			reset();
 			GuiManager.Instance.ShowGuiWaiting(false);
 			if (shuttingDown == true)
