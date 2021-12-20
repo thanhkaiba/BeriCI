@@ -127,7 +127,7 @@ public class NetworkController : MonoBehaviour
 	public static NetworkController Instance;
 
 	private static List<NetworkActionListenerDelegate> serverActionListeners = new List<NetworkActionListenerDelegate>();
-	private static readonly string Host = "34.101.198.96";
+	private static readonly string Host = "dev-game1.piratera.local";
 
 	private static readonly int TcpPort = 8972;
 
