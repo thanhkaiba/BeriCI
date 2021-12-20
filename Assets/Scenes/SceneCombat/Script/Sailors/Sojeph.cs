@@ -40,7 +40,7 @@ public class Sojeph : CombatSailor
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
         });
-        return 0.8f;
+        return 0.9f;
     }
 
     public override void SetFaceDirection()
@@ -99,7 +99,7 @@ public class Sojeph : CombatSailor
         startPos = gun2.GetWorldPosition(modelObject.transform);
         targetPos = mainTarget.transform.position;
         targetPos.y += 2;
-        return 2;
+        return 2.5f;
     }
     public void StartEffHealth()
     {

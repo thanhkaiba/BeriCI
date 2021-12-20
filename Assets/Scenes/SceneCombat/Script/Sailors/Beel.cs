@@ -17,28 +17,24 @@ public class Beel : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
+/*        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
         relativePos.y += 4.5f;
-        relativePos.x *= modelObject.transform.localScale.x;
+        relativePos.x *= modelObject.transform.localScale.x;*/
         TriggerAnimation("Attack");
 
         Vector3 targetPos = target.transform.position;
-        targetPos.y += 3.4f;
+        targetPos.y += 2;
+        targetPos.x -= 2;
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.68f);
+        seq.AppendInterval(1f);
         seq.AppendCallback(() =>
         {
-            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
-            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            //startPos.y -= 0.4f;
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
-
-            var go = GameEffMgr.Instance.ShowSmokeSide(startPos, startPos.x < targetPos.x);
-            go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
+            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
+            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);      
+            GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, targetPos, 0, .4f, .7f, .7f);
         });
-        seq.AppendInterval(0.1f);
-        return 0.9f;
+        return 1.4f;
     }
 
     public override void SetFaceDirection()
@@ -61,53 +57,45 @@ public class Beel : CombatSailor
         float magic_damage = cs.Power * Model.config_stats.skill_params[0];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Range(this, enermy);
-        List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, true);
 
-        return RunAnimation(target, around_target, magic_damage);
+
+        return RunAnimation(enermy, magic_damage);
     }
-    float RunAnimation(CombatSailor target, List<CombatSailor> around_target, float magic_damage)
+
+    public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        var listTargets = CombatState.Instance.GetSailors(targets);
+        float loseHealth = _params[0];
+        return RunAnimation(listTargets, loseHealth);
+
+    }
+    float RunAnimation(List<CombatSailor> targets, float magic_damage)
+    {
+        base.ProcessSkill();
         TriggerAnimation("Skill");
 
-        CombatEvents.Instance.highlightTarget.Invoke(target);
-        Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, target.transform.position);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, target.transform.position, d - 8.0f);
-        desPos.y += 1;
+        CombatState.Instance.HighlightListSailor(targets, 2.2f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.6f);
         seq.AppendCallback(() =>
         {
-            Debug.LogError(around_target.Count);
-            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
-            //Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-           // startPos.y -= 0.0f;
-            Vector3 targetPos = target.transform.position;
-            targetPos.y += 3.4f;
-            for (int i = 0; i < around_target.Count; i++)
-            {
-               // Spine.Bone bone = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("fx_ball_1");
-               // Vector3 startPos = bone.GetWorldPosition(modelObject.transform);
-                Vector3 endPos = around_target[i].transform.position;
-                endPos.y += 2;
-                GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", transform.position, endPos, 0, .4f, 1, 1f);
-            }
-            //GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.4f);
+            Spine.Bone ball = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
+            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(-30,0,0), new Vector3(30, 0, 0), 0, 1, 10, 1);
         });
-        seq.AppendInterval(0.4f);
-        seq.AppendCallback(() => {
-            Vector3 explorePos = target.transform.position;
-            explorePos.y += 3.4f;
-           // GameEffMgr.Instance.ShowSmallExplosion(explorePos);
-        });
-        seq.AppendInterval(0.1f);
+     
+        seq.AppendInterval(.6f);
         seq.AppendCallback(() =>
         {
-            around_target.ForEach(s => s.LoseHealth(new Damage() { magic = magic_damage }));
+            foreach (var item in targets)
+            {
+                var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/beel_impact_skill"), item.transform.position, Quaternion.identity);
+                seq.AppendInterval(0.3f);
+                seq.AppendCallback(() => Destroy(eff));
+            }
+            targets.ForEach(s => s.LoseHealth(new Damage() { magic = magic_damage }));
         });
 
         seq.AppendInterval(0.3f);
-        return 2.8f;
+        return 4;
     }
 }
