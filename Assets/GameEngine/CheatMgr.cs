@@ -1,6 +1,7 @@
-﻿
-
+﻿#if PIRATERA_DEV || PIRATERA_QC
+using Piratera.Network;
 using Sfs2X.Entities.Data;
+using UnityEngine;
 
 namespace Piratera.Cheat
 {
@@ -11,7 +12,7 @@ namespace Piratera.Cheat
             NetworkController.Send(SFSAction.COMBAT_BOT, sailorCheatData);
         }
 
-        public static void CheatSailor(string name,  string quality = "0", string level = "0")
+        public static void CheatSailor(string name, string quality = "0", string level = "0")
         {
             SFSObject data = new SFSObject();
             data.PutUtfString("cheat_text",
@@ -36,5 +37,15 @@ namespace Piratera.Cheat
             data.PutInt("rank", rank);
             NetworkController.Send(SFSAction.CHEAT_RANK, data);
         }
+
+        public static void CheatSailorQuantity(string sid, int quality)
+        {
+            Debug.Log($"Cheat SID: {sid} - quality {quality}");
+            SFSObject data = new SFSObject();
+            data.PutUtfString("sid", sid);
+            data.PutInt("quality", quality);
+            NetworkController.Send(SFSAction.CHEAT_SAILOR_QUANTITY, data);
+        }
     }
 }
+#endif

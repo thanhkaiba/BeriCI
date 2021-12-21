@@ -1,8 +1,11 @@
+using Piratera.GUI;
+using Piratera.Cheat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class CrewManager : MonoBehaviour
 {
@@ -26,7 +29,31 @@ public class CrewManager : MonoBehaviour
 
     private GameObject sailor;
     private List<IconSailor> listIcon;
+
+    private SailorModel curModel;
+    [SerializeField]
+    private GameObject buttonCheat;
     // Start is called before the first frame update
+
+    private void Start()
+    {
+
+        GameEvent.SailorInfoChanged.AddListener(OnSailorInfoChanged);
+#if PIRATERA_DEV || PIRATERA_QC
+        buttonCheat.SetActive(true);
+#else
+        buttonCheat.SetActive(false);
+#endif
+    }
+
+    private void OnSailorInfoChanged(SailorModel model)
+    {
+        if (curModel.id == model.id)
+        {
+            RenderListSubSailor();
+            SetData(model);
+        }
+    }
 
     private void OnEnable()
     {
@@ -37,6 +64,11 @@ public class CrewManager : MonoBehaviour
     {
         sailors = CrewData.Instance.Sailors;
         listIcon = new List<IconSailor>();
+
+        foreach (Transform child in listSailors)
+        {
+            Destroy(child.gameObject);
+        }
         for (int i = 0; i < sailors.Count; i++)
         {
             GameObject go = Instantiate(iconSailorPrefap, listSailors);
@@ -60,6 +92,7 @@ public class CrewManager : MonoBehaviour
 
     public void SetData(SailorModel model) 
     {
+        curModel = model;
         texts[0].text = model.name;
         texts[1].text = model.id;
         foreach (var item in sailorDes.sheets[0].list)
@@ -101,4 +134,14 @@ public class CrewManager : MonoBehaviour
     {
         SceneManager.LoadScene("ScenePickTeam");
     }
+
+
+    public void ShowCheatSailorInfo()
+    {
+#if PIRATERA_DEV || PIRATERA_QC
+        PopupCheatSailorInfo popup = GuiManager.Instance.AddGui<PopupCheatSailorInfo>("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
+       popup.sailorId = curModel.id; 
+#endif
+    }
+
 }

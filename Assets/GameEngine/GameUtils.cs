@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Piratera.GUI;
 using Piratera.Lib;
+using Piratera.Network;
 
 public class GameUtils : UnityEngine.Object
 {

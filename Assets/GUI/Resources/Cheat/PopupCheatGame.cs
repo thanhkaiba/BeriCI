@@ -1,11 +1,13 @@
-using Piratera.Cheat;
+#if PIRATERA_DEV || PIRATERA_QC
+using Piratera.GUI;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace Piratera.GUI
+namespace Piratera.Cheat
 {
+
     public class PopupCheatGame : BaseGui
     {
         [SerializeField]
@@ -92,8 +94,5 @@ namespace Piratera.GUI
         }
 
     }
-
-
 }
-
-
+#endif

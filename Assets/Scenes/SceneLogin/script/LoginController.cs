@@ -6,6 +6,11 @@ using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Piratera.GUI;
+using Piratera.Network;
+using System;
+using Sfs2X.Util;
+using System.Collections;
+using UnityEngine.Networking;
 
 public class LoginController: MonoBehaviour
 {
@@ -26,6 +31,8 @@ public class LoginController: MonoBehaviour
 	private Button signupButton;
 	[SerializeField]
 	private Text errorText;
+	[SerializeField]
+	private Toggle loginTypeToggle;
 
 	[SerializeField]
 	private string signupLink = "https://piratera.io/";
@@ -41,6 +48,12 @@ public class LoginController: MonoBehaviour
 
 		nameInput.text = PlayerPrefs.GetString("UserName");
 
+#if PIRATERA_DEV
+		loginTypeToggle.gameObject.SetActive(true);
+#else
+		loginTypeToggle.gameObject.SetActive(false);
+#endif
+	
 	}
 
 	private void OnConnection(BaseEvent evt)
@@ -77,11 +90,28 @@ public class LoginController: MonoBehaviour
 	//----------------------------------------------------------
 	// Public interface methods for UI
 	//----------------------------------------------------------
-
+	public IEnumerator CheckInternetConnection(Action<bool> syncResult)
+	{
+		GuiManager.Instance.ShowGuiWaiting(true);
+		const string echoServer = "http://google.com";
+		bool result;
+		using (var request = UnityWebRequest.Head(echoServer))
+		{
+			request.timeout = 5;
+			yield return request.SendWebRequest();
+			result = (request.result == UnityWebRequest.Result.Success) && request.responseCode == 200;
+		}
+		syncResult(result);
+	}
 	public void OnLoginButtonClick()
 	{
-		if (string.IsNullOrEmpty(nameInput.text))
+		if (string.IsNullOrEmpty(nameInput.text) && string.IsNullOrEmpty(passwordInput.text))
         {
+			errorText.text = "Please enter your username and password";
+			return;
+		}
+		if (string.IsNullOrEmpty(nameInput.text))
+		{
 			errorText.text = "Username field is empty";
 			return;
 
@@ -94,20 +124,36 @@ public class LoginController: MonoBehaviour
 
 		}
 
-		if (Application.internetReachability == NetworkReachability.NotReachable)
-		{
-			errorText.text = "Error. Check Internet connection!";
-			return;
-		}
 
-		GuiManager.Instance.ShowGuiWaiting(true);
-		enableLoginUI(false);
-		NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text));
-		NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
-		NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
+		StartCoroutine(CheckInternetConnection(isConnected => {
+			if (isConnected)
+            {
+			
+				enableLoginUI(false);
+				NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text, loginTypeToggle.isOn ? GameLoginType.DUMMY : GameLoginType.AUTHENTICATON));
+				NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
+				NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
+				NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+			} else
+            {
+				GuiManager.Instance.ShowGuiWaiting(false);
+				errorText.text = "Error. Check Internet connection!";
+			}
+		}));
+
 	}
 
-	public void OnButtonCreateOneClick()
+    private void OnConnectionLost(BaseEvent evt)
+    {
+		string reason = (string)evt.Params["reason"];
+		if (reason != ClientDisconnectionReason.MANUAL)
+		{
+			enableLoginUI(true);
+		}
+
+	}
+
+    public void OnButtonCreateOneClick()
     {
 		Application.OpenURL(signupLink);
 	}
@@ -150,10 +196,10 @@ public class LoginController: MonoBehaviour
     //----------------------------------------------------------
     private void enableLoginUI(bool enable)
 	{
-		nameInput.interactable = enable;
+		/*nameInput.interactable = enable;
 		passwordInput.interactable = enable;
 		loginButton.interactable = enable;
-		signupButton.interactable = enable;
+		signupButton.interactable = enable;*/
 		errorText.text = "";
 	}
 

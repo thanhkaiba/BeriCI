@@ -1,8 +1,10 @@
 using DG.Tweening;
 using Piratera.GUI;
+using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -30,21 +32,38 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private float remainTime;
     private float maxTime;
     private bool counting = false;
+
+    private void Awake()
+    {
+        NetworkController.AddServerActionListener(OnReceiveServerAction);
+    }
+
+    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    {
+        switch (action)
+        {
+            case SFSAction.PVE_SURRENDER:
+            case SFSAction.PVE_CONFIRM:
+                if (errorCode != SFSErrorCode.SUCCESS)
+                {
+                    GuiManager.Instance.ShowGuiWaiting(false);
+                }
+                break;
+        }
+    }
+
+    private void OnDestroy()
+    {
+        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+    }
+
     private void Start()
     {
-        if (SoundMgr.Instance != null) SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
+        SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
         Init();
     }
 
-    public void OnJoinBattle()
-    {
-        //  SceneManager.LoadScene("SceneCombat2D");
-    }
-
-    public void OnSurrender()
-    {
-        // NetworkController.OnExtentionResponse();
-    }
+ 
 
     public void Init()
     {
@@ -97,6 +116,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Need at least one Sailor");
         else
         {
+            GuiManager.Instance.ShowGuiWaiting(true);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
