@@ -105,6 +105,11 @@ public class LoginController: MonoBehaviour
 	}
 	public void OnLoginButtonClick()
 	{
+		if (string.IsNullOrEmpty(nameInput.text) && string.IsNullOrEmpty(passwordInput.text))
+        {
+			errorText.text = "Please enter your username and password";
+			return;
+		}
 		if (string.IsNullOrEmpty(nameInput.text))
 		{
 			errorText.text = "Username field is empty";

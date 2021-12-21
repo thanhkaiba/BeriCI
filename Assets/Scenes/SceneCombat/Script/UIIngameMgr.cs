@@ -109,6 +109,7 @@ public class UIIngameMgr : MonoBehaviour
         avtB.LoadAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt1 : TempCombatData.Instance.avt0);
         usernameA.text = TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.userName0 : TempCombatData.Instance.userName1;
         usernameB.text = TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.userName1 : TempCombatData.Instance.userName0;
+        ShowTimeScale();
 
         //Debug.Log("GameEvents.instance " + GameEvents.instance);
         //Debug.Log("GameEvents.instance.attackOneTarget " + GameEvents.instance.attackOneTarget);

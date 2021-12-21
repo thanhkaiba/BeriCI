@@ -15,11 +15,11 @@ namespace Piratera.Network
 
 	public static class GAME_NETWORK_ADDRESS
     {
-		public const string QC_HOST = "34.101.198.96";
-		public const int QC_PORT = 8972;
+		public const string QC_HOST = "dev-game1.piratera.local";
+		public const int QC_PORT = 9933;
 
 
-		public const string DEV_HOST = "dev-game1.piratera.loca";
+		public const string DEV_HOST = "dev-game1.piratera.local";
 		public const int DEV_PORT = 9933;
 	}
 

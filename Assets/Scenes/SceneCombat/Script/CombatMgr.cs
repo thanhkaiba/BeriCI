@@ -35,7 +35,7 @@ public class CombatMgr : MonoBehaviour
     {
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
-        Time.timeScale = 1;
+        Time.timeScale = PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1);
         //return;
         PreparingGame();
         StartCoroutine(StartGame());
@@ -241,5 +241,7 @@ public class CombatMgr : MonoBehaviour
     {
         if (Time.timeScale == 1) Time.timeScale = 2;
         else Time.timeScale = 1;
+
+        PlayerPrefs.SetFloat($"TimeCombatScale {UserData.Instance.UID}", Time.timeScale);
     }
 }
