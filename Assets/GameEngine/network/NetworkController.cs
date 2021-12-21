@@ -172,7 +172,7 @@ namespace Piratera.Network
 #endif
 				sfso.PutUtfString("client_info", new LoginLogData().ToJson());
 				sfs.Send(new LoginRequest(loginData.Username, "", Zone, sfso));
-				Debug.Log("Send Login " + loginData.Username + "-" + loginData.Password);
+				Debug.Log("Send Login " + loginData.Username + "-" + loginData.Password + "-" + loginData.Type);
 			}
 			else Debug.Log("Connection failed; is the server running at all?");
 		}
