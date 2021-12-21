@@ -38,12 +38,12 @@ namespace Piratera.Cheat
             NetworkController.Send(SFSAction.CHEAT_RANK, data);
         }
 
-        public static void CheatSailorQuantity(string sid, int quantity)
+        public static void CheatSailorQuantity(string sid, int quality)
         {
-            Debug.Log($"Cheat SID: {sid} - quantity {quantity}");
+            Debug.Log($"Cheat SID: {sid} - quality {quality}");
             SFSObject data = new SFSObject();
             data.PutUtfString("sid", sid);
-            data.PutInt("quantity", quantity);
+            data.PutInt("quality", quality);
             NetworkController.Send(SFSAction.CHEAT_SAILOR_QUANTITY, data);
         }
     }
