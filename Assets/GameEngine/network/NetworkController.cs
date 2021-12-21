@@ -8,6 +8,7 @@ using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
 using Sfs2X.Requests;
 using Piratera.GUI;
+using System;
 
 namespace Piratera.Network
 {
@@ -22,7 +23,13 @@ namespace Piratera.Network
 		public static NetworkController Instance;
 
 		private static List<NetworkActionListenerDelegate> serverActionListeners = new List<NetworkActionListenerDelegate>();
-		private static readonly string Host = "dev-game1.piratera.local";
+
+        internal static void AddServerActionListener(object onReceiveServerAction)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static readonly string Host = "dev-game1.piratera.local";
 
 		private static readonly int TcpPort = 9933;
 

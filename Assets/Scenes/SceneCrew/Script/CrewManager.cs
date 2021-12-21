@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System;
 
 public class CrewManager : MonoBehaviour
 {
@@ -36,11 +37,22 @@ public class CrewManager : MonoBehaviour
 
     private void Start()
     {
+
+        GameEvent.SailorInfoChanged.AddListener(OnSailorInfoChanged);
 #if PIRATERA_DEV
         buttonCheat.SetActive(true);
 #else
         buttonCheat.SetActive(false);
 #endif
+    }
+
+    private void OnSailorInfoChanged(SailorModel model)
+    {
+        if (curModel.id == model.id)
+        {
+            RenderListSubSailor();
+            SetData(model);
+        }
     }
 
     private void OnEnable()
@@ -52,6 +64,11 @@ public class CrewManager : MonoBehaviour
     {
         sailors = CrewData.Instance.Sailors;
         listIcon = new List<IconSailor>();
+
+        foreach (Transform child in listSailors)
+        {
+            Destroy(child.gameObject);
+        }
         for (int i = 0; i < sailors.Count; i++)
         {
             GameObject go = Instantiate(iconSailorPrefap, listSailors);

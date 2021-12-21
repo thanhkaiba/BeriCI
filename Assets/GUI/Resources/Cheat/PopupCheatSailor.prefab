@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textCheatSailor_name: {fileID: 973775316912246803}
-  textCheatSailor_quality: {fileID: 2533450999440994642}
+  textCheatSailor_quality: {fileID: 925801256849590928}
   sailorId: 
 --- !u!1 &4079788391230523808
 GameObject:
