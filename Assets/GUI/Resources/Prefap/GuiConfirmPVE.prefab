@@ -1523,7 +1523,7 @@ MonoBehaviour:
   background: {fileID: 3509160481380002895}
   fight: {fileID: 472703075488426464}
   find: {fileID: 3394679073517349807}
-  finding: {fileID: 6543014395404943715}
+  findBtn: {fileID: 3287520926191535962}
   lobby: {fileID: 0}
 --- !u!1 &8418320845937866137
 GameObject:
