@@ -52,6 +52,7 @@ namespace Piratera.GUI
         protected override void Start()
         {
             base.Start();
+            textVersion.text = "DEV_" + Application.version;
             textName.text = UserData.Instance.Username;
             textUID.text = UserData.Instance.UID;
             userAvatar.LoadAvatar(UserData.Instance.Avatar);
