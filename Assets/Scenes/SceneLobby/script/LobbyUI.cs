@@ -63,7 +63,7 @@ public class LobbyUI : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-#if PIRATERA_DEV
+#if PIRATERA_DEV || PIRATERA_QC
         buttonCheat.gameObject.SetActive(true);
 #else
         buttonCheat.gameObject.SetActive(false);
@@ -196,7 +196,7 @@ public class LobbyUI : MonoBehaviour
     }
     public void ShowGuiCheat()
     {
-#if PIRATERA_DEV
+#if PIRATERA_DEV || PIRATERA_QC
         GuiManager.Instance.AddGui<PopupCheatGame>("Cheat/PopupCheat");
 #endif
     }

@@ -1,7 +1,7 @@
-﻿using Piratera.GUI;
+﻿#if PIRATERA_DEV || PIRATERA_QC
+using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
-#if PIRATERA_DEV
 using System;
 using UnityEngine;
 using UnityEngine.UI;

@@ -13,6 +13,16 @@ using System;
 namespace Piratera.Network
 {
 
+	public static class GAME_NETWORK_ADDRESS
+    {
+		public const string QC_HOST = "34.101.198.96";
+		public const int QC_PORT = 8972;
+
+
+		public const string DEV_HOST = "dev-game1.piratera.loca";
+		public const int DEV_PORT = 9933;
+	}
+
 	public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
 
 	public class NetworkController : MonoBehaviour
@@ -29,9 +39,15 @@ namespace Piratera.Network
             throw new NotImplementedException();
         }
 
-        private static readonly string Host = "dev-game1.piratera.local";
+#if PIRATERA_QC
+		private static readonly string Host = GAME_NETWORK_ADDRESS.QC_HOST;
+		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.QC_PORT;
+#elif PIRATERA_DEV
+			private static readonly string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
+		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
+#endif
 
-		private static readonly int TcpPort = 9933;
+
 
 		private static readonly int WSPort = 8080;
 
@@ -150,6 +166,8 @@ namespace Piratera.Network
 			AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
 			AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, OnUserDataUpdate);
 
+			Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
+
 			sfs.Connect(cfg);
 		}
 		public static void Logout()
@@ -174,6 +192,8 @@ namespace Piratera.Network
 #if PIRATERA_DEV
 				
 				sfso.PutInt("loginType", (int)loginData.Type);
+#elif PIRATERA_QC
+                sfso.PutInt("loginType", (int)GameLoginType.DUMMY);
 #else
                 sfso.PutInt("loginType", (int)GameLoginType.AUTHENTICATON);
 #endif

@@ -1,10 +1,10 @@
+#if PIRATERA_DEV || PIRATERA_QC
 using Piratera.GUI;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-#if PIRATERA_DEV
 namespace Piratera.Cheat
 {
 

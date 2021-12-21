@@ -52,7 +52,13 @@ namespace Piratera.GUI
         protected override void Start()
         {
             base.Start();
+#if PIRATERA_DEV
             textVersion.text = "DEV_" + Application.version;
+#elif PIRATERA_QC
+            textVersion.text = "QC_" + Application.version;
+#else
+            textVersion.text = "LIVE_" + Application.version;
+#endif
             textName.text = UserData.Instance.Username;
             textUID.text = UserData.Instance.UID;
             userAvatar.LoadAvatar(UserData.Instance.Avatar);

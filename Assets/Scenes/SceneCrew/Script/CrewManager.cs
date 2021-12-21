@@ -39,7 +39,7 @@ public class CrewManager : MonoBehaviour
     {
 
         GameEvent.SailorInfoChanged.AddListener(OnSailorInfoChanged);
-#if PIRATERA_DEV
+#if PIRATERA_DEV || PIRATERA_QC
         buttonCheat.SetActive(true);
 #else
         buttonCheat.SetActive(false);
@@ -138,8 +138,8 @@ public class CrewManager : MonoBehaviour
 
     public void ShowCheatSailorInfo()
     {
-#if PIRATERA_DEV
-       PopupCheatSailorInfo popup = GuiManager.Instance.AddGui<PopupCheatSailorInfo>("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
+#if PIRATERA_DEV || PIRATERA_QC
+        PopupCheatSailorInfo popup = GuiManager.Instance.AddGui<PopupCheatSailorInfo>("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
        popup.sailorId = curModel.id; 
 #endif
     }
