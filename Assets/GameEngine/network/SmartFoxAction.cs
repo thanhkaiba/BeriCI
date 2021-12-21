@@ -25,5 +25,6 @@
         CHEAT_SAILOR = 101,
         CHEAT_RESOURCE = 102,
         CHEAT_RANK = 103,
+        CHEAT_SAILOR_QUANTITY = 104,
     }
 }

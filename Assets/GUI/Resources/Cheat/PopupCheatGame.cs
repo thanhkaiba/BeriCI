@@ -1,11 +1,11 @@
-using Piratera.Cheat;
+using Piratera.GUI;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
 
 #if PIRATERA_DEV
-namespace Piratera.GUI
+namespace Piratera.Cheat
 {
 
     public class PopupCheatGame : BaseGui

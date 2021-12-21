@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine.Events;
 using Piratera.Sound;
 using Piratera.Network;
+using Piratera.Cheat;
 
 public class LobbyUI : MonoBehaviour
 {

@@ -1,3 +1,5 @@
+using Piratera.GUI;
+using Piratera.Cheat;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,7 +28,20 @@ public class CrewManager : MonoBehaviour
 
     private GameObject sailor;
     private List<IconSailor> listIcon;
+
+    private SailorModel curModel;
+    [SerializeField]
+    private GameObject buttonCheat;
     // Start is called before the first frame update
+
+    private void Start()
+    {
+#if PIRATERA_DEV
+        buttonCheat.SetActive(true);
+#else
+        buttonCheat.SetActive(false);
+#endif
+    }
 
     private void OnEnable()
     {
@@ -60,6 +75,7 @@ public class CrewManager : MonoBehaviour
 
     public void SetData(SailorModel model) 
     {
+        curModel = model;
         texts[0].text = model.name;
         texts[1].text = model.id;
         foreach (var item in sailorDes.sheets[0].list)
@@ -101,4 +117,14 @@ public class CrewManager : MonoBehaviour
     {
         SceneManager.LoadScene("ScenePickTeam");
     }
+
+
+    public void ShowCheatSailorInfo()
+    {
+#if PIRATERA_DEV
+       PopupCheatSailorInfo popup = GuiManager.Instance.AddGui<PopupCheatSailorInfo>("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
+       popup.sailorId = curModel.id; 
+#endif
+    }
+
 }
