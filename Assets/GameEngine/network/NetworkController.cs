@@ -189,11 +189,8 @@ namespace Piratera.Network
 
 				SFSObject sfso = new SFSObject();
 				sfso.PutUtfString("passwd", loginData.Password);
-#if PIRATERA_DEV
-				
+#if PIRATERA_DEV || PIRATERA_QC
 				sfso.PutInt("loginType", (int)loginData.Type);
-#elif PIRATERA_QC
-                sfso.PutInt("loginType", (int)GameLoginType.DUMMY);
 #else
                 sfso.PutInt("loginType", (int)GameLoginType.AUTHENTICATON);
 #endif
