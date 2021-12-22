@@ -57,6 +57,7 @@ public class StaminaData : Singleton<StaminaData>
         long delta = now - LastCountStamina;
         int recoveringTime = StaminaConfig.recovering_time * 1000;
         delta = recoveringTime - delta % recoveringTime;
+
         return delta;
     }
 

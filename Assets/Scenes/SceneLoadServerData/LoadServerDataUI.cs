@@ -55,13 +55,16 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private Text errorText;
 
+    [SerializeField]
+    private Canvas canvas;
+
 
     void Start()
     {
 
         RandomTip();
         buttonReload.gameObject.SetActive(false);
-        sailorRank.transform.position = Camera.main.WorldToScreenPoint(sailorNode.transform.position) - new Vector3(40, -20, 0);
+       
         SendGetData();
         ShowLoading(15f, startingPoint, RandomTip);
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
@@ -80,8 +83,12 @@ public class LoadServerDataUI : MonoBehaviour
         {
             DestroyImmediate(child.gameObject);
         }
-        if (GameUtils.AddSailorImage("Mealodo", sailorNode.transform, out SailorConfig config_stats) != null)
+        GameObject sailor;
+        if ((sailor = GameUtils.AddSailorImage("Alex", sailorNode.transform, out SailorConfig config_stats)) != null)
         {
+            BoxCollider2D box = sailor.GetComponent<BoxCollider2D>();
+            sailorRank.transform.position = Camera.main.WorldToScreenPoint(sailorNode.transform.position - new Vector3(box.size.x / 2 - box.offset.x, 0, 0)) + new Vector3(0, 10, 0);
+             
 
             sailorName.text = param.present_name;
             sailorBio.text = param.title;
@@ -132,8 +139,9 @@ public class LoadServerDataUI : MonoBehaviour
             RectTransform rectTransform = GO.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(size - margin, size - margin);
             rectTransform.SetParent(sailorClass.transform);
-
+      
             rectTransform.anchoredPosition = new Vector2(-totalSize / 2 + size * ( i + 0.5f), 10);
+            rectTransform.localScale = Vector3.one;
 
         }
     }
