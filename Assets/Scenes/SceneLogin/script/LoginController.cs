@@ -50,10 +50,11 @@ public class LoginController: MonoBehaviour
 
 #if PIRATERA_DEV
 		loginTypeToggle.gameObject.SetActive(true);
+	    loginTypeToggle.isOn = PlayerPrefs.GetInt("loginTypeToggle", 1) == 1;
 #else
 		loginTypeToggle.gameObject.SetActive(false);
 #endif
-	
+
 	}
 
 	private void OnConnection(BaseEvent evt)
@@ -128,7 +129,9 @@ public class LoginController: MonoBehaviour
 		StartCoroutine(CheckInternetConnection(isConnected => {
 			if (isConnected)
             {
-			
+#if PIRATERA_DEV
+	            PlayerPrefs.SetInt("loginTypeToggle", loginTypeToggle.isOn ? 1 : 0);
+#endif
 				enableLoginUI(false);
 				NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text, loginTypeToggle.isOn ? GameLoginType.DUMMY : GameLoginType.AUTHENTICATON));
 				NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
