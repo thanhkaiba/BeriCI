@@ -108,7 +108,7 @@ public class LobbyUI : MonoBehaviour
 
     void PresentData()
     {
-        userName.text = UserData.Instance.Username.LimitLength(11);
+        userName.text = UserData.Instance.Username.LimitLength(22);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
         userStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
     }
