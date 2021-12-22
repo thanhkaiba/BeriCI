@@ -65,7 +65,7 @@ namespace Piratera.GUI
 
         public void Report()
         {
-
+            Application.OpenURL(GameConst.CUSTOMER_CARE_URL);
         }
 
         public void OnClose()

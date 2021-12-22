@@ -120,7 +120,11 @@ public class LobbyUI : MonoBehaviour
     }
     public void OnStartPVEMode()
     {
-      
+        if (CrewData.Instance.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupBuySailor();
+            return;
+        }
         GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
         go.GetComponent<GuiConfirmPVE>().lobby = this;
     }
