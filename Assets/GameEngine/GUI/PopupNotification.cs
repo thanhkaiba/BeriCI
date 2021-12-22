@@ -10,6 +10,8 @@ namespace Piratera.GUI
         [SerializeField]
         private Text textNotification;
         [SerializeField]
+        private Text textOk;
+        [SerializeField]
         private Transform background;
         private Action OKFunc;
         protected override void Start()
@@ -58,6 +60,13 @@ namespace Piratera.GUI
         {
             SetData(text);
             OKFunc = okFunc;
+        }
+
+        public void SetData(string text, string okText, Action okFunc)
+        {
+            SetData(text);
+            OKFunc = okFunc;
+            textOk.text = okText;
         }
     }
 }

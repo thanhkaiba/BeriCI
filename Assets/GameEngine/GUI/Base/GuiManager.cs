@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Piratera.Constance;
+using System;
 using UnityEngine;
 
 namespace Piratera.GUI
@@ -40,6 +41,14 @@ namespace Piratera.GUI
             return gameObject;
         }
 
+        public GameObject ShowPopupNotification(string text, string okText, Action okAction)
+        {
+            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotification", LayerId.POPUP);
+            PopupNotification popup = gameObject.GetComponent<PopupNotification>();
+            popup.SetData(text, okText, okAction);
+            return gameObject;
+        }
+
         public void ShowGuiWaiting(bool show)
         {
             if (show)
@@ -49,6 +58,11 @@ namespace Piratera.GUI
             {
                 DestroyGui<GuiWaiting>();
             }
+        }
+
+        public void ShowPopupBuySailor()
+        {
+            ShowPopupNotification("You need a sailor to play", "BUY NOW", () => Application.OpenURL(GameConst.MARKET_URL));
         }
 
         public void DestroyGui<T>()

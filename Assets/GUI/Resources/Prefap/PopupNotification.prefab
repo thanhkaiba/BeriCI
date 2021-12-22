@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textNotification: {fileID: 3894656285051267594}
+  textOk: {fileID: 7937648013150973738}
   background: {fileID: 4849125788031673727}
 --- !u!114 &722372519354883176
 MonoBehaviour:
@@ -459,7 +460,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.6
   blockTouchBehind: 1
-  fog: {fileID: 0}
 --- !u!1 &4291724934757070048
 GameObject:
   m_ObjectHideFlags: 0

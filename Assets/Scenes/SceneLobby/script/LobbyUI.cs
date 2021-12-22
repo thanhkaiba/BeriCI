@@ -12,6 +12,7 @@ using UnityEngine.Events;
 using Piratera.Sound;
 using Piratera.Network;
 using Piratera.Cheat;
+using Piratera.Constance;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -118,12 +119,18 @@ public class LobbyUI : MonoBehaviour
         GuiManager.Instance.AddGui<GuiSetting>("Prefap/GuiSetting", LayerId.GUI);
     }
     public void OnStartPVEMode()
-    {       
-       GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
+    {
+      
+        GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
         go.GetComponent<GuiConfirmPVE>().lobby = this;
     }
     public void OnButtonPickTeamClick()
     {
+        if (CrewData.Instance.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupBuySailor();
+            return;
+        }
         SceneManager.LoadScene("ScenePickTeam");
     }
 
@@ -136,7 +143,7 @@ public class LobbyUI : MonoBehaviour
 
     public void OnBuyBeri()
     {
-        Application.OpenURL("https://piratera.io/");
+        Application.OpenURL(GameConst.MARKET_URL);
     }
 
     public void ShowCommingSoon()
@@ -146,6 +153,11 @@ public class LobbyUI : MonoBehaviour
 
     public void ShowSceneCrew()
     {
+        if (CrewData.Instance.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupBuySailor();
+            return;
+        }
         SceneManager.LoadScene("SceneCrew");
     }
 

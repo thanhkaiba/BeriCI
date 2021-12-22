@@ -33,6 +33,7 @@ namespace Piratera.GUI
         {
             if ((action == SFSAction.PVE_PLAY || action == SFSAction.COMBAT_PREPARE) && errorCode != SFSErrorCode.SUCCESS)
             {
+                lobby.OnStaminaChanged(StaminaData.Instance.Stamina, StaminaData.Instance.Stamina);
                 OnClose();
             }
         }

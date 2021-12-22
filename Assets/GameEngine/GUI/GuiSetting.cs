@@ -1,4 +1,5 @@
-﻿using Piratera.Network;
+﻿using Piratera.Constance;
+using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using System;
@@ -20,19 +21,6 @@ namespace Piratera.GUI
 
         [SerializeField]
         private UserAvatar userAvatar;
-
-        [Header("Social")]
-        [SerializeField]
-        private string whitePaperUrl = "https://piratera.io/";
-        [SerializeField]
-        private string website = "https://piratera.io/";
-        [SerializeField]
-        private string facebookUrl = "https://piratera.io/";
-        [SerializeField]
-        private string telegramUrl = "https://piratera.io/";
-        [SerializeField]
-        private string twitterUrl = "https://piratera.io/";
-
 
         [SerializeField]
         private Sprite[] iconSoundSprites;
@@ -113,28 +101,28 @@ namespace Piratera.GUI
 
         public void OpenWhitePaper()
         {
-            Application.OpenURL(whitePaperUrl);
+            Application.OpenURL(GameConst.WHITE_PAPER_URL);
         }
 
         public void OpenWebsite()
         {
-            Application.OpenURL(website);
+            Application.OpenURL(GameConst.WEBSITE_URL);
         }
 
 
         public void OpenFacebook()
         {
-            Application.OpenURL(facebookUrl);
+            Application.OpenURL(GameConst.FACEBOOK_URL);
         }
 
         public void OpenTwitter()
         {
-            Application.OpenURL(twitterUrl);
+            Application.OpenURL(GameConst.TWITTER_URL);
         }
 
         public void OpenTelegram()
         {
-            Application.OpenURL(telegramUrl);
+            Application.OpenURL(GameConst.TELEGRAM_URL);
         }
     }
 }

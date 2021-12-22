@@ -8,6 +8,12 @@ public class CrewData : Singleton<CrewData>
     public List<SailorModel> Sailors = new List<SailorModel>();
     public FightingLine FightingTeam = new FightingLine();
 
+
+    public bool IsEmpty()
+    {
+        return Sailors.Count <= 0;
+    }
+
     protected override void OnAwake()
     {
         ResetData();

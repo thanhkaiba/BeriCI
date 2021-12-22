@@ -11,6 +11,7 @@ using System;
 using Sfs2X.Util;
 using System.Collections;
 using UnityEngine.Networking;
+using Piratera.Constance;
 
 public class LoginController: MonoBehaviour
 {
@@ -34,8 +35,7 @@ public class LoginController: MonoBehaviour
 	[SerializeField]
 	private Toggle loginTypeToggle;
 
-	[SerializeField]
-	private string signupLink = "https://piratera.io/";
+
 
 
 	//----------------------------------------------------------
@@ -158,7 +158,7 @@ public class LoginController: MonoBehaviour
 
     public void OnButtonCreateOneClick()
     {
-		Application.OpenURL(signupLink);
+		Application.OpenURL(GameConst.ACCOUNT_URL);
 	}
 
 	public void ReceiveJoinZoneSuccess(SFSErrorCode errorCode, ISFSObject packet)
