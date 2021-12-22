@@ -138,7 +138,7 @@ public class CombatMgr : MonoBehaviour
                     {
                         case ModeID.PvE:
                             {
-                                StartCoroutine(WaitAndDo(0.5f, () => UIManager.Instance.reward.SetReward(yourTeamIndex, data)));
+                                StartCoroutine(WaitAndDo(0.5f, () => UIManager.Instance.reward.SetReward(data)));
                                 break;
                             }
                     }

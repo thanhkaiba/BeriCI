@@ -19,7 +19,7 @@ public class UIPopupReward : MonoBehaviour
     [SerializeField]
     Transform posBeri;
 
-    public void SetReward(byte yourTeamIndex, GameEndData r)
+    public void SetReward(GameEndData r)
     {
         Time.timeScale = 1;
         transform.GetChild(0).gameObject.SetActive(false);
@@ -76,7 +76,7 @@ public class UIPopupReward : MonoBehaviour
         }
 
 
-            transform.GetChild(1).gameObject.SetActive(true);
+        transform.GetChild(1).gameObject.SetActive(true);
         gameObject.SetActive(true);
         gameObject.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), .5f, 2, 0);
     }
@@ -104,6 +104,16 @@ public class UIPopupReward : MonoBehaviour
         }
         beri.transform.position = posBeri.position;
     
+    }
+
+    public void OnSurrenDer()
+    {
+       transform.GetChild(0).gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        transform.GetChild(0).gameObject.SetActive(true);
+        gameObject.SetActive(true);
+
+       transform.GetChild(0).gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack);
+       // gameObject.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), .5f, 2, 0);
     }
   
     public void ClickReceive()

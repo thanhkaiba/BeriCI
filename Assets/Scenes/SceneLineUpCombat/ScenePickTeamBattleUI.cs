@@ -99,13 +99,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnTimeOut()
     {
-        if (UIManager.Instance.reward.gameObject.activeInHierarchy)
-            UIManager.Instance.reward.ConfirmSur();
-        else if (!squaA.HaveSailor())
-        {
-            UIManager.Instance.reward.SendSurrenderToSever();
-            GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors");
-        }
+        if (UIManager.Instance.reward.gameObject.activeInHierarchy) UIManager.Instance.reward.ConfirmSur();
+        else if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors" , UIManager.Instance.reward.SendSurrenderToSever);
         else SendStartCombat();
 
            
@@ -126,7 +121,6 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void Surrender()
     {
-        UIManager.Instance.reward.gameObject.SetActive(true);
-        UIManager.Instance.reward.transform.GetChild(0).gameObject.SetActive(true);
+        UIManager.Instance.reward.OnSurrenDer();
     }
 }
