@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class TooltipClassBonus : MonoBehaviour
 {
-    public IconClassBonus iconType; 
+   // public IconClassBonus iconType; 
     public Text title;
     public Text content;
     public static TooltipClassBonus Instance;
@@ -45,7 +45,7 @@ public class TooltipClassBonus : MonoBehaviour
         gameObject.transform.localScale = SceneManager.GetActiveScene().name == "SceneCombat2D" ? new Vector3(.6f,.6f,.6f) : Vector3.one;
         int maxPop = config.GetMaxPopNeed(data.type);
         List<float> para = config.GetParams(data.type, data.level);
-        iconType.SetData(data);
+       // iconType.SetData(data);
         title.text = "" + data.type + " (" + data.current + "/" + maxPop + ")";
         switch (data.type)
         {

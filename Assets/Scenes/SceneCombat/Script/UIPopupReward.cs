@@ -17,13 +17,8 @@ public class UIPopupReward : MonoBehaviour
     [SerializeField]
     GameObject beri, overlay;
     [SerializeField]
-    Vector3 posBeri;
+    Transform posBeri;
 
-
-    private void Start()
-    {
-        posBeri = beri.transform.position;
-    }
     public void SetReward(byte yourTeamIndex, GameEndData r)
     {
         Time.timeScale = 1;
@@ -107,7 +102,7 @@ public class UIPopupReward : MonoBehaviour
         {
             item.SetActive(false);
         }
-        beri.transform.position = posBeri;
+        beri.transform.position = posBeri.position;
     
     }
   
