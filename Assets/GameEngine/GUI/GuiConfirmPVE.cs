@@ -25,7 +25,16 @@ namespace Piratera.GUI
             base.Start();
             UpdateCurrentStamina();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
+            NetworkController.AddServerActionListener(onReceiveServerAction);
             Appear();
+        }
+
+        private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        {
+            if ((action == SFSAction.PVE_PLAY || action == SFSAction.COMBAT_PREPARE) && errorCode != SFSErrorCode.SUCCESS)
+            {
+                OnClose();
+            }
         }
 
         private void UpdateCurrentStamina(int arg0, int arg1)
@@ -65,8 +74,10 @@ namespace Piratera.GUI
         }
         public void OnClose()
         {
-            ClosePopup();
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
+            NetworkController.RemoveServerActionListener(onReceiveServerAction);
+            ClosePopup();
+
         }
         private void Appear()
         {

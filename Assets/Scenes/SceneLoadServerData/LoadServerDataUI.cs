@@ -80,7 +80,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             DestroyImmediate(child.gameObject);
         }
-        if (GameUtils.AddSailorImage(param.root_name, sailorNode.transform, out SailorConfig config_stats) != null)
+        if (GameUtils.AddSailorImage("Mealodo", sailorNode.transform, out SailorConfig config_stats) != null)
         {
 
             sailorName.text = param.present_name;

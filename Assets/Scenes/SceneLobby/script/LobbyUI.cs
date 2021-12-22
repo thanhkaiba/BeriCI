@@ -101,14 +101,14 @@ public class LobbyUI : MonoBehaviour
 
     void UpdateUserInfo(List<string> changedVars)
     {
-        userName.DOText(UserData.Instance.Username.LimitLength(11), 0.5f).SetEase(Ease.InOutCubic);
+        userName.DOText(UserData.Instance.Username.LimitLength(18), 0.5f).SetEase(Ease.InOutCubic);
         DoTweenUtils.UpdateNumber(userBeri, 0, UserData.Instance.Beri, x => StringUtils.ShortNumber(x));
         DoTweenUtils.UpdateNumber(userStamina, 0, StaminaData.Instance.Stamina, x => StaminaData.Instance.GetStaminaFormat((int)x));
     }
 
     void PresentData()
     {
-        userName.text = UserData.Instance.Username.LimitLength(22);
+        userName.text = UserData.Instance.Username.LimitLength(18);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
         userStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
     }

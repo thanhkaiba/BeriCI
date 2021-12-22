@@ -43,6 +43,7 @@ public class DragableSailor : MonoBehaviour
         if (!SquadContainer.Draging || !SquadAContainer.Draging)
         {
             dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);
+            dragImage.enabled = false;
             SetSailorOpacity(0.8f);
             for (short i = 0; i < slots.Length; i++)
             {
