@@ -40,7 +40,7 @@ public class Sojeph : CombatSailor
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
         });
-        return 0.9f;
+        return 1;
     }
 
     public override void SetFaceDirection()
@@ -55,7 +55,7 @@ public class Sojeph : CombatSailor
     // skill
     public override bool CanActiveSkill(CombatState cbState)
     {
-        return base.CanActiveSkill(cbState);
+        return cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this).Count > 0;
     }
     public override float CastSkill(CombatState cbState)
     {
@@ -64,13 +64,9 @@ public class Sojeph : CombatSailor
         List<float> _params = new List<float>();
         float main_damage = cs.Power;
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        List<CombatSailor> teams = cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this);   
-        if(teams.Count > 0)
-        {
-            CombatSailor healthTarget = TargetsUtils.LowestHealth(teams);
-            targets.Add(healthTarget.Model.id);
-        }
-       
+        List<CombatSailor> teams = cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this);
+        CombatSailor healthTarget = TargetsUtils.LowestHealth(teams);
+        targets.Add(healthTarget.Model.id);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         targets.Add(target.Model.id);
         _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
@@ -80,39 +76,28 @@ public class Sojeph : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
-        if (targets.Count == 2)
-        {
-            mainTarget = CombatState.Instance.GetSailor(targets[1]);
-            healthTarget = CombatState.Instance.GetSailor(targets[0]);
-            healthGain = cs.Power * Model.config_stats.skill_params[0];
-            CombatEvents.Instance.highlightTarget.Invoke(healthTarget);
-            targetHealPos = healthTarget.transform.position;
-        }
-        else 
-        {
-            mainTarget = CombatState.Instance.GetSailor(targets[0]);
-            healthGain = -1;
-        }
+        mainTarget = CombatState.Instance.GetSailor(targets[1]);
+        healthTarget = CombatState.Instance.GetSailor(targets[0]);
+        healthGain = cs.Power * Model.config_stats.skill_params[0];
+        CombatEvents.Instance.highlightTarget.Invoke(healthTarget);
+        targetHealPos = healthTarget.transform.position;
         dame = _params[0];
         CombatEvents.Instance.highlightTarget.Invoke(mainTarget); 
         Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
         startPos = gun2.GetWorldPosition(modelObject.transform);
         targetPos = mainTarget.transform.position;
         targetPos.y += 2;
-        return 2.5f;
+        return 3;
     }
     public void StartEffHealth()
     {
         SoundMgr.PlaySoundSkillSailor(14);
-        if (healthGain < 0)
-            return;
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
             Vector3 pos = targetHealPos;
             pos.y += 4f;
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
-    
+            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);  
             healthTarget.GainHealth(healthGain);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));

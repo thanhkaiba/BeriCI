@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerExitHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     private SailorModel model;
     public SailorModel Model
@@ -48,7 +48,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         flyImage.sprite = model.config_stats.avatar;
         flyImage.SetNativeSize();
         trans.SetParent(parent);
-        trans.localScale = Vector3.one;
+        trans.localScale = new Vector3(-1, 1, 1);
         flyImage.color -= new Color(0, 0, 0, 0.2f);
         return flyImage;
     }
@@ -67,11 +67,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         beginPos = eventData.position;
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        beginPos = Vector2.zero;
-    }
-
+ 
     public void OnPointerUp(PointerEventData eventData)
     {
         showedSubsailor = false;
@@ -107,7 +103,6 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnEndDrag(PointerEventData eventData)
     {
         ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
-        beginPos = Vector2.zero;
     }
 
 

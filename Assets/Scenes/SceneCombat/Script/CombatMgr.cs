@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Piratera.GUI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -138,7 +139,7 @@ public class CombatMgr : MonoBehaviour
                     {
                         case ModeID.PvE:
                             {
-                                StartCoroutine(WaitAndDo(0.5f, () => UIManager.Instance.reward.SetReward(data)));
+                                StartCoroutine(WaitAndDo(0.5f, () => ShowResult(data)));
                                 break;
                             }
                     }
@@ -195,6 +196,11 @@ public class CombatMgr : MonoBehaviour
         Team winTeam = CheckTeamWin();
         if (winTeam == Team.NONE) CombatLoop();
         else GameOver(winTeam);
+    }
+    void ShowResult(GameEndData d)
+    {
+        GameObject go = GuiManager.Instance.AddGui<GuiReward>("Prefap/GuiReward", LayerId.GUI);
+        go.GetComponent<GuiReward>().SetReward(d);
     }
     void GameOver(Team winTeam)
     {

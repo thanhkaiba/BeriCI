@@ -20,8 +20,7 @@ public class CharacterContainer : MonoBehaviour
 
     [SerializeField]
     private SquadContainer squadContainer;
-    [SerializeField]
-    private SquadAContainer _squadContainer;
+   
     void Start()
     {
         RenderListSubSailor();
@@ -88,8 +87,6 @@ public class CharacterContainer : MonoBehaviour
                 imgObject = Instantiate(iconSailorPrefap, transform);
                 subSailorIcon = imgObject.AddComponent<SubSailorIcon>();
                 subSailorIcon.AddSubSailor = (id) => squadContainer.AddSubSailor(id);
-                if(_squadContainer != null)
-                subSailorIcon.AddSubSailor = (id) => _squadContainer.AddSubSailor(id);
             }
             subSailorIcon.scrollRect = scrollRect;
             subSailorIcon.Model = substituteSailors[i];
