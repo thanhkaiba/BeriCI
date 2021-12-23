@@ -35,7 +35,7 @@ MonoBehaviour:
         ball, deal magic damage to all enermy.
     - root_name: Tons
       present_name: Tons
-      title: Captain from Criminal-Land
+      title: Zetpees criminal-org
       skill_description: Walk through the darkness, deal massive damage to his target.
     - root_name: Herminia
       present_name: Herminia

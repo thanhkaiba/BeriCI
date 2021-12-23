@@ -84,7 +84,7 @@ public class LobbyUI : MonoBehaviour
 
     private void OnBeriChanged(long oldValue, long newValue)
     {
-        DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x));
+        DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x, 6));
 
     }
 

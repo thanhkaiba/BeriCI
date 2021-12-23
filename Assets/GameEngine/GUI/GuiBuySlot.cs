@@ -34,7 +34,7 @@ namespace Piratera.GUI
             this.cost = cost;
             textBeriCost.text = "" + cost;
             buttonBuy.interactable = cost >= 0;
-            textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
+            textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
             GameEvent.UserBeriChanged.AddListener(UpdateCurrentBeri);
             NetworkController.AddServerActionListener(OnReceiveServerAction);
 
@@ -42,7 +42,7 @@ namespace Piratera.GUI
 
         private void UpdateCurrentBeri(long arg0, long arg1)
         {
-            textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri);
+            textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
         }
 
         public void OnClose()
