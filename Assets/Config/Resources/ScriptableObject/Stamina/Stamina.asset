@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfefee0339d75eb479cc9c93d3da1968, type: 3}
   m_Name: Stamina
   m_EditorClassIdentifier: 
-  max_stamina: 200
-  pve_cost: 5
-  pvp_cost: 5
-  recovering_time: 600
-  costs: 0a00000064000000c8000000f4010000e8030000
-  statmina_buy_value: 25
+  max_stamina: 15
+  pve_cost: 3
+  pvp_cost: 3
+  recovering_time: 1800
+  costs: 140000003200000064000000c80000002c010000
+  statmina_buy_value: 10

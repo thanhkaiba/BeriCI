@@ -21,6 +21,8 @@ public class RenderAllConfig : MonoBehaviour
         RenderCombatConfig("ScriptableObject/Combat", "Combat");
         RenderSailorGereralConfig("ScriptableObject/SailorGeneralConfig", "SailorGeneralConfig");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
+        RenderStaminaConfig("ScriptableObject/Stamina/Stamina", "Stamina");
+        RenderLineUpSlotConfig("ScriptableObject/LineUpSlot/LineUpSlot", "LineUpSlot");
     }
 
     // Update is called once per frame
@@ -67,6 +69,28 @@ public class RenderAllConfig : MonoBehaviour
     {
         Debug.Log("RenderConfig " + src + " " + file_name);
         ContainerClassBonus a = Resources.Load<ContainerClassBonus>(src);
+        string json = a.Serialize(a);
+        string filesrc = "Assets/Config/json/" + file_name + ".json";
+        File.WriteAllText(filesrc, "");
+        StreamWriter writer = new StreamWriter(filesrc, true);
+        writer.WriteLine(json);
+        writer.Close();
+    }
+    void RenderStaminaConfig(string src, string file_name)
+    {
+        Debug.Log("RenderConfig " + src + " " + file_name);
+        UserStaminaConfig a = Resources.Load<UserStaminaConfig>(src);
+        string json = a.Serialize(a);
+        string filesrc = "Assets/Config/json/" + file_name + ".json";
+        File.WriteAllText(filesrc, "");
+        StreamWriter writer = new StreamWriter(filesrc, true);
+        writer.WriteLine(json);
+        writer.Close();
+    }
+    void RenderLineUpSlotConfig(string src, string file_name)
+    {
+        Debug.Log("RenderConfig " + src + " " + file_name);
+        LineUpSlot a = Resources.Load<LineUpSlot>(src);
         string json = a.Serialize(a);
         string filesrc = "Assets/Config/json/" + file_name + ".json";
         File.WriteAllText(filesrc, "");

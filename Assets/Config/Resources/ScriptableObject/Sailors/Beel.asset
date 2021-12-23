@@ -16,15 +16,15 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 4d5a380abc682ce40b390b409fb946cf, type: 3}
   root_name: Beel
   rank: 3
-  power_base: 85
-  health_base: 240
-  speed_base: 90
+  power_base: 70
+  health_base: 320
+  speed_base: 60
   armor: 20
-  magic_resist: 35
+  magic_resist: 20
   crit: 0
   attack_type: 1
   classes: 04000000
   start_fury: 0
-  max_fury: 80
+  max_fury: 70
   skill_params:
-  - 5
+  - 4

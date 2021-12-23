@@ -107,24 +107,44 @@ public class Tons : CombatSailor
         posEnemy.y += 1.7f;
         posEnemy.z -= 0.1f;
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(.8f);
+        seq.AppendInterval(.4f);
         seq.AppendCallback(() => {
+            GameObject ex = Instantiate(
+                Resources.Load<GameObject>("Effect2D/tele/tele"),
+                Vector3.MoveTowards(transform.position, posEnemy, -1), new Quaternion());
+            Sequence seq2 = DOTween.Sequence();
+            seq2.AppendInterval(1.0f);
+            seq2.AppendCallback(() => Destroy(ex));
+        });
+        seq.AppendInterval(.2f);
+        seq.AppendCallback(() => {
+            bar.gameObject.SetActive(false);
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/Impact/Impact"),
                posEnemy, modelObject.transform.rotation);
-            ex.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+            ex.transform.localScale = new Vector3(2f, 2f, 2f);
             SoundMgr.PlaySoundSkillSailor(11);
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
-            seq2.AppendInterval(.18f);
+            seq2.AppendInterval(.2f);
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
-            seq2.AppendInterval(.18f);
+            seq2.AppendInterval(.2f);
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
-            seq2.AppendInterval(.18f);
+            seq2.AppendInterval(.2f);
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
-            seq2.AppendInterval(.18f);
+            seq2.AppendInterval(.2f);
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
-            seq2.AppendInterval(.18f);
+            seq2.AppendInterval(.2f);
+            seq2.AppendCallback(() => Destroy(ex));
+        });
+        seq.AppendInterval(1.0f);
+        seq.AppendCallback(() => {
+            bar.gameObject.SetActive(true);
+            GameObject ex = Instantiate(
+                Resources.Load<GameObject>("Effect2D/tele/tele"),
+                Vector3.MoveTowards(transform.position, posEnemy, -1), new Quaternion());
+            Sequence seq2 = DOTween.Sequence();
+            seq2.AppendInterval(1.0f);
             seq2.AppendCallback(() => Destroy(ex));
         });
         return 2.6f;

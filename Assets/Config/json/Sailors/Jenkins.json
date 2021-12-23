@@ -1,17 +1,17 @@
 {
   "root_name": "Jenkins",
   "rank": 3,
-  "power_base": 88.0,
-  "health_base": 280.0,
-  "speed_base": 82.0,
-  "armor": 28.0,
-  "magic_resist": 28.0,
+  "power_base": 70.0,
+  "health_base": 320.0,
+  "speed_base": 60.0,
+  "armor": 30.0,
+  "magic_resist": 30.0,
   "crit": 0.0,
   "attack_type": 0,
   "classes": [
     2
   ],
-  "start_fury": 10,
+  "start_fury": 0,
   "max_fury": 30,
   "skill_params": [
     2.0,

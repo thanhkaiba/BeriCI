@@ -16,15 +16,15 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: a76d968055be90a478ddc86eff402287, type: 3}
   root_name: Jenkins
   rank: 3
-  power_base: 88
-  health_base: 280
-  speed_base: 82
-  armor: 28
-  magic_resist: 28
+  power_base: 70
+  health_base: 320
+  speed_base: 60
+  armor: 30
+  magic_resist: 30
   crit: 0
   attack_type: 0
   classes: 02000000
-  start_fury: 10
+  start_fury: 0
   max_fury: 30
   skill_params:
   - 2

@@ -1,11 +1,11 @@
 {
   "root_name": "RowT",
   "rank": 2,
-  "power_base": 68.0,
-  "health_base": 250.0,
-  "speed_base": 92.0,
-  "armor": 10.0,
-  "magic_resist": 50.0,
+  "power_base": 65.0,
+  "health_base": 300.0,
+  "speed_base": 60.0,
+  "armor": 30.0,
+  "magic_resist": 30.0,
   "crit": 0.0,
   "attack_type": 1,
   "classes": [

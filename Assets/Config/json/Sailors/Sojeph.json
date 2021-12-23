@@ -2,10 +2,10 @@
   "root_name": "Sojeph",
   "rank": 1,
   "power_base": 50.0,
-  "health_base": 250.0,
-  "speed_base": 110.0,
-  "armor": 10.0,
-  "magic_resist": 10.0,
+  "health_base": 300.0,
+  "speed_base": 60.0,
+  "armor": 25.0,
+  "magic_resist": 25.0,
   "crit": 0.0,
   "attack_type": 0,
   "classes": [
@@ -14,6 +14,6 @@
   "start_fury": 0,
   "max_fury": 10,
   "skill_params": [
-    1.2
+    1.5
   ]
 }

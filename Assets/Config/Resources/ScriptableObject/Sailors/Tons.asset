@@ -16,15 +16,15 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 248f8edf19bdc1146ab7729bdfd89bec, type: 3}
   root_name: Tons
   rank: 3
-  power_base: 72
-  health_base: 270
-  speed_base: 72
-  armor: 27
-  magic_resist: 27
+  power_base: 70
+  health_base: 300
+  speed_base: 60
+  armor: 20
+  magic_resist: 20
   crit: 0
   attack_type: 2
   classes: 06000000
-  start_fury: 50
-  max_fury: 70
+  start_fury: 0
+  max_fury: 50
   skill_params:
   - 2

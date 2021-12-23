@@ -1,18 +1,18 @@
 {
   "root_name": "Tons",
   "rank": 3,
-  "power_base": 72.0,
-  "health_base": 270.0,
-  "speed_base": 72.0,
-  "armor": 27.0,
-  "magic_resist": 27.0,
+  "power_base": 70.0,
+  "health_base": 300.0,
+  "speed_base": 60.0,
+  "armor": 20.0,
+  "magic_resist": 20.0,
   "crit": 0.0,
   "attack_type": 2,
   "classes": [
     6
   ],
-  "start_fury": 50,
-  "max_fury": 70,
+  "start_fury": 0,
+  "max_fury": 50,
   "skill_params": [
     2.0
   ]

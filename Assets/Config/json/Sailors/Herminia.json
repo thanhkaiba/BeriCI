@@ -1,11 +1,11 @@
 {
   "root_name": "Herminia",
   "rank": 0,
-  "power_base": 52.0,
-  "health_base": 220.0,
-  "speed_base": 160.0,
-  "armor": 10.0,
-  "magic_resist": 10.0,
+  "power_base": 40.0,
+  "health_base": 300.0,
+  "speed_base": 80.0,
+  "armor": 15.0,
+  "magic_resist": 15.0,
   "crit": 0.0,
   "attack_type": 1,
   "classes": [

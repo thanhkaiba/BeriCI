@@ -17,14 +17,14 @@ MonoBehaviour:
   root_name: Sojeph
   rank: 1
   power_base: 50
-  health_base: 250
-  speed_base: 110
-  armor: 10
-  magic_resist: 10
+  health_base: 300
+  speed_base: 60
+  armor: 25
+  magic_resist: 25
   crit: 0
   attack_type: 0
   classes: 0a000000
   start_fury: 0
   max_fury: 10
   skill_params:
-  - 1.2
+  - 1.5

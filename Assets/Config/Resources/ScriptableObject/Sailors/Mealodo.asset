@@ -16,15 +16,15 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: a66e358b52fe6614b9e80577133b96f4, type: 3}
   root_name: Mealodo
   rank: 0
-  power_base: 54
-  health_base: 250
-  speed_base: 70
-  armor: 25
-  magic_resist: 15
+  power_base: 50
+  health_base: 300
+  speed_base: 60
+  armor: 20
+  magic_resist: 20
   crit: 0
   attack_type: 0
   classes: 
   start_fury: 0
-  max_fury: 15
+  max_fury: 20
   skill_params:
   - 2

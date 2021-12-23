@@ -15,7 +15,7 @@ MonoBehaviour:
   container: {fileID: 1507287549702856024}
   pop: 2
   _params:
-  - 15
+  - 30
 --- !u!114 &-8458338205497828197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48,7 +48,7 @@ MonoBehaviour:
   container: {fileID: -6935687130001534065}
   pop: 5
   _params:
-  - 0.1
+  - 0.2
 --- !u!114 &-7853367719279466070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MonoBehaviour:
   container: {fileID: -6935687130001534065}
   pop: 3
   _params:
-  - 0.05
+  - 0.1
 --- !u!114 &-7628449547967748212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Name: MAGE_1
   m_EditorClassIdentifier: 
   container: {fileID: -3850908979103961074}
-  pop: 5
+  pop: 3
   _params:
-  - 1
+  - 0.5
 --- !u!114 &-5382267788096682999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,6 +148,7 @@ MonoBehaviour:
   levels:
   - {fileID: -2846937303394854705}
   - {fileID: 5632407113825715848}
+  - {fileID: 3656651241095530863}
 --- !u!114 &-4807246714159610176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,7 +213,7 @@ MonoBehaviour:
   container: {fileID: -160921110909277169}
   pop: 4
   _params:
-  - 12
+  - 20
 --- !u!114 &-3183711232705518949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +262,7 @@ MonoBehaviour:
   container: {fileID: -5348706335485419333}
   pop: 2
   _params:
-  - 0.2
+  - 0.3
 --- !u!114 &-2633125027903871905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +278,7 @@ MonoBehaviour:
   container: {fileID: -8458338205497828197}
   pop: 4
   _params:
-  - 28
+  - 40
 --- !u!114 &-2143905600956970317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,7 +310,7 @@ MonoBehaviour:
   container: {fileID: -8458338205497828197}
   pop: 2
   _params:
-  - 12
+  - 20
 --- !u!114 &-160921110909277169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +421,22 @@ MonoBehaviour:
   pop: 2
   _params:
   - 5
+--- !u!114 &3656651241095530863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: MIGHTY_2
+  m_EditorClassIdentifier: 
+  container: {fileID: -5348706335485419333}
+  pop: 4
+  _params:
+  - 1
 --- !u!114 &4070462658726575220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,9 +482,9 @@ MonoBehaviour:
   m_Name: KNIGHT_1
   m_EditorClassIdentifier: 
   container: {fileID: 1507287549702856024}
-  pop: 4
+  pop: 3
   _params:
-  - 50
+  - 100
 --- !u!114 &5116449402280295237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,9 +498,9 @@ MonoBehaviour:
   m_Name: MAGE_0
   m_EditorClassIdentifier: 
   container: {fileID: -3850908979103961074}
-  pop: 3
+  pop: 2
   _params:
-  - 0.5
+  - 0.2
 --- !u!114 &5632407113825715848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -497,9 +514,9 @@ MonoBehaviour:
   m_Name: MIGHTY_1
   m_EditorClassIdentifier: 
   container: {fileID: -5348706335485419333}
-  pop: 4
+  pop: 3
   _params:
-  - 0.6
+  - 0.5
 --- !u!114 &5729306647252334749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +564,7 @@ MonoBehaviour:
   container: {fileID: -160921110909277169}
   pop: 2
   _params:
-  - 8
+  - 10
 --- !u!114 &5970126343382269018
 MonoBehaviour:
   m_ObjectHideFlags: 0

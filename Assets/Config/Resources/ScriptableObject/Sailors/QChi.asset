@@ -16,9 +16,9 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: d72bec73ea59fbb42849e495beb4f8f0, type: 3}
   root_name: QChi
   rank: 1
-  power_base: 35
-  health_base: 250
-  speed_base: 86
+  power_base: 50
+  health_base: 300
+  speed_base: 50
   armor: 20
   magic_resist: 20
   crit: 0
@@ -27,4 +27,4 @@ MonoBehaviour:
   start_fury: 0
   max_fury: 25
   skill_params:
-  - 4
+  - 2

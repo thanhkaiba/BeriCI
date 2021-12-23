@@ -1,11 +1,11 @@
 {
   "root_name": "Salvatafo",
   "rank": 4,
-  "power_base": 92.0,
+  "power_base": 75.0,
   "health_base": 320.0,
-  "speed_base": 98.0,
-  "armor": 24.0,
-  "magic_resist": 24.0,
+  "speed_base": 60.0,
+  "armor": 40.0,
+  "magic_resist": 40.0,
   "crit": 0.0,
   "attack_type": 0,
   "classes": [
@@ -15,7 +15,7 @@
   "start_fury": 10,
   "max_fury": 35,
   "skill_params": [
-    1.4,
-    0.6
+    2.0,
+    1.0
   ]
 }

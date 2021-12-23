@@ -17,14 +17,14 @@ MonoBehaviour:
   root_name: Geechoso
   rank: 0
   power_base: 40
-  health_base: 220
-  speed_base: 160
+  health_base: 300
+  speed_base: 80
   armor: 15
   magic_resist: 15
   crit: 0
   attack_type: 1
   classes: 
   start_fury: 0
-  max_fury: 10
+  max_fury: 20
   skill_params:
   - 2

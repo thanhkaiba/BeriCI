@@ -16,11 +16,11 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 2cf172b42a1419f4c96dbf09b48d88ae, type: 3}
   root_name: Galdalf
   rank: 1
-  power_base: 40
-  health_base: 200
+  power_base: 50
+  health_base: 300
   speed_base: 50
-  armor: 35
-  magic_resist: 35
+  armor: 15
+  magic_resist: 15
   crit: 0
   attack_type: 1
   classes: 0400000007000000

@@ -1,0 +1,14 @@
+{
+  "max_stamina": 15,
+  "pve_cost": 3,
+  "pvp_cost": 3,
+  "recovering_time": 1800,
+  "costs": [
+    20,
+    50,
+    100,
+    200,
+    300
+  ],
+  "statmina_buy_value": 10
+}
