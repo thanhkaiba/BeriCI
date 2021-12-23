@@ -14,6 +14,7 @@ namespace Piratera.GUI
         [SerializeField]
         private Transform background;
         private Action OKFunc;
+        private Action cancelFunc;
         protected override void Start()
         {
             Appear();
@@ -26,6 +27,17 @@ namespace Piratera.GUI
             }
             ClosePopup();
         }
+
+        public void OnCancel()
+        {
+            if (cancelFunc != null)
+            {
+                cancelFunc();
+            }
+            ClosePopup();
+        }
+
+
         private void Appear()
         {
             Sequence s = DOTween.Sequence();
@@ -60,6 +72,7 @@ namespace Piratera.GUI
         {
             SetData(text);
             OKFunc = okFunc;
+            cancelFunc = okFunc;
         }
 
         public void SetData(string text, string okText, Action okFunc)
@@ -67,6 +80,15 @@ namespace Piratera.GUI
             SetData(text);
             OKFunc = okFunc;
             textOk.text = okText;
+            cancelFunc = okFunc;
+        }
+
+        public void SetData(string text, string okText, Action okAction, Action cancelAction)
+        {
+            SetData(text);
+            OKFunc = okAction;
+            textOk.text = okText;
+            cancelFunc = cancelAction;
         }
     }
 }

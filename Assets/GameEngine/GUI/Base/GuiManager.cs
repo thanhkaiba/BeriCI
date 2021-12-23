@@ -49,6 +49,14 @@ namespace Piratera.GUI
             return gameObject;
         }
 
+        public GameObject ShowPopupNotification(string text, string okText, Action okAction, Action cancelAction)
+        {
+            GameObject gameObject = AddGui<PopupNotification>("Prefap/PopupNotification", LayerId.POPUP);
+            PopupNotification popup = gameObject.GetComponent<PopupNotification>();
+            popup.SetData(text, okText, okAction, cancelAction);
+            return gameObject;
+        }
+
         public void ShowGuiWaiting(bool show)
         {
             if (show)
@@ -62,7 +70,7 @@ namespace Piratera.GUI
 
         public void ShowPopupBuySailor()
         {
-            ShowPopupNotification("You need a sailor to play", "BUY NOW", () => Application.OpenURL(GameConst.MARKET_URL));
+            ShowPopupNotification("You need a sailor to play", "BUY NOW", () => Application.OpenURL(GameConst.MARKET_URL), null);
         }
 
         public void DestroyGui<T>()
