@@ -234,7 +234,12 @@ namespace Piratera.Network
 
 
 		}
-
+		public void SendSurrenderPVEToSever()
+		{
+			SFSObject sfsObject = new SFSObject();
+			sfsObject.PutBool("accept", false);
+			Send(SFSAction.PVE_SURRENDER, sfsObject);
+		}
 		private static void OnLogin(BaseEvent evt)
 		{
 			if (sfs.RoomList.Count > 0)

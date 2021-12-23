@@ -7,22 +7,25 @@ using TMPro;
 using UnityEngine.UI;
 using Piratera.Sound;
 using Piratera.Network;
+using Piratera.GUI;
 
-public class UIPopupReward : MonoBehaviour
+public class GuiReward : BaseGui
 {
     [SerializeField]
     TextMeshProUGUI[] texts;
     [SerializeField]
     GameObject[] results, typeWin, backLight;
     [SerializeField]
-    GameObject beri, overlay;
-    [SerializeField]
-    Transform posBeri;
+    private Transform background;
+
+    protected override void Start()
+    {
+        base.Start();
+        Appear();
+    }
 
     public void SetReward(GameEndData r)
     {
-        Time.timeScale = 1;
-        transform.GetChild(0).gameObject.SetActive(false);
         texts[0].text = "x" + (r.mode_reward + r.hard_bonus + r.win_rank_bonus).ToString();
         texts[1].text = r.mode_reward.ToString();
         texts[2].text = r.win_rank_bonus.ToString();
@@ -75,65 +78,25 @@ public class UIPopupReward : MonoBehaviour
             results[2].SetActive(true);
         }
 
-
-        transform.GetChild(1).gameObject.SetActive(true);
-        gameObject.SetActive(true);
-        gameObject.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), .5f, 2, 0);
     }
 
-    private void OnDisable()
+    private void Appear()
     {
-        overlay.SetActive(false);
-        foreach (var item in texts)
-        {
-            item.text = "";
-        }
-        transform.GetChild(1).gameObject.SetActive(false);
-        transform.GetChild(0).gameObject.SetActive(false);
-        foreach (var item in results)
-        {
-            item.SetActive(false);
-        }
-        foreach (var item in typeWin)
-        {
-            item.SetActive(false);
-        }
-        foreach (var item in backLight)
-        {
-            item.SetActive(false);
-        }
-        beri.transform.position = posBeri.position;
-    
+        Sequence s = DOTween.Sequence();
+        var canvasGroup = background.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.DOFade(1, 0.2f);
+        s.AppendCallback(() => canvasGroup.interactable = true);
+        background.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        background.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack);
+        var fog = GetComponent<HaveFog>();
+        if (fog) fog.FadeIn(0.3f);
     }
 
-    public void OnSurrenDer()
-    {
-       transform.GetChild(0).gameObject.transform.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-        transform.GetChild(0).gameObject.SetActive(true);
-        gameObject.SetActive(true);
-
-       transform.GetChild(0).gameObject.transform.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack);
-       // gameObject.transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), .5f, 2, 0);
-    }
-  
     public void ClickReceive()
     {
-        gameObject.SetActive(false);
         SceneManager.LoadScene("SceneLobby");
     }
-    public void ConfirmSur()
-    {
-        overlay.SetActive(true);
-        float jumPower = 40;
-        Vector3 pos = beri.transform.position;
-        pos.y += jumPower;
-        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() =>SendSurrenderToSever());
-    }
-    public void SendSurrenderToSever()
-    {
-        SFSObject sfsObject = new SFSObject();
-        sfsObject.PutBool("accept", false);
-        NetworkController.Send(SFSAction.PVE_SURRENDER, sfsObject);
-        gameObject.SetActive(false);
-    }
+ 
 }

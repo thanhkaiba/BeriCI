@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Sound;
 using Spine.Unity;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +31,7 @@ public class Beel : CombatSailor
         seq.AppendInterval(1f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundAttackSailor(14);
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);      
             GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, targetPos, 0, .4f, .7f, .7f);
@@ -81,6 +83,7 @@ public class Beel : CombatSailor
         {
             Spine.Bone ball = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
             GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(-30,0,0), new Vector3(30, 0, 0), 0, 1, 10, 1);
+            SoundMgr.PlaySoundSkillSailor(15);
         });
      
         seq.AppendInterval(.6f);
