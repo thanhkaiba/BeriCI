@@ -82,11 +82,11 @@ public class Beel : CombatSailor
         seq.AppendCallback(() =>
         {
             Spine.Bone ball = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
-            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(-30,0,0), new Vector3(30, 0, 0), 0, 1, 10, 1);
+            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(cs.team == Team.A ? -30 : 30, 0,0), new Vector3(cs.team == Team.A ? 30 : -30, 0, 0), 0, 1.5f, 10, 1);
             SoundMgr.PlaySoundSkillSailor(15);
         });
      
-        seq.AppendInterval(.6f);
+        seq.AppendInterval(1);
         seq.AppendCallback(() =>
         {
             foreach (var item in targets)
@@ -99,6 +99,6 @@ public class Beel : CombatSailor
         });
 
         seq.AppendInterval(0.3f);
-        return 4;
+        return 4.5f;
     }
 }
