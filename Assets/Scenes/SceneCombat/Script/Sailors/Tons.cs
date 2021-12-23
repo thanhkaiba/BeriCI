@@ -112,6 +112,7 @@ public class Tons : CombatSailor
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/Impact/Impact"),
                posEnemy, modelObject.transform.rotation);
+            ex.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
             SoundMgr.PlaySoundSkillSailor(11);
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendCallback(() => target.LoseHealth(damage / 5));
