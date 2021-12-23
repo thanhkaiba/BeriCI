@@ -72,7 +72,9 @@ public class StaminaData : Singleton<StaminaData>
         {
             GameEvent.UserStaminaChanged.Invoke(oldStamina, Stamina);
         }
-
     }
-
+    public int GetPvECost()
+    {
+        return StaminaConfig.pve_cost;
+    }
 }
