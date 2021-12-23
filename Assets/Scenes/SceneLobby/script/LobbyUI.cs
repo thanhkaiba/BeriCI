@@ -84,7 +84,7 @@ public class LobbyUI : MonoBehaviour
 
     private void OnBeriChanged(long oldValue, long newValue)
     {
-        DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x));
+        DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x, 6));
 
     }
 
@@ -203,10 +203,13 @@ public class LobbyUI : MonoBehaviour
     }
     private void ShowListSailors()
     {
+        var listLineUp = CrewData.Instance.GetSquadModelList();
+        listLineUp.Sort();
+        listLineUp.Reverse();
         for (int i = 0; i < nodeSailors.Count; i++)
         {
-            if (i >= CrewData.Instance.Sailors.Count) break;
-            var model = CrewData.Instance.Sailors[i];
+            if (i >= listLineUp.Count) break;
+            var model = listLineUp[i];
             Instantiate(model.config_stats.model, nodeSailors[i]);
         }
     }

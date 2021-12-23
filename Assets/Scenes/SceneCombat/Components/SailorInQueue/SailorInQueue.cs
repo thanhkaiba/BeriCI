@@ -42,6 +42,6 @@ public class SailorInQueue : MonoBehaviour
     }
     public void OnClick()
     {
-        TooltipSailorInfo.Instance.ShowTooltip(sailorData.gameObject, true);
+        TooltipSailorInfo.Instance.ShowTooltip(sailorData.gameObject);
     }
 }

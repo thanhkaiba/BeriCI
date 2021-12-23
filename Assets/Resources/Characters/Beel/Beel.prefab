@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8962916649750526188}
   - component: {fileID: 4596190683929232976}
-  - component: {fileID: 4744159445790211813}
+  - component: {fileID: 5181435088493594283}
   m_Layer: 0
   m_Name: Beel
   m_TagString: Untagged
@@ -229,7 +229,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.6, y: 4}
   m_EdgeRadius: 0
---- !u!114 &4744159445790211813
+--- !u!114 &5181435088493594283
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

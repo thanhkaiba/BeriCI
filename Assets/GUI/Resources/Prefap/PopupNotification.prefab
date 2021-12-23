@@ -215,7 +215,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 4259833779625835403}
         m_TargetAssemblyTypeName: Piratera.GUI.PopupNotification, Assembly-CSharp
-        m_MethodName: OnOK
+        m_MethodName: OnCancel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
