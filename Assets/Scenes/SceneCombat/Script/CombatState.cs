@@ -93,12 +93,12 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("Tons", new CombatPosition(2, 1), Team.A);
+        CreateCombatSailor("Tons", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Scrub", new CombatPosition(1, 1), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("Salvatafo", new CombatPosition(1, 1), Team.B);
+        CreateCombatSailor("Salvatafo", new CombatPosition(0, 2), Team.B);
        // CreateCombatSailor("Galdalf", new CombatPosition(2, 1), Team.B);
     }
 
@@ -214,7 +214,15 @@ public class CombatState : MonoBehaviour
             int speedNeed_2 = sailor2.GetSpeedNeeded();
             if (speedNeed_1 < speedNeed_2) return -1;
             if (speedNeed_1 > speedNeed_2) return 1;
-            if ( string.Compare(sailor1.Model.id, sailor2.Model.id, StringComparison.Ordinal) > 0) return -1;
+            short x_1 = sailor1.cs.position.x;
+            short x_2 = sailor2.cs.position.x;
+            if (x_1 < x_2) return 1;
+            if (x_1 > x_2) return -1;
+            short y_1 = sailor1.cs.position.y;
+            short y_2 = sailor2.cs.position.y;
+            if (y_1 < y_2) return 1;
+            if (y_1 > y_2) return -1;
+            if (sailor1.cs.team == Team.A) return 1;
             else return 1;
         });
         return result;
