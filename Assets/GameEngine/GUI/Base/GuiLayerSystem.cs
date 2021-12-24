@@ -19,7 +19,7 @@ namespace Piratera.GUI
         private List<GameObject> layers = new List<GameObject>();
         Dictionary<string, GameObject> guis = new Dictionary<string, GameObject>();
 
-        void Start()
+        void Awake()
         {
             foreach (LayerId val in Enum.GetValues(typeof(LayerId)))
             {
