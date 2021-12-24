@@ -30,29 +30,29 @@ namespace Piratera.Utils
         public static string ShortNumber(long n, uint decimals = 0)
         {
             long min = 0;
-            if (decimals > 0 && n > min)
+            if (decimals > 0 && n >= min)
             {
                 min = (long)Math.Pow(10, decimals);
             }
 
-            if (n >= 1000000000 && n > min)
+            if (n >= 1000000000 && n >= min)
             {
                 return (n / 1000000000D).ToString("0.##B");
             }
 
-            if (n >= 100000000 && n > min)
+            if (n >= 100000000 && n >= min)
             {
                 return (n / 1000000D).ToString("0.#M");
             }
-            if (n >= 1000000 && n > min)
+            if (n >= 1000000 && n >= min)
             {
                 return (n / 1000000D).ToString("0.##M");
             }
-            if (n >= 100000 && n > min)
+            if (n >= 100000 && n >= min)
             {
                 return (n / 1000D).ToString("0.#k");
             }
-            if (n >= 10000 && n > min)
+            if (n >= 10000 && n >= min)
             {
                 return (n / 1000D).ToString("0.##k");
             }
