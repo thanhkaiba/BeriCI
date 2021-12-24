@@ -29,7 +29,12 @@ public class Meechik : CombatSailor
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
-        
+        Sequence sq = DOTween.Sequence();
+        sq.AppendInterval(0.3f);
+        sq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundAttackSailor(5);
+        });
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.68f);
         seq.AppendCallback(() =>
@@ -38,12 +43,11 @@ public class Meechik : CombatSailor
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             //startPos.y -= 0.4f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
-
             var go = GameEffMgr.Instance.ShowSmokeSide(startPos, startPos.x < targetPos.x);
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
         seq.AppendInterval(0.1f);
-        SoundMgr.PlaySoundAttackSailor(5);
+
         return 0.9f;
     }
     
