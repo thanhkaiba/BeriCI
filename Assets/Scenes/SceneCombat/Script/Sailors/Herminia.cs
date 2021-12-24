@@ -31,14 +31,19 @@ public class Herminia : CombatSailor
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
-     
+
+        Sequence sq = DOTween.Sequence();
+
+        sq.AppendInterval(.3f);
+        sq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundAttackSailor(3);
+        });
         Sequence seq = DOTween.Sequence(); 
-        SoundMgr.PlaySoundAttackSailor(3);
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-
             ArrowTarget(startPos, targetPos, 2f/Vector3.Distance(startPos, targetPos));
         });
         return 1.1f;
@@ -96,13 +101,18 @@ public class Herminia : CombatSailor
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
+        Sequence sq = DOTween.Sequence();
 
+        sq.AppendInterval(1);
+        sq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundSkillSailor(3);
+        });
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.35f);
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            SoundMgr.PlaySoundSkillSailor(3);
             ArrowTarget(startPos, targetPos, 2f / Vector3.Distance(startPos, targetPos), true);
         });
         seq.AppendInterval(0.3f);

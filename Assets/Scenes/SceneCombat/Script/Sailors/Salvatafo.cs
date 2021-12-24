@@ -31,10 +31,15 @@ public class Salvatafo : CombatSailor
             target.transform.position.y,
             target.transform.position.z - 0.1f
         );
+        Sequence sq = DOTween.Sequence();
+        sq.AppendInterval(0.5f);
+        sq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundAttackSailor(8);
+        });
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.4f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        SoundMgr.PlaySoundAttackSailor(8);
         seq.AppendInterval(0.5f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.8f;

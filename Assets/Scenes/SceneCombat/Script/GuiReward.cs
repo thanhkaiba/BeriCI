@@ -8,24 +8,29 @@ using UnityEngine.UI;
 using Piratera.Sound;
 using Piratera.Network;
 using Piratera.GUI;
+using Spine.Unity;
 
 public class GuiReward : BaseGui
 {
     [SerializeField]
     TextMeshProUGUI[] texts;
     [SerializeField]
-    GameObject[] results, typeWin, backLight;
+    GameObject[] typeWin;
     [SerializeField]
     private Transform background;
+    [SerializeField]
+    private SkeletonGraphic anim;
 
     protected override void Start()
     {
+     
         base.Start();
         Appear();
     }
 
     public void SetReward(GameEndData r)
     {
+        anim.initialSkinName = "";
         texts[0].text = "x" + (r.mode_reward + r.hard_bonus + r.win_rank_bonus).ToString();
         texts[1].text = r.mode_reward.ToString();
         texts[2].text = r.win_rank_bonus.ToString();
@@ -64,18 +69,23 @@ public class GuiReward : BaseGui
                 seq.Insert(0.5f, image.DOFade(1, 0.3f).SetEase(Ease.InSine));
             }
 
-            results[0].SetActive(true);
-            backLight[0].SetActive(true);
+            anim.initialSkinName = "win";
+            anim.Initialize(true);
+            ChangeStateAnim();
         }
         else if (r.team_win == 1)
         {
             SoundMgr.PlaySound(PirateraSoundEffect.LOSE);
-            results[1].SetActive(true);
+            anim.initialSkinName = "lose";
+            anim.Initialize(true);
+            ChangeStateAnim();
         }
         else
         {
             SoundMgr.PlaySound(PirateraSoundEffect.DRAW);
-            results[2].SetActive(true);
+            anim.initialSkinName = "draw";
+            anim.Initialize(true);
+            ChangeStateAnim();
         }
 
     }
@@ -94,6 +104,16 @@ public class GuiReward : BaseGui
         if (fog) fog.FadeIn(0.3f);
     }
 
+    void ChangeStateAnim()
+    {
+        Sequence sq = DOTween.Sequence();
+        sq.AppendInterval(1);
+        sq.AppendCallback(() =>
+        {
+            anim.startingAnimation = "idle";
+            anim.Initialize(true);
+        });
+    }
     public void ClickReceive()
     {
         SceneManager.LoadScene("SceneLobby");
