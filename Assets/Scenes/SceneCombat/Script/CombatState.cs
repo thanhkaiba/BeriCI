@@ -216,13 +216,13 @@ public class CombatState : MonoBehaviour
             if (speedNeed_1 > speedNeed_2) return 1;
             short x_1 = sailor1.cs.position.x;
             short x_2 = sailor2.cs.position.x;
-            if (x_1 < x_2) return 1;
-            if (x_1 > x_2) return -1;
+            if (x_1 < x_2) return -1;
+            if (x_1 > x_2) return 1;
             short y_1 = sailor1.cs.position.y;
             short y_2 = sailor2.cs.position.y;
-            if (y_1 < y_2) return 1;
-            if (y_1 > y_2) return -1;
-            if (sailor1.cs.team == Team.A) return 1;
+            if (y_1 < y_2) return -1;
+            if (y_1 > y_2) return 1;
+            if (sailor1.cs.team == Team.A) return -1;
             else return 1;
         });
         return result;
