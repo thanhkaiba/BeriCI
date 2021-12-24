@@ -5,7 +5,7 @@ using System;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
-public class IconSailor : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
+public class IconSailor : MonoBehaviour
 {
     [SerializeField]
     private Color[] rankColor;
@@ -30,15 +30,10 @@ public class IconSailor : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     [SerializeField]
     private GameObject GOFocus;
     public Action<SailorModel> OnClick;
-    private SailorModel sailorModel;
+    public SailorModel sailorModel;
     public bool ShowClass = false;
     public bool ShowRank = false;
-    private bool ShowToolTip = true;
-
-    private Vector2 mouseBeginPos;
-    private const float MOVE_OFFSET = 50;
-    private bool selected = false;
-    private bool moved = false;
+ 
 
     public void PresentData(SailorModel model)
     {
@@ -97,33 +92,5 @@ public class IconSailor : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
         }
     }
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (selected && !moved)
-        {
-            if (TooltipSailorInfo.Instance != null && ShowToolTip)
-            {
-                Canvas canvas = FindObjectOfType<Canvas>();
-                TooltipSailorInfo.Instance.ShowStaticTooltip(sailorModel, transform.position + new Vector3(0, icon.sprite.rect.height * canvas.transform.localScale.x));
 
-            }
-        }
-        selected = false;
-        moved = false;
-    }
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        if (Vector3.Distance(mouseBeginPos, eventData.position) >= MOVE_OFFSET)
-        {
-            moved = true;
-        }
-    }
-
-    void IPointerDownHandler.OnPointerDown(PointerEventData eventData)
-    {
-        mouseBeginPos = eventData.position;
-        selected = true;
-        moved = false;
-    }
 }
