@@ -76,6 +76,7 @@ namespace Piratera.GUI
                 seq.AppendInterval(2f);
                 seq.Append(trs.GetComponent<Text>().DOFade(0, 0.2f));
                 seq.AppendCallback(() => { Destroy(trs); });
+                seq.SetLink(gameObject).SetTarget(transform);
 
                 Sequence s = DOTween.Sequence();
                 s.AppendInterval(0.6f);

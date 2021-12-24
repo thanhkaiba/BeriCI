@@ -45,6 +45,7 @@ namespace Piratera.GUI
             canvasGroup.interactable = false;
             canvasGroup.DOFade(1, 0.2f);
             s.AppendCallback(() => canvasGroup.interactable = true);
+            s.SetTarget(transform).SetLink(gameObject);
             background.localScale = new Vector3(0.6f, 0.6f, 0.6f);
             background.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack);
             var fog = GetComponent<HaveFog>();
@@ -57,6 +58,7 @@ namespace Piratera.GUI
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
             s.AppendCallback(DestroySelf);
+            s.SetTarget(transform).SetLink(gameObject);
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);
         }
