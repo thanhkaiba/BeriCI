@@ -28,12 +28,14 @@ public class TooltipSailorInfo : MonoBehaviour
     public Text textArmor;
     public Text textMagicResist;
     public Text textDes;
-    private Canvas canvas;
+    private RectTransform canvas;
+    private RectTransform panel;
 
     public List<Image> iconItems;
     void Awake()
     {
-        canvas = FindObjectOfType<Canvas>();
+        canvas = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
+        panel = GetComponent<RectTransform>();
         Instance = this;
     }
     void OnDestroy()
@@ -51,7 +53,7 @@ public class TooltipSailorInfo : MonoBehaviour
         {
             if (Input.GetMouseButton(0) && gameObject.activeSelf &&
              !RectTransformUtility.RectangleContainsScreenPoint(
-                 gameObject.GetComponent<RectTransform>(),
+                 panel,
                  Input.mousePosition,
                  Camera.main))
             {
@@ -67,6 +69,7 @@ public class TooltipSailorInfo : MonoBehaviour
             {
                 Vector3 pos = Camera.main.GetComponent<Camera>().WorldToScreenPoint(follow.position) + new Vector3(0, Screen.height / 10, 0);
                 transform.position = pos;
+                UpdateTooltipPos();
             }
             if (SceneManager.GetActiveScene().name != "SceneCombat2D")
                 return;
@@ -82,6 +85,17 @@ public class TooltipSailorInfo : MonoBehaviour
             furySlider.transform.Find("Text").GetComponent<Text>().text = (stats.Fury).ToString() + "/" + (stats.MaxFury).ToString();
         }
     }
+
+    private void UpdateTooltipPos()
+    {
+        var sizeDelta = canvas.sizeDelta - panel.sizeDelta;
+        var panelPivot = panel.pivot;
+        var position = panel.anchoredPosition;
+        position.x = Mathf.Clamp(position.x, -sizeDelta.x * panelPivot.x, sizeDelta.x * (1 - panelPivot.x));
+        position.y = Mathf.Clamp(position.y, -sizeDelta.y * panelPivot.y, sizeDelta.y * (1 - panelPivot.y));
+        panel.anchoredPosition = position;
+    }
+
     public void ShowTooltip(GameObject sailorGO)
     {
         if (SceneManager.GetActiveScene().name == "SceneCombat2D")
@@ -123,6 +137,7 @@ public class TooltipSailorInfo : MonoBehaviour
     {
         ShowTooltip(sailorModel, null);
         transform.position = position + new Vector3(0, GetComponent<RectTransform>().sizeDelta.y / 2 * canvas.transform.localScale.x);
+        UpdateTooltipPos();
     }
 
     public void ShowBasicInfo()
