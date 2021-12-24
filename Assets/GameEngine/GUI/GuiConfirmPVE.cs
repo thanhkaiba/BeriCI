@@ -27,7 +27,7 @@ namespace Piratera.GUI
         protected override void Start()
         {
             base.Start();
-            priceStamina = StaminaData.Instance.GetPvECost();
+            priceStamina = GlobalConfigs.PvE.stamina_cost;
             staminaCost.text = "" + priceStamina;
             staminaMinus.text = "-" + priceStamina;
             UpdateCurrentStamina();
