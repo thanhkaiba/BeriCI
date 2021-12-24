@@ -1,0 +1,20 @@
+{
+  "stamina_cost": 3,
+  "preparing_time": 60,
+  "lose_reward": 10,
+  "win_reward": 30,
+  "excellent_bonus": [
+    5,
+    10,
+    15,
+    20
+  ],
+  "excellent_health_remain": [
+    0,
+    25,
+    50,
+    75
+  ],
+  "hard_bonus_ratio": 0.2,
+  "rank_bot_around": 5.0
+}

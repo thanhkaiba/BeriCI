@@ -23,6 +23,7 @@ public class RenderAllConfig : MonoBehaviour
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
         RenderStaminaConfig("ScriptableObject/Stamina/Stamina", "Stamina");
         RenderLineUpSlotConfig("ScriptableObject/LineUpSlot/LineUpSlot", "LineUpSlot");
+        RenderPvEConfig("ScriptableObject/PvE/PvE", "PvE");
     }
 
     // Update is called once per frame
@@ -91,6 +92,17 @@ public class RenderAllConfig : MonoBehaviour
     {
         Debug.Log("RenderConfig " + src + " " + file_name);
         LineUpSlot a = Resources.Load<LineUpSlot>(src);
+        string json = a.Serialize(a);
+        string filesrc = "Assets/Config/json/" + file_name + ".json";
+        File.WriteAllText(filesrc, "");
+        StreamWriter writer = new StreamWriter(filesrc, true);
+        writer.WriteLine(json);
+        writer.Close();
+    }
+    void RenderPvEConfig(string src, string file_name)
+    {
+        Debug.Log("RenderConfig " + src + " " + file_name);
+        PvEConfig a = Resources.Load<PvEConfig>(src);
         string json = a.Serialize(a);
         string filesrc = "Assets/Config/json/" + file_name + ".json";
         File.WriteAllText(filesrc, "");
