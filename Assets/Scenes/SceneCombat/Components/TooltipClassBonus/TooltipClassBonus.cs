@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TooltipClassBonus : MonoBehaviour
 {
-   // public IconClassBonus iconType; 
+    // public IconClassBonus iconType; 
     public Text title;
     public Text content;
     public static TooltipClassBonus Instance;
@@ -29,8 +27,8 @@ public class TooltipClassBonus : MonoBehaviour
         {
             Rect size = GetComponent<RectTransform>().rect;
             Vector2 posInImage = transform.position - Input.mousePosition;
-            if (posInImage.x >= -size.width/2 && posInImage.x < size.width/2 &&
-                 posInImage.y >= -size.height/2 && posInImage.y < size.height/2)
+            if (posInImage.x >= -size.width / 2 && posInImage.x < size.width / 2 &&
+                 posInImage.y >= -size.height / 2 && posInImage.y < size.height / 2)
             {
                 // click inside
             }
@@ -42,10 +40,10 @@ public class TooltipClassBonus : MonoBehaviour
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         gameObject.SetActive(true);
         gameObject.transform.position = _pos.position;
-        gameObject.transform.localScale = SceneManager.GetActiveScene().name == "SceneCombat2D" ? new Vector3(.6f,.6f,.6f) : Vector3.one;
+        gameObject.transform.localScale = SceneManager.GetActiveScene().name == "SceneCombat2D" ? new Vector3(.6f, .6f, .6f) : Vector3.one;
         int maxPop = config.GetMaxPopNeed(data.type);
         List<float> para = config.GetParams(data.type, data.level);
-       // iconType.SetData(data);
+        // iconType.SetData(data);
         title.text = "" + data.type + " (" + data.current + "/" + maxPop + ")";
         switch (data.type)
         {

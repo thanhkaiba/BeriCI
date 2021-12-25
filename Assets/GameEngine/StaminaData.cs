@@ -1,10 +1,5 @@
 ﻿using Piratera.Utils;
 using Sfs2X.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public class StaminaData : Singleton<StaminaData>
@@ -54,11 +49,13 @@ public class StaminaData : Singleton<StaminaData>
         }
 
         long now = GameTimeMgr.GetCurrentTime();
+
         long delta = now - LastCountStamina;
         int recoveringTime = StaminaConfig.recovering_time * 1000;
-        delta = recoveringTime - delta % recoveringTime;
+        long remain = recoveringTime - delta % recoveringTime;
 
-        return delta;
+
+        return remain;
     }
 
     public void OnUserVariablesUpdate(User user)

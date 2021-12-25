@@ -40,7 +40,7 @@ namespace Piratera.GUI
 
         }
 
-       
+
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
             GuiManager.Instance.ShowGuiWaiting(false);
@@ -50,7 +50,8 @@ namespace Piratera.GUI
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);
-                } else
+                }
+                else
                 {
                     OnClose();
                 }
@@ -61,7 +62,7 @@ namespace Piratera.GUI
             textCurrentStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
 
         }
- 
+
         private void EnableButtonBuy(bool enabled)
         {
             buttonBuy.interactable = enabled;

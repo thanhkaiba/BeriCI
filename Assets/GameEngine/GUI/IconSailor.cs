@@ -1,9 +1,7 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Piratera.Constance;
-using System;
-using UnityEngine.EventSystems;
-using System.Collections.Generic;
 
 public class IconSailor : MonoBehaviour
 {
@@ -33,7 +31,7 @@ public class IconSailor : MonoBehaviour
     public SailorModel sailorModel;
     public bool ShowClass = false;
     public bool ShowRank = false;
- 
+
 
     public void PresentData(SailorModel model)
     {
@@ -85,7 +83,7 @@ public class IconSailor : MonoBehaviour
     }
     public void ClickSailor()
     {
-     
+
         if (OnClick != null)
         {
             OnClick(sailorModel);

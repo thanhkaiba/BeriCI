@@ -31,50 +31,57 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Spine.Unity.Prototyping {
+namespace Spine.Unity.Prototyping
+{
 
-	public class SpineEventUnityHandler : MonoBehaviour {
+    public class SpineEventUnityHandler : MonoBehaviour
+    {
 
-		[System.Serializable]
-		public class EventPair {
-			[SpineEvent] public string spineEvent;
-			public UnityEvent unityHandler;
-			public AnimationState.TrackEntryEventDelegate eventDelegate;
-		}
+        [System.Serializable]
+        public class EventPair
+        {
+            [SpineEvent] public string spineEvent;
+            public UnityEvent unityHandler;
+            public AnimationState.TrackEntryEventDelegate eventDelegate;
+        }
 
-		public List<EventPair> events = new List<EventPair>();
+        public List<EventPair> events = new List<EventPair>();
 
-		ISkeletonComponent skeletonComponent;
-		IAnimationStateComponent animationStateComponent;
+        ISkeletonComponent skeletonComponent;
+        IAnimationStateComponent animationStateComponent;
 
-		void Start () {
-			skeletonComponent = skeletonComponent ?? GetComponent<ISkeletonComponent>();
-			if (skeletonComponent == null) return;
-			animationStateComponent = animationStateComponent ?? skeletonComponent as IAnimationStateComponent;
-			if (animationStateComponent == null) return;
-			var skeleton = skeletonComponent.Skeleton;
-			if (skeleton == null) return;
+        void Start()
+        {
+            skeletonComponent = skeletonComponent ?? GetComponent<ISkeletonComponent>();
+            if (skeletonComponent == null) return;
+            animationStateComponent = animationStateComponent ?? skeletonComponent as IAnimationStateComponent;
+            if (animationStateComponent == null) return;
+            var skeleton = skeletonComponent.Skeleton;
+            if (skeleton == null) return;
 
 
-			var skeletonData = skeleton.Data;
-			var state = animationStateComponent.AnimationState;
-			foreach (var ep in events) {
-				var eventData = skeletonData.FindEvent(ep.spineEvent);
-				ep.eventDelegate = ep.eventDelegate ?? delegate(TrackEntry trackEntry, Event e) { if (e.Data == eventData) ep.unityHandler.Invoke(); };
-				state.Event += ep.eventDelegate;
-			}
-		}
+            var skeletonData = skeleton.Data;
+            var state = animationStateComponent.AnimationState;
+            foreach (var ep in events)
+            {
+                var eventData = skeletonData.FindEvent(ep.spineEvent);
+                ep.eventDelegate = ep.eventDelegate ?? delegate (TrackEntry trackEntry, Event e) { if (e.Data == eventData) ep.unityHandler.Invoke(); };
+                state.Event += ep.eventDelegate;
+            }
+        }
 
-		void OnDestroy () {
-			animationStateComponent = animationStateComponent ?? GetComponent<IAnimationStateComponent>();
-			if (animationStateComponent == null) return;
+        void OnDestroy()
+        {
+            animationStateComponent = animationStateComponent ?? GetComponent<IAnimationStateComponent>();
+            if (animationStateComponent == null) return;
 
-			var state = animationStateComponent.AnimationState;
-			foreach (var ep in events) {
-				if (ep.eventDelegate != null) state.Event -= ep.eventDelegate;
-				ep.eventDelegate = null;
-			}
-		}
+            var state = animationStateComponent.AnimationState;
+            foreach (var ep in events)
+            {
+                if (ep.eventDelegate != null) state.Event -= ep.eventDelegate;
+                ep.eventDelegate = null;
+            }
+        }
 
-	}
+    }
 }

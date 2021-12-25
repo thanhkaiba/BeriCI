@@ -1,8 +1,6 @@
 using DG.Tweening;
 using Piratera.Network;
-using Piratera.Utils;
 using Sfs2X.Entities.Data;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,7 +78,8 @@ namespace Piratera.GUI
 
                 Sequence s = DOTween.Sequence();
                 s.AppendInterval(0.6f);
-                s.AppendCallback(() => {
+                s.AppendCallback(() =>
+                {
                     fight.SetActive(false);
                     find.SetActive(true);
                 });

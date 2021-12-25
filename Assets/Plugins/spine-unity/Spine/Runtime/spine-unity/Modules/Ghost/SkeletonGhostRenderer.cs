@@ -29,100 +29,109 @@
 
 // Contributed by: Mitch Thompson
 
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-namespace Spine.Unity.Modules {
-	public class SkeletonGhostRenderer : MonoBehaviour {
-		static readonly Color32 TransparentBlack = new Color32(0, 0, 0, 0);
-		const string colorPropertyName = "_Color";
+namespace Spine.Unity.Modules
+{
+    public class SkeletonGhostRenderer : MonoBehaviour
+    {
+        static readonly Color32 TransparentBlack = new Color32(0, 0, 0, 0);
+        const string colorPropertyName = "_Color";
 
-		float fadeSpeed = 10;
-		Color32 startColor;
-		MeshFilter meshFilter;
-		MeshRenderer meshRenderer;
+        float fadeSpeed = 10;
+        Color32 startColor;
+        MeshFilter meshFilter;
+        MeshRenderer meshRenderer;
 
-		MaterialPropertyBlock mpb;
-		int colorId;
+        MaterialPropertyBlock mpb;
+        int colorId;
 
-		void Awake () {
-			meshRenderer = gameObject.AddComponent<MeshRenderer>();
-			meshFilter = gameObject.AddComponent<MeshFilter>();
+        void Awake()
+        {
+            meshRenderer = gameObject.AddComponent<MeshRenderer>();
+            meshFilter = gameObject.AddComponent<MeshFilter>();
 
-			colorId = Shader.PropertyToID(colorPropertyName);
-			mpb = new MaterialPropertyBlock();
-		}
+            colorId = Shader.PropertyToID(colorPropertyName);
+            mpb = new MaterialPropertyBlock();
+        }
 
-		public void Initialize (Mesh mesh, Material[] materials, Color32 color, bool additive, float speed, int sortingLayerID, int sortingOrder) {
-			StopAllCoroutines();
+        public void Initialize(Mesh mesh, Material[] materials, Color32 color, bool additive, float speed, int sortingLayerID, int sortingOrder)
+        {
+            StopAllCoroutines();
 
-			gameObject.SetActive(true);
-			meshRenderer.sharedMaterials = materials;
-			meshRenderer.sortingLayerID = sortingLayerID;
-			meshRenderer.sortingOrder = sortingOrder;
-			meshFilter.sharedMesh = Instantiate(mesh);
-			startColor = color;
-			mpb.SetColor(colorId, color);
-			meshRenderer.SetPropertyBlock(mpb);
+            gameObject.SetActive(true);
+            meshRenderer.sharedMaterials = materials;
+            meshRenderer.sortingLayerID = sortingLayerID;
+            meshRenderer.sortingOrder = sortingOrder;
+            meshFilter.sharedMesh = Instantiate(mesh);
+            startColor = color;
+            mpb.SetColor(colorId, color);
+            meshRenderer.SetPropertyBlock(mpb);
 
-			fadeSpeed = speed;
+            fadeSpeed = speed;
 
-			if (additive)
-				StartCoroutine(FadeAdditive());
-			else
-				StartCoroutine(Fade());
-		}
+            if (additive)
+                StartCoroutine(FadeAdditive());
+            else
+                StartCoroutine(Fade());
+        }
 
-		IEnumerator Fade () {
-			Color32 c = startColor;
-			Color32 black = SkeletonGhostRenderer.TransparentBlack;
+        IEnumerator Fade()
+        {
+            Color32 c = startColor;
+            Color32 black = SkeletonGhostRenderer.TransparentBlack;
 
-			float t = 1f;
-			for (float hardTimeLimit = 5f; hardTimeLimit > 0; hardTimeLimit -= Time.deltaTime) {
-				c = Color32.Lerp(black, startColor, t);
-				mpb.SetColor(colorId, c);
-				meshRenderer.SetPropertyBlock(mpb);
+            float t = 1f;
+            for (float hardTimeLimit = 5f; hardTimeLimit > 0; hardTimeLimit -= Time.deltaTime)
+            {
+                c = Color32.Lerp(black, startColor, t);
+                mpb.SetColor(colorId, c);
+                meshRenderer.SetPropertyBlock(mpb);
 
-				t = Mathf.Lerp(t, 0, Time.deltaTime * fadeSpeed);
-				if (t <= 0)
-					break;
-				
-				yield return null;
-			}
+                t = Mathf.Lerp(t, 0, Time.deltaTime * fadeSpeed);
+                if (t <= 0)
+                    break;
 
-			Destroy(meshFilter.sharedMesh);
-			gameObject.SetActive(false);
-		}
+                yield return null;
+            }
 
-		IEnumerator FadeAdditive () {
-			Color32 c = startColor;
-			Color32 black = SkeletonGhostRenderer.TransparentBlack;
+            Destroy(meshFilter.sharedMesh);
+            gameObject.SetActive(false);
+        }
 
-			float t = 1f;
-			
-			for (float hardTimeLimit = 5f; hardTimeLimit > 0; hardTimeLimit -= Time.deltaTime) {
-				c = Color32.Lerp(black, startColor, t);
-				mpb.SetColor(colorId, c);
-				meshRenderer.SetPropertyBlock(mpb);
+        IEnumerator FadeAdditive()
+        {
+            Color32 c = startColor;
+            Color32 black = SkeletonGhostRenderer.TransparentBlack;
 
-				t = Mathf.Lerp(t, 0, Time.deltaTime * fadeSpeed);
-				if (t <= 0)
-					break;
+            float t = 1f;
 
-				yield return null;
-			}
+            for (float hardTimeLimit = 5f; hardTimeLimit > 0; hardTimeLimit -= Time.deltaTime)
+            {
+                c = Color32.Lerp(black, startColor, t);
+                mpb.SetColor(colorId, c);
+                meshRenderer.SetPropertyBlock(mpb);
 
-			Destroy(meshFilter.sharedMesh);
+                t = Mathf.Lerp(t, 0, Time.deltaTime * fadeSpeed);
+                if (t <= 0)
+                    break;
 
-			gameObject.SetActive(false);
-		}
+                yield return null;
+            }
 
-		public void Cleanup () {
-			if (meshFilter != null && meshFilter.sharedMesh != null)
-				Destroy(meshFilter.sharedMesh);
+            Destroy(meshFilter.sharedMesh);
 
-			Destroy(gameObject);
-		}
-	}
+            gameObject.SetActive(false);
+        }
+
+        public void Cleanup()
+        {
+            if (meshFilter != null && meshFilter.sharedMesh != null)
+                Destroy(meshFilter.sharedMesh);
+
+            Destroy(gameObject);
+        }
+    }
 
 }

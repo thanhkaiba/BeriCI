@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System.Collections;
+using UnityEngine.UI;
 
 public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
@@ -40,7 +39,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         drag.SetStartPosition(data.position, dragImage, this);
     }
 
-   
+
     public static Image CreateDragSailorImage(SailorModel model, Transform parent)
     {
         GameObject g = new GameObject("drag-" + model.id);
@@ -68,17 +67,17 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         beginPos = eventData.position;
     }
 
- 
+
     public void OnPointerUp(PointerEventData eventData)
     {
         showedSubsailor = false;
     }
 
-  
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-   
+
         ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.beginDragHandler);
     }
 

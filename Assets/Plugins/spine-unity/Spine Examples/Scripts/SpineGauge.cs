@@ -28,37 +28,41 @@
  *****************************************************************************/
 
 using UnityEngine;
-using Spine.Unity;
 
-namespace Spine.Unity.Examples {
-	[ExecuteInEditMode]
-	[RequireComponent(typeof(SkeletonRenderer))]
-	public class SpineGauge : MonoBehaviour {
+namespace Spine.Unity.Examples
+{
+    [ExecuteInEditMode]
+    [RequireComponent(typeof(SkeletonRenderer))]
+    public class SpineGauge : MonoBehaviour
+    {
 
-		#region Inspector
-		[Range(0,1)]
-		public float fillPercent = 0;
-		public AnimationReferenceAsset fillAnimation;
-		#endregion
+        #region Inspector
+        [Range(0, 1)]
+        public float fillPercent = 0;
+        public AnimationReferenceAsset fillAnimation;
+        #endregion
 
-		SkeletonRenderer skeletonRenderer;
+        SkeletonRenderer skeletonRenderer;
 
-		void Awake () {
-			skeletonRenderer = GetComponent<SkeletonRenderer>();
-		}
+        void Awake()
+        {
+            skeletonRenderer = GetComponent<SkeletonRenderer>();
+        }
 
-		void Update () {
-			SetGaugePercent(fillPercent);
-		}
+        void Update()
+        {
+            SetGaugePercent(fillPercent);
+        }
 
-		public void SetGaugePercent (float percent) {
-			if (skeletonRenderer == null) return;
-			var skeleton = skeletonRenderer.skeleton; if (skeleton == null) return;
+        public void SetGaugePercent(float percent)
+        {
+            if (skeletonRenderer == null) return;
+            var skeleton = skeletonRenderer.skeleton; if (skeleton == null) return;
 
-			fillAnimation.Animation.PoseSkeleton(skeleton, percent);
-			skeleton.Update(Time.deltaTime);
-			skeleton.UpdateWorldTransform();
-		}
-	}
+            fillAnimation.Animation.PoseSkeleton(skeleton, percent);
+            skeleton.Update(Time.deltaTime);
+            skeleton.UpdateWorldTransform();
+        }
+    }
 
 }

@@ -1,7 +1,6 @@
 ﻿using DG.Tweening;
 using Spine.Unity;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -99,7 +98,7 @@ public class CombatState : MonoBehaviour
     void CreateTeamB()
     {
         CreateCombatSailor("Salvatafo", new CombatPosition(0, 2), Team.B);
-       // CreateCombatSailor("Galdalf", new CombatPosition(2, 1), Team.B);
+        // CreateCombatSailor("Galdalf", new CombatPosition(2, 1), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
@@ -166,7 +165,8 @@ public class CombatState : MonoBehaviour
     public List<CombatSailor> GetAllAliveCombatSailors()
     {
         List<CombatSailor> result = new List<CombatSailor>();
-        sailorsTeamA.ForEach(character => {
+        sailorsTeamA.ForEach(character =>
+        {
             if (!character.IsDeath()) result.Add(character);
         });
         sailorsTeamB.ForEach(character =>
@@ -185,7 +185,7 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    public List<CombatSailor> GetAllTeamAliveExceptSelfSailors(Team t , CombatSailor m)
+    public List<CombatSailor> GetAllTeamAliveExceptSelfSailors(Team t, CombatSailor m)
     {
         List<CombatSailor> result = new List<CombatSailor>();
         List<CombatSailor> CTeam = t == Team.A ? sailorsTeamA : sailorsTeamB;
@@ -237,7 +237,7 @@ public class CombatState : MonoBehaviour
         {
             typeCount.Add(0);
         }
-        
+
         foreach (SailorClass type in (SailorClass[])Enum.GetValues(typeof(SailorClass)))
         {
             List<string> countedSailor = new List<string>();
@@ -321,14 +321,16 @@ public class CombatState : MonoBehaviour
     public CombatSailor GetSailor(Team t, string id)
     {
         var l = GetAllTeamAliveSailors(t);
-        return l.Find(sailor => {
+        return l.Find(sailor =>
+        {
             return sailor.Model.id == id;
         });
     }
     public CombatSailor GetSailor(string id)
     {
         var l = GetAllSailors();
-        return l.Find(sailor => {
+        return l.Find(sailor =>
+        {
             return sailor.Model.id == id;
         });
     }
@@ -338,7 +340,7 @@ public class CombatState : MonoBehaviour
         list_id.ForEach(id => result.Add(GetSailor(id)));
         return result;
     }
-    public void HighlightListSailor (List<CombatSailor> sailors, float time)
+    public void HighlightListSailor(List<CombatSailor> sailors, float time)
     {
         var l = GetAllSailors();
         l.ForEach(sailor =>

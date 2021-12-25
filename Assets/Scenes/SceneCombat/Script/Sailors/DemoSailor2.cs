@@ -1,10 +1,6 @@
-using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
-
 using DG.Tweening;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class DemoSailor2 : CombatSailor
 {
@@ -51,7 +47,8 @@ public class DemoSailor2 : CombatSailor
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.05f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             arrow.SetActive(true);
             arrow.transform.rotation = Quaternion.Euler(0, 0, -5 * r);
             arrow.transform.DORotate(new Vector3(0, 0, 10 * r), 0.4f);
@@ -61,7 +58,7 @@ public class DemoSailor2 : CombatSailor
 
         return 0.4f;
     }
-    public override float RunSkill (List<CombatSailor> targets)
+    public override float RunSkill(List<CombatSailor> targets)
     {
         float delay = 0f;
         return delay;

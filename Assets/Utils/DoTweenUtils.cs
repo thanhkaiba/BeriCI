@@ -1,5 +1,5 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -72,14 +72,14 @@ namespace Piratera.Utils
             s.SetLink(button.gameObject);
         }
 
-        public static Tweener FadeAppear(Image image, float duration, float delay = 0 )
+        public static Tweener FadeAppear(Image image, float duration, float delay = 0)
         {
             float opacity = image.color.a;
             image.color -= new Color(0, 0, 0, opacity);
             return image.DOFade(opacity, duration).SetDelay(delay);
         }
 
-       
+
 
         public static void UpdateNumber(Text nodeText, long oldValue, long newValue, float actionTime, Func<long, string> transform)
         {

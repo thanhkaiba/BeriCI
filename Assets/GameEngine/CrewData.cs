@@ -1,7 +1,6 @@
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class CrewData : Singleton<CrewData>
 {
@@ -27,7 +26,7 @@ public class CrewData : Singleton<CrewData>
     {
         Sailors.Clear();
         FightingTeam.Clean();
-        
+
     }
     public void NewFromSFSObject(ISFSObject packet)
     {
@@ -57,7 +56,7 @@ public class CrewData : Singleton<CrewData>
         }
 
     }
-    public void Occupie(string sailorId,short slot)
+    public void Occupie(string sailorId, short slot)
     {
         if (GetSailorModel(sailorId) == null)
         {
@@ -74,7 +73,7 @@ public class CrewData : Singleton<CrewData>
         {
             return;
         }
-        
+
         if (FightingTeam.Replace(subSailor, slot))
         {
             GameEvent.SquadChanged.Invoke();
@@ -99,14 +98,14 @@ public class CrewData : Singleton<CrewData>
         List<string> values = FightingTeam.GetValues();
         foreach (string val in values)
         {
-            if(val != "")
+            if (val != "")
             {
                 result.Add(GetSailorModel(val));
             }
         }
         return result;
     }
-  
+
     public List<SailorModel> GetSubstituteSailors()
     {
         List<SailorModel> result = new List<SailorModel>();
@@ -128,7 +127,7 @@ public class CrewData : Singleton<CrewData>
     /// <param name="combatPosition"></param>
     /// <returns>return null if not found</returns>
     public SailorModel SailorAt(CombatPosition combatPosition)
-    {  
+    {
         return GetSailorModel(FightingTeam.SailorIdAt(combatPosition));
     }
 }

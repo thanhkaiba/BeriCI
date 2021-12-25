@@ -1,9 +1,8 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json.Linq;
 using System.Collections;
-using UnityEngine.Networking;
-using Piratera.GUI;
-using Newtonsoft.Json.Linq;
+using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 
 public class GameVersionController : MonoBehaviour
 {
@@ -50,11 +49,12 @@ public class GameVersionController : MonoBehaviour
             {
                 DownloadUrl = (string)o["download_url"];
                 OnNeedUpdate.Invoke((string)o["download_url"]);
-            }  else
+            }
+            else
             {
                 OnCheckSuccess.Invoke();
             }
-  
+
         }
     }
 }

@@ -1,10 +1,8 @@
-using DG.Tweening;
 using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -59,7 +57,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         Init();
     }
 
- 
+
 
     public void Init()
     {
@@ -98,20 +96,20 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
         if (!squaA.HaveSailor())
         {
-           
+
             NetworkController.SendSurrenderPVEToSever();
             GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors", () => SceneManager.LoadScene("SceneLobby"));
         }
         else SendStartCombat();
 
-           
+
     }
 
     public void SendStartCombat()
     {
-        if (!squaA.HaveSailor()) 
-        { 
-            GuiManager.Instance.ShowPopupNotification("Need at least one Sailor"); 
+        if (!squaA.HaveSailor())
+        {
+            GuiManager.Instance.ShowPopupNotification("Need at least one Sailor");
         }
         else
         {
@@ -127,5 +125,5 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         GuiManager.Instance.AddGui<GuiSurrender>("Prefap/GuiSurrender", LayerId.GUI);
     }
 
- 
+
 }

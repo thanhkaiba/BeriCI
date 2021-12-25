@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using Piratera.Utils;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Piratera.Sound;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class LoginUI : MonoBehaviour
 {
@@ -31,12 +30,12 @@ public class LoginUI : MonoBehaviour
     void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.LOGIN);
-		RunAppearAction();
+        RunAppearAction();
     }
 
-	private void RunAppearAction2()
-	{
-     
+    private void RunAppearAction2()
+    {
+
         Sequence seq = DOTween.Sequence();
         RectTransform chainTrasform = (chain.transform as RectTransform);
         seq.Insert(1, chainTrasform.DOAnchorPosY(chainTrasform.anchoredPosition.y + 500, 0.6f).From().SetEase(Ease.OutQuint));
@@ -53,7 +52,7 @@ public class LoginUI : MonoBehaviour
 
         foreach (Image element in textboxs)
         {
-            
+
             Sequence textBoxSeq = DOTween.Sequence();
             element.transform.localScale -= new Vector3(element.transform.localScale.x, 0, 0);
             textBoxSeq.PrependInterval(Random.Range(0.4f, 0.6f));
@@ -75,7 +74,7 @@ public class LoginUI : MonoBehaviour
         buttonSeq2.Insert(0, buttonSignup.DOFade(1, 0.4f));
         buttonSeq2.Insert(0, buttonSignup.transform.DOMoveY(-200, 0.4f).From());
         seq.Append(buttonSeq2);
-       
+
 
 
 

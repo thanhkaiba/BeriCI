@@ -29,7 +29,7 @@ public class SquadContainer : MonoBehaviour
                 }
             }
         }
-        
+
         OnUpdateSquad();
         GameEvent.SquadChanged.AddListener(OnUpdateSquad);
 
@@ -47,7 +47,7 @@ public class SquadContainer : MonoBehaviour
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
         sailor.transform.localPosition = Vector3.zero;
-      
+
 
         return sailor;
     }
@@ -78,7 +78,7 @@ public class SquadContainer : MonoBehaviour
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
         sailor.transform.localPosition = Vector3.zero;
-     
+
 
         return sailor;
     }

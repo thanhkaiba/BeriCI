@@ -27,36 +27,39 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using System.Collections;
+using Spine.Unity.Modules.AttachmentTools;
 using System.Collections.Generic;
 using UnityEngine;
-using Spine.Unity.Modules.AttachmentTools; 
 
-namespace Spine.Unity.Examples {
-	public class CombinedSkin : MonoBehaviour {
-		[SpineSkin]
-		public List<string> skinsToCombine;
+namespace Spine.Unity.Examples
+{
+    public class CombinedSkin : MonoBehaviour
+    {
+        [SpineSkin]
+        public List<string> skinsToCombine;
 
-		Skin combinedSkin;
+        Skin combinedSkin;
 
-		void Start () {
-			var skeletonComponent = GetComponent<ISkeletonComponent>();
-			if (skeletonComponent == null) return;
-			var skeleton = skeletonComponent.Skeleton;
-			if (skeleton == null) return;
+        void Start()
+        {
+            var skeletonComponent = GetComponent<ISkeletonComponent>();
+            if (skeletonComponent == null) return;
+            var skeleton = skeletonComponent.Skeleton;
+            if (skeleton == null) return;
 
-			combinedSkin = combinedSkin ?? new Skin("combined");
-			combinedSkin.Clear();
-			foreach (var skinName in skinsToCombine) {
-				var skin = skeleton.Data.FindSkin(skinName);
-				if (skin != null) combinedSkin.AddAttachments(skin);
-			}
+            combinedSkin = combinedSkin ?? new Skin("combined");
+            combinedSkin.Clear();
+            foreach (var skinName in skinsToCombine)
+            {
+                var skin = skeleton.Data.FindSkin(skinName);
+                if (skin != null) combinedSkin.AddAttachments(skin);
+            }
 
-			skeleton.SetSkin(combinedSkin);
-			skeleton.SetToSetupPose();
-			var animationStateComponent = skeletonComponent as IAnimationStateComponent;
-			if (animationStateComponent != null) animationStateComponent.AnimationState.Apply(skeleton);
-		}
-	}
+            skeleton.SetSkin(combinedSkin);
+            skeleton.SetToSetupPose();
+            var animationStateComponent = skeletonComponent as IAnimationStateComponent;
+            if (animationStateComponent != null) animationStateComponent.AnimationState.Apply(skeleton);
+        }
+    }
 
 }

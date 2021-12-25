@@ -27,138 +27,153 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
-using Spine;
-using Spine.Unity;
+namespace Spine.Unity.Examples
+{
+    public class SpineAnimationTesterTool : MonoBehaviour, IHasSkeletonDataAsset, IHasSkeletonComponent
+    {
 
-using System.Text;
+        public SkeletonAnimation skeletonAnimation;
+        public SkeletonDataAsset SkeletonDataAsset { get { return skeletonAnimation.SkeletonDataAsset; } }
+        public ISkeletonComponent SkeletonComponent { get { return skeletonAnimation; } }
 
-namespace Spine.Unity.Examples {
-	public class SpineAnimationTesterTool : MonoBehaviour, IHasSkeletonDataAsset, IHasSkeletonComponent {
+        public bool useOverrideMixDuration;
+        public float overrideMixDuration = 0.2f;
 
-		public SkeletonAnimation skeletonAnimation;
-		public SkeletonDataAsset SkeletonDataAsset { get { return skeletonAnimation.SkeletonDataAsset; } }
-		public ISkeletonComponent SkeletonComponent { get { return skeletonAnimation; } }
+        public bool useOverrideAttachmentThreshold = true;
 
-		public bool useOverrideMixDuration;
-		public float overrideMixDuration = 0.2f;
+        [Range(0f, 1f)]
+        public float attachmentThreshold = 0.5f;
 
-		public bool useOverrideAttachmentThreshold = true;
+        public bool useOverrideDrawOrderThreshold;
+        [Range(0f, 1f)]
+        public float drawOrderThreshold = 0.5f;
 
-		[Range(0f,1f)]
-		public float attachmentThreshold = 0.5f;
+        [System.Serializable]
+        public struct AnimationControl
+        {
+            [SpineAnimation]
+            public string animationName;
+            public bool loop;
+            public KeyCode key;
 
-		public bool useOverrideDrawOrderThreshold;
-		[Range(0f, 1f)]
-		public float drawOrderThreshold = 0.5f;
+            [Space]
+            public bool useCustomMixDuration;
+            public float mixDuration;
+            //public bool useChainToControl;
+            //public int chainToControl;
+        }
+        [System.Serializable]
+        public class ControlledTrack
+        {
+            public List<AnimationControl> controls = new List<AnimationControl>();
+        }
 
-		[System.Serializable]
-		public struct AnimationControl {
-			[SpineAnimation]
-			public string animationName;
-			public bool loop;
-			public KeyCode key;
+        [Space]
+        public List<ControlledTrack> trackControls = new List<ControlledTrack>();
 
-			[Space]			
-			public bool useCustomMixDuration;
-			public float mixDuration;
-			//public bool useChainToControl;
-			//public int chainToControl;
-		}
-		[System.Serializable]
-		public class ControlledTrack {
-			public List<AnimationControl> controls = new List<AnimationControl>();
-		}
+        [Header("UI")]
+        public UnityEngine.UI.Text boundAnimationsText;
+        public UnityEngine.UI.Text skeletonNameText;
 
-		[Space]
-		public List<ControlledTrack> trackControls = new List<ControlledTrack>();
+        void OnValidate()
+        {
+            // Fill in the SkeletonData asset name
+            if (skeletonNameText != null)
+            {
+                if (skeletonAnimation != null && skeletonAnimation.skeletonDataAsset != null)
+                {
+                    skeletonNameText.text = SkeletonDataAsset.name.Replace("_SkeletonData", "");
+                }
+            }
 
-		[Header("UI")]
-		public UnityEngine.UI.Text boundAnimationsText;
-		public UnityEngine.UI.Text skeletonNameText;
+            // Fill in the control list.
+            if (boundAnimationsText != null)
+            {
+                var boundAnimationsStringBuilder = new StringBuilder();
+                boundAnimationsStringBuilder.AppendLine("Animation Controls:");
 
-		void OnValidate () {
-			// Fill in the SkeletonData asset name
-			if (skeletonNameText != null) {
-				if (skeletonAnimation != null && skeletonAnimation.skeletonDataAsset != null) {
-					skeletonNameText.text = SkeletonDataAsset.name.Replace("_SkeletonData", "");
-				}
-			}
+                for (int trackIndex = 0; trackIndex < trackControls.Count; trackIndex++)
+                {
 
-			// Fill in the control list.
-			if (boundAnimationsText != null) {
-				var boundAnimationsStringBuilder = new StringBuilder();
-				boundAnimationsStringBuilder.AppendLine("Animation Controls:");
+                    if (trackIndex > 0)
+                        boundAnimationsStringBuilder.AppendLine();
 
-				for (int trackIndex = 0; trackIndex < trackControls.Count; trackIndex++) {
+                    boundAnimationsStringBuilder.AppendFormat("---- Track {0} ---- \n", trackIndex);
+                    foreach (var ba in trackControls[trackIndex].controls)
+                    {
+                        string animationName = ba.animationName;
+                        if (string.IsNullOrEmpty(animationName))
+                            animationName = "SetEmptyAnimation";
 
-					if (trackIndex > 0)
-						boundAnimationsStringBuilder.AppendLine();
+                        boundAnimationsStringBuilder.AppendFormat("[{0}]  {1}\n", ba.key.ToString(), animationName);
+                    }
 
-					boundAnimationsStringBuilder.AppendFormat("---- Track {0} ---- \n", trackIndex);
-					foreach (var ba in trackControls[trackIndex].controls) {
-						string animationName = ba.animationName;
-						if (string.IsNullOrEmpty(animationName))
-							animationName = "SetEmptyAnimation";
+                }
 
-						boundAnimationsStringBuilder.AppendFormat("[{0}]  {1}\n", ba.key.ToString(), animationName);
-					}
+                boundAnimationsText.text = boundAnimationsStringBuilder.ToString();
 
-				}	
+            }
 
-				boundAnimationsText.text = boundAnimationsStringBuilder.ToString();
+        }
 
-			}
-				
-		}
+        void Start()
+        {
+            if (useOverrideMixDuration)
+            {
+                skeletonAnimation.AnimationState.Data.DefaultMix = overrideMixDuration;
+            }
+        }
 
-		void Start () {
-			if (useOverrideMixDuration) {
-				skeletonAnimation.AnimationState.Data.DefaultMix = overrideMixDuration;
-			}
-		}
+        void Update()
+        {
+            var animationState = skeletonAnimation.AnimationState;
 
-		void Update () {
-			var animationState = skeletonAnimation.AnimationState;
+            // For each track
+            for (int trackIndex = 0; trackIndex < trackControls.Count; trackIndex++)
+            {
 
-			// For each track
-			for (int trackIndex = 0; trackIndex < trackControls.Count; trackIndex++) {
+                // For each control in the track
+                foreach (var control in trackControls[trackIndex].controls)
+                {
 
-				// For each control in the track
-				foreach (var control in trackControls[trackIndex].controls) {
+                    // Check each control, and play the appropriate animation.
+                    if (Input.GetKeyDown(control.key))
+                    {
+                        TrackEntry trackEntry;
+                        if (!string.IsNullOrEmpty(control.animationName))
+                        {
+                            trackEntry = animationState.SetAnimation(trackIndex, control.animationName, control.loop);
 
-					// Check each control, and play the appropriate animation.
-					if (Input.GetKeyDown(control.key)) {
-						TrackEntry trackEntry;
-						if (!string.IsNullOrEmpty(control.animationName)) {
-							trackEntry = animationState.SetAnimation(trackIndex, control.animationName, control.loop);
-							
-						} else {
-							float mix = control.useCustomMixDuration ? control.mixDuration : animationState.Data.DefaultMix;
-							trackEntry = animationState.SetEmptyAnimation(trackIndex, mix);
-						}
+                        }
+                        else
+                        {
+                            float mix = control.useCustomMixDuration ? control.mixDuration : animationState.Data.DefaultMix;
+                            trackEntry = animationState.SetEmptyAnimation(trackIndex, mix);
+                        }
 
-						if (trackEntry != null) {
-							if (control.useCustomMixDuration)
-								trackEntry.MixDuration = control.mixDuration;
+                        if (trackEntry != null)
+                        {
+                            if (control.useCustomMixDuration)
+                                trackEntry.MixDuration = control.mixDuration;
 
-							if (useOverrideAttachmentThreshold)
-								trackEntry.AttachmentThreshold = attachmentThreshold;
+                            if (useOverrideAttachmentThreshold)
+                                trackEntry.AttachmentThreshold = attachmentThreshold;
 
-							if (useOverrideDrawOrderThreshold)
-								trackEntry.DrawOrderThreshold = drawOrderThreshold;
-						}
+                            if (useOverrideDrawOrderThreshold)
+                                trackEntry.DrawOrderThreshold = drawOrderThreshold;
+                        }
 
-						// Don't parse more than one animation per track.
-						break; 
-					}
-				}
-			}
+                        // Don't parse more than one animation per track.
+                        break;
+                    }
+                }
+            }
 
-		}
+        }
 
-	}
+    }
 }

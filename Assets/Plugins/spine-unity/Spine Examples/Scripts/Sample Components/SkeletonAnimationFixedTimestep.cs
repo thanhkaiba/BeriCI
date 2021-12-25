@@ -29,68 +29,76 @@
 
 using UnityEngine;
 
-namespace Spine.Unity {
+namespace Spine.Unity
+{
 
-	// To use this example component, add it to your SkeletonAnimation Spine GameObject.
-	// This component will disable that SkeletonAnimation component to prevent it from calling its own Update and LateUpdate methods.
+    // To use this example component, add it to your SkeletonAnimation Spine GameObject.
+    // This component will disable that SkeletonAnimation component to prevent it from calling its own Update and LateUpdate methods.
 
-	[DisallowMultipleComponent]
-	public sealed class SkeletonAnimationFixedTimestep : MonoBehaviour {
-		#region Inspector
-		public SkeletonAnimation skeletonAnimation;
+    [DisallowMultipleComponent]
+    public sealed class SkeletonAnimationFixedTimestep : MonoBehaviour
+    {
+        #region Inspector
+        public SkeletonAnimation skeletonAnimation;
 
-		[Tooltip("The duration of each frame in seconds. For 12 fps: enter '1/12' in the Unity inspector.")]
-		public float frameDeltaTime = 1 / 15f;
+        [Tooltip("The duration of each frame in seconds. For 12 fps: enter '1/12' in the Unity inspector.")]
+        public float frameDeltaTime = 1 / 15f;
 
-		[Header("Advanced")]
-		[Tooltip("The maximum number of fixed timesteps. If the game framerate drops below the If the framerate is consistently faster than the limited frames, this does nothing.")]
-		public int maxFrameSkip = 4;
+        [Header("Advanced")]
+        [Tooltip("The maximum number of fixed timesteps. If the game framerate drops below the If the framerate is consistently faster than the limited frames, this does nothing.")]
+        public int maxFrameSkip = 4;
 
-		[Tooltip("If enabled, the Skeleton mesh will be updated only on the same frame when the animation and skeleton are updated. Disable this or call SkeletonAnimation.LateUpdate yourself if you are modifying the Skeleton using other components that don't run in the same fixed timestep.")]
-		public bool frameskipMeshUpdate = true;
+        [Tooltip("If enabled, the Skeleton mesh will be updated only on the same frame when the animation and skeleton are updated. Disable this or call SkeletonAnimation.LateUpdate yourself if you are modifying the Skeleton using other components that don't run in the same fixed timestep.")]
+        public bool frameskipMeshUpdate = true;
 
-		[Tooltip("This is the amount the internal accumulator starts with. Set it to some fraction of your frame delta time if you want to stagger updates between multiple skeletons.")]
-		public float timeOffset;
-		#endregion
+        [Tooltip("This is the amount the internal accumulator starts with. Set it to some fraction of your frame delta time if you want to stagger updates between multiple skeletons.")]
+        public float timeOffset;
+        #endregion
 
-		float accumulatedTime = 0;
-		bool requiresNewMesh;
+        float accumulatedTime = 0;
+        bool requiresNewMesh;
 
-		void OnValidate () {
-			skeletonAnimation = GetComponent<SkeletonAnimation>();
-			if (frameDeltaTime <= 0) frameDeltaTime = 1 / 60f;
-			if (maxFrameSkip < 1) maxFrameSkip = 1;
-		}
+        void OnValidate()
+        {
+            skeletonAnimation = GetComponent<SkeletonAnimation>();
+            if (frameDeltaTime <= 0) frameDeltaTime = 1 / 60f;
+            if (maxFrameSkip < 1) maxFrameSkip = 1;
+        }
 
-		void Awake () {
-			requiresNewMesh = true;
-			accumulatedTime = timeOffset;
-		}
+        void Awake()
+        {
+            requiresNewMesh = true;
+            accumulatedTime = timeOffset;
+        }
 
-		void Update () {
-			if (skeletonAnimation.enabled)
-				skeletonAnimation.enabled = false;
+        void Update()
+        {
+            if (skeletonAnimation.enabled)
+                skeletonAnimation.enabled = false;
 
-			accumulatedTime += Time.deltaTime;
+            accumulatedTime += Time.deltaTime;
 
-			float frames = 0;
-			while (accumulatedTime >= frameDeltaTime) {
-				frames++;
-				if (frames > maxFrameSkip) break;
-				accumulatedTime -= frameDeltaTime;
-			}
+            float frames = 0;
+            while (accumulatedTime >= frameDeltaTime)
+            {
+                frames++;
+                if (frames > maxFrameSkip) break;
+                accumulatedTime -= frameDeltaTime;
+            }
 
-			if (frames > 0) {
-				skeletonAnimation.Update(frames * frameDeltaTime);
-				requiresNewMesh = true;
-			}	
-		}
+            if (frames > 0)
+            {
+                skeletonAnimation.Update(frames * frameDeltaTime);
+                requiresNewMesh = true;
+            }
+        }
 
-		void LateUpdate () {
-			if (frameskipMeshUpdate && !requiresNewMesh) return;
+        void LateUpdate()
+        {
+            if (frameskipMeshUpdate && !requiresNewMesh) return;
 
-			skeletonAnimation.LateUpdate();
-			requiresNewMesh = false;
-		}
-	}
+            skeletonAnimation.LateUpdate();
+            requiresNewMesh = false;
+        }
+    }
 }

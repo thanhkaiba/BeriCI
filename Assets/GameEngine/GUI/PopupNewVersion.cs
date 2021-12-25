@@ -22,7 +22,7 @@ namespace Piratera.GUI
             }
         }
 
-     
+
 
         private void Appear()
         {
@@ -50,7 +50,7 @@ namespace Piratera.GUI
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);
         }
-        
+
         public void SetData(Action okFunc)
         {
             OKFunc = okFunc;

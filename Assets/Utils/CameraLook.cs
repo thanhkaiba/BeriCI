@@ -1,7 +1,4 @@
 using UnityEngine;
-using System.Collections;
-using System;
-using UnityEngine.EventSystems;
 
 public class CameraLook : MonoBehaviour
 {
@@ -46,7 +43,7 @@ public class CameraLook : MonoBehaviour
         float angle = transform.eulerAngles.y;
         float scale = 1;
         if (angle > 180) angle -= 360;
-        if (moveX > 0 && angle > limitSlow) scale = (limitAngle - angle)/(limitAngle - limitSlow);
+        if (moveX > 0 && angle > limitSlow) scale = (limitAngle - angle) / (limitAngle - limitSlow);
         if (moveX < 0 && angle < -limitSlow) scale = (limitAngle + angle) / (limitAngle - limitSlow);
         transform.RotateAround(point, new Vector3(0.0f, 1.0f, 0.0f), speed * moveX * scale);
     }

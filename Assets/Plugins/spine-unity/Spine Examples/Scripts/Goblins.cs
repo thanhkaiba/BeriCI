@@ -28,40 +28,45 @@
  *****************************************************************************/
 
 using UnityEngine;
-using Spine;
-using Spine.Unity;
 
-namespace Spine.Unity.Examples {
-	public class Goblins : MonoBehaviour {
-		SkeletonAnimation skeletonAnimation;
-		Bone headBone;
-		bool girlSkin;
+namespace Spine.Unity.Examples
+{
+    public class Goblins : MonoBehaviour
+    {
+        SkeletonAnimation skeletonAnimation;
+        Bone headBone;
+        bool girlSkin;
 
-		[Range(-360, 360)]
-		public float extraRotation;
-		
-		public void Start () {
-			skeletonAnimation = GetComponent<SkeletonAnimation>();
-			headBone = skeletonAnimation.Skeleton.FindBone("head");
-			skeletonAnimation.UpdateLocal += UpdateLocal;
-		}
+        [Range(-360, 360)]
+        public float extraRotation;
 
-		// This is called after the animation is applied to the skeleton and can be used to adjust the bones dynamically.
-		public void UpdateLocal (ISkeletonAnimation skeletonRenderer) {
-			headBone.Rotation += extraRotation;
-		}
-		
-		public void OnMouseDown () {
-			skeletonAnimation.Skeleton.SetSkin(girlSkin ? "goblin" : "goblingirl");
-			skeletonAnimation.Skeleton.SetSlotsToSetupPose();
-			
-			girlSkin = !girlSkin;
-			
-			if (girlSkin) {
-				skeletonAnimation.Skeleton.SetAttachment("right hand item", null);
-				skeletonAnimation.Skeleton.SetAttachment("left hand item", "spear");
-			} else
-				skeletonAnimation.Skeleton.SetAttachment("left hand item", "dagger");
-		}
-	}
+        public void Start()
+        {
+            skeletonAnimation = GetComponent<SkeletonAnimation>();
+            headBone = skeletonAnimation.Skeleton.FindBone("head");
+            skeletonAnimation.UpdateLocal += UpdateLocal;
+        }
+
+        // This is called after the animation is applied to the skeleton and can be used to adjust the bones dynamically.
+        public void UpdateLocal(ISkeletonAnimation skeletonRenderer)
+        {
+            headBone.Rotation += extraRotation;
+        }
+
+        public void OnMouseDown()
+        {
+            skeletonAnimation.Skeleton.SetSkin(girlSkin ? "goblin" : "goblingirl");
+            skeletonAnimation.Skeleton.SetSlotsToSetupPose();
+
+            girlSkin = !girlSkin;
+
+            if (girlSkin)
+            {
+                skeletonAnimation.Skeleton.SetAttachment("right hand item", null);
+                skeletonAnimation.Skeleton.SetAttachment("left hand item", "spear");
+            }
+            else
+                skeletonAnimation.Skeleton.SetAttachment("left hand item", "dagger");
+        }
+    }
 }

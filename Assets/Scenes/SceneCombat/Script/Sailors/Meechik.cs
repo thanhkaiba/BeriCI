@@ -2,7 +2,6 @@ using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Meechik : CombatSailor
@@ -50,7 +49,7 @@ public class Meechik : CombatSailor
 
         return 0.9f;
     }
-    
+
     public override void SetFaceDirection()
     {
         if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1 : -1, 1, 1);
@@ -113,10 +112,11 @@ public class Meechik : CombatSailor
             Vector3 targetPos = mainTarget.transform.position;
             targetPos.y += 3.0f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.3f);
-     
+
         });
         seq.AppendInterval(0.3f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             Vector3 explorePos = mainTarget.transform.position;
             explorePos.y += 3.4f;
             GameEffMgr.Instance.ShowSmallExplosion(explorePos);

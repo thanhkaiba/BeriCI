@@ -62,7 +62,8 @@ namespace Piratera.GUI
             if (show)
             {
                 AddGui<GuiWaiting>("Prefap/GuiWaiting", LayerId.LOADING);
-            } else
+            }
+            else
             {
                 DestroyGui<GuiWaiting>();
             }

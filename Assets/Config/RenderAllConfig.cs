@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
@@ -12,7 +10,8 @@ public class RenderAllConfig : MonoBehaviour
         foreach (string file in files)
         {
             //Do work on the files here
-            if (!file.Contains(".asset.meta") && file.Contains(".asset")) {
+            if (!file.Contains(".asset.meta") && file.Contains(".asset"))
+            {
                 string nameAsset = file.Split('\\')[1];
                 string name = nameAsset.Split('.')[0];
                 RenderSailorConfig("ScriptableObject/Sailors/" + name, name);
@@ -29,7 +28,7 @@ public class RenderAllConfig : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void RenderSailorConfig(string src, string file_name)

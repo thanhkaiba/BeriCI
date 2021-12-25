@@ -1,8 +1,8 @@
-using UnityEngine.UI;
-using UnityEngine;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Piratera.GUI;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneLoadingUI : MonoBehaviour
 {

@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Helti : CombatSailor
@@ -68,7 +67,7 @@ public class Helti : CombatSailor
         List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
 
         targets.Add(main_target.Model.id);
-        _params.Add( main_target.CalcDamageTake(new Damage() { physics = main_damage }) );
+        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage }));
 
         behind_targets.ForEach(t =>
         {

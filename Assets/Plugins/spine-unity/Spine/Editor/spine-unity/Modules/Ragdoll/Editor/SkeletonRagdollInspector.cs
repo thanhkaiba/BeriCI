@@ -29,18 +29,22 @@
 
 // Contributed by: Mitch Thompson
 
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
-namespace Spine.Unity.Modules {
-	
-	public class SkeletonRagdollInspector : UnityEditor.Editor {
-		[CustomPropertyDrawer(typeof(SkeletonRagdoll.LayerFieldAttribute))]
-		public class LayerFieldPropertyDrawer : PropertyDrawer {
-			public override void OnGUI (Rect position, SerializedProperty property, GUIContent label) {
-				property.intValue = EditorGUI.LayerField(position, label, property.intValue);
-			}
-		}
-	}
+namespace Spine.Unity.Modules
+{
+
+    public class SkeletonRagdollInspector : UnityEditor.Editor
+    {
+        [CustomPropertyDrawer(typeof(SkeletonRagdoll.LayerFieldAttribute))]
+        public class LayerFieldPropertyDrawer : PropertyDrawer
+        {
+            public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+            {
+                property.intValue = EditorGUI.LayerField(position, label, property.intValue);
+            }
+        }
+    }
 
 }

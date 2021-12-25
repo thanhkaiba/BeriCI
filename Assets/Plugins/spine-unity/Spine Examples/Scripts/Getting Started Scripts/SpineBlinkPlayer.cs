@@ -27,25 +27,28 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using UnityEngine;
 using System.Collections;
-using Spine.Unity;
+using UnityEngine;
 
-namespace Spine.Unity.Examples {
-	public class SpineBlinkPlayer : MonoBehaviour {
-		const int BlinkTrack = 1;
+namespace Spine.Unity.Examples
+{
+    public class SpineBlinkPlayer : MonoBehaviour
+    {
+        const int BlinkTrack = 1;
 
-		public AnimationReferenceAsset blinkAnimation;
-		public float minimumDelay = 0.15f;
-		public float maximumDelay = 3f;
+        public AnimationReferenceAsset blinkAnimation;
+        public float minimumDelay = 0.15f;
+        public float maximumDelay = 3f;
 
-		IEnumerator Start () {
-			var skeletonAnimation = GetComponent<SkeletonAnimation>(); if (skeletonAnimation == null) yield break;
-			while (true) {
-				skeletonAnimation.AnimationState.SetAnimation(SpineBlinkPlayer.BlinkTrack, blinkAnimation, false);
-				yield return new WaitForSeconds(Random.Range(minimumDelay, maximumDelay));
-			}
-		}
+        IEnumerator Start()
+        {
+            var skeletonAnimation = GetComponent<SkeletonAnimation>(); if (skeletonAnimation == null) yield break;
+            while (true)
+            {
+                skeletonAnimation.AnimationState.SetAnimation(SpineBlinkPlayer.BlinkTrack, blinkAnimation, false);
+                yield return new WaitForSeconds(Random.Range(minimumDelay, maximumDelay));
+            }
+        }
 
-	}
+    }
 }

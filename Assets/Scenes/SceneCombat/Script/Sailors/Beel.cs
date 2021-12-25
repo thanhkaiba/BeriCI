@@ -2,7 +2,6 @@ using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Beel : CombatSailor
@@ -18,9 +17,9 @@ public class Beel : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-/*        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
-        relativePos.y += 4.5f;
-        relativePos.x *= modelObject.transform.localScale.x;*/
+        /*        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
+                relativePos.y += 4.5f;
+                relativePos.x *= modelObject.transform.localScale.x;*/
         TriggerAnimation("Attack");
 
         Vector3 targetPos = target.transform.position;
@@ -33,7 +32,7 @@ public class Beel : CombatSailor
         {
             SoundMgr.PlaySoundAttackSailor(14);
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
-            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);      
+            Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, targetPos, 0, .4f, .7f, .7f);
         });
         return 1.4f;
@@ -82,10 +81,10 @@ public class Beel : CombatSailor
         seq.AppendCallback(() =>
         {
             Spine.Bone ball = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
-            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(cs.team == Team.A ? -30 : 30, 0,0), new Vector3(cs.team == Team.A ? 30 : -30, 0, 0), 0, 1.5f, 10, 1);
+            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(cs.team == Team.A ? -30 : 30, 0, 0), new Vector3(cs.team == Team.A ? 30 : -30, 0, 0), 0, 1.5f, 10, 1);
             SoundMgr.PlaySoundSkillSailor(15);
         });
-     
+
         seq.AppendInterval(1);
         seq.AppendCallback(() =>
         {

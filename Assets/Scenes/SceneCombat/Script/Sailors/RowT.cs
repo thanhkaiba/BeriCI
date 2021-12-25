@@ -1,9 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
-using Spine.Unity;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class RowT : CombatSailor

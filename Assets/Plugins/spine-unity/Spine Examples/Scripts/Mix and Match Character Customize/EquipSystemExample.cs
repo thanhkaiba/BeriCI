@@ -27,72 +27,78 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using System.Collections;
+using Spine.Unity.Modules.AttachmentTools;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Spine.Unity.Modules.AttachmentTools;
+namespace Spine.Unity.Examples
+{
+    public class EquipSystemExample : MonoBehaviour, IHasSkeletonDataAsset
+    {
 
-namespace Spine.Unity.Examples {
-	public class EquipSystemExample : MonoBehaviour, IHasSkeletonDataAsset {
+        // Implementing IHasSkeletonDataAsset allows Spine attribute drawers to automatically detect this component as a skeleton data source.
+        public SkeletonDataAsset skeletonDataAsset;
+        SkeletonDataAsset IHasSkeletonDataAsset.SkeletonDataAsset { get { return this.skeletonDataAsset; } }
 
-		// Implementing IHasSkeletonDataAsset allows Spine attribute drawers to automatically detect this component as a skeleton data source.
-		public SkeletonDataAsset skeletonDataAsset;
-		SkeletonDataAsset IHasSkeletonDataAsset.SkeletonDataAsset { get { return this.skeletonDataAsset; } }
-		
-		public Material sourceMaterial;
-		public bool applyPMA = true;
-		public List<EquipHook> equippables = new List<EquipHook>();
+        public Material sourceMaterial;
+        public bool applyPMA = true;
+        public List<EquipHook> equippables = new List<EquipHook>();
 
-		public EquipsVisualsComponentExample target;
-		public Dictionary<EquipAssetExample, Attachment> cachedAttachments = new Dictionary<EquipAssetExample, Attachment>();
+        public EquipsVisualsComponentExample target;
+        public Dictionary<EquipAssetExample, Attachment> cachedAttachments = new Dictionary<EquipAssetExample, Attachment>();
 
-		[System.Serializable]
-		public class EquipHook {
-			public EquipType type;
-			[SpineSlot]
-			public string slot;
-			[SpineSkin]
-			public string templateSkin;
-			[SpineAttachment(skinField:"templateSkin")]
-			public string templateAttachment;
-		}
-		
-		public enum EquipType {
-			Gun,
-			Goggles
-		}
+        [System.Serializable]
+        public class EquipHook
+        {
+            public EquipType type;
+            [SpineSlot]
+            public string slot;
+            [SpineSkin]
+            public string templateSkin;
+            [SpineAttachment(skinField: "templateSkin")]
+            public string templateAttachment;
+        }
 
-		public void Equip (EquipAssetExample asset) {
-			var equipType = asset.equipType;
-			EquipHook howToEquip = equippables.Find(x => x.type == equipType);
+        public enum EquipType
+        {
+            Gun,
+            Goggles
+        }
 
-			var skeletonData = skeletonDataAsset.GetSkeletonData(true);
-			int slotIndex = skeletonData.FindSlotIndex(howToEquip.slot);
-			var attachment = GenerateAttachmentFromEquipAsset(asset, slotIndex, howToEquip.templateSkin, howToEquip.templateAttachment);
-			target.Equip(slotIndex, howToEquip.templateAttachment, attachment);
-		}
+        public void Equip(EquipAssetExample asset)
+        {
+            var equipType = asset.equipType;
+            EquipHook howToEquip = equippables.Find(x => x.type == equipType);
 
-		Attachment GenerateAttachmentFromEquipAsset (EquipAssetExample asset, int slotIndex, string templateSkinName, string templateAttachmentName) {
-			Attachment attachment;
-			cachedAttachments.TryGetValue(asset, out attachment);
+            var skeletonData = skeletonDataAsset.GetSkeletonData(true);
+            int slotIndex = skeletonData.FindSlotIndex(howToEquip.slot);
+            var attachment = GenerateAttachmentFromEquipAsset(asset, slotIndex, howToEquip.templateSkin, howToEquip.templateAttachment);
+            target.Equip(slotIndex, howToEquip.templateAttachment, attachment);
+        }
 
-			if (attachment == null) {
-				var skeletonData = skeletonDataAsset.GetSkeletonData(true);
-				var templateSkin = skeletonData.FindSkin(templateSkinName);
-				Attachment templateAttachment = templateSkin.GetAttachment(slotIndex, templateAttachmentName);
-				attachment = templateAttachment.GetRemappedClone(asset.sprite, sourceMaterial, premultiplyAlpha: this.applyPMA);
+        Attachment GenerateAttachmentFromEquipAsset(EquipAssetExample asset, int slotIndex, string templateSkinName, string templateAttachmentName)
+        {
+            Attachment attachment;
+            cachedAttachments.TryGetValue(asset, out attachment);
 
-				cachedAttachments.Add(asset, attachment); // Cache this value for next time this asset is used.
-			}
+            if (attachment == null)
+            {
+                var skeletonData = skeletonDataAsset.GetSkeletonData(true);
+                var templateSkin = skeletonData.FindSkin(templateSkinName);
+                Attachment templateAttachment = templateSkin.GetAttachment(slotIndex, templateAttachmentName);
+                attachment = templateAttachment.GetRemappedClone(asset.sprite, sourceMaterial, premultiplyAlpha: this.applyPMA);
 
-			return attachment;
-		}
+                cachedAttachments.Add(asset, attachment); // Cache this value for next time this asset is used.
+            }
 
-		public void Done () {
-			target.OptimizeSkin();
-		}
+            return attachment;
+        }
 
-	}
+        public void Done()
+        {
+            target.OptimizeSkin();
+        }
+
+    }
 
 }

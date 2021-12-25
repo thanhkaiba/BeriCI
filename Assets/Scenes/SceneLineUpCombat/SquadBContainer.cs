@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SquadBContainer : MonoBehaviour
@@ -17,7 +16,7 @@ public class SquadBContainer : MonoBehaviour
                 short key = FightingLine.Position2SlotIndex(i, j);
                 SquadSlot slot = slots[key];
                 string sailorId = TeamCombatPrepareData.Instance.OpponentFightingLine.SailorIdAt(i, j);
-                
+
                 if (sailorId.Length > 0)
                 {
 
@@ -45,7 +44,7 @@ public class SquadBContainer : MonoBehaviour
     }
 
     public void OnUpdateSquadB()
-    { 
+    {
         teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.GetSquadModelList(false)));
     }
 }

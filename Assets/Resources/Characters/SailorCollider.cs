@@ -7,23 +7,23 @@ public class SailorCollider : MonoBehaviour
 
     private bool ShowToolTip = true;
     private bool selected = false;
-    private bool moved = false;    
+    private bool moved = false;
 
     private void OnMouseDown()
     {
         mouseBeginPos = Input.mousePosition;
         selected = true;
         moved = false;
-       
+
     }
 
     private void OnMouseUp()
     {
         if (selected && !moved)
         {
-            if (TooltipSailorInfo.Instance != null && ShowToolTip) 
-            { 
-                TooltipSailorInfo.Instance.ShowTooltip(gameObject); 
+            if (TooltipSailorInfo.Instance != null && ShowToolTip)
+            {
+                TooltipSailorInfo.Instance.ShowTooltip(gameObject);
             }
         }
         selected = false;
@@ -40,6 +40,6 @@ public class SailorCollider : MonoBehaviour
                 TooltipSailorInfo.Instance.gameObject.SetActive(false);
             }
         }
-    
+
     }
 }

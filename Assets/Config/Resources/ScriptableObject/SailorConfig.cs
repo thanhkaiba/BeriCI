@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,23 +31,27 @@ public class SailorConfig : ScriptableObjectPro
     public float power_plv
     {
         get { return power_base * GlobalConfigs.SailorGeneral.POWER_PER_LEVEL_RATIO; }
-    }    
+    }
     public float power_plv_step
     {
         get { return power_base_step * GlobalConfigs.SailorGeneral.POWER_PER_LEVEL_RATIO; }
     }
 
-    public float health_base_step { 
+    public float health_base_step
+    {
         get { return health_base * GlobalConfigs.SailorGeneral.MAX_MIN_HEALTH_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }
     }
-    public float health_plv {
+    public float health_plv
+    {
         get { return health_base * GlobalConfigs.SailorGeneral.HEALTH_PER_LEVEL_RATIO; }
     }
-    public float health_plv_step {
+    public float health_plv_step
+    {
         get { return health_base_step * GlobalConfigs.SailorGeneral.HEALTH_PER_LEVEL_RATIO; }
     }
 
-    public float speed_step {
+    public float speed_step
+    {
         get { return speed_base * GlobalConfigs.SailorGeneral.MAX_MIN_SPEED_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }
     }
 

@@ -1,8 +1,6 @@
 using DG.Tweening;
 using Piratera.Network;
-using Piratera.Utils;
 using Sfs2X.Entities.Data;
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

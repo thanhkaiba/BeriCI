@@ -27,57 +27,67 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using UnityEngine;
-using System.Collections.Generic;
-using Spine;
 using Spine.Unity.Modules.AttachmentTools;
+using System.Collections.Generic;
+using UnityEngine;
 
-namespace Spine.Unity.Modules {
-	/// <summary>
-	/// Example code for a component that replaces the default attachment of a slot with an image from a Spine atlas.</summary>
-	public class AtlasRegionAttacher : MonoBehaviour {
+namespace Spine.Unity.Modules
+{
+    /// <summary>
+    /// Example code for a component that replaces the default attachment of a slot with an image from a Spine atlas.</summary>
+    public class AtlasRegionAttacher : MonoBehaviour
+    {
 
-		[System.Serializable]
-		public class SlotRegionPair {
-			[SpineSlot] public string slot;
-			[SpineAtlasRegion] public string region;
-		}
+        [System.Serializable]
+        public class SlotRegionPair
+        {
+            [SpineSlot] public string slot;
+            [SpineAtlasRegion] public string region;
+        }
 
-		[SerializeField] protected SpineAtlasAsset atlasAsset;
-		[SerializeField] protected bool inheritProperties = true;
-		[SerializeField] protected List<SlotRegionPair> attachments = new List<SlotRegionPair>();
+        [SerializeField] protected SpineAtlasAsset atlasAsset;
+        [SerializeField] protected bool inheritProperties = true;
+        [SerializeField] protected List<SlotRegionPair> attachments = new List<SlotRegionPair>();
 
-		Atlas atlas;
+        Atlas atlas;
 
-		void Awake () {
-			var skeletonRenderer = GetComponent<SkeletonRenderer>();
-			skeletonRenderer.OnRebuild += Apply;
-			if (skeletonRenderer.valid) Apply(skeletonRenderer);
-		}
+        void Awake()
+        {
+            var skeletonRenderer = GetComponent<SkeletonRenderer>();
+            skeletonRenderer.OnRebuild += Apply;
+            if (skeletonRenderer.valid) Apply(skeletonRenderer);
+        }
 
-		void Start () { } // Allow checkbox in inspector
+        void Start() { } // Allow checkbox in inspector
 
-		void Apply (SkeletonRenderer skeletonRenderer) {
-			if (!this.enabled) return;
+        void Apply(SkeletonRenderer skeletonRenderer)
+        {
+            if (!this.enabled) return;
 
-			atlas = atlasAsset.GetAtlas();
-			if (atlas == null) return;
-			float scale = skeletonRenderer.skeletonDataAsset.scale;
+            atlas = atlasAsset.GetAtlas();
+            if (atlas == null) return;
+            float scale = skeletonRenderer.skeletonDataAsset.scale;
 
-			foreach (var entry in attachments) {
-				Slot slot = skeletonRenderer.Skeleton.FindSlot(entry.slot);
-				Attachment originalAttachment = slot.Attachment;
-				AtlasRegion region = atlas.FindRegion(entry.region);
+            foreach (var entry in attachments)
+            {
+                Slot slot = skeletonRenderer.Skeleton.FindSlot(entry.slot);
+                Attachment originalAttachment = slot.Attachment;
+                AtlasRegion region = atlas.FindRegion(entry.region);
 
-				if (region == null) {
-					slot.Attachment = null;
-				} else if (inheritProperties && originalAttachment != null) {
-					slot.Attachment = originalAttachment.GetRemappedClone(region, true, true, scale);
-				} else {
-					var newRegionAttachment = region.ToRegionAttachment(region.name, scale);
-					slot.Attachment = newRegionAttachment;
-				}
-			}
-		}
-	}
+                if (region == null)
+                {
+                    slot.Attachment = null;
+                }
+                else if (inheritProperties && originalAttachment != null)
+                {
+                    slot.Attachment = originalAttachment.GetRemappedClone(region, true, true, scale);
+                }
+                else
+                {
+                    var newRegionAttachment = region.ToRegionAttachment(region.name, scale);
+                    slot.Attachment = newRegionAttachment;
+                }
+            }
+        }
+    }
 }

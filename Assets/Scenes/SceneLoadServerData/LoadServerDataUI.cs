@@ -1,12 +1,12 @@
-using Sfs2X.Entities.Data;
-using Piratera.GUI;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Piratera.GUI;
+using Piratera.Network;
+using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
-using Piratera.Network;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LoadServerDataUI : MonoBehaviour
 {
@@ -64,7 +64,7 @@ public class LoadServerDataUI : MonoBehaviour
 
         RandomTip();
         buttonReload.gameObject.SetActive(false);
-       
+
         SendGetData();
         ShowLoading(15f, startingPoint, RandomTip);
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
@@ -93,7 +93,8 @@ public class LoadServerDataUI : MonoBehaviour
             sailorDescripton.text = param.skill_description;
             sailorRank.sprite = spriteRanks[(int)config_stats.rank];
             RenderClass(config_stats.classes);
-        } else
+        }
+        else
         {
             RandomTip();
         }
@@ -130,15 +131,15 @@ public class LoadServerDataUI : MonoBehaviour
         float totalSize = size * classes.Count;
         for (int i = 0; i < classes.Count; i++)
         {
-            GameObject GO = new GameObject(classes[i].ToString()); 
+            GameObject GO = new GameObject(classes[i].ToString());
             Image image = GO.AddComponent<Image>();
             image.sprite = Resources.Load<Sprite>("Icons/SailorType/" + classes[i]);
             image.color = new Color32(202, 202, 202, 255);
             RectTransform rectTransform = GO.GetComponent<RectTransform>();
             rectTransform.sizeDelta = new Vector2(size - margin, size - margin);
             rectTransform.SetParent(sailorClass.transform);
-      
-            rectTransform.anchoredPosition = new Vector2(-totalSize / 2 + size * ( i + 0.5f), 10);
+
+            rectTransform.anchoredPosition = new Vector2(-totalSize / 2 + size * (i + 0.5f), 10);
             rectTransform.localScale = Vector3.one;
 
         }
@@ -151,7 +152,8 @@ public class LoadServerDataUI : MonoBehaviour
             if (errorCode == SFSErrorCode.SUCCESS)
             {
                 ShowLoading(1f, 1f, OnLoadSuccess);
-            } else
+            }
+            else
             {
                 OnLoadError(errorCode);
             }
@@ -181,7 +183,7 @@ public class LoadServerDataUI : MonoBehaviour
     {
         NetworkController.Logout();
     }
- 
+
 
     public void ShowLoading(float actionTime, float value, Action action)
     {
