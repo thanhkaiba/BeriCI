@@ -26,4 +26,9 @@ public class SceneLoadingUI : MonoBehaviour
     {
         SceneManager.LoadScene("SceneLogin");
     }
+
+    public void OnLoadError(string error)
+    {
+        SceneManager.LoadScene("SceneLogin");
+    }
 }

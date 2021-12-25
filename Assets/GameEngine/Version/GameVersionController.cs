@@ -13,6 +13,9 @@ public class GameVersionController : MonoBehaviour
     [SerializeField]
     public UnityEvent OnCheckSuccess;
 
+    [SerializeField]
+    public UnityEvent<string> OnError;
+
     void Start()
     {
         StartCoroutine(GetText());
@@ -26,6 +29,7 @@ public class GameVersionController : MonoBehaviour
         if (www.result != UnityWebRequest.Result.Success)
         {
             Debug.Log(www.error);
+            OnError.Invoke(www.error);
         }
         else
         {
