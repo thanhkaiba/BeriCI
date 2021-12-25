@@ -38,6 +38,7 @@ public class SceneLoadingUI : MonoBehaviour
         DOTween.Kill(textInfo.transform);
         textInfo.gameObject.SetActive(false);
         PopupNewVersion popup = GuiManager.Instance.AddGui<PopupNewVersion>("Prefap/PopupNewVersion", LayerId.IMPORTANT).GetComponent<PopupNewVersion>();
-        popup.SetData(() => Application.OpenURL(url));
+        Debug.Log(url);
+        popup.SetData(() => Application.OpenURL(GameVersionController.DownloadUrl));
     }
 }

@@ -19,12 +19,14 @@ public class GameVersionController : MonoBehaviour
     [SerializeField]
     public UnityEvent<string> OnError;
 
+    public static string DownloadUrl;
+
     void Start()
     {
-#if UNITY_EDITOR
-        OnCheckSuccess.Invoke();
-#else
+#if PIRATERA_QC
         StartCoroutine(GetText());
+#else
+        OnCheckSuccess.Invoke();
 #endif
     }
 
@@ -46,6 +48,7 @@ public class GameVersionController : MonoBehaviour
             Debug.Log(float.Parse(Application.version) + " " + (float)o["min_version"]);
             if (float.Parse(Application.version) < (float)o["min_version"])
             {
+                DownloadUrl = (string)o["download_url"];
                 OnNeedUpdate.Invoke((string)o["download_url"]);
             }  else
             {
