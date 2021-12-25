@@ -43,10 +43,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         {
             case SFSAction.PVE_SURRENDER:
             case SFSAction.PVE_CONFIRM:
-                if (errorCode != SFSErrorCode.SUCCESS)
-                {
-                    GuiManager.Instance.ShowGuiWaiting(false);
-                }
+                GuiManager.Instance.ShowGuiWaiting(false);
                 break;
         }
     }

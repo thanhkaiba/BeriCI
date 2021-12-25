@@ -34,13 +34,13 @@ namespace Piratera.GUI
             switch (action)
             {
                 case SFSAction.PVE_SURRENDER:
-                    if (errorCode != SFSErrorCode.SUCCESS)
+                    if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         GuiManager.Instance.ShowGuiWaiting(false);
                         float jumPower = 40;
                         Vector3 pos = beri.transform.position;
                         pos.y += jumPower;
-                        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() => SceneManager.LoadScene("SceneLogin"));
+                        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() => SceneManager.LoadScene("SceneLobby"));
                     }
                     break;
             }
