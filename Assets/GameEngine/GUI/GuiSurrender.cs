@@ -4,6 +4,7 @@ using Piratera.Utils;
 using Sfs2X.Entities.Data;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Piratera.GUI
@@ -20,17 +21,40 @@ namespace Piratera.GUI
 
         protected override void Start()
         {
-            base.Start();
             Appear();
+        }
+
+        private void Awake()
+        {
+            NetworkController.AddServerActionListener(OnReceiveServerAction);
+        }
+
+        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        {
+            switch (action)
+            {
+                case SFSAction.PVE_SURRENDER:
+                    if (errorCode != SFSErrorCode.SUCCESS)
+                    {
+                        GuiManager.Instance.ShowGuiWaiting(false);
+                        float jumPower = 40;
+                        Vector3 pos = beri.transform.position;
+                        pos.y += jumPower;
+                        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() => SceneManager.LoadScene("SceneLogin"));
+                    }
+                    break;
+            }
+        }
+
+        private void OnDestroy()
+        {
+            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         }
 
         public void ConfirmSur()
         {
+            NetworkController.SendSurrenderPVEToSever();
             btn.enabled = false;
-            float jumPower = 40;
-            Vector3 pos = beri.transform.position;
-            pos.y += jumPower;
-            beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() => NetworkController.Instance.SendSurrenderPVEToSever());
         }
 
         public void OnClose()

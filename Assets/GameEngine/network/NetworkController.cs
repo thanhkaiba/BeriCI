@@ -234,8 +234,9 @@ namespace Piratera.Network
 
 
 		}
-		public void SendSurrenderPVEToSever()
+		public static void SendSurrenderPVEToSever()
 		{
+			GuiManager.Instance.ShowGuiWaiting(true);
 			SFSObject sfsObject = new SFSObject();
 			sfsObject.PutBool("accept", false);
 			Send(SFSAction.PVE_SURRENDER, sfsObject);
@@ -363,14 +364,6 @@ namespace Piratera.Network
 						{
 							TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
 							SceneManager.LoadScene("ScenePickTeamBattle");
-						}
-						break;
-					}
-				case SFSAction.PVE_SURRENDER:
-					{
-						if (errorCode == SFSErrorCode.SUCCESS)
-						{
-							SceneManager.LoadScene("SceneLobby");
 						}
 						break;
 					}

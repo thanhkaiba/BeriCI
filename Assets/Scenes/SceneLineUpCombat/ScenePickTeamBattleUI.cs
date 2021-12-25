@@ -28,7 +28,6 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     public SquadAContainer squaA;
     [SerializeField]
     private Button[] buttons;
-    public GuiSurrender sur;
     private float remainTime;
     private float maxTime;
     private bool counting = false;
@@ -99,8 +98,13 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void OnTimeOut()
     {
-        if (sur != null) sur.ConfirmSur();
-        else if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors" , NetworkController.Instance.SendSurrenderPVEToSever);
+
+        if (!squaA.HaveSailor())
+        {
+           
+            NetworkController.SendSurrenderPVEToSever();
+            GuiManager.Instance.ShowPopupNotification("Lose because there are no Sailors", () => SceneManager.LoadScene("SceneLobby"));
+        }
         else SendStartCombat();
 
            
@@ -108,7 +112,10 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void SendStartCombat()
     {
-        if (!squaA.HaveSailor()) GuiManager.Instance.ShowPopupNotification("Need at least one Sailor");
+        if (!squaA.HaveSailor()) 
+        { 
+            GuiManager.Instance.ShowPopupNotification("Need at least one Sailor"); 
+        }
         else
         {
             GuiManager.Instance.ShowGuiWaiting(true);
@@ -120,8 +127,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void Surrender()
     {
-        GameObject go = GuiManager.Instance.AddGui<GuiSurrender>("Prefap/GuiSurrender", LayerId.GUI);
-        sur = go.GetComponent<GuiSurrender>();
+        GuiManager.Instance.AddGui<GuiSurrender>("Prefap/GuiSurrender", LayerId.GUI);
     }
 
  
