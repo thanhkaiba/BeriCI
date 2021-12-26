@@ -99,7 +99,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457314133054356952}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -49.2, y: 50, z: -141.53818}
+  m_LocalPosition: {x: -52, y: 52, z: -141.53818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7725597495769743506}
@@ -619,7 +619,6 @@ GameObject:
   - component: {fileID: 7725597495769743505}
   - component: {fileID: 4733519343817226215}
   - component: {fileID: 9112739189552905285}
-  - component: {fileID: 8046570068980293477}
   m_Layer: 5
   m_Name: IconSailorPrefap
   m_TagString: Untagged
@@ -786,19 +785,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8046570068980293477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7725597495769743507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ae95e43e2cab364f835bf0ad6a596b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  iconClass: {fileID: 0}
 --- !u!1 &7725597496263003583
 GameObject:
   m_ObjectHideFlags: 0

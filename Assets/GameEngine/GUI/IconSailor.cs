@@ -69,7 +69,7 @@ public class IconSailor : MonoBehaviour
         {
             GameObject GO = Instantiate(GOClass, nodeClass.transform);
             GO.GetComponent<IconClassInAvt>().SetClass(classes[i]);
-            GO.transform.localPosition -= new Vector3(0, i * 52, 0);
+            GO.transform.localPosition -= new Vector3(0, i * 45, 0);
         }
     }
 
