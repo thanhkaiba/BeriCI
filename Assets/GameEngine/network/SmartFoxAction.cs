@@ -19,6 +19,7 @@
         BUY_SLOT = 20,
         GET_STAMINA_PACK = 21,
         GET_LINEUP_SLOT_PACK = 22,
+        GET_SERVER_TIME = 23,
 
 
         // cheat

@@ -168,7 +168,7 @@ public class LoginController : MonoBehaviour
         {
             PlayerPrefs.SetString("UserName", nameInput.text);
             User user = NetworkController.Connection.MySelf;
-            GameTimeMgr.SetLoginTime((long)user.GetVariable("login_time").GetDoubleValue());
+            GameTimeMgr.SetServerTime((long)user.GetVariable("login_time").GetDoubleValue());
             UserData.Instance.OnUserVariablesUpdate(user);
             StaminaData.Instance.OnUserVariablesUpdate(user);
             OpenLobby();
@@ -186,6 +186,7 @@ public class LoginController : MonoBehaviour
             case SFSAction.JOIN_ZONE_SUCCESS:
                 {
                     ReceiveJoinZoneSuccess(errorCode, packet);
+                    NetworkController.Send(SFSAction.GET_SERVER_TIME);
                     break;
                 }
 

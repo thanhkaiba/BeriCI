@@ -306,6 +306,7 @@ namespace Piratera.Network
         }
         protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
+            
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
@@ -393,6 +394,15 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             GuiManager.Instance.ShowPopupNotification($"Cheat Rank Success, Rank {packet.GetInt("rank")}");
+                        }
+                        break;
+                    }
+
+                case SFSAction.GET_SERVER_TIME:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            GameTimeMgr.SetServerTime(packet.GetLong("time"));
                         }
                         break;
                     }
