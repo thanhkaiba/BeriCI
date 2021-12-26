@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public enum ModeID
 {
@@ -59,7 +58,7 @@ public class CombatMgr : MonoBehaviour
             combatState.CreateDemoTeam();
             serverGame = false;
         }
-        
+
         combatState.CalculateClassBonus();
         combatState.UpdateGameWithClassBonus();
         // ui
@@ -135,7 +134,7 @@ public class CombatMgr : MonoBehaviour
                 {
                     Time.timeScale = 1;
                     GameEndData data = actionProcess.gameEndData;
-                    switch(modeId)
+                    switch (modeId)
                     {
                         case ModeID.PvE:
                             {
@@ -146,7 +145,7 @@ public class CombatMgr : MonoBehaviour
                     return 0;
                 }
             default:
-                 return 0;
+                return 0;
         }
     }
     private CombatSailor GetActorAction(CombatAction action)

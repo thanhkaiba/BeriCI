@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -78,7 +77,7 @@ public class Geechoso : CombatSailor
         targetPos = mainTarget.transform.position;
         targetPos.y += 2;
         dame = _params[0];
-      
+
         return 2f;
     }
     public void StartEff()

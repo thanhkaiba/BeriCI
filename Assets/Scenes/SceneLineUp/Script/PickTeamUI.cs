@@ -1,12 +1,10 @@
 
-using UnityEngine;
-using UnityEngine.UI;
-using Piratera.Utils;
-using DG.Tweening;
-using UnityEngine.SceneManagement;
 using Piratera.GUI;
-using Sfs2X.Entities.Data;
 using Piratera.Network;
+using Sfs2X.Entities.Data;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PickTeamUI : MonoBehaviour
 {

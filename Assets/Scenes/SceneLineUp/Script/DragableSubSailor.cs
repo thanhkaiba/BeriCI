@@ -4,14 +4,14 @@ using UnityEngine.UI;
 
 public class DragableSubsailor : DragableSailor
 {
-   
+
     private SubSailorIcon subSailorIcon;
     private Sailor swapSailor;
     private GameObject model;
     public Action<string, short> ReplaceSailorAction;
     public Func<bool> IsSquadFull;
     public Action<GameObject> OnTransfromSailor;
- 
+
     public void SetStartPosition(Vector2 mousePosition2D, Image d, SubSailorIcon subSailorIcon)
     {
         draging = true;
@@ -33,7 +33,7 @@ public class DragableSubsailor : DragableSailor
         {
             boxAround = GetComponent<BoxCollider>();
         }
-      
+
 
         foreach (SquadSlot slot in slots)
         {
@@ -50,7 +50,7 @@ public class DragableSubsailor : DragableSailor
 
     new void OnMouseUpEmpty()
     {
-     
+
         subSailorIcon.iconSailor.SetVisible(true);
         Destroy(gameObject);
     }
@@ -83,7 +83,8 @@ public class DragableSubsailor : DragableSailor
             subSailorIcon.UpdateSailorImage(swapSailor.Model);
             subSailorIcon.iconSailor.SetVisible(true);
             Destroy(swapSailor.gameObject);
-        } else
+        }
+        else
         {
             DestroyImmediate(subSailorIcon.gameObject);
         }
@@ -123,8 +124,9 @@ public class DragableSubsailor : DragableSailor
                 dragImage.enabled = true;
                 model.SetActive(false);
                 dragImage.transform.position = mousePosition;
-            } 
-        } else if (Input.GetMouseButtonUp(0))
+            }
+        }
+        else if (Input.GetMouseButtonUp(0))
         {
             OnMouseUp();
         }

@@ -48,7 +48,7 @@ public class SquadSlot : MonoBehaviour
             blackCircle.SetActive(true);
             blackCircle.GetComponent<SpriteRenderer>().color = Color.magenta;
         }
-     
+
     }
 
     public void OnFree()
@@ -74,15 +74,16 @@ public class SquadSlot : MonoBehaviour
                 blackCircle.SetActive(true);
                 blackCircle.GetComponent<SpriteRenderer>().color = Color.white;
             }
-          
-        } else
+
+        }
+        else
         {
             OnFree();
         }
-       
+
     }
 
- 
+
 
     public void Swap(SquadSlot slot)
     {

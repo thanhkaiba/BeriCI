@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Piratera.GUI
@@ -19,7 +16,7 @@ namespace Piratera.GUI
         private List<GameObject> layers = new List<GameObject>();
         Dictionary<string, GameObject> guis = new Dictionary<string, GameObject>();
 
-        void Start()
+        void Awake()
         {
             foreach (LayerId val in Enum.GetValues(typeof(LayerId)))
             {
@@ -35,7 +32,7 @@ namespace Piratera.GUI
             panel.AddComponent<CanvasRenderer>();
 
             RectTransform parentRectTransform = GetComponent<RectTransform>();
-            
+
             RectTransform rectTransform = panel.AddComponent<RectTransform>();
             rectTransform.sizeDelta = parentRectTransform.sizeDelta;
             rectTransform.localScale = Vector3.one;
@@ -45,12 +42,12 @@ namespace Piratera.GUI
 
         public GameObject AddGui(GameObject prefap, LayerId layerId, string guiId)
         {
-            
+
             GameObject layer = layers[((int)layerId)];
             if (layer != null)
             {
                 GameObject gui = Instantiate(prefap, layer.transform);
-               
+
                 if (guis.ContainsKey(guiId))
                 {
                     DestroyGui(guiId);
@@ -61,7 +58,7 @@ namespace Piratera.GUI
             }
 
             return null;
-          
+
         }
 
         internal void DestroyGui(string guiId)

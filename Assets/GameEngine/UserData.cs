@@ -1,8 +1,5 @@
-﻿
-using System;
+﻿using Sfs2X.Entities;
 using System.Collections.Generic;
-using Sfs2X.Entities;
-using UnityEngine;
 
 public class UserInfoPropertiesKey
 {
@@ -22,22 +19,22 @@ public class UserInfoPropertiesKey
 public class UserData : Singleton<UserData>
 {
 
-  
+
     protected override void OnAwake()
     {
         LoadExpConfig();
     }
     public UserLevelConfig LevelConfig;
-    public string UID { get;  set; }
-    public string Username { get;  set; }
-    public string Avatar { get;  set; }
-    public long Beri { get;  set; }
-    public long Exp { get;  set; }
+    public string UID { get; set; }
+    public string Username { get; set; }
+    public string Avatar { get; set; }
+    public long Beri { get; set; }
+    public long Exp { get; set; }
 
     /// <summary>
     /// Level of User, start from 1
     /// </summary>
-    public int Level { get;  set; } 
+    public int Level { get; set; }
     public int NumSlot { get; set; }
 
     public long CreateAt { get; set; }
@@ -46,7 +43,7 @@ public class UserData : Singleton<UserData>
     public void LoadExpConfig()
     {
         // LevelConfig = Resources.Load<UserLevelConfig>("ScriptableObject/UserLevel/UserLevel");
-      
+
     }
 
     public float GetExpProgress()
@@ -74,7 +71,7 @@ public class UserData : Singleton<UserData>
             GameEvent.UserBeriChanged.Invoke(oldBeri, Beri);
         }
 
-    
+
     }
 
     public void OnUserVariablesUpdate(User user)

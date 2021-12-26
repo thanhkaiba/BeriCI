@@ -1,8 +1,5 @@
 using DG.Tweening;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 
 public class GameEffMgr : MonoBehaviour
@@ -39,23 +36,24 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendInterval(delay);
         seq.AppendCallback(() => bulletGO.SetActive(true));
         seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             //ShowSmallExplosion(bulletGO.transform.position);
             //ShowSmoke4(bulletGO.transform.position, startPos.x > targetPos.x);
-         
+
 
             GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/bullet_explore/bullet_explore"), bulletGO.transform.position, new Quaternion());
             Destroy(bulletGO);
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendInterval(2.0f);
             seq2.AppendCallback(() => Destroy(ex));
-            ex.transform.localScale = new Vector3(isFlip*3, 3, 3);
+            ex.transform.localScale = new Vector3(isFlip * 3, 3, 3);
         });
     }
-    public void TrailToTarget(string trail, string explore, Vector3 startPos, Vector3 targetPos, float delay, float flyTime, float scaleTrail , float scaleExplore)
+    public void TrailToTarget(string trail, string explore, Vector3 startPos, Vector3 targetPos, float delay, float flyTime, float scaleTrail, float scaleExplore)
     {
         var bulletGO = Instantiate(Resources.Load<GameObject>(trail), startPos, Quaternion.identity);
-    
+
         bulletGO.SetActive(false);
 
         Vector3 oriPos = transform.position;
@@ -68,7 +66,8 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendInterval(delay);
         seq.AppendCallback(() => bulletGO.SetActive(true));
         seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             Vector3 pos = bulletGO.transform.position;
             GameObject ex = Instantiate(Resources.Load<GameObject>(explore), pos, new Quaternion());
             ex.transform.localScale = new Vector3(isFlip * scaleExplore, scaleExplore, scaleExplore);
@@ -76,7 +75,7 @@ public class GameEffMgr : MonoBehaviour
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendInterval(2.0f);
             seq2.AppendCallback(() => Destroy(ex));
-       
+
         });
     }
     public void ShowSmallExplosion(Vector3 position)
@@ -124,7 +123,7 @@ public class GameEffMgr : MonoBehaviour
     }
     public float ShowExplosion(Team team)
     {
-        var go = team == Team.A ? fieldLeft : fieldRight; 
+        var go = team == Team.A ? fieldLeft : fieldRight;
         GameObject ex = Instantiate(bigExplosion, go.transform.position, go.transform.rotation);
         ex.transform.localScale = new Vector3(3.0f, 3.0f, 3.0f);
         Sequence seq = DOTween.Sequence();

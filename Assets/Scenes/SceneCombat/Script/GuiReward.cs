@@ -1,14 +1,11 @@
-using Sfs2X.Entities.Data;
 using DG.Tweening;
-using System.Collections.Generic;
+using Piratera.GUI;
+using Piratera.Sound;
+using Spine.Unity;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
-using Piratera.Sound;
-using Piratera.Network;
-using Piratera.GUI;
-using Spine.Unity;
 
 public class GuiReward : BaseGui
 {
@@ -23,7 +20,7 @@ public class GuiReward : BaseGui
 
     protected override void Start()
     {
-     
+
         base.Start();
         Appear();
     }
@@ -118,5 +115,5 @@ public class GuiReward : BaseGui
     {
         SceneManager.LoadScene("SceneLobby");
     }
- 
+
 }

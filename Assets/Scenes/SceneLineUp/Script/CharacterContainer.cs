@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +19,7 @@ public class CharacterContainer : MonoBehaviour
 
     [SerializeField]
     private SquadContainer squadContainer;
-   
+
     void Start()
     {
         RenderListSubSailor();
@@ -37,7 +36,7 @@ public class CharacterContainer : MonoBehaviour
     public void OnPointerDownLeft()
     {
         direction = -1;
-       
+
     }
     public void OnPointerUp()
     {
@@ -47,16 +46,17 @@ public class CharacterContainer : MonoBehaviour
     {
         if (direction != 0)
         {
-            Speed += Acceleration * direction * Time.deltaTime ;
+            Speed += Acceleration * direction * Time.deltaTime;
 
-            if (Mathf.Abs(Speed) >  MaxSpeed)
+            if (Mathf.Abs(Speed) > MaxSpeed)
             {
                 Speed = direction * MaxSpeed;
             }
             float contentWidth = scrollRect.content.sizeDelta.x;
             float curAmout = scrollRect.horizontalNormalizedPosition + Speed / contentWidth;
             scrollRect.horizontalNormalizedPosition = Mathf.Clamp(curAmout, 0, 1);
-        } else
+        }
+        else
         {
             Speed = 0;
         }
@@ -82,7 +82,8 @@ public class CharacterContainer : MonoBehaviour
                 imgObject = transform.GetChild(i).gameObject;
                 subSailorIcon = imgObject.GetComponent<SubSailorIcon>();
                 subSailorIcon.iconSailor.SetVisible(true);
-            } else
+            }
+            else
             {
                 imgObject = Instantiate(iconSailorPrefap, transform);
                 subSailorIcon = imgObject.AddComponent<SubSailorIcon>();

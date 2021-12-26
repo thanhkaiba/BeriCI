@@ -29,9 +29,7 @@
 
 // Contributed by: Mitch Thompson
 
-using UnityEngine;
-using UnityEditor;
-
-namespace Spine.Unity.Modules {
-	public class SkeletonRagdoll2DInspector {}
+namespace Spine.Unity.Modules
+{
+    public class SkeletonRagdoll2DInspector { }
 }

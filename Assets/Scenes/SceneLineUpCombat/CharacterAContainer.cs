@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -92,7 +91,7 @@ public class CharacterAContainer : MonoBehaviour
             }
             subSailorIcon.scrollRect = scrollRect;
             subSailorIcon.Model = substituteSailors[i];
-           
+
         }
     }
 }

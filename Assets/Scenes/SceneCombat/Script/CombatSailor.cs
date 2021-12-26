@@ -1,12 +1,9 @@
 ﻿using DG.Tweening;
-using Newtonsoft.Json;
 using Spine.Unity;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -99,7 +96,7 @@ public class CombatSailor : Sailor
                     cs.BaseMagicResist += config.GetParams(p.type, p.level)[0];
                     break;
                 case SailorClass.SUPPORT:
-                    cs.Fury += (int) config.GetParams(p.type, p.level)[0];
+                    cs.Fury += (int)config.GetParams(p.type, p.level)[0];
                     break;
                 case SailorClass.KNIGHT:
                     if (cs.HaveType(SailorClass.KNIGHT))
@@ -121,7 +118,7 @@ public class CombatSailor : Sailor
         });
     }
 
-    public virtual void ActiveStartPassive() 
+    public virtual void ActiveStartPassive()
     {
         // do nothing, se say ra o 1 so tuong skill passive
     }
@@ -162,12 +159,12 @@ public class CombatSailor : Sailor
     {
         return HaveStatus(SailorStatusType.DEATH);
     }
-        
+
     public float DoCombatAction(CombatState combatState)
     {
         bool useSkillCondition = UseSkillCondition(combatState);
         if (HaveStatus(SailorStatusType.STUN)) return Immobile();
-        else if(useSkillCondition) return CastSkill(combatState);
+        else if (useSkillCondition) return CastSkill(combatState);
         else return BaseAttack(combatState);
     }
     // Base attack
@@ -222,7 +219,7 @@ public class CombatSailor : Sailor
         ClassBonusItem cyborg = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
         if (cs.HaveType(SailorClass.CYBORG) && cyborg != null)
         {
-            int furyAdd = (int) config.GetParams(cyborg.type, cyborg.level)[0];
+            int furyAdd = (int)config.GetParams(cyborg.type, cyborg.level)[0];
             GainFury(furyAdd);
             CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
         }
@@ -242,7 +239,7 @@ public class CombatSailor : Sailor
         {
             GainFury(GlobalConfigs.Combat.fury_per_base_attack);
             target.LoseHealth(damage);
-        } ));
+        }));
         return delay + 0.6f;
     }
     public void CheckActiveGrappler()
@@ -261,11 +258,11 @@ public class CombatSailor : Sailor
         yield return new WaitForSeconds(time);
         action();
     }
-    bool UseSkillCondition (CombatState combatState)
+    bool UseSkillCondition(CombatState combatState)
     {
         return cs.Fury >= cs.MaxFury && CanActiveSkill(combatState);
     }
-    float Immobile ()
+    float Immobile()
     {
         cs.CurrentSpeed -= cs.SpeedNeed;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
@@ -284,7 +281,7 @@ public class CombatSailor : Sailor
         float r = Random.Range(0f, 1f);
         return r < cs.Block;
     }
-   CombatSailor GetBaseAttackTarget(CombatState combatState)
+    CombatSailor GetBaseAttackTarget(CombatState combatState)
     {
         switch (Model.config_stats.attack_type)
         {
@@ -347,7 +344,7 @@ public class CombatSailor : Sailor
 
         return physicTake + magicTake + d.pure;
     }
-    public void AddStatus (SailorStatus status)
+    public void AddStatus(SailorStatus status)
     {
         SailorStatus existStatus = cs.listStatus.Find(x => x.name == status.name);
         if (existStatus != null)
@@ -425,14 +422,14 @@ public class CombatSailor : Sailor
     {
         return cs.SpeedNeed - cs.CurrentSpeed;
     }
-    public void AddCurSpeed (int value)
+    public void AddCurSpeed(int value)
     {
         cs.CurrentSpeed += value;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
     }
     public virtual void SpeedUp(float percent)
     {
-        cs.CurrentSpeed += (int) (percent * cs.SpeedNeed);
+        cs.CurrentSpeed += (int)(percent * cs.SpeedNeed);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
     }
     public void IncDisplaySpeed(float spInc)

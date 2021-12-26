@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Piratera.GUI
 {
@@ -35,7 +30,8 @@ namespace Piratera.GUI
             if (baseGuiEffect != null)
             {
                 baseGuiEffect.runDisappearEffectEff(DestroySelf);
-            } else
+            }
+            else
             {
                 DestroySelf();
             }
@@ -43,10 +39,11 @@ namespace Piratera.GUI
 
         public void RunDestroy(GuiEff eff)
         {
-            if(baseGuiEffect != null)
+            if (baseGuiEffect != null)
             {
                 baseGuiEffect.runDisappearEffectEff(eff, DestroySelf);
-            } else
+            }
+            else
             {
                 DestroySelf();
             }

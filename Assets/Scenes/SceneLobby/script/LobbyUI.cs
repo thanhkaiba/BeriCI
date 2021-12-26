@@ -1,18 +1,15 @@
 using DG.Tweening;
-using Piratera.GUI;
-using System;
-using System.Collections;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using Piratera.Utils;
-using System.Collections.Generic;
-using UnityEngine.Events;
-using Piratera.Sound;
-using Piratera.Network;
 using Piratera.Cheat;
 using Piratera.Constance;
+using Piratera.GUI;
+using Piratera.Network;
+using Piratera.Sound;
+using Piratera.Utils;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -140,7 +137,7 @@ public class LobbyUI : MonoBehaviour
     {
         GuiManager.Instance.ShowGuiWaiting(true);
         NetworkController.Send(SFSAction.GET_STAMINA_PACK);
-        
+
     }
 
     public void OnBuyBeri()

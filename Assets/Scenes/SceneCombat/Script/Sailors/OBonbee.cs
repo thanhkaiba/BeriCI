@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class OBonbee : CombatSailor
@@ -87,7 +86,7 @@ public class OBonbee : CombatSailor
         y /= listTargets.Count;
         z /= listTargets.Count;
 
-        Vector3 desPos = new Vector3( listTargets[0].transform.position.x + offset * 4, y, z - 0.1f);
+        Vector3 desPos = new Vector3(listTargets[0].transform.position.x + offset * 4, y, z - 0.1f);
         var listHighlight = new List<CombatSailor>() { this };
         listHighlight.AddRange(listTargets);
         CombatState.Instance.HighlightListSailor(listHighlight, 2.2f);

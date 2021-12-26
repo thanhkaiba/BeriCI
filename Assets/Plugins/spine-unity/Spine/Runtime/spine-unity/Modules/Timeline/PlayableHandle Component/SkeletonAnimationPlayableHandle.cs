@@ -27,38 +27,36 @@
  * EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *****************************************************************************/
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 //using UnityEngine.Playables;
 
-using Spine;
-using Spine.Unity;
-using Spine.Unity.Playables;
 
-namespace Spine.Unity.Playables {
+namespace Spine.Unity.Playables
+{
 
-	[AddComponentMenu("Spine/Playables/SkeletonAnimation Playable Handle (Playables)")]
-	public class SkeletonAnimationPlayableHandle : SpinePlayableHandleBase {
-		#region Inspector
-		public SkeletonAnimation skeletonAnimation;
-		//public float fadeOutDuration = 0.5f;
+    [AddComponentMenu("Spine/Playables/SkeletonAnimation Playable Handle (Playables)")]
+    public class SkeletonAnimationPlayableHandle : SpinePlayableHandleBase
+    {
+        #region Inspector
+        public SkeletonAnimation skeletonAnimation;
+        //public float fadeOutDuration = 0.5f;
 
-		#if UNITY_EDITOR
-		void OnValidate () {
-			if (this.skeletonAnimation == null)
-				skeletonAnimation = GetComponent<SkeletonAnimation>();
-		}
-		#endif
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            if (this.skeletonAnimation == null)
+                skeletonAnimation = GetComponent<SkeletonAnimation>();
+        }
+#endif
 
-		#endregion
+        #endregion
 
-		//readonly HashSet<int> frameAppliedProperties = new HashSet<int>();
+        //readonly HashSet<int> frameAppliedProperties = new HashSet<int>();
 
-		public override Skeleton Skeleton {	get { return skeletonAnimation.Skeleton; } }
-		public override SkeletonData SkeletonData { get { return skeletonAnimation.Skeleton.data; } }
+        public override Skeleton Skeleton { get { return skeletonAnimation.Skeleton; } }
+        public override SkeletonData SkeletonData { get { return skeletonAnimation.Skeleton.data; } }
 
-		#if UNITY_2017 || UNITY_2018 || (UNITY_2019_1_OR_NEWER && SPINE_TIMELINE_PACKAGE_DOWNLOADED)
+#if UNITY_2017 || UNITY_2018 || (UNITY_2019_1_OR_NEWER && SPINE_TIMELINE_PACKAGE_DOWNLOADED)
 		void Awake () {
 			if (skeletonAnimation == null)
 				skeletonAnimation = GetComponent<SkeletonAnimation>();
@@ -108,6 +106,6 @@ namespace Spine.Unity.Playables {
 		//	frameTrackCount++;
 		//}
 #endif
-	}
+    }
 
 }

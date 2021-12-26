@@ -1,11 +1,7 @@
-using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using UnityEngine;
 using DG.Tweening;
+using UnityEngine;
 
-public class DemoSailor: CombatSailor
+public class DemoSailor : CombatSailor
 {
     public DemoSailor()
     {

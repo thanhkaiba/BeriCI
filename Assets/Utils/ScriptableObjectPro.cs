@@ -1,10 +1,9 @@
-using System;
-using System.Reflection;
-using System.Collections.Generic;
-using UnityEngine;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 [CreateAssetMenu]

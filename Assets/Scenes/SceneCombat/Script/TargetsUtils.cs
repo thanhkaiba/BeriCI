@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Newtonsoft.Json;
-using System.IO;
-using System.Linq;
 using Random = System.Random;
 
 public class TargetsUtils
@@ -34,7 +29,7 @@ public class TargetsUtils
     }
     public static CombatSailor Self(CombatSailor actor)
     {
-        CombatSailor result = actor; 
+        CombatSailor result = actor;
         return result;
     }
     public static CombatSailor Range(CombatSailor actor, List<CombatSailor> l)
@@ -227,7 +222,7 @@ public class TargetsUtils
         for (int i = 0; i < l.Count; i++)
         {
             if (l[i].cs.position.y == 0) row1.Add(l[i]);
-            if (l[i].cs.position.y == 1) row2.Add(l[i]);           
+            if (l[i].cs.position.y == 1) row2.Add(l[i]);
             if (l[i].cs.position.y == 2) row3.Add(l[i]);
         }
         row1.Sort((s1, s2) => s1.cs.position.x.CompareTo(s2.cs.position.x));
@@ -242,7 +237,7 @@ public class TargetsUtils
     {
         var result = new CombatSailor();
         var sameRow = new List<CombatSailor>();
-        for (int i = 0; i < l.Count; i++)if (l[i].cs.position.y == actor.cs.position.y && l[i].cs.position.x != actor.cs.position.x && l[i].cs.position.x < actor.cs.position.x) sameRow.Add(l[i]);
+        for (int i = 0; i < l.Count; i++) if (l[i].cs.position.y == actor.cs.position.y && l[i].cs.position.x != actor.cs.position.x && l[i].cs.position.x < actor.cs.position.x) sameRow.Add(l[i]);
         if (sameRow.Count == 1)
         {
             result = sameRow[0];
@@ -254,7 +249,7 @@ public class TargetsUtils
             result = sameRow[0].cs.position.x > sameRow[1].cs.position.x ? sameRow[0] : sameRow[1];
             return result;
         }
-      
+
     }
     public static CombatSailor Front(CombatSailor actor, List<CombatSailor> l)
     {

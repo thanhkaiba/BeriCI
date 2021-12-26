@@ -1,11 +1,9 @@
-using Piratera.GUI;
 using Piratera.Cheat;
-using System.Collections;
+using Piratera.GUI;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using System;
 
 public class CrewManager : MonoBehaviour
 {
@@ -21,9 +19,9 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private SailorDescription sailorDes;
     [SerializeField]
-    private Image quality,rank;
+    private Image quality, rank;
     [SerializeField]
-    private Image [] classImgs;
+    private Image[] classImgs;
     [SerializeField]
     private Transform sailorPos;
 
@@ -90,18 +88,18 @@ public class CrewManager : MonoBehaviour
         }
     }
 
-    public void SetData(SailorModel model) 
+    public void SetData(SailorModel model)
     {
         curModel = model;
         texts[0].text = model.name;
         texts[1].text = model.id;
         foreach (var item in sailorDes.sheets[0].list)
         {
-            if(model.name == item.root_name)
+            if (model.name == item.root_name)
             {
                 texts[2].text = item.title;
                 texts[8].text = item.skill_description;
-            }             
+            }
         }
         quality.fillAmount = (float)model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
         texts[3].text = Mathf.Round(model.config_stats.GetPower(model.level, model.quality)).ToString();
@@ -140,7 +138,7 @@ public class CrewManager : MonoBehaviour
     {
 #if PIRATERA_DEV || PIRATERA_QC
         PopupCheatSailorInfo popup = GuiManager.Instance.AddGui<PopupCheatSailorInfo>("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
-       popup.sailorId = curModel.id; 
+        popup.sailorId = curModel.id;
 #endif
     }
 

@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using DG.Tweening;
+﻿using DG.Tweening;
 using System;
+using UnityEngine;
 
 namespace Piratera.GUI
 {
@@ -14,7 +14,7 @@ namespace Piratera.GUI
         LEFT,
         RIGHT,
     }
-    public class HaveBaseGuiEffect: MonoBehaviour
+    public class HaveBaseGuiEffect : MonoBehaviour
     {
 
         [SerializeField]
@@ -41,16 +41,16 @@ namespace Piratera.GUI
 
         public void runAppearEffect(GuiEff eff)
         {
-           
 
-            switch(eff)
+
+            switch (eff)
             {
                 case GuiEff.ZOOM:
                     {
-                        
+
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
-                       
+
                         transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
                         s.Insert(0, transform.DOScale(new Vector3(1f, 1f, 1f), appearTime));
 
@@ -62,7 +62,7 @@ namespace Piratera.GUI
                     break;
                 case GuiEff.FALL:
                     {
-                       
+
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -82,7 +82,7 @@ namespace Piratera.GUI
                     break;
                 case GuiEff.FLY_UP:
                     {
-                     
+
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -102,7 +102,7 @@ namespace Piratera.GUI
 
                 case GuiEff.LEFT:
                     {
-                       
+
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -121,7 +121,7 @@ namespace Piratera.GUI
                     break;
                 case GuiEff.RIGHT:
                     {
-                      
+
                         Sequence s = DOTween.Sequence();
                         s.SetTarget(transform).SetLink(gameObject);
                         if (canvasGroup != null)
@@ -161,7 +161,7 @@ namespace Piratera.GUI
         }
 
         public void runAppearEffect()
-        { 
+        {
             runAppearEffect(appearEffect);
         }
 
@@ -199,7 +199,7 @@ namespace Piratera.GUI
                             haveFog.VisibleFog(false);
                         }
 
-                      
+
                         Sequence s = DOTween.Sequence();
                         if (canvasGroup != null)
                         {
@@ -211,7 +211,7 @@ namespace Piratera.GUI
                         s.SetTarget(transform);
                         s.SetLink(gameObject);
 
-                       
+
                     }
                     break;
 

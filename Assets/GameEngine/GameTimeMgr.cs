@@ -1,17 +1,19 @@
 ﻿using System;
+using UnityEngine;
 
 public static class GameTimeMgr
 {
     public static long DeltaTime = 0;
 
-    public static void SetLoginTime(long loginTime)
+    public static void SetServerTime(long loginTime)
     {
-        long now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        DeltaTime = now - loginTime;
+        Debug.Log("Server Time: " + loginTime);
+        long now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
+        DeltaTime = loginTime - now; 
     }
 
     public static long GetCurrentTime()
     {
-        return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() + DeltaTime;
+        return DateTimeOffset.Now.ToUnixTimeMilliseconds() + DeltaTime;
     }
 }

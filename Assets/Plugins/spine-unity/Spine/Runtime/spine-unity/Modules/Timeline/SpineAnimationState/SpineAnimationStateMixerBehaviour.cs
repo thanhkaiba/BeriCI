@@ -50,9 +50,9 @@ namespace Spine.Unity.Playables {
 			var state = spineComponent.AnimationState;
 
 			if (!Application.isPlaying) {
-				#if SPINE_EDITMODEPOSE
+#if SPINE_EDITMODEPOSE
 				PreviewEditModePose(playable, spineComponent);
-				#endif
+#endif
 				return;
 			}
 
@@ -103,7 +103,7 @@ namespace Spine.Unity.Playables {
 			}
 		}
 
-		#if SPINE_EDITMODEPOSE
+#if SPINE_EDITMODEPOSE
 
 		AnimationState dummyAnimationState;
 
@@ -187,7 +187,7 @@ namespace Spine.Unity.Playables {
 			// Do nothing outside of the first clip and the last clip.
 
 		}
-		#endif
+#endif
 
 	}
 

@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Scrub : CombatSailor

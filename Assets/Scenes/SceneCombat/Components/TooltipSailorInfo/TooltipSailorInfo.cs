@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -45,7 +43,7 @@ public class TooltipSailorInfo : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
-        
+
     }
     private void Update()
     {
@@ -57,14 +55,14 @@ public class TooltipSailorInfo : MonoBehaviour
                  Input.mousePosition,
                  Camera.main))
             {
-                 gameObject.SetActive(false);
-                 follow = null;
+                gameObject.SetActive(false);
+                follow = null;
 
             }
         }
         if (gameObject.activeSelf)
         {
-            
+
             if (follow != null)
             {
                 Vector3 pos = Camera.main.GetComponent<Camera>().WorldToScreenPoint(follow.position) + new Vector3(0, Screen.height / 10, 0);
@@ -112,10 +110,10 @@ public class TooltipSailorInfo : MonoBehaviour
 
     public void ShowDynamicTooltip(SailorModel sailorModel, CombatStats cs, Transform target)
     {
-            stats = cs;
-            model = sailorModel;
-            follow = target;
-            ShowBasicInfo();
+        stats = cs;
+        model = sailorModel;
+        follow = target;
+        ShowBasicInfo();
     }
 
     public void ShowTooltip(SailorModel sailorModel, Transform target)

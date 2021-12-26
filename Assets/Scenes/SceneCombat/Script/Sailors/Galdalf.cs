@@ -1,8 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Galdalf : CombatSailor
@@ -20,7 +18,7 @@ public class Galdalf : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-     
+
         Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
         relativePos.y += 4.5f;
         relativePos.x *= modelObject.transform.localScale.x;
@@ -36,7 +34,7 @@ public class Galdalf : CombatSailor
             Vector3 startPos = hand.GetWorldPosition(modelObject.transform);
             Vector3 endPos = target.transform.position;
             endPos.y += 2;
-            GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, endPos, 0, .4f, .3f,.2f);
+            GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, endPos, 0, .4f, .3f, .2f);
 
         });
         seq.AppendInterval(0.4f);
@@ -79,7 +77,7 @@ public class Galdalf : CombatSailor
         {
             Vector3 pos = _targets.transform.position;
             pos.y += 4f;
-       
+
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_7_purple"), pos, Quaternion.identity);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));

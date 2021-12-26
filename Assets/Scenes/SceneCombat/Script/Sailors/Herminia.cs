@@ -3,7 +3,6 @@ using Piratera.Sound;
 using Spine.Unity;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Herminia : CombatSailor
@@ -39,12 +38,12 @@ public class Herminia : CombatSailor
         {
             SoundMgr.PlaySoundAttackSailor(3);
         });
-        Sequence seq = DOTween.Sequence(); 
+        Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() =>
         {
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
-            ArrowTarget(startPos, targetPos, 2f/Vector3.Distance(startPos, targetPos));
+            ArrowTarget(startPos, targetPos, 2f / Vector3.Distance(startPos, targetPos));
         });
         return 1.1f;
     }
@@ -127,9 +126,9 @@ public class Herminia : CombatSailor
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-        
-        float rZ = (float) Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
-        arrGO.transform.eulerAngles = new Vector3(0, 0, rZ*57.3f);
+
+        float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
+        arrGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f);
 
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() => arrGO.SetActive(true));

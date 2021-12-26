@@ -26,7 +26,7 @@ namespace Piratera.Cheat
 
         public void SendCheatSailor()
         {
-            
+
 
             CheatMgr.CheatSailor(textCheatSailor_name.text, textCheatSailor_quality.text, textCheatSailor_level.text);
 
@@ -90,7 +90,7 @@ namespace Piratera.Cheat
             sailorCheatData.PutSFSArray("sailorcheats", sailorcheats);
 
             CheatMgr.CheatBotAndPlay(sailorCheatData);
-            
+
         }
 
     }

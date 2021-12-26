@@ -55,7 +55,7 @@ namespace Piratera.GUI
             textCreateAt.text = date.ToString("MM/dd/yyyy");
             UpdateSoundIcon();
             UpdateMusicIcon();
-            
+
         }
 
         public void Logout()

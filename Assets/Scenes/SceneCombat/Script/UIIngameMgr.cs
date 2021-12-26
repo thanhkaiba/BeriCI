@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,7 +35,7 @@ public class UIIngameMgr : MonoBehaviour
         {
             SailorInQueue s = Instantiate(sailorInQueue, node).GetComponent<SailorInQueue>();
             s.transform.localPosition = new Vector3(-i * 150, 0, 0);
-            s.transform.SetSiblingIndex(sailors.Count-i);
+            s.transform.SetSiblingIndex(sailors.Count - i);
             listSailorInQueue.Add(s);
             s.SetData(sailors[i]);
             s.PresentData();
@@ -55,7 +54,7 @@ public class UIIngameMgr : MonoBehaviour
             if (index >= 0)
             {
                 s.transform.DOLocalMoveX(-index * 150, 0.5f);
-                s.transform.SetSiblingIndex(listSailorInQueue.Count-index-1);
+                s.transform.SetSiblingIndex(listSailorInQueue.Count - index - 1);
                 s.PresentData();
             }
             else
@@ -175,7 +174,7 @@ public class UIIngameMgr : MonoBehaviour
         icon.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.Model.config_stats.root_name);
         health.SetValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
         //Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
-        if (sailor.cs.MaxFury != 0) fury.value = (float) sailor.cs.Fury / (float) sailor.cs.MaxFury;
+        if (sailor.cs.MaxFury != 0) fury.value = (float)sailor.cs.Fury / (float)sailor.cs.MaxFury;
         else fury.value = 1;
     }
     public void ShowTakeDamage(CombatSailor sailor)
@@ -224,6 +223,6 @@ public class UIIngameMgr : MonoBehaviour
     }
     public void ShowTimeScale()
     {
-        timescale.text = "X" + (int) Time.timeScale;
+        timescale.text = "X" + (int)Time.timeScale;
     }
 }

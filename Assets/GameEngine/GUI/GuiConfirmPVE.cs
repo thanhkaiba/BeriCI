@@ -1,8 +1,6 @@
 using DG.Tweening;
 using Piratera.Network;
-using Piratera.Utils;
 using Sfs2X.Entities.Data;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +20,10 @@ namespace Piratera.GUI
         private Text staminaCost;
         [SerializeField]
         private Text staminaMinus;
+        [SerializeField]
+        private GameObject iconFind, findTarget;
         public LobbyUI lobby;
+        private Vector3 v;
 
         protected override void Start()
         {
@@ -34,6 +35,7 @@ namespace Piratera.GUI
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
             NetworkController.AddServerActionListener(onReceiveServerAction);
             Appear();
+            v = iconFind.transform.position - findTarget.transform.position;
         }
 
         private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -80,13 +82,18 @@ namespace Piratera.GUI
 
                 Sequence s = DOTween.Sequence();
                 s.AppendInterval(0.6f);
-                s.AppendCallback(() => {
+                s.AppendCallback(() =>
+                {
                     fight.SetActive(false);
                     find.SetActive(true);
+             
+
                 });
                 s.AppendInterval(1.5f);
                 s.AppendCallback(() => NetworkController.Send(SFSAction.PVE_PLAY));
                 s.SetLink(gameObject).SetTarget(transform);
+
+                
             }
 
         }
@@ -122,6 +129,12 @@ namespace Piratera.GUI
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);
+        }
+
+        private void Update()
+        {
+            v = Quaternion.AngleAxis(Time.deltaTime * 95, Vector3.forward) * v;
+            iconFind.transform.position = findTarget.transform.position + v;
         }
     }
 }

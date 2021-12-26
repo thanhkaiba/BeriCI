@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum AttackType
 {
@@ -127,13 +125,16 @@ public class CombatStats
     public float CurHealth;
 
     public float BaseArmor;
-    public float Armor {
+    public float Armor
+    {
         get { return BaseArmor; }
     }
 
     public float BaseMagicResist;
-    public float MagicResist {
-        get {
+    public float MagicResist
+    {
+        get
+        {
             // tinh toan dua tren status
             return BaseMagicResist;
         }

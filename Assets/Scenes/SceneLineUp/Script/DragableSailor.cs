@@ -17,7 +17,7 @@ public class DragableSailor : MonoBehaviour
     protected short originIndex = -1;
     protected Image dragImage;
     protected bool draging = false;
-    
+
     private Vector3 delta;
     private float originZ;
 
@@ -62,15 +62,16 @@ public class DragableSailor : MonoBehaviour
             SquadContainer.Draging = true;
             SquadAContainer.Draging = true;
             draging = true;
-        } else
+        }
+        else
         {
             draging = false;
         }
-  
+
 
     }
 
-  
+
     protected void OnMouseDrag()
     {
 
@@ -82,7 +83,8 @@ public class DragableSailor : MonoBehaviour
                 dragImage.enabled = false;
                 model.SetActive(true);
                 OnDragSailor(mousePosition);
-            } else
+            }
+            else
             {
 
                 UpdateSlots(originIndex);
@@ -90,7 +92,7 @@ public class DragableSailor : MonoBehaviour
                 model.SetActive(false);
                 dragImage.transform.position = mousePosition;
             }
-           
+
         }
 
     }
@@ -106,7 +108,7 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseUp()
     {
-      
+
         if (draging)
         {
             SquadContainer.Draging = false;
@@ -130,7 +132,8 @@ public class DragableSailor : MonoBehaviour
                 {
                     OnMouseUpEmpty();
                 }
-            } else
+            }
+            else
             {
                 OnUnEquip();
             }
@@ -148,20 +151,22 @@ public class DragableSailor : MonoBehaviour
         slots[originIndex].OnFree();
         Destroy(gameObject);
         UnEquipSailor(sailor.Model.id);
-           
+
     }
 
     protected void OnMouseUpWithSlot()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, originZ);
 
-        if (IsSlotEmpty(selectingIndex)) {
+        if (IsSlotEmpty(selectingIndex))
+        {
             OccupieSailor(sailor.Model.id, selectingIndex);
-           
-        } else
+
+        }
+        else
         {
             SwapSailor(sailor.Model.id, selectingIndex);
-           
+
         }
 
         slots[selectingIndex].SetSelectedSailer(sailor);
@@ -216,7 +221,8 @@ public class DragableSailor : MonoBehaviour
             Spine.Skeleton skeleton = transform.GetComponentInChildren<SkeletonMecanim>().skeleton;
             Color color = skeleton.GetColor();
             skeleton.SetColor(new Color(color.r, color.g, color.b, opacity));
-        } catch 
+        }
+        catch
         {
 
         }

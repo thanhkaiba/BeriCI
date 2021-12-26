@@ -1,10 +1,7 @@
 using Newtonsoft.Json;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
 
 public class CombineTypeConfig
 {
@@ -27,7 +24,7 @@ public class CombineTypeConfig
         using (StreamReader r = new StreamReader("Assets/Config/PassiveType/PassiveType.json"))
         {
             string json = r.ReadToEnd();
-            config = JsonConvert.DeserializeObject< IEnumerable<PassiveConfig> >(json);
+            config = JsonConvert.DeserializeObject<IEnumerable<PassiveConfig>>(json);
         }
     }
     private PassiveConfig GetPassiveConfig(SailorClass type)
@@ -43,7 +40,7 @@ public class CombineTypeConfig
         var config = GetPassiveConfig(type);
         return config != null;
     }
-    public List<int> GetMilestones (SailorClass type)
+    public List<int> GetMilestones(SailorClass type)
     {
         var config = GetPassiveConfig(type);
         List<int> result = new List<int>();
@@ -69,7 +66,7 @@ public class CombineTypeConfig
         }
         return result;
     }
-    public List<float> GetParams (SailorClass type, int level)
+    public List<float> GetParams(SailorClass type, int level)
     {
         var config = GetPassiveConfig(type);
         List<float> result = new List<float>();

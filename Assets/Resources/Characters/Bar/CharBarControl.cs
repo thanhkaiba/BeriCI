@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +13,7 @@ public class CharBarControl : MonoBehaviour
     public Image iconSkill;
     public Text textName;
 
-    public void SetName (string name)
+    public void SetName(string name)
     {
         textName.text = name;
     }
@@ -47,7 +45,7 @@ public class CharBarControl : MonoBehaviour
         furyBar.gameObject.SetActive(max != 0);
         if (max != 0)
         {
-            furyBar.value = (float) min / max;
+            furyBar.value = (float)min / max;
             furyText.text = min + "/" + max;
         }
     }

@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class Tons : CombatSailor
@@ -30,7 +29,8 @@ public class Tons : CombatSailor
         desPos.z -= 1;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.22f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/tele/tele"),
                 Vector3.MoveTowards(oriPos, desPos, -1), new Quaternion());
@@ -41,7 +41,8 @@ public class Tons : CombatSailor
 
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => SoundMgr.PlaySoundAttackSailor(10));
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/tele/tele"), desPos, new Quaternion());
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendInterval(1.0f);
@@ -50,9 +51,10 @@ public class Tons : CombatSailor
         seq.AppendInterval(0.2f);
         seq.Append(transform.DOMove(desPos, 0.0f));
         float currentLocalScaleX = modelObject.transform.localScale.x;
-        seq.Append(modelObject.transform.DOScaleX(currentLocalScaleX*-1, 0.0f));
+        seq.Append(modelObject.transform.DOScaleX(currentLocalScaleX * -1, 0.0f));
         seq.AppendInterval(0.42f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/tele/tele"),
                 oriPos, new Quaternion());
@@ -108,7 +110,8 @@ public class Tons : CombatSailor
         posEnemy.z -= 0.1f;
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.4f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/tele/tele"),
                 Vector3.MoveTowards(transform.position, posEnemy, -1), new Quaternion());
@@ -117,7 +120,8 @@ public class Tons : CombatSailor
             seq2.AppendCallback(() => Destroy(ex));
         });
         seq.AppendInterval(.2f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             bar.gameObject.SetActive(false);
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/Impact/Impact"),
@@ -138,7 +142,8 @@ public class Tons : CombatSailor
             seq2.AppendCallback(() => Destroy(ex));
         });
         seq.AppendInterval(1.0f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             bar.gameObject.SetActive(true);
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/tele/tele"),

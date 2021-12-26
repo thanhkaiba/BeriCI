@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -95,7 +94,7 @@ public class QChi : CombatSailor
                 Vector3 startPos = bone.GetWorldPosition(modelObject.transform);
                 Vector3 endPos = listTargets[i].transform.position;
                 endPos.y += 2;
-                GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, endPos, 0, .4f,1 , 1f);
+                GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, endPos, 0, .4f, 1, 1f);
             }
 
 

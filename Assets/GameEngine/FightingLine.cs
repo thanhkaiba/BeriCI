@@ -10,8 +10,10 @@ public class FightingLine
     public static readonly byte NUM_SQUAD_COL = 3;
 
     private int numSlot = -1;
-    public int NumSlot { 
-        get { 
+    public int NumSlot
+    {
+        get
+        {
             if (numSlot > 0)
             {
                 return numSlot;
@@ -24,7 +26,7 @@ public class FightingLine
             numSlot = value;
         }
     }
-    private Dictionary<short, string> slots = new Dictionary<short, string> 
+    private Dictionary<short, string> slots = new Dictionary<short, string>
     {
             {0,  ""},
             {1,  ""},
@@ -53,7 +55,7 @@ public class FightingLine
 
         slots[slotA] = sailorB;
         slots[slotB] = sailorA;
-       
+
         return true;
     }
 
@@ -73,7 +75,7 @@ public class FightingLine
 
     public bool Occupie(string sailorId, short slotIndex)
     {
-      
+
         if (slots[slotIndex] != "")
         {
             return false;
@@ -87,7 +89,7 @@ public class FightingLine
 
     public bool Replace(string sailor, short slot)
     {
-        
+
         slots[slot] = sailor;
         return true;
     }
