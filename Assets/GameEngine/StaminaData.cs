@@ -61,7 +61,6 @@ public class StaminaData : Singleton<StaminaData>
     public void OnUserVariablesUpdate(User user)
     {
         LastCountStamina = (long)user.GetVariable(UserInfoPropertiesKey.LAST_COUNT).GetDoubleValue();
-        Debug.LogWarning("Last Count: " + LastCountStamina);
         TimeBuyStaminaToday = user.GetVariable(UserInfoPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
         int oldStamina = Stamina;
         Stamina = user.GetVariable(UserInfoPropertiesKey.STAMINA).GetIntValue();
