@@ -7,10 +7,6 @@ using UnityEngine;
 public class Geechoso : CombatSailor
 {
     public SailorConfig config;
-    Vector3 startPos;
-    Vector3 targetPos;
-    CombatSailor mainTarget;
-    float dame;
     //private Spine.Bone boneTarget;
     public Geechoso()
     {
@@ -23,7 +19,7 @@ public class Geechoso : CombatSailor
     public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("Attack");
-        targetPos = target.transform.position;
+        var targetPos = target.transform.position;
         targetPos.y += 2f;
 
         Sequence seq = DOTween.Sequence();
@@ -70,18 +66,26 @@ public class Geechoso : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
-        mainTarget = CombatState.Instance.GetSailor(targets[0]);
-        CombatEvents.Instance.highlightTarget.Invoke(mainTarget);
-        Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
-        startPos = gun2.GetWorldPosition(modelObject.transform);
-        targetPos = mainTarget.transform.position;
-        targetPos.y += 2;
-        dame = _params[0];
+        var target = CombatState.Instance.GetSailor(targets[0]);
+        CombatEvents.Instance.highlightTarget.Invoke(target);
+        var damage = _params[0];
 
+        var seq = DOTween.Sequence();
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() => Shoot(target, damage / 2));
+        seq.AppendInterval(0.8f);
+        seq.AppendCallback(() => {
+            Shoot(target, damage / 2);
+        });
         return 2f;
     }
-    public void StartEff()
+    private void Shoot(CombatSailor target, float damage)
     {
+        Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
+        var startPos = gun2.GetWorldPosition(modelObject.transform);
+        var targetPos = target.transform.position;
+        targetPos.y += 2;
+
         float time = 0;
         time = 5f / Vector3.Distance(startPos, targetPos);
         Sequence seq = DOTween.Sequence();
@@ -91,9 +95,6 @@ public class Geechoso : CombatSailor
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, time);
         });
         seq.AppendInterval(time);
-        seq.AppendCallback(() =>
-        {
-            mainTarget.LoseHealth(new Damage() { physics = (dame / 2) });
-        });
+        seq.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage }));
     }
 }

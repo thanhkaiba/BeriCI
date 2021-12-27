@@ -3,16 +3,16 @@ using UnityEngine.UI;
 
 public class CharBarControl : MonoBehaviour
 {
-    public Slider healthBar;
+    public SmoothSlider healthBar;
     public Text healthText;
     public Slider speedBar;
     public Text speedText;
-    public Slider furyBar;
+    public SmoothSlider furyBar;
     public Text furyText;
     public Image iconType;
     public Image iconSkill;
     public Text textName;
-
+    
     public void SetName(string name)
     {
         textName.text = name;
@@ -32,7 +32,7 @@ public class CharBarControl : MonoBehaviour
     }
     public void SetHealthBar(float max, float min)
     {
-        healthBar.value = min / max;
+        healthBar.ChangeValue(min / max);
         healthText.text = (System.Math.Ceiling(min)).ToString();
     }
     public void SetSpeedBar(int max, int min)
@@ -45,7 +45,7 @@ public class CharBarControl : MonoBehaviour
         furyBar.gameObject.SetActive(max != 0);
         if (max != 0)
         {
-            furyBar.value = (float)min / max;
+            furyBar.ChangeValue((float)min / max);
             furyText.text = min + "/" + max;
         }
     }

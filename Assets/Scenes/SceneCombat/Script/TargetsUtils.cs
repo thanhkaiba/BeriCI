@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 using Random = System.Random;
 
 public class TargetsUtils
@@ -91,7 +92,7 @@ public class TargetsUtils
         CombatPosition p = actor.cs.position;
         l.ForEach(cha =>
         {
-            if ((cha.cs.position.x < actor.cs.position.x)
+            if ((cha.cs.position.x > actor.cs.position.x)
                 && cha.cs.position.y == actor.cs.position.y) result.Add(cha);
         });
         return result;

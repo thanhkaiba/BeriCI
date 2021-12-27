@@ -382,16 +382,7 @@ public class CombatSailor : Sailor
     {
         cs.BaseArmor += armor;
     }
-    public void LoseHealth(float health)
-    {
-        cs.CurHealth -= health;
-        if (cs.CurHealth <= 0) cs.CurHealth = 0;
-        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
-        CheckDeath();
-
-        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = health });
-    }
-    public void LoseHealth(Damage d)
+    public void LoseHealth(Damage d, bool checkDeath = true)
     {
         TriggerAnimation("Hurt");
         GainFury(d.fury_gain);
@@ -399,7 +390,7 @@ public class CombatSailor : Sailor
         cs.CurHealth -= d.physics + d.magic + d.pure;
         if (cs.CurHealth <= 0) cs.CurHealth = 0;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
-        CheckDeath();
+        if (checkDeath) CheckDeath();
 
         CombatEvents.Instance.takeDamage.Invoke(this, d);
     }

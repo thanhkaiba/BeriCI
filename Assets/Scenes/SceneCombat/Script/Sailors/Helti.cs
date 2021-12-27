@@ -111,14 +111,14 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
+                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
             windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 });
+                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
             windAnimator.SetTrigger("run");
         });
         seq.AppendInterval(0.8f);
