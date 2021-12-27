@@ -102,7 +102,7 @@ public class CombatMgr : MonoBehaviour
         {
             actionCountShow++;
         }
-        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCountShow)));
+        StartCoroutine(WaitAndDo(0.0f, () => UIMgr.ShowActionCount(actionCountShow)));
 
         switch (actionProcess.type)
         {
@@ -172,7 +172,7 @@ public class CombatMgr : MonoBehaviour
         actionCount++;
         actionCountShow++;
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        StartCoroutine(WaitAndDo(0.3f, () => UIMgr.ShowActionCount(actionCountShow)));
+        StartCoroutine(WaitAndDo(0.0f, () => UIMgr.ShowActionCount(actionCountShow)));
         Debug.Log(
             " ----> combat action character: " + actionChar.Model.config_stats.root_name
             + " | team: " + (actionChar.cs.team == Team.A ? "A" : "B")

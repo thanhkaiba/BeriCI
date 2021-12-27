@@ -21,9 +21,6 @@ public class UIIngameMgr : MonoBehaviour
     {
         Instance = this;
     }
-
-
-
     public void OnDestroy()
     {
         Instance = null;
