@@ -8,8 +8,7 @@ public class SailorInQueue : MonoBehaviour
     public SmoothSlider speedSlider;
     public Image icon;
     public Text level;
-    public Sprite bg_0;
-    public Sprite bg_1;
+    public Image colorTeam;
     public void SetData(CombatSailor s)
     {
         sailorData = s;
@@ -28,12 +27,12 @@ public class SailorInQueue : MonoBehaviour
         if (sailorData.cs.team == Team.A)
         {
             icon.transform.localScale = new Vector3(-1, 1, 1);
-            background.sprite = bg_0;
+            colorTeam.color = new Color(103f/255f, 169f/255f, 255f/255f);
         }
         else
         {
             icon.transform.localScale = new Vector3(1, 1, 1);
-            background.sprite = bg_1;
+            colorTeam.color = new Color(217f/255f, 88f/255f, 97f/255f);
         }
         level.text = sailorData.Model.level.ToString();
     }

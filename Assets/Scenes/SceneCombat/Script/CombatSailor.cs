@@ -240,7 +240,7 @@ public class CombatSailor : Sailor
             GainFury(GlobalConfigs.Combat.fury_per_base_attack);
             target.LoseHealth(damage);
         }));
-        return delay + 0.6f;
+        return delay + 0.8f;
     }
     public void CheckActiveGrappler()
     {
