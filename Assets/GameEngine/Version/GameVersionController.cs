@@ -10,8 +10,9 @@ public class GameVersionController : MonoBehaviour
     private const string URL = "https://api1.piratera.io/v1/game/version/8";
 #elif UNITY_ANDROID
     private const string URL = "https://api1.piratera.io/v1/game/version/9";
+#else
+    private const string URL = "";
 #endif
-    private const string TEST_URL = "localhost:3001";
 
     [SerializeField]
     public UnityEvent OnCheckSuccess;
@@ -27,7 +28,13 @@ public class GameVersionController : MonoBehaviour
     void Start()
     {
 #if !UNITY_EDITOR && UNITY_STANDALONE_WIN
-        StartCoroutine(GetText());
+        if (!string.IsNullOrEmpty(DownloadUrl))
+        {
+            StartCoroutine(GetText());
+        } else
+        {
+            OnCheckSuccess.Invoke();
+        }
 #else
         OnCheckSuccess.Invoke();
 #endif
