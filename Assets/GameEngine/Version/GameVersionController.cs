@@ -28,7 +28,7 @@ public class GameVersionController : MonoBehaviour
     void Start()
     {
 #if !UNITY_EDITOR && UNITY_STANDALONE_WIN
-        if (!string.IsNullOrEmpty(DownloadUrl))
+        if (!string.IsNullOrEmpty(URL))
         {
             StartCoroutine(GetText());
         } else
