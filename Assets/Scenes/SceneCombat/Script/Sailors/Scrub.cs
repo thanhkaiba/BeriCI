@@ -34,7 +34,7 @@ public class Scrub : CombatSailor
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return 0.4f;
+        return 0.45f;
     }
     public override float TakeDamage(Damage d)
     {

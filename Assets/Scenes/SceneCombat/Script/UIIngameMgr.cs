@@ -34,11 +34,12 @@ public class UIIngameMgr : MonoBehaviour
         for (int i = 0; i < sailors.Count; i++)
         {
             SailorInQueue s = Instantiate(sailorInQueue, node).GetComponent<SailorInQueue>();
-            s.transform.localPosition = new Vector3(-i * 150, 0, 0);
+            s.transform.localPosition = new Vector3(-i * 154 + (i == 0 ? 0 : -6), 0, 0);
             s.transform.SetSiblingIndex(sailors.Count - i);
             listSailorInQueue.Add(s);
             s.SetData(sailors[i]);
             s.PresentData();
+            if (i >= 5) s.gameObject.SetActive(false);
         }
     }
     public void UpdateListSailorInQueue()
@@ -51,14 +52,16 @@ public class UIIngameMgr : MonoBehaviour
         {
             var s = listSailorInQueue[i];
             int index = sailors.IndexOf(listSailorInQueue[i].GetData());
-            if (index >= 0)
+            if (index >= 0 && index < 5)
             {
-                s.transform.DOLocalMoveX(-index * 150, 0.5f);
+                s.gameObject.SetActive(true);
+                s.transform.DOLocalMoveX(-index * 154 + (index == 0 ? 0 : -6), 0.5f).SetEase(Ease.OutSine);
                 s.transform.SetSiblingIndex(listSailorInQueue.Count - index - 1);
                 s.PresentData();
             }
             else
             {
+                s.transform.position = new Vector3(-4 * index + (index == 0 ? 0 : -6), s.transform.position.y, s.transform.position.z);
                 s.gameObject.SetActive(false);
             }
         }
@@ -79,8 +82,8 @@ public class UIIngameMgr : MonoBehaviour
             GameObject GO = Resources.Load<GameObject>("Icons/SailorType/combine");
             IconClassBonus s = Instantiate(GO, nodeLeft).GetComponent<IconClassBonus>();
             s.SetData(passiveTypeA[i]);
-            s.transform.localScale = new Vector3(0.6f, 0.6f, 1);
-            s.transform.DOLocalMoveX(72 * i, 0.5f);
+            s.transform.localScale = new Vector3(0.8f, 0.8f, 1);
+            s.transform.DOLocalMoveX(72*i, 0.5f);
         }
 
         for (int i = 0; i < passiveTypeB.Count; i++)
@@ -90,7 +93,7 @@ public class UIIngameMgr : MonoBehaviour
             Vector3 pos = s.transform.GetChild(1).transform.localPosition;
             s.transform.GetChild(1).transform.localPosition = new Vector3(-pos.x, pos.y, pos.z);
             s.SetData(passiveTypeB[i]);
-            s.transform.localScale = new Vector3(0.6f, 0.6f, 1);
+            s.transform.localScale = new Vector3(0.8f, 0.8f, 1);
             s.transform.DOLocalMoveX(-72 * i, 0.5f);
         }
     }

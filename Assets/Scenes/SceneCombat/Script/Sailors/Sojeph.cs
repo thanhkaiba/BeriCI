@@ -7,13 +7,6 @@ using UnityEngine;
 public class Sojeph : CombatSailor
 {
     public SailorConfig config;
-    Vector3 startPos;
-    Vector3 targetPos;
-    Vector3 targetHealPos;
-    CombatSailor mainTarget;
-    CombatSailor healthTarget;
-    float dame;
-    float healthGain;
     //private Spine.Bone boneTarget;
     public Sojeph()
     {
@@ -26,7 +19,7 @@ public class Sojeph : CombatSailor
     public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("Attack");
-        targetPos = target.transform.position;
+        var targetPos = target.transform.position;
         targetPos.y += 2f;
 
         Sequence seq = DOTween.Sequence();
@@ -75,38 +68,51 @@ public class Sojeph : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
-        mainTarget = CombatState.Instance.GetSailor(targets[1]);
-        healthTarget = CombatState.Instance.GetSailor(targets[0]);
-        healthGain = cs.Power * Model.config_stats.skill_params[0];
+        var healthTarget = CombatState.Instance.GetSailor(targets[0]);
+        var target = CombatState.Instance.GetSailor(targets[1]);
+        var healthGain = cs.Power * Model.config_stats.skill_params[0];
         CombatEvents.Instance.highlightTarget.Invoke(healthTarget);
-        targetHealPos = healthTarget.transform.position;
-        dame = _params[0];
-        CombatEvents.Instance.highlightTarget.Invoke(mainTarget);
-        Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
-        startPos = gun2.GetWorldPosition(modelObject.transform);
-        targetPos = mainTarget.transform.position;
-        targetPos.y += 2;
+        var damage = _params[0];
+        CombatEvents.Instance.highlightTarget.Invoke(target);
+
+        var seq = DOTween.Sequence();
+        seq.AppendInterval(1.0f);
+        seq.AppendCallback(() => StartEffHealth(healthTarget, healthGain));
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() => {
+            StartEffDame(target, damage);
+        });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() =>
+        {
+            target.LoseHealth(new Damage() { physics = damage });
+        });
+
         return 3;
     }
-    public void StartEffHealth()
+    public void StartEffHealth(CombatSailor target, float health)
     {
         SoundMgr.PlaySoundSkillSailor(14);
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-            Vector3 pos = targetHealPos;
+            var pos = target.transform.position;
             pos.y += 4f;
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
-            healthTarget.GainHealth(healthGain);
+            target.GainHealth(health);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));
         });
 
 
     }
-    public void StartEffDame()
+    public void StartEffDame(CombatSailor target, float damage)
     {
         float time = 0;
+        Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
+        var startPos = gun2.GetWorldPosition(modelObject.transform);
+        var targetPos = target.transform.position;
+        targetPos.y += 2;
         time = 5f / Vector3.Distance(startPos, targetPos);
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
@@ -117,7 +123,7 @@ public class Sojeph : CombatSailor
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySoundAttackSailor(13);
-            mainTarget.LoseHealth(new Damage() { physics = (dame) });
+            target.LoseHealth(new Damage() { physics = damage });
         });
     }
 }
