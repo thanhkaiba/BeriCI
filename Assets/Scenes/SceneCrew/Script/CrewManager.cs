@@ -31,12 +31,17 @@ public class CrewManager : MonoBehaviour
     private SailorModel curModel;
     [SerializeField]
     private GameObject buttonCheat;
+
+
+    private Transform canvas;
+
     // Start is called before the first frame update
 
     private void Start()
     {
-
+        canvas = FindObjectOfType<Canvas>().transform;
         GameEvent.SailorInfoChanged.AddListener(OnSailorInfoChanged);
+        RenderListSubSailor();
 #if PIRATERA_DEV || PIRATERA_QC
         buttonCheat.SetActive(true);
 #else
@@ -51,11 +56,6 @@ public class CrewManager : MonoBehaviour
             RenderListSubSailor();
             SetData(model);
         }
-    }
-
-    private void OnEnable()
-    {
-        RenderListSubSailor();
     }
 
     void RenderListSubSailor()
@@ -123,6 +123,7 @@ public class CrewManager : MonoBehaviour
             //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
         qualityText.text = "Qua: " + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        UpdateRankIconPosition();
     }
     public void BackToLobby()
     {
@@ -131,6 +132,19 @@ public class CrewManager : MonoBehaviour
     public void GoToLineup()
     {
         SceneManager.LoadScene("ScenePickTeam");
+    }
+
+    public void UpdateRankIconPosition()
+    {
+        BoxCollider2D box = sailor.GetComponent<BoxCollider2D>();
+        Vector2 pos = Camera.main.WorldToScreenPoint(sailor.transform.position - new Vector3(box.size.x / 4 - box.offset.x, -box.size.y, 0));
+        rank.transform.position = new Vector3(pos.x - 10 * canvas.localScale.x, pos.y, rank.transform.position.z);
+
+        if (curModel.config_stats.root_name == "Salvatafo")
+        {
+            rank.transform.position += new Vector3(0, 65 * canvas.localScale.x);
+        }
+        
     }
 
 
