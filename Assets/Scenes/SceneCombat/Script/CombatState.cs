@@ -324,6 +324,21 @@ public class CombatState : MonoBehaviour
         });
         return health / total_health;
     }
+
+ #if PIRATERA_DEV
+    public string GetTeamHealthRatioString(Team t)
+    {
+        List<CombatSailor> list = t == Team.A ? sailorsTeamA : sailorsTeamB;
+        float health = 0;
+        float total_health = 0;
+        list.ForEach(sailor =>
+        {
+            health += sailor.cs.CurHealth;
+            total_health += sailor.cs.MaxHealth;
+        });
+        return $"{health}/{total_health}";
+    }
+#endif
     public CombatSailor GetSailor(Team t, string id)
     {
         var l = GetAllTeamAliveSailors(t);

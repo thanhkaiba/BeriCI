@@ -70,9 +70,11 @@ public class Sojeph : CombatSailor
         TriggerAnimation("Skill");
         var healthTarget = CombatState.Instance.GetSailor(targets[0]);
         var target = CombatState.Instance.GetSailor(targets[1]);
-        var healthGain = cs.Power * Model.config_stats.skill_params[0];
         CombatEvents.Instance.highlightTarget.Invoke(healthTarget);
-        var damage = _params[0];
+        var healthGain = _params[0];
+        var damage = _params[1];
+
+
         CombatEvents.Instance.highlightTarget.Invoke(target);
 
         var seq = DOTween.Sequence();
@@ -82,12 +84,7 @@ public class Sojeph : CombatSailor
         seq.AppendCallback(() => {
             StartEffDame(target, damage);
         });
-        seq.AppendInterval(0.2f);
-        seq.AppendCallback(() =>
-        {
-            target.LoseHealth(new Damage() { physics = damage });
-        });
-
+    
         return 3;
     }
     public void StartEffHealth(CombatSailor target, float health)

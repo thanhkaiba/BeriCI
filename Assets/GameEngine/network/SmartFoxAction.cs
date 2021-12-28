@@ -21,11 +21,12 @@
         GET_LINEUP_SLOT_PACK = 22,
         GET_SERVER_TIME = 23,
 
-
+#if PIRATERA_DEV || PIRATERA_QC
         // cheat
         CHEAT_SAILOR = 101,
         CHEAT_RESOURCE = 102,
         CHEAT_RANK = 103,
         CHEAT_SAILOR_QUANTITY = 104,
+#endif
     }
 }

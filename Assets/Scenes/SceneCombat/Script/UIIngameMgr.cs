@@ -173,6 +173,9 @@ public class UIIngameMgr : MonoBehaviour
         node.SetActive(true);
         icon.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + sailor.Model.config_stats.root_name);
         health.SetValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
+#if PIRATERA_DEV
+        health.Heath.text = $"{sailor.cs.CurHealth} / {sailor.cs.MaxHealth}";
+#endif
         //Debug.Log("huhhh " + sailor.charName + " e >>>>>> " + sailor.cs.current_health + " " + sailor.cs.max_health + " " + health.value);
         if (sailor.cs.MaxFury != 0) fury.value = (float)sailor.cs.Fury / (float)sailor.cs.MaxFury;
         else fury.value = 1;
@@ -195,6 +198,9 @@ public class UIIngameMgr : MonoBehaviour
                 return;
         }
         health.ChangeValue(sailor.cs.CurHealth / sailor.cs.MaxHealth);
+#if PIRATERA_DEV
+        health.Heath.text = $"{sailor.cs.CurHealth} / {sailor.cs.MaxHealth}";
+#endif
     }
     public void UpdateTotalHealth()
     {
@@ -220,6 +226,9 @@ public class UIIngameMgr : MonoBehaviour
         }
         node.SetActive(true);
         health.ChangeValue(CombatState.Instance.GetTeamHealthRatio(t));
+#if PIRATERA_DEV
+        health.Heath.text = CombatState.Instance.GetTeamHealthRatioString(t);
+#endif
     }
     public void ShowTimeScale()
     {

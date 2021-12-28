@@ -60,17 +60,16 @@ public class Beel : CombatSailor
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
 
 
-        return RunAnimation(enermy, magic_damage);
+        return RunAnimation(enermy, new List<float> { magic_damage });
     }
 
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
         var listTargets = CombatState.Instance.GetSailors(targets);
-        float loseHealth = _params[0];
-        return RunAnimation(listTargets, loseHealth);
+        return RunAnimation(listTargets, _params);
 
     }
-    float RunAnimation(List<CombatSailor> targets, float magic_damage)
+    float RunAnimation(List<CombatSailor> targets, List<float> magic_damage)
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
@@ -92,13 +91,15 @@ public class Beel : CombatSailor
         seq.AppendInterval(1);
         seq.AppendCallback(() =>
         {
-            foreach (var item in targets)
-            {
-                var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/beel_impact_skill"), item.transform.position, Quaternion.identity);
-                seq.AppendInterval(0.3f);
-                seq.AppendCallback(() => Destroy(eff));
-            }
-            targets.ForEach(s => s.LoseHealth(new Damage() { magic = magic_damage }));
+        int i = 0;
+        foreach (var item in targets)
+        {
+            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/beel_impact_skill"), item.transform.position, Quaternion.identity);
+            seq.AppendInterval(0.3f);
+            seq.AppendCallback(() => Destroy(eff));
+            item.LoseHealth(new Damage() { magic = magic_damage[i] });
+            i++;
+        }
         });
 
         seq.AppendInterval(0.3f);
