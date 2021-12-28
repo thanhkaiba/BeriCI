@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Geechoso_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: f2b217cbc4246194bb7e22e1aa2325d6, type: 2}
+  - {fileID: 11400000, guid: 1297516ab62b06d4da16d9027dfa4af0, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 220ec1a2ad3fb46479f7324bbe3069e8, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 19d9fe7d5e73c054aafce7cceee015a9, type: 3}
   skeletonDataModifiers: []
   fromAnimation: []
   toAnimation: []
   duration: []
   defaultMix: 0.2
-  controller: {fileID: 9100000, guid: 1aeb78b467df9754788ec8c6cae4a302, type: 2}
+  controller: {fileID: 9100000, guid: cc2d2220135455d4c956a56781ea8680, type: 2}

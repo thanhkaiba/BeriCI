@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
   m_Name: Geechoso_Atlas
   m_EditorClassIdentifier: 
-  atlasFile: {fileID: 4900000, guid: f481e8c7306fd0e478c081800890e5fc, type: 3}
+  atlasFile: {fileID: 4900000, guid: 49be781abf25479468d562a7cbaa2270, type: 3}
   materials:
-  - {fileID: 2100000, guid: d6745856800d8ff4c91b414ab313d1ec, type: 2}
+  - {fileID: 2100000, guid: cc88711c9aff0da4a97390f2e19d0fe9, type: 2}
