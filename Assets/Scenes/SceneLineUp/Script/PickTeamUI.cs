@@ -15,14 +15,14 @@ public class PickTeamUI : MonoBehaviour
     private Button ButtonBuySlot;
     [SerializeField]
     private LineUpSlot lineUpSlotConfig;
-
+    public RoyalCollectingController royal;
     void Start()
     {
         SquadContainer.Draging = false;
         SquadAContainer.Draging = false;
         UpdateSlotMaxCapacity();
         NetworkController.AddServerActionListener(OnReceiveServerAction);
-
+        GameEvent.FlyBeri.AddListener(FlyBeri);
     }
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -45,6 +45,7 @@ public class PickTeamUI : MonoBehaviour
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        GameEvent.FlyBeri.RemoveListener(FlyBeri);
     }
 
 
@@ -73,7 +74,10 @@ public class PickTeamUI : MonoBehaviour
     {
         SceneManager.LoadScene("SceneCrew");
     }
-
+    public void FlyBeri()
+    {
+        royal.CollectItem(5, 1, () => { });
+    }
     public void OnBuySlot()
     {
         if (UserData.Instance.NumSlot >= lineUpSlotConfig.max)

@@ -73,6 +73,7 @@ namespace Piratera.GUI
                 }
                 else
                 {
+                    GameEvent.FlyBeri.Invoke();
                     OnClose();
                 }
             }

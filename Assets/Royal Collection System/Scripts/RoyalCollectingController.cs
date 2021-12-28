@@ -74,7 +74,7 @@ public class RoyalCollectingController : MonoBehaviour {
 			} 
 			if(animation == null) {
 				// No free object has been found in pool, so we instantiate a new one
-				GameObject go = Instantiate (itemPrefab) as GameObject;
+				GameObject go = Instantiate (itemPrefab, popPosition.position , Quaternion.identity);
 				animation = go.GetComponent<RoyalCollectingAnimation>();
 				_itemList.Add(animation);
                 Destroy(go , 2.2f);//Remove go Object
@@ -107,7 +107,7 @@ public class RoyalCollectingController : MonoBehaviour {
 			if (animation == null)
 			{
 				// No free object has been found in pool, so we instantiate a new one
-				GameObject go = Instantiate(itemPrefab) as GameObject;
+				GameObject go = Instantiate(itemPrefab, popPosition.position, Quaternion.identity);
 				animation = go.GetComponent<RoyalCollectingAnimation>();
 				_itemList.Add(animation);
 				Destroy(go, 2.2f);//Remove go Object
