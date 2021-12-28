@@ -159,13 +159,14 @@ public class Sojeph : CombatSailor
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
+        targetPos.y += 1; 
         int isFlip = 1;
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         bulletGO.transform.localScale = new Vector3(isFlip * 2, 2, 2);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => bulletGO.SetActive(true));
-        seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime));
+        seq.Append(bulletGO.transform.DOJump(targetPos,8,1, flyTime));
         seq.AppendInterval(.2f);
         seq.AppendCallback(() => Destroy(bulletGO));
 
