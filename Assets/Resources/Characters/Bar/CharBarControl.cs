@@ -12,7 +12,14 @@ public class CharBarControl : MonoBehaviour
     public Image iconType;
     public Image iconSkill;
     public Text textName;
-    
+    private void Awake()
+    {
+#if PIRATERA_DEV
+        healthText.gameObject.SetActive(true);
+#else
+        healthText.gameObject.SetActive(false);
+#endif
+    }
     public void SetName(string name)
     {
         textName.text = name;
@@ -33,7 +40,11 @@ public class CharBarControl : MonoBehaviour
     public void SetHealthBar(float max, float min)
     {
         healthBar.ChangeValue(min / max);
+#if PIRATERA_DEV
+        healthText.text = $"{min}/{max}";
+#else
         healthText.text = (System.Math.Ceiling(min)).ToString();
+#endif
     }
     public void SetSpeedBar(int max, int min)
     {

@@ -362,7 +362,7 @@ public class CombatSailor : Sailor
     }
     public void InitDisplayStatus()
     {
-        UnityEngine.Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
+        Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
         transform.position = p;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
