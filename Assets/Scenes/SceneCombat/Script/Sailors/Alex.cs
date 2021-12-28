@@ -87,7 +87,7 @@ public class Alex : CombatSailor
         });
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.GainHealth(_params[0]));
-        CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = 0 });
+        // CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = 0 });
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.GainArmor((int)_params[1]));
         return 2f;
