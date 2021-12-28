@@ -54,10 +54,9 @@ public class LobbyUI : MonoBehaviour
     private Transform nodeUser;
     [SerializeField]
     private Transform background;
-
+    public RoyalCollectingController royal;
     [SerializeField]
     private Button buttonCheat;
-
     // Start is called before the first frame update
     private void Awake()
     {
@@ -75,6 +74,7 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
+        GameEvent.FlyStamina.AddListener(FlyStamina);
         RunAppearAction();
         ShowListSailors();
     }
@@ -87,14 +87,18 @@ public class LobbyUI : MonoBehaviour
 
     public void OnStaminaChanged(int oldValue, int newValue)
     {
-        DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat((int)x));
+       DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat((int)x)); 
     }
-
+    public void FlyStamina()
+    {
+        royal.CollectItem(5, 1, () => {});
+    }
     private void OnDestroy()
     {
         GameEvent.UserDataChanged.RemoveListener(UpdateUserInfo);
         GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
+        GameEvent.FlyStamina.RemoveListener(FlyStamina);
     }
 
     void UpdateUserInfo(List<string> changedVars)

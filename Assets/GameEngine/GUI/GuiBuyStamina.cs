@@ -53,6 +53,7 @@ namespace Piratera.GUI
                 }
                 else
                 {
+                    GameEvent.FlyStamina.Invoke();
                     OnClose();
                 }
             }
