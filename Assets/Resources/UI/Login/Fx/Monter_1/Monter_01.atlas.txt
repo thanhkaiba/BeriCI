@@ -1,0 +1,20 @@
+
+Monter_01.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+monter_1
+  rotate: false
+  xy: 351, 284
+  size: 228, 163
+  orig: 228, 163
+  offset: 0, 0
+  index: -1
+monter_11
+  rotate: false
+  xy: 2, 2
+  size: 347, 445
+  orig: 347, 445
+  offset: 0, 0
+  index: -1
