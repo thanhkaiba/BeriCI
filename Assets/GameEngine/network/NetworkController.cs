@@ -298,7 +298,8 @@ namespace Piratera.Network
                     GameUtils.ShowPopupPacketError(errorCode);
                 }
                 OnReceiveServerAction(action, errorCode, packet);
-            } else if (cmd == MAINTAINANCE_NOTI)
+            }
+            else if (cmd == MAINTAINANCE_NOTI)
             {
 #if PIRATERA_DEV
                 long startTime = packet.GetLong("startMaintainTime");
@@ -307,8 +308,8 @@ namespace Piratera.Network
 
                 Debug.Log("maintain " + startTime + " " + endTime + " " + message);
                 GuiManager.Instance.ShowPopupNotification("maintain " + startTime + " " + endTime + " " + message);
-            }
 #endif
+            }
 
 
         }
