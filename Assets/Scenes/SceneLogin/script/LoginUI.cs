@@ -9,8 +9,7 @@ public class LoginUI : MonoBehaviour
     private Image loginBox;
     [SerializeField]
     private CanvasGroup chain;
-    [SerializeField]
-    private Image[] monters;
+  
     [SerializeField]
     private Image buttonLogin;
 
@@ -76,14 +75,6 @@ public class LoginUI : MonoBehaviour
         seq.Append(buttonSeq2);
 
 
-
-
-        foreach (Image monter in monters)
-        {
-            seq.Insert(1, monter.DOFade(0, 0.2f).From());
-            seq.Insert(1, monter.transform.DOScale(new Vector3(0, 0, 0), 0.4f).From().SetEase(Ease.OutQuad));
-        }
-
         seq.SetTarget(transform).SetLink(gameObject);
 
     }
@@ -126,11 +117,6 @@ public class LoginUI : MonoBehaviour
             seq.Append(buttonSignup.transform.DOScale(0.4f, 0));
             seq.Append(buttonSignup.transform.DOScale(1, 0.4f));
         }
-        foreach (Image monter in monters)
-        {
-            Sequence seq = DOTween.Sequence();
-            seq.Insert(0.2f, monter.DOFade(0, 0.2f).From());
-            seq.Insert(0.2f, monter.transform.DOScale(new Vector3(0, 0, 0), 0.6f).From().SetEase(Ease.OutQuad));
-        }
+     
     }
 }

@@ -51,6 +51,7 @@ namespace Piratera.Network
         private static readonly string CLIENT_REQUEST = "clrq";
         private static readonly string ACTION_INCORE = "acc";
         private static readonly string ERROR_CODE = "error_code";
+        private static readonly string MAINTAINANCE_NOTI = "maintainance_noti";
 
         private static string adminMessage;
 
@@ -297,6 +298,14 @@ namespace Piratera.Network
                     GameUtils.ShowPopupPacketError(errorCode);
                 }
                 OnReceiveServerAction(action, errorCode, packet);
+            }
+
+            if (cmd == MAINTAINANCE_NOTI)
+            {
+                long startTime = packet.GetLong("startMaintainTime");
+                long endTime = packet.GetLong("endMaintainTime");
+                string message = packet.GetUtfString("note");
+                GuiManager.Instance.ShowPopupNotification("maintain " + startTime + " " + endTime + " " + message);
             }
         }
         public static void Send(SFSAction action, ISFSObject data)
