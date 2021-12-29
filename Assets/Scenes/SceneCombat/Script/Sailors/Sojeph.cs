@@ -80,27 +80,26 @@ public class Sojeph : CombatSailor
         var seq = DOTween.Sequence();
         seq.AppendInterval(1.0f);
         seq.AppendCallback(() => StartEffHealth(healthTarget, healthGain));
-        seq.AppendInterval(0.5f);
+        seq.AppendInterval(.8f);
         seq.AppendCallback(() => {
             StartEffDame(target, damage);
         });
     
-        return 3.8f;
+        return 3.5f;
     }
     public void StartEffHealth(CombatSailor target, float health)
     {
-        float time = 0;
         SoundMgr.PlaySoundSkillSailor(14);
         Sequence seq = DOTween.Sequence();
         Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("Magic/Magic_00000");
         var startPos = gun2.GetWorldPosition(modelObject.transform);
         var targetPos = target.transform.position;
-        time = 4f / Vector3.Distance(startPos, targetPos);
+        //time = 3f / Vector3.Distance(startPos, targetPos);
         seq.AppendCallback(() =>
         {
-            MedicineToTarget(startPos, targetPos, 0, time);
+            MedicineToTarget(startPos, targetPos, 0, .3f);
         });
-        seq.AppendInterval(time);
+        seq.AppendInterval(.3f);
         seq.AppendCallback(() =>
         {
             var pos = target.transform.position;
@@ -166,7 +165,7 @@ public class Sojeph : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => bulletGO.SetActive(true));
-        seq.Append(bulletGO.transform.DOJump(targetPos,8,1, flyTime));
+        seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime));
         seq.AppendInterval(.2f);
         seq.AppendCallback(() => Destroy(bulletGO));
 
