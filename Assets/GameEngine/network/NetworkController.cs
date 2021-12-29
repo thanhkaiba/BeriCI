@@ -46,17 +46,13 @@ namespace Piratera.Network
 			private static readonly string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
 		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
 #endif
-
-
-
         private static readonly int WSPort = 8080;
-
-
-
         private static readonly string Zone = "Piratera";
         private static readonly string CLIENT_REQUEST = "clrq";
         private static readonly string ACTION_INCORE = "acc";
         private static readonly string ERROR_CODE = "error_code";
+
+        private static string adminMessage;
 
         public static SmartFox Connection
         {
@@ -164,11 +160,24 @@ namespace Piratera.Network
             AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
             AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
             AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, OnUserDataUpdate);
+            sfs.AddEventListener(SFSEvent.MODERATOR_MESSAGE, OnModMessage);
+            sfs.AddEventListener(SFSEvent.ADMIN_MESSAGE, OnModMessage);
 
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
 
             sfs.Connect(cfg);
         }
+
+        private static void OnModMessage(BaseEvent evt)
+        {
+            string message = (string)evt.Params["message"];
+            adminMessage = message;
+            if (message == "already login")
+            {
+                adminMessage = "Same account launched from different device";
+            }
+        }
+
         public static void Logout()
         {
             if (sfs != null)
@@ -223,6 +232,13 @@ namespace Piratera.Network
                 {
                     text = "You have been kicked by Server";
                 }
+
+                if (reason == ClientDisconnectionReason.UNKNOWN)
+                {
+                    text = adminMessage;
+                    adminMessage = "";
+                }
+
 
                 GuiManager.Instance.ShowPopupNotification(text, ForceStartScene);
             }
