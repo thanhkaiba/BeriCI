@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -55,8 +56,10 @@ public class GameVersionController : MonoBehaviour
             Debug.Log(www.downloadHandler.text);
 
             JObject o = JObject.Parse(www.downloadHandler.text);
-            Debug.Log(float.Parse(Application.version) + " " + (float)o["min_version"]);
-            if (float.Parse(Application.version) < (float)o["min_version"])
+
+            Version version1 = new Version(Application.version);
+            Version version2 = new Version((string)o["min_version"]);
+            if (version2.CompareTo(version1) > 0)
             {
                 DownloadUrl = (string)o["download_url"];
                 OnNeedUpdate.Invoke((string)o["download_url"]);
