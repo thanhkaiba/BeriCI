@@ -300,6 +300,7 @@ namespace Piratera.Network
                 OnReceiveServerAction(action, errorCode, packet);
             } else if (cmd == MAINTAINANCE_NOTI)
             {
+#if PIRATERA_DEV
                 long startTime = packet.GetLong("startMaintainTime");
                 long endTime = packet.GetLong("endMaintainTime");
                 string message = packet.GetUtfString("note");
@@ -307,6 +308,7 @@ namespace Piratera.Network
                 Debug.Log("maintain " + startTime + " " + endTime + " " + message);
                 GuiManager.Instance.ShowPopupNotification("maintain " + startTime + " " + endTime + " " + message);
             }
+#endif
 
 
         }
