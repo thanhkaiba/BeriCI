@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Piratera.Network;
+using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
 using System.Linq;
@@ -74,6 +75,7 @@ namespace Piratera.GUI
                 else
                 {
                     GameEvent.FlyBeri.Invoke();
+                    SoundMgr.PlaySound(PirateraSoundEffect.OPEN_SLOT);
                     OnClose();
                 }
             }

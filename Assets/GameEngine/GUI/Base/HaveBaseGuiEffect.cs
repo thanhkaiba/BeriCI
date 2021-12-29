@@ -52,7 +52,7 @@ namespace Piratera.GUI
                         s.SetTarget(transform).SetLink(gameObject);
 
                         transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
-                        s.Insert(0, transform.DOScale(new Vector3(1f, 1f, 1f), appearTime));
+                        s.Insert(0, transform.DOScale(new Vector3(1f, 1f, 1f), appearTime)).SetEase(Ease.OutBack);
 
                         if (haveFog != null)
                         {

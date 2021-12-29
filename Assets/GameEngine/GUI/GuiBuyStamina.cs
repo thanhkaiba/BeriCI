@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using Piratera.Network;
+using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using System;
 using UnityEngine;
@@ -54,6 +55,7 @@ namespace Piratera.GUI
                 else
                 {
                     GameEvent.FlyStamina.Invoke();
+                    SoundMgr.PlaySound(PirateraSoundEffect.RECEIVE_GIFT);
                     OnClose();
                 }
             }

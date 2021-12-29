@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5871113061505615607}
   - component: {fileID: 5740918435207184026}
   - component: {fileID: 7884170077881910477}
+  - component: {fileID: 1497538185633790043}
   m_Layer: 5
   m_Name: ButtonClose
   m_TagString: Untagged
@@ -132,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1497538185633790043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724737766481239253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &742056877410805631
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,6 +157,7 @@ GameObject:
   - component: {fileID: 2493084264025039582}
   - component: {fileID: 3234076350103211761}
   - component: {fileID: 6026301523517125430}
+  - component: {fileID: 2411968973103576578}
   m_Layer: 5
   m_Name: ButtonTelegram
   m_TagString: Untagged
@@ -265,6 +279,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &2411968973103576578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 742056877410805631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &988908541052201037
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,11 +481,6 @@ MonoBehaviour:
   textUID: {fileID: 1486925667535028758}
   textCreateAt: {fileID: 6408261082516960292}
   userAvatar: {fileID: 7742746106721698558}
-  whitePaperUrl: https://whitepaper.piratera.io/piratera/
-  website: https://piratera.io/
-  facebookUrl: http://facebook.com/piratera.official
-  telegramUrl: http://t.me/officialpiratera
-  twitterUrl: http://twitter.com/PirateraBay
   iconSoundSprites:
   - {fileID: 21300000, guid: 1af8f511207fd88459f25f3ec739634a, type: 3}
   - {fileID: 21300000, guid: 7a99dcad8d9b5724eb8afcdcd5917b00, type: 3}
@@ -522,6 +543,7 @@ GameObject:
   - component: {fileID: 1080179812204115544}
   - component: {fileID: 297085416598519353}
   - component: {fileID: 2764300263093382484}
+  - component: {fileID: 5119708198002390364}
   m_Layer: 5
   m_Name: ButtonReport
   m_TagString: Untagged
@@ -643,6 +665,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5119708198002390364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139840386013574084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254060202198037732
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,6 +689,7 @@ GameObject:
   - component: {fileID: 5339804668635332990}
   - component: {fileID: 5353654851059574188}
   - component: {fileID: 4869834767409113430}
+  - component: {fileID: 3160751994063192532}
   m_Layer: 5
   m_Name: ButtonLogout
   m_TagString: Untagged
@@ -777,6 +812,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &3160751994063192532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1254060202198037732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1502570380141080104
 GameObject:
   m_ObjectHideFlags: 0
@@ -865,6 +912,7 @@ GameObject:
   - component: {fileID: 1936205597323346403}
   - component: {fileID: 4803044386928072692}
   - component: {fileID: 8628790468193997819}
+  - component: {fileID: 9068327838804642271}
   m_Layer: 5
   m_Name: ButtonSound
   m_TagString: Untagged
@@ -986,6 +1034,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &9068327838804642271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557470375694908081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1661542292534441770
 GameObject:
   m_ObjectHideFlags: 0
@@ -998,6 +1058,7 @@ GameObject:
   - component: {fileID: 4159187044835058286}
   - component: {fileID: 5433603362934194589}
   - component: {fileID: 2376141998810237293}
+  - component: {fileID: 8029060980823063087}
   m_Layer: 5
   m_Name: ButtonWhitePaper
   m_TagString: Untagged
@@ -1119,6 +1180,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8029060980823063087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661542292534441770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1809379203258620976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1211,6 +1284,7 @@ GameObject:
   - component: {fileID: 791419278952492429}
   - component: {fileID: 9180220977138111187}
   - component: {fileID: 3078496518631568154}
+  - component: {fileID: 7651192266683282020}
   m_Layer: 5
   m_Name: ButtonMusic
   m_TagString: Untagged
@@ -1332,6 +1406,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &7651192266683282020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915341302703652737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1917885076675644547
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,6 +2305,7 @@ GameObject:
   - component: {fileID: 9165708877962274955}
   - component: {fileID: 4229225434267068826}
   - component: {fileID: 7116088498178097578}
+  - component: {fileID: 8224982981668643797}
   m_Layer: 5
   m_Name: ButtonTwitter
   m_TagString: Untagged
@@ -2340,6 +2427,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &8224982981668643797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879427316092146896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6512335776758591022
 GameObject:
   m_ObjectHideFlags: 0
@@ -2582,6 +2681,7 @@ GameObject:
   - component: {fileID: 6645319908341402004}
   - component: {fileID: 119784820819675846}
   - component: {fileID: 8433734827657829368}
+  - component: {fileID: 9087953011497392079}
   m_Layer: 5
   m_Name: ButtonFB
   m_TagString: Untagged
@@ -2703,6 +2803,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &9087953011497392079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6811307296009857919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7183871529060723287
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,6 +3131,7 @@ GameObject:
   - component: {fileID: 972272167584229904}
   - component: {fileID: 1613822343874342786}
   - component: {fileID: 7860493163265484986}
+  - component: {fileID: 864019888876913355}
   m_Layer: 5
   m_Name: ButtonWebsite
   m_TagString: Untagged
@@ -3140,6 +3253,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+--- !u!114 &864019888876913355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8988571723291466431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdcc54252cb6e5a4181549740ffc7c08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9042976383125085947
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ namespace Piratera.Sound
         WIN,
         LOSE,
         DRAW,
+        RECEIVE_GIFT,
+        OPEN_SLOT
     }
 
     class SoundMgr : MonoBehaviour
@@ -32,6 +34,11 @@ namespace Piratera.Sound
         [SerializeField]
         private AudioClip draw;
 
+        [SerializeField]
+        private AudioClip receiveGift;
+
+        [SerializeField]
+        private AudioClip openSlot;
 
 
         [Header("Background Music")]
@@ -189,6 +196,12 @@ namespace Piratera.Sound
                         break;
                     case PirateraSoundEffect.LOSE:
                         Instance.PlaySoundEffect(Instance.lose);
+                        break;
+                    case PirateraSoundEffect.RECEIVE_GIFT:
+                        Instance.PlaySoundEffect(Instance.receiveGift);
+                        break;
+                    case PirateraSoundEffect.OPEN_SLOT:
+                        Instance.PlaySoundEffect(Instance.openSlot);
                         break;
                 }
 
