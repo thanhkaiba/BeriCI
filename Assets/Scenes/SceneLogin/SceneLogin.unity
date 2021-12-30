@@ -1993,9 +1993,12 @@ MonoBehaviour:
   receiveGift: {fileID: 8300000, guid: c1f193f5f409b89438bdfc1c69bd54e1, type: 3}
   openSlot: {fileID: 8300000, guid: 6934bf9ef2c430846b27b2b4ac382014, type: 3}
   findMatchVoice:
+  - {fileID: 8300000, guid: 602f102da2112fa40a72879a41667d6c, type: 3}
   - {fileID: 8300000, guid: 74f2e9745ae16af458e12964c9cec23b, type: 3}
+  - {fileID: 8300000, guid: 3ba7a9041c548074caeebc305abd4a03, type: 3}
   - {fileID: 8300000, guid: 998bcb4e95ff3fd4487f6423cb810967, type: 3}
   - {fileID: 8300000, guid: 0e92fd3c8e224d54fb35b5345e738820, type: 3}
+  - {fileID: 8300000, guid: dc3a706351cb7124086c809f1d3a18fd, type: 3}
   - {fileID: 8300000, guid: a8f13e9bf84fcef4193d9e2d9c5b3a4f, type: 3}
   LobbyMusic: {fileID: 8300000, guid: b685f1635c2a2a84db81fc0daedea0d9, type: 3}
   CombatMusic: {fileID: 8300000, guid: 652cea6c4c8ba9848b50c00bb0c4ca12, type: 3}

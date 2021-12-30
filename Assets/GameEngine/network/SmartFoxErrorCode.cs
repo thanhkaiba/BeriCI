@@ -37,7 +37,13 @@ namespace Piratera.Network
         [Description("Invalid data")]
         COMBAT_CONFIRM_SLOT_INVALID = 15,
         [Description("Invalid Game State")]
-        INVALID_GAME_STATE = 69,
+        INVALID_GAME_STATE = 16,
+
+        [Description("Server under maintenance")]
+        SERVER_MAINTAINACE = 17,
+
+        [Description("Your username or password is incorrect")]
+        WRONG_USER_NAME_OR_PASS = 18,
 
     }
 }

@@ -1,5 +1,6 @@
 using Piratera.Constance;
 using Piratera.GUI;
+using Piratera.Lib;
 using Piratera.Network;
 using Sfs2X.Core;
 using Sfs2X.Entities;
@@ -68,8 +69,13 @@ public class LoginController : MonoBehaviour
 
     private void OnLoginFail(BaseEvent evt)
     {
-        OnError("Your username or password is incorrect");
-        Debug.Log("Login failed: " + (string)evt.Params["errorMessage"]);
+        string description = "There was a problem.";
+        if (evt.Params.ContainsKey("errorCode"))
+        {
+            int err = int.Parse(evt.Params["errorCode"].ToString());
+            description = EnumHelper.GetDescription((SFSErrorCode)err);
+        }
+        OnError(description);
     }
 
     private void OnError(string error)

@@ -285,8 +285,10 @@ namespace Piratera.Network
         {
 
             ISFSObject packet = (ISFSObject)evt.Params["params"];
-
             string cmd = (string)evt.Params["cmd"];
+
+            Debug.Log("CMD NAME: " + cmd);
+
             if (cmd == CLIENT_REQUEST)
             {
                 Debug.Log("response:" + packet.GetDump());
@@ -301,14 +303,12 @@ namespace Piratera.Network
             }
             else if (cmd == MAINTAINANCE_NOTI)
             {
-#if PIRATERA_DEV
                 long startTime = packet.GetLong("startMaintainTime");
                 long endTime = packet.GetLong("endMaintainTime");
                 string message = packet.GetUtfString("note");
 
                 Debug.Log("maintain " + startTime + " " + endTime + " " + message);
                 GuiManager.Instance.ShowPopupNotification("maintain " + startTime + " " + endTime + " " + message);
-#endif
             }
 
 
