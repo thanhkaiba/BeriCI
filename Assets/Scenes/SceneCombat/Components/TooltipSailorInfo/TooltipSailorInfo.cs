@@ -142,7 +142,7 @@ public class TooltipSailorInfo : MonoBehaviour
     {
 
         gameObject.SetActive(true);
-        avtSailor.sprite = Resources.Load<Sprite>("Icons/IconSailor/" + model.config_stats.root_name);
+        avtSailor.sprite = model.config_stats.avatar;
         background.color = rankColorInside[(int)model.config_stats.rank];
         var listType = model.config_stats.classes;
         for (int i = 0; i < 3; i++)
