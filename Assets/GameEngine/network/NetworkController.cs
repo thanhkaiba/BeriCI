@@ -1,4 +1,5 @@
-﻿using Piratera.GUI;
+﻿using Piratera.Engine;
+using Piratera.GUI;
 using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities;
@@ -172,6 +173,8 @@ namespace Piratera.Network
         private static void OnModMessage(BaseEvent evt)
         {
             string message = (string)evt.Params["message"];
+            Debug.Log("Admin message: " + message);
+
             adminMessage = message;
             if (message == "already login")
             {
@@ -231,7 +234,17 @@ namespace Piratera.Network
 
                 if (reason == ClientDisconnectionReason.KICK)
                 {
-                    text = "You have been kicked by Server";
+                    if (string.IsNullOrEmpty(adminMessage))
+                    {
+                        text = "You have been kicked by Server";
+
+                    }
+                    else
+                    {
+                        text = adminMessage;
+                        adminMessage = "";
+                    } 
+                        
                 }
 
                 if (reason == ClientDisconnectionReason.UNKNOWN)
@@ -308,7 +321,7 @@ namespace Piratera.Network
                 string message = packet.GetUtfString("note");
 
                 Debug.Log("maintain " + startTime + " " + endTime + " " + message);
-                GuiManager.Instance.ShowPopupNotification("maintain " + startTime + " " + endTime + " " + message);
+                MaintainManager.OnReceiveMaintainInfo(startTime, endTime, message);
             }
 
 

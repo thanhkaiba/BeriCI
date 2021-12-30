@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Piratera.Cheat;
 using Piratera.Constance;
+using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
@@ -17,6 +18,9 @@ public class LobbyUI : MonoBehaviour
     //----------------------------------------------------------
     // UI elements
     //----------------------------------------------------------
+
+    [SerializeField]
+    private Text maintainText;
 
     [SerializeField]
     private Text userName;
@@ -75,8 +79,28 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
         GameEvent.FlyStamina.AddListener(FlyStamina);
+        GameEvent.MaintainDataChanged.AddListener(UpdateMaintain);
+        UpdateMaintain();
         RunAppearAction();
         ShowListSailors();
+       
+       
+    }
+
+    void UpdateMaintain()
+    {
+        DOTween.Kill(maintainText.gameObject);
+        if (MaintainManager.GetRemainTimeToMaintain() > 0)
+        {
+            Sequence s = DOTween.Sequence();
+            s.AppendCallback(() => maintainText.text = MaintainManager.GetMaintainMessage());
+            s.AppendInterval(1);
+            s.SetTarget(maintainText.gameObject).SetLink(maintainText.gameObject);
+            s.SetLoops(-1);
+        } else
+        {
+            maintainText.text = "";
+        }
     }
 
     private void OnBeriChanged(long oldValue, long newValue)
@@ -122,6 +146,12 @@ public class LobbyUI : MonoBehaviour
         if (CrewData.Instance.IsEmpty())
         {
             GuiManager.Instance.ShowPopupBuySailor();
+            return;
+        }
+
+        if (MaintainManager.GetRemainTimeToMaintain() > 0)
+        {
+            GuiManager.Instance.ShowPopupNotification("This function is locked due to upcoming server maintenance");
             return;
         }
         GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);

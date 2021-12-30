@@ -12,6 +12,6 @@ public class GameEvent
     public static readonly UnityEvent FlyStamina = new UnityEvent();
     public static readonly UnityEvent FlyBeri = new UnityEvent();
     public static readonly UnityEvent<long, long> UserBeriChanged = new UnityEvent<long, long>();
-
+    public static readonly UnityEvent MaintainDataChanged = new UnityEvent();
 
 }

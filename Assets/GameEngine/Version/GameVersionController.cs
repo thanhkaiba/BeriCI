@@ -5,29 +5,31 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Networking;
 
-public class GameVersionController : MonoBehaviour
+namespace Piratera.Engine
 {
+    public class GameVersionController : MonoBehaviour
+    {
 #if UNITY_STANDALONE_WIN
     private const string URL = "https://api1.piratera.io/v1/game/version/8";
 #elif UNITY_ANDROID
-    private const string URL = "https://api1.piratera.io/v1/game/version/9";
+        private const string URL = "https://api1.piratera.io/v1/game/version/9";
 #else
     private const string URL = "";
 #endif
 
-    [SerializeField]
-    public UnityEvent OnCheckSuccess;
+        [SerializeField]
+        public UnityEvent OnCheckSuccess;
 
-    [SerializeField]
-    public UnityEvent<string> OnNeedUpdate;
+        [SerializeField]
+        public UnityEvent<string> OnNeedUpdate;
 
-    [SerializeField]
-    public UnityEvent<string> OnError;
+        [SerializeField]
+        public UnityEvent<string> OnError;
 
-    public static string DownloadUrl;
+        public static string DownloadUrl;
 
-    void Start()
-    {
+        void Start()
+        {
 #if !UNITY_EDITOR && UNITY_STANDALONE_WIN
         if (!string.IsNullOrEmpty(URL))
         {
@@ -37,38 +39,39 @@ public class GameVersionController : MonoBehaviour
             OnCheckSuccess.Invoke();
         }
 #else
-        OnCheckSuccess.Invoke();
+            OnCheckSuccess.Invoke();
 #endif
-    }
-
-    IEnumerator GetText()
-    {
-        yield return new WaitForSeconds(1f);
-        UnityWebRequest www = UnityWebRequest.Get(URL);
-        yield return www.SendWebRequest();
-        if (www.result != UnityWebRequest.Result.Success)
-        {
-            Debug.Log(www.error);
-            OnError.Invoke(www.error);
         }
-        else
+
+        IEnumerator GetText()
         {
-            Debug.Log(www.downloadHandler.text);
-
-            JObject o = JObject.Parse(www.downloadHandler.text);
-
-            Version version1 = new Version(Application.version);
-            Version version2 = new Version((string)o["min_version"]);
-            if (version2.CompareTo(version1) > 0)
+            yield return new WaitForSeconds(1f);
+            UnityWebRequest www = UnityWebRequest.Get(URL);
+            yield return www.SendWebRequest();
+            if (www.result != UnityWebRequest.Result.Success)
             {
-                DownloadUrl = (string)o["download_url"];
-                OnNeedUpdate.Invoke((string)o["download_url"]);
+                Debug.Log(www.error);
+                OnError.Invoke(www.error);
             }
             else
             {
-                OnCheckSuccess.Invoke();
-            }
+                Debug.Log(www.downloadHandler.text);
 
+                JObject o = JObject.Parse(www.downloadHandler.text);
+
+                Version version1 = new Version(Application.version);
+                Version version2 = new Version((string)o["min_version"]);
+                if (version2.CompareTo(version1) > 0)
+                {
+                    DownloadUrl = (string)o["download_url"];
+                    OnNeedUpdate.Invoke((string)o["download_url"]);
+                }
+                else
+                {
+                    OnCheckSuccess.Invoke();
+                }
+
+            }
         }
     }
 }
