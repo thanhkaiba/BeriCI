@@ -143,17 +143,18 @@ public class LobbyUI : MonoBehaviour
     }
     public void OnStartPVEMode()
     {
+        if (!MaintainManager.CanPlay())
+        {
+            GuiManager.Instance.ShowPopupNotification("This function is locked due to upcoming server maintenance");
+            return;
+        }
+
         if (CrewData.Instance.IsEmpty())
         {
             GuiManager.Instance.ShowPopupBuySailor();
             return;
         }
 
-        if (MaintainManager.GetRemainTimeToMaintain() > 0)
-        {
-            GuiManager.Instance.ShowPopupNotification("This function is locked due to upcoming server maintenance");
-            return;
-        }
         GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
         go.GetComponent<GuiConfirmPVE>().lobby = this;
     }

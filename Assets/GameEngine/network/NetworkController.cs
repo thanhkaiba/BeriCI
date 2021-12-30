@@ -165,6 +165,7 @@ namespace Piratera.Network
             sfs.AddEventListener(SFSEvent.MODERATOR_MESSAGE, OnModMessage);
             sfs.AddEventListener(SFSEvent.ADMIN_MESSAGE, OnModMessage);
 
+            MaintainManager.ResetData();
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
 
             sfs.Connect(cfg);
@@ -249,8 +250,11 @@ namespace Piratera.Network
 
                 if (reason == ClientDisconnectionReason.UNKNOWN)
                 {
-                    text = adminMessage;
-                    adminMessage = "";
+                    if (!string.IsNullOrEmpty(adminMessage))
+                    {
+                        text = adminMessage;
+                        adminMessage = "";
+                    }  
                 }
 
 

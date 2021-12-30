@@ -52,5 +52,10 @@ namespace Piratera.Engine
             }
            
         }
+
+        public static bool CanPlay()
+        {
+            return GetRemainTimeToMaintain() <= 0 && GameTimeMgr.GetCurrentTime() > endTime;
+        }
     }
 }
