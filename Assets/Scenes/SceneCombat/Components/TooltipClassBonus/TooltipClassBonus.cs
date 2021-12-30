@@ -75,7 +75,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "Marksman gây thêm sát thương kẻ địch dưới " + (para[0] * 100) + "% máu.";
                 break;
             case SailorClass.ASSASSIN:
-                content.text = "ASSASSIN tăng " + (para[0] * 100) + "% sát thương. \n Chỉ áp dụng khi đội hình có duy nhất 1 ASSASSIN";
+                content.text = "ASSASSIN tăng " + (para[0] * 100) + "% sát thương. \nChỉ áp dụng khi đội hình có duy nhất 1 ASSASSIN";
                 break;
         }
 
