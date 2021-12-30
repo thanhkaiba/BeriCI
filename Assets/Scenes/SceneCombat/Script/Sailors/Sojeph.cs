@@ -47,20 +47,22 @@ public class Sojeph : CombatSailor
     // skill
     public override bool CanActiveSkill(CombatState cbState)
     {
-        return cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this).Count > 0;
+        return base.CanActiveSkill(cbState);
     }
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
+        float healthGain = Model.config_stats.skill_params[0] * cs.Power;
         float main_damage = cs.Power;
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        List<CombatSailor> teams = cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this);
+        List<CombatSailor> teams = cbState.GetAllTeamAliveSailors(cs.team);
         CombatSailor healthTarget = TargetsUtils.LowestHealth(teams);
         targets.Add(healthTarget.Model.id);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         targets.Add(target.Model.id);
+        _params.Add(healthGain);
         _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
         return ProcessSkill(targets, _params);
     }
