@@ -40,6 +40,10 @@ namespace Piratera.Sound
         [SerializeField]
         private AudioClip openSlot;
 
+        [Header("Voice")]
+        [SerializeField]
+        private AudioClip[] findMatchVoice;
+
 
         [Header("Background Music")]
         [SerializeField]
@@ -208,6 +212,14 @@ namespace Piratera.Sound
             }
         }
 
+        public static void PlaySound(AudioClip audioClip)
+        {
+            if (Instance != null)
+            {
+                Instance.PlaySoundEffect(audioClip);
+            }
+        }
+
         private void PlaySoundEffect(AudioClip audioClip)
         {
             if (soundOn)
@@ -247,6 +259,14 @@ namespace Piratera.Sound
             }
         }
 
+        public static void PlayFindMatchSound()
+        {
+            if (Instance != null)
+            {
+                Instance.PlaySoundEffect(Instance.findMatchVoice[Random.Range(0, Instance.findMatchVoice.Length)]);
+            }
+        }
+
         private void PlayBackgroundMusic(AudioClip music, float volume)
         {
             MusicVolume = volume;
@@ -260,10 +280,10 @@ namespace Piratera.Sound
                 switch (music)
                 {
                     case PirateraMusic.LOBBY:
-                        Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.25f);
+                        Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.15f);
                         break;
                     case PirateraMusic.LOGIN:
-                        Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.4f);
+                        Instance.PlayBackgroundMusic(Instance.LobbyMusic, 0.3f);
                         break;
                     case PirateraMusic.COMBAT:
                         Instance.PlayBackgroundMusic(Instance.CombatMusic, 0.25f);

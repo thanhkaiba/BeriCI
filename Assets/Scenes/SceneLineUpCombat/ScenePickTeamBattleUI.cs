@@ -24,14 +24,18 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     [SerializeField]
     private UserAvatar avatarB;
     public SquadAContainer squaA;
+
+    [Header("UI")]
     [SerializeField]
     private Button[] buttons;
     private float remainTime;
     private float maxTime;
     private bool counting = false;
 
+
     private void Awake()
     {
+  
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 

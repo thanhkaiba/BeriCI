@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Network;
+using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,7 @@ namespace Piratera.GUI
         protected override void Start()
         {
             base.Start();
+            SoundMgr.PlayFindMatchSound();
             priceStamina = GlobalConfigs.PvE.stamina_cost;
             staminaCost.text = "" + priceStamina;
             staminaMinus.text = "-" + priceStamina;
