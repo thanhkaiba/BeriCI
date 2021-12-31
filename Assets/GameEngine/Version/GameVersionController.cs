@@ -12,7 +12,7 @@ namespace Piratera.Engine
 #if UNITY_STANDALONE_WIN
     private const string URL = "https://api1.piratera.io/v1/game/version/8";
 #elif UNITY_ANDROID
-        private const string URL = "https://api1.piratera.io/v1/game/version/9";
+    private const string URL = "https://api1.piratera.io/v1/game/version/9";
 #else
     private const string URL = "";
 #endif
@@ -30,7 +30,7 @@ namespace Piratera.Engine
 
         void Start()
         {
-#if !UNITY_EDITOR && UNITY_STANDALONE_WIN
+#if !UNITY_EDITOR
         if (!string.IsNullOrEmpty(URL))
         {
             StartCoroutine(GetText());
