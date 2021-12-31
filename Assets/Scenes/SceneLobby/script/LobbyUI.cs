@@ -123,6 +123,7 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
         GameEvent.FlyStamina.RemoveListener(FlyStamina);
+        GameEvent.MaintainDataChanged.RemoveListener(UpdateMaintain);
     }
 
     void UpdateUserInfo(List<string> changedVars)
@@ -217,19 +218,19 @@ public class LobbyUI : MonoBehaviour
         }
 
         nodeUser.Translate(-250, 0, 0);
-        nodeUser.DOMove(new Vector3(250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
+        nodeUser.DOMove(new Vector3(250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(nodeUser).SetLink(nodeUser.gameObject);
 
         DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.6f, Vector3.one, 0.7f);
 
         buttonCol.Translate(250, 0, 0);
-        buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
+        buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(buttonCol).SetLink(buttonCol.gameObject);
 
         sail.Translate(50, 180, 0);
-        sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc);
+        sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);
 
         var scale = new Vector3(0.6f, 0.6f, 0.6f);
         background.localScale += scale;
-        background.DOScale(-scale, 0.8f).SetRelative().SetEase(Ease.OutCirc);
+        background.DOScale(-scale, 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(background).SetLink(background.gameObject);
     }
     private void ShowListSailors()
     {
