@@ -75,7 +75,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
 
 
 [CustomEditor(typeof(WindowBuildVersion))]
-public class CustomTypeEditor : Editor
+public class CustomWindowVersionEditor : Editor
 {
     public override void OnInspectorGUI()
     {

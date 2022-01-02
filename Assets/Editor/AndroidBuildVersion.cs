@@ -61,12 +61,35 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
         Instance.UpdateVersionNumber();
     }
 
-    void UpdateVersionNumber()
+    public void UpdateVersionNumber()
     {
         //Make your custom version layout here.
         CurrentVersion = MajorVersion.ToString("0") + "." + MinorVersion.ToString("00") + "." + BuildVersion.ToString("000");
         PlayerSettings.Android.bundleVersionCode = MajorVersion * 10000 + MinorVersion * 1000 + BuildVersion;
         PlayerSettings.bundleVersion = CurrentVersion;
+    }
+}
+
+[CustomEditor(typeof(AndroidBuildVersion))]
+public class CustomAndroidVersionEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        AndroidBuildVersion customType = (AndroidBuildVersion)target;
+
+        int MajorVersion = EditorGUILayout.IntField("MajorVersion", customType.MajorVersion);
+        int MinorVersion = EditorGUILayout.IntField("MinorVersion", customType.MinorVersion);
+        int BuildVersion = EditorGUILayout.IntField("BuildVersion", customType.BuildVersion);
+
+        if (MajorVersion != customType.MajorVersion || MinorVersion != customType.MinorVersion || BuildVersion != customType.BuildVersion)
+        {
+            customType.MajorVersion = MajorVersion;
+            customType.MinorVersion = MinorVersion;
+            customType.BuildVersion = BuildVersion;
+            customType.UpdateVersionNumber();
+        }
+
+        EditorGUILayout.LabelField($"Current Version: " + customType.CurrentVersion);
     }
 }
 

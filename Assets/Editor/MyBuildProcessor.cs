@@ -49,7 +49,7 @@ public class MyBuildProcessor : Editor
             if (summary.result == BuildResult.Succeeded)
             {
                 UnityEngine.Debug.Log("Build Window succeeded: " + summary.totalSize + " bytes");
-                EditorUtility.RevealInFinder(path);
+                EditorUtility.RevealInFinder(buildPlayerOptions.locationPathName);
                 BuildInnoSetup();
             }
 
@@ -98,6 +98,7 @@ public class MyBuildProcessor : Editor
             if (summary.result == BuildResult.Succeeded)
             {
                 UnityEngine.Debug.Log("Build Android succeeded: " + summary.totalSize + " bytes");
+                EditorUtility.RevealInFinder(buildPlayerOptions.locationPathName);
             }
 
             if (summary.result == BuildResult.Failed)
