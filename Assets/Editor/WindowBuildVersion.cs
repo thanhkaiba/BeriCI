@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR 
 using UnityEngine;
 using UnityEditor;
-using UnityEditor.Callbacks;
 
 [InitializeOnLoad]
 public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
@@ -9,6 +8,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
     public int MajorVersion;
     public int MinorVersion = 1;
     public int BuildVersion;
+    [HideInInspector]
     public string CurrentVersion;
 
     protected override void OnInstanceLoaded()
@@ -33,13 +33,13 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
     }
 
 
-    [MenuItem("Builds/Window/Create Version File")]
+    [MenuItem("Builds/Window/Create Version File", false, 2)]
     private static void Create()
     {
         Instance.Make();
     }
 
-    [MenuItem("Builds/Window/Increase Major Version")]
+    [MenuItem("Builds/Window/Increase Major Version", false, 3)]
     protected static void IncreaseMajor()
     {
         Instance.MajorVersion++;
@@ -47,7 +47,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
         Instance.BuildVersion = 0;
         Instance.UpdateVersionNumber();
     }
-    [MenuItem("Builds/Window/Increase Minor Version")]
+    [MenuItem("Builds/Window/Increase Minor Version", false, 4)]
     protected static void IncreaseMinor()
     {
         Instance.MinorVersion++;
@@ -73,28 +73,5 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
  
 }
 
-
-[CustomEditor(typeof(WindowBuildVersion))]
-public class CustomWindowVersionEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        WindowBuildVersion customType = (WindowBuildVersion)target;
-
-        int MajorVersion = EditorGUILayout.IntField("MajorVersion", customType.MajorVersion);
-        int MinorVersion = EditorGUILayout.IntField("MinorVersion", customType.MinorVersion);
-        int BuildVersion = EditorGUILayout.IntField("BuildVersion", customType.BuildVersion);
-
-        if (MajorVersion != customType.MajorVersion || MinorVersion != customType.MinorVersion || BuildVersion != customType.BuildVersion)
-        {
-            customType.MajorVersion = MajorVersion;
-            customType.MinorVersion = MinorVersion;
-            customType.BuildVersion = BuildVersion;
-            customType.UpdateVersionNumber();
-        }
-
-        EditorGUILayout.LabelField($"Current Version: " + customType.CurrentVersion);
-    }
-}
 
 #endif

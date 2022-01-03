@@ -11,9 +11,9 @@ namespace Piratera.Engine
     public class GameVersionController : MonoBehaviour
     {
 #if UNITY_STANDALONE_WIN
-    private const string URL = GameConst.WINDOW_VERSION_URL;
+    private const string URL = GameConst.WINDOW_DEV_VERSION_URL;
 #elif UNITY_ANDROID
-    private const string URL = GameConst.ANDROID_VERSION_URL;
+    private const string URL = GameConst.ANDROID_DEV_VERSION_URL;
 #else
     private const string URL = "";
 #endif

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: AndroidBuildVersion
   m_EditorClassIdentifier: 
   MajorVersion: 0
-  MinorVersion: 1
-  BuildVersion: 0
-  CurrentVersion: 
+  MinorVersion: 14
+  BuildVersion: 1
+  CurrentVersion: 0.01.001

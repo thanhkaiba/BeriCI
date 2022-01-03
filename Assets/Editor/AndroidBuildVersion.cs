@@ -9,6 +9,7 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
     public int MajorVersion;
     public int MinorVersion = 1;
     public int BuildVersion;
+    [HideInInspector]
     public string CurrentVersion;
 
     protected override void OnInstanceLoaded()
@@ -33,13 +34,13 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
     }
 
 
-    [MenuItem("Builds/Android/Create Version File")]
+    [MenuItem("Builds/Android/Create Version File", false, 2)]
     private static void Create()
     {
         Instance.Make();
     }
 
-    [MenuItem("Builds/Android/Increase Major Version")]
+    [MenuItem("Builds/Android/Increase Major Version", false, 3)]
     protected static void IncreaseMajor()
     {
         Instance.MajorVersion++;
@@ -47,7 +48,7 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
         Instance.BuildVersion = 0;
         Instance.UpdateVersionNumber();
     }
-    [MenuItem("Builds/Android/Increase Minor Version")]
+    [MenuItem("Builds/Android/Increase Minor Version", false, 4)]
     protected static void IncreaseMinor()
     {
         Instance.MinorVersion++;
@@ -69,29 +70,5 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
         PlayerSettings.bundleVersion = CurrentVersion;
     }
 }
-
-[CustomEditor(typeof(AndroidBuildVersion))]
-public class CustomAndroidVersionEditor : Editor
-{
-    public override void OnInspectorGUI()
-    {
-        AndroidBuildVersion customType = (AndroidBuildVersion)target;
-
-        int MajorVersion = EditorGUILayout.IntField("MajorVersion", customType.MajorVersion);
-        int MinorVersion = EditorGUILayout.IntField("MinorVersion", customType.MinorVersion);
-        int BuildVersion = EditorGUILayout.IntField("BuildVersion", customType.BuildVersion);
-
-        if (MajorVersion != customType.MajorVersion || MinorVersion != customType.MinorVersion || BuildVersion != customType.BuildVersion)
-        {
-            customType.MajorVersion = MajorVersion;
-            customType.MinorVersion = MinorVersion;
-            customType.BuildVersion = BuildVersion;
-            customType.UpdateVersionNumber();
-        }
-
-        EditorGUILayout.LabelField($"Current Version: " + customType.CurrentVersion);
-    }
-}
-
 
 #endif
