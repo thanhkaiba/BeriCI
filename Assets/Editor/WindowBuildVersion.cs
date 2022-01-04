@@ -23,15 +23,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
         IncreaseBuild();
     }
 
-    void IncrementVersion(int majorIncr, int minorIncr, int buildIncr)
-    {
-        MajorVersion += majorIncr;
-        MinorVersion += minorIncr;
-        BuildVersion += buildIncr;
-
-        UpdateVersionNumber();
-    }
-
+ 
 
     [MenuItem("Builds/Window/Create Version File", false, 2)]
     private static void Create()

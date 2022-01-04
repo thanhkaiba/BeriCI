@@ -169,13 +169,6 @@ namespace Piratera.Network
             AddEventListener(SFSEvent.SOCKET_ERROR, OnSocketError);
 
 
-            // Add LoggerEvent listeners
-            sfs.Logger.EnableEventDispatching = true;
-            sfs.Logger.AddEventListener(LogLevel.INFO, OnInfoLogMessage);
-            sfs.Logger.AddEventListener(LogLevel.WARN, OnInfoLogMessage);
-            sfs.Logger.AddEventListener(LogLevel.ERROR, OnInfoLogMessage);
-            sfs.Logger.AddEventListener(LogLevel.DEBUG, OnInfoLogMessage);
-
             MaintainManager.ResetData();
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
 
@@ -479,7 +472,10 @@ namespace Piratera.Network
                     }
                 case SFSAction.JOIN_ZONE_SUCCESS:
                     {
-                        Instance.GetServerTime();
+                        if (Instance != null)
+                        {
+                            Instance.GetServerTime();
+                        }
                         break;
                     }
 
