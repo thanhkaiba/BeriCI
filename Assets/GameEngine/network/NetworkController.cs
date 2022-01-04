@@ -4,6 +4,7 @@ using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
+using Sfs2X.Logging;
 using Sfs2X.Requests;
 using Sfs2X.Util;
 using System;
@@ -91,6 +92,7 @@ namespace Piratera.Network
         private static void reset()
         {
             // Remove SFS2X listeners
+            Instance.CancelInvoke("GetServerTime");
             sfs.RemoveAllEventListeners();
             sfs = null;
         }
@@ -162,13 +164,34 @@ namespace Piratera.Network
             AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginError);
             AddEventListener(SFSEvent.EXTENSION_RESPONSE, OnExtentionResponse);
             AddEventListener(SFSEvent.USER_VARIABLES_UPDATE, OnUserDataUpdate);
-            sfs.AddEventListener(SFSEvent.MODERATOR_MESSAGE, OnModMessage);
-            sfs.AddEventListener(SFSEvent.ADMIN_MESSAGE, OnModMessage);
+            AddEventListener(SFSEvent.MODERATOR_MESSAGE, OnModMessage);
+            AddEventListener(SFSEvent.ADMIN_MESSAGE, OnModMessage);
+            AddEventListener(SFSEvent.SOCKET_ERROR, OnSocketError);
+
+
+            // Add LoggerEvent listeners
+            sfs.Logger.EnableEventDispatching = true;
+            sfs.Logger.AddEventListener(LogLevel.INFO, OnInfoLogMessage);
+            sfs.Logger.AddEventListener(LogLevel.WARN, OnInfoLogMessage);
+            sfs.Logger.AddEventListener(LogLevel.ERROR, OnInfoLogMessage);
+            sfs.Logger.AddEventListener(LogLevel.DEBUG, OnInfoLogMessage);
 
             MaintainManager.ResetData();
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
 
             sfs.Connect(cfg);
+        }
+
+        private static void OnInfoLogMessage(BaseEvent evt)
+        {
+            string message = (string)evt.Params["message"];
+            Debug.Log("[SFS2X INFO] " + message);                           // .Net / Unity
+            
+        }
+
+        private static void OnSocketError(BaseEvent evt)
+        {
+            Debug.Log("On Socket Error " + (string)evt.Params["message"]);
         }
 
         private static void OnModMessage(BaseEvent evt)
@@ -450,12 +473,20 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             GameTimeMgr.SetServerTime(packet.GetLong("time"));
+                            Instance.Invoke("GetServerTime", 10f);
                         }
+                        break;
+                    }
+                case SFSAction.JOIN_ZONE_SUCCESS:
+                    {
+                        Instance.GetServerTime();
                         break;
                     }
 
             }
         }
+
+
 
         public static void AddServerActionListener(NetworkActionListenerDelegate listener)
         {
@@ -467,6 +498,11 @@ namespace Piratera.Network
         {
             serverActionListeners.Remove(listener);
 
+        }
+
+        public void GetServerTime()
+        {
+            Send(SFSAction.GET_SERVER_TIME);
         }
 
 

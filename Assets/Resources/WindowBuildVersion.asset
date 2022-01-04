@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WindowBuildVersion
   m_EditorClassIdentifier: 
   MajorVersion: 0
-  MinorVersion: 14
-  BuildVersion: 0
-  CurrentVersion: 
+  MinorVersion: 15
+  BuildVersion: 1
+  CurrentVersion: 0.15.001

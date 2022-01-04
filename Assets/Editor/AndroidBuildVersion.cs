@@ -24,36 +24,10 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
         IncreaseBuild();
     }
 
-    void IncrementVersion(int majorIncr, int minorIncr, int buildIncr)
-    {
-        MajorVersion += majorIncr;
-        MinorVersion += minorIncr;
-        BuildVersion += buildIncr;
-
-        UpdateVersionNumber();
-    }
-
-
     [MenuItem("Builds/Android/Create Version File", false, 2)]
     private static void Create()
     {
         Instance.Make();
-    }
-
-    [MenuItem("Builds/Android/Increase Major Version", false, 3)]
-    protected static void IncreaseMajor()
-    {
-        Instance.MajorVersion++;
-        Instance.MinorVersion = 0;
-        Instance.BuildVersion = 0;
-        Instance.UpdateVersionNumber();
-    }
-    [MenuItem("Builds/Android/Increase Minor Version", false, 4)]
-    protected static void IncreaseMinor()
-    {
-        Instance.MinorVersion++;
-        Instance.BuildVersion = 0;
-        Instance.UpdateVersionNumber();
     }
 
     private static void IncreaseBuild()
@@ -68,6 +42,21 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
         CurrentVersion = MajorVersion.ToString("0") + "." + MinorVersion.ToString("00") + "." + BuildVersion.ToString("000");
         PlayerSettings.Android.bundleVersionCode = MajorVersion * 10000 + MinorVersion * 1000 + BuildVersion;
         PlayerSettings.bundleVersion = CurrentVersion;
+    }
+}
+
+[CustomEditor(typeof(AndroidBuildVersion))]
+public class AndroidBuildEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        AndroidBuildVersion myScript = (AndroidBuildVersion)target;
+        if (GUILayout.Button("Force Update"))
+        {
+            myScript.UpdateVersionNumber();
+        }
+        EditorGUILayout.LabelField("Current Version", Application.version);
     }
 }
 

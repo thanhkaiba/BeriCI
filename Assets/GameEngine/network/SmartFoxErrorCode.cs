@@ -43,7 +43,7 @@ namespace Piratera.Network
         SERVER_MAINTAINACE = 17,
 
         [Description("Your username or password is incorrect")]
-        WRONG_USER_NAME_OR_PASS = 18,
+        WRONG_USER_NAME_OR_PASS = 19,
 
     }
 }

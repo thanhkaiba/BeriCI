@@ -192,12 +192,13 @@ public class LoginController : MonoBehaviour
             case SFSAction.JOIN_ZONE_SUCCESS:
                 {
                     ReceiveJoinZoneSuccess(errorCode, packet);
-                    NetworkController.Send(SFSAction.GET_SERVER_TIME);
                     break;
                 }
 
         }
     }
+
+   
     private void OpenLobby()
     {
         SceneManager.LoadScene("SceneLoadServerData");

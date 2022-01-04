@@ -39,21 +39,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
         Instance.Make();
     }
 
-    [MenuItem("Builds/Window/Increase Major Version", false, 3)]
-    protected static void IncreaseMajor()
-    {
-        Instance.MajorVersion++;
-        Instance.MinorVersion = 0;
-        Instance.BuildVersion = 0;
-        Instance.UpdateVersionNumber();
-    }
-    [MenuItem("Builds/Window/Increase Minor Version", false, 4)]
-    protected static void IncreaseMinor()
-    {
-        Instance.MinorVersion++;
-        Instance.BuildVersion = 0;
-        Instance.UpdateVersionNumber();
-    }
+  
 
     private static void IncreaseBuild()
     {
@@ -68,9 +54,22 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
         PlayerSettings.Android.bundleVersionCode = MajorVersion * 10000 + MinorVersion * 1000 + BuildVersion;
         PlayerSettings.bundleVersion = CurrentVersion;
     }
+}
 
 
- 
+[CustomEditor(typeof(WindowBuildVersion))]
+public class WindowBuildEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+        WindowBuildVersion myScript = (WindowBuildVersion)target;
+        if (GUILayout.Button("Force Update"))
+        {
+            myScript.UpdateVersionNumber();
+        }
+        EditorGUILayout.LabelField("Current Version", Application.version);
+    }
 }
 
 

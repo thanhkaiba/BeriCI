@@ -88,14 +88,22 @@ namespace Piratera.Build
         public static void AndroidBuild()
         {
             AndroidBuildVersion.Instance.UpdateVersionNumber();
-
             string path = $"{BuildFolder}/Android";
+
+            EditorUserBuildSettings.buildAppBundle = EditorUtility.DisplayDialog(
+              "Build Type",
+              "Choose Android Build Type",
+              "AAB",
+              "APK"
+            );
+
+            string ext = EditorUserBuildSettings.buildAppBundle ? "aab" : "apk";
             if (path.Length > 0)
             {
                 OnPreprocessBuild(AndroidBuildVersion.OnPreprocessBuild);
                 BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
                 buildPlayerOptions.scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
-                buildPlayerOptions.locationPathName = $"{BuildFolder}/Android" + $"/Piratera v{AndroidBuildVersion.Instance.CurrentVersion}.apk";
+                buildPlayerOptions.locationPathName = $"{BuildFolder}/Android" + $"/Piratera v{AndroidBuildVersion.Instance.CurrentVersion}.{ext}";
                 buildPlayerOptions.target = BuildTarget.Android;
                 buildPlayerOptions.options = BuildOptions.None;
 
