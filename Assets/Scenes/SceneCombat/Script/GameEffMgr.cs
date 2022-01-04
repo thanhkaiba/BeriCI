@@ -212,4 +212,22 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendCallback(() => Destroy(go));
         return 0.4f;
     }
+    public void Shake(float dur = 0.1f, float strength = 1)
+    {
+        var cam = Camera.main.transform;
+        var seq = DOTween.Sequence();
+        var z = cam.position.z;
+        float s = 0.06f;
+        float max_delta = 0.05f * strength;
+        int times = Mathf.RoundToInt(dur / s);
+        for (int i = 0; i < times; i++)
+        {
+            float delta = max_delta * Mathf.Sqrt( 1f / (i + 1));
+            float x = Random.Range(-delta, delta);
+            float y = Random.Range(-delta, delta) * 0.6f;
+            seq.Append(cam.transform.DOMove(new Vector3(x, y, z), 0));
+            seq.AppendInterval(s);
+        }
+        seq.Append(cam.transform.DOMove(new Vector3(0, 0, z), 0));
+    }
 }

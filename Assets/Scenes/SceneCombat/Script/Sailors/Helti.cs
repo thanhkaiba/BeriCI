@@ -37,6 +37,7 @@ public class Helti : CombatSailor
         );
         Sequence seq = DOTween.Sequence();
         StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
+        StartCoroutine(GameUtils.WaitAndDo(0.5f, () => GameEffMgr.Instance.Shake(0.1f, 0.5f)));
         seq.AppendInterval(0.25f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);
@@ -113,6 +114,7 @@ public class Helti : CombatSailor
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
             windAnimator.SetTrigger("run");
+            GameEffMgr.Instance.Shake(0.2f, 1);
         });
         seq.AppendInterval(0.5f);
         seq.AppendCallback(() =>
@@ -120,6 +122,7 @@ public class Helti : CombatSailor
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
             windAnimator.SetTrigger("run");
+            GameEffMgr.Instance.Shake(0.2f, 1);
         });
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() =>
@@ -127,6 +130,7 @@ public class Helti : CombatSailor
             for (int i = 0; i < listTargets.Count; i++)
                 listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 4 / 10 });
             windAnimator.SetTrigger("run");
+            GameEffMgr.Instance.Shake(0.3f, 2);
         });
 
         seq.AppendInterval(0.8f);
