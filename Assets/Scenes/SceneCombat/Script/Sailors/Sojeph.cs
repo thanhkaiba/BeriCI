@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -155,9 +156,22 @@ public class Sojeph : CombatSailor
             Vector3 theScale = transform.localScale;
             if (bulletGO.transform.position.x > desPos.x) theScale.x = -1;
             else theScale.x = 1;
-            if (bulletGO.transform.position.y > desPos.y + 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
-            else if (bulletGO.transform.position.y < desPos.y - 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
-            bulletGO.transform.localScale = theScale * 2;
+            
+            if (bulletGO.transform.position.y > desPos.y + 1)
+            {
+                if (theScale.x == 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
+                else bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
+            }
+            else if (bulletGO.transform.position.y < desPos.y - 1)
+            {
+                if (theScale.x == 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
+                else bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
+            }
+            
+            //float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
+            //bulletGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f);
+
+            bulletGO.transform.localScale = theScale * 3;
             Sequence seq = DOTween.Sequence();
             seq.AppendInterval(delay + i * 0.1f);
             seq.AppendCallback(() => bulletGO.SetActive(true));
