@@ -151,7 +151,7 @@ public class Sojeph : CombatSailor
         Vector3 desPos = Vector3.Lerp(oriPos, targetPos, d / 2);
         for (int i = 0; i < 3; i++)
         {
-            var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos, Quaternion.identity);
+            var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos - new Vector3(0, i * 0.2f), Quaternion.identity);
             bulletGO.SetActive(false);
             Vector3 theScale = transform.localScale;
             if (bulletGO.transform.position.x > desPos.x) theScale.x = -1;
@@ -171,12 +171,13 @@ public class Sojeph : CombatSailor
             //float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
             //bulletGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f);
 
-            bulletGO.transform.localScale = theScale * 3;
+            bulletGO.transform.localScale = theScale * 4f;
             Sequence seq = DOTween.Sequence();
-            seq.AppendInterval(delay + i * 0.1f);
+            seq.AppendInterval(delay + i * 0.02f);
             seq.AppendCallback(() => bulletGO.SetActive(true));
             seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.Linear));
-            seq.AppendInterval(flyTime - i * 0.1f);
+            seq.Join(bulletGO.transform.DOScale(2, flyTime));
+            seq.AppendInterval(flyTime - i * 0.02f);
             seq.AppendCallback(() => Destroy(bulletGO)).SetLink(bulletGO).SetTarget(bulletGO);
         }
         

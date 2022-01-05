@@ -10,8 +10,6 @@ public class RoyalCollectingController : MonoBehaviour {
 
 
 
-    // Play collecting sound at begining of the animation or at the end
-    public RoyalCollectingAnimation.PLAY_SOUND_MODE _playSoundMode;
     public RoyalCollectingAnimation.EXPANSION_MODE _expansionMode = RoyalCollectingAnimation.EXPANSION_MODE.Going_Up;
     // The emission rate in seconds
 	public float emissionRate = 0.2f;
@@ -27,16 +25,11 @@ public class RoyalCollectingController : MonoBehaviour {
 
 	// This is a list of instanciated _itemPrefab 
 	private List<RoyalCollectingAnimation> _itemList = new List<RoyalCollectingAnimation>();
-	// Reference to the AudioSource component
-	[SerializeField]
-	private List<AudioSource> _audioSource;
-	[SerializeField]
-	AudioClip audio;
+
 
 	void Awake() {
 		// Setting instance
 		_instance = this;
-	//	_audioSource = GetComponent<AudioSource> ();
 	}
 
 	// Collect some items with animation
@@ -81,7 +74,7 @@ public class RoyalCollectingController : MonoBehaviour {
             }
 
 			// Initialize object
-			animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _playSoundMode, _expansionMode, this);
+			animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _expansionMode, this);
 			// Start animation
 			animation.StartAnimation();
 			yield return delay;
@@ -114,7 +107,7 @@ public class RoyalCollectingController : MonoBehaviour {
 			}
 
 			// Initialize object
-			animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _playSoundMode, _expansionMode, this, newValue, ()=> {
+			animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _expansionMode, this, newValue, ()=> {
 				number--;
 				// Debug.Log("NUMBER_CHEKED: " + number);
 				if( number <= 0)
@@ -129,21 +122,4 @@ public class RoyalCollectingController : MonoBehaviour {
 		}
 	}
 
-
-	// Play the collecting sound
-/*	public void PlayCollectingSound()
-    {
-		//	_audioSource.Play ();
-
-		for (int i = 0; i < _audioSource.Count; i++)
-		{
-			if (!_audioSource[i].isPlaying)
-			{
-				_audioSource[i].volume = Utils.GetInt(Utils.KEY_SOUND, 1); //PlayerPrefs.GetInt("enableSound", 1);
-				_audioSource[i].PlayOneShot(audio);
-				break;
-			}
-		}
-
-	}*/
 }

@@ -7,12 +7,7 @@ public class RoyalCollectingAnimation : MonoBehaviour
     /// <summary>
     /// RoyalCollectionSystem Package
     /// </summary>
-    public enum PLAY_SOUND_MODE
-    {
-        None,
-        Start_Beginning,
-        End_The_Collect
-    }
+    
 
     public enum EXPANSION_MODE
     {
@@ -54,8 +49,6 @@ public class RoyalCollectingAnimation : MonoBehaviour
     [SerializeField]
     private RoyalItemDisplayer _itemDisplayer;
 
-    // Defines when to play the collecting sound
-    private PLAY_SOUND_MODE _playSoundMode;
 
     // Defines the expansion mode
     private EXPANSION_MODE _expansionMode;
@@ -67,15 +60,13 @@ public class RoyalCollectingAnimation : MonoBehaviour
     //private int number = 0;
     private System.Action OnCompleted;
 
-    public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale,
-        PLAY_SOUND_MODE playSoundMode, EXPANSION_MODE expansionMode,
+    public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale, EXPANSION_MODE expansionMode,
         RoyalCollectingController collectingEffectController, int newValue, System.Action action)
     {
         _itemDisplayerTransform = destination;
         transform.SetParent(parent);
         transform.localPosition = localPosition;
         transform.localScale = localScale;
-        _playSoundMode = playSoundMode;
         _expansionMode = expansionMode;
         Royal_collectinController = collectingEffectController;
         this.newValue = newValue;
@@ -84,8 +75,7 @@ public class RoyalCollectingAnimation : MonoBehaviour
     }
 
     // Initialize this item
-    public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale,
-        PLAY_SOUND_MODE playSoundMode, EXPANSION_MODE expansionMode,
+    public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale, EXPANSION_MODE expansionMode,
         RoyalCollectingController collectingEffectController)
     {
         _itemDisplayerTransform = destination;
@@ -93,7 +83,6 @@ public class RoyalCollectingAnimation : MonoBehaviour
         transform.SetParent(parent);
         transform.localPosition = localPosition;
         transform.localScale = localScale;
-        _playSoundMode = playSoundMode;
         _expansionMode = expansionMode;
         Royal_collectinController = collectingEffectController;
     }
@@ -112,11 +101,7 @@ public class RoyalCollectingAnimation : MonoBehaviour
         float t = 0;
         float speed = 1.0f;
 
-        // Playing sound at beginning of the animation if relevant
-      /*  if (_playSoundMode == PLAY_SOUND_MODE.Start_Beginning)
-        {
-            Royal_collectinController.PlayCollectingSound();
-        }*/
+     
 
         // 1st step : Move up animation
         Vector3 direction;
@@ -158,12 +143,7 @@ public class RoyalCollectingAnimation : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-        // Playing sound at the end of the animation if relevant
-        if (_playSoundMode == PLAY_SOUND_MODE.End_The_Collect)
-        {
-           // Royal_collectinController.PlayCollectingSound();
-            Destroy(gameObject);
-        }
+      
 
         // Adding the gem
         //_itemDisplayer.AddItem (1);
