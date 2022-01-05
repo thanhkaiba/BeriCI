@@ -126,7 +126,8 @@ public class Sojeph : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-            KnifeToTarget(startPos, targetPos, 0, time);
+            //KnifeToTarget(startPos, targetPos, 0, time);
+            KnifeToTarget(startPos, targetPos, 0, .2f);
         });
         seq.AppendInterval(time);
         seq.AppendCallback(() =>
@@ -137,23 +138,34 @@ public class Sojeph : CombatSailor
     }
     public void KnifeToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
     {
+        /*
+        var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos, Quaternion.identity);
+        bulletGO.SetActive(false);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 0.4f);
+        */
+        Vector3 oriPos = transform.position;
+        float d = Vector3.Distance(oriPos, targetPos);
+        //Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 0.4f);
+        Vector3 desPos = Vector3.Lerp(oriPos, targetPos, d / 2);
         for (int i = 0; i < 3; i++)
         {
             var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos, Quaternion.identity);
             bulletGO.SetActive(false);
-            int isFlip = 1;
-            if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
-            bulletGO.transform.localScale = new Vector3(isFlip * 3, 3, 3);
+            Vector3 theScale = transform.localScale;
+            if (bulletGO.transform.position.x > desPos.x) theScale.x = -1;
+            else theScale.x = 1;
+            if (bulletGO.transform.position.y > desPos.y + 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
+            else if (bulletGO.transform.position.y < desPos.y - 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
+            bulletGO.transform.localScale = theScale * 2;
             Sequence seq = DOTween.Sequence();
-            seq.AppendInterval(delay + i*0.1f);
+            seq.AppendInterval(delay + i * 0.1f);
             seq.AppendCallback(() => bulletGO.SetActive(true));
             seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.Linear));
-            seq.AppendInterval(flyTime - i*0.1f);
+            seq.AppendInterval(flyTime - i * 0.1f);
             seq.AppendCallback(() => Destroy(bulletGO)).SetLink(bulletGO).SetTarget(bulletGO);
         }
+        
 
     }
     public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
@@ -173,6 +185,5 @@ public class Sojeph : CombatSailor
         seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime));
         seq.AppendInterval(.2f);
         seq.AppendCallback(() => Destroy(bulletGO));
-
     }
 }
