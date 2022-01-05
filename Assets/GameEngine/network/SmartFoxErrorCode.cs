@@ -45,5 +45,9 @@ namespace Piratera.Network
         [Description("Your username or password is incorrect")]
         WRONG_USER_NAME_OR_PASS = 19,
 
+
+        [Description("A suitable opponent could not be found right now")]
+        NO_OPPONENT_FOUND = 20,
+
     }
 }
