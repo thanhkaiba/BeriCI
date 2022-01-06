@@ -1,4 +1,3 @@
-#if PIRATERA_DEV || PIRATERA_QC
 using Piratera.GUI;
 using Sfs2X.Entities.Data;
 using UnityEngine;
@@ -7,6 +6,7 @@ using UnityEngine.UI;
 
 namespace Piratera.Cheat
 {
+#if PIRATERA_DEV || PIRATERA_QC
 
     public class PopupCheatGame : BaseGui
     {
@@ -94,5 +94,5 @@ namespace Piratera.Cheat
         }
 
     }
-}
 #endif
+}

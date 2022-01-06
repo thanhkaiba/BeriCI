@@ -23,6 +23,10 @@ namespace Piratera.Network
 
         public const string DEV_HOST = "dev-game1.piratera.local";
         public const int DEV_PORT = 9933;
+
+
+        public const string PROD_HOST = "game1.piratera.local";
+        public const int PROD_PORT = 9933;
     }
 
     public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
@@ -45,8 +49,11 @@ namespace Piratera.Network
         private static readonly string Host = GAME_NETWORK_ADDRESS.QC_HOST;
         private static readonly int TcpPort = GAME_NETWORK_ADDRESS.QC_PORT;
 #elif PIRATERA_DEV
-			private static readonly string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
+		private static readonly string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
 		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
+#elif PIRATERA_LIVE
+        private static readonly string Host = GAME_NETWORK_ADDRESS.PROD_HOST;
+		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.PROD_PORT;
 #endif
         private static readonly int WSPort = 8080;
         private static readonly string Zone = "Piratera";
@@ -218,12 +225,8 @@ namespace Piratera.Network
 
                 SFSObject sfso = new SFSObject();
                 sfso.PutUtfString("passwd", loginData.Password);
-#if PIRATERA_DEV || PIRATERA_QC
-                sfso.PutInt("loginType", (int)loginData.Type);
-#else
-                sfso.PutInt("loginType", (int)GameLoginType.AUTHENTICATON);
-#endif
                 sfso.PutUtfString("client_info", new LoginLogData().ToJson());
+                sfso.PutInt("loginType", (int)loginData.Type);
                 sfs.Send(new LoginRequest(loginData.Username, "", Zone, sfso));
                 Debug.Log("Send Login " + loginData.Username + "-" + loginData.Password + "-" + loginData.Type);
             }
@@ -452,6 +455,7 @@ namespace Piratera.Network
                         }
                         break;
                     }
+#if PIRATERA_QC || PIRATERA_DEV
                 case SFSAction.CHEAT_RANK:
                     {
                         if (errorCode == SFSErrorCode.SUCCESS)
@@ -460,6 +464,7 @@ namespace Piratera.Network
                         }
                         break;
                     }
+#endif
 
                 case SFSAction.GET_SERVER_TIME:
                     {

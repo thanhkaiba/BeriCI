@@ -130,16 +130,21 @@ public class LoginController : MonoBehaviour
 
         }
 
+#if PIRATERA_DEV || PIRATERA_QC
+        PlayerPrefs.SetInt("loginTypeToggle", loginTypeToggle.isOn ? 1 : 0);
+#endif
 
+        SendRequestLogin(nameInput.text, passwordInput.text, loginTypeToggle.isOn ? GameLoginType.DUMMY : GameLoginType.AUTHENTICATON);
+    }
+
+    private void SendRequestLogin(string username, string password, GameLoginType loginType)
+    {
         StartCoroutine(CheckInternetConnection(isConnected =>
         {
             if (isConnected)
             {
-#if PIRATERA_DEV || PIRATERA_QC
-                PlayerPrefs.SetInt("loginTypeToggle", loginTypeToggle.isOn ? 1 : 0);
-#endif
                 enableLoginUI(false);
-                NetworkController.LoginToServer(new LoginData(nameInput.text, passwordInput.text, loginTypeToggle.isOn ? GameLoginType.DUMMY : GameLoginType.AUTHENTICATON));
+                NetworkController.LoginToServer(new LoginData(username, password, loginType));
                 NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
                 NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
                 NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
@@ -150,7 +155,6 @@ public class LoginController : MonoBehaviour
                 errorText.text = "Error. Check Internet connection!";
             }
         }));
-
     }
 
     private void OnConnectionLost(BaseEvent evt)
@@ -165,7 +169,8 @@ public class LoginController : MonoBehaviour
 
     public void OnButtonCreateOneClick()
     {
-        Application.OpenURL(GameConst.ACCOUNT_URL);
+          SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
+//        Application.OpenURL(GameConst.ACCOUNT_URL);
     }
 
     public void ReceiveJoinZoneSuccess(SFSErrorCode errorCode, ISFSObject packet)

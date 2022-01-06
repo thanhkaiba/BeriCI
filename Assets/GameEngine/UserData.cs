@@ -56,7 +56,7 @@ public class UserData : Singleton<UserData>
 
         Avatar = user.GetVariable(UserInfoPropertiesKey.AVATAR).GetStringValue();
         UID = user.GetVariable(UserInfoPropertiesKey.UID).GetStringValue();
-        Username = user.Name;
+        //Username = user.GetVariable(UserInfoPropertiesKey.USERNAME).GetStringValue();
         Exp = (long)user.GetVariable(UserInfoPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();

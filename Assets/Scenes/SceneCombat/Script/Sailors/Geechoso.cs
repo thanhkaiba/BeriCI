@@ -69,18 +69,18 @@ public class Geechoso : CombatSailor
         TriggerAnimation("Skill");
         var target = CombatState.Instance.GetSailor(targets[0]);
         CombatEvents.Instance.highlightTarget.Invoke(target);
-        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 1f);
+        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 2f);
 
         var damage = _params[0];
 
         var seq = DOTween.Sequence();
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => Shoot(target, damage / 2));
-        seq.AppendInterval(0.4f);
+        seq.AppendInterval(1f);
         seq.AppendCallback(() => {
             Shoot(target, damage / 2);
         });
-        return 2f;
+        return 2.5f;
     }
     private void Shoot(CombatSailor target, float damage)
     {

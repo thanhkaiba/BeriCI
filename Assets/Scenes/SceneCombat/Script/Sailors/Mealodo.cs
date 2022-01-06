@@ -78,7 +78,7 @@ public class Mealodo : CombatSailor
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
 
         Vector3 desPos = new Vector3(
-            target.transform.position.x + offset * 0.5f,
+            target.transform.position.x + offset * 4f,
             target.transform.position.y,
             target.transform.position.z
         );
