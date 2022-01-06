@@ -25,6 +25,7 @@ public class TooltipSailorInfo : MonoBehaviour
     public Text textSpeed;
     public Text textArmor;
     public Text textMagicResist;
+    public Text textName;
     public Text textDes;
     private RectTransform canvas;
     private RectTransform panel;
@@ -157,6 +158,7 @@ public class TooltipSailorInfo : MonoBehaviour
         var attackType = model.config_stats.attack_type;
         iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + attackType);
         textLevel.text = model.level.ToString();
+        textName.text = model.name.ToString();
         foreach (var item in sailorDes.sheets[0].list)
         {
             if (model.name == item.root_name)

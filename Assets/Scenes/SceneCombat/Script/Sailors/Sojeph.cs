@@ -157,12 +157,12 @@ public class Sojeph : CombatSailor
             if (bulletGO.transform.position.x > desPos.x) theScale.x = -1;
             else theScale.x = 1;
             
-            if (bulletGO.transform.position.y > desPos.y + 1)
+            if (bulletGO.transform.position.y > desPos.y + 3)
             {
                 if (theScale.x == 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
                 else bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
             }
-            else if (bulletGO.transform.position.y < desPos.y - 1)
+            else if (bulletGO.transform.position.y < desPos.y - 3)
             {
                 if (theScale.x == 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
                 else bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
