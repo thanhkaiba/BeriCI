@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class UserInfoPropertiesKey
 {
     public const string UID = "id";
-    public const string USERNAME = "username";
+    public const string USERNAME = "displayName";
     public const string BERI = "beri";
     public const string STAMINA = "stamina";
     public const string LAST_COUNT = "last_count";
@@ -56,7 +56,13 @@ public class UserData : Singleton<UserData>
 
         Avatar = user.GetVariable(UserInfoPropertiesKey.AVATAR).GetStringValue();
         UID = user.GetVariable(UserInfoPropertiesKey.UID).GetStringValue();
-        //Username = user.GetVariable(UserInfoPropertiesKey.USERNAME).GetStringValue();
+        try
+        {
+            Username = user.GetVariable(UserInfoPropertiesKey.USERNAME).GetStringValue();
+        } catch
+        {
+            Username = user.Name;
+        }
         Exp = (long)user.GetVariable(UserInfoPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();

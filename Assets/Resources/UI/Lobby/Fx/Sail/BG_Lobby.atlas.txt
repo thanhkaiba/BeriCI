@@ -1,0 +1,48 @@
+
+BG_Lobby.png
+size: 2011,1276
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 16
+  rotate: true
+  xy: 1624, 892
+  size: 382, 361
+  orig: 382, 361
+  offset: 0, 0
+  index: -1
+Layer 18
+  rotate: true
+  xy: 2, 25
+  size: 468, 1146
+  orig: 468, 1146
+  offset: 0, 0
+  index: -1
+Layer 19
+  rotate: false
+  xy: 1150, 122
+  size: 510, 768
+  orig: 510, 768
+  offset: 0, 0
+  index: -1
+day_1
+  rotate: false
+  xy: 1662, 2
+  size: 347, 888
+  orig: 347, 888
+  offset: 0, 0
+  index: -1
+flag
+  rotate: false
+  xy: 2, 1053
+  size: 1620, 221
+  orig: 1620, 221
+  offset: 0, 0
+  index: -1
+tiencanh
+  rotate: true
+  xy: 2, 495
+  size: 556, 1146
+  orig: 556, 1146
+  offset: 0, 0
+  index: -1

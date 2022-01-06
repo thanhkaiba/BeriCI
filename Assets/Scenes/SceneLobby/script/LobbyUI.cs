@@ -225,8 +225,8 @@ public class LobbyUI : MonoBehaviour
         buttonCol.Translate(250, 0, 0);
         buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(buttonCol).SetLink(buttonCol.gameObject);
 
-        sail.Translate(50, 180, 0);
-        sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);
+       /* sail.Translate(50, 180, 0);
+        sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);*/
 
         var scale = new Vector3(0.6f, 0.6f, 0.6f);
         background.localScale += scale;
