@@ -51,7 +51,9 @@ public class LoginController : MonoBehaviour
 #if PIRATERA_DEV || PIRATERA_QC
         loginTypeToggle.gameObject.SetActive(true);
         loginTypeToggle.isOn = PlayerPrefs.GetInt("loginTypeToggle", 1) == 1;
+
 #else
+        loginTypeToggle.isOn = false;
 		loginTypeToggle.gameObject.SetActive(false);
 #endif
 

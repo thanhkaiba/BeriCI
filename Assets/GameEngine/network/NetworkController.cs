@@ -25,7 +25,7 @@ namespace Piratera.Network
         public const int DEV_PORT = 9933;
 
 
-        public const string PROD_HOST = "game1.piratera.local";
+        public const string PROD_HOST = "game.piratera.io";
         public const int PROD_PORT = 9933;
     }
 
@@ -54,6 +54,8 @@ namespace Piratera.Network
 #elif PIRATERA_LIVE
         private static readonly string Host = GAME_NETWORK_ADDRESS.PROD_HOST;
 		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.PROD_PORT;
+#else
+        
 #endif
         private static readonly int WSPort = 8080;
         private static readonly string Zone = "Piratera";

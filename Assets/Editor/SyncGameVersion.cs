@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Piratera.Constance;
 using System.Diagnostics;
+using UnityEditor;
 
 namespace Piratera.Build
 {
@@ -40,25 +41,25 @@ namespace Piratera.Build
 
         public static void Sync(BuildType type, string version)
         {
-
+            string path = EditorUtility.OpenFilePanel(GetGameFolder(type), "", "");
             UploadDrive(
-                GetGameFile(type, version),
+                path,
                 type,
                 version
             );
 
         }
 
-        public static string GetGameFile(BuildType type, string version)
+        public static string GetGameFolder(BuildType type)
         {
             switch (type)
             {
                 case BuildType.WINDOW_DEV:
-                    return $"{MyBuildProcessor.BuildFolder}/l2cpp/Piratera Installer v{version}.exe"; ;
+                    return $"{MyBuildProcessor.BuildFolder}/l2cpp/"; ;
                 case BuildType.ANDROID_DEV:
-                    return $"{MyBuildProcessor.BuildFolder}/Android/Piratera v{version}.apk";
+                    return $"{MyBuildProcessor.BuildFolder}/Android/";
                 default:
-                    return "";
+                    return MyBuildProcessor.BuildFolder;
             }
         }
 
