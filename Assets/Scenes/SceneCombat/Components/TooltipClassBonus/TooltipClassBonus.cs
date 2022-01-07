@@ -44,7 +44,7 @@ public class TooltipClassBonus : MonoBehaviour
         int maxPop = config.GetMaxPopNeed(data.type);
         List<float> para = config.GetParams(data.type, data.level);
         // iconType.SetData(data);
-        title.text = "" + data.type + " (" + data.current + "/" + maxPop + ")";
+        title.text = data.type.ToString().Replace('_', ' ') + $" ({data.current}/{maxPop})";
         switch (data.type)
         {
             case SailorClass.WILD:
