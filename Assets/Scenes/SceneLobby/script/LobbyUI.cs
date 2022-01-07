@@ -6,6 +6,7 @@ using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
+using Spine.Unity;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -241,7 +242,9 @@ public class LobbyUI : MonoBehaviour
         {
             if (i >= listLineUp.Count) break;
             var model = listLineUp[i];
-            Instantiate(model.config_stats.model, nodeSailors[i]);
+            Transform GO = Instantiate(model.config_stats.model, nodeSailors[i]).transform.FindDeepChild("model");
+            GO.GetComponent<Renderer>().sortingOrder = 3;
+            GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
     }
     public void ShowGuiCheat()
