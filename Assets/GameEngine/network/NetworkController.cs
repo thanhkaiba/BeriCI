@@ -238,7 +238,8 @@ namespace Piratera.Network
                 Debug.Log("SFS2X API version: " + sfs.Version);
                 Debug.Log("Connection mode is: " + sfs.ConnectionMode);
 #if PIRATERA_QC || PIRATERA_DEV
-                sfs.InitCrypto();
+                // sfs.InitCrypto();
+                DoLogin();
 #else
                 DoLogin();
 #endif
