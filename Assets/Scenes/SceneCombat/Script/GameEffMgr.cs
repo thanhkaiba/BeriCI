@@ -29,7 +29,7 @@ public class GameEffMgr : MonoBehaviour
 
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d);
         int isFlip = 1;
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         Sequence seq = DOTween.Sequence();

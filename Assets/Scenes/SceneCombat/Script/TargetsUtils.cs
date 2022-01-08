@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
@@ -11,19 +11,22 @@ public class TargetsUtils
         int myRow = actor.cs.position.y;
         int NR_col = 9999;
         int NR_row = 9999;
+        int lastRow = 0;
         l.ForEach(delegate (CombatSailor character)
         {
             int col = character.cs.position.x;
             int row = character.cs.position.y;
             if (
                 (result == null)
-                || (col < NR_col)
-                || (col == NR_col && Math.Abs(myRow - row) < NR_row)
+                || (col < NR_col) // X nhỏ nhất
+                || (col == NR_col && Math.Abs(myRow - row) < NR_row) // nếu trùng thì cùng hàng hoặc gần hàng nhất
+                || ((col == NR_col && Math.Abs(myRow - row) == NR_row && row > lastRow)) // nếu giống nhau nữa thì lấy Y max
             )
             {
                 result = character;
                 NR_col = col;
                 NR_row = Math.Abs(myRow - row);
+                lastRow = row;
             }
         });
         return result;
@@ -39,19 +42,22 @@ public class TargetsUtils
         int myRow = actor.cs.position.y;
         int NR_col = 9999;
         int NR_row = 9999;
+        int lastRow = 0;
         l.ForEach(delegate (CombatSailor character)
         {
             int col = character.cs.position.x;
             int row = character.cs.position.y;
             if (
                 (result == null)
-                || (Math.Abs(myRow - row) < NR_row)
-                || (Math.Abs(myRow - row) == NR_row && col < NR_col)
+                || (Math.Abs(myRow - row) < NR_row)  // cùng Y hoặc gần nhất
+                || (Math.Abs(myRow - row) == NR_row && col < NR_col) // nếu bằng thì X nhỏ nhất
+                || (Math.Abs(myRow - row) == NR_row && col == NR_col && row > lastRow) // nếu cùng X nữa thì nấy Y to nhất để unique
             )
             {
                 result = character;
                 NR_col = col;
                 NR_row = Math.Abs(myRow - row);
+                lastRow = row;
             }
         });
         return result;

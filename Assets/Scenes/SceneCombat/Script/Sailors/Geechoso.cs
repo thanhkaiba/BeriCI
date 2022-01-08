@@ -77,9 +77,7 @@ public class Geechoso : CombatSailor
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => Shoot(target, damage / 2));
         seq.AppendInterval(1f);
-        seq.AppendCallback(() => {
-            Shoot(target, damage / 2);
-        });
+        seq.AppendCallback(() => Shoot(target, damage / 2));
         return 2.5f;
     }
     private void Shoot(CombatSailor target, float damage)
@@ -87,7 +85,7 @@ public class Geechoso : CombatSailor
         Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
         var startPos = gun2.GetWorldPosition(modelObject.transform);
         var targetPos = target.transform.position;
-        targetPos.y += 2;
+        targetPos.y += 3.5f;
 
         float time = 0;
         time = 5f / Vector3.Distance(startPos, targetPos);
