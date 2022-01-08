@@ -154,6 +154,7 @@ namespace Piratera.Network
             cfg.Host = Host;
 #if !UNITY_WEBGL
             cfg.Port = TcpPort;
+            cfg.HttpsPort = WSPort;
 #else
 			cfg.Port = WSPort;
 #endif
@@ -176,12 +177,24 @@ namespace Piratera.Network
             AddEventListener(SFSEvent.MODERATOR_MESSAGE, OnModMessage);
             AddEventListener(SFSEvent.ADMIN_MESSAGE, OnModMessage);
             AddEventListener(SFSEvent.SOCKET_ERROR, OnSocketError);
+            AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
 
 
             MaintainManager.ResetData();
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
+            
 
             sfs.Connect(cfg);
+           
+        }
+        // Handle encryption initialization event
+        private static void OnCryptoInit(BaseEvent evt)
+        {
+            if ((bool)evt.Params["success"])
+            {
+                // Send a login request
+                DoLogin();
+            }
         }
 
         private static void OnInfoLogMessage(BaseEvent evt)
@@ -224,15 +237,27 @@ namespace Piratera.Network
             {
                 Debug.Log("SFS2X API version: " + sfs.Version);
                 Debug.Log("Connection mode is: " + sfs.ConnectionMode);
+#if PIRATERA_QC || PIRATERA_DEV
+                sfs.InitCrypto();
+#else
+                DoLogin();
+#endif
 
-                SFSObject sfso = new SFSObject();
-                sfso.PutUtfString("passwd", loginData.Password);
-                sfso.PutUtfString("client_info", new LoginLogData().ToJson());
-                sfso.PutInt("loginType", (int)loginData.Type);
-                sfs.Send(new LoginRequest(loginData.Username, "", Zone, sfso));
-                Debug.Log("Send Login " + loginData.Username + "-" + loginData.Password + "-" + loginData.Type);
             }
             else Debug.Log("Connection failed; is the server running at all?");
+        }
+
+        // Send a login request
+        private static void DoLogin()
+        {
+            
+
+            SFSObject sfso = new SFSObject();
+            sfso.PutUtfString("passwd", loginData.Password);
+            sfso.PutUtfString("client_info", new LoginLogData().ToJson());
+            sfso.PutInt("loginType", (int)loginData.Type);
+            sfs.Send(new LoginRequest(loginData.Username, "", Zone, sfso));
+            Debug.Log("Send Login " + loginData.Username + "-" + loginData.Password + "-" + loginData.Type);
         }
 
         protected static void OnConnectionLost(BaseEvent evt)
