@@ -25,12 +25,12 @@ MonoBehaviour:
   stripLiteralEscapeCharacters: 1
   obfuscateMarkerInDecimal: 94
   RSAKeyLength: 1024
-  addFakeCode: 1
+  addFakeCode: 0
   minFalseMethodsPerClass: 10
   maxFalseMethodsPerClass: 150
   unicodeStartInDecimal: 65
   numberOfCharacters: 2
-  createNameTranslationFile: 0
+  createNameTranslationFile: 1
   nameTranslationFile: nameTranslation.txt
   usePreviousObfuscation: 0
   previousNameTranslationFile: nameTranslation.txt
@@ -207,7 +207,7 @@ MonoBehaviour:
   includeProtectedFields: 1
   includeProtectedProperties: 1
   includeProtectedEvents: 1
-  enabled: 0
+  enabled: 1
   onlyObfuscatedSpecifiedNamespaces: 0
   skipNamespacesRecursively: 1
   obfuscateSpecifiedNamespacesRecursively: 1
@@ -296,7 +296,7 @@ MonoBehaviour:
   forcedRandomSeed: 0
   allowShortShaSalt: 0
   printShaSaltInNameTranslationFile: 0
-  randomiseShaSaltOnBuild: 1
+  randomiseShaSaltOnBuild: 0
   equivalentAttributesForSuppressLog: []
   obfuscateAnonymousTypes: 0
   obfuscateAnonymousYieldingEnumeratorTypes: 1

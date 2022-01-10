@@ -323,13 +323,8 @@ namespace Piratera.Network
         }
         private static void OnLogin(BaseEvent evt)
         {
-            if (sfs.RoomList.Count > 0)
-            {
-                // sfs.Send(new Sfs2X.Requests.JoinRoomRequest("The Lobby"));
-                Debug.Log("Request Join Room Lobby");
-            }
 
-
+            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
             Debug.Log("Login success as " + sfs.MySelf.Name);
         }
 
