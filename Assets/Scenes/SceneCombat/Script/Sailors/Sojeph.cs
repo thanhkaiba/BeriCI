@@ -91,7 +91,7 @@ public class Sojeph : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
-            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
+            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("Medicine");
             var startPos = gun2.GetWorldPosition(modelObject.transform);
             var targetPos = target.transform.position;
             targetPos.y += 2f;
