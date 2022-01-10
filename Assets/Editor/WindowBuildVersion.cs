@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEditor;
 
-[InitializeOnLoad]
 public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
 {
     public int MajorVersion;

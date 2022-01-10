@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "702397329897",
+    "project_id": "piratera-167f8",
+    "storage_bucket": "piratera-167f8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:702397329897:android:6f25afe17253566d4d1b78",
+        "android_client_info": {
+          "package_name": "com.KralusStudio.Piratera"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "702397329897-3963ru57fot7u7en2na7hdor8r4drtkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDOlm9CyqZyMNE_PH4up4SG3mwY3SfPC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "702397329897-3963ru57fot7u7en2na7hdor8r4drtkh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
