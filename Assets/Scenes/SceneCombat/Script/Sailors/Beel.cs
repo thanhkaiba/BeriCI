@@ -74,35 +74,38 @@ public class Beel : CombatSailor
         base.ProcessSkill();
         TriggerAnimation("Skill");
 
-        CombatState.Instance.HighlightListSailor(targets, 2.2f);
+        CombatState.Instance.HighlightListSailor(new List<CombatSailor>() { this }, 2.0f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.6f);
         seq.PrependCallback(() =>
         {
             SoundMgr.PlaySoundSkillSailor(15);
         });
+        seq.AppendInterval(0.2f);
         seq.AppendCallback(() =>
         {
             Spine.Bone ball = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
-            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(cs.team == Team.A ? -30 : 30, 0, 0), new Vector3(cs.team == Team.A ? 30 : -30, 0, 0), 0, 1.5f, 10, 1);
-         
+            GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(cs.team == Team.A ? -40 : 40, 0, 0), new Vector3(cs.team == Team.A ? 40 : -40, 0, 0), 0, 2.0f, 10, 1);
         });
-
-        seq.AppendInterval(1);
+        seq.AppendInterval(0.7f);
         seq.AppendCallback(() =>
         {
-        int i = 0;
-        foreach (var item in targets)
+            GameEffMgr.Instance.Shake(1.2f, 1.0f);
+        });
+        seq.AppendInterval(0.8f);
+        seq.AppendCallback(() =>
         {
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/beel_impact_skill"), item.transform.position, Quaternion.identity);
-            seq.AppendInterval(0.3f);
-            seq.AppendCallback(() => Destroy(eff));
-            item.LoseHealth(new Damage() { magic = magic_damage[i] });
-            i++;
-        }
+            int i = 0;
+            foreach (var item in targets)
+            {
+                var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/beel_impact_skill"), item.transform.position, Quaternion.identity);
+                seq.AppendInterval(0.3f);
+                seq.AppendCallback(() => Destroy(eff));
+                item.LoseHealth(new Damage() { magic = magic_damage[i] });
+                i++;
+            }
         });
 
-        seq.AppendInterval(0.3f);
         return 4.5f;
     }
 }

@@ -65,7 +65,7 @@ public class GameEffMgr : MonoBehaviour
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(delay);
         seq.AppendCallback(() => bulletGO.SetActive(true));
-        seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
+        seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.InSine));
         seq.AppendCallback(() =>
         {
             Vector3 pos = bulletGO.transform.position;
