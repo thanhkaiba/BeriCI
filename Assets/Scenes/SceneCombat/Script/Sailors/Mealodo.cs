@@ -37,7 +37,7 @@ public class Mealodo : CombatSailor
         seq.AppendInterval(.6f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         seq.SetTarget(transform).SetLink(gameObject);
-        return .5f;
+        return .45f;
     }
     public override float TakeDamage(Damage d)
     {
@@ -87,12 +87,12 @@ public class Mealodo : CombatSailor
         var x = damage / 2;
         Sequence seq = DOTween.Sequence();
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
-        seq.AppendInterval(.3f);
+        seq.AppendInterval(.2f);
         seq.AppendCallback(() =>
         {
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 2 }));
-            seq2.AppendInterval(.45f);
+            seq2.AppendInterval(.35f);
             seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 2 }));
         });
         seq.AppendInterval(.6f);

@@ -22,7 +22,7 @@ public class GameEffMgr : MonoBehaviour
     public GameObject energyExplosion;
     public GameObject fieldLeft;
     public GameObject fieldRight;
-    public void BulletToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
+    public Transform BulletToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime, float scale = 1f)
     {
         var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/meechik_projectile"), startPos, Quaternion.identity);
         bulletGO.SetActive(false);
@@ -47,8 +47,10 @@ public class GameEffMgr : MonoBehaviour
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendInterval(2.0f);
             seq2.AppendCallback(() => Destroy(ex));
-            ex.transform.localScale = new Vector3(isFlip * 3, 3, 3);
+            ex.transform.localScale = new Vector3(isFlip * 3 * scale, 3 * scale, 3 * scale);
         });
+        bulletGO.transform.localScale = new Vector3(scale, scale, scale);
+        return bulletGO.transform;
     }
     public void TrailToTarget(string trail, string explore, Vector3 startPos, Vector3 targetPos, float delay, float flyTime, float scaleTrail, float scaleExplore)
     {
@@ -57,8 +59,7 @@ public class GameEffMgr : MonoBehaviour
         bulletGO.SetActive(false);
 
         Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, targetPos);
-        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1);
+        Vector3 desPos = targetPos;
         int isFlip = 1;
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         bulletGO.transform.localScale = new Vector3(isFlip * scaleTrail, scaleTrail, scaleTrail);

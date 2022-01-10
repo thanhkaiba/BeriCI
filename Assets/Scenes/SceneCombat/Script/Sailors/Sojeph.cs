@@ -22,6 +22,7 @@ public class Sojeph : CombatSailor
         TriggerAnimation("Attack");
         var targetPos = target.transform.position;
         targetPos.y += 3f;
+        targetPos.z += 0.2f;
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.8f);
@@ -33,7 +34,7 @@ public class Sojeph : CombatSailor
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             KnifeToTarget(startPos, targetPos, 0f, 0.2f);
         });
-        return 1;
+        return 0.95f;
     }
 
     public override void SetFaceDirection()
@@ -73,48 +74,39 @@ public class Sojeph : CombatSailor
         TriggerAnimation("Skill");
         var healthTarget = CombatState.Instance.GetSailor(targets[0]);
         var target = CombatState.Instance.GetSailor(targets[1]);
-        CombatEvents.Instance.highlightTarget.Invoke(healthTarget);
         var healthGain = _params[0];
         var damage = _params[1];
 
-
-        CombatEvents.Instance.highlightTarget.Invoke(target);
-
         var seq = DOTween.Sequence();
-        seq.AppendInterval(1.0f);
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() => StartEffHealth(healthTarget, healthGain));
-        seq.AppendInterval(.8f);
-        seq.AppendCallback(() => {
-            StartEffDame(target, damage);
-        });
+        seq.AppendInterval(0.8f);
+        seq.AppendCallback(() => StartEffDame(target, damage));
     
-        return 3.5f;
+        return 1.8f;
     }
     public void StartEffHealth(CombatSailor target, float health)
     {
         SoundMgr.PlaySoundSkillSailor(14);
         Sequence seq = DOTween.Sequence();
-        Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("Magic/Magic_00000");
-        var startPos = gun2.GetWorldPosition(modelObject.transform);
-        var targetPos = target.transform.position;
-        //time = 3f / Vector3.Distance(startPos, targetPos);
         seq.AppendCallback(() =>
         {
-            MedicineToTarget(startPos, targetPos, 0, .3f);
+            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
+            var startPos = gun2.GetWorldPosition(modelObject.transform);
+            var targetPos = target.transform.position;
+            targetPos.y += 2f;
+            MedicineToTarget(startPos, targetPos, 1.0f);
         });
-        seq.AppendInterval(.3f);
+        seq.AppendInterval(1.0f);
         seq.AppendCallback(() =>
         {
+            target.GainHealth(health);
             var pos = target.transform.position;
             pos.y += 4f;
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
-            target.GainHealth(health);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));
         });
-
-
-
     }
     public void StartEffDame(CombatSailor target, float damage)
     {
@@ -123,14 +115,11 @@ public class Sojeph : CombatSailor
         var startPos = gun2.GetWorldPosition(modelObject.transform);
         var targetPos = target.transform.position;
         targetPos.y += 3;
+        targetPos.z += 0.2f;
         time = 5f / Vector3.Distance(startPos, targetPos);
         Sequence seq = DOTween.Sequence();
-        seq.AppendCallback(() =>
-        {
-            //KnifeToTarget(startPos, targetPos, 0, time);
-            KnifeToTarget(startPos, targetPos, 0, .2f);
-        });
-        seq.AppendInterval(time);
+        seq.AppendCallback(() => KnifeToTarget(startPos, targetPos, 0, .2f));
+        seq.AppendInterval(0.2f);
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySoundAttackSailor(13);
@@ -139,54 +128,38 @@ public class Sojeph : CombatSailor
     }
     public void KnifeToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
     {
-        /*
-        var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos, Quaternion.identity);
-        bulletGO.SetActive(false);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
-        */
-        Vector3 oriPos = transform.position;
-        float d = Vector3.Distance(oriPos, targetPos);
-        //Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 0.4f);
-        Vector3 desPos = Vector3.Lerp(oriPos, targetPos, d / 2);
+        Vector3 desPos = targetPos;
         for (int i = 0; i < 3; i++)
         {
             var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos - new Vector3(0, i * 0.2f), Quaternion.identity);
             bulletGO.SetActive(false);
             Vector3 theScale = transform.localScale;
-            if (bulletGO.transform.position.x > desPos.x) theScale.x = -1;
+            if (startPos.x > desPos.x) theScale.x = -1;
             else theScale.x = 1;
-            
-            if (bulletGO.transform.position.y > desPos.y + 3)
-            {
-                if (theScale.x == 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
-                else bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
-            }
-            else if (bulletGO.transform.position.y < desPos.y - 3)
-            {
-                if (theScale.x == 1) bulletGO.transform.rotation = Quaternion.Euler(0, 0, 15);
-                else bulletGO.transform.rotation = Quaternion.Euler(0, 0, -15);
-            }
-            
-            //float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
-            //bulletGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f);
+
+            float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
+            bulletGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f + (theScale.x == -1 ? 180 : 0));
 
             bulletGO.transform.localScale = theScale * 4f;
             Sequence seq = DOTween.Sequence();
             seq.AppendInterval(delay + i * 0.02f);
             seq.AppendCallback(() => bulletGO.SetActive(true));
             seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.Linear));
-            seq.Join(bulletGO.transform.DOScale(2, flyTime));
+            seq.Join(bulletGO.transform.DOScaleX(2 * theScale.x, flyTime));
+            seq.Join(bulletGO.transform.DOScaleY(2, flyTime));
+            seq.Join(bulletGO.transform.DOScaleZ(2, flyTime));
             seq.AppendInterval(flyTime - i * 0.02f);
             seq.AppendCallback(() => Destroy(bulletGO)).SetLink(bulletGO).SetTarget(bulletGO);
         }
         
 
     }
-    public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
+    public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
     {
+        Debug.Log("Medicine");
         var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/Medicine/Medicine"), startPos, Quaternion.identity);
-        bulletGO.SetActive(false);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
@@ -195,8 +168,6 @@ public class Sojeph : CombatSailor
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         bulletGO.transform.localScale = new Vector3(isFlip * 2, 2, 2);
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(delay);
-        seq.AppendCallback(() => bulletGO.SetActive(true));
         seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime));
         seq.AppendInterval(.2f);
         seq.AppendCallback(() => Destroy(bulletGO));

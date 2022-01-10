@@ -177,7 +177,7 @@ public class TargetsUtils
         float health = 0.0f;
         l.ForEach(character =>
         {
-            Debug.LogError(character.cs.GetCurrentHealthRatio());
+            Debug.Log(character.cs.GetCurrentHealthRatio());
             if (
                 (result == null)
                 || (character.cs.GetCurrentHealthRatio() < health)

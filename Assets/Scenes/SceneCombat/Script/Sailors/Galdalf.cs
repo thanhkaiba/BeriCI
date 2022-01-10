@@ -34,7 +34,7 @@ public class Galdalf : CombatSailor
             Vector3 startPos = hand.GetWorldPosition(modelObject.transform);
             Vector3 endPos = target.transform.position;
             endPos.y += 2;
-            GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_purple", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_22_purple", startPos, endPos, 0, .4f, .3f, .2f);
+            GameEffMgr.Instance.TrailToTarget("Effect2D/magic_attack/Trail_green", "Effect2D/118 sprite effects bundle/25 sprite effects/ef_13_purple", startPos, endPos, 0, .4f, .3f, .4f);
 
         });
         seq.AppendInterval(0.4f);
@@ -73,6 +73,7 @@ public class Galdalf : CombatSailor
         _targets.GainPower(power_buff);
         _targets.SpeedUp(speed_buff);
         Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(0.4f);
         seq.AppendCallback(() =>
         {
             Vector3 pos = _targets.transform.position;

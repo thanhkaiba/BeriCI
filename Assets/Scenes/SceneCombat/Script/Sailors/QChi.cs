@@ -32,13 +32,13 @@ public class QChi : CombatSailor
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("fx_ball_1");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             Vector3 endPos = target.transform.position;
-            endPos.y += 2;
+            endPos.y += 2.5f;
             SoundMgr.PlaySoundAttackSailor(7);
             var go = GameEffMgr.Instance.ShowPurple(endPos, startPos.x < targetPos.x);
             go.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f);
         });
         seq.AppendInterval(0.1f);
-        return 0.9f;
+        return 0.7f;
     }
 
     public override void SetFaceDirection()
@@ -79,9 +79,8 @@ public class QChi : CombatSailor
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var listTargets = CombatState.Instance.GetSailors(targets);
-        var listHighlight = new List<CombatSailor>() { this };
-        listHighlight.AddRange(listTargets);
-        CombatState.Instance.HighlightListSailor(listHighlight, 2.2f);
+        CombatState.Instance.HighlightSailor2Step(this, listTargets, 1.0f, 2.0f);
+        GameEffMgr.Instance.Shake(0.6f, 2);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1f);
         seq.AppendCallback(() =>

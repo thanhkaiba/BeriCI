@@ -108,9 +108,8 @@ public class Meechik : CombatSailor
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("gun2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            startPos.y -= 0.0f;
             Vector3 targetPos = mainTarget.transform.position;
-            targetPos.y += 3.0f;
+            targetPos.y += 3.3f;
             GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.3f);
 
         });
@@ -124,6 +123,7 @@ public class Meechik : CombatSailor
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() =>
         {
+            GameEffMgr.Instance.Shake(0.3f, 3.0f);
             for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { physics = _params[i] });
         });
 

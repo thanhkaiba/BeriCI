@@ -20,18 +20,18 @@ public class Geechoso : CombatSailor
     {
         TriggerAnimation("Attack");
         var targetPos = target.transform.position;
-        targetPos.y += 2f;
+        targetPos.y += 2.8f;
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.3f);
+        seq.AppendInterval(0.28f);
         seq.AppendCallback(() =>
         {
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.2f);
+            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, 0.05f, 0.5f);
             SoundMgr.PlaySoundSkillSailor(13);
         });
-        return 0.6f;
+        return 0.33f;
     }
 
     public override void SetFaceDirection()
@@ -68,32 +68,29 @@ public class Geechoso : CombatSailor
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var target = CombatState.Instance.GetSailor(targets[0]);
-        CombatEvents.Instance.highlightTarget.Invoke(target);
-        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 2f);
 
         var damage = _params[0];
 
         var seq = DOTween.Sequence();
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() => Shoot(target, damage / 2));
-        seq.AppendInterval(1f);
+        seq.AppendInterval(0.7f);
         seq.AppendCallback(() => Shoot(target, damage / 2));
-        return 2.5f;
+        return 1.3f;
     }
     private void Shoot(CombatSailor target, float damage)
     {
-        Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
-        var startPos = gun2.GetWorldPosition(modelObject.transform);
         var targetPos = target.transform.position;
         targetPos.y += 3.5f;
 
-        float time = 0;
-        time = 5f / Vector3.Distance(startPos, targetPos);
+        float time = 0.05f;
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySoundSkillSailor(13);
-            GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, time);
+            Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("2_hand_7");
+            var startPos = gun2.GetWorldPosition(modelObject.transform);
+            Transform bullet = GameEffMgr.Instance.BulletToTarget(startPos, targetPos, 0f, time, 0.5f);
         });
         seq.AppendInterval(time);
         seq.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage }));
