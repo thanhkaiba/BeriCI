@@ -24,7 +24,7 @@ public class Beel : CombatSailor
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 2;
-        targetPos.x -= 2;
+        targetPos.z -= 0.1f;
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1f);

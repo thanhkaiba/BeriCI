@@ -221,7 +221,7 @@ public class LobbyUI : MonoBehaviour
         nodeUser.Translate(-250, 0, 0);
         nodeUser.DOMove(new Vector3(250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(nodeUser).SetLink(nodeUser.gameObject);
 
-        DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.6f, Vector3.one, 0.7f);
+        DoTweenUtils.ButtonBigAppear(buttonAdventure, 0.6f, Vector3.one, 0.2f);
 
         buttonCol.Translate(250, 0, 0);
         buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(buttonCol).SetLink(buttonCol.gameObject);
