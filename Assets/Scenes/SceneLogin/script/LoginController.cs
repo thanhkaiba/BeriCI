@@ -136,6 +136,10 @@ public class LoginController : MonoBehaviour
         PlayerPrefs.SetInt("loginTypeToggle", loginTypeToggle.isOn ? 1 : 0);
 #endif
 
+#if PIRATERA_LIVE
+        loginTypeToggle.isOn = false;
+#endif
+
         SendRequestLogin(nameInput.text, passwordInput.text, loginTypeToggle.isOn ? GameLoginType.DUMMY : GameLoginType.AUTHENTICATON);
     }
 

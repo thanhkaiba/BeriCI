@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 
-[InitializeOnLoad]
 public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
 {
     public int MajorVersion;
@@ -17,7 +16,6 @@ public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
         UpdateVersionNumber();
     }
 
-    [PostProcessBuild(1)]
     public static void OnPreprocessBuild()
     {
         Debug.Log("Build v" + Instance.CurrentVersion);

@@ -88,6 +88,8 @@ namespace Piratera.Build
         public static void AndroidBuild()
         {
             AndroidBuildVersion.Instance.UpdateVersionNumber();
+            PlayerSettings.Android.keystorePass = "depvuimoingay";
+            PlayerSettings.Android.keyaliasPass = "depvuimoingay";
             string path = $"{BuildFolder}/Android";
 
             EditorUserBuildSettings.buildAppBundle = EditorUtility.DisplayDialog(

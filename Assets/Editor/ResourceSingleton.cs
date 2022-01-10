@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEngine;
 
-[InitializeOnLoad]
 public abstract class EditorResourceSingleton<T> : ScriptableObject
        where T : ScriptableObject
 {

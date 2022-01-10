@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Crashlytics;
 using Piratera.Engine;
 using Piratera.GUI;
 using UnityEngine;
@@ -9,6 +10,16 @@ public class SceneLoadingUI : MonoBehaviour
 {
     [SerializeField]
     private Text textInfo;
+
+    private void Awake()
+    {
+#if UNITY_EDITOR
+        Debug.unityLogger.logEnabled = true;
+#else
+        Debug.unityLogger.logEnabled = false;
+#endif
+        CrashlyticsInitializer.Instance.CrashlyticsInit();
+    }
 
     private void Start()
     {
