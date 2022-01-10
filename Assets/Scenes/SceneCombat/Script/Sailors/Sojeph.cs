@@ -95,6 +95,7 @@ public class Sojeph : CombatSailor
             var startPos = gun2.GetWorldPosition(modelObject.transform);
             var targetPos = target.transform.position;
             targetPos.y += 2f;
+            targetPos.z -= 0.2f;
             MedicineToTarget(startPos, targetPos, 1.0f);
         });
         seq.AppendInterval(1.0f);
