@@ -207,7 +207,7 @@ MonoBehaviour:
   includeProtectedFields: 1
   includeProtectedProperties: 1
   includeProtectedEvents: 1
-  enabled: 1
+  enabled: 0
   onlyObfuscatedSpecifiedNamespaces: 0
   skipNamespacesRecursively: 1
   obfuscateSpecifiedNamespacesRecursively: 1
@@ -280,7 +280,7 @@ MonoBehaviour:
   obfuscateLiteralsInAllMethods: 0
   noPublicFakeMethods: 0
   progressBar: 1
-  obfuscateReleaseOnly: 0
+  obfuscateReleaseOnly: 1
   attributesToRemoveIfObfuscatedMember:
   - UnityEngine.AddComponentMenu
   - UnityEngine.ContextMenu
