@@ -1,4 +1,5 @@
 ﻿using Piratera.GUI;
+using Piratera.Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,9 +37,16 @@ public class CombatMgr : MonoBehaviour
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
         Time.timeScale = PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1);
+        UpdateSoundSpeed();
         //return;
         PreparingGame();
         StartCoroutine(StartGame());
+    }
+
+    private void OnDestroy()
+    {
+        Time.timeScale = 1;
+        UpdateSoundSpeed();
     }
     public void PreparingGame()
     {
@@ -156,6 +164,8 @@ public class CombatMgr : MonoBehaviour
     {
         return combatState.GetSailor(action.target);
     }
+
+   
     IEnumerator NextLoopServer(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -204,6 +214,7 @@ public class CombatMgr : MonoBehaviour
     void GameOver(Team winTeam)
     {
         Time.timeScale = 1;
+        UpdateSoundSpeed();
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
@@ -227,6 +238,8 @@ public class CombatMgr : MonoBehaviour
 
         return Math.Max(speedAdd, 0);
     }
+
+   
     CombatSailor AddCurSpeedAllSailor(int speedAdd)
     {
         combatState.GetAllAliveCombatSailors().ForEach(character => character.AddCurSpeed(speedAdd));
@@ -244,9 +257,27 @@ public class CombatMgr : MonoBehaviour
     }
     public void ChangeTimeScale()
     {
-        if (Time.timeScale == 1) Time.timeScale = 2;
-        else Time.timeScale = 1;
-
+        if (Time.timeScale == 1)
+        {
+            Time.timeScale = 2;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
+        UpdateSoundSpeed();
         PlayerPrefs.SetFloat($"TimeCombatScale {UserData.Instance.UID}", Time.timeScale);
+    }
+
+    private void UpdateSoundSpeed()
+    {
+        if (Time.timeScale == 1)
+        {
+            SoundMgr.SetSoundFxSpeed(1f);
+        }
+        else
+        {
+            SoundMgr.SetSoundFxSpeed(1.5f);
+        }
     }
 }
