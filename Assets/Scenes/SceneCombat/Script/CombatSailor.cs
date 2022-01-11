@@ -455,7 +455,7 @@ public class CombatSailor : Sailor
     public virtual float RunSkill(List<CombatSailor> targets) { return 0f; }
     public virtual float RunDeath()
     {
-        TriggerAnimation("Death");
+        // TriggerAnimation("Death");
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.1f);
         seq.AppendCallback(() => { gameObject.SetActive(false); });

@@ -74,13 +74,10 @@ public class Beel : CombatSailor
         CombatState.Instance.HighlightListSailor(new List<CombatSailor>() { this }, 2.0f);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.6f);
-        seq.PrependCallback(() =>
-        {
-            SoundMgr.PlaySoundSkillSailor(15);
-        });
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundSkillSailor(15);
             Spine.Bone ball = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("TARGET_ORB");
             GameEffMgr.Instance.TrailToTarget("Effect2D/Duong_FX/beel_projectile_skill", "Effect2D/Duong_FX/beel_impact_skill", new Vector3(cs.team == Team.A ? -40 : 40, 0, 0), new Vector3(cs.team == Team.A ? 40 : -40, 0, 0), 0, 2.0f, 10, 1);
         });

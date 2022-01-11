@@ -170,12 +170,25 @@ namespace Piratera.Sound
             {
                 musicOn = PlayerPrefs.GetInt(MUSIC_TOGGLE_KEY, 1) == 1;
                 soundOn = PlayerPrefs.GetInt(SOUND_FX_TOGGLE_KEY, 1) == 1;
+              //  var pitchBendGroup = Resources.Load<UnityEngine.Audio.AudioMixerGroup>("Audio/Pitch_Bend_Mixer");
+              //  soundEfectPlayer.outputAudioMixerGroup = pitchBendGroup;
+
+               // soundEfectPlayer.pitch = 1.5f;
+               // pitchBendGroup.audioMixer.SetFloat("pitchBend", 1f / 1.5f);
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
             else Destroy(gameObject);
 
 
+        }
+
+        public static void SetSoundFxSpeed(float pitch)
+        {
+            if (Instance != null)
+            {
+                Instance.soundEfectPlayer.pitch = pitch;
+            }
         }
 
         public static void PlayTabSound()
@@ -224,6 +237,7 @@ namespace Piratera.Sound
         {
             if (soundOn)
             {
+                
                 soundEfectPlayer.PlayOneShot(audioClip, soundVolume);
             }
         }
