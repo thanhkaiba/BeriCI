@@ -78,12 +78,12 @@ public class Meechik : CombatSailor
         List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, false);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }, this));
 
         around_target.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = aoe_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = aoe_damage }, this));
         });
 
         return ProcessSkill(targets, _params);

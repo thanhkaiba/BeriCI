@@ -113,6 +113,7 @@ public class CombatSailor : Sailor
             {
                 case SailorClass.DEMON:
                     cs.BaseArmor -= config.GetParams(p.type, p.level)[0];
+                    cs.BaseMagicResist -= config.GetParams(p.type, p.level)[0];
                     break;
             }
         });
@@ -176,15 +177,6 @@ public class CombatSailor : Sailor
         bool isCrit = IsCrit();
         // class bonus
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
-        bool activeMarksman = false;
-        ClassBonusItem marksman = combatState.GetTeamClassBonus(cs.team, SailorClass.MARKSMAN);
-        if (cs.HaveType(SailorClass.MARKSMAN)
-            && marksman != null)
-        {
-            float healthRatio = config.GetParams(marksman.type, marksman.level)[0];
-            if (target.cs.GetCurrentHealthRatio() < healthRatio) activeMarksman = true;
-            CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.MARKSMAN, new List<float>());
-        }
         float healthGain = 0;
         ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.WILD);
         if (cs.HaveType(SailorClass.WILD) && wild != null)
@@ -196,7 +188,6 @@ public class CombatSailor : Sailor
         // Deal damage
         float d = cs.Power;
         if (isCrit) d *= GlobalConfigs.Combat.base_crit_damage;
-        if (activeMarksman) d *= 1.5f; // 1.5 hardcode
         Damage damage = new Damage()
         {
             physics = cs.HaveType(SailorClass.MAGE) ? 0 : d,
@@ -204,7 +195,7 @@ public class CombatSailor : Sailor
             isCrit = isCrit,
             fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
         };
-        float damageTake = target.CalcDamageTake(damage);
+        float damageTake = target.CalcDamageTake(damage, this);
         return BaseAttack(target, isCrit, damageTake, healthGain);
     }
     // ... server trả 
@@ -332,6 +323,19 @@ public class CombatSailor : Sailor
             fury_gain = fury_gain,
             isCrit = isCrit,
         });
+    }
+    public float CalcDamageTake(Damage d, CombatSailor actor)
+    {
+        float damage = CalcDamageTake(d);
+        var state = CombatState.Instance;
+        ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        if (actor.cs.HaveType(SailorClass.MARKSMAN) && marksman != null)
+        {
+            float bonusDamagePerTile = config.GetParams(marksman.type, marksman.level)[0];
+            damage += damage * bonusDamagePerTile * (actor.cs.position.x + cs.position.x + 1);
+        }
+        return damage;
     }
     public float CalcDamageTake(Damage d)
     {

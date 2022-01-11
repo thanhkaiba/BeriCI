@@ -69,7 +69,7 @@ public class QChi : CombatSailor
         listTargets.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }, this));
         });
 
         return ProcessSkill(targets, _params);

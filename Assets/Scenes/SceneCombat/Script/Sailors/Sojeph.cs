@@ -65,7 +65,7 @@ public class Sojeph : CombatSailor
         CombatSailor target = TargetsUtils.Range(this, enermy);
         targets.Add(target.Model.id);
         _params.Add(healthGain);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }, this));
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
