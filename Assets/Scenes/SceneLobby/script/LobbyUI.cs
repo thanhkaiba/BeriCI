@@ -112,7 +112,7 @@ public class LobbyUI : MonoBehaviour
 
     public void OnStaminaChanged(int oldValue, int newValue)
     {
-       DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat((int)x)); 
+       DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6))); 
     }
     public void FlyStamina()
     {
@@ -136,7 +136,7 @@ public class LobbyUI : MonoBehaviour
     {
         userName.text = UserData.Instance.Username.LimitLength(15);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
-        userStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
+        userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
     }
 
     public void OnLogoutButtonClick()
