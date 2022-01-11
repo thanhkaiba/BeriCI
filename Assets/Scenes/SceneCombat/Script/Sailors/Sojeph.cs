@@ -169,8 +169,7 @@ public class Sojeph : CombatSailor
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         bulletGO.transform.localScale = new Vector3(isFlip * 2, 2, 2);
         Sequence seq = DOTween.Sequence();
-        seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime));
-        seq.AppendInterval(.2f);
+        seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime).SetEase(Ease.InSine));
         seq.AppendCallback(() => Destroy(bulletGO));
     }
 }

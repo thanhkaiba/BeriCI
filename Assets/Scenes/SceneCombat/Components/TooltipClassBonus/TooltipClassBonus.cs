@@ -47,35 +47,68 @@ public class TooltipClassBonus : MonoBehaviour
         title.text = data.type.ToString().Replace('_', ' ') + $" ({data.current}/{maxPop})";
         switch (data.type)
         {
+            //case SailorClass.WILD:
+            //    content.text = "WILD hồi " + (para[0] * 100) + "% máu khi tấn công kẻ địch";
+            //    break;
+            //case SailorClass.MIGHTY:
+            //    content.text = "MIGHTY tăng " + (para[0] * 100) + "% máu tối đa";
+            //    break;
+            //case SailorClass.SWORD_MAN:
+            //    content.text = "SWORD MAN tăng " + para[0] + " tốc độ";
+            //    break;
+            //case SailorClass.DEMON:
+            //    content.text = "Tất cả kẻ địch bị giảm " + para[0] + " giáp";
+            //    break;
+            //case SailorClass.CYBORG:
+            //    content.text = "CYBORG tăng " + para[0] + " giáp";
+            //    break;
+            //case SailorClass.SEA_CREATURE:
+            //    content.text = "Đồng đội nhận " + (para[0] * 100) + "kháng phép";
+            //    break;
+            //case SailorClass.MAGE:
+            //    content.text = "MAGE tăng " + (para[0] * 100) + "% Power";
+            //    break;
+            //case SailorClass.SUPPORT:
+            //    content.text = "Tất cả đồng đội nhận " + para[0] + " fury khởi đầu";
+            //    break;
+            //case SailorClass.MARKSMAN:
+            //    content.text = "Marksman " + (para[0] * 100) + "% sát thương với mỗi ô khoảng cách.";
+            //    break;
+            //case SailorClass.ASSASSIN:
+            //    content.text = "ASSASSIN tăng " + (para[0] * 100) + "% sát thương. \nChỉ áp dụng khi đội hình có duy nhất 1 ASSASSIN";
+            //    break;
             case SailorClass.WILD:
-                content.text = "WILD hồi " + (para[0] * 100) + "% máu khi tấn công kẻ địch";
+                content.text = "WILD heal " + (para[0] * 100) + "% after attacking";
                 break;
             case SailorClass.MIGHTY:
-                content.text = "MIGHTY tăng " + (para[0] * 100) + "% máu tối đa";
+                content.text = "MIGHTY gain " + (para[0] * 100) + "% max health";
                 break;
             case SailorClass.SWORD_MAN:
-                content.text = "SWORD MAN tăng " + para[0] + " tốc độ";
+                content.text = "SWORD MAN gain " + para[0] + " speed";
                 break;
             case SailorClass.DEMON:
-                content.text = "Tất cả kẻ địch bị giảm " + para[0] + " giáp";
+                content.text = "Emenies lose " + para[0] + " armor and magic resist";
                 break;
             case SailorClass.CYBORG:
-                content.text = "CYBORG tăng " + para[0] + " giáp";
+                content.text = "CYBORG gain " + para[0] + " armor";
                 break;
             case SailorClass.SEA_CREATURE:
-                content.text = "Đồng đội nhận " + (para[0] * 100) + "kháng phép";
+                content.text = "Alies gain " + (para[0] * 100) + "magic resist";
                 break;
             case SailorClass.MAGE:
-                content.text = "MAGE tăng " + (para[0] * 100) + "% Power";
+                content.text = "MAGE gain " + (para[0] * 100) + "% power";
                 break;
             case SailorClass.SUPPORT:
-                content.text = "Tất cả đồng đội nhận " + para[0] + " fury khởi đầu";
+                content.text = "Alies gain " + para[0] + " fury";
                 break;
             case SailorClass.MARKSMAN:
-                content.text = "Marksman gây thêm sát thương kẻ địch dưới " + (para[0] * 100) + "% máu.";
+                content.text = "Marksman deal " + (para[0] * 100) + "% more damage for each distance-tiles";
                 break;
             case SailorClass.ASSASSIN:
-                content.text = "ASSASSIN tăng " + (para[0] * 100) + "% sát thương. \nChỉ áp dụng khi đội hình có duy nhất 1 ASSASSIN";
+                content.text = "ASSASSIN gain " + (para[0] * 100) + "% power if fighting alone";
+                break;
+            case SailorClass.GRAPPLER:
+                content.text = "GRAPPLER speed-up " + (para[0] * 100) + "% after base attack";
                 break;
         }
 
