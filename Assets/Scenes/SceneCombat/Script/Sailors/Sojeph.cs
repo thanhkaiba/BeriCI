@@ -25,11 +25,12 @@ public class Sojeph : CombatSailor
         targetPos.z += 0.2f;
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(.8f);
-
+        seq.AppendInterval(.4f);
+        seq.AppendCallback(() => SoundMgr.PlaySoundAttackSailor(13));
+        seq.AppendInterval(.4f);
         seq.AppendCallback(() =>
         {
-            SoundMgr.PlaySoundAttackSailor(13);
+            
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             KnifeToTarget(startPos, targetPos, 0f, 0.2f);
@@ -119,11 +120,15 @@ public class Sojeph : CombatSailor
         targetPos.z += 0.2f;
         time = 5f / Vector3.Distance(startPos, targetPos);
         Sequence seq = DOTween.Sequence();
-        seq.AppendCallback(() => KnifeToTarget(startPos, targetPos, 0, .2f));
-        seq.AppendInterval(0.2f);
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySoundAttackSailor(13);
+            KnifeToTarget(startPos, targetPos, 0, .2f);
+        });
+        seq.AppendInterval(0.2f);
+        seq.AppendCallback(() =>
+        {
+           
             target.LoseHealth(new Damage() { physics = damage });
         });
     }

@@ -12,6 +12,7 @@ public class TextDamage : MonoBehaviour
         seq.AppendInterval(1.5f);
         seq.Append(transform.GetComponent<Text>().DOFade(0, 0.2f));
         seq.AppendCallback(() => { Destroy(gameObject); });
+        seq.SetTarget(transform).SetLink(gameObject);
     }
 
     public void Present(float damage, Vector3 p, bool isCrit, Color color)

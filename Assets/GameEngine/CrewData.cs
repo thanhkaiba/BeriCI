@@ -22,6 +22,11 @@ public class CrewData : Singleton<CrewData>
     {
         NetworkController.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
     }
+
+    public void OnConfirmSquad()
+    {
+        NetworkController.Send(SFSAction.CONFIRM_LINEUP, FightingTeam.ToSFSObject());
+    }
     private void ResetData()
     {
         Sailors.Clear();

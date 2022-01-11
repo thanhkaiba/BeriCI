@@ -347,9 +347,6 @@ namespace Piratera.Network
 
             ISFSObject packet = (ISFSObject)evt.Params["params"];
             string cmd = (string)evt.Params["cmd"];
-
-            Debug.Log("CMD NAME: " + cmd);
-
             if (cmd == CLIENT_REQUEST)
             {
                 Debug.Log("response:" + packet.GetDump());

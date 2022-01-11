@@ -370,10 +370,11 @@ FBOJPPIIIKA⇨System.Void Alex/<>c__DisplayClass7_0::<ProcessSkill>b__1()
 HMMGLNMFGGE⇨System.Void Alex/<>c__DisplayClass7_0::<ProcessSkill>b__2()
 LALEEKONGKG⇨System.Void Alex/<>c__DisplayClass7_1::<ProcessSkill>b__3()
 FMLAPBDAEDH⇨System.Void Beel/<>c::<RunAnimation>b__9_0()
+HBLIIOMEPPE⇨System.Void Beel/<>c::<RunAnimation>b__9_2()
 LBFAHNPLDGP⇨System.Void Beel/<>c__DisplayClass3_0::<RunBaseAttack>b__0()
 MIDCBHMFOKE⇨System.Void Beel/<>c__DisplayClass9_0::<RunAnimation>b__1()
-PHHOPPNDGGA⇨System.Void Beel/<>c__DisplayClass9_0::<RunAnimation>b__2()
-FGKHHMCKLDM⇨System.Void Beel/<>c__DisplayClass9_1::<RunAnimation>b__3()
+FGKHHMCKLDM⇨System.Void Beel/<>c__DisplayClass9_0::<RunAnimation>b__3()
+PEJCDJOAFEM⇨System.Void Beel/<>c__DisplayClass9_1::<RunAnimation>b__4()
 PBJOJECLNEF⇨System.Void CharacterAContainer::RenderListSubSailor()
 PBJOJECLNEF⇨System.Void CharacterContainer::RenderListSubSailor()
 HOAAADDCGMB⇨System.Void CombatMgr/<>c::<ActivateAllStartPassive>b__12_0(CombatSailor)
@@ -702,7 +703,6 @@ LBGHJKKFDLJ⇨System.Void Sojeph/<>c__DisplayClass10_0::<StartEffDame>b__1()
 ELOIKLJMEGG⇨System.Void Sojeph/<>c__DisplayClass11_0::<KnifeToTarget>b__0()
 CAPEIBHEJJD⇨System.Void Sojeph/<>c__DisplayClass11_0::<KnifeToTarget>b__1()
 NJDCFFOMPLI⇨System.Void Sojeph/<>c__DisplayClass12_0::<MedicineToTarget>b__0()
-JPGOHFOFCIK⇨System.Void Sojeph/<>c__DisplayClass12_0::<MedicineToTarget>b__1()
 LBFAHNPLDGP⇨System.Void Sojeph/<>c__DisplayClass3_0::<RunBaseAttack>b__0()
 OFIMOFGHBJN⇨System.Void Sojeph/<>c__DisplayClass8_0::<ProcessSkill>b__0()
 FBOJPPIIIKA⇨System.Void Sojeph/<>c__DisplayClass8_0::<ProcessSkill>b__1()
@@ -1524,10 +1524,6 @@ HBPFJKOOCGP⇨System.Void FlyTextMgr::ShowTextTakeDamage(CombatSailor,Damage) s
 PMIICDCNDNH⇨System.Void GameEffMgr::ActiveClassBonus(CombatSailor,SailorClass,System.Collections.Generic.List`1<System.Single>) _params
 DFPPCHGDNPI⇨System.Void GameEffMgr::ActiveClassBonus(CombatSailor,SailorClass,System.Collections.Generic.List`1<System.Single>) sailor
 HCCLKHJNKKD⇨System.Void GameEffMgr::ActiveClassBonus(CombatSailor,SailorClass,System.Collections.Generic.List`1<System.Single>) type
-AHMNMIKEDLE⇨System.Void GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) delay
-HMFMDBCOIIE⇨System.Void GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) flyTime
-FIKKJLHLFOP⇨System.Void GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) startPos
-POAJNENOKCF⇨System.Void GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) targetPos
 LMDOJADLIFC⇨System.Void GameEffMgr::set_Instance(GameEffMgr) value
 NBBKLCPOPIG⇨System.Void GameEffMgr::Shake(System.Single,System.Single) dur
 MNDCAKOIPHH⇨System.Void GameEffMgr::Shake(System.Single,System.Single) strength
@@ -1814,10 +1810,9 @@ AHMNMIKEDLE⇨System.Void Sojeph::KnifeToTarget(UnityEngine.Vector3,UnityEngine.
 HMFMDBCOIIE⇨System.Void Sojeph::KnifeToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) flyTime
 FIKKJLHLFOP⇨System.Void Sojeph::KnifeToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) startPos
 POAJNENOKCF⇨System.Void Sojeph::KnifeToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) targetPos
-AHMNMIKEDLE⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) delay
-HMFMDBCOIIE⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) flyTime
-FIKKJLHLFOP⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) startPos
-POAJNENOKCF⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single) targetPos
+HMFMDBCOIIE⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single) flyTime
+FIKKJLHLFOP⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single) startPos
+POAJNENOKCF⇨System.Void Sojeph::MedicineToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single) targetPos
 KJMPGIFLPND⇨System.Void Sojeph::StartEffDame(CombatSailor,System.Single) damage
 FOKBPEICDIA⇨System.Void Sojeph::StartEffDame(CombatSailor,System.Single) target
 DHGAOHKJBKH⇨System.Void Sojeph::StartEffHealth(CombatSailor,System.Single) health
@@ -1924,6 +1919,11 @@ ADKGMFAHBIO⇨UnityEngine.GameObject Piratera.GUI.GuiManager::ShowPopupNotificat
 DJPPFJLNELK⇨UnityEngine.GameObject Piratera.GUI.GuiManager::ShowPopupNotification(System.String,System.String,System.Action,System.Action) okAction
 MCCNPNKDNJJ⇨UnityEngine.GameObject Piratera.GUI.GuiManager::ShowPopupNotification(System.String,System.String,System.Action,System.Action) okText
 HBGMAAJKGEJ⇨UnityEngine.GameObject Piratera.GUI.GuiManager::ShowPopupNotification(System.String,System.String,System.Action,System.Action) text
+AHMNMIKEDLE⇨UnityEngine.Transform GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Single) delay
+HMFMDBCOIIE⇨UnityEngine.Transform GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Single) flyTime
+PJFEGHLLOAO⇨UnityEngine.Transform GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Single) scale
+FIKKJLHLFOP⇨UnityEngine.Transform GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Single) startPos
+POAJNENOKCF⇨UnityEngine.Transform GameEffMgr::BulletToTarget(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single,System.Single) targetPos
 MEFAHNFEJHP⇨UnityEngine.Transform TransformDeepChildExtension::FindDeepChild(UnityEngine.Transform,System.String) aName
 OJDJCGGCOKN⇨UnityEngine.Transform TransformDeepChildExtension::FindDeepChild(UnityEngine.Transform,System.String) aParent
 FPDMBEKDDGK⇨UnityEngine.UI.Image SubSailorIcon::CreateDragSailorImage(SailorModel,UnityEngine.Transform) model
