@@ -60,7 +60,7 @@ public class OBonbee : CombatSailor
         listTargets.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = physics_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = physics_damage }, this));
         });
 
         return ProcessSkill(targets, _params);

@@ -62,12 +62,12 @@ public class Scrub : CombatSailor
         CombatSailor behind_target = TargetsUtils.Behind(target, enermy);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }, this));
 
         if (behind_target)
         {
             targets.Add(behind_target.Model.id);
-            _params.Add(behind_target.CalcDamageTake(new Damage() { physics = secondary_damage }));
+            _params.Add(behind_target.CalcDamageTake(new Damage() { physics = secondary_damage }, this));
         }
 
         return ProcessSkill(targets, _params);

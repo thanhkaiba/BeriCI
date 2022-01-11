@@ -68,12 +68,12 @@ public class Helti : CombatSailor
         List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
 
         targets.Add(main_target.Model.id);
-        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage }));
+        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage }, this));
 
         behind_targets.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage }, this));
         });
 
         return ProcessSkill(targets, _params);

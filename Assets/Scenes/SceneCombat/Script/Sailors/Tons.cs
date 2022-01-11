@@ -95,7 +95,7 @@ public class Tons : CombatSailor
         CombatSailor target = TargetsUtils.Backstab(this, enermy);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }, this));
 
         return ProcessSkill(targets, _params);
     }

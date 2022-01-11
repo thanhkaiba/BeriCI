@@ -68,12 +68,12 @@ public class Salvatafo : CombatSailor
         float health = (1 + aroundPlusTarget.Count) * healt_ratio * cs.Power;
 
         targets.Add(main_target.Model.id);
-        _params.Add(main_target.CalcDamageTake(new Damage() { magic = magic_damage }));
+        _params.Add(main_target.CalcDamageTake(new Damage() { magic = magic_damage }, this));
 
         aroundPlusTarget.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }));
+            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }, this));
         });
 
         _params.Add(health);

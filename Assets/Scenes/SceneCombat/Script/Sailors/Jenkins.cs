@@ -61,7 +61,7 @@ public class Jenkins : CombatSailor
         CombatSailor target = TargetsUtils.Melee(this, enermy);
         damage = (cs.Power * dame_health) + (scale_health * target.cs.MaxHealth);
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }, this));
 
         return ProcessSkill(targets, _params);
     }

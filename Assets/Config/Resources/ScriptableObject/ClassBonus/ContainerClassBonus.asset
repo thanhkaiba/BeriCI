@@ -198,6 +198,7 @@ MonoBehaviour:
   levels:
   - {fileID: 5116449402280295237}
   - {fileID: -5670452299483487548}
+  - {fileID: 6771869344932043001}
 --- !u!114 &-3719516338166762360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,7 +214,7 @@ MonoBehaviour:
   container: {fileID: -160921110909277169}
   pop: 4
   _params:
-  - 20
+  - 40
 --- !u!114 &-3183711232705518949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +279,7 @@ MonoBehaviour:
   container: {fileID: -8458338205497828197}
   pop: 4
   _params:
-  - 40
+  - 60
 --- !u!114 &-2143905600956970317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,7 +311,7 @@ MonoBehaviour:
   container: {fileID: -8458338205497828197}
   pop: 2
   _params:
-  - 20
+  - 30
 --- !u!114 &-160921110909277169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +453,7 @@ MonoBehaviour:
   container: {fileID: -3183711232705518949}
   pop: 4
   _params:
-  - 0.7
+  - 0.5
 --- !u!114 &4112114195823546615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -500,7 +501,7 @@ MonoBehaviour:
   container: {fileID: -3850908979103961074}
   pop: 2
   _params:
-  - 0.2
+  - 0.25
 --- !u!114 &5632407113825715848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +517,7 @@ MonoBehaviour:
   container: {fileID: -5348706335485419333}
   pop: 3
   _params:
-  - 0.5
+  - 0.6
 --- !u!114 &5729306647252334749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,7 +549,7 @@ MonoBehaviour:
   container: {fileID: -3183711232705518949}
   pop: 2
   _params:
-  - 0.45
+  - 0.2
 --- !u!114 &5952441041131782355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,7 +565,7 @@ MonoBehaviour:
   container: {fileID: -160921110909277169}
   pop: 2
   _params:
-  - 10
+  - 20
 --- !u!114 &5970126343382269018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,7 +581,7 @@ MonoBehaviour:
   container: {fileID: 8634524938568386142}
   pop: 1
   _params:
-  - 0.3
+  - 0.35
 --- !u!114 &6211138524695139528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,6 +632,22 @@ MonoBehaviour:
   pop: 3
   _params:
   - 30
+--- !u!114 &6771869344932043001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: MAGE_2
+  m_EditorClassIdentifier: 
+  container: {fileID: -3850908979103961074}
+  pop: 4
+  _params:
+  - 1
 --- !u!114 &8634524938568386142
 MonoBehaviour:
   m_ObjectHideFlags: 0

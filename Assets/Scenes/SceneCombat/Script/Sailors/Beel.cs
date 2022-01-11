@@ -17,9 +17,6 @@ public class Beel : CombatSailor
     }
     public override float RunBaseAttack(CombatSailor target)
     {
-        /*        Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
-                relativePos.y += 4.5f;
-                relativePos.x *= modelObject.transform.localScale.x;*/
         TriggerAnimation("Attack");
 
         Vector3 targetPos = target.transform.position;

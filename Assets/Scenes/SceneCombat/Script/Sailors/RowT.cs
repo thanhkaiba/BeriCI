@@ -45,7 +45,7 @@ public class RowT : CombatSailor
         CombatSailor target = TargetsUtils.Random(enermy);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { magic = magic_damage }));
+        _params.Add(target.CalcDamageTake(new Damage() { magic = magic_damage }, this));
 
         return ProcessSkill(targets, _params);
     }
