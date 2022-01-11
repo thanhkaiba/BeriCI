@@ -19,4 +19,12 @@ MonoBehaviour:
   excellent_bonus: 050000000a0000000f00000014000000
   excellent_health_remain: 0000000019000000320000004b000000
   hard_bonus_ratio: 0.2
+  excellent_rank_inc:
+  - 1
+  - 2
+  - 3
+  - 5
+  lose_rank_dec: -2
+  "m\u1EC9n_rank": 0
+  max_rank: 100
   rank_bot_around: 2
