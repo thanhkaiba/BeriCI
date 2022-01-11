@@ -31,15 +31,15 @@ public class TempCombatData : Singleton<TempCombatData>
         avt0 = packet.GetUtfString("avt_0");
         avt1 = packet.GetUtfString("avt_1");
         combatId = packet.GetInt("combat_id");
-        ISFSArray sFSSailors = packet.GetSFSArray("sailors");
-        foreach (ISFSObject obj in sFSSailors)
-        {
-            SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
-            { quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
-            listSailor.Add(model);
-        }
+        /* ISFSArray sFSSailors = packet.GetSFSArray("sailors");
+         foreach (ISFSObject obj in sFSSailors)
+         {
+             SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
+             { quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+             listSailor.Add(model);
+         }*/
 
-        sFSSailors = packet.GetSFSArray("sailors_1");
+        ISFSArray sFSSailors = packet.GetSFSArray("sailors_1");
         foreach (ISFSObject obj in sFSSailors)
         {
             SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))

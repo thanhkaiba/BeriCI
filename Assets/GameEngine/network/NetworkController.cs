@@ -154,7 +154,6 @@ namespace Piratera.Network
             cfg.Host = Host;
 #if !UNITY_WEBGL
             cfg.Port = TcpPort;
-            cfg.HttpsPort = WSPort;
 #else
 			cfg.Port = WSPort;
 #endif
@@ -190,10 +189,14 @@ namespace Piratera.Network
         // Handle encryption initialization event
         private static void OnCryptoInit(BaseEvent evt)
         {
+            Debug.Log("OnCryptoInit: ");
             if ((bool)evt.Params["success"])
             {
                 // Send a login request
                 DoLogin();
+            } else
+            {
+                Debug.Log(evt.Params["message"].ToString());
             }
         }
 
@@ -238,10 +241,9 @@ namespace Piratera.Network
                 Debug.Log("SFS2X API version: " + sfs.Version);
                 Debug.Log("Connection mode is: " + sfs.ConnectionMode);
 #if PIRATERA_QC || PIRATERA_DEV
-                // sfs.InitCrypto();
                 DoLogin();
 #else
-                DoLogin();
+                sfs.InitCrypto();
 #endif
 
             }
