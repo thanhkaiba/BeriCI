@@ -9,6 +9,7 @@ using Sfs2X.Requests;
 using Sfs2X.Util;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -243,7 +244,7 @@ namespace Piratera.Network
 #if PIRATERA_QC || PIRATERA_DEV
                 DoLogin();
 #else
-                sfs.InitCrypto();
+                new CustomCryptoInitializerV2(sfs).Run();
 #endif
 
             }
