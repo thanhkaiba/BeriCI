@@ -84,8 +84,7 @@ public class LobbyUI : MonoBehaviour
         UpdateMaintain();
         RunAppearAction();
         ShowListSailors();
-       
-       
+        Time.timeScale = 1;
     }
 
     void UpdateMaintain()

@@ -40,24 +40,6 @@ public class CombatSailor : Sailor
         cs = new CombatStats(Model);
         cs.position = p;
         cs.team = t;
-
-        //Debug.Log("-----------------------------------");
-        //Debug.Log(" > Model.id" + Model.id);
-        //Debug.Log(" > BasePower" + cs.BasePower);
-        //Debug.Log(" > MaxHealth" + cs.MaxHealth);
-        //Debug.Log(" > CurHealth" + cs.CurHealth);
-        //Debug.Log(" > BaseArmor" + cs.BaseArmor);
-        //Debug.Log(" > BaseMagicResist" + cs.BaseMagicResist);
-        //Debug.Log(" > Speed" + cs.Speed);
-        //Debug.Log(" > CurrentSpeed" + cs.CurrentSpeed);
-        //Debug.Log(" > Crit" + cs.Crit);
-        //Debug.Log(" > CritDamage" + cs.CritDamage);
-        //Debug.Log(" > Block" + cs.Block);
-        //Debug.Log(" > BaseFury" + cs.BaseFury);
-        //Debug.Log(" > Fury" + cs.Fury);
-        //Debug.Log(" > Model.level" + Model.level);
-        //Debug.Log(" > Model.quality" + Model.quality);
-        //Debug.Log("-----------------------------------");
     }
     // them giam chi so theo toc he
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam)
@@ -117,6 +99,24 @@ public class CombatSailor : Sailor
                     break;
             }
         });
+
+        Debug.Log("-----------------------------------" +
+        "\n > Model.id: " + Model.id +
+        "\n > Name: " + Model.name +
+        "\n > Power: " + cs.BasePower +
+        "\n > Health: " + cs.MaxHealth +
+        "\n > Armor: " + cs.BaseArmor +
+        "\n > MagicResist: " + cs.BaseMagicResist +
+        "\n > Speed: " + cs.Speed +
+        "\n > CurrentSpeed: " + cs.CurrentSpeed +
+        "\n > Crit: " + cs.Crit +
+        "\n > CritDamage: " + cs.CritDamage +
+        "\n > Block: " + cs.Block +
+        "\n > MaxFury: " + cs.BaseFury +
+        "\n > Fury: " + cs.Fury +
+        "\n > level: " + Model.level +
+        "\n > quality: " + Model.quality
+        );
     }
 
     public virtual void ActiveStartPassive()
