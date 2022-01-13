@@ -6,7 +6,6 @@ public class StaminaData : Singleton<StaminaData>
 {
     public int Stamina;
     private long LastCountStamina;
-    private int TimeBuyStaminaToday;
     UserStaminaConfig StaminaConfig;
     protected override void OnAwake()
     {
@@ -26,6 +25,11 @@ public class StaminaData : Singleton<StaminaData>
     public string GetStaminaFormat(int stamina)
     {
         return $"{StringUtils.ShortNumber(stamina)}/{StaminaConfig.max_stamina}";
+    }
+
+    public string GetStaminaFormat(string stamina)
+    {
+        return $"{stamina}/{StaminaConfig.max_stamina}";
     }
     public string _GetStaminaFormat(int stamina)
     {
@@ -61,7 +65,6 @@ public class StaminaData : Singleton<StaminaData>
     public void OnUserVariablesUpdate(User user)
     {
         LastCountStamina = (long)user.GetVariable(UserInfoPropertiesKey.LAST_COUNT).GetDoubleValue();
-        TimeBuyStaminaToday = user.GetVariable(UserInfoPropertiesKey.TIME_BUY_STAMINA_TODAY).GetIntValue();
         int oldStamina = Stamina;
         Stamina = user.GetVariable(UserInfoPropertiesKey.STAMINA).GetIntValue();
 

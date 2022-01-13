@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Piratera.Network;
 using Piratera.Sound;
+using Piratera.Utils;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,7 +21,7 @@ namespace Piratera.GUI
         [SerializeField]
         private Text staminaCost;
         [SerializeField]
-        private Text staminaMinus;
+        private GameObject staminaMinus;
         [SerializeField]
         private GameObject iconFind, findTarget;
         public LobbyUI lobby;
@@ -32,7 +33,7 @@ namespace Piratera.GUI
             SoundMgr.PlayFindMatchSound();
             priceStamina = GlobalConfigs.PvE.stamina_cost;
             staminaCost.text = "" + priceStamina;
-            staminaMinus.text = "-" + priceStamina;
+          
             UpdateCurrentStamina();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
             NetworkController.AddServerActionListener(onReceiveServerAction);
@@ -57,7 +58,7 @@ namespace Piratera.GUI
 
         private void UpdateCurrentStamina()
         {
-            textCurrentStamina.text = StaminaData.Instance.Stamina.ToString();
+            textCurrentStamina.text = StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6);
         }
 
         public void OnStartFindGame()
@@ -69,18 +70,23 @@ namespace Piratera.GUI
             }
             else
             {
+              
                 backBtn.GetComponent<Button>().enabled = false;
                 findBtn.GetComponent<Button>().enabled = false;
-                textCurrentStamina.text = "" + (StaminaData.Instance.Stamina - priceStamina);
+                textCurrentStamina.text = StringUtils.ShortNumber(StaminaData.Instance.Stamina - priceStamina, 6);
                 lobby.OnStaminaChanged(StaminaData.Instance.Stamina, (StaminaData.Instance.Stamina - priceStamina));
-                var trs = staminaMinus.transform;
-                staminaMinus.gameObject.SetActive(true);
-                trs.DOMoveY(trs.position.y + 50, 0.6f).SetEase(Ease.OutBack);
+
+                GameObject staminaMinusGO = Instantiate(staminaMinus, textCurrentStamina.transform);
+                staminaMinusGO.GetComponent<Text>().text = "-" + priceStamina;
+                var trs = staminaMinusGO.transform as RectTransform;
+                
+                
                 Sequence seq = DOTween.Sequence();
-                seq.AppendInterval(2f);
-                seq.Append(trs.GetComponent<Text>().DOFade(0, 0.2f));
-                seq.AppendCallback(() => { Destroy(trs); });
+                seq.Append(trs.DOAnchorPosY(100, 0.8f).SetRelative().SetEase(Ease.OutQuint));
+                seq.Join(trs.GetComponent<CanvasGroup>().DOFade(0, 2f));
+                seq.AppendCallback(() => Destroy(trs));
                 seq.SetLink(gameObject).SetTarget(transform);
+             
 
                 Sequence s = DOTween.Sequence();
                 s.AppendInterval(0.6f);

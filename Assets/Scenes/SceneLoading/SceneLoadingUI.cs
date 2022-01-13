@@ -16,9 +16,10 @@ public class SceneLoadingUI : MonoBehaviour
 #if UNITY_EDITOR
         Debug.unityLogger.logEnabled = true;
 #else
+        CrashlyticsInitializer.Instance.CrashlyticsInit();
         Debug.unityLogger.logEnabled = false;
 #endif
-        CrashlyticsInitializer.Instance.CrashlyticsInit();
+       
     }
 
     private void Start()
