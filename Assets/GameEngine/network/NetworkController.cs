@@ -327,7 +327,7 @@ namespace Piratera.Network
         private static void OnLogin(BaseEvent evt)
         {
 
-            Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
+            //Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
             Debug.Log("Login success as " + sfs.MySelf.Name);
         }
 
