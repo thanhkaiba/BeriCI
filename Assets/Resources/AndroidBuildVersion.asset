@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MajorVersion: 0
   MinorVersion: 15
-  BuildVersion: 0
-  CurrentVersion: 0.15.000
+  BuildVersion: 12
+  CurrentVersion: 0.15.012

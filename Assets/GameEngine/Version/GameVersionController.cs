@@ -11,9 +11,18 @@ namespace Piratera.Engine
     public class GameVersionController : MonoBehaviour
     {
 #if UNITY_STANDALONE_WIN
+#if PIRATERA_QC || PIRATERA_QC_DEV
     private const string URL = GameConst.WINDOW_DEV_VERSION_URL;
+#else
+    private const string URL = GameConst.WINDOW_LIVE_VERSION_URL;
+#endif
 #elif UNITY_ANDROID
+
+#if PIRATERA_QC || PIRATERA_QC_DEV
     private const string URL = GameConst.ANDROID_DEV_VERSION_URL;
+#else
+    private const string URL = GameConst.ANDROID_LIVE_VERSION_URL;
+#endif
 #else
     private const string URL = "";
 #endif
@@ -48,6 +57,7 @@ namespace Piratera.Engine
         {
             yield return new WaitForSeconds(1f);
             UnityWebRequest www = UnityWebRequest.Get(URL);
+            www.certificateHandler = new CustomCertificateHandler();
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)
             {
