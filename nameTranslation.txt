@@ -93,6 +93,7 @@ JKHKIJDGIAF⇨Geechoso/<>c__DisplayClass8_0
 JACPEODPPLE⇨Geechoso/<>c__DisplayClass9_0
 BNLNBDKOGMN⇨GlobalConfigs
 LFFPNAINAFJ⇨GuiReward/<>c__DisplayClass6_0
+LJPHBMJCMEM⇨GuiReward/<>c__DisplayClass7_0
 JANKINGEHMK⇨Helti/<>c__DisplayClass8_0
 JJOECGAIOHC⇨Helti/<>c__DisplayClass9_0
 APHLADKJPHE⇨Herminia/<>c__DisplayClass10_0
@@ -103,8 +104,8 @@ BOGALGHJOGD⇨ItemColor
 KHIHLKFMHMG⇨ItemPosition
 JIOKPCFICOI⇨Jenkins/<>c__DisplayClass7_0
 MPDEDJHBGCD⇨LoadServerDataUI/<>c__DisplayClass24_0
-BHNLMODENLI⇨LoginController/<>c__DisplayClass13_0
-BKOKBKDLHKN⇨LoginController/<CheckInternetConnection>d__11
+PDIOMOFPEHE⇨LoginController/<>c__DisplayClass14_0
+HIAFBELMOBL⇨LoginController/<CheckInternetConnection>d__12
 HFGBCJACLMG⇨LoginUI/<>c__DisplayClass8_0
 DNMEBEPNNEK⇨Mealodo/<>c__DisplayClass8_0
 FAODDGLAIHD⇨Meechik/<>c__DisplayClass4_0
@@ -113,6 +114,7 @@ IHGNAEPIBEF⇨Meechik/<>c__DisplayClass9_0
 DCGNLKKEGMM⇨ModeID
 HNIMOOFMEFP⇨OBonbee/<>c__DisplayClass6_0
 JIPIIIJCLOK⇨OBonbee/<>c__DisplayClass7_0
+DPHLJEHNODA⇨Piratera.Build.BuildType
 CGHMFAOBLFD⇨Piratera.Cheat.CheatMgr
 MOOMDLBEEGN⇨Piratera.Constance.GameConst
 JANINBFCFGL⇨Piratera.Engine.GameVersionController/<GetText>d__6
@@ -357,6 +359,7 @@ PDFAHAPIONN⇨System.String FightingLine::OwnerOf(System.Int16)
 GAFCBKNFDME⇨System.String FightingLine::SailorIdAt(CombatPosition)
 GAFCBKNFDME⇨System.String FightingLine::SailorIdAt(System.Int16,System.Int16)
 GIGMIADNEBI⇨System.String GameUtils::RandomId(System.Int32)
+FLANJKJHDMI⇨System.String GuiReward/<>c::<SetReward>b__6_1(System.Int64)
 AOGEOINOOBC⇨System.String LobbyUI/<>c::<OnBeriChanged>b__19_0(System.Int64)
 HLPDPABNKNG⇨System.String LobbyUI/<>c::<OnStaminaChanged>b__20_0(System.Int64)
 CMCGOELFMAG⇨System.String Piratera.Engine.MaintainManager::GetMaintainMessage()
@@ -484,8 +487,9 @@ FBOJPPIIIKA⇨System.Void Geechoso/<>c__DisplayClass8_0::<ProcessSkill>b__1()
 PJDOIAGMGFG⇨System.Void Geechoso/<>c__DisplayClass9_0::<Shoot>b__0()
 CEIJGGJDKGF⇨System.Void Geechoso/<>c__DisplayClass9_0::<Shoot>b__1()
 NHPBFBCLLMH⇨System.Void Geechoso::Shoot(CombatSailor,System.Single)
-IEPHMOAFGCH⇨System.Void GuiReward/<>c__DisplayClass6_0::<Appear>b__0()
-LFLKBIFPODG⇨System.Void GuiReward::<ChangeStateAnim>b__7_0()
+FOPIMMBBOLF⇨System.Void GuiReward/<>c__DisplayClass6_0::<SetReward>b__0()
+IEPHMOAFGCH⇨System.Void GuiReward/<>c__DisplayClass7_0::<Appear>b__0()
+BFLLPHPJLMB⇨System.Void GuiReward::<ChangeStateAnim>b__8_0()
 MJPNCPEFCOP⇨System.Void GuiReward::Appear()
 MMLGNPDGHOP⇨System.Void GuiReward::ChangeStateAnim()
 NGNNCLIKIIH⇨System.Void Helti/<>c::<ProcessSkill>b__9_0()
@@ -533,8 +537,8 @@ IGDBCCPKOGO⇨System.Void LobbyUI::RunAppearAction()
 GFMMJJOKHJE⇨System.Void LobbyUI::ShowListSailors()
 PPFPMADIHOC⇨System.Void LobbyUI::UpdateMaintain()
 GEODIGHPOGJ⇨System.Void LobbyUI::UpdateUserInfo(System.Collections.Generic.List`1<System.String>)
-CKOEOCLAEPC⇨System.Void LoginController/<>c__DisplayClass13_0::<SendRequestLogin>b__0(System.Boolean)
-CCBKJEDEKMB⇨System.Void LoginController/<CheckInternetConnection>d__11::<>m__Finally1()
+CKOEOCLAEPC⇨System.Void LoginController/<>c__DisplayClass14_0::<SendRequestLogin>b__0(System.Boolean)
+CCBKJEDEKMB⇨System.Void LoginController/<CheckInternetConnection>d__12::<>m__Finally1()
 IDDLOELHFMJ⇨System.Void LoginController::enableLoginUI(System.Boolean)
 NOBLNPHBODP⇨System.Void LoginController::OnConnection(Sfs2X.Core.BaseEvent)
 PDNJLHHPCNF⇨System.Void LoginController::OnConnectionLost(Sfs2X.Core.BaseEvent)
@@ -960,7 +964,6 @@ IHODNGALJMB⇨System.String Davinci::uniqueHash
 LMNGLIKBMEO⇨System.String Davinci::url
 ODNKJOHGOHN⇨System.String FGL::id
 GKCEPHLNGAM⇨System.String Piratera.Constance.GameConst::ACCOUNT_URL
-ECLPDBBLENM⇨System.String Piratera.Constance.GameConst::ANDROID_DEV_VERSION_URL
 KOOMINBBBEI⇨System.String Piratera.Constance.GameConst::CUSTOMER_CARE_URL
 OBGNFCHAJOM⇨System.String Piratera.Constance.GameConst::FACEBOOK_URL
 JCCMNMCAEPB⇨System.String Piratera.Constance.GameConst::MARKET_URL
@@ -968,7 +971,6 @@ NIGEKOIKNLN⇨System.String Piratera.Constance.GameConst::TELEGRAM_URL
 AAKNPNNIDMH⇨System.String Piratera.Constance.GameConst::TWITTER_URL
 JNFNGFLPJFG⇨System.String Piratera.Constance.GameConst::WEBSITE_URL
 EOGPLNGLIMO⇨System.String Piratera.Constance.GameConst::WHITE_PAPER_URL
-LGLNBMDMMGK⇨System.String Piratera.Constance.GameConst::WINDOW_DEV_VERSION_URL
 LBICBAMGMPM⇨System.String Piratera.Engine.GameVersionController::URL
 BKKKMOPIOCL⇨System.String Piratera.Engine.MaintainManager::message
 IOCMLIEEGLE⇨System.String Piratera.Network.CustomCryptoInitializerV2::KEY_SESSION_TOKEN

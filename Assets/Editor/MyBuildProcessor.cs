@@ -143,16 +143,28 @@ namespace Piratera.Build
         }
 
    
-        [MenuItem("Builds/Window/Upload", false, 1)]
+        [MenuItem("Builds/Window/Upload/Dev", false, 1)]
         public static void SyncWindowVersion()
         {
             SyncGameVersion.Sync(BuildType.WINDOW_DEV, WindowBuildVersion.Instance.CurrentVersion);
         }
 
-        [MenuItem("Builds/Android/Upload", false, 1)]
+        [MenuItem("Builds/Window/Upload/Live", false, 1)]
+        public static void SyncWindowVersionLive()
+        {
+            SyncGameVersion.Sync(BuildType.WINDOW_LIVE, WindowBuildVersion.Instance.CurrentVersion);
+        }
+
+        [MenuItem("Builds/Android/Upload/Dev", false, 1)]
         public static void SyncAndroidVersion()
         {
             SyncGameVersion.Sync(BuildType.ANDROID_DEV, AndroidBuildVersion.Instance.CurrentVersion);
+        }
+
+        [MenuItem("Builds/Android/Upload/Live", false, 1)]
+        public static void SyncAndroidVersionLive()
+        {
+            SyncGameVersion.Sync(BuildType.ANDROID_LIVE, AndroidBuildVersion.Instance.CurrentVersion);
         }
     }
 }

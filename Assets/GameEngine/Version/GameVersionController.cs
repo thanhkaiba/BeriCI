@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Piratera.Build;
 using Piratera.Constance;
 using System;
 using System.Collections;
@@ -12,16 +13,16 @@ namespace Piratera.Engine
     {
 #if UNITY_STANDALONE_WIN
 #if PIRATERA_QC || PIRATERA_QC_DEV
-    private const string URL = GameConst.WINDOW_DEV_VERSION_URL;
+     private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.WINDOW_DEV;
 #else
-    private const string URL = GameConst.WINDOW_LIVE_VERSION_URL;
+      private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.WINDOW_LIVE;
 #endif
 #elif UNITY_ANDROID
 
 #if PIRATERA_QC || PIRATERA_QC_DEV
-    private const string URL = GameConst.ANDROID_DEV_VERSION_URL;
+     private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.ANDROID_DEV;
 #else
-    private const string URL = GameConst.ANDROID_LIVE_VERSION_URL;
+     private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.ANDROID_LIVE;
 #endif
 #else
     private const string URL = "";
@@ -71,7 +72,7 @@ namespace Piratera.Engine
                 JObject o = JObject.Parse(www.downloadHandler.text);
 
                 Version version1 = new Version(Application.version);
-                Version version2 = new Version((string)o["min_version"]);
+                Version version2 = new Version(((string)o["min_version"]).Split('_')[1]);
                 if (version2.CompareTo(version1) > 0)
                 {
                     DownloadUrl = (string)o["download_url"];

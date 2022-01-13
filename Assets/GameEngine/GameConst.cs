@@ -14,13 +14,6 @@ namespace Piratera.Constance
         public const string TWITTER_URL = "https://twitter.com/PirateraBay";
         public const string CUSTOMER_CARE_URL = "https://m.me/piratera.official";
 
-        // Version
-        public const string WINDOW_DEV_VERSION_URL = "https://api1.piratera.io/v1/game/version/8";
-        public const string ANDROID_DEV_VERSION_URL = "https://api1.piratera.io/v1/game/version/9";
-
-        public const string WINDOW_LIVE_VERSION_URL = "https://api1.piratera.io/v1/game/version/98";
-        public const string ANDROID_LIVE_VERSION_URL = "https://api1.piratera.io/v1/game/version/99";
-
         public static Vector2 DESIGN_SCREEN_SIZE = new Vector2(1920, 1080);
     }
 }

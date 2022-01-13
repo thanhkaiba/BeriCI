@@ -1112,6 +1112,7 @@ MonoBehaviour:
   passwordInput: {fileID: 8475617}
   loginButton: {fileID: 962814694}
   signupButton: {fileID: 1966144556}
+  signupText: {fileID: 1759595211}
   errorText: {fileID: 937110912}
   loginTypeToggle: {fileID: 43850231}
 --- !u!4 &671366201
@@ -1151,7 +1152,7 @@ MonoBehaviour:
   textOr: {fileID: 362719866}
   textboxlbs:
   - {fileID: 1989904207}
-  - {fileID: 0}
+  - {fileID: 1759595211}
 --- !u!1 &821471656
 GameObject:
   m_ObjectHideFlags: 0
