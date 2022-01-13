@@ -99,7 +99,7 @@ public class CombatSailor : Sailor
                     break;
             }
         });
-
+        /*
         Debug.Log("-----------------------------------" +
         "\n > Model.id: " + Model.id +
         "\n > Name: " + Model.name +
@@ -117,6 +117,7 @@ public class CombatSailor : Sailor
         "\n > level: " + Model.level +
         "\n > quality: " + Model.quality
         );
+        */
     }
 
     public virtual void ActiveStartPassive()
