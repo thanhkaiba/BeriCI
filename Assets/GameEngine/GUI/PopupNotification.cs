@@ -48,7 +48,7 @@ namespace Piratera.GUI
             s.AppendCallback(() => canvasGroup.interactable = true);
 
             background.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-            background.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack);
+            background.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack).SetLink(background.gameObject).SetTarget(background.transform);
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeIn(0.3f);

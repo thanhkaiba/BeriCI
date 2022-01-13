@@ -31,6 +31,8 @@ public class LoginController : MonoBehaviour
     [SerializeField]
     private Button signupButton;
     [SerializeField]
+    private Text signupText;
+    [SerializeField]
     private Text errorText;
     [SerializeField]
     private Toggle loginTypeToggle;
@@ -51,8 +53,10 @@ public class LoginController : MonoBehaviour
 #if PIRATERA_DEV || PIRATERA_QC
         loginTypeToggle.gameObject.SetActive(true);
         loginTypeToggle.isOn = PlayerPrefs.GetInt("loginTypeToggle", 1) == 1;
+        signupText.text = "Guest";
 
 #else
+         signupText.text = "Create One";
         loginTypeToggle.isOn = false;
 		loginTypeToggle.gameObject.SetActive(false);
 #endif
@@ -175,8 +179,11 @@ public class LoginController : MonoBehaviour
 
     public void OnButtonCreateOneClick()
     {
-          SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
-//        Application.OpenURL(GameConst.ACCOUNT_URL);
+#if PIRATERA_QC || PIRATERA_DEV
+        SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
+#else
+        Application.OpenURL(GameConst.ACCOUNT_URL);
+#endif
     }
 
     public void ReceiveJoinZoneSuccess(SFSErrorCode errorCode, ISFSObject packet)

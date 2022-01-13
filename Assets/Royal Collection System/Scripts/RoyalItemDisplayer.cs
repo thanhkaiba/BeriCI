@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 using DG.Tweening;
-using TMPro;
 
 
 public class RoyalItemDisplayer : MonoBehaviour

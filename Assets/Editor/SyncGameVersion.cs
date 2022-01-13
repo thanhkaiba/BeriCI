@@ -63,22 +63,8 @@ namespace Piratera.Build
             }
         }
 
-        public static string GetVersionUrl(BuildType type)
-        {
-            switch (type)
-            {
-                case BuildType.WINDOW_DEV:
-                    return GameConst.WINDOW_DEV_VERSION_URL;
-                case BuildType.ANDROID_DEV:
-                    return GameConst.ANDROID_DEV_VERSION_URL;
-                default:
-                    return "";
-            }
-        }
-
         public static void UploadDrive(string filePath, BuildType buildType, string version)
         {
-            Process process = new Process();
             Process p = new Process();
             ProcessStartInfo psi = new ProcessStartInfo();
             psi.FileName = @"cmd.exe";
