@@ -14,6 +14,7 @@ public class UserInfoPropertiesKey
     public const string TIME_BUY_STAMINA_TODAY = "time_buy_to_day";
     public const string NUMBER_OF_POSITIONS = "number_of_positions";
     public const string CREATE_AT = "createdAt";
+    public const string PVE_RANK = "pve_rank";
 }
 
 public class UserData : Singleton<UserData>
@@ -30,6 +31,8 @@ public class UserData : Singleton<UserData>
     public string Avatar { get; set; }
     public long Beri { get; set; }
     public long Exp { get; set; }
+
+    public long PVERank { get; set; }
 
     /// <summary>
     /// Level of User, start from 1
@@ -67,6 +70,13 @@ public class UserData : Singleton<UserData>
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
         CreateAt = (long)user.GetVariable(UserInfoPropertiesKey.CREATE_AT).GetDoubleValue();
+        try
+        {
+            PVERank = user.GetVariable(UserInfoPropertiesKey.PVE_RANK).GetIntValue();
+        } catch
+        {
+            PVERank = 0;
+        }
         GameEvent.UserDataChanged.Invoke(changedVars);
 
         long oldBeri = Beri;

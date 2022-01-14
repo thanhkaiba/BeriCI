@@ -13,16 +13,16 @@ namespace Piratera.Engine
     {
 #if UNITY_STANDALONE_WIN
 #if PIRATERA_QC || PIRATERA_QC_DEV
-     private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.WINDOW_DEV;
+     private static string URL = "https://api1.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
 #else
-      private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.WINDOW_LIVE;
+      private static string URL = "https://api1.piratera.io/v1/game/version/" +  (int)BuildType.WINDOW_LIVE;
 #endif
 #elif UNITY_ANDROID
 
 #if PIRATERA_QC || PIRATERA_QC_DEV
-     private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.ANDROID_DEV;
+     private static string URL = "https://api1.piratera.io/v1/game/version/" +  (int)BuildType.ANDROID_DEV;
 #else
-     private static string URL = "https://api1.piratera.io/v1/game/version/" + BuildType.ANDROID_LIVE;
+     private static string URL = "";
 #endif
 #else
     private const string URL = "";

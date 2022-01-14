@@ -231,10 +231,10 @@ MonoBehaviour:
   - {fileID: 3136134625369586358}
   - {fileID: 701918032992023930}
   typeWin:
-  - {fileID: 3021923670850382773}
-  - {fileID: 9106801482968724295}
-  - {fileID: 1717543505530687276}
   - {fileID: 4266278589844829150}
+  - {fileID: 1717543505530687276}
+  - {fileID: 9106801482968724295}
+  - {fileID: 3021923670850382773}
   background: {fileID: 3956715176463524597}
   coin: {fileID: 2663988508363445501}
   anim: {fileID: 9165214087401290714}
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 4062782912883202375}
   - component: {fileID: 6808868945215373517}
   m_Layer: 5
-  m_Name: Quell
+  m_Name: Verygood
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 8663037648426986086}
   - component: {fileID: 7077946134853527220}
   m_Layer: 5
-  m_Name: 'Excellent '
+  m_Name: Absolute
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 4406544893507466626}
   - component: {fileID: 8357494431521948902}
   m_Layer: 5
-  m_Name: Close
+  m_Name: Good
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1422,7 +1422,7 @@ GameObject:
   - component: {fileID: 4733762927865476343}
   - component: {fileID: 2456682638499195795}
   m_Layer: 5
-  m_Name: Overpower
+  m_Name: Outstanding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

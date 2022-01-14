@@ -80,7 +80,7 @@ public enum CombatAcionType
 }
 public enum RankBonus
 {
-    None, Excellent, Overpower, Quell, Close
+    None, ABSOLUTE = 3, OUTSTANDING = 2, VERY_GOLD = 1, GOOD = 0
 }
 public class FGL
 {
@@ -142,9 +142,8 @@ public class GameEndData
 
     public GameEndData(ISFSObject packet)
     {
-        type = (RankBonus)packet.GetByte("actionType");
         ISFSObject detail = packet.GetSFSObject("detail");
-
+        type = (RankBonus)detail.GetByte("win_type");
         win_rank = detail.GetByte("win_rank");
         mode_reward = detail.GetInt("mode_reward");
         win_rank_bonus = detail.GetInt("win_rank_bonus");

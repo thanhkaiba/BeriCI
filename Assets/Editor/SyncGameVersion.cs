@@ -55,8 +55,10 @@ namespace Piratera.Build
             switch (type)
             {
                 case BuildType.WINDOW_DEV:
+                case BuildType.WINDOW_LIVE:
                     return $"{MyBuildProcessor.BuildFolder}/l2cpp/"; ;
                 case BuildType.ANDROID_DEV:
+                case BuildType.ANDROID_LIVE:
                     return $"{MyBuildProcessor.BuildFolder}/Android/";
                 default:
                     return MyBuildProcessor.BuildFolder;

@@ -52,23 +52,7 @@ public class GuiReward : BaseGui
         {
             SoundMgr.PlaySound(PirateraSoundEffect.WIN);
             GameObject _typeWin = null;
-            switch (r.type)
-            {
-                case RankBonus.Excellent:
-                    _typeWin = typeWin[0];
-                    break;
-                case RankBonus.Overpower:
-                    _typeWin = typeWin[1];
-                    break;
-                case RankBonus.Quell:
-                    _typeWin = typeWin[2];
-                    break;
-                case RankBonus.Close:
-                    _typeWin = typeWin[3];
-                    break;
-                default:
-                    break;
-            }
+            _typeWin = typeWin[(int)r.type];
             if (_typeWin != null)
             {
                 _typeWin.SetActive(true);

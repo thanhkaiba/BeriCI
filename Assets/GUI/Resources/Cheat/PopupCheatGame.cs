@@ -1,5 +1,8 @@
 using Piratera.GUI;
+using Piratera.Network;
 using Sfs2X.Entities.Data;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +25,23 @@ namespace Piratera.Cheat
         private InputField textCheatStamina_quality;
         [SerializeField]
         private InputField textCheatRank_quality;
+
+
+        private void Awake()
+        {
+            GameEvent.UserDataChanged.AddListener(UpdatePVERank);
+            textCheatRank_quality.text = UserData.Instance.PVERank.ToString();
+        }
+
+        private void UpdatePVERank(List<string> arg0)
+        {
+            textCheatRank_quality.text = UserData.Instance.PVERank.ToString();
+        }
+
+        private void OnDestroy()
+        {
+            GameEvent.UserDataChanged.RemoveListener(UpdatePVERank);
+        }
 
 
         public void SendCheatSailor()

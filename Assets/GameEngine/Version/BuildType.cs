@@ -5,7 +5,7 @@ namespace Piratera.Build
     {
         WINDOW_DEV = 8,
         ANDROID_DEV = 9,
-        WINDOW_LIVE = 98,
+        WINDOW_LIVE = 12,
         ANDROID_LIVE = 99,
     }
 }
