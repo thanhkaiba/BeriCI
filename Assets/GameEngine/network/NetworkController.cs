@@ -197,7 +197,7 @@ namespace Piratera.Network
                 DoLogin();
             } else
             {
-                Debug.Log(evt.Params["message"].ToString());
+                Debug.Log(evt.Params["errorMessage"].ToString());
             }
         }
 
