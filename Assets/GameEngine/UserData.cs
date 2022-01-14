@@ -75,7 +75,7 @@ public class UserData : Singleton<UserData>
             PVERank = user.GetVariable(UserInfoPropertiesKey.PVE_RANK).GetIntValue();
         } catch
         {
-            PVERank = 0;
+           
         }
         GameEvent.UserDataChanged.Invoke(changedVars);
 

@@ -115,7 +115,6 @@ DCGNLKKEGMM⇨ModeID
 HNIMOOFMEFP⇨OBonbee/<>c__DisplayClass6_0
 JIPIIIJCLOK⇨OBonbee/<>c__DisplayClass7_0
 DPHLJEHNODA⇨Piratera.Build.BuildType
-CGHMFAOBLFD⇨Piratera.Cheat.CheatMgr
 MOOMDLBEEGN⇨Piratera.Constance.GameConst
 JANINBFCFGL⇨Piratera.Engine.GameVersionController/<GetText>d__6
 JGAONCLIJBP⇨Piratera.Engine.MaintainManager
@@ -567,12 +566,6 @@ OFIMOFGHBJN⇨System.Void OBonbee/<>c__DisplayClass7_0::<ProcessSkill>b__0()
 OLNJDAHMIBO⇨System.Void PickTeamUI/<>c::<FlyBeri>b__10_0()
 BBCOALKAJDO⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 HDLICOHHGPG⇨System.Void PickTeamUI::UpdateSlotMaxCapacity()
-BKKFLJBELBG⇨System.Void Piratera.Cheat.CheatMgr::CheatBotAndPlay(Sfs2X.Entities.Data.SFSObject)
-CFELCODEIAB⇨System.Void Piratera.Cheat.CheatMgr::CheatRank(System.Int32)
-LLPGNGELKGK⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32)
-LIGOJDIPIAD⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String)
-IDKBODPLCFG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32)
-BBCOALKAJDO⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 FLNOBBMLBPG⇨System.Void Piratera.Crashlytics.CrashlyticsInitializer/<>c::<CrashlyticsInit>b__0_0(System.Threading.Tasks.Task`1<Firebase.DependencyStatus>)
 AHEFBFCHCBN⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String)
 OOKKLCDDKOE⇨System.Void Piratera.Engine.MaintainManager::ResetData()
@@ -933,6 +926,7 @@ JLHODGKDBFB⇨System.Int64 StaminaData::LastCountStamina
 <PLAOGAENEDP>k__BackingField⇨System.Int64 UserData::<Beri>k__BackingField
 <LNIGCEPKJEA>k__BackingField⇨System.Int64 UserData::<CreateAt>k__BackingField
 <JDGNAHMIAMI>k__BackingField⇨System.Int64 UserData::<Exp>k__BackingField
+<JFGCBBFOBLL>k__BackingField⇨System.Int64 UserData::<PVERank>k__BackingField
 MEMHHHIJENB⇨System.Object Singleton`1::Lock
 IIIDOFHIJDO⇨System.Random GameUtils::rd
 IKMEIBGLILK⇨System.Single CameraLook::lastX
@@ -1030,6 +1024,7 @@ AMFIJEFCEBN⇨System.String UserInfoPropertiesKey::EXP
 OHNODKINAEJ⇨System.String UserInfoPropertiesKey::LAST_COUNT
 CGJDJLGEPNC⇨System.String UserInfoPropertiesKey::LEVEL
 KEOHFPNNIBA⇨System.String UserInfoPropertiesKey::NUMBER_OF_POSITIONS
+NCFHFAIODOK⇨System.String UserInfoPropertiesKey::PVE_RANK
 LLMHCGMNILL⇨System.String UserInfoPropertiesKey::STAMINA
 NKMMEHMPMHO⇨System.String UserInfoPropertiesKey::TIME_BUY_STAMINA_TODAY
 OKGOCJGMKKG⇨System.String UserInfoPropertiesKey::UID
@@ -1114,6 +1109,7 @@ GIMOHBDANFK⇨System.Int32 UserData::NumSlot()
 FKPLGFIGBKH⇨System.Int64 UserData::Beri()
 FHCBLMPOAKE⇨System.Int64 UserData::CreateAt()
 GMMKAFCLCCB⇨System.Int64 UserData::Exp()
+HPIJKKOPEOE⇨System.Int64 UserData::PVERank()
 FEJGBCJLNCA⇨System.Single CombatStats::Armor()
 LAMPLHFHNHJ⇨System.Single CombatStats::MagicResist()
 FKIJKDGNIFP⇨System.Single CombatStats::Power()
@@ -1616,18 +1612,6 @@ LMDOJADLIFC⇨System.Void OBonbee::GainFury(System.Int32) value
 CHLKBJKLJBK⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
 CPIHOGKHADA⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
 BBOGDHJHGPB⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
-EHLDBDLCDIP⇨System.Void Piratera.Cheat.CheatMgr::CheatBotAndPlay(Sfs2X.Entities.Data.SFSObject) sailorCheatData
-KDOOFPHKNHM⇨System.Void Piratera.Cheat.CheatMgr::CheatRank(System.Int32) rank
-EGJOKFAHFPD⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32) quantity
-KENHIJKCKAH⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32) resource
-DLPDGGDCNDO⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) level
-CBMHCHLKODH⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) name
-JLCDNIOBKLG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) quality
-JLCDNIOBKLG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32) quality
-OBELGLDNGJK⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32) sid
-CHLKBJKLJBK⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
-CPIHOGKHADA⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
-BBOGDHJHGPB⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
 MIAEKGCHMAB⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) end
 ALLBGKOKCDB⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) m
 EBLFODBNAND⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) start
@@ -1912,6 +1896,7 @@ LMDOJADLIFC⇨System.Void UserData::set_CreateAt(System.Int64) value
 LMDOJADLIFC⇨System.Void UserData::set_Exp(System.Int64) value
 LMDOJADLIFC⇨System.Void UserData::set_Level(System.Int32) value
 LMDOJADLIFC⇨System.Void UserData::set_NumSlot(System.Int32) value
+LMDOJADLIFC⇨System.Void UserData::set_PVERank(System.Int64) value
 LMDOJADLIFC⇨System.Void UserData::set_UID(System.String) value
 LMDOJADLIFC⇨System.Void UserData::set_Username(System.String) value
 HBGMAAJKGEJ⇨T ScriptableObjectPro::Deserialize(System.String) text
