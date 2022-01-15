@@ -5,6 +5,7 @@ using Piratera.GUI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Piratera.Log;
 
 public class SceneLoadingUI : MonoBehaviour
 {
@@ -16,10 +17,15 @@ public class SceneLoadingUI : MonoBehaviour
 #if UNITY_EDITOR
         Debug.unityLogger.logEnabled = true;
 #else
-        //CrashlyticsInitializer.Instance.CrashlyticsInit();
         Debug.unityLogger.logEnabled = false;
 #endif
-       
+
+#if UNITY_ANDROID
+        CrashlyticsInitializer.Instance.CrashlyticsInit();
+#endif
+
+        LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME);
+
     }
 
     private void Start()

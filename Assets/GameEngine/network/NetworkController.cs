@@ -1,5 +1,6 @@
 ﻿using Piratera.Engine;
 using Piratera.GUI;
+using Piratera.Log;
 using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities;
@@ -102,7 +103,8 @@ namespace Piratera.Network
         private static void reset()
         {
             // Remove SFS2X listeners
-            Instance.CancelInvoke("GetServerTime");
+           // Instance.CancelInvoke("GetServerTime");
+            UserData.Instance.Reset();
             sfs.RemoveAllEventListeners();
             sfs = null;
         }
@@ -197,6 +199,7 @@ namespace Piratera.Network
                 DoLogin();
             } else
             {
+                LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME, evt.Params["errorMessage"].ToString());
                 Debug.Log(evt.Params["errorMessage"].ToString());
             }
         }
@@ -261,7 +264,9 @@ namespace Piratera.Network
             sfso.PutUtfString("client_info", new LoginLogData().ToJson());
             sfso.PutInt("loginType", (int)loginData.Type);
             sfs.Send(new LoginRequest(loginData.Username, "", Zone, sfso));
+#if PIRATERA_DEV || PIRATERA_QC
             Debug.Log("Send Login " + loginData.Username + "-" + loginData.Password + "-" + loginData.Type);
+#endif
         }
 
         protected static void OnConnectionLost(BaseEvent evt)
@@ -327,7 +332,7 @@ namespace Piratera.Network
         private static void OnLogin(BaseEvent evt)
         {
 
-            //Firebase.Analytics.FirebaseAnalytics.LogEvent(Firebase.Analytics.FirebaseAnalytics.EventLogin);
+      
             Debug.Log("Login success as " + sfs.MySelf.Name);
         }
 
@@ -494,7 +499,7 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             GameTimeMgr.SetServerTime(packet.GetLong("time"));
-                            Instance.Invoke("GetServerTime", 10f);
+                            // Instance.Invoke("GetServerTime", 10f);
                         }
                         break;
                     }

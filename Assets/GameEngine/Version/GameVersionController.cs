@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using Piratera.Build;
 using Piratera.Constance;
+using Piratera.Log;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -71,6 +72,7 @@ namespace Piratera.Engine
             {
                 Debug.Log(www.error);
                 OnError.Invoke(www.error);
+                LogServiceManager.Instance.SendLog(LogEvent.GET_VERSION_INFO_FAIL);
             }
             else
             {

@@ -101,4 +101,13 @@ public class UserData : Singleton<UserData>
     {
         return Beri >= beri;
     }
+
+    public void Reset()
+    {
+        UID = "";
+        Username = "";
+        Avatar = "";
+        Beri = 0;
+        NumSlot = 0;
+    }
 }
