@@ -56,9 +56,14 @@ public class LoginController : MonoBehaviour
         signupText.text = "Guest";
 
 #else
-         signupText.text = "Create One";
+         
         loginTypeToggle.isOn = false;
 		loginTypeToggle.gameObject.SetActive(false);
+#endif
+
+        signupText.text = "Create One";
+#if PIRATERA_QC || PIRATERA_DEV || (PIRATERA_LIVE && UNITY_ANDROID)
+        signupText.text = "Guest";
 #endif
 
     }
@@ -158,6 +163,7 @@ public class LoginController : MonoBehaviour
                 NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
                 NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
                 NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+                NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
             }
             else
             {
@@ -165,6 +171,18 @@ public class LoginController : MonoBehaviour
                 errorText.text = "Error. Check Internet connection!";
             }
         }));
+    }
+
+    private void OnCryptoInit(BaseEvent evt)
+    {
+      
+        if (!(bool)evt.Params["success"])
+        {
+            // Send a login request
+            OnError((string)evt.Params["errorMessage"]);
+        }
+     
+        
     }
 
     private void OnConnectionLost(BaseEvent evt)
@@ -179,7 +197,7 @@ public class LoginController : MonoBehaviour
 
     public void OnButtonCreateOneClick()
     {
-#if PIRATERA_QC || PIRATERA_DEV
+#if PIRATERA_QC || PIRATERA_DEV || (PIRATERA_LIVE && UNITY_ANDROID)
         SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
 #else
         Application.OpenURL(GameConst.ACCOUNT_URL);
@@ -237,6 +255,8 @@ public class LoginController : MonoBehaviour
     {
         NetworkController.RemoveEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
         NetworkController.RemoveEventListener(SFSEvent.CONNECTION, OnConnection);
+        NetworkController.RemoveEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+        NetworkController.RemoveEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
     }
 
 
