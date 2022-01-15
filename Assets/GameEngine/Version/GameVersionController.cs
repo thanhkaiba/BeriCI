@@ -15,7 +15,7 @@ namespace Piratera.Engine
 #if PIRATERA_QC || PIRATERA_QC_DEV
      private static string URL = "https://api1.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
 #else
-      private static string URL = "https://api1.piratera.io/v1/game/version/" +  (int)BuildType.WINDOW_LIVE;
+     private static string URL = "https://api.piratera.io/v1/game/version/" +  (int)BuildType.WINDOW_LIVE;
 #endif
 #elif UNITY_ANDROID
 
@@ -24,8 +24,15 @@ namespace Piratera.Engine
 #else
      private static string URL = "";
 #endif
+#elif UNITY_STANDALONE_OSX
+#if PIRATERA_QC || PIRATERA_QC_DEV
+     private static string URL = "https://api1.piratera.io/v1/game/version/" + (int)BuildType.MACOS_DEV;
 #else
-    private const string URL = "";
+     private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.MACOS_LIVE;
+#endif
+
+#else
+        private const string URL = "";
 #endif
 
         [SerializeField]
