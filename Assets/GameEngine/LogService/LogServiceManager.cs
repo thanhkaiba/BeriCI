@@ -20,7 +20,8 @@ namespace Piratera.Log
                 Event = _event
             };
 
-            Post(JsonConvert.SerializeObject(myData));
+            StartCoroutine(Post(JsonConvert.SerializeObject(myData)));
+          
         }
 
         public string getHeaderFormat() 
