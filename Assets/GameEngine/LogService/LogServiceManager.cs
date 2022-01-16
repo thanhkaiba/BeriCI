@@ -20,7 +20,7 @@ namespace Piratera.Log
             {
                 Header = getHeaderFormat(),
                 Params = _params,
-                Event = _event
+                Event = _event.ToString()
             };
 
             StartCoroutine(Post(JsonConvert.SerializeObject(myData)));
@@ -34,8 +34,12 @@ namespace Piratera.Log
 
         IEnumerator Post(string text)
         {
-            using (UnityWebRequest www = UnityWebRequest.Post(URL, text))
+            
+            using (UnityWebRequest www = new UnityWebRequest(URL, "POST"))
             {
+                byte[] bodyRaw = Encoding.UTF8.GetBytes(text);
+                www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                www.SetRequestHeader("Content-Type", "text/plain");
                 yield return www.SendWebRequest();
                 if (www.result != UnityWebRequest.Result.Success)
                 {
