@@ -31,18 +31,21 @@ namespace Piratera.Log
 
         IEnumerator Post(string text)
         {
-            UnityWebRequest www = UnityWebRequest.Post(URL, text);
-            // www.certificateHandler = new CustomCertificateHandler();
-            yield return www.SendWebRequest();
-            if (www.result != UnityWebRequest.Result.Success)
+            using (UnityWebRequest www = UnityWebRequest.Post(URL, text))
             {
-                Debug.Log(www.error);
-            }
-            else
-            {
-                Debug.Log("Send log success!");             
+                yield return www.SendWebRequest();
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log(www.error);
+                }
+                else
+                {
+                    Debug.Log("Send log success!");
 
+                }
             }
+             
+             
         }
     }
 }

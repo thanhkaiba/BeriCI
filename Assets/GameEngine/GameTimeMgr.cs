@@ -16,4 +16,9 @@ public static class GameTimeMgr
     {
         return DateTimeOffset.Now.ToUnixTimeMilliseconds() + DeltaTime;
     }
+
+    public static long GetCurrentUTCTime()
+    {
+        return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+    }
 }

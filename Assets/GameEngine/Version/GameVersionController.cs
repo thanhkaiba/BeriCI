@@ -65,34 +65,37 @@ namespace Piratera.Engine
         IEnumerator GetText()
         {
             yield return new WaitForSeconds(1f);
-            UnityWebRequest www = UnityWebRequest.Get(URL);
-            www.certificateHandler = new CustomCertificateHandler();
-            yield return www.SendWebRequest();
-            if (www.result != UnityWebRequest.Result.Success)
+            using (UnityWebRequest www = UnityWebRequest.Get(URL))
             {
-                Debug.Log(www.error);
-                OnError.Invoke(www.error);
-                LogServiceManager.Instance.SendLog(LogEvent.GET_VERSION_INFO_FAIL);
-            }
-            else
-            {
-                Debug.Log(www.downloadHandler.text);
-
-                JObject o = JObject.Parse(www.downloadHandler.text);
-
-                Version version1 = new Version(Application.version);
-                Version version2 = new Version(((string)o["min_version"]).Split('_')[1]);
-                if (version2.CompareTo(version1) > 0)
+                www.certificateHandler = new CustomCertificateHandler();
+                yield return www.SendWebRequest();
+                if (www.result != UnityWebRequest.Result.Success)
                 {
-                    DownloadUrl = (string)o["download_url"];
-                    OnNeedUpdate.Invoke((string)o["download_url"]);
+                    Debug.Log(www.error);
+                    OnError.Invoke(www.error);
+                    LogServiceManager.Instance.SendLog(LogEvent.GET_VERSION_INFO_FAIL);
                 }
                 else
                 {
-                    OnCheckSuccess.Invoke();
-                }
+                    Debug.Log(www.downloadHandler.text);
 
+                    JObject o = JObject.Parse(www.downloadHandler.text);
+
+                    Version version1 = new Version(Application.version);
+                    Version version2 = new Version(((string)o["min_version"]).Split('_')[1]);
+                    if (version2.CompareTo(version1) > 0)
+                    {
+                        DownloadUrl = (string)o["download_url"];
+                        OnNeedUpdate.Invoke((string)o["download_url"]);
+                    }
+                    else
+                    {
+                        OnCheckSuccess.Invoke();
+                    }
+
+                }
             }
+            
         }
     }
 }

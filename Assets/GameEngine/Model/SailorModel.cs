@@ -17,14 +17,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         quality = obj.GetInt("quality");
         level = obj.GetInt("level");
         exp = obj.GetInt("exp");
-
-        try
-        {
-            lastTrade = obj.GetLong("last_trade");
-        } catch
-        {
-
-        }
+        lastTrade = obj.GetLong("last_trade");
 
     }
 
@@ -69,7 +62,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     internal bool isAvaiable()
     {
-        return lastTrade < GameTimeMgr.GetCurrentTime() - 24 * 60 * 60 * 1000;
+        return lastTrade < GameTimeMgr.GetCurrentUTCTime() - 24 * 60 * 60 * 1000;
     }
 
     bool IEquatable<SailorModel>.Equals(SailorModel other)
