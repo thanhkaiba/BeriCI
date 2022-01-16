@@ -20,6 +20,8 @@ public class IconSailor : MonoBehaviour
     [SerializeField]
     private Image border;
     [SerializeField]
+    private Image iconLock;
+    [SerializeField]
     private Slider qualitySlider;
     [SerializeField]
     private GameObject nodeClass;
@@ -31,6 +33,7 @@ public class IconSailor : MonoBehaviour
     public SailorModel sailorModel;
     public bool ShowClass = false;
     public bool ShowRank = false;
+   
 
 
     public void PresentData(SailorModel model)
@@ -38,6 +41,7 @@ public class IconSailor : MonoBehaviour
         gameObject.name = model.id;
         icon.sprite = model.config_stats.avatar;
         border.color = rankColor[(int)model.config_stats.rank];
+        iconLock.gameObject.SetActive(!model.isAvaiable());
         background.color = rankColorInside[(int)model.config_stats.rank];
 
         iconRank.gameObject.SetActive(ShowRank);

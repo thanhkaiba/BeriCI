@@ -39,8 +39,7 @@ public class CrewData : Singleton<CrewData>
         ISFSArray sFSArray = packet.GetSFSArray("sailors");
         foreach (ISFSObject obj in sFSArray)
         {
-            SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
-            { quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+            SailorModel model = new SailorModel(obj);
             Sailors.Add(model);
         }
 

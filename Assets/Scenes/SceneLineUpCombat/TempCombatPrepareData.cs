@@ -149,15 +149,13 @@ public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
         ISFSArray sFSSailors = packet.GetSFSArray("sailors_0");
         foreach (ISFSObject obj in sFSSailors)
         {
-            SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
-            { quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+            SailorModel model = new SailorModel(obj);
             sailors_0.Add(model);
         }
         sFSSailors = packet.GetSFSArray("sailors_1");
         foreach (ISFSObject obj in sFSSailors)
         {
-            SailorModel model = new SailorModel(obj.GetUtfString("id"), obj.GetUtfString("name"))
-            { quality = obj.GetInt("quality"), level = obj.GetInt("level"), exp = obj.GetInt("exp") };
+            SailorModel model = new SailorModel(obj);
             sailors_1.Add(model);
         }
 

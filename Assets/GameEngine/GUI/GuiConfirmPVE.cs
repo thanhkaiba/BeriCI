@@ -84,7 +84,7 @@ namespace Piratera.GUI
                 Sequence seq = DOTween.Sequence();
                 seq.Append(trs.DOAnchorPosY(100, 0.8f).SetRelative().SetEase(Ease.OutQuint));
                 seq.Join(trs.GetComponent<CanvasGroup>().DOFade(0, 2f));
-                seq.AppendCallback(() => Destroy(trs));
+                seq.AppendCallback(() => Destroy(staminaMinusGO));
                 seq.SetLink(gameObject).SetTarget(transform);
              
 
@@ -141,7 +141,7 @@ namespace Piratera.GUI
 
         private void Update()
         {
-            v = Quaternion.AngleAxis(Time.deltaTime * 95, Vector3.forward) * v;
+            v = Quaternion.AngleAxis(Time.deltaTime * 120, Vector3.forward) * v;
             iconFind.transform.position = findTarget.transform.position + v;
         }
     }

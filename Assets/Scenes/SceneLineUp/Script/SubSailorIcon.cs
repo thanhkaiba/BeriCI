@@ -83,6 +83,11 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnDrag(PointerEventData eventData)
     {
+        if(!model.isAvaiable())
+        {
+            ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.dragHandler);
+            return;
+        }
         Vector2 movePos = eventData.position;
         Vector2 delta = movePos - beginPos;
         if (Mathf.Abs(delta.x) < Mathf.Abs(delta.y) && delta.y > 10 * canvas.transform.localScale.x)
@@ -95,7 +100,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
         else if (!showedSubsailor)
         {
-            StopAllCoroutines();
+    
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.dragHandler);
         }
     }
