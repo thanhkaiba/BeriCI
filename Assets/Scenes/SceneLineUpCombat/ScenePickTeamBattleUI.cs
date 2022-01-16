@@ -35,10 +35,11 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     private void Awake()
     {
-  
+        Input.multiTouchEnabled = false;
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 
+   
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)

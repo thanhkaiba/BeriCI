@@ -8,8 +8,11 @@ namespace Piratera.Log
 {
     class LogServiceManager : Singleton<LogServiceManager>
     {
+#if PIRATERA_LIVE
         private const string URL = "http://crash-log.piratera.io/crash-log";
-
+#else
+        private const string URL = "http://dev-game1.piratera.local:7676/crash-log";
+#endif
 
         public void SendLog(LogEvent _event, string _params = "")
         {

@@ -25,6 +25,11 @@ public class PickTeamUI : MonoBehaviour
         GameEvent.FlyBeri.AddListener(FlyBeri);
     }
 
+    void Awake()
+    {
+        Input.multiTouchEnabled = false;
+    }
+
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
 
