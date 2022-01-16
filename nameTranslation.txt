@@ -129,6 +129,8 @@ PBJEBLLDKJJ⇨Piratera.GUI.LayerId
 BHGBMIOMNDD⇨Piratera.GUI.PopupNewVersion/<>c__DisplayClass4_0
 GLNNAJCMLHP⇨Piratera.GUI.PopupNotification/<>c__DisplayClass8_0
 ECNHBMJNFMG⇨Piratera.Lib.EnumHelper
+PIPJLLKKHJJ⇨Piratera.Log.LogEvent
+KDACFDLAIKJ⇨Piratera.Log.LogServiceManager/<Post>d__3
 IADCDCPMGMP⇨Piratera.Network.CustomCryptoInitializerV2
 GPJGPCEPBPH⇨Piratera.Network.CustomCryptoInitializerV2/InitCrytoState
 HOBCDCGDGLE⇨Piratera.Network.GAME_NETWORK_ADDRESS
@@ -144,7 +146,6 @@ GOJJEPPFFMH⇨Piratera.Utils.DoTweenUtils
 IOENIMMEOKP⇨Piratera.Utils.DoTweenUtils/<>c__DisplayClass8_0
 OCHJPMFMFMG⇨Piratera.Utils.LoadAvatarUtils/<StartLoadAvatar>d__0
 EBLOGBEOMHH⇨Piratera.Utils.StringUtils
-IJBDIBOLMMP⇨PrivateImplementationDetailsLOkWPANW.Deserialize
 BHLKGHJEGIE⇨QChi/<>c__DisplayClass3_0
 NAACMKNJHEH⇨QChi/<>c__DisplayClass7_0
 IEKGBABCOFN⇨QChi/<>c__DisplayClass8_0
@@ -160,7 +161,7 @@ CCHPJDGLOGJ⇨RoyalStarsManager/<>c__DisplayClass10_1
 GALCNMALLLB⇨SailorClass
 PGOBECNCCNF⇨SailorConfig/<>c__DisplayClass35_0
 EBGBHLFPMJP⇨SailorModel
-BMAMBOMFCJF⇨SailorModel/<>c__DisplayClass24_0
+GMIEANBNALI⇨SailorModel/<>c__DisplayClass29_0
 EFHNBAEKNOJ⇨SailorRank
 OHDIBCABDCM⇨SailorStatus
 KJKJNJBNGLG⇨SailorStatusType
@@ -212,6 +213,9 @@ KJAGADEBLPG⇨TransformDeepChildExtension
 CDKDGFKGNNN⇨UIHighlightTarget
 OBHLDHOEFKD⇨UserInfoPropertiesKey
 #Methods
+FNCMBPGMMDH⇨<Event>j__TPar <>f__AnonymousType0`3::get_Event()
+MNHPNFAHCFF⇨<Header>j__TPar <>f__AnonymousType0`3::get_Header()
+NLFFNKKMAMM⇨<Params>j__TPar <>f__AnonymousType0`3::get_Params()
 EIGCBOIMILG⇨ClassBonus ContainerClassBonus::GetPassiveConfig(SailorClass)
 OHNLEHFBNBC⇨CombatPosition FightingLine::SlotIndex2Position(System.Int16)
 KIJHPBPAGDE⇨CombatSailor CombatMgr::AddCurSpeedAllSailor(System.Int32)
@@ -275,6 +279,7 @@ FBIHHECEPAJ⇨System.Boolean FightingLine::UnEquip(System.String)
 PKHEFGKKMIC⇨System.Boolean Piratera.Engine.MaintainManager::CanPlay()
 JGENINHPDMF⇨System.Boolean SailorConfig::HaveType(SailorClass)
 JGENINHPDMF⇨System.Boolean SailorModel::HaveType(SailorClass)
+IJMEFBHEOFN⇨System.Boolean SailorModel::isAvaiable()
 OKEJKLGMIDD⇨System.Boolean ScriptableObjectPro/UnityImitatingContractResolver/<>c__DisplayClass1_0::<IsIgnoredType>b__0(System.Type)
 JKFOHMMPMGE⇨System.Boolean ScriptableObjectPro/UnityImitatingContractResolver/<>c__DisplayClass2_0::<CreateProperties>b__1(Newtonsoft.Json.Serialization.JsonProperty)
 AFFNHMNDJIN⇨System.Boolean ScriptableObjectPro/UnityImitatingContractResolver::IsIgnoredType(System.Type)
@@ -313,6 +318,7 @@ EDKMOHELLEK⇨System.Collections.IEnumerator Davinci::Downloader()
 GGOJKODOOHB⇨System.Collections.IEnumerator Davinci::ImageLoader(UnityEngine.Texture2D)
 BKHMFHMIMAG⇨System.Collections.IEnumerator GameUtils::WaitAndDo(System.Single,System.Action)
 BJDPMPIAAEG⇨System.Collections.IEnumerator Piratera.Engine.GameVersionController::GetText()
+CFLBCPJEJAJ⇨System.Collections.IEnumerator Piratera.Log.LogServiceManager::Post(System.String)
 OBLPHJEKKNI⇨System.Collections.IEnumerator Piratera.Utils.LoadAvatarUtils::StartLoadAvatar(UnityEngine.UI.Image,System.String)
 MLLEKGGDPIA⇨System.Collections.IEnumerator RoyalCollectingAnimation::CollectAnimation()
 LKBFFIKHCFL⇨System.Collections.IEnumerator RoyalCollectingController::PopItems(System.Int32)
@@ -335,8 +341,10 @@ IBAJLIBFBBM⇨System.Int32 TargetsUtils/<>c::<AllFirstRow>b__14_0(CombatSailor,C
 CPFLNHMGCCG⇨System.Int32 TargetsUtils/<>c::<AllFirstRow>b__14_1(CombatSailor,CombatSailor)
 EICJNNMHBCI⇨System.Int32 TargetsUtils/<>c::<AllFirstRow>b__14_2(CombatSailor,CombatSailor)
 NDDANCLFMKP⇨System.Int64 GameTimeMgr::GetCurrentTime()
+NLBOFFDLBJC⇨System.Int64 GameTimeMgr::GetCurrentUTCTime()
 OINAJMGAAIO⇨System.Int64 Piratera.Engine.MaintainManager::GetRemainTimeToMaintain()
 CKEFHOMFBDE⇨System.Int64 Piratera.Utils.DoTweenUtils/<>c__DisplayClass8_0::<UpdateNumber>b__0()
+BJFILDFKFCH⇨System.Int64 SailorModel::get_lastTrade()
 BAHJEINDLPP⇨System.Int64 UserLevelConfig::GetExpNeed(System.Int32)
 OACNIFLONPA⇨System.Single Beel::RunAnimation(System.Collections.Generic.List`1<CombatSailor>,System.Collections.Generic.List`1<System.Single>)
 KKIHFMMBENO⇨System.Single CombatMgr::ProcessAction()
@@ -367,7 +375,6 @@ PHMDKLJLGEA⇨System.String Piratera.Network.LoginLogData::ToJson()
 MPCDHGFBNIO⇨System.String Piratera.Utils.DoTweenUtils/<>c::<UpdateNumber>b__9_0(System.Int64)
 DIGGJPADMKN⇨System.String Piratera.Utils.StringUtils::LimitLength(System.String,System.Int32)
 DEGMIGEGIJG⇨System.String Piratera.Utils.StringUtils::ShortNumber(System.Int64,System.UInt32)
-AMMPLINCNJK⇨System.String PrivateImplementationDetailsLOkWPANW.Deserialize::DeserializeLiteral(System.Byte[],System.Byte[])
 DMFLMBPDAHI⇨System.String ScriptableObjectPro::Serialize(T)
 PFDADBEKHIL⇨System.Void Alex/<>c::<RunBaseAttack>b__3_0()
 OFIMOFGHBJN⇨System.Void Alex/<>c__DisplayClass7_0::<ProcessSkill>b__0()
@@ -541,6 +548,7 @@ CCBKJEDEKMB⇨System.Void LoginController/<CheckInternetConnection>d__12::<>m__F
 IDDLOELHFMJ⇨System.Void LoginController::enableLoginUI(System.Boolean)
 NOBLNPHBODP⇨System.Void LoginController::OnConnection(Sfs2X.Core.BaseEvent)
 PDNJLHHPCNF⇨System.Void LoginController::OnConnectionLost(Sfs2X.Core.BaseEvent)
+LJOIPIBNANC⇨System.Void LoginController::OnCryptoInit(Sfs2X.Core.BaseEvent)
 DMOCEGGBHNJ⇨System.Void LoginController::OnError(System.String)
 DMJONOOHLOL⇨System.Void LoginController::OnLoginFail(Sfs2X.Core.BaseEvent)
 MELOGPEAKLG⇨System.Void LoginController::OpenLobby()
@@ -567,6 +575,7 @@ OLNJDAHMIBO⇨System.Void PickTeamUI/<>c::<FlyBeri>b__10_0()
 BBCOALKAJDO⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 HDLICOHHGPG⇨System.Void PickTeamUI::UpdateSlotMaxCapacity()
 FLNOBBMLBPG⇨System.Void Piratera.Crashlytics.CrashlyticsInitializer/<>c::<CrashlyticsInit>b__0_0(System.Threading.Tasks.Task`1<Firebase.DependencyStatus>)
+CCBKJEDEKMB⇨System.Void Piratera.Engine.GameVersionController/<GetText>d__6::<>m__Finally1()
 AHEFBFCHCBN⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String)
 OOKKLCDDKOE⇨System.Void Piratera.Engine.MaintainManager::ResetData()
 JLGLDEJGOFD⇨System.Void Piratera.GUI.BaseGui::RunAppear()
@@ -617,6 +626,7 @@ GPKLMEGJGDO⇨System.Void Piratera.GUI.PopupNewVersion::ClosePopup()
 IEPHMOAFGCH⇨System.Void Piratera.GUI.PopupNotification/<>c__DisplayClass8_0::<Appear>b__0()
 MJPNCPEFCOP⇨System.Void Piratera.GUI.PopupNotification::Appear()
 GPKLMEGJGDO⇨System.Void Piratera.GUI.PopupNotification::ClosePopup()
+CCBKJEDEKMB⇨System.Void Piratera.Log.LogServiceManager/<Post>d__3::<>m__Finally1()
 MMCOOBDPBJK⇨System.Void Piratera.Network.CustomCryptoInitializerV2::Init()
 IBOHMOEAHNF⇨System.Void Piratera.Network.CustomCryptoInitializerV2::OnHttpError(System.String)
 NJHHKAIMGME⇨System.Void Piratera.Network.CustomCryptoInitializerV2::OnHttpResponse(System.String)
@@ -672,11 +682,12 @@ AKACKHFEOOA⇨System.Void SailorAnimations/<>c::<Start>b__5_0(Spine.TrackEntry)
 IHJJHBKFEOB⇨System.Void SailorAnimations::<Start>b__5_1(Spine.TrackEntry)
 HPPJFLPMKLJ⇨System.Void SailorAnimations::HandleEvent(Spine.TrackEntry,Spine.Event)
 IKJJGDNHEDH⇨System.Void SailorConfig/<>c__DisplayClass35_0::<HaveType>b__0(SailorClass)
-IKJJGDNHEDH⇨System.Void SailorModel/<>c__DisplayClass24_0::<HaveType>b__0(SailorClass)
+IKJJGDNHEDH⇨System.Void SailorModel/<>c__DisplayClass29_0::<HaveType>b__0(SailorClass)
 PKBHNIEMEDO⇨System.Void SailorModel::LoadConfig()
 CNHKLLICPMN⇨System.Void SailorModel::set_config_stats(SailorConfig)
 NMGAKFKMKPI⇨System.Void SailorModel::set_exp(System.Int32)
 FBEOJBBKFGP⇨System.Void SailorModel::set_items(System.Collections.Generic.List`1<Item>)
+PNBLFCJMJGO⇨System.Void SailorModel::set_lastTrade(System.Int64)
 HAHODOAJKOE⇨System.Void SailorModel::set_level(System.Int32)
 CFPKKPHKFJE⇨System.Void SailorModel::set_quality(System.Int32)
 ODDCFECAIAL⇨System.Void Salvatafo/<>c::<RunBaseAttack>b__4_0()
@@ -922,6 +933,7 @@ KIIDEBOIKHM⇨System.Int64 Piratera.Engine.MaintainManager::endTime
 HLFDKNKKMEN⇨System.Int64 Piratera.Engine.MaintainManager::startTime
 JCKBGLEPHPD⇨System.Int64 Piratera.GUI.GuiBuySlot::cost
 JCKBGLEPHPD⇨System.Int64 Piratera.GUI.GuiBuyStamina::cost
+<EPINLJNDDHD>k__BackingField⇨System.Int64 SailorModel::<lastTrade>k__BackingField
 JLHODGKDBFB⇨System.Int64 StaminaData::LastCountStamina
 <PLAOGAENEDP>k__BackingField⇨System.Int64 UserData::<Beri>k__BackingField
 <LNIGCEPKJEA>k__BackingField⇨System.Int64 UserData::<CreateAt>k__BackingField
@@ -967,6 +979,7 @@ JNFNGFLPJFG⇨System.String Piratera.Constance.GameConst::WEBSITE_URL
 EOGPLNGLIMO⇨System.String Piratera.Constance.GameConst::WHITE_PAPER_URL
 LBICBAMGMPM⇨System.String Piratera.Engine.GameVersionController::URL
 BKKKMOPIOCL⇨System.String Piratera.Engine.MaintainManager::message
+LBICBAMGMPM⇨System.String Piratera.Log.LogServiceManager::URL
 IOCMLIEEGLE⇨System.String Piratera.Network.CustomCryptoInitializerV2::KEY_SESSION_TOKEN
 OINKCJNIHEL⇨System.String Piratera.Network.CustomCryptoInitializerV2::TARGET_SERVLET
 OINKADBOMJF⇨System.String Piratera.Network.GAME_NETWORK_ADDRESS::DEV_HOST
@@ -1106,6 +1119,7 @@ JLCDNIOBKLG⇨System.Int32 SailorModel::quality()
 CKBJCIEPEMP⇨System.Int32 ScriptableObjectPro/FloatConverter::DecimalPlaces()
 NIDDPGPNGPP⇨System.Int32 UserData::Level()
 GIMOHBDANFK⇨System.Int32 UserData::NumSlot()
+BCPPHNMPPMM⇨System.Int64 SailorModel::lastTrade()
 FKPLGFIGBKH⇨System.Int64 UserData::Beri()
 FHCBLMPOAKE⇨System.Int64 UserData::CreateAt()
 GMMKAFCLCCB⇨System.Int64 UserData::Exp()
@@ -1287,6 +1301,7 @@ NOIIFHLKKLB⇨System.Collections.IEnumerator Davinci::ImageLoader(UnityEngine.Te
 CHLKBJKLJBK⇨System.Collections.IEnumerator GameUtils::WaitAndDo(System.Single,System.Action) action
 PJHHGMOGOAM⇨System.Collections.IEnumerator GameUtils::WaitAndDo(System.Single,System.Action) time
 MLDNOPDLLIA⇨System.Collections.IEnumerator LoginController::CheckInternetConnection(System.Action`1<System.Boolean>) syncResult
+HBGMAAJKGEJ⇨System.Collections.IEnumerator Piratera.Log.LogServiceManager::Post(System.String) text
 LMNGLIKBMEO⇨System.Collections.IEnumerator Piratera.Utils.LoadAvatarUtils::StartLoadAvatar(UnityEngine.UI.Image,System.String) url
 HIOJNODBHPI⇨System.Collections.IEnumerator Piratera.Utils.LoadAvatarUtils::StartLoadAvatar(UnityEngine.UI.Image,System.String) userAvatar
 EGJOKFAHFPD⇨System.Collections.IEnumerator RoyalCollectingController::PopItems(System.Int32) quantity
@@ -1444,8 +1459,6 @@ NBBKBNPPHBF⇨System.String Piratera.Utils.StringUtils::LimitLength(System.Strin
 IGBLLGNEPHG⇨System.String Piratera.Utils.StringUtils::LimitLength(System.String,System.Int32) source
 AAIGEFCFJEF⇨System.String Piratera.Utils.StringUtils::ShortNumber(System.Int64,System.UInt32) decimals
 KHCNNFJKHOL⇨System.String Piratera.Utils.StringUtils::ShortNumber(System.Int64,System.UInt32) n
-FBJIJHDBELD⇨System.String PrivateImplementationDetailsLOkWPANW.Deserialize::DeserializeLiteral(System.Byte[],System.Byte[]) d
-FGIPDFMMNKL⇨System.String PrivateImplementationDetailsLOkWPANW.Deserialize::DeserializeLiteral(System.Byte[],System.Byte[]) k
 EFFKMNADGAN⇨System.String ScriptableObjectPro::Serialize(T) obj
 FKJLPLAEJJG⇨System.String StaminaData::_GetStaminaFormat(System.Int32) stamina
 FKJLPLAEJJG⇨System.String StaminaData::GetStaminaFormat(System.Int32) stamina
@@ -1597,6 +1610,7 @@ ACPMIOGMCJI⇨System.Void LobbyUI::UpdateUserInfo(System.Collections.Generic.Lis
 KCGGNCLILNK⇨System.Void LoginController::enableLoginUI(System.Boolean) enable
 NOIOMDIBHIB⇨System.Void LoginController::OnConnection(Sfs2X.Core.BaseEvent) evt
 NOIOMDIBHIB⇨System.Void LoginController::OnConnectionLost(Sfs2X.Core.BaseEvent) evt
+NOIOMDIBHIB⇨System.Void LoginController::OnCryptoInit(Sfs2X.Core.BaseEvent) evt
 KHNLOJJNKOB⇨System.Void LoginController::OnError(System.String) error
 NOIOMDIBHIB⇨System.Void LoginController::OnLoginFail(Sfs2X.Core.BaseEvent) evt
 CHLKBJKLJBK⇨System.Void LoginController::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
@@ -1658,6 +1672,8 @@ ADKGMFAHBIO⇨System.Void Piratera.GUI.PopupNotification::SetData(System.String,
 DJPPFJLNELK⇨System.Void Piratera.GUI.PopupNotification::SetData(System.String,System.String,System.Action,System.Action) okAction
 MCCNPNKDNJJ⇨System.Void Piratera.GUI.PopupNotification::SetData(System.String,System.String,System.Action,System.Action) okText
 HBGMAAJKGEJ⇨System.Void Piratera.GUI.PopupNotification::SetData(System.String,System.String,System.Action,System.Action) text
+CGPIOAGALEC⇨System.Void Piratera.Log.LogServiceManager::SendLog(Piratera.Log.LogEvent,System.String) _event
+PMIICDCNDNH⇨System.Void Piratera.Log.LogServiceManager::SendLog(Piratera.Log.LogEvent,System.String) _params
 OOAOOFHIKEN⇨System.Void Piratera.Network.CustomCryptoInitializerV2::.ctor(Sfs2X.SmartFox) sfs
 KOPLFGLMCCO⇨System.Void Piratera.Network.CustomCryptoInitializerV2::OnHttpError(System.String) errorMsg
 IJOANKCPJKJ⇨System.Void Piratera.Network.CustomCryptoInitializerV2::OnHttpResponse(System.String) rawData
@@ -1786,11 +1802,13 @@ CNAFFMOACHC⇨System.Void SailorAnimations::<Start>b__5_1(Spine.TrackEntry) <p0>
 MKFIHBOLNHK⇨System.Void SailorAnimations::HandleEvent(Spine.TrackEntry,Spine.Event) e
 BDIBAJLKPOH⇨System.Void SailorAnimations::HandleEvent(Spine.TrackEntry,Spine.Event) trackEntry
 HBPFJKOOCGP⇨System.Void SailorInQueue::SetData(CombatSailor) s
+EFFKMNADGAN⇨System.Void SailorModel::.ctor(Sfs2X.Entities.Data.ISFSObject) obj
 AJNJECGHNPL⇨System.Void SailorModel::.ctor(System.String,System.String) _id
 DNCCEFNHLGM⇨System.Void SailorModel::.ctor(System.String,System.String) _name
 LMDOJADLIFC⇨System.Void SailorModel::set_config_stats(SailorConfig) value
 LMDOJADLIFC⇨System.Void SailorModel::set_exp(System.Int32) value
 LMDOJADLIFC⇨System.Void SailorModel::set_items(System.Collections.Generic.List`1<Item>) value
+LMDOJADLIFC⇨System.Void SailorModel::set_lastTrade(System.Int64) value
 LMDOJADLIFC⇨System.Void SailorModel::set_level(System.Int32) value
 LMDOJADLIFC⇨System.Void SailorModel::set_quality(System.Int32) value
 DNCCEFNHLGM⇨System.Void SailorStatus::.ctor(SailorStatusType,System.Int32,System.Collections.Generic.List`1<System.Single>) _name

@@ -14,20 +14,20 @@ namespace Piratera.Engine
     {
 #if UNITY_STANDALONE_WIN
 #if PIRATERA_QC || PIRATERA_QC_DEV
-     private static string URL = "https://api1.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
+     private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
 #else
-     private static string URL = "https://api.piratera.io/v1/game/version/" +  (int)BuildType.WINDOW_LIVE;
+     private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_LIVE;
 #endif
 #elif UNITY_ANDROID
 
 #if PIRATERA_QC || PIRATERA_QC_DEV
-     private static string URL = "https://api1.piratera.io/v1/game/version/" +  (int)BuildType.ANDROID_DEV;
+     private static string URL = "https://api.piratera.io/v1/game/version/" +  (int)BuildType.ANDROID_DEV;
 #else
-     private static string URL = "";
+     private static string URL = "https://api.piratera.io/v1/game/version/" +  (int)BuildType.ANDROID_LIVE;
 #endif
 #elif UNITY_STANDALONE_OSX
 #if PIRATERA_QC || PIRATERA_QC_DEV
-     private static string URL = "https://api1.piratera.io/v1/game/version/" + (int)BuildType.MACOS_DEV;
+     private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.MACOS_DEV;
 #else
      private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.MACOS_LIVE;
 #endif

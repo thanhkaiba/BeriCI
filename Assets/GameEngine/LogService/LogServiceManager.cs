@@ -8,7 +8,7 @@ namespace Piratera.Log
 {
     class LogServiceManager : Singleton<LogServiceManager>
     {
-        private const string URL = @"localhost:3000";
+        private const string URL = "http://crash-log.piratera.io/crash-log";
 
 
         public void SendLog(LogEvent _event, string _params = "")

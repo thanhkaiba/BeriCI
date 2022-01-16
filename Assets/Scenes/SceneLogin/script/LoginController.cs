@@ -124,12 +124,12 @@ public class LoginController : MonoBehaviour
     {
         if (string.IsNullOrEmpty(nameInput.text) && string.IsNullOrEmpty(passwordInput.text))
         {
-            errorText.text = "Please enter your username and password";
+            errorText.text = "Please enter your email and password";
             return;
         }
         if (string.IsNullOrEmpty(nameInput.text))
         {
-            errorText.text = "Username field is empty";
+            errorText.text = "Email field is empty";
             return;
 
         }

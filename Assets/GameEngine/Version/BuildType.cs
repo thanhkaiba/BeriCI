@@ -3,12 +3,12 @@ namespace Piratera.Build
 {
     public enum BuildType
     {
-        ANDROID_DEV = 9,
-        WINDOW_DEV = 8,
-        MACOS_DEV = 16,
+        WINDOW_DEV = 1,
+        ANDROID_DEV = 2,
+        MACOS_DEV = 3,
 
-        WINDOW_LIVE = 12,
-        ANDROID_LIVE = 14,
-        MACOS_LIVE = 17
+        WINDOW_LIVE = 4,
+        ANDROID_LIVE = 5,
+        MACOS_LIVE = 6
     }
 }
