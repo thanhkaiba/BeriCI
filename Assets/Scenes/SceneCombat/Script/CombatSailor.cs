@@ -79,7 +79,7 @@ public class CombatSailor : Sailor
                     cs.BaseMagicResist += config.GetParams(p.type, p.level)[0];
                     break;
                 case SailorClass.SUPPORT:
-                    cs.Fury += (int)config.GetParams(p.type, p.level)[0];
+                    GainFury((int)config.GetParams(p.type, p.level)[0]);
                     break;
                 case SailorClass.KNIGHT:
                     if (cs.HaveType(SailorClass.KNIGHT))
