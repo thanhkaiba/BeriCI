@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d07f8bd6ae8b11547a95e75ff5e67c8b, type: 3}
-  m_Name: Tad
+  m_Name: LiuHi
   m_EditorClassIdentifier: 
-  model: {fileID: 8087726741317758466, guid: 4a7b52c4983827f4a9783a2c640896cb, type: 3}
-  avatar: {fileID: 21300000, guid: eefd0a82786681947af2fba0607e83bc, type: 3}
-  root_name: Tad
-  rank: 1
-  power_base: 60
-  health_base: 350
+  model: {fileID: 5096938913208836610, guid: 8b7236d9e777b504991094bafcd2086a, type: 3}
+  avatar: {fileID: 0}
+  root_name: LiuHi
+  rank: 0
+  power_base: 50
+  health_base: 250
   speed_base: 50
-  armor: 35
-  magic_resist: 35
-  crit: 0.25
-  attack_type: 0
-  classes: 0700000001000000
+  armor: 15
+  magic_resist: 15
+  crit: 0
+  attack_type: 1
+  classes: 
   start_fury: 0
-  max_fury: 50
+  max_fury: 25
   skill_params:
   - 1
-  - 3

@@ -62,7 +62,6 @@ public class Tad : CombatSailor
 
         ContainerClassBonus config = GlobalConfigs.ClassBonus;
         ClassBonusItem wild = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.WILD);
-        Debug.Log("??????" + wild);
         float healthGain = 150;
         if (cs.HaveType(SailorClass.WILD) && wild != null)
         {
