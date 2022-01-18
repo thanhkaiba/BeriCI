@@ -73,7 +73,7 @@ namespace Piratera.Build
             Process process = new Process();
             Process p = new Process();
             ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = @"D:/Program Files/Inno Setup 6/iscc.exe";
+            psi.FileName = @"C:/Program Files (x86)/Inno Setup 6/iscc.exe";
             psi.Arguments = $" /DMyAppVersion={version} " + InnoSetupFile;
 
             p.StartInfo = psi;
