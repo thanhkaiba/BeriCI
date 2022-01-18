@@ -95,7 +95,7 @@ public class Beel : CombatSailor
                 var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/beel_impact_skill"), item.transform.position, Quaternion.identity);
                 seq.AppendInterval(0.3f);
                 seq.AppendCallback(() => Destroy(eff));
-                item.LoseHealth(new Damage() { magic = magic_damage[i] });
+                item.LoseHealth(new Damage() { magic = magic_damage[i], isCrit = true });
                 i++;
             }
         });

@@ -86,6 +86,9 @@ public class LiuHi : CombatSailor
             for (int i = 0; i < alies.Count; i++)
             {
                 alies[i].GainHealth(_params[i]);
+                var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), alies[i].transform.position, Quaternion.identity);
+                seq.AppendInterval(0.3f);
+                seq.AppendCallback(() => Destroy(eff));
             }
         });
         return 2.1f;

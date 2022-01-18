@@ -162,7 +162,7 @@ MonoBehaviour:
   m_Name: SUPPORT_1
   m_EditorClassIdentifier: 
   container: {fileID: 490806217928476229}
-  pop: 5
+  pop: 3
   _params:
   - 15
 --- !u!114 &-4732602113200687873
@@ -180,7 +180,7 @@ MonoBehaviour:
   container: {fileID: 490806217928476229}
   pop: 2
   _params:
-  - 5
+  - 10
 --- !u!114 &-3850908979103961074
 MonoBehaviour:
   m_ObjectHideFlags: 0
