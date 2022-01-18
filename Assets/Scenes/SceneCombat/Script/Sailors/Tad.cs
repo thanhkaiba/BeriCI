@@ -3,20 +3,15 @@ using Piratera.Sound;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Helti : CombatSailor
+public class Tad : CombatSailor
 {
-    private GameObject wind;
-    private Animator windAnimator;
-    public Helti()
+    public Tad()
     {
     }
     public override void Awake()
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
-
-        wind = Instantiate(Resources.Load<GameObject>("Characters/Helti/skill/skill"));
-        windAnimator = wind.transform.Find("eff").GetComponent<Animator>();
     }
     public override void GainFury(int value)
     {
@@ -26,9 +21,6 @@ public class Helti : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
-        Debug.Log("target: " + target);
-        Debug.Log("target id: " + target.Model.id);
-        Debug.Log("target id: " + target.Model.config_stats.root_name);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
             target.transform.position.x + offset * 4,
@@ -36,13 +28,13 @@ public class Helti : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
+        //StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
         StartCoroutine(GameUtils.WaitAndDo(0.5f, () => GameEffMgr.Instance.Shake(0.1f, 0.5f)));
-        seq.AppendInterval(0.25f);
+        seq.AppendInterval(0.05f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.3f);
+        seq.AppendInterval(0.75f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return 0.5f;
+        return 0.7f;
     }
     public override void SetFaceDirection()
     {
@@ -59,23 +51,25 @@ public class Helti : CombatSailor
         List<float> _params = new List<float>();
 
         float scale_damage_ratio = Model.config_stats.skill_params[0];
-        float behind_damage_ratio = Model.config_stats.skill_params[1];
-        float main_damage = cs.Power * scale_damage_ratio;
-        float secondary_damage = cs.Power * behind_damage_ratio;
+        float attackTimes = Model.config_stats.skill_params[1];
+        float damage = cs.Power * scale_damage_ratio * attackTimes;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor main_target = TargetsUtils.Melee(this, enermy);
-        List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
 
         targets.Add(main_target.Model.id);
-        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage }, this));
+        _params.Add(main_target.CalcDamageTake(new Damage() { physics = damage }, this));
 
-        behind_targets.ForEach(t =>
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        ClassBonusItem wild = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.WILD);
+        Debug.Log("??????" + wild);
+        float healthGain = 150;
+        if (cs.HaveType(SailorClass.WILD) && wild != null)
         {
-            targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage }, this));
-        });
-
+            float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
+            healthGain = percentHealthGain * cs.MaxHealth * attackTimes;
+        }
+        _params.Add(healthGain);
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
@@ -84,8 +78,7 @@ public class Helti : CombatSailor
         Debug.Log("_params " + _params.Count);
         base.ProcessSkill();
         TriggerAnimation("Skill");
-        var listTargets = CombatState.Instance.GetSailors(targets);
-        var mainTarget = listTargets[0];
+        var mainTarget = CombatState.Instance.GetSailor(targets[0]);
         Vector3 oriPos = transform.position;
         int offset = transform.position.x < mainTarget.transform.position.x ? -1 : 1;
 
@@ -97,12 +90,8 @@ public class Helti : CombatSailor
             targetPos.z - 0.1f
         );
 
-        wind.transform.position = targetPos;
-        wind.transform.localScale = new Vector3(cs.team == Team.A ? 2.0f : -2.0f, 2.0f, 2.0f);
-
         //var listHighlight = new List<CombatSailor>() { this };
         //listHighlight.AddRange(listTargets);
-        CombatState.Instance.HighlightSailor2Step(this, listTargets, 0.45f, 2.5f);
 
         Sequence seq = DOTween.Sequence();
         StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundSkillSailor(2)));
@@ -111,30 +100,27 @@ public class Helti : CombatSailor
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
-            windAnimator.SetTrigger("run");
+            mainTarget.LoseHealth(new Damage() { physics = _params[0] * 3 / 10, isCrit = true }, false);
+            GainHealth(_params[1] * 3 / 10);
             GameEffMgr.Instance.Shake(0.2f, 1);
         });
-        seq.AppendInterval(0.5f);
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
-            windAnimator.SetTrigger("run");
+            mainTarget.LoseHealth(new Damage() { physics = _params[0] * 3 / 10, isCrit = true }, false);
             GameEffMgr.Instance.Shake(0.2f, 1);
+            GainHealth(_params[1] * 3 / 10);
         });
-        seq.AppendInterval(0.8f);
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 4 / 10, isCrit = true });
-            windAnimator.SetTrigger("run");
+            mainTarget.LoseHealth(new Damage() { physics = _params[0] * 4 / 10, isCrit = true });
             GameEffMgr.Instance.Shake(0.3f, 2);
+            GainHealth(_params[1] * 4 / 10);
         });
 
         seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 3.2f;
+        return 2.8f;
     }
 }

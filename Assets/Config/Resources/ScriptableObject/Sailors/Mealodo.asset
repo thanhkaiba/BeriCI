@@ -23,7 +23,7 @@ MonoBehaviour:
   magic_resist: 20
   crit: 0
   attack_type: 0
-  classes: 
+  classes: 00000000
   start_fury: 0
   max_fury: 20
   skill_params:

@@ -71,7 +71,8 @@ public class CombatSailor : Sailor
                 case SailorClass.ASSASSIN:
                     if (cs.HaveType(SailorClass.ASSASSIN))
                     {
-                        cs.BasePower *= 1 + config.GetParams(p.type, p.level)[0];
+                        cs.CritDamage += config.GetParams(p.type, p.level)[0];
+                        cs.Crit += config.GetParams(p.type, p.level)[0];
                     }
                     break;
                 case SailorClass.SEA_CREATURE:
@@ -202,6 +203,7 @@ public class CombatSailor : Sailor
     // ... server trả 
     public float BaseAttack(CombatSailor target, bool isCrit, float damageDeal, float wildHeal)
     {
+        Debug.Log("Base Attack >>>>" + isCrit + " " + damageDeal);
         var combatState = CombatState.Instance;
         cs.CurrentSpeed -= cs.SpeedNeed;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);

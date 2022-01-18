@@ -33,6 +33,8 @@ public enum SailorClass
     SUPPORT,
     KNIGHT,
     GRAPPLER,
+    GUNPOWDER,
+    SHIPWRIGHT,
 };
 
 public enum SailorRank

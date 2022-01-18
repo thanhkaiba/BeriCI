@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81d7a7da278e84b4ca852f7f33dbf50f, type: 3}
-  m_Name: SailorGeneralConfig
+  m_Script: {fileID: 11500000, guid: a6b194f808b1af6499c93410e504af42, type: 3}
+  m_Name: Tad_Atlas
   m_EditorClassIdentifier: 
-  MAX_QUALITY: 200
-  MAX_MIN_POWER_RATIO: 0.2
-  MAX_MIN_HEALTH_RATIO: 0.2
-  MAX_MIN_SPEED_RATIO: 0.2
-  POWER_PER_LEVEL_RATIO: 0.1
-  HEALTH_PER_LEVEL_RATIO: 0.1
+  atlasFile: {fileID: 4900000, guid: f19cbae72283eed4a8ffe0ce319c8ba1, type: 3}
+  materials:
+  - {fileID: 2100000, guid: dde9aab774058444f82dc7e20c0191d6, type: 2}
