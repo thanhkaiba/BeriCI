@@ -105,7 +105,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "Marksman deal " + (para[0] * 100) + "% more damage for each distance-tiles";
                 break;
             case SailorClass.ASSASSIN:
-                content.text = "ASSASSIN gain " + (para[0] * 100) + "% power if fighting alone";
+                content.text = "ASSASSIN gain " + (para[0] * 100) + "% crit chance and crit damage if there is no other ASSASSIN";
                 break;
             case SailorClass.GRAPPLER:
                 content.text = "GRAPPLER speed-up " + (para[0] * 100) + "% after base attack";
