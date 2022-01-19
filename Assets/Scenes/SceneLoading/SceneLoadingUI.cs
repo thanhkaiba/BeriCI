@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Piratera.Crashlytics;
 using Piratera.Engine;
 using Piratera.GUI;
 using UnityEngine;
@@ -19,11 +18,6 @@ public class SceneLoadingUI : MonoBehaviour
 #else
         Debug.unityLogger.logEnabled = false;
 #endif
-
-#if UNITY_ANDROID
-        CrashlyticsInitializer.Instance.CrashlyticsInit();
-#endif
-
         LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME);
 
     }

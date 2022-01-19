@@ -358,7 +358,7 @@ namespace Piratera.Network
                 Debug.Log("response:" + packet.GetDump());
 
                 SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
-                SFSErrorCode errorCode = (SFSErrorCode)packet.GetByte(ERROR_CODE);
+                SFSErrorCode errorCode = (SFSErrorCode)packet.GetShort(ERROR_CODE);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);

@@ -70,10 +70,10 @@ namespace Piratera.Build
 
         public static void BuildInnoSetup( string version)
         {
-            Process process = new Process();
+           
             Process p = new Process();
             ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = @"C:/Program Files (x86)/Inno Setup 6/iscc.exe";
+            psi.FileName = @"D:/Program Files/Inno Setup 6/iscc.exe";
             psi.Arguments = $" /DMyAppVersion={version} " + InnoSetupFile;
 
             p.StartInfo = psi;

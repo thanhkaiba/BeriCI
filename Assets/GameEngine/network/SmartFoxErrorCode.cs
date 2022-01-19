@@ -5,49 +5,49 @@ namespace Piratera.Network
     public enum SFSErrorCode
     {
         [Description("Success")]
-        SUCCESS = 0,
+        SUCCESS = 800,
         [Description("Unknown error")]
-        UNKNOWN_ERROR = 1,
+        UNKNOWN_ERROR = 801,
         [Description("Invalid data")]
-        INVALID_DATA = 2,
+        INVALID_DATA = 802,
         [Description("Fighting line list empty")]
-        FIGHTING_LINE_LIST_EMPTY = 3,
+        FIGHTING_LINE_LIST_EMPTY = 803,
         [Description("Sailor list empty")]
-        SAILOR_LIST_EMPTY = 4,
+        SAILOR_LIST_EMPTY = 804,
         [Description("Pick team fighting line list invalid")]
-        PICK_TEAM_FIGHTING_LINE_LIST_INVALID = 5,  // ft không hợp lệ (sửa tên cho nó dể hiểu lỗi của lệnh nào )
+        PICK_TEAM_FIGHTING_LINE_LIST_INVALID = 805,  // ft không hợp lệ (sửa tên cho nó dể hiểu lỗi của lệnh nào )
         [Description("Combat fighting finished")]
-        COMBAT_FIGHTING_FINISHED = 6,   //Chặn lệnh đúp ( chưa xử lý )
+        COMBAT_FIGHTING_FINISHED = 806,   //Chặn lệnh đúp ( chưa xử lý )
         [Description("Sailor configuration invalid")]
-        SAILOR_CONFIG_INVALID = 7, //Không load được sailor config file
+        SAILOR_CONFIG_INVALID = 807, //Không load được sailor config file
         [Description("Combat sailor and fighiting line invalid")]
-        COMBAT_SAILOR_AND_FIGHITING_LINE_INVALID = 8,   //sailor và ft không hợp lệ ( kể cả số lượng lẫn id phải khớp nhau )
+        COMBAT_SAILOR_AND_FIGHITING_LINE_INVALID = 808,   //sailor và ft không hợp lệ ( kể cả số lượng lẫn id phải khớp nhau )
         [Description("Stamina sold out")]
-        STAMINA_SOLD_OUT = 9,   //hết lượt mua
+        STAMINA_SOLD_OUT = 809,   //hết lượt mua
         [Description("Not enough Beri")]
-        STAMINA_BERI_NOT_ENOUGH = 10,   //ko đủ beri để mua
+        STAMINA_BERI_NOT_ENOUGH = 810,   //ko đủ beri để mua
         [Description("Not enough Stamina")]
-        COMBAT_STAMINA_NOT_ENOUGH = 11, //ko du stamina de choi
+        COMBAT_STAMINA_NOT_ENOUGH = 811, //ko du stamina de choi
         [Description("Combat not prepare")]
-        COMBAT_NOT_PREPARE = 12,    // chua chuan bi
+        COMBAT_NOT_PREPARE = 812,    // chua chuan bi
         [Description("Not enough Beri")]
-        BUY_SLOT_BERI_NOT_ENOUGH = 13,
+        BUY_SLOT_BERI_NOT_ENOUGH = 813,
         [Description("Slot sold out")]
-        BUY_SLOT_POSITION_SOLD_OUT = 14,
+        BUY_SLOT_POSITION_SOLD_OUT = 814,
         [Description("Invalid data")]
-        COMBAT_CONFIRM_SLOT_INVALID = 15,
+        COMBAT_CONFIRM_SLOT_INVALID = 815,
         [Description("Invalid Game State")]
-        INVALID_GAME_STATE = 16,
+        INVALID_GAME_STATE = 816,
 
         [Description("Server under maintenance")]
-        SERVER_MAINTAINACE = 17,
+        SERVER_MAINTAINACE = 817,
 
         [Description("Your username or password is incorrect")]
-        WRONG_USER_NAME_OR_PASS = 19,
+        WRONG_USER_NAME_OR_PASS = 819,
 
 
         [Description("A suitable opponent could not be found right now")]
-        NO_OPPONENT_FOUND = 20,
+        NO_OPPONENT_FOUND = 820,
 
     }
 }
