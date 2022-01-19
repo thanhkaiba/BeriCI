@@ -36,6 +36,10 @@ EditorBuildSettings:
     path: Assets/Scenes/SceneCrew/SceneCrew.unity
     guid: 45400b35138f46748a41b9f519b0578a
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 4f6052c83e7b0324198f1ce9da5fdc0e,
+      type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
+      guid: 0a8fd66517c4efd45a41a7a9d213b3ac, type: 2}
     com.unity.addressableassets: {fileID: 11400000, guid: 4b14029e76de3a2478e6be08c6eda9dc,
       type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 4c71d051435906043a0d94977cb475ac,

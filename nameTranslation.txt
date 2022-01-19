@@ -103,6 +103,8 @@ NNFNPGBLFFO⇨IconClassBonus/<>c__DisplayClass7_0
 BOGALGHJOGD⇨ItemColor
 KHIHLKFMHMG⇨ItemPosition
 JIOKPCFICOI⇨Jenkins/<>c__DisplayClass7_0
+IMCBEEIJHDO⇨LiuHi/<>c__DisplayClass8_0
+MELGCODDIGA⇨LiuHi/<>c__DisplayClass9_0
 MPDEDJHBGCD⇨LoadServerDataUI/<>c__DisplayClass24_0
 PDIOMOFPEHE⇨LoginController/<>c__DisplayClass14_0
 HIAFBELMOBL⇨LoginController/<CheckInternetConnection>d__12
@@ -115,6 +117,7 @@ DCGNLKKEGMM⇨ModeID
 HNIMOOFMEFP⇨OBonbee/<>c__DisplayClass6_0
 JIPIIIJCLOK⇨OBonbee/<>c__DisplayClass7_0
 DPHLJEHNODA⇨Piratera.Build.BuildType
+CGHMFAOBLFD⇨Piratera.Cheat.CheatMgr
 MOOMDLBEEGN⇨Piratera.Constance.GameConst
 JANINBFCFGL⇨Piratera.Engine.GameVersionController/<GetText>d__6
 JGAONCLIJBP⇨Piratera.Engine.MaintainManager
@@ -182,6 +185,7 @@ LMFKBGPJGEO⇨Sojeph/<>c__DisplayClass8_0
 KCDLMONIODK⇨Sojeph/<>c__DisplayClass9_0
 LJHNJBMGIPI⇨Sojeph/<>c__DisplayClass9_1
 NGBJFGJDJAM⇨SquadSlot/State
+COAMOPNCCGP⇨Tad/<>c__DisplayClass7_0
 PPGGHHACPGH⇨TakeDamageEvent
 OJHMKBIOCJC⇨TargetsUtils
 CNJALDKHPHM⇨TargetsUtils/<>c__DisplayClass0_0
@@ -528,6 +532,9 @@ LALEEKONGKG⇨System.Void Jenkins/<>c__DisplayClass7_0::<ProcessSkill>b__3()
 DDKGEMNEFJN⇨System.Void Jenkins/<>c__DisplayClass7_0::<ProcessSkill>b__5()
 APOOMOLGPGB⇨System.Void Jenkins/<>c__DisplayClass7_0::<ProcessSkill>b__7()
 EGDLLLDJOPH⇨System.Void Jenkins/<>c__DisplayClass7_0::<ProcessSkill>b__9()
+KBOOFPNHDJI⇨System.Void LiuHi/<>c::<RunBaseAttack>b__5_0()
+HAGKJMJNMBA⇨System.Void LiuHi/<>c__DisplayClass8_0::<CastSkill>b__0(CombatSailor)
+OFIMOFGHBJN⇨System.Void LiuHi/<>c__DisplayClass9_0::<ProcessSkill>b__0()
 PMGNIECBBJL⇨System.Void LoadServerDataUI/<>c__DisplayClass24_0::<ShowLoading>b__0()
 DDOAKFBEKOK⇨System.Void LoadServerDataUI::OnLoadError(Piratera.Network.SFSErrorCode)
 CEOPAHAHGIM⇨System.Void LoadServerDataUI::OnLoadSuccess()
@@ -574,6 +581,13 @@ OFIMOFGHBJN⇨System.Void OBonbee/<>c__DisplayClass7_0::<ProcessSkill>b__0()
 AJGLIMDLACP⇨System.Void PickTeamUI/<>c::<FlyBeri>b__11_0()
 BBCOALKAJDO⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 HDLICOHHGPG⇨System.Void PickTeamUI::UpdateSlotMaxCapacity()
+BKKFLJBELBG⇨System.Void Piratera.Cheat.CheatMgr::CheatBotAndPlay(Sfs2X.Entities.Data.SFSObject)
+CFELCODEIAB⇨System.Void Piratera.Cheat.CheatMgr::CheatRank(System.Int32)
+LLPGNGELKGK⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32)
+LIGOJDIPIAD⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String)
+IDKBODPLCFG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32)
+DNFAEAEEJOJ⇨System.Void Piratera.Cheat.PopupCheatGame::UpdatePVERank(System.Collections.Generic.List`1<System.String>)
+BBCOALKAJDO⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 FLNOBBMLBPG⇨System.Void Piratera.Crashlytics.CrashlyticsInitializer/<>c::<CrashlyticsInit>b__0_0(System.Threading.Tasks.Task`1<Firebase.DependencyStatus>)
 CCBKJEDEKMB⇨System.Void Piratera.Engine.GameVersionController/<GetText>d__6::<>m__Finally1()
 AHEFBFCHCBN⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String)
@@ -740,6 +754,11 @@ LLAHAJINDNL⇨System.Void SquadContainer::CreateDragableSailorComponent(UnityEng
 JEBBFNNDPBL⇨System.Void SquadContainer::CreateSubDragableSailorComponent(UnityEngine.GameObject)
 ILMIPKENLMC⇨System.Void StaminaData::LoadExpConfig()
 NCIBANDAJGK⇨System.Void StaminaData::OnAwake()
+DFLGPOIFLID⇨System.Void Tad/<>c::<ProcessSkill>b__7_0()
+PFDADBEKHIL⇨System.Void Tad/<>c::<RunBaseAttack>b__3_0()
+FBOJPPIIIKA⇨System.Void Tad/<>c__DisplayClass7_0::<ProcessSkill>b__1()
+HMMGLNMFGGE⇨System.Void Tad/<>c__DisplayClass7_0::<ProcessSkill>b__2()
+LALEEKONGKG⇨System.Void Tad/<>c__DisplayClass7_0::<ProcessSkill>b__3()
 AELKIGDDGHK⇨System.Void TargetsUtils/<>c__DisplayClass0_0::<Melee>b__0(CombatSailor)
 OLOOJABJDPA⇨System.Void TargetsUtils/<>c__DisplayClass10_0::<SameRow>b__0(CombatSailor)
 GOLFCKKPHID⇨System.Void TargetsUtils/<>c__DisplayClass11_0::<LowestHealth>b__0(CombatSailor)
@@ -829,6 +848,8 @@ OOAOOFHIKEN⇨Sfs2X.SmartFox Piratera.Network.NetworkController::sfs
 FJDNFNIHIFE⇨Spine.Bone Galdalf::boneTarget
 PEHEEPOKBEK⇨Spine.Bone Herminia::boneArr
 FJDNFNIHIFE⇨Spine.Bone Herminia::boneTarget
+PEHEEPOKBEK⇨Spine.Bone LiuHi::boneArr
+FJDNFNIHIFE⇨Spine.Bone LiuHi::boneTarget
 FJDNFNIHIFE⇨Spine.Bone Meechik::boneTarget
 PEHEEPOKBEK⇨Spine.Bone RowT::boneArr
 FJDNFNIHIFE⇨Spine.Bone RowT::boneTarget
@@ -1246,6 +1267,7 @@ ADEKCCHGKKG⇨System.Boolean Geechoso::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Helti::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Herminia::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Jenkins::CanActiveSkill(CombatState) cbState
+ADEKCCHGKKG⇨System.Boolean LiuHi::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Mealodo::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Meechik::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean OBonbee::CanActiveSkill(CombatState) cbState
@@ -1258,6 +1280,7 @@ ADEKCCHGKKG⇨System.Boolean Salvatafo::CanActiveSkill(CombatState) cbState
 HCCLKHJNKKD⇨System.Boolean ScriptableObjectPro/UnityImitatingContractResolver::IsIgnoredType(System.Type) type
 ADEKCCHGKKG⇨System.Boolean Scrub::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Sojeph::CanActiveSkill(CombatState) cbState
+ADEKCCHGKKG⇨System.Boolean Tad::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Tons::CanActiveSkill(CombatState) cbState
 MELCGPPFDMF⇨System.Boolean UserData::IsEnoughBeri(System.Int64) beri
 GOGODJDHBAG⇨System.Collections.Generic.IList`1<Newtonsoft.Json.Serialization.JsonProperty> ScriptableObjectPro/UnityImitatingContractResolver::CreateProperties(System.Type,Newtonsoft.Json.MemberSerialization) memberSerialization
@@ -1392,6 +1415,11 @@ PMIICDCNDNH⇨System.Single Jenkins::ProcessSkill(System.Collections.Generic.Lis
 JBBOPKICABO⇨System.Single Jenkins::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) targets
 FOKBPEICDIA⇨System.Single Jenkins::RunBaseAttack(CombatSailor) target
 FBJIJHDBELD⇨System.Single Jenkins::TakeDamage(Damage) d
+ADEKCCHGKKG⇨System.Single LiuHi::CastSkill(CombatState) cbState
+PMIICDCNDNH⇨System.Single LiuHi::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) _params
+JBBOPKICABO⇨System.Single LiuHi::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) targets
+FOKBPEICDIA⇨System.Single LiuHi::RunBaseAttack(CombatSailor) target
+FBJIJHDBELD⇨System.Single LiuHi::TakeDamage(Damage) d
 ADEKCCHGKKG⇨System.Single Mealodo::CastSkill(CombatState) cbState
 PMIICDCNDNH⇨System.Single Mealodo::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) _params
 JBBOPKICABO⇨System.Single Mealodo::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) targets
@@ -1443,6 +1471,10 @@ PMIICDCNDNH⇨System.Single Sojeph::ProcessSkill(System.Collections.Generic.List
 JBBOPKICABO⇨System.Single Sojeph::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) targets
 FOKBPEICDIA⇨System.Single Sojeph::RunBaseAttack(CombatSailor) target
 FBJIJHDBELD⇨System.Single Sojeph::TakeDamage(Damage) d
+ADEKCCHGKKG⇨System.Single Tad::CastSkill(CombatState) cbState
+PMIICDCNDNH⇨System.Single Tad::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) _params
+JBBOPKICABO⇨System.Single Tad::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) targets
+FOKBPEICDIA⇨System.Single Tad::RunBaseAttack(CombatSailor) target
 ADEKCCHGKKG⇨System.Single Tons::CastSkill(CombatState) cbState
 PMIICDCNDNH⇨System.Single Tons::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) _params
 JBBOPKICABO⇨System.Single Tons::ProcessSkill(System.Collections.Generic.List`1<System.String>,System.Collections.Generic.List`1<System.Single>) targets
@@ -1626,6 +1658,19 @@ LMDOJADLIFC⇨System.Void OBonbee::GainFury(System.Int32) value
 CHLKBJKLJBK⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
 CPIHOGKHADA⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
 BBOGDHJHGPB⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
+EHLDBDLCDIP⇨System.Void Piratera.Cheat.CheatMgr::CheatBotAndPlay(Sfs2X.Entities.Data.SFSObject) sailorCheatData
+KDOOFPHKNHM⇨System.Void Piratera.Cheat.CheatMgr::CheatRank(System.Int32) rank
+EGJOKFAHFPD⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32) quantity
+KENHIJKCKAH⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32) resource
+DLPDGGDCNDO⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) level
+CBMHCHLKODH⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) name
+JLCDNIOBKLG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) quality
+JLCDNIOBKLG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32) quality
+OBELGLDNGJK⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32) sid
+MFCNFBBNEDO⇨System.Void Piratera.Cheat.PopupCheatGame::UpdatePVERank(System.Collections.Generic.List`1<System.String>) arg0
+CHLKBJKLJBK⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
+CPIHOGKHADA⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
+BBOGDHJHGPB⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
 MIAEKGCHMAB⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) end
 ALLBGKOKCDB⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) m
 EBLFODBNAND⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) start
@@ -1859,6 +1904,7 @@ MFJIADJGIHK⇨System.Void SubSailorIcon::OnPointerUp(UnityEngine.EventSystems.Po
 IJHHIEODIDM⇨System.Void SubSailorIcon::OnSelectSubSailor(UnityEngine.EventSystems.PointerEventData) data
 LMDOJADLIFC⇨System.Void SubSailorIcon::set_Model(SailorModel) value
 FPDMBEKDDGK⇨System.Void SubSailorIcon::UpdateSailorImage(SailorModel) model
+LMDOJADLIFC⇨System.Void Tad::GainFury(System.Int32) value
 EFCOLMMCBNO⇨System.Void TeamColor::ShowClassBonus(System.Collections.Generic.List`1<ClassBonusItem>) passiveType
 BBOGDHJHGPB⇨System.Void TeamCombatPrepareData::NewFromSFSObject(Sfs2X.Entities.Data.ISFSObject) packet
 KADFDAFPAFN⇨System.Void TeamCombatPrepareData::Occupie(System.String,System.Int16) sailorId

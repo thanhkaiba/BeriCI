@@ -156,13 +156,13 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.KralusStudio.Piratera
-    Standalone: com.KralusStudio.Piratera
+    Android: com.Kralus.Studio.Piratera
+    Standalone: com.Kralus.Studio.Piratera
   buildNumber:
     Standalone: 0
     iPhone: 0
     tvOS: 0
-  overrideDefaultApplicationIdentifier: 0
+  overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 10003
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 30
