@@ -1,4 +1,3 @@
-using Piratera.Constance;
 using Piratera.GUI;
 using Piratera.Lib;
 using Piratera.Network;
@@ -12,6 +11,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Piratera.Constance;
 
 public class LoginController : MonoBehaviour
 {
@@ -83,8 +83,15 @@ public class LoginController : MonoBehaviour
         string description = "There was a problem.";
         if (evt.Params.ContainsKey("errorCode"))
         {
-            int err = int.Parse(evt.Params["errorCode"].ToString());
-            description = EnumHelper.GetDescription((SFSErrorCode)err);
+            try
+            {
+                int err = int.Parse(evt.Params["errorCode"].ToString());
+                description = EnumHelper.GetDescription((SFSErrorCode)err);
+            } catch
+            {
+                description = evt.Params["errorMessage"].ToString();
+            }
+          
         }
         OnError(description);
     }

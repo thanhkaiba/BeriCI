@@ -49,7 +49,7 @@ namespace Piratera.Engine
 
         void Start()
         {
-#if !UNITY_EDITOR
+#if UNITY_EDITOR
         if (!string.IsNullOrEmpty(URL))
         {
             StartCoroutine(GetText());

@@ -9,7 +9,7 @@ namespace Piratera.Log
     class LogServiceManager : Singleton<LogServiceManager>
     {
 #if PIRATERA_LIVE
-        private const string URL = "http://crash-log.piratera.io/crash-log";
+        private const string URL = "https://crash-log.piratera.io/crash-log";
 #else
         private const string URL = "http://dev-game1.piratera.local:7676/crash-log";
 #endif
@@ -39,6 +39,7 @@ namespace Piratera.Log
             {
                 byte[] bodyRaw = Encoding.UTF8.GetBytes(text);
                 www.uploadHandler = new UploadHandlerRaw(bodyRaw);
+                www.downloadHandler = new DownloadHandlerBuffer();
                 www.SetRequestHeader("Content-Type", "text/plain");
                 yield return www.SendWebRequest();
                 if (www.result != UnityWebRequest.Result.Success)

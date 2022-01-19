@@ -7,7 +7,7 @@ namespace Piratera.Network
         [Description("Success")]
         SUCCESS = 800,
         [Description("Unknown error")]
-        UNKNOWN_ERROR = 801,
+        UNKNOWN_ERROR = 28,
         [Description("Invalid data")]
         INVALID_DATA = 802,
         [Description("Fighting line list empty")]
@@ -40,13 +40,13 @@ namespace Piratera.Network
         INVALID_GAME_STATE = 816,
 
         [Description("Server under maintenance")]
-        SERVER_MAINTAINACE = 817,
+        SERVER_MAINTAINACE = 8,
 
         [Description("Your username or password is incorrect")]
         WRONG_USER_NAME_OR_PASS = 819,
 
         [Description("Your username or password is incorrect")]
-        WRONG_USER_NAME_OR_PASS_2 = 818,
+        WRONG_USER_NAME_OR_PASS_2 = 3,
 
         [Description("A suitable opponent could not be found right now")]
         NO_OPPONENT_FOUND = 820,
