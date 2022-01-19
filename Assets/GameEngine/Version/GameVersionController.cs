@@ -13,20 +13,20 @@ namespace Piratera.Engine
     public class GameVersionController : MonoBehaviour
     {
 #if UNITY_STANDALONE_WIN
-#if PIRATERA_QC || PIRATERA_QC_DEV
+#if PIRATERA_QC || PIRATERA_DEV
      private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
 #else
      private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_LIVE;
 #endif
 #elif UNITY_ANDROID
 
-#if PIRATERA_QC || PIRATERA_QC_DEV
+#if PIRATERA_QC || PIRATERA_DEV
      private static string URL = "https://api.piratera.io/v1/game/version/" +  (int)BuildType.ANDROID_DEV;
 #else
      private static string URL = "https://api.piratera.io/v1/game/version/" +  (int)BuildType.ANDROID_LIVE;
 #endif
 #elif UNITY_STANDALONE_OSX
-#if PIRATERA_QC || PIRATERA_QC_DEV
+#if PIRATERA_QC || PIRATERA_DEV
      private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.MACOS_DEV;
 #else
      private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.MACOS_LIVE;
@@ -49,7 +49,7 @@ namespace Piratera.Engine
 
         void Start()
         {
-#if UNITY_EDITOR
+#if !UNITY_EDITOR
         if (!string.IsNullOrEmpty(URL))
         {
             StartCoroutine(GetText());
