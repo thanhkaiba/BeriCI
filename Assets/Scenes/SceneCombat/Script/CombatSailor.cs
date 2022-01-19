@@ -217,7 +217,6 @@ public class CombatSailor : Sailor
             GainFury(furyAdd);
             CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
         }
-        GainHealth(wildHeal);
         target.CheckActiveGrappler();
 
         // Deal damage
@@ -231,6 +230,7 @@ public class CombatSailor : Sailor
         };
         StartCoroutine(WaitAndDo(delay, () =>
         {
+            GainHealth(wildHeal);
             GainFury(GlobalConfigs.Combat.fury_per_base_attack);
             target.LoseHealth(damage);
         }));

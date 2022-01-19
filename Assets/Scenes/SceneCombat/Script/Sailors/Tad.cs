@@ -28,7 +28,7 @@ public class Tad : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        //StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
+        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
         StartCoroutine(GameUtils.WaitAndDo(0.5f, () => GameEffMgr.Instance.Shake(0.1f, 0.5f)));
         seq.AppendInterval(0.05f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
@@ -93,7 +93,7 @@ public class Tad : CombatSailor
         //listHighlight.AddRange(listTargets);
 
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundSkillSailor(2)));
+        StartCoroutine(GameUtils.WaitAndDo(0.0f, () => SoundMgr.PlaySoundSkillSailor(2)));
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);

@@ -74,6 +74,7 @@ public class LiuHi : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        StartCoroutine(GameUtils.WaitAndDo(0.0f, () => SoundMgr.PlaySoundSkillSailor(14)));
         base.ProcessSkill();
         List<CombatSailor> alies = CombatState.Instance.GetSailors(targets);
         float loseHealth = _params[0];
@@ -86,7 +87,9 @@ public class LiuHi : CombatSailor
             for (int i = 0; i < alies.Count; i++)
             {
                 alies[i].GainHealth(_params[i]);
-                var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), alies[i].transform.position, Quaternion.identity);
+                var pos = alies[i].transform.position;
+                pos.y += 4f;
+                var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
                 seq.AppendInterval(0.3f);
                 seq.AppendCallback(() => Destroy(eff));
             }
