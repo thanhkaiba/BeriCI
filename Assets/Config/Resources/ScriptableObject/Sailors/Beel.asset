@@ -16,7 +16,7 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 4d5a380abc682ce40b390b409fb946cf, type: 3}
   root_name: Beel
   rank: 3
-  power_base: 70
+  power_base: 65
   health_base: 320
   speed_base: 60
   armor: 20
@@ -27,4 +27,4 @@ MonoBehaviour:
   start_fury: 0
   max_fury: 75
   skill_params:
-  - 4
+  - 3

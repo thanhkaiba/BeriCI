@@ -25,7 +25,7 @@ MonoBehaviour:
   attack_type: 1
   classes: 030000000d000000
   start_fury: 0
-  max_fury: 40
+  max_fury: 20
   skill_params:
   - 2.5
-  - 1.25
+  - 1.5

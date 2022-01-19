@@ -15,16 +15,16 @@ MonoBehaviour:
   stamina_cost: 3
   preparing_time: 60
   lose_reward: 5
-  win_reward: 15
+  win_reward: 10
   excellent_bonus: 050000000a0000000f00000014000000
-  excellent_health_remain: 0000000019000000320000004b000000
+  excellent_health_remain: 00000000280000003c00000050000000
   hard_bonus_ratio: 1
   excellent_rank_inc:
   - 1
   - 2
   - 3
   - 5
-  lose_rank_dec: -5
+  lose_rank_dec: -4
   min_rank: 0
   max_rank: 100
   rank_bot_around: 3

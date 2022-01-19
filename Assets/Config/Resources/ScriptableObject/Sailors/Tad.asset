@@ -17,7 +17,7 @@ MonoBehaviour:
   root_name: Tad
   rank: 1
   power_base: 60
-  health_base: 350
+  health_base: 340
   speed_base: 50
   armor: 35
   magic_resist: 35

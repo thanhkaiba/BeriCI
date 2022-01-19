@@ -19,7 +19,7 @@ MonoBehaviour:
   power_base: 60
   health_base: 300
   speed_base: 50
-  armor: 30
+  armor: 40
   magic_resist: 40
   crit: 0
   attack_type: 0
@@ -28,4 +28,4 @@ MonoBehaviour:
   max_fury: 50
   skill_params:
   - 0.25
-  - 5
+  - 10

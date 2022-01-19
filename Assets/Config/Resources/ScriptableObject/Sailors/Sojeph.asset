@@ -16,7 +16,7 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 178155ca17c12fb41bab1985672f8cf2, type: 3}
   root_name: Sojeph
   rank: 1
-  power_base: 50
+  power_base: 55
   health_base: 300
   speed_base: 60
   armor: 25
