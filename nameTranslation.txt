@@ -437,7 +437,6 @@ BKJLJCMFOEE⇨System.Void CombatState::CreateTeamA()
 AGBIEKHPAMB⇨System.Void CombatState::CreateTeamB()
 IKJJGDNHEDH⇨System.Void CombatStats/<>c__DisplayClass27_0::<HaveType>b__0(SailorClass)
 DEAJPPDLMHB⇨System.Void CombatStats::<.ctor>b__0_0(Item)
-EECDBAHBMFE⇨System.Void CrashlyticsTester::throwExceptionEvery60Updates()
 NCIBANDAJGK⇨System.Void CrewData::OnAwake()
 MLIIFAEMEFH⇨System.Void CrewData::OnUpdateSquad()
 OOKKLCDDKOE⇨System.Void CrewData::ResetData()
@@ -590,7 +589,6 @@ LIGOJDIPIAD⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,Sys
 IDKBODPLCFG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32)
 DNFAEAEEJOJ⇨System.Void Piratera.Cheat.PopupCheatGame::UpdatePVERank(System.Collections.Generic.List`1<System.String>)
 BBCOALKAJDO⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
-FLNOBBMLBPG⇨System.Void Piratera.Crashlytics.CrashlyticsInitializer/<>c::<CrashlyticsInit>b__0_0(System.Threading.Tasks.Task`1<Firebase.DependencyStatus>)
 CCBKJEDEKMB⇨System.Void Piratera.Engine.GameVersionController/<GetText>d__6::<>m__Finally1()
 AHEFBFCHCBN⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String)
 OOKKLCDDKOE⇨System.Void Piratera.Engine.MaintainManager::ResetData()
@@ -925,7 +923,6 @@ IKKFOFFDOPM⇨System.Int32 CombatStats::BaseFury
 BOKKBMOKMCA⇨System.Int32 CombatStats::CurrentSpeed
 PDEMHADJJDC⇨System.Int32 CombatStats::Fury
 LHELOMDMLKD⇨System.Int32 CombineTypeConfig/Level::pop
-OLBFEFIBNDD⇨System.Int32 CrashlyticsTester::updatesBeforeException
 IGLDPGKFNEM⇨System.Int32 Damage::fury_gain
 INHCPIFKNFL⇨System.Int32 Davinci::progress
 NIMAMBLOMPK⇨System.Int32 DragableSailor::TransformHeight

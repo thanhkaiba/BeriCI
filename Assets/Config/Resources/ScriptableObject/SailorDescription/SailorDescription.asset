@@ -58,24 +58,11 @@ MonoBehaviour:
       present_name: O-Bonbee
       title: Baby scared
       skill_description: Use his sword-arms, deal damage in a column.
-    - root_name: Kaibon
-      present_name: Kaibon
-      title: Epic story teller
-      skill_description: Buff all alies power and speed them up.
     - root_name: Salvatafo
       present_name: Salvatafo
       title: The Salvage of the Wotafo
       skill_description: Summon power of the sun, deal Magic Damage and heal depend
         on number of victims.
-    - root_name: Scott_Papagal
-      present_name: Scott & Papagal
-      title: The elder Pirate
-      skill_description: When Papagal death, he becomes angry, uses his gun with
-        high speed.
-    - root_name: Tad
-      present_name: Tad
-      title: Beat tiger his bare hands
-      skill_description: Attack target three times with tiger technique.
     - root_name: Alex
       present_name: Alex
       title: Acient weapon Defender
@@ -87,7 +74,7 @@ MonoBehaviour:
       skill_description: Use hell power attack all enemies at the front.
     - root_name: Galdalf
       present_name: Galdalf
-      title: Aaboriginals Mage
+      title: Aboriginals Mage
       skill_description: At start of combat, use the secret charm to buff the one
         at the front power, fury and speed up them.
     - root_name: Mealodo
@@ -98,3 +85,11 @@ MonoBehaviour:
       present_name: Geechoso
       title: An old sailor
       skill_description: Shot his target two times.
+    - root_name: Tad
+      present_name: Tad
+      title: Kindergarten Tiger
+      skill_description: Scratch 3 times, heal with WILD-buff.
+    - root_name: LiuHi
+      present_name: LiuHi
+      title: Yellow Flower
+      skill_description: 'Heal around Alies. '
