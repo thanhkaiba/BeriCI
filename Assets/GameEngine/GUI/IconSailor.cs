@@ -29,6 +29,8 @@ public class IconSailor : MonoBehaviour
     private GameObject GOClass;
     [SerializeField]
     private GameObject GOFocus;
+    [SerializeField]
+    private Text level;
     public Action<SailorModel> OnClick;
     public SailorModel sailorModel;
     public bool ShowClass = false;
@@ -55,6 +57,7 @@ public class IconSailor : MonoBehaviour
         {
             RenderClass(model.config_stats.classes);
         }
+        level.text = "" + model.level;
     }
     public void ShowFocus(bool b)
     {
