@@ -18,4 +18,7 @@ public class PvEConfig : ScriptableObjectPro
     public float max_rank = 100f;
 
     public float rank_bot_around = 5f;
+
+    public int sailor_exp_win = 150;
+    public int sailor_exp_lose = 100;
 }
