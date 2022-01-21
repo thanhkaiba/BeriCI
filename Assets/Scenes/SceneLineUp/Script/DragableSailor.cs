@@ -12,7 +12,6 @@ public class DragableSailor : MonoBehaviour
     [SerializeField]
     protected short selectingIndex = -1;
     protected Sailor sailor;
-    private GameObject model;
     [SerializeField]
     protected short originIndex = -1;
     protected Image dragImage;
@@ -30,12 +29,8 @@ public class DragableSailor : MonoBehaviour
     {
         boxAround = GetComponent<BoxCollider>();
         sailor = GetComponent<Sailor>();
-        canvas = FindObjectOfType<Canvas>();
-        Transform t = transform.Find("model");
-        if (t != null)
-        {
-            model = t.gameObject;
-        }
+        //canvas = FindObjectOfType<Canvas>();
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
     }
 
     protected void OnMouseDown()
@@ -81,7 +76,7 @@ public class DragableSailor : MonoBehaviour
             if (mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
             {
                 dragImage.enabled = false;
-                model.SetActive(true);
+                ShowChild(true);
                 OnDragSailor(mousePosition);
             }
             else
@@ -89,12 +84,18 @@ public class DragableSailor : MonoBehaviour
 
                 UpdateSlots(originIndex);
                 dragImage.enabled = true;
-                model.SetActive(false);
+                ShowChild(false);
                 dragImage.transform.position = mousePosition;
             }
 
         }
 
+    }
+    private void ShowChild(bool isShow)
+    {
+        int children = transform.childCount;
+        for (int i = 0; i < children; ++i)
+            transform.GetChild(i).gameObject.SetActive(isShow);
     }
 
     protected void OnDragSailor(Vector2 mousePosition)

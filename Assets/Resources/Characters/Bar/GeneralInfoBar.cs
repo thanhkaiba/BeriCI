@@ -9,4 +9,12 @@ public class GeneralInfoBar : MonoBehaviour
     private Text level;
     [SerializeField]
     private Text quality;
+    [SerializeField]
+    private Slider qualitySlider;
+    public void PresentData(SailorModel model)
+    {
+        level.text = "" + model.level;
+        quality.text = "" + model.quality;
+        qualitySlider.value = model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
+    }
 }

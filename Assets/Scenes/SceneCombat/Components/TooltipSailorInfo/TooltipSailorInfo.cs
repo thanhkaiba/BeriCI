@@ -33,7 +33,7 @@ public class TooltipSailorInfo : MonoBehaviour
     public List<Image> iconItems;
     void Awake()
     {
-        canvas = FindObjectOfType<Canvas>().GetComponent<RectTransform>();
+        canvas = GameObject.Find("Canvas").GetComponent<RectTransform>();
         panel = GetComponent<RectTransform>();
         Instance = this;
     }
@@ -44,7 +44,6 @@ public class TooltipSailorInfo : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
-
     }
     private void Update()
     {
@@ -66,7 +65,7 @@ public class TooltipSailorInfo : MonoBehaviour
 
             if (follow != null)
             {
-                Vector3 pos = Camera.main.GetComponent<Camera>().WorldToScreenPoint(follow.position) + new Vector3(0, Screen.height / 10, 0);
+                Vector3 pos = Camera.main.GetComponent<Camera>().WorldToScreenPoint(follow.position) + new Vector3(0, Screen.height / 7.5f, 0);
                 transform.position = pos;
                 UpdateTooltipPos();
             }
@@ -138,7 +137,7 @@ public class TooltipSailorInfo : MonoBehaviour
     public void ShowStaticTooltip(SailorModel sailorModel, Vector3 position)
     {
         ShowTooltip(sailorModel, null);
-        transform.position = position + new Vector3(0, GetComponent<RectTransform>().sizeDelta.y / 2 * canvas.transform.localScale.x);
+        transform.position = position + new Vector3(0, GetComponent<RectTransform>().sizeDelta.y / 2.4f * canvas.transform.localScale.x);
         UpdateTooltipPos();
     }
 

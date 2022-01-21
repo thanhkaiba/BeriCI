@@ -30,7 +30,7 @@ public class GuiReward : BaseGui
     public void SetReward(GameEndData r)
     {
         texts[0].text = "";
-        var canvas = FindObjectOfType<Canvas>();
+        var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         Sequence seqe = DOTween.Sequence();
         coin.transform.localScale = Vector3.zero;
         seqe.Append(coin.rectTransform.DOMoveY(50 * canvas.transform.localScale.x, 0.25f).From());

@@ -39,7 +39,7 @@ public class CrewManager : MonoBehaviour
 
     private void Start()
     {
-        canvas = FindObjectOfType<Canvas>().transform;
+        canvas = GameObject.Find("Canvas").transform;
         GameEvent.SailorInfoChanged.AddListener(OnSailorInfoChanged);
         RenderListSubSailor();
 #if PIRATERA_DEV || PIRATERA_QC
@@ -122,7 +122,7 @@ public class CrewManager : MonoBehaviour
             classImgs[i].sprite = s;
             //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
-        qualityText.text = "Qua: " + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        qualityText.text = "Quality: " + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
         UpdateRankIconPosition();
     }
     public void BackToLobby()

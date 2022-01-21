@@ -22,7 +22,7 @@ public class TooltipIconSailor : MonoBehaviour, IPointerDownHandler, IPointerUpH
         {
             if (TooltipSailorInfo.Instance != null && ShowToolTip)
             {
-                Canvas canvas = FindObjectOfType<Canvas>();
+                Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
                 TooltipSailorInfo.Instance.ShowStaticTooltip(iconSailor.sailorModel, transform.position + new Vector3(0, iconSailor.icon.sprite.rect.height * canvas.transform.localScale.x));
 
             }

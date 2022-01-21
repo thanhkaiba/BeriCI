@@ -24,7 +24,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         iconSailor = GetComponent<IconSailor>();
         iconSailor.gameObject.AddComponent<TooltipIconSailor>();
-        canvas = FindObjectOfType<Canvas>();
+        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         iconSailor.ShowClass = true;
     }
 

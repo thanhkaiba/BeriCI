@@ -19,7 +19,6 @@ public class SquadBContainer : MonoBehaviour
 
                 if (sailorId.Length > 0)
                 {
-
                     Sailor sailor = AddSailor(sailorId);
                     slot.SetSelectedSailer(sailor);
                 }
@@ -40,6 +39,9 @@ public class SquadBContainer : MonoBehaviour
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
         sailor.transform.localPosition = Vector3.zero;
+        var model = sailor.transform.Find("model");
+        var curScale = model.localScale;
+        model.localScale = new Vector3(-curScale.x, curScale.y, curScale.z);
         return sailor;
     }
 

@@ -83,9 +83,16 @@ public class GameUtils : UnityEngine.Object
         GameObject characterGO = Instantiate(sailorModel.config_stats.model);
         Sailor sailor = characterGO.AddComponent<Sailor>();
         sailor.Model = sailorModel;
-        sailor.gameObject.AddComponent<Billboard>();
-        return sailor;
 
+        var barPrefab = Resources.Load<GameObject>("characters/Bar/GereralInfoBar");
+        var barGO = Instantiate(
+            barPrefab,
+            sailor.transform.Find("nodeBar"));
+        barGO.transform.localScale = new Vector3(0.024f, 0.024f, 1f);
+        barGO.transform.localPosition = new Vector3(0, 0, 0);
+        barGO.transform.GetComponent<GeneralInfoBar>().PresentData(sailorModel);
+
+        return sailor;
     }
     public static Item CreateItem(string itemId, int quality = 0)
     {

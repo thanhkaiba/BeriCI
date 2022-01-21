@@ -7,7 +7,6 @@ public class DragableSubsailor : DragableSailor
 
     private SubSailorIcon subSailorIcon;
     private Sailor swapSailor;
-    private GameObject model;
     public Action<string, short> ReplaceSailorAction;
     public Func<bool> IsSquadFull;
     public Action<GameObject> OnTransfromSailor;
@@ -17,12 +16,6 @@ public class DragableSubsailor : DragableSailor
         draging = true;
         this.subSailorIcon = subSailorIcon;
         SetSailorOpacity(0.8f);
-        Transform t = transform.Find("model");
-        if (t != null)
-        {
-            model = t.gameObject;
-            model.SetActive(false);
-        }
         dragImage = d;
 
         Vector3 startPos = Camera.main.ScreenToWorldPoint(mousePosition2D);
@@ -106,7 +99,7 @@ public class DragableSubsailor : DragableSailor
             if (mousePosition.y > (TransformHeight * canvas.transform.localScale.y))
             {
                 dragImage.enabled = false;
-                model.SetActive(true);
+                ShowChild(true);
                 OnDragSailor(mousePosition);
 
             }
@@ -122,7 +115,7 @@ public class DragableSubsailor : DragableSailor
                     selectingIndex = -1;
                 }
                 dragImage.enabled = true;
-                model.SetActive(false);
+                ShowChild(false);
                 dragImage.transform.position = mousePosition;
             }
         }
@@ -130,6 +123,12 @@ public class DragableSubsailor : DragableSailor
         {
             OnMouseUp();
         }
+    }
+    private void ShowChild(bool isShow)
+    {
+        int children = transform.childCount;
+        for (int i = 0; i < children; ++i)
+            transform.GetChild(i).gameObject.SetActive(isShow);
     }
 
     protected override void UpdateSlots(short newSelecting)
