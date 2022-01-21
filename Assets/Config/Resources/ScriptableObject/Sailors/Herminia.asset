@@ -16,8 +16,8 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 09a258d0c91e3d94daf23f5a156565b4, type: 3}
   root_name: Herminia
   rank: 0
-  power_base: 40
-  health_base: 300
+  power_base: 50
+  health_base: 250
   speed_base: 80
   armor: 15
   magic_resist: 15

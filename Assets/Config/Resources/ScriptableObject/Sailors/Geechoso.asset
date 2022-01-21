@@ -16,7 +16,7 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: 80e20952244cb0744815047b143c054e, type: 3}
   root_name: Geechoso
   rank: 0
-  power_base: 40
+  power_base: 45
   health_base: 300
   speed_base: 80
   armor: 15

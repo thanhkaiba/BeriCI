@@ -10,4 +10,8 @@ public class SailorGeneralConfig : ScriptableObjectPro
 
     public float POWER_PER_LEVEL_RATIO = 0.1f;
     public float HEALTH_PER_LEVEL_RATIO = 0.1f;
+
+    public int START_LEVEL = 0;
+    public int MAX_LEVEL = 20;
+    public int EXP_PARAMS = 500;
 }

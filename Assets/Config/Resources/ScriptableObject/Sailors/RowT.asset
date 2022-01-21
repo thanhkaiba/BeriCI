@@ -19,8 +19,8 @@ MonoBehaviour:
   power_base: 65
   health_base: 300
   speed_base: 60
-  armor: 30
-  magic_resist: 30
+  armor: 15
+  magic_resist: 15
   crit: 0
   attack_type: 1
   classes: 04000000
