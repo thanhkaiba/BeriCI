@@ -15,6 +15,6 @@ public class GeneralInfoBar : MonoBehaviour
     {
         level.text = "" + model.level;
         quality.text = "" + model.quality;
-        qualitySlider.value = model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        qualitySlider.value = (float) model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
     }
 }
