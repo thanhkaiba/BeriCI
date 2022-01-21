@@ -40,7 +40,7 @@ public class OBonbee : CombatSailor
     }
     public override void SetFaceDirection()
     {
-        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1f : -1f, 1f, 1f);
+        if (modelObject.activeSelf) modelObject.transform.localScale = new Vector3(cs.team == Team.A ? 1.3f : -1.3f, 1.3f, 1.3f);
     }
     // skill
     public override bool CanActiveSkill(CombatState cbState)
