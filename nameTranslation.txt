@@ -48,11 +48,8 @@ NDIJDFMAHNL⇨CombatState/<>c__DisplayClass9_1
 KJKHBEMNIMD⇨CombatStats
 CAKAPKIPHID⇨CombatStats/<>c__DisplayClass27_0
 HGLAGICNNEC⇨CombatStatus
-DNBLLMNOOKD⇨CombineTypeConfig
-ECCNLHILKAJ⇨CombineTypeConfig/Level
-ENDGBIMJLEL⇨CombineTypeConfig/PassiveConfig
 NDIBHOHJKNE⇨CrewData/<>c__DisplayClass8_0
-ELPCNNAKHNP⇨CrewManager/<>c__DisplayClass22_0
+CBMOGKHCCKI⇨CrewManager/<>c__DisplayClass17_0
 DGNEEDKIHNF⇨CustomCertificateHandler
 HAACEJPCLLD⇨Damage
 GOPMGJKEOEK⇨Davinci/<Downloader>d__38
@@ -82,7 +79,6 @@ FNAIHCLDILJ⇨GameEffMgr/<>c__DisplayClass21_0
 MHPBCBDIJNC⇨GameEffMgr/<>c__DisplayClass24_0
 POHCEOHMGDC⇨GameEndData
 JJDGABCEOJB⇨GameEvent
-DIMENPNCCOM⇨GameMode
 KHONBKLOBGM⇨GameTimeMgr
 LECEOMGKBBJ⇨GameUtils
 HKONIIMCEBO⇨GameUtils/<>c__DisplayClass7_0
@@ -91,7 +87,6 @@ IGDFABKLHNC⇨GameUtils/<WaitAndDo>d__11
 IALBNPIJCCF⇨Geechoso/<>c__DisplayClass3_0
 JKHKIJDGIAF⇨Geechoso/<>c__DisplayClass8_0
 JACPEODPPLE⇨Geechoso/<>c__DisplayClass9_0
-BNLNBDKOGMN⇨GlobalConfigs
 LFFPNAINAFJ⇨GuiReward/<>c__DisplayClass6_0
 LJPHBMJCMEM⇨GuiReward/<>c__DisplayClass7_0
 JANKINGEHMK⇨Helti/<>c__DisplayClass8_0
@@ -118,8 +113,15 @@ DCGNLKKEGMM⇨ModeID
 HNIMOOFMEFP⇨OBonbee/<>c__DisplayClass6_0
 JIPIIIJCLOK⇨OBonbee/<>c__DisplayClass7_0
 DPHLJEHNODA⇨Piratera.Build.BuildType
+CGHMFAOBLFD⇨Piratera.Cheat.CheatMgr
+PCCILHNAIHP⇨Piratera.Config.CombineTypeConfig
+JOAGOLOIICP⇨Piratera.Config.CombineTypeConfig/Level
+GCKHBEIPEMN⇨Piratera.Config.CombineTypeConfig/PassiveConfig
+IAHAFIIGHIK⇨Piratera.Config.GameConfigSync/ConfigFileMeta
+FOGGKGIBLIM⇨Piratera.Config.GlobalConfigs
 MOOMDLBEEGN⇨Piratera.Constance.GameConst
 JANINBFCFGL⇨Piratera.Engine.GameVersionController/<GetText>d__6
+EDKCIHBKGFG⇨Piratera.Engine.GameVersionController/<GetTextWithCustomCertificate>d__8
 JGAONCLIJBP⇨Piratera.Engine.MaintainManager
 HNEDDPEDJLB⇨Piratera.GUI.GuiBuySlot/<>c__DisplayClass11_0
 EBCJCDEKBAP⇨Piratera.GUI.GuiBuyStamina/<>c__DisplayClass15_0
@@ -241,13 +243,13 @@ KNKHGJLMPGD⇨CombatSailor TargetsUtils::Melee(CombatSailor,System.Collections.G
 HOCIPGGIDPM⇨CombatSailor TargetsUtils::Random(System.Collections.Generic.List`1<CombatSailor>)
 MIDKOJAOLCN⇨CombatSailor TargetsUtils::Range(CombatSailor,System.Collections.Generic.List`1<CombatSailor>)
 GNLNPDHDOFF⇨CombatSailor TargetsUtils::Self(CombatSailor)
-EIGCBOIMILG⇨CombineTypeConfig/PassiveConfig CombineTypeConfig::GetPassiveConfig(SailorClass)
 MOKDPHEOIGA⇨DG.Tweening.Sequence Piratera.Utils.DoTweenUtils::FadeAppearX(UnityEngine.UI.Button,System.Single,System.Single,DG.Tweening.Ease)
 GDFIPGOAKFN⇨DG.Tweening.Sequence Piratera.Utils.DoTweenUtils::FadeAppearY(UnityEngine.UI.Button,System.Single,System.Single,DG.Tweening.Ease)
 GDFIPGOAKFN⇨DG.Tweening.Sequence Piratera.Utils.DoTweenUtils::FadeAppearY(UnityEngine.UI.Image,System.Single,System.Single,DG.Tweening.Ease)
 GPKMBIOBNAP⇨DG.Tweening.Tweener Piratera.Utils.DoTweenUtils::FadeAppear(UnityEngine.UI.Image,System.Single,System.Single)
 JBAOMIENCPH⇨FightingLine FightingLine::NewFromSFSObject(Sfs2X.Entities.Data.ISFSArray)
 IOBIAAMDLIF⇨Item GameUtils::CreateItem(System.String,System.Int32)
+EIGCBOIMILG⇨Piratera.Config.CombineTypeConfig/PassiveConfig Piratera.Config.CombineTypeConfig::GetPassiveConfig(SailorClass)
 GEJDPLOACDB⇨Sailor CharacterAContainer::<RenderListSubSailor>b__14_0(System.String)
 GEJDPLOACDB⇨Sailor CharacterContainer::<RenderListSubSailor>b__14_0(System.String)
 ENMEBCPOMFH⇨Sailor GameUtils::CreateSailor(SailorModel)
@@ -270,7 +272,6 @@ CCPFGLHIJON⇨System.Boolean CombatState/<>c__DisplayClass28_0::<GetSailor>b__0(
 ABMANJLLKHO⇨System.Boolean CombatState/<>c__DisplayClass9_0::<CreateTeamFromServer>b__0(SailorModel)
 FMAPIOHJIMC⇨System.Boolean CombatState/<>c__DisplayClass9_1::<CreateTeamFromServer>b__1(SailorModel)
 JGENINHPDMF⇨System.Boolean CombatStats::HaveType(SailorClass)
-KCLEEKGPBCN⇨System.Boolean CombineTypeConfig::HaveCombine(SailorClass)
 JDODIOAFPIN⇨System.Boolean ContainerClassBonus::HaveBonus(SailorClass)
 JHFMMNOKEEK⇨System.Boolean CrewData/<>c__DisplayClass8_0::<GetSailorModel>b__0(SailorModel)
 JDPCGNJHILH⇨System.Boolean FightingLine::IsFull()
@@ -280,7 +281,7 @@ CPDCALLGJKN⇨System.Boolean FightingLine::Occupie(System.String,System.Int16)
 JOEBHAHECLE⇨System.Boolean FightingLine::Replace(System.String,System.Int16)
 HPNCEDDCCNH⇨System.Boolean FightingLine::Swap(System.String,System.String)
 FBIHHECEPAJ⇨System.Boolean FightingLine::UnEquip(System.String)
-JMCGKEFGPMB⇨System.Boolean ItemInfo::isMouseInsideUI()
+KCLEEKGPBCN⇨System.Boolean Piratera.Config.CombineTypeConfig::HaveCombine(SailorClass)
 PKHEFGKKMIC⇨System.Boolean Piratera.Engine.MaintainManager::CanPlay()
 JGENINHPDMF⇨System.Boolean SailorConfig::HaveType(SailorClass)
 JGENINHPDMF⇨System.Boolean SailorModel::HaveType(SailorClass)
@@ -308,10 +309,10 @@ LEFGAOBBEGB⇨System.Collections.Generic.List`1<Item> SailorModel::get_items()
 PAJKADIGPGD⇨System.Collections.Generic.List`1<SailorClass> SailorModel::GetListClasses()
 CMAJGDKEPHJ⇨System.Collections.Generic.List`1<SailorModel> TeamCombatPrepareData::get_OpponentSailors()
 JBLCIHMCOEB⇨System.Collections.Generic.List`1<SailorModel> TeamCombatPrepareData::get_YourSailors()
-KHGJDIICCCL⇨System.Collections.Generic.List`1<System.Int32> CombineTypeConfig::GetMilestones(SailorClass)
 KHGJDIICCCL⇨System.Collections.Generic.List`1<System.Int32> ContainerClassBonus::GetMilestones(SailorClass)
-OEKEPNHGAJL⇨System.Collections.Generic.List`1<System.Single> CombineTypeConfig::GetParams(SailorClass,System.Int32)
+KHGJDIICCCL⇨System.Collections.Generic.List`1<System.Int32> Piratera.Config.CombineTypeConfig::GetMilestones(SailorClass)
 OEKEPNHGAJL⇨System.Collections.Generic.List`1<System.Single> ContainerClassBonus::GetParams(SailorClass,System.Int32)
+OEKEPNHGAJL⇨System.Collections.Generic.List`1<System.Single> Piratera.Config.CombineTypeConfig::GetParams(SailorClass,System.Int32)
 KNKKCHKIAJL⇨System.Collections.Generic.List`1<System.String> FightingLine::GetValues()
 PANAAGFEDME⇨System.Collections.IEnumerator CombatMgr::EndLoop(CombatSailor,System.Single)
 KJEGKBCMDCE⇨System.Collections.IEnumerator CombatMgr::NextLoop(System.Single)
@@ -323,6 +324,7 @@ EDKMOHELLEK⇨System.Collections.IEnumerator Davinci::Downloader()
 GGOJKODOOHB⇨System.Collections.IEnumerator Davinci::ImageLoader(UnityEngine.Texture2D)
 BKHMFHMIMAG⇨System.Collections.IEnumerator GameUtils::WaitAndDo(System.Single,System.Action)
 BJDPMPIAAEG⇨System.Collections.IEnumerator Piratera.Engine.GameVersionController::GetText()
+KPLKIJCOHPL⇨System.Collections.IEnumerator Piratera.Engine.GameVersionController::GetTextWithCustomCertificate()
 CFLBCPJEJAJ⇨System.Collections.IEnumerator Piratera.Log.LogServiceManager::Post(System.String)
 OBLPHJEKKNI⇨System.Collections.IEnumerator Piratera.Utils.LoadAvatarUtils::StartLoadAvatar(UnityEngine.UI.Image,System.String)
 MLLEKGGDPIA⇨System.Collections.IEnumerator RoyalCollectingAnimation::CollectAnimation()
@@ -334,9 +336,9 @@ IANDENFOIED⇨System.Int32 CombatMgr::CalculateSpeedAddThisLoop()
 IOCIOOCPBAA⇨System.Int32 CombatState/<>c::<GetQueueNextActionSailor>b__20_0(CombatSailor,CombatSailor)
 FDMBKDEKLKN⇨System.Int32 CombatStats::get_MaxFury()
 HAJMKKIBPIN⇨System.Int32 CombatStats::get_SpeedNeed()
-ACPECMPNADM⇨System.Int32 CombineTypeConfig::GetMaxPopNeed(SailorClass)
 ACPECMPNADM⇨System.Int32 ContainerClassBonus::GetMaxPopNeed(SailorClass)
 GMKAGMBOPJE⇨System.Int32 FightingLine::get_NumSlot()
+ACPECMPNADM⇨System.Int32 Piratera.Config.CombineTypeConfig::GetMaxPopNeed(SailorClass)
 IAEJFLPBHJJ⇨System.Int32 SailorModel::get_exp()
 APBLBKHEDOA⇨System.Int32 SailorModel::get_level()
 PEMPHDABGFH⇨System.Int32 SailorModel::get_quality()
@@ -374,6 +376,7 @@ GIGMIADNEBI⇨System.String GameUtils::RandomId(System.Int32)
 FLANJKJHDMI⇨System.String GuiReward/<>c::<SetReward>b__6_1(System.Int64)
 AOGEOINOOBC⇨System.String LobbyUI/<>c::<OnBeriChanged>b__19_0(System.Int64)
 HLPDPABNKNG⇨System.String LobbyUI/<>c::<OnStaminaChanged>b__20_0(System.Int64)
+EDCPKLOLHAN⇨System.String Piratera.Config.GameConfigSync::CalculateMD5(System.String)
 CMCGOELFMAG⇨System.String Piratera.Engine.MaintainManager::GetMaintainMessage()
 EMLPDLKDBOH⇨System.String Piratera.Lib.EnumHelper::GetDescription(T)
 PHMDKLJLGEA⇨System.String Piratera.Network.LoginLogData::ToJson()
@@ -440,8 +443,8 @@ DEAJPPDLMHB⇨System.Void CombatStats::<.ctor>b__0_0(Item)
 NCIBANDAJGK⇨System.Void CrewData::OnAwake()
 MLIIFAEMEFH⇨System.Void CrewData::OnUpdateSquad()
 OOKKLCDDKOE⇨System.Void CrewData::ResetData()
-ENJAPNLJBAC⇨System.Void CrewManager/<>c::<RenderListSubSailor>b__22_1(IconSailor)
-KEGAIBECHEL⇨System.Void CrewManager/<>c__DisplayClass22_0::<RenderListSubSailor>b__0(SailorModel)
+KDFIKLADJCC⇨System.Void CrewManager/<>c::<RenderListSubSailor>b__17_1(IconSailor)
+KEGAIBECHEL⇨System.Void CrewManager/<>c__DisplayClass17_0::<RenderListSubSailor>b__0(SailorModel)
 NODIMMGLBJI⇨System.Void CrewManager::OnSailorInfoChanged(SailorModel)
 PBJOJECLNEF⇨System.Void CrewManager::RenderListSubSailor()
 IFMJGMNFLDP⇨System.Void Davinci::<start>b__37_0()
@@ -458,9 +461,11 @@ INLNGMMMIBJ⇨System.Void DragableSailor::OnMouseUpEmpty()
 GFCMOPLLPBH⇨System.Void DragableSailor::OnMouseUpWithSlot()
 GJPLNEFFAJP⇨System.Void DragableSailor::OnUnEquip()
 PNCCKDJJABI⇨System.Void DragableSailor::SetSailorOpacity(System.Single)
+MFBAGGIOBMD⇨System.Void DragableSailor::ShowChild(System.Boolean)
 GCGMFFBEDLB⇨System.Void DragableSailor::UpdateSlots(System.Int16)
 INLNGMMMIBJ⇨System.Void DragableSubsailor::OnMouseUpEmpty()
 GFCMOPLLPBH⇨System.Void DragableSubsailor::OnMouseUpWithSlot()
+MFBAGGIOBMD⇨System.Void DragableSubsailor::ShowChild(System.Boolean)
 GCGMFFBEDLB⇨System.Void DragableSubsailor::UpdateSlots(System.Int16)
 JCIADDEMADN⇨System.Void FightingLine::Clean()
 FHPPMDHDFDF⇨System.Void FightingLine::set_NumSlot(System.Int32)
@@ -520,12 +525,6 @@ PEFOEIIJGFJ⇨System.Void Herminia::ArrowTarget(UnityEngine.Vector3,UnityEngine.
 GLBNJAHCMDG⇨System.Void IconClassBonus/<>c__DisplayClass7_0::<Start>b__0()
 AMLBCNFJBDE⇨System.Void IconClassBonus::OnClickIcon(UnityEngine.Transform)
 JLMGLPKKBHJ⇨System.Void IconSailor::RenderClass(System.Collections.Generic.List`1<SailorClass>)
-LLCAHNDBNIC⇨System.Void ItemDisplay::display()
-CBHMJPPFILL⇨System.Void ItemDisplay::showColor()
-MNEBHIOMAHM⇨System.Void ItemDisplay::showPos()
-MCFMNGEBONB⇨System.Void ItemDisplay::showStats()
-IOMOBPIECHI⇨System.Void ItemMenu::readAllItemInEdit()
-GMIMONHPFKJ⇨System.Void ItemMenu::resetLeftMenuUI()
 DFLGPOIFLID⇨System.Void Jenkins/<>c::<ProcessSkill>b__7_0()
 GMCHILFPBEA⇨System.Void Jenkins/<>c::<ProcessSkill>b__7_2()
 KMEMOIOLDHF⇨System.Void Jenkins/<>c::<ProcessSkill>b__7_4()
@@ -589,7 +588,19 @@ OFIMOFGHBJN⇨System.Void OBonbee/<>c__DisplayClass7_0::<ProcessSkill>b__0()
 AJGLIMDLACP⇨System.Void PickTeamUI/<>c::<FlyBeri>b__11_0()
 BBCOALKAJDO⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 HDLICOHHGPG⇨System.Void PickTeamUI::UpdateSlotMaxCapacity()
+BKKFLJBELBG⇨System.Void Piratera.Cheat.CheatMgr::CheatBotAndPlay(Sfs2X.Entities.Data.SFSObject)
+CFELCODEIAB⇨System.Void Piratera.Cheat.CheatMgr::CheatRank(System.Int32)
+LLPGNGELKGK⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32)
+LIGOJDIPIAD⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String)
+IDKBODPLCFG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32)
+DNFAEAEEJOJ⇨System.Void Piratera.Cheat.PopupCheatGame::UpdatePVERank(System.Collections.Generic.List`1<System.String>)
+BBCOALKAJDO⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
+JBAOMIENCPH⇨System.Void Piratera.Config.GameConfigSync/ConfigFileMeta::NewFromSFSObject(Sfs2X.Entities.Data.ISFSObject)
+HPOIJHOKHPO⇨System.Void Piratera.Config.GameConfigSync/ConfigFileMeta::SaveFile()
+CLGBJAGHACP⇨System.Void Piratera.Config.GameConfigSync::onReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 CCBKJEDEKMB⇨System.Void Piratera.Engine.GameVersionController/<GetText>d__6::<>m__Finally1()
+CCBKJEDEKMB⇨System.Void Piratera.Engine.GameVersionController/<GetTextWithCustomCertificate>d__8::<>m__Finally1()
+LCNGLFBHANN⇨System.Void Piratera.Engine.GameVersionController::CheckVersion(System.String)
 AHEFBFCHCBN⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String)
 OOKKLCDDKOE⇨System.Void Piratera.Engine.MaintainManager::ResetData()
 JLGLDEJGOFD⇨System.Void Piratera.GUI.BaseGui::RunAppear()
@@ -714,11 +725,12 @@ LALEEKONGKG⇨System.Void Salvatafo/<>c__DisplayClass8_0::<ProcessSkill>b__3()
 MBMBHDHKNPA⇨System.Void Salvatafo/<>c__DisplayClass8_0::<ProcessSkill>b__4()
 DDKGEMNEFJN⇨System.Void Salvatafo/<>c__DisplayClass8_1::<ProcessSkill>b__5()
 ALKIOCMJMPM⇨System.Void Salvatafo/<>c__DisplayClass8_2::<ProcessSkill>b__6()
-CGNJHEPBACH⇨System.Void SceneLoadingUI/<>c::<OnNeedUpdate>b__5_0()
-NGILLONFAGB⇨System.Void SceneLoadingUI::<Start>b__2_0()
-OMNHBMKCKHA⇨System.Void SceneLoadingUI::<Start>b__2_1()
-GCHIIFHGMPK⇨System.Void SceneLoadingUI::<Start>b__2_2()
-MNEFACILHOI⇨System.Void SceneLoadingUI::<Start>b__2_3()
+ANKDIPAHPPN⇨System.Void SceneLoadingUI/<>c::<OnNeedUpdate>b__6_0()
+PKLJHLHLONF⇨System.Void SceneLoadingUI::<OnLoadError>b__5_0()
+LMMDJPMOFPI⇨System.Void SceneLoadingUI::<Start>b__3_0()
+JEBIDOAMPPO⇨System.Void SceneLoadingUI::<Start>b__3_1()
+GAGNPMEGHED⇨System.Void SceneLoadingUI::<Start>b__3_2()
+NCMNHNDHLNC⇨System.Void SceneLoadingUI::<Start>b__3_3()
 DNAHIAEGFFD⇨System.Void ScenePickTeamBattleUI/<>c::<OnTimeOut>b__17_0()
 BBCOALKAJDO⇨System.Void ScenePickTeamBattleUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject)
 OFBDMGKLAOH⇨System.Void ScriptableObjectPro/FloatConverter::set_DecimalPlaces(System.Int32)
@@ -808,15 +820,14 @@ AKPJHCOMGAH⇨UnityEngine.GameObject GameUtils::CreateFakeSailorObject(System.St
 CIGNFDLJCFI⇨UnityEngine.Transform TransformDeepChildExtension::FindDeepChild(UnityEngine.Transform,System.String)
 #Fields
 HCCLKHJNKKD⇨CombatAcionType CombatAction::type
-CAJIBLAFCFP⇨CombatConfig GlobalConfigs::Combat
+CAJIBLAFCFP⇨CombatConfig Piratera.Config.GlobalConfigs::Combat
 NLAHIOKENCE⇨CombatPosition CombatStats::position
 BMAMGMODBNO⇨CombatPosition FGL::pos
 BEOOHLHNFCM⇨CombatSailor SailorInQueue::sailorData
 MKCENAMOAAK⇨CombatSailor UIIngameMgr::currentA
 OJKHNNHHKIP⇨CombatSailor UIIngameMgr::currentB
 JCLJAJNHPCA⇨CombatStats TooltipSailorInfo::stats
-ILMHFJKIKOC⇨CombineTypeConfig CombineTypeConfig::Instance
-DKHJEIEJEBK⇨ContainerClassBonus GlobalConfigs::ClassBonus
+DKHJEIEJEBK⇨ContainerClassBonus Piratera.Config.GlobalConfigs::ClassBonus
 DNMJNLKMHBH⇨Davinci/RendererType Davinci::rendererType
 JBHHIMHEOGD⇨FightingLine TeamCombatPrepareData::fgl0
 ODNKPJMBIPP⇨FightingLine TeamCombatPrepareData::fgl1
@@ -825,17 +836,13 @@ ODNKPJMBIPP⇨FightingLine TeamCombatPrepareData::fgl1
 KAFPFOLPJFJ⇨GameEndData CombatAction::gameEndData
 BOBJCMKDGCA⇨HaveFog Piratera.GUI.HaveBaseGuiEffect::haveFog
 COLPOOBNNEF⇨IconSailor TooltipIconSailor::iconSailor
-JIDFNABFLDB⇨ItemColor ItemDisplay::color
-BLOOFNIJLIK⇨ItemDisplay ItemInfo::equipItem
-GBHJEIDOKDN⇨ItemDisplay ItemInfo::item
-BLFFNKEBAKH⇨ItemDisplay ItemMenu::itemClone
-BMAMGMODBNO⇨ItemPosition ItemDisplay::pos
 EPLNLJHONIA⇨ModeID CombatMgr::modeId
 HKAIHAKLIIC⇨ModeID TeamCombatPrepareData::modeID
+ILMHFJKIKOC⇨Piratera.Config.CombineTypeConfig Piratera.Config.CombineTypeConfig::Instance
 GAAECAAOPKJ⇨Piratera.GUI.HaveBaseGuiEffect Piratera.GUI.BaseGui::baseGuiEffect
 DIACPHLPBKK⇨Piratera.Network.GameLoginType Piratera.Network.LoginData::Type
 JCOOGACAAHJ⇨Piratera.Network.LoginData Piratera.Network.NetworkController::loginData
-LLLLCGOJABM⇨PvEConfig GlobalConfigs::PvE
+LLLLCGOJABM⇨PvEConfig Piratera.Config.GlobalConfigs::PvE
 HCCLKHJNKKD⇨RankBonus GameEndData::type
 KKCBGIDNAPE⇨RoyalCollectingAnimation/EXPANSION_MODE RoyalCollectingAnimation::_expansionMode
 PPNIKAHLLEC⇨RoyalCollectingController RoyalCollectingAnimation::Royal_collectinController
@@ -843,10 +850,9 @@ DFPPCHGDNPI⇨Sailor DragableSailor::sailor
 PGFFBKAMCCH⇨Sailor DragableSubsailor::swapSailor
 DFPPCHGDNPI⇨Sailor SquadSlot::sailor
 HCCLKHJNKKD⇨SailorClass ClassBonusItem::type
-HCCLKHJNKKD⇨SailorClass CombineTypeConfig/PassiveConfig::type
-ABPGACBDLFI⇨SailorClass ItemDisplay::buf_class
+HCCLKHJNKKD⇨SailorClass Piratera.Config.CombineTypeConfig/PassiveConfig::type
 <EPABGNEENCD>k__BackingField⇨SailorConfig SailorModel::<config_stats>k__BackingField
-ONAGBPPJDMO⇨SailorGeneralConfig GlobalConfigs::SailorGeneral
+ONAGBPPJDMO⇨SailorGeneralConfig Piratera.Config.GlobalConfigs::SailorGeneral
 AINPLPOHCNG⇨SailorModel CrewManager::curModel
 FPDMBEKDDGK⇨SailorModel SubSailorIcon::model
 FPDMBEKDDGK⇨SailorModel TooltipSailorInfo::model
@@ -878,8 +884,6 @@ CDMDJGNLFJN⇨System.Boolean Davinci::ENABLE_GLOBAL_LOGS
 BJCCHBIIKJP⇨System.Boolean Davinci::enableLog
 KKAMAEMCCFH⇨System.Boolean Davinci::success
 ILPADPALOMK⇨System.Boolean DragableSailor::draging
-NAGHMADCBHC⇨System.Boolean ItemDisplay::isEquiping
-IMNBCJEEHEE⇨System.Boolean ItemInfo::hasEquiping
 PINHKBGHHAK⇨System.Boolean Piratera.Network.CustomCryptoInitializerV2::useHttps
 CHJOKJPAPAC⇨System.Boolean Piratera.Network.NetworkController::shuttingDown
 ONMDDJNEIAO⇨System.Boolean RoyalBoxManager::close
@@ -905,12 +909,13 @@ COIGIFLMMCB⇨System.Byte TeamCombatPrepareData::yourTeamIndex
 COAOMFKPHMM⇨System.Collections.Generic.Dictionary`2<System.Int16,System.String> FightingLine::slots
 IIOLLBOINDH⇨System.Collections.Generic.Dictionary`2<System.String,Davinci> Davinci::underProcessDavincies
 DLLMNAPEELI⇨System.Collections.Generic.Dictionary`2<System.String,UnityEngine.GameObject> Piratera.GUI.GuiLayerSystem::guis
-FIMFMONHDPP⇨System.Collections.Generic.IEnumerable`1<CombineTypeConfig/Level> CombineTypeConfig/PassiveConfig::levels
-FIIMGBAGEJO⇨System.Collections.Generic.IEnumerable`1<CombineTypeConfig/PassiveConfig> CombineTypeConfig::config
-PMIICDCNDNH⇨System.Collections.Generic.IEnumerable`1<System.Single> CombineTypeConfig/Level::_params
+FIMFMONHDPP⇨System.Collections.Generic.IEnumerable`1<Piratera.Config.CombineTypeConfig/Level> Piratera.Config.CombineTypeConfig/PassiveConfig::levels
+FIIMGBAGEJO⇨System.Collections.Generic.IEnumerable`1<Piratera.Config.CombineTypeConfig/PassiveConfig> Piratera.Config.CombineTypeConfig::config
+PMIICDCNDNH⇨System.Collections.Generic.IEnumerable`1<System.Single> Piratera.Config.CombineTypeConfig/Level::_params
 LIPPLOCCMAI⇨System.Collections.Generic.List`1<CombatAction> CombatMgr::listActions
 NBGGMFDCJEH⇨System.Collections.Generic.List`1<IconSailor> CrewManager::listIcon
 <FJBBPMDHPDJ>k__BackingField⇨System.Collections.Generic.List`1<Item> SailorModel::<items>k__BackingField
+EBHKBDEPCCD⇨System.Collections.Generic.List`1<Piratera.Config.GameConfigSync/ConfigFileMeta> Piratera.Config.GameConfigSync::manifest
 LDGPNHNFMHD⇨System.Collections.Generic.List`1<Piratera.Network.NetworkActionListenerDelegate> Piratera.Network.NetworkController::serverActionListeners
 BDNFBLBLLNO⇨System.Collections.Generic.List`1<RoyalCollectingAnimation> RoyalCollectingController::_itemList
 BMIPJNPODPL⇨System.Collections.Generic.List`1<SailorClass> CombatStats::types
@@ -932,7 +937,6 @@ EHAIOOCAHAH⇨System.Int32 CombatMgr::actionCount
 IKKFOFFDOPM⇨System.Int32 CombatStats::BaseFury
 BOKKBMOKMCA⇨System.Int32 CombatStats::CurrentSpeed
 PDEMHADJJDC⇨System.Int32 CombatStats::Fury
-LHELOMDMLKD⇨System.Int32 CombineTypeConfig/Level::pop
 IGLDPGKFNEM⇨System.Int32 Damage::fury_gain
 INHCPIFKNFL⇨System.Int32 Davinci::progress
 NIMAMBLOMPK⇨System.Int32 DragableSailor::TransformHeight
@@ -940,8 +944,7 @@ CMOONAMCBGH⇨System.Int32 FightingLine::numSlot
 ECJLMDAFEMI⇨System.Int32 GameEndData::hard_bonus
 HGJMHANLOEB⇨System.Int32 GameEndData::mode_reward
 LIAEKELIJLF⇨System.Int32 GameEndData::win_rank_bonus
-HEEFLECANDE⇨System.Int32 ItemMenu::itemNo
-AGODKJFAOLO⇨System.Int32 ItemMenu::rowNo
+LHELOMDMLKD⇨System.Int32 Piratera.Config.CombineTypeConfig/Level::pop
 FAIDBBAOMKF⇨System.Int32 Piratera.GUI.GuiConfirmPVE::priceStamina
 LKJEOBOHEMC⇨System.Int32 Piratera.Network.GAME_NETWORK_ADDRESS::DEV_PORT
 DCGNKALLEND⇨System.Int32 Piratera.Network.GAME_NETWORK_ADDRESS::PROD_PORT
@@ -988,16 +991,6 @@ CDDFLBBOHBI⇨System.Single Damage::physics
 GIBNODAADMF⇨System.Single Damage::pure
 PMLDOOCFHGL⇨System.Single Davinci::fadeTime
 BFBMKLDIGLA⇨System.Single DragableSailor::originZ
-KNBKFIFENBM⇨System.Single ItemDisplay::armor
-MHCFIDFHEBL⇨System.Single ItemDisplay::crit
-EMKFMBIAGDI⇨System.Single ItemDisplay::fury
-DHGAOHKJBKH⇨System.Single ItemDisplay::health
-DHHMPBAJPJJ⇨System.Single ItemDisplay::magicres
-KCDPAICOBEN⇨System.Single ItemDisplay::power
-JLCDNIOBKLG⇨System.Single ItemDisplay::quality
-OJLNKGDADNB⇨System.Single ItemDisplay::speed
-GDNOLAJJOID⇨System.Single ItemDisplay::stat1
-PHODMMJMEDH⇨System.Single ItemDisplay::stat2
 PBHNIEIFCGK⇨System.Single SailorCollider::MOVE_OFFSET
 MPCPGJEAMMN⇨System.Single ScenePickTeamBattleUI::maxTime
 DHEDMIINKPA⇨System.Single ScenePickTeamBattleUI::remainTime
@@ -1012,7 +1005,9 @@ ECKJKBKOGGG⇨System.String Davinci::filePath
 IHODNGALJMB⇨System.String Davinci::uniqueHash
 LMNGLIKBMEO⇨System.String Davinci::url
 ODNKJOHGOHN⇨System.String FGL::id
-FPKBIPIIACI⇨System.String ItemDisplay::id_item
+DDOLAPMADFN⇨System.String Piratera.Config.GameConfigSync/ConfigFileMeta::Content
+AKAPGKOHJAN⇨System.String Piratera.Config.GameConfigSync/ConfigFileMeta::FileName
+AGPAOICMMBB⇨System.String Piratera.Config.GameConfigSync/ConfigFileMeta::MD5Hash
 GKCEPHLNGAM⇨System.String Piratera.Constance.GameConst::ACCOUNT_URL
 KOOMINBBBEI⇨System.String Piratera.Constance.GameConst::CUSTOMER_CARE_URL
 OBGNFCHAJOM⇨System.String Piratera.Constance.GameConst::FACEBOOK_URL
@@ -1114,13 +1109,10 @@ DGMJMGCHGIC⇨UnityEngine.Events.UnityEvent`2<System.Int64,System.Int64> GameEve
 GBIGGNPJPAF⇨UnityEngine.GameObject CombatSailor::iceBlock
 DFPPCHGDNPI⇨UnityEngine.GameObject CrewManager::sailor
 JGMAFPKBLLK⇨UnityEngine.GameObject Davinci::targetObj
-FPDMBEKDDGK⇨UnityEngine.GameObject DragableSailor::model
-FPDMBEKDDGK⇨UnityEngine.GameObject DragableSubsailor::model
 OPLPPCOLGIM⇨UnityEngine.GameObject HaveFog::fog
 PPAOILHKPNM⇨UnityEngine.GameObject Helti::wind
 JHKEBHJDDFL⇨UnityEngine.GameObject Scrub::circle
 JHKEBHJDDFL⇨UnityEngine.GameObject Tons::circle
-NKAEFCDNKPG⇨UnityEngine.RectTransform ItemInfo::panel
 NFFEKOCFMKG⇨UnityEngine.RectTransform TooltipSailorInfo::canvas
 NKAEFCDNKPG⇨UnityEngine.RectTransform TooltipSailorInfo::panel
 ELGFFJIGNGL⇨UnityEngine.Texture2D Davinci::errorPlaceholder
@@ -1144,12 +1136,10 @@ DHPGJKEEEHC⇨FightingLine TeamCombatPrepareData::OpponentFightingLine()
 DHBHMFGEDON⇨FightingLine TeamCombatPrepareData::YourFightingLine()
 ILMHFJKIKOC⇨FlyTextMgr FlyTextMgr::Instance()
 ILMHFJKIKOC⇨GameEffMgr GameEffMgr::Instance()
-JOOCFNICLIN⇨ItemPosition ItemDisplay::Position()
 OMOHOOOPDCG⇨SailorConfig SailorModel::config_stats()
 DFBCOJCGAFO⇨SailorModel SubSailorIcon::Model()
 HEOECBHKJOA⇨Sfs2X.SmartFox Piratera.Network.NetworkController::Connection()
 COAOMFKPHMM⇨SquadSlot[] DragableSailor::slots()
-MKGOALCJDPO⇨System.Boolean ItemDisplay::IsEquiping()
 PBABIKFENBL⇨System.Boolean Piratera.Network.NetworkController::IsInitialized()
 OHLEPFMMOBH⇨System.Boolean Piratera.Sound.SoundMgr::MusicOn()
 EAHCDGAIKDJ⇨System.Boolean Piratera.Sound.SoundMgr::SoundOn()
@@ -1224,7 +1214,6 @@ NBLACPNCPCJ⇨CombatSailor TargetsUtils::Random(System.Collections.Generic.List`
 OMBBIIMJMIA⇨CombatSailor TargetsUtils::Range(CombatSailor,System.Collections.Generic.List`1<CombatSailor>) actor
 NBLACPNCPCJ⇨CombatSailor TargetsUtils::Range(CombatSailor,System.Collections.Generic.List`1<CombatSailor>) l
 OMBBIIMJMIA⇨CombatSailor TargetsUtils::Self(CombatSailor) actor
-HCCLKHJNKKD⇨CombineTypeConfig/PassiveConfig CombineTypeConfig::GetPassiveConfig(SailorClass) type
 BINBCPLJPIN⇨Davinci Davinci::into(UnityEngine.Renderer) renderer
 JPNHJDODJFM⇨Davinci Davinci::into(UnityEngine.SpriteRenderer) spriteRenderer
 OAMFGFBKMIN⇨Davinci Davinci::into(UnityEngine.UI.Image) image
@@ -1258,6 +1247,7 @@ OAMFGFBKMIN⇨DG.Tweening.Tweener Piratera.Utils.DoTweenUtils::FadeAppear(UnityE
 NNIAPCNJGDI⇨FightingLine FightingLine::NewFromSFSObject(Sfs2X.Entities.Data.ISFSArray) sFSArray
 OBPAMDBCENA⇨Item GameUtils::CreateItem(System.String,System.Int32) itemId
 JLCDNIOBKLG⇨Item GameUtils::CreateItem(System.String,System.Int32) quality
+HCCLKHJNKKD⇨Piratera.Config.CombineTypeConfig/PassiveConfig Piratera.Config.CombineTypeConfig::GetPassiveConfig(SailorClass) type
 ODNKJOHGOHN⇨Sailor CharacterAContainer::<RenderListSubSailor>b__14_0(System.String) id
 ODNKJOHGOHN⇨Sailor CharacterContainer::<RenderListSubSailor>b__14_0(System.String) id
 NIOKEMJLOAE⇨Sailor GameUtils::CreateSailor(SailorModel) sailorModel
@@ -1277,7 +1267,6 @@ ADEKCCHGKKG⇨System.Boolean CombatSailor::CanActiveSkill(CombatState) cbState
 CBMHCHLKODH⇨System.Boolean CombatSailor::HaveStatus(SailorStatusType) name
 PALHHECBAEA⇨System.Boolean CombatSailor::UseSkillCondition(CombatState) combatState
 HCCLKHJNKKD⇨System.Boolean CombatStats::HaveType(SailorClass) type
-HCCLKHJNKKD⇨System.Boolean CombineTypeConfig::HaveCombine(SailorClass) type
 HCCLKHJNKKD⇨System.Boolean ContainerClassBonus::HaveBonus(SailorClass) type
 OKPGMABANCP⇨System.Boolean CustomCertificateHandler::ValidateCertificate(System.Byte[]) certificateData
 ODNKJOHGOHN⇨System.Boolean FightingLine::IsInSquad(System.String) id
@@ -1298,6 +1287,7 @@ ADEKCCHGKKG⇨System.Boolean LiuHi::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Mealodo::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean Meechik::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean OBonbee::CanActiveSkill(CombatState) cbState
+HCCLKHJNKKD⇨System.Boolean Piratera.Config.CombineTypeConfig::HaveCombine(SailorClass) type
 ADEKCCHGKKG⇨System.Boolean QChi::CanActiveSkill(CombatState) cbState
 ADEKCCHGKKG⇨System.Boolean RowT::CanActiveSkill(CombatState) cbState
 HCCLKHJNKKD⇨System.Boolean SailorConfig::HaveType(SailorClass) type
@@ -1333,12 +1323,12 @@ BOCIBDGGFBE⇨System.Collections.Generic.List`1<CombatSailor> TargetsUtils::Rand
 OMBBIIMJMIA⇨System.Collections.Generic.List`1<CombatSailor> TargetsUtils::SameRow(CombatSailor,System.Collections.Generic.List`1<CombatSailor>) actor
 NBLACPNCPCJ⇨System.Collections.Generic.List`1<CombatSailor> TargetsUtils::SameRow(CombatSailor,System.Collections.Generic.List`1<CombatSailor>) l
 GJCDPJJPPMO⇨System.Collections.Generic.List`1<SailorModel> TeamCombatPrepareData::GetSquadModelList(System.Boolean) yourTeam
-HCCLKHJNKKD⇨System.Collections.Generic.List`1<System.Int32> CombineTypeConfig::GetMilestones(SailorClass) type
 HCCLKHJNKKD⇨System.Collections.Generic.List`1<System.Int32> ContainerClassBonus::GetMilestones(SailorClass) type
-DLPDGGDCNDO⇨System.Collections.Generic.List`1<System.Single> CombineTypeConfig::GetParams(SailorClass,System.Int32) level
-HCCLKHJNKKD⇨System.Collections.Generic.List`1<System.Single> CombineTypeConfig::GetParams(SailorClass,System.Int32) type
+HCCLKHJNKKD⇨System.Collections.Generic.List`1<System.Int32> Piratera.Config.CombineTypeConfig::GetMilestones(SailorClass) type
 DLPDGGDCNDO⇨System.Collections.Generic.List`1<System.Single> ContainerClassBonus::GetParams(SailorClass,System.Int32) level
 HCCLKHJNKKD⇨System.Collections.Generic.List`1<System.Single> ContainerClassBonus::GetParams(SailorClass,System.Int32) type
+DLPDGGDCNDO⇨System.Collections.Generic.List`1<System.Single> Piratera.Config.CombineTypeConfig::GetParams(SailorClass,System.Int32) level
+HCCLKHJNKKD⇨System.Collections.Generic.List`1<System.Single> Piratera.Config.CombineTypeConfig::GetParams(SailorClass,System.Int32) type
 OMBBIIMJMIA⇨System.Collections.IEnumerator CombatMgr::EndLoop(CombatSailor,System.Single) actor
 AHMNMIKEDLE⇨System.Collections.IEnumerator CombatMgr::EndLoop(CombatSailor,System.Single) delay
 AHMNMIKEDLE⇨System.Collections.IEnumerator CombatMgr::NextLoop(System.Single) delay
@@ -1367,8 +1357,8 @@ NDGDPJAGBLL⇨System.Int16 FightingLine::Position2SlotIndex(System.Int16,System.
 MLGAINPKFJP⇨System.Int16 FightingLine::Position2SlotIndex(System.Int16,System.Int16) y
 ODNKJOHGOHN⇨System.Int16 FightingLine::SlotOf(System.String) id
 CBMHCHLKODH⇨System.Int32 CombatSailor::GetStatusRemainTurn(SailorStatusType) name
-HCCLKHJNKKD⇨System.Int32 CombineTypeConfig::GetMaxPopNeed(SailorClass) type
 HCCLKHJNKKD⇨System.Int32 ContainerClassBonus::GetMaxPopNeed(SailorClass) type
+HCCLKHJNKKD⇨System.Int32 Piratera.Config.CombineTypeConfig::GetMaxPopNeed(SailorClass) type
 ALEHBPBAHHJ⇨System.Int32 SailorModel::System.IComparable<SailorModel>.CompareTo(SailorModel) other
 DLPDGGDCNDO⇨System.Int64 UserLevelConfig::GetExpNeed(System.Int32) level
 ADEKCCHGKKG⇨System.Single Alex::CastSkill(CombatState) cbState
@@ -1513,6 +1503,7 @@ EACMHFFHFPI⇨System.String FightingLine::SailorIdAt(CombatPosition) combatPosit
 NDGDPJAGBLL⇨System.String FightingLine::SailorIdAt(System.Int16,System.Int16) x
 MLGAINPKFJP⇨System.String FightingLine::SailorIdAt(System.Int16,System.Int16) y
 FBEDJHNIPNC⇨System.String GameUtils::RandomId(System.Int32) stringLength
+APNMDDBBMHP⇨System.String Piratera.Config.GameConfigSync::CalculateMD5(System.String) filename
 ODCMJCGKCFK⇨System.String Piratera.Lib.EnumHelper::GetDescription(T) enumValue
 NBBKBNPPHBF⇨System.String Piratera.Utils.StringUtils::LimitLength(System.String,System.Int32) maxLength
 IGBLLGNEPHG⇨System.String Piratera.Utils.StringUtils::LimitLength(System.String,System.Int32) source
@@ -1593,10 +1584,12 @@ OFGPMLKNFHF⇨System.Void DragableSailor::CheckNewSelecting(UnityEngine.Vector3)
 NKHOEJKMNJA⇨System.Void DragableSailor::OnDragSailor(UnityEngine.Vector2) mousePosition
 LMDOJADLIFC⇨System.Void DragableSailor::set_slots(SquadSlot[]) value
 GOJKAHMCDDB⇨System.Void DragableSailor::SetSailorOpacity(System.Single) opacity
+PKMFOOIIEHD⇨System.Void DragableSailor::ShowChild(System.Boolean) isShow
 MDDPBFOBCDF⇨System.Void DragableSailor::UpdateSlots(System.Int16) newSelecting
 FBJIJHDBELD⇨System.Void DragableSubsailor::SetStartPosition(UnityEngine.Vector2,UnityEngine.UI.Image,SubSailorIcon) d
 LKCNOGEPNHA⇨System.Void DragableSubsailor::SetStartPosition(UnityEngine.Vector2,UnityEngine.UI.Image,SubSailorIcon) mousePosition2D
 DAAMDPALFFE⇨System.Void DragableSubsailor::SetStartPosition(UnityEngine.Vector2,UnityEngine.UI.Image,SubSailorIcon) subSailorIcon
+PKMFOOIIEHD⇨System.Void DragableSubsailor::ShowChild(System.Boolean) isShow
 MDDPBFOBCDF⇨System.Void DragableSubsailor::UpdateSlots(System.Int16) newSelecting
 BBOGDHJHGPB⇨System.Void FGL::.ctor(Sfs2X.Entities.Data.ISFSObject) packet
 LMDOJADLIFC⇨System.Void FightingLine::set_NumSlot(System.Int32) value
@@ -1630,6 +1623,7 @@ GEBGMCAFNNJ⇨System.Void GameTimeMgr::SetServerTime(System.Int64) loginTime
 CPIHOGKHADA⇨System.Void GameUtils::ShowPopupPacketError(Piratera.Network.SFSErrorCode) errorCode
 KJMPGIFLPND⇨System.Void Geechoso::Shoot(CombatSailor,System.Single) damage
 FOKBPEICDIA⇨System.Void Geechoso::Shoot(CombatSailor,System.Single) target
+FPDMBEKDDGK⇨System.Void GeneralInfoBar::PresentData(SailorModel) model
 KBOLEELNPNF⇨System.Void GuiReward::SetReward(GameEndData) r
 PJHHGMOGOAM⇨System.Void HaveFog::FadeIn(System.Single) time
 PJHHGMOGOAM⇨System.Void HaveFog::FadeOut(System.Single) time
@@ -1651,10 +1645,6 @@ FPDMBEKDDGK⇨System.Void IconSailor::PresentData(SailorModel) model
 FEMPMJMPPMM⇨System.Void IconSailor::RenderClass(System.Collections.Generic.List`1<SailorClass>) classes
 CMJMHPCPHIG⇨System.Void IconSailor::SetVisible(System.Boolean) visible
 KEGBCLACGCN⇨System.Void IconSailor::ShowFocus(System.Boolean) b
-GMMIAEMIAGL⇨System.Void ItemDisplay::changeItem(Item,ItemInfo) info
-MINMJFDKOEA⇨System.Void ItemDisplay::changeItem(Item,ItemInfo) it
-KEGBCLACGCN⇨System.Void ItemDisplay::setEquip(System.Boolean) b
-EFFKMNADGAN⇨System.Void ItemInfo::show(ItemDisplay) obj
 LMDOJADLIFC⇨System.Void Jenkins::GainFury(System.Int32) value
 CPIHOGKHADA⇨System.Void LoadServerDataUI::OnLoadError(Piratera.Network.SFSErrorCode) errorCode
 CHLKBJKLJBK⇨System.Void LoadServerDataUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
@@ -1689,6 +1679,25 @@ LMDOJADLIFC⇨System.Void OBonbee::GainFury(System.Int32) value
 CHLKBJKLJBK⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
 CPIHOGKHADA⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
 BBOGDHJHGPB⇨System.Void PickTeamUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
+EHLDBDLCDIP⇨System.Void Piratera.Cheat.CheatMgr::CheatBotAndPlay(Sfs2X.Entities.Data.SFSObject) sailorCheatData
+KDOOFPHKNHM⇨System.Void Piratera.Cheat.CheatMgr::CheatRank(System.Int32) rank
+EGJOKFAHFPD⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32) quantity
+KENHIJKCKAH⇨System.Void Piratera.Cheat.CheatMgr::CheatResource(System.String,System.Int32) resource
+DLPDGGDCNDO⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) level
+CBMHCHLKODH⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) name
+JLCDNIOBKLG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailor(System.String,System.String,System.String) quality
+JLCDNIOBKLG⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32) quality
+OBELGLDNGJK⇨System.Void Piratera.Cheat.CheatMgr::CheatSailorQuantity(System.String,System.Int32) sid
+MFCNFBBNEDO⇨System.Void Piratera.Cheat.PopupCheatGame::UpdatePVERank(System.Collections.Generic.List`1<System.String>) arg0
+CHLKBJKLJBK⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
+CPIHOGKHADA⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
+BBOGDHJHGPB⇨System.Void Piratera.Cheat.PopupCheatSailorInfo::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
+BBOGDHJHGPB⇨System.Void Piratera.Config.GameConfigSync/ConfigFileMeta::.ctor(Sfs2X.Entities.Data.ISFSObject) packet
+BBOGDHJHGPB⇨System.Void Piratera.Config.GameConfigSync/ConfigFileMeta::NewFromSFSObject(Sfs2X.Entities.Data.ISFSObject) packet
+CHLKBJKLJBK⇨System.Void Piratera.Config.GameConfigSync::onReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action
+CPIHOGKHADA⇨System.Void Piratera.Config.GameConfigSync::onReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) errorCode
+BBOGDHJHGPB⇨System.Void Piratera.Config.GameConfigSync::onReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) packet
+IJHHIEODIDM⇨System.Void Piratera.Engine.GameVersionController::CheckVersion(System.String) data
 MIAEKGCHMAB⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) end
 ALLBGKOKCDB⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) m
 EBLFODBNAND⇨System.Void Piratera.Engine.MaintainManager::OnReceiveMaintainInfo(System.Int64,System.Int64,System.String) start

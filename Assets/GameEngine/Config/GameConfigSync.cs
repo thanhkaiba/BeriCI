@@ -42,7 +42,9 @@ namespace Piratera.Config
 
         private void Start()
         {
-            NetworkController.Send(SFSAction.GET_CONFIG);
+            SFSObject data = new SFSObject();
+            data.PutUtfString("path", "");
+            NetworkController.Send(SFSAction.GET_CONFIG, data);
             NetworkController.AddServerActionListener(onReceiveServerAction);
         }
 
@@ -50,16 +52,20 @@ namespace Piratera.Config
 
         private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
+           
            if (action == SFSAction.GET_CONFIG)
            {
 
-               ISFSArray data = packet.GetSFSArray("manifest");
+              if (errorCode == SFSErrorCode.SUCCESS)
+                {
+                    ISFSArray data = packet.GetSFSArray("manifest");
 
-               foreach (SFSObject obj in data)
-               {
-                    manifest.Add(new ConfigFileMeta(obj));
-               }
-                Debug.Log("Da vao day");
+                    foreach (SFSObject obj in data)
+                    {
+                        manifest.Add(new ConfigFileMeta(obj));
+                    }
+                }
+         
            }
         }
 
