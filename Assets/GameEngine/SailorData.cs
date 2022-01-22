@@ -1,3 +1,4 @@
+using Piratera.Config;
 using System.Collections.Generic;
 
 public enum AttackType

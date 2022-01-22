@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;

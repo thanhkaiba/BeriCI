@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Piratera.Config;
 
 [CreateAssetMenu(fileName = "New Sailor", menuName = "config/Sailor")]
 public class SailorConfig : ScriptableObjectPro

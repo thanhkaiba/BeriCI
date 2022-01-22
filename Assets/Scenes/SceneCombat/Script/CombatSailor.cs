@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Piratera.Config;
 using Spine.Unity;
 using System;
 using System.Collections;

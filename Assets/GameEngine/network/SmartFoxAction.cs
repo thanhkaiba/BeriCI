@@ -20,6 +20,7 @@
         GET_STAMINA_PACK = 21,
         GET_LINEUP_SLOT_PACK = 22,
         GET_SERVER_TIME = 23,
+        GET_CONFIG = 24,
         CONFIRM_LINEUP = 25,
 
 #if PIRATERA_DEV || PIRATERA_QC

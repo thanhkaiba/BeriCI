@@ -1,3 +1,4 @@
+using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Lib;
 using Piratera.Network;

@@ -1,3 +1,4 @@
+using Piratera.Config;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;

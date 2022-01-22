@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.Sound;
 using System.Collections.Generic;
 using UnityEngine;

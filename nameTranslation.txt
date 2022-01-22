@@ -52,7 +52,7 @@ DNBLLMNOOKD⇨CombineTypeConfig
 ECCNLHILKAJ⇨CombineTypeConfig/Level
 ENDGBIMJLEL⇨CombineTypeConfig/PassiveConfig
 NDIBHOHJKNE⇨CrewData/<>c__DisplayClass8_0
-CBMOGKHCCKI⇨CrewManager/<>c__DisplayClass17_0
+ELPCNNAKHNP⇨CrewManager/<>c__DisplayClass22_0
 DGNEEDKIHNF⇨CustomCertificateHandler
 HAACEJPCLLD⇨Damage
 GOPMGJKEOEK⇨Davinci/<Downloader>d__38
@@ -280,6 +280,7 @@ CPDCALLGJKN⇨System.Boolean FightingLine::Occupie(System.String,System.Int16)
 JOEBHAHECLE⇨System.Boolean FightingLine::Replace(System.String,System.Int16)
 HPNCEDDCCNH⇨System.Boolean FightingLine::Swap(System.String,System.String)
 FBIHHECEPAJ⇨System.Boolean FightingLine::UnEquip(System.String)
+JMCGKEFGPMB⇨System.Boolean ItemInfo::isMouseInsideUI()
 PKHEFGKKMIC⇨System.Boolean Piratera.Engine.MaintainManager::CanPlay()
 JGENINHPDMF⇨System.Boolean SailorConfig::HaveType(SailorClass)
 JGENINHPDMF⇨System.Boolean SailorModel::HaveType(SailorClass)
@@ -439,8 +440,8 @@ DEAJPPDLMHB⇨System.Void CombatStats::<.ctor>b__0_0(Item)
 NCIBANDAJGK⇨System.Void CrewData::OnAwake()
 MLIIFAEMEFH⇨System.Void CrewData::OnUpdateSquad()
 OOKKLCDDKOE⇨System.Void CrewData::ResetData()
-KDFIKLADJCC⇨System.Void CrewManager/<>c::<RenderListSubSailor>b__17_1(IconSailor)
-KEGAIBECHEL⇨System.Void CrewManager/<>c__DisplayClass17_0::<RenderListSubSailor>b__0(SailorModel)
+ENJAPNLJBAC⇨System.Void CrewManager/<>c::<RenderListSubSailor>b__22_1(IconSailor)
+KEGAIBECHEL⇨System.Void CrewManager/<>c__DisplayClass22_0::<RenderListSubSailor>b__0(SailorModel)
 NODIMMGLBJI⇨System.Void CrewManager::OnSailorInfoChanged(SailorModel)
 PBJOJECLNEF⇨System.Void CrewManager::RenderListSubSailor()
 IFMJGMNFLDP⇨System.Void Davinci::<start>b__37_0()
@@ -519,6 +520,12 @@ PEFOEIIJGFJ⇨System.Void Herminia::ArrowTarget(UnityEngine.Vector3,UnityEngine.
 GLBNJAHCMDG⇨System.Void IconClassBonus/<>c__DisplayClass7_0::<Start>b__0()
 AMLBCNFJBDE⇨System.Void IconClassBonus::OnClickIcon(UnityEngine.Transform)
 JLMGLPKKBHJ⇨System.Void IconSailor::RenderClass(System.Collections.Generic.List`1<SailorClass>)
+LLCAHNDBNIC⇨System.Void ItemDisplay::display()
+CBHMJPPFILL⇨System.Void ItemDisplay::showColor()
+MNEBHIOMAHM⇨System.Void ItemDisplay::showPos()
+MCFMNGEBONB⇨System.Void ItemDisplay::showStats()
+IOMOBPIECHI⇨System.Void ItemMenu::readAllItemInEdit()
+GMIMONHPFKJ⇨System.Void ItemMenu::resetLeftMenuUI()
 DFLGPOIFLID⇨System.Void Jenkins/<>c::<ProcessSkill>b__7_0()
 GMCHILFPBEA⇨System.Void Jenkins/<>c::<ProcessSkill>b__7_2()
 KMEMOIOLDHF⇨System.Void Jenkins/<>c::<ProcessSkill>b__7_4()
@@ -818,6 +825,11 @@ ODNKPJMBIPP⇨FightingLine TeamCombatPrepareData::fgl1
 KAFPFOLPJFJ⇨GameEndData CombatAction::gameEndData
 BOBJCMKDGCA⇨HaveFog Piratera.GUI.HaveBaseGuiEffect::haveFog
 COLPOOBNNEF⇨IconSailor TooltipIconSailor::iconSailor
+JIDFNABFLDB⇨ItemColor ItemDisplay::color
+BLOOFNIJLIK⇨ItemDisplay ItemInfo::equipItem
+GBHJEIDOKDN⇨ItemDisplay ItemInfo::item
+BLFFNKEBAKH⇨ItemDisplay ItemMenu::itemClone
+BMAMGMODBNO⇨ItemPosition ItemDisplay::pos
 EPLNLJHONIA⇨ModeID CombatMgr::modeId
 HKAIHAKLIIC⇨ModeID TeamCombatPrepareData::modeID
 GAAECAAOPKJ⇨Piratera.GUI.HaveBaseGuiEffect Piratera.GUI.BaseGui::baseGuiEffect
@@ -832,6 +844,7 @@ PGFFBKAMCCH⇨Sailor DragableSubsailor::swapSailor
 DFPPCHGDNPI⇨Sailor SquadSlot::sailor
 HCCLKHJNKKD⇨SailorClass ClassBonusItem::type
 HCCLKHJNKKD⇨SailorClass CombineTypeConfig/PassiveConfig::type
+ABPGACBDLFI⇨SailorClass ItemDisplay::buf_class
 <EPABGNEENCD>k__BackingField⇨SailorConfig SailorModel::<config_stats>k__BackingField
 ONAGBPPJDMO⇨SailorGeneralConfig GlobalConfigs::SailorGeneral
 AINPLPOHCNG⇨SailorModel CrewManager::curModel
@@ -865,6 +878,8 @@ CDMDJGNLFJN⇨System.Boolean Davinci::ENABLE_GLOBAL_LOGS
 BJCCHBIIKJP⇨System.Boolean Davinci::enableLog
 KKAMAEMCCFH⇨System.Boolean Davinci::success
 ILPADPALOMK⇨System.Boolean DragableSailor::draging
+NAGHMADCBHC⇨System.Boolean ItemDisplay::isEquiping
+IMNBCJEEHEE⇨System.Boolean ItemInfo::hasEquiping
 PINHKBGHHAK⇨System.Boolean Piratera.Network.CustomCryptoInitializerV2::useHttps
 CHJOKJPAPAC⇨System.Boolean Piratera.Network.NetworkController::shuttingDown
 ONMDDJNEIAO⇨System.Boolean RoyalBoxManager::close
@@ -925,6 +940,8 @@ CMOONAMCBGH⇨System.Int32 FightingLine::numSlot
 ECJLMDAFEMI⇨System.Int32 GameEndData::hard_bonus
 HGJMHANLOEB⇨System.Int32 GameEndData::mode_reward
 LIAEKELIJLF⇨System.Int32 GameEndData::win_rank_bonus
+HEEFLECANDE⇨System.Int32 ItemMenu::itemNo
+AGODKJFAOLO⇨System.Int32 ItemMenu::rowNo
 FAIDBBAOMKF⇨System.Int32 Piratera.GUI.GuiConfirmPVE::priceStamina
 LKJEOBOHEMC⇨System.Int32 Piratera.Network.GAME_NETWORK_ADDRESS::DEV_PORT
 DCGNKALLEND⇨System.Int32 Piratera.Network.GAME_NETWORK_ADDRESS::PROD_PORT
@@ -971,6 +988,16 @@ CDDFLBBOHBI⇨System.Single Damage::physics
 GIBNODAADMF⇨System.Single Damage::pure
 PMLDOOCFHGL⇨System.Single Davinci::fadeTime
 BFBMKLDIGLA⇨System.Single DragableSailor::originZ
+KNBKFIFENBM⇨System.Single ItemDisplay::armor
+MHCFIDFHEBL⇨System.Single ItemDisplay::crit
+EMKFMBIAGDI⇨System.Single ItemDisplay::fury
+DHGAOHKJBKH⇨System.Single ItemDisplay::health
+DHHMPBAJPJJ⇨System.Single ItemDisplay::magicres
+KCDPAICOBEN⇨System.Single ItemDisplay::power
+JLCDNIOBKLG⇨System.Single ItemDisplay::quality
+OJLNKGDADNB⇨System.Single ItemDisplay::speed
+GDNOLAJJOID⇨System.Single ItemDisplay::stat1
+PHODMMJMEDH⇨System.Single ItemDisplay::stat2
 PBHNIEIFCGK⇨System.Single SailorCollider::MOVE_OFFSET
 MPCPGJEAMMN⇨System.Single ScenePickTeamBattleUI::maxTime
 DHEDMIINKPA⇨System.Single ScenePickTeamBattleUI::remainTime
@@ -985,6 +1012,7 @@ ECKJKBKOGGG⇨System.String Davinci::filePath
 IHODNGALJMB⇨System.String Davinci::uniqueHash
 LMNGLIKBMEO⇨System.String Davinci::url
 ODNKJOHGOHN⇨System.String FGL::id
+FPKBIPIIACI⇨System.String ItemDisplay::id_item
 GKCEPHLNGAM⇨System.String Piratera.Constance.GameConst::ACCOUNT_URL
 KOOMINBBBEI⇨System.String Piratera.Constance.GameConst::CUSTOMER_CARE_URL
 OBGNFCHAJOM⇨System.String Piratera.Constance.GameConst::FACEBOOK_URL
@@ -1092,6 +1120,7 @@ OPLPPCOLGIM⇨UnityEngine.GameObject HaveFog::fog
 PPAOILHKPNM⇨UnityEngine.GameObject Helti::wind
 JHKEBHJDDFL⇨UnityEngine.GameObject Scrub::circle
 JHKEBHJDDFL⇨UnityEngine.GameObject Tons::circle
+NKAEFCDNKPG⇨UnityEngine.RectTransform ItemInfo::panel
 NFFEKOCFMKG⇨UnityEngine.RectTransform TooltipSailorInfo::canvas
 NKAEFCDNKPG⇨UnityEngine.RectTransform TooltipSailorInfo::panel
 ELGFFJIGNGL⇨UnityEngine.Texture2D Davinci::errorPlaceholder
@@ -1115,10 +1144,12 @@ DHPGJKEEEHC⇨FightingLine TeamCombatPrepareData::OpponentFightingLine()
 DHBHMFGEDON⇨FightingLine TeamCombatPrepareData::YourFightingLine()
 ILMHFJKIKOC⇨FlyTextMgr FlyTextMgr::Instance()
 ILMHFJKIKOC⇨GameEffMgr GameEffMgr::Instance()
+JOOCFNICLIN⇨ItemPosition ItemDisplay::Position()
 OMOHOOOPDCG⇨SailorConfig SailorModel::config_stats()
 DFBCOJCGAFO⇨SailorModel SubSailorIcon::Model()
 HEOECBHKJOA⇨Sfs2X.SmartFox Piratera.Network.NetworkController::Connection()
 COAOMFKPHMM⇨SquadSlot[] DragableSailor::slots()
+MKGOALCJDPO⇨System.Boolean ItemDisplay::IsEquiping()
 PBABIKFENBL⇨System.Boolean Piratera.Network.NetworkController::IsInitialized()
 OHLEPFMMOBH⇨System.Boolean Piratera.Sound.SoundMgr::MusicOn()
 EAHCDGAIKDJ⇨System.Boolean Piratera.Sound.SoundMgr::SoundOn()
@@ -1620,6 +1651,10 @@ FPDMBEKDDGK⇨System.Void IconSailor::PresentData(SailorModel) model
 FEMPMJMPPMM⇨System.Void IconSailor::RenderClass(System.Collections.Generic.List`1<SailorClass>) classes
 CMJMHPCPHIG⇨System.Void IconSailor::SetVisible(System.Boolean) visible
 KEGBCLACGCN⇨System.Void IconSailor::ShowFocus(System.Boolean) b
+GMMIAEMIAGL⇨System.Void ItemDisplay::changeItem(Item,ItemInfo) info
+MINMJFDKOEA⇨System.Void ItemDisplay::changeItem(Item,ItemInfo) it
+KEGBCLACGCN⇨System.Void ItemDisplay::setEquip(System.Boolean) b
+EFFKMNADGAN⇨System.Void ItemInfo::show(ItemDisplay) obj
 LMDOJADLIFC⇨System.Void Jenkins::GainFury(System.Int32) value
 CPIHOGKHADA⇨System.Void LoadServerDataUI::OnLoadError(Piratera.Network.SFSErrorCode) errorCode
 CHLKBJKLJBK⇨System.Void LoadServerDataUI::OnReceiveServerAction(Piratera.Network.SFSAction,Piratera.Network.SFSErrorCode,Sfs2X.Entities.Data.ISFSObject) action

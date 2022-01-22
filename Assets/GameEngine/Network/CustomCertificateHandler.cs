@@ -40,7 +40,7 @@ class CustomCertificateHandler : CertificateHandler
 
         string pk = certificate.GetPublicKeyString();
 
-        bool check = pk.Equals(PUB_KEY) || pk.Equals(PUB_KEY_2);
+        
 
         return pk.Equals(PUB_KEY) || pk.Equals(PUB_KEY_2) || pk.Equals(PUB_KEY_3);
     }
