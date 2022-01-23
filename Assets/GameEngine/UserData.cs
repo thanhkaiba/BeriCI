@@ -20,12 +20,6 @@ public class UserInfoPropertiesKey
 public class UserData : Singleton<UserData>
 {
 
-
-    protected override void OnAwake()
-    {
-        LoadExpConfig();
-    }
-    public UserLevelConfig LevelConfig;
     public string UID { get; set; }
     public string Username { get; set; }
     public string Avatar { get; set; }
@@ -41,18 +35,6 @@ public class UserData : Singleton<UserData>
     public int NumSlot { get; set; }
 
     public long CreateAt { get; set; }
-
-
-    public void LoadExpConfig()
-    {
-        // LevelConfig = Resources.Load<UserLevelConfig>("ScriptableObject/UserLevel/UserLevel");
-
-    }
-
-    public float GetExpProgress()
-    {
-        return (Exp * 1.0F) / LevelConfig.GetExpNeed(Level);
-    }
 
     public void OnUserVariablesUpdate(User user, List<string> changedVars)
     {
