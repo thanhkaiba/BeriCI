@@ -1986,6 +1986,7 @@ GameObject:
   - component: {fileID: 7009391420991579959}
   - component: {fileID: 3519184098524642583}
   - component: {fileID: 1744226279374476961}
+  - component: {fileID: 2982650029202358429}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -2043,7 +2044,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8ec3b3fa00e5aa34c81ccf5c7c7c162b, type: 3}
-    m_FontSize: 22
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 1
@@ -2055,6 +2056,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 20/30
+--- !u!114 &2982650029202358429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5758589969467398837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &6215462891035405999
 GameObject:
   m_ObjectHideFlags: 0
@@ -3097,6 +3113,7 @@ GameObject:
   - component: {fileID: 6792750424058003494}
   - component: {fileID: 1110112466472792759}
   - component: {fileID: 7204839878921341531}
+  - component: {fileID: 6691446539343829712}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -3166,6 +3183,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 200/200
+--- !u!114 &6691446539343829712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8652498780543503758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 2, y: -2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &8908194357781562480
 GameObject:
   m_ObjectHideFlags: 0

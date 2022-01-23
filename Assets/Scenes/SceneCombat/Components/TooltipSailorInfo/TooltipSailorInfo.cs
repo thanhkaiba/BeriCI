@@ -120,8 +120,8 @@ public class TooltipSailorInfo : MonoBehaviour
     {
         model = sailorModel;
         follow = target;
-        furySlider.transform.Find("Text").GetComponent<Text>().text = (model.config_stats.max_fury).ToString() + "/" + (model.config_stats.max_fury).ToString();
-        furySlider.value = 1;
+        furySlider.transform.Find("Text").GetComponent<Text>().text = (model.config_stats.start_fury).ToString() + "/" + (model.config_stats.max_fury).ToString();
+        furySlider.value = (float) model.config_stats.start_fury / model.config_stats.max_fury;
        
 
         int MaxHealth = (int)model.config_stats.GetHealth(model.level, model.quality);
