@@ -35,6 +35,9 @@ public enum SailorClass
     GRAPPLER,
     GUNPOWDER,
     SHIPWRIGHT,
+    EPIDEMIC,
+    CRIMINAL,
+    SUMMONER,
 };
 
 public enum SailorRank

@@ -65,42 +65,22 @@ public class CombatState : MonoBehaviour
     {
         CreateTeamA();
         CreateTeamB();
-        //CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.A);
-        //CreateCombatSailor("Helti", new CombatPosition(0, 2), Team.A);
-        //CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.A);
-        //CreateCombatSailor("Helti", new CombatPosition(2, 0), Team.A);
-        //CreateCombatSailor("Helti", new CombatPosition(2, 2), Team.A);
-
-        //for (short x = 0; x < 3; x++)
-        //{
-        //    for (short y = 0; y < 3; y++)
-        //    {
-        //        SailorModel sA = SquadData.Instance.SailorAt(new CombatPosition(x, y));
-        //        if (sA != null)
-        //        {
-        //            CreateCombatSailor(sA, new CombatPosition(x, y), Team.A);
-        //        }
-
-        //        SailorModel sB = SquadBData.Instance.SailorAt(new CombatPosition(x, y));
-        //        if (sB != null)
-        //        {
-        //            CreateCombatSailor(sB, new CombatPosition(x, y), Team.B);
-        //        }
-        //    }
-        //}
-
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("LiuHi", new CombatPosition(0, 0), Team.A);
-        CreateCombatSailor("Meechik", new CombatPosition(0, 1), Team.A);
-        CreateCombatSailor("QChi", new CombatPosition(1, 0), Team.A);
+        CreateCombatSailor("OBonbee", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("Tad", new CombatPosition(0, 1), Team.A);
+        CreateCombatSailor("LiuHi", new CombatPosition(1, 1), Team.A);
+        //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.A);
+        //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("LiuHi", new CombatPosition(2, 2), Team.B);
-        //CreateCombatSailor("Meechik", new CombatPosition(0, 0), Team.B);
-        //CreateCombatSailor("QChi", new CombatPosition(0, 2), Team.B);
+        CreateCombatSailor("Salvatafo", new CombatPosition(0, 0), Team.B);
+        CreateCombatSailor("Tad", new CombatPosition(0, 1), Team.B);
+        CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.B);
+        //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.B);
+        //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)

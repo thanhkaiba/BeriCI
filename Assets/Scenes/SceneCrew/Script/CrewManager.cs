@@ -17,9 +17,11 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private Text qualityText;
     [SerializeField]
+    private Text levelText, expText;
+    [SerializeField]
     private SailorDescription sailorDes;
     [SerializeField]
-    private Image quality, rank;
+    private Image quality, rank, exp;
     [SerializeField]
     private Image[] classImgs;
     [SerializeField]
@@ -123,6 +125,11 @@ public class CrewManager : MonoBehaviour
             //classImgs[i].rectTransform.sizeDelta = new Vector2(s.rect.width, s.rect.height);
         }
         qualityText.text = "Quality: " + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        levelText.text = "" + model.level;
+        Debug.Log("model.exp " + model.exp);
+        Debug.Log("GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level) " + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level));
+        exp.fillAmount = (float) model.exp / GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
+        expText.text = "" + model.exp + "/" + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
         UpdateRankIconPosition();
     }
     public void BackToLobby()
