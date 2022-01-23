@@ -47,7 +47,7 @@ namespace Piratera.Engine
 
         public static string DownloadUrl;
 
-        void Start()
+        public void GetVersionInfo()
         {
 #if !UNITY_EDITOR
         if (!string.IsNullOrEmpty(URL))
@@ -67,6 +67,44 @@ namespace Piratera.Engine
             yield return new WaitForSeconds(1f);
             using (UnityWebRequest www = UnityWebRequest.Get(URL))
             {
+                yield return www.SendWebRequest();
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log(www.error);
+                    yield return GetTextWithCustomCertificate();
+
+                }
+                else
+                {
+    
+                    CheckVersion(www.downloadHandler.text);
+                }
+            }
+            
+        }
+
+        private void CheckVersion(string data)
+        {
+            Debug.Log(data);
+            JObject o = JObject.Parse(data);
+            Version version1 = new Version(Application.version);
+            Version version2 = new Version(((string)o["min_version"]).Split('_')[1]);
+            if (version2.CompareTo(version1) > 0)
+            {
+                DownloadUrl = (string)o["download_url"];
+                OnNeedUpdate.Invoke((string)o["download_url"]);
+            }
+            else
+            {
+                OnCheckSuccess.Invoke();
+            }
+        }
+
+        IEnumerator GetTextWithCustomCertificate()
+        {
+           
+            using (UnityWebRequest www = UnityWebRequest.Get(URL))
+            {
                 www.certificateHandler = new CustomCertificateHandler();
                 yield return www.SendWebRequest();
                 if (www.result != UnityWebRequest.Result.Success)
@@ -77,25 +115,10 @@ namespace Piratera.Engine
                 }
                 else
                 {
-                    Debug.Log(www.downloadHandler.text);
-
-                    JObject o = JObject.Parse(www.downloadHandler.text);
-
-                    Version version1 = new Version(Application.version);
-                    Version version2 = new Version(((string)o["min_version"]).Split('_')[1]);
-                    if (version2.CompareTo(version1) > 0)
-                    {
-                        DownloadUrl = (string)o["download_url"];
-                        OnNeedUpdate.Invoke((string)o["download_url"]);
-                    }
-                    else
-                    {
-                        OnCheckSuccess.Invoke();
-                    }
-
+                    CheckVersion(www.downloadHandler.text);
                 }
             }
-            
+
         }
     }
 }

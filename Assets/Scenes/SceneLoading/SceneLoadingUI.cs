@@ -11,6 +11,9 @@ public class SceneLoadingUI : MonoBehaviour
     [SerializeField]
     private Text textInfo;
 
+    [SerializeField]
+    private GameVersionController gameVersionController;
+
     private void Awake()
     {
 #if UNITY_EDITOR
@@ -35,6 +38,8 @@ public class SceneLoadingUI : MonoBehaviour
         seq.AppendCallback(() => textInfo.text = "Checking Game Version...");
         seq.SetLink(textInfo.gameObject).SetTarget(textInfo.transform);
         seq.SetLoops(-1);
+
+        gameVersionController.GetVersionInfo();
     }
     public void OnLoadSuccess()
     {
@@ -43,8 +48,9 @@ public class SceneLoadingUI : MonoBehaviour
 
     public void OnLoadError(string error)
     {
-        SceneManager.LoadScene("SceneLogin");
-    }
+        // SceneManager.LoadScene("SceneLogin");
+        GuiManager.Instance.ShowPopupNotification("Check New Version Fail!", "Try Again", () => gameVersionController.GetVersionInfo());
+    ;}
 
     public void OnNeedUpdate(string url)
     {
