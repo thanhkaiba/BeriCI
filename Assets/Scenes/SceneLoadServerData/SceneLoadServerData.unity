@@ -158,8 +158,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5124921, y: 0}
   m_AnchorMax: {x: 0.5124921, y: 0}
-  m_AnchoredPosition: {x: -1.0001221, y: 40.99994}
-  m_SizeDelta: {x: 620.919, y: 73.179}
+  m_AnchoredPosition: {x: -1.0001221, y: 50.226}
+  m_SizeDelta: {x: 620.919, y: 91.632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &23037049
 MonoBehaviour:
@@ -1034,7 +1034,6 @@ MonoBehaviour:
   buttonReload: {fileID: 338365944}
   buttonLogout: {fileID: 1673866948}
   progressBar: {fileID: 1118888388}
-  startingPoint: 0.9
   sailorDescription: {fileID: 11400000, guid: a3a0080a2ebd8ca4da0004cb0994dd10, type: 2}
   sailorName: {fileID: 658980625}
   sailorBio: {fileID: 1989781663}
@@ -1050,6 +1049,7 @@ MonoBehaviour:
   sailorClass: {fileID: 1889495521}
   errorText: {fileID: 1334580487}
   canvas: {fileID: 729652085}
+  ConfigSync: {fileID: 861855173}
 --- !u!114 &861855173
 MonoBehaviour:
   m_ObjectHideFlags: 0
