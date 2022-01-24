@@ -15,6 +15,9 @@ public class SailorGeneralConfig : ScriptableObjectPro
     public int MAX_LEVEL = 20;
     public int EXP_PARAMS = 500;
 
+    public float STAR_STAT_RATE = 0.2f;
+    public int MAX_STAR = 5;
+
     public int GetNextLevelExp(int curLevel)
     {
         int x = curLevel + 2;

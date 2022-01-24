@@ -23,6 +23,7 @@ public class PvEConfig : ScriptableObjectPro
     public int sailor_exp_lose = 100;
 
     public int default_exp = 20;
+    public float hard_exp_ratio = 1;
     public float win_exp_ratio = 1;
     public float lose_exp_ratio = 0.5f;
 }
