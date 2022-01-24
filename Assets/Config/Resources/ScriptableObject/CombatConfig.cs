@@ -1,7 +1,5 @@
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "Combat config", menuName = "config/combat")]
-public class CombatConfig : ScriptableObjectPro
+public class CombatConfig
 {
     public int fury_per_base_attack = 10;
     public int fury_per_take_damage = 2;

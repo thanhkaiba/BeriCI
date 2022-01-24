@@ -1,4 +1,5 @@
-﻿using Piratera.Utils;
+﻿using Piratera.Config;
+using Piratera.Utils;
 using Sfs2X.Entities;
 using UnityEngine;
 
@@ -6,17 +7,7 @@ public class StaminaData : Singleton<StaminaData>
 {
     public int Stamina;
     private long LastCountStamina;
-    UserStaminaConfig StaminaConfig;
-    protected override void OnAwake()
-    {
-        LoadExpConfig();
-    }
-
-    private void LoadExpConfig()
-    {
-        StaminaConfig = Resources.Load<UserStaminaConfig>("ScriptableObject/Stamina/Stamina");
-    }
-
+    
     public string GetCurrentStaminaFormat()
     {
         return GetStaminaFormat(Stamina);
@@ -24,12 +15,12 @@ public class StaminaData : Singleton<StaminaData>
 
     public string GetStaminaFormat(int stamina)
     {
-        return $"{StringUtils.ShortNumber(stamina)}/{StaminaConfig.max_stamina}";
+        return $"{StringUtils.ShortNumber(stamina)}/{GlobalConfigs.StaminaConfig.max_stamina}";
     }
 
     public string GetStaminaFormat(string stamina)
     {
-        return $"{stamina}/{StaminaConfig.max_stamina}";
+        return $"{stamina}/{GlobalConfigs.StaminaConfig.max_stamina}";
     }
     public string _GetStaminaFormat(int stamina)
     {
@@ -42,12 +33,12 @@ public class StaminaData : Singleton<StaminaData>
 
     public bool IsRecorveringStamina()
     {
-        return Stamina < StaminaConfig.max_stamina;
+        return Stamina < GlobalConfigs.StaminaConfig.max_stamina;
     }
 
     public long TimeToHaveNewStamina()
     {
-        if (Stamina > StaminaConfig.max_stamina)
+        if (Stamina > GlobalConfigs.StaminaConfig.max_stamina)
         {
             return -1;
         }
@@ -55,7 +46,7 @@ public class StaminaData : Singleton<StaminaData>
         long now = GameTimeMgr.GetCurrentTime();
 
         long delta = now - LastCountStamina;
-        int recoveringTime = StaminaConfig.recovering_time * 1000;
+        int recoveringTime = GlobalConfigs.StaminaConfig.recovering_time * 1000;
         long remain = recoveringTime - delta % recoveringTime;
 
 
@@ -75,6 +66,6 @@ public class StaminaData : Singleton<StaminaData>
     }
     public int GetPvECost()
     {
-        return StaminaConfig.pve_cost;
+        return GlobalConfigs.StaminaConfig.pve_cost;
     }
 }

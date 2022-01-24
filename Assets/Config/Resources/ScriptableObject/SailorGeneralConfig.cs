@@ -1,7 +1,4 @@
-using UnityEngine;
-
-[CreateAssetMenu(fileName = "SailorGeneralConfig", menuName = "config/SailorGeneral")]
-public class SailorGeneralConfig : ScriptableObjectPro
+public class SailorGeneralConfig
 {
     public int MAX_QUALITY = 200;
     public float MAX_MIN_POWER_RATIO = 1.5f;

@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 
-[CreateAssetMenu(fileName = "PvE config", menuName = "config/PvE")]
-public class PvEConfig : ScriptableObjectPro
+public class PvEConfig
 {
     public int stamina_cost = 3;
     public int preparing_time = 60;

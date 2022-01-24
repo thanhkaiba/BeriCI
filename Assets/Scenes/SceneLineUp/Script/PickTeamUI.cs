@@ -1,4 +1,5 @@
 
+using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
@@ -13,8 +14,6 @@ public class PickTeamUI : MonoBehaviour
     private Text TextMaxCapacity;
     [SerializeField]
     private Button ButtonBuySlot;
-    [SerializeField]
-    private LineUpSlot lineUpSlotConfig;
     public RoyalCollectingController royal;
     void Start()
     {
@@ -60,7 +59,7 @@ public class PickTeamUI : MonoBehaviour
     {
         TextMaxCapacity.text = "" + UserData.Instance.NumSlot;
 
-        if (UserData.Instance.NumSlot < lineUpSlotConfig.max && UserData.Instance.NumSlot > 0)
+        if (UserData.Instance.NumSlot < GlobalConfigs.LineUp.max && UserData.Instance.NumSlot > 0)
         {
             ButtonBuySlot.gameObject.SetActive(true);
         }
@@ -86,7 +85,7 @@ public class PickTeamUI : MonoBehaviour
     }
     public void OnBuySlot()
     {
-        if (UserData.Instance.NumSlot >= lineUpSlotConfig.max)
+        if (UserData.Instance.NumSlot >= GlobalConfigs.LineUp.max)
         {
             GuiManager.Instance.ShowPopupNotification("Can't buy more slot");
             return;

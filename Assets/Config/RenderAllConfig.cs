@@ -17,12 +17,7 @@ public class RenderAllConfig : MonoBehaviour
                 RenderSailorConfig("ScriptableObject/Sailors/" + name, name);
             }
         }
-        RenderCombatConfig("ScriptableObject/Combat", "Combat");
-        RenderSailorGereralConfig("ScriptableObject/SailorGeneralConfig", "SailorGeneralConfig");
         RenderClassBonusConfig("ScriptableObject/ClassBonus/ContainerClassBonus", "ContainerClassBonus");
-        RenderStaminaConfig("ScriptableObject/Stamina/Stamina", "Stamina");
-        RenderLineUpSlotConfig("ScriptableObject/LineUpSlot/LineUpSlot", "LineUpSlot");
-        RenderPvEConfig("ScriptableObject/PvE/PvE", "PvE");
     }
 
     // Update is called once per frame
@@ -43,28 +38,8 @@ public class RenderAllConfig : MonoBehaviour
         writer.Close();
     }
 
-    void RenderCombatConfig(string src, string file_name)
-    {
-        Debug.Log("RenderConfig " + src + " " + file_name);
-        CombatConfig a = Resources.Load<CombatConfig>(src);
-        string json = a.Serialize(a);
-        string filesrc = "Assets/Config/json/" + file_name + ".json";
-        File.WriteAllText(filesrc, "");
-        StreamWriter writer = new StreamWriter(filesrc, true);
-        writer.WriteLine(json);
-        writer.Close();
-    }
-    void RenderSailorGereralConfig(string src, string file_name)
-    {
-        Debug.Log("RenderConfig " + src + " " + file_name);
-        SailorGeneralConfig a = Resources.Load<SailorGeneralConfig>(src);
-        string json = a.Serialize(a);
-        string filesrc = "Assets/Config/json/" + file_name + ".json";
-        File.WriteAllText(filesrc, "");
-        StreamWriter writer = new StreamWriter(filesrc, true);
-        writer.WriteLine(json);
-        writer.Close();
-    }
+  
+   
     void RenderClassBonusConfig(string src, string file_name)
     {
         Debug.Log("RenderConfig " + src + " " + file_name);
@@ -76,37 +51,7 @@ public class RenderAllConfig : MonoBehaviour
         writer.WriteLine(json);
         writer.Close();
     }
-    void RenderStaminaConfig(string src, string file_name)
-    {
-        Debug.Log("RenderConfig " + src + " " + file_name);
-        UserStaminaConfig a = Resources.Load<UserStaminaConfig>(src);
-        string json = a.Serialize(a);
-        string filesrc = "Assets/Config/json/" + file_name + ".json";
-        File.WriteAllText(filesrc, "");
-        StreamWriter writer = new StreamWriter(filesrc, true);
-        writer.WriteLine(json);
-        writer.Close();
-    }
-    void RenderLineUpSlotConfig(string src, string file_name)
-    {
-        Debug.Log("RenderConfig " + src + " " + file_name);
-        LineUpSlot a = Resources.Load<LineUpSlot>(src);
-        string json = a.Serialize(a);
-        string filesrc = "Assets/Config/json/" + file_name + ".json";
-        File.WriteAllText(filesrc, "");
-        StreamWriter writer = new StreamWriter(filesrc, true);
-        writer.WriteLine(json);
-        writer.Close();
-    }
-    void RenderPvEConfig(string src, string file_name)
-    {
-        Debug.Log("RenderConfig " + src + " " + file_name);
-        PvEConfig a = Resources.Load<PvEConfig>(src);
-        string json = a.Serialize(a);
-        string filesrc = "Assets/Config/json/" + file_name + ".json";
-        File.WriteAllText(filesrc, "");
-        StreamWriter writer = new StreamWriter(filesrc, true);
-        writer.WriteLine(json);
-        writer.Close();
-    }
+    
+  
+   
 }
