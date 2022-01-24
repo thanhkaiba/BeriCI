@@ -16,7 +16,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     {
         quality = obj.GetInt("quality");
         level = obj.GetInt("level");
-        exp = obj.GetInt("exp");
+        exp = obj.GetLong("exp");
         lastTrade = obj.GetLong("last_trade");
 
     }
@@ -26,7 +26,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     public readonly string name;
     public int quality { get; set; }
     public int level { get; set; }
-    public int exp { get; set; }
+    public long exp { get; set; }
 
     public long lastTrade { get; set; }
     public List<Item> items { get; set; }
