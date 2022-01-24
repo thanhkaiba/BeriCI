@@ -22,7 +22,7 @@ public class GameUtils : UnityEngine.Object
     public static CombatSailor CreateCombatSailor(string name)
     {
         SailorModel model = new SailorModel(RandomId(), name);
-        SailorConfig2 config_stats = model.config_stats;
+        SailorConfig config_stats = model.config_stats;
         //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
@@ -44,7 +44,7 @@ public class GameUtils : UnityEngine.Object
         return sailor;
     }
 
-    public static GameObject AddSailorImage(string name, Transform parent, out SailorConfig2 config_stats)
+    public static GameObject AddSailorImage(string name, Transform parent, out SailorConfig config_stats)
     {
         SailorModel model = new SailorModel(RandomId(), name);
         config_stats = model.config_stats;
@@ -58,7 +58,7 @@ public class GameUtils : UnityEngine.Object
     }
     public static CombatSailor CreateCombatSailor(SailorModel model)
     {
-        SailorConfig2 config_stats = model.config_stats;
+        SailorConfig config_stats = model.config_stats;
         GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(model.config_stats.root_name)) as CombatSailor;
         sailor.Model = model;
@@ -78,7 +78,7 @@ public class GameUtils : UnityEngine.Object
     public static GameObject CreateFakeSailorObject(string name)
     {
         SailorModel model = new SailorModel(RandomId(), name);
-        SailorConfig2 config_stats = model.config_stats;
+        SailorConfig config_stats = model.config_stats;
         return Instantiate(GetSailorModelPrefab(config_stats.root_name));
 
     }

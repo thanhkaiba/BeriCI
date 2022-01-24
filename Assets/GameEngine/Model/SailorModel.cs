@@ -22,7 +22,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     }
 
-    public SailorConfig2 config_stats { get; set; }
+    public SailorConfig config_stats { get; set; }
     public readonly string id;
     public readonly string name;
     public int quality { get; set; }

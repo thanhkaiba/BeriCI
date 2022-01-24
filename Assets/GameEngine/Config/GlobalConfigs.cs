@@ -11,7 +11,7 @@ namespace Piratera.Config {
         public static LineUpSlot LineUp;
         public static UserStaminaConfig StaminaConfig;
         public static CombatConfig Combat;
-        private static Dictionary<string, SailorConfig2> SailorDic = new Dictionary<string, SailorConfig2>();
+        private static Dictionary<string, SailorConfig> SailorDic = new Dictionary<string, SailorConfig>();
         public static SynergiesConfig Synergies;
 
         public static void InitSyncConfig()
@@ -30,13 +30,13 @@ namespace Piratera.Config {
                 {
                     string nameAsset = Path.GetFileName(file);
                     string name = nameAsset.Split('.')[0];
-                    SailorConfig2 config = JsonConvert.DeserializeObject<SailorConfig2>(File.ReadAllText(file));
+                    SailorConfig config = JsonConvert.DeserializeObject<SailorConfig>(File.ReadAllText(file));
                     if (SailorDic.ContainsKey(name)) SailorDic[name] = config;
                     else SailorDic.Add(name, config);
                 }
             }
         }
-        public static SailorConfig2 GetSailorConfig(string sailorRootName)
+        public static SailorConfig GetSailorConfig(string sailorRootName)
         {
             return SailorDic[sailorRootName];
         }

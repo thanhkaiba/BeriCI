@@ -87,7 +87,7 @@ public class LoadServerDataUI : MonoBehaviour
             DestroyImmediate(child.gameObject);
         }
         GameObject sailor;
-        if ((sailor = GameUtils.AddSailorImage(param.root_name, sailorNode.transform, out SailorConfig2 config_stats)) != null)
+        if ((sailor = GameUtils.AddSailorImage(param.root_name, sailorNode.transform, out SailorConfig config_stats)) != null)
         {
             BoxCollider2D box = sailor.GetComponent<BoxCollider2D>();
             sailorRank.transform.position = Camera.main.WorldToScreenPoint(sailorNode.transform.position - new Vector3(box.size.x / 2 - box.offset.x, 0, 0)) + new Vector3(0, 10, 0);

@@ -2,7 +2,7 @@ using Newtonsoft.Json.Linq;
 using Piratera.Config;
 using System.Collections.Generic;
 using UnityEngine;
-public class SailorConfig2
+public class SailorConfig
 {
     public string root_name = "Root";
     public SailorRank rank = SailorRank.S;
