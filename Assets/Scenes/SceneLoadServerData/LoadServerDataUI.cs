@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Piratera.Config;
 
 public class LoadServerDataUI : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private Slider progressBar;
 
-    [SerializeField]
     private float startingPoint = 0.3f;
 
     [SerializeField]
@@ -58,15 +58,17 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private Canvas canvas;
 
+    [SerializeField]
+    private GameConfigSync ConfigSync;
+
 
     void Start()
     {
-
+        VisibleErrorUI(false);
         RandomTip();
         buttonReload.gameObject.SetActive(false);
-
-        SendGetData();
-        ShowLoading(15f, startingPoint, RandomTip);
+        progressBar.value = 0;
+        ShowLoading(1f, startingPoint, SendGetData);
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
     }
 
@@ -101,14 +103,19 @@ public class LoadServerDataUI : MonoBehaviour
 
     }
 
+    public void VisibleErrorUI(bool visible)
+    {
+        progressBar.gameObject.SetActive(!visible);
+        buttonReload.gameObject.SetActive(visible);
+        percentText.gameObject.SetActive(!visible);
+        buttonLogout.gameObject.SetActive(visible);
+        errorText.gameObject.SetActive(visible);
+    }
+
     public void SendGetData()
     {
-        progressBar.value = 0;
-        progressBar.gameObject.SetActive(true);
-        buttonReload.gameObject.SetActive(false);
-        percentText.gameObject.SetActive(false);
-        buttonLogout.gameObject.SetActive(false);
-        errorText.gameObject.SetActive(false);
+        progressBar.value = startingPoint;
+        VisibleErrorUI(false);
         NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
     }
 
@@ -151,7 +158,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             if (errorCode == SFSErrorCode.SUCCESS)
             {
-                ShowLoading(1f, 1f, OnLoadSuccess);
+                ShowLoading(1f, 0.4f, OnLoadSuccess);
             }
             else
             {
@@ -163,19 +170,9 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnLoadError(SFSErrorCode errorCode)
     {
-        GuiManager.Instance.ShowPopupNotification($"Load list hero fail! \n {errorCode}: {(int)errorCode}");
-
+        errorText.text = $"Load list hero fail! \n {errorCode}: {(int)errorCode}";
         DOTween.Kill(progressBar);
-        buttonReload.gameObject.SetActive(true);
-        progressBar.gameObject.SetActive(false);
-        percentText.gameObject.SetActive(false);
-        buttonLogout.gameObject.SetActive(true);
-        errorText.gameObject.SetActive(true);
-
-        /* GuiManager.Instance.ShowPopupNotification($"Load list hero fail! \n {errorCode}: {(int)errorCode}", () => {
-             SceneManager.LoadScene("SceneLogin");
-           }
-         );*/
+        VisibleErrorUI(true);
 
     }
 
@@ -185,12 +182,11 @@ public class LoadServerDataUI : MonoBehaviour
     }
 
 
-    public void ShowLoading(float actionTime, float value, Action action)
+    public void ShowLoading(float actionTime, float value, Action callback)
     {
-        DOTween.Kill(progressBar);
         Sequence seq = DOTween.Sequence();
-        seq.Append(progressBar.DOValue(value, actionTime));
-        seq.AppendCallback(() => action());
+        seq.Append(progressBar.DOValue(value, actionTime).SetRelative());
+        seq.AppendCallback(() => callback());
         seq.SetLink(progressBar.gameObject);
         seq.SetTarget(progressBar);
     }
@@ -198,7 +194,15 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnLoadSuccess()
     {
-        SceneManager.LoadScene("SceneLobby");
+        ConfigSync.StartFlowSync(x => progressBar.value += x, () =>
+        {
+            GlobalConfigs.InitSyncConfig();
+            SceneManager.LoadScene("SceneLobby");
+        }, () => {
+            errorText.text = "Synchronization Failed";
+            VisibleErrorUI(true);
+        });
+        
     }
 
     private void Awake()

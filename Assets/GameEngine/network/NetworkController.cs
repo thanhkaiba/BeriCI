@@ -234,6 +234,8 @@ namespace Piratera.Network
             {
                 sfs.Disconnect();
             }
+
+            ForceStartScene();
         }
         //----------------------------------------------------------
         // SmartFoxServer event listeners

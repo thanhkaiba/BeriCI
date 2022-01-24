@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Stamina", menuName = "config/Stamina")]
-public class UserStaminaConfig : ScriptableObjectPro
+public class UserStaminaConfig
 {
     public int max_stamina = 200;
     public int pve_cost = 5;

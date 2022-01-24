@@ -19,7 +19,6 @@ namespace Piratera.Config
             public ConfigFileMeta(ISFSObject packet)
             {
                 UnpackMeta(packet);
-                HandleDownload();
             }
 
             private void UnpackMeta(ISFSObject packet)
@@ -48,13 +47,14 @@ namespace Piratera.Config
                 Debug.Log("Saved Config JSON to: " + absolutePath);
             }
 
-            public void HandleDownload()
+            public bool NeedUpdate()
             {
                 string localMD5Hash = CalculateMD5(FileName);
                 if (localMD5Hash != MD5Hash)
                 {
-                    RequestDowload();
+                    return true;
                 }
+                return false;
             }
 
             public void RequestDowload()
@@ -89,55 +89,106 @@ namespace Piratera.Config
         }
 
 
-        public static Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
+        private Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
+        private Action<float> UpdateProgressBar;
+        private Action OnSuccess;
+        private Action OnError;
+        private int TotalUnSync = 0;
+        private int TotalSynced = 0;
+
 
 
         private void Start()
         {
-            SFSObject data = new SFSObject();
-            data.PutUtfString("path", "");
-            NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
+            
             NetworkController.AddServerActionListener(onReceiveServerAction);
 
            
+        }
+
+        public void StartFlowSync(Action<float> progressAction, Action onSuccess, Action onError)
+        {
+            UpdateProgressBar = progressAction;
+            OnSuccess = onSuccess;
+            OnError = onError;
+            TotalSynced = 0;
+            TotalUnSync = 0;
+
+            SFSObject data = new SFSObject();
+            data.PutUtfString("path", "");
+            NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
+            manifest.Clear();
         }
 
 
 
         private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
-           
-           if (action == SFSAction.GET_CONFIG_MANIFEST)
-           {
-
-              if (errorCode == SFSErrorCode.SUCCESS)
-                {
-                    ISFSArray data = packet.GetSFSArray("manifest");
-
-                    foreach (SFSObject obj in data)
+            switch (action)
+            {
+                case SFSAction.GET_CONFIG_MANIFEST:
                     {
-                        ConfigFileMeta meta = new ConfigFileMeta(obj);
-                        if (!manifest.ContainsKey(meta.FileName))
+                        if (errorCode == SFSErrorCode.SUCCESS)
                         {
-                            manifest.Add(meta.FileName, new ConfigFileMeta(obj));
+                            ISFSArray data = packet.GetSFSArray("manifest");
+
+                            foreach (SFSObject obj in data)
+                            {
+                                ConfigFileMeta meta = new ConfigFileMeta(obj);
+                                if (!manifest.ContainsKey(meta.FileName))
+                                {
+                                    manifest.Add(meta.FileName, new ConfigFileMeta(obj));
+
+                                    if (meta.NeedUpdate())
+                                    {
+                                        TotalUnSync++;
+                                        meta.RequestDowload();
+                                    }
+                                }
+
+                            }
+                            CheckSuccess();
+
+                        } else
+                        {
+                            OnError();
                         }
-
+                        break;
                     }
-                    GlobalConfigs.InitSyncConfig();
-                }
-
-         
-           } else if (action == SFSAction.GET_CONFIG)
-           {
-                if (errorCode == SFSErrorCode.SUCCESS)
-                {
-                    string fileName = packet.GetUtfString("file_name");
-                    if (manifest.ContainsKey(fileName))
+                case SFSAction.GET_CONFIG:
                     {
-                        manifest[fileName].NewFromSFSObject(packet);
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            string fileName = packet.GetUtfString("file_name");
+                            if (manifest.ContainsKey(fileName))
+                            {
+                                manifest[fileName].NewFromSFSObject(packet);
+                                UpdateProgressBar(0.3f / TotalUnSync);
+                                TotalSynced++;
+                                CheckSuccess();
+
+
+                            }
+                        }
+                        else
+                        {
+                            OnError();
+                        }
+                        break;
                     }
-                }
-           }
+
+
+
+            }
+        
+        }
+
+        private void CheckSuccess()
+        {
+            if (TotalSynced >= TotalUnSync)
+            {
+                OnSuccess();
+            }
         }
 
         private void OnDestroy()
