@@ -8,6 +8,7 @@ public class SailorInQueue : MonoBehaviour
     public SmoothSlider speedSlider;
     public Image icon;
     public Text level;
+    public Text quality;
     public Image colorTeam;
     public void SetData(CombatSailor s)
     {
@@ -35,6 +36,7 @@ public class SailorInQueue : MonoBehaviour
             colorTeam.color = new Color(217f/255f, 88f/255f, 97f/255f);
         }
         level.text = sailorData.Model.level.ToString();
+        quality.text = "Q:" + sailorData.Model.quality.ToString();
     }
     public void OnClick()
     {

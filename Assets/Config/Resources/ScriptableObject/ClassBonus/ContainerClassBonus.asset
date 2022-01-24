@@ -149,6 +149,22 @@ MonoBehaviour:
   - {fileID: -2846937303394854705}
   - {fileID: 5632407113825715848}
   - {fileID: 3656651241095530863}
+--- !u!114 &-5170416716755477929
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: GUNPOWDER_0
+  m_EditorClassIdentifier: 
+  container: {fileID: 9078106810150908001}
+  pop: 2
+  _params:
+  - 0.5
 --- !u!114 &-4807246714159610176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,6 +197,22 @@ MonoBehaviour:
   pop: 2
   _params:
   - 10
+--- !u!114 &-3901968490203592529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164d8ababc65cbc49b9c7bc85e54d197, type: 3}
+  m_Name: SUMMONER
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  type: 17
+  levels:
+  - {fileID: -443416402061572721}
 --- !u!114 &-3850908979103961074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +247,55 @@ MonoBehaviour:
   pop: 4
   _params:
   - 40
+--- !u!114 &-3559218092757921742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: GUNPOWDER_1
+  m_EditorClassIdentifier: 
+  container: {fileID: 9078106810150908001}
+  pop: 3
+  _params:
+  - 0.75
+--- !u!114 &-3553346711244983574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: CRIMINAL_1
+  m_EditorClassIdentifier: 
+  container: {fileID: -2977587753794258495}
+  pop: 3
+  _params:
+  - 1
+--- !u!114 &-3274535457591505731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164d8ababc65cbc49b9c7bc85e54d197, type: 3}
+  m_Name: SHIPWRIGHT
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  type: 14
+  levels:
+  - {fileID: 324689618241855899}
+  - {fileID: 3573187817673440465}
 --- !u!114 &-3183711232705518949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +329,23 @@ MonoBehaviour:
   pop: 4
   _params:
   - 60
+--- !u!114 &-2977587753794258495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164d8ababc65cbc49b9c7bc85e54d197, type: 3}
+  m_Name: CRIMINAL
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  type: 16
+  levels:
+  - {fileID: -1575849693632788299}
+  - {fileID: -3553346711244983574}
 --- !u!114 &-2846937303394854705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,7 +393,23 @@ MonoBehaviour:
   container: {fileID: 3486168131814241331}
   pop: 3
   _params:
-  - 0.2
+  - 0.8
+--- !u!114 &-1575849693632788299
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: CRIMINAL_0
+  m_EditorClassIdentifier: 
+  container: {fileID: -2977587753794258495}
+  pop: 2
+  _params:
+  - 0.5
 --- !u!114 &-1098121521410366417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,6 +426,21 @@ MonoBehaviour:
   pop: 2
   _params:
   - 30
+--- !u!114 &-443416402061572721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: SUMMONER_0
+  m_EditorClassIdentifier: 
+  container: {fileID: -3901968490203592529}
+  pop: 3
+  _params: []
 --- !u!114 &-160921110909277169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +483,27 @@ MonoBehaviour:
   - {fileID: 490806217928476229}
   - {fileID: 1507287549702856024}
   - {fileID: 3486168131814241331}
+  - {fileID: 9078106810150908001}
+  - {fileID: -3274535457591505731}
+  - {fileID: 7772678465547923693}
+  - {fileID: -2977587753794258495}
+  - {fileID: -3901968490203592529}
+--- !u!114 &324689618241855899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: SHIPWRIGHT_0
+  m_EditorClassIdentifier: 
+  container: {fileID: -3274535457591505731}
+  pop: 3
+  _params:
+  - 0.1
 --- !u!114 &490806217928476229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,7 +555,22 @@ MonoBehaviour:
   levels:
   - {fileID: 5729306647252334749}
   - {fileID: -2143905600956970317}
-  - {fileID: 4112114195823546615}
+--- !u!114 &3573187817673440465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: SHIPWRIGHT_1
+  m_EditorClassIdentifier: 
+  container: {fileID: -3274535457591505731}
+  pop: 5
+  _params:
+  - 0.3
 --- !u!114 &3583291195967303073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,25 +616,9 @@ MonoBehaviour:
   m_Name: MARKSMAN_1
   m_EditorClassIdentifier: 
   container: {fileID: -3183711232705518949}
-  pop: 4
+  pop: 3
   _params:
-  - 0.5
---- !u!114 &4112114195823546615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
-  m_Name: GRAPPLER_2
-  m_EditorClassIdentifier: 
-  container: {fileID: 3486168131814241331}
-  pop: 5
-  _params:
-  - 0.45
+  - 0.25
 --- !u!114 &4751073023730971478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -531,9 +680,9 @@ MonoBehaviour:
   m_Name: GRAPPLER_0
   m_EditorClassIdentifier: 
   container: {fileID: 3486168131814241331}
-  pop: 1
+  pop: 2
   _params:
-  - 0.05
+  - 0.5
 --- !u!114 &5837189685783871986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -581,7 +730,7 @@ MonoBehaviour:
   container: {fileID: 8634524938568386142}
   pop: 1
   _params:
-  - 0.35
+  - 0.45
 --- !u!114 &6211138524695139528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -648,6 +797,22 @@ MonoBehaviour:
   pop: 4
   _params:
   - 0.8
+--- !u!114 &7772678465547923693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164d8ababc65cbc49b9c7bc85e54d197, type: 3}
+  m_Name: EPIDEMIC
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  type: 15
+  levels:
+  - {fileID: 9178386011903465035}
 --- !u!114 &8634524938568386142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,3 +829,35 @@ MonoBehaviour:
   type: 6
   levels:
   - {fileID: 5970126343382269018}
+--- !u!114 &9078106810150908001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 164d8ababc65cbc49b9c7bc85e54d197, type: 3}
+  m_Name: GUNPOWDER
+  m_EditorClassIdentifier: 
+  container: {fileID: 11400000}
+  type: 13
+  levels:
+  - {fileID: -5170416716755477929}
+  - {fileID: -3559218092757921742}
+--- !u!114 &9178386011903465035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acf5620ac84ac384baacff19ff1ff9ec, type: 3}
+  m_Name: EPIDEMIC_0
+  m_EditorClassIdentifier: 
+  container: {fileID: 7772678465547923693}
+  pop: 1
+  _params: []

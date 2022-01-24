@@ -32,20 +32,22 @@ public class IconClassBonus : MonoBehaviour
     {
         text.text = _text;
     }
-    public void ChangeLevel(int level)
+    public void ChangeLevel(int level, int levelNumber)
     {
         // TODO sau phai check theo tung loai
-        if (level >= 1) GetComponent<Image>().sprite = bg_2;
+        if (levelNumber - level == 1) GetComponent<Image>().sprite = bg_2;
+        else if (levelNumber - level == 2) GetComponent<Image>().sprite = bg_1;
         else GetComponent<Image>().sprite = bg_0;
     }
     public void SetData(ClassBonusItem data)
     {
+        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        int levelNumber = config.GetLevelCount(data.type);
+        int maxPop = config.GetMaxPopNeed(data.type);
+
         this.data = data;
         ChangeIcon(data.type);
-        ChangeLevel(data.level);
-
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
-        int maxPop = config.GetMaxPopNeed(data.type);
+        ChangeLevel(data.level, levelNumber);
 
         ChangeText("" + data.current + "/" + maxPop);
     }

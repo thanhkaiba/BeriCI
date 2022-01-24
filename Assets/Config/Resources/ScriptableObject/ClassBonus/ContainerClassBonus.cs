@@ -82,6 +82,24 @@ public class ContainerClassBonus : ScriptableObjectPro
         }
         return result;
     }
+    public List<int> GetListPop(SailorClass type)
+    {
+        List<int> result = new List<int>();
+        var config = GetPassiveConfig(type);
+        if (config != null)
+        {
+            foreach (ClassBonusLevel l in config.levels)
+            {
+                result.Add(l.pop);
+            }
+        }
+        return result;
+    }
+    public int GetLevelCount(SailorClass type)
+    {
+        var config = GetPassiveConfig(type);
+        return config.levels.Count;
+    }
     public List<float> GetParams(SailorClass type, int level)
     {
         var config = GetPassiveConfig(type);
