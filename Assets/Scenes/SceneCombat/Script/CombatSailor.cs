@@ -45,7 +45,7 @@ public class CombatSailor : Sailor
     // them giam chi so theo toc he
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam)
     {
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         ownTeam.ForEach(p =>
         {
             switch (p.type)
@@ -179,7 +179,7 @@ public class CombatSailor : Sailor
         CombatSailor target = GetBaseAttackTarget(combatState);
         bool isCrit = IsCrit();
         // class bonus
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         float healthGain = 0;
         ClassBonusItem wild = combatState.GetTeamClassBonus(cs.team, SailorClass.WILD);
         if (cs.HaveType(SailorClass.WILD) && wild != null)
@@ -210,7 +210,7 @@ public class CombatSailor : Sailor
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
 
         // Calc Class Active
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         ClassBonusItem cyborg = combatState.GetTeamClassBonus(cs.team, SailorClass.CYBORG);
         if (cs.HaveType(SailorClass.CYBORG) && cyborg != null)
         {
@@ -239,7 +239,7 @@ public class CombatSailor : Sailor
     }
     public void CheckActiveGrappler()
     {
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         ClassBonusItem grappler = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.GRAPPLER);
         if (cs.HaveType(SailorClass.GRAPPLER) && grappler != null)
         {
@@ -333,7 +333,7 @@ public class CombatSailor : Sailor
         float damage = CalcDamageTake(d);
         var state = CombatState.Instance;
         ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         if (actor.cs.HaveType(SailorClass.MARKSMAN) && marksman != null)
         {
             float bonusDamagePerTile = config.GetParams(marksman.type, marksman.level)[0];

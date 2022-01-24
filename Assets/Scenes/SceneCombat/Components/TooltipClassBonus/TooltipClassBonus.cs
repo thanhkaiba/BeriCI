@@ -38,7 +38,7 @@ public class TooltipClassBonus : MonoBehaviour
     }
     public void ShowTooltipPassiveType(ClassBonusItem data, Transform _pos)
     {
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         gameObject.SetActive(true);
         gameObject.transform.position = _pos.position;
         gameObject.transform.localScale = SceneManager.GetActiveScene().name == "SceneCombat2D" ? new Vector3(.6f, .6f, .6f) : Vector3.one;

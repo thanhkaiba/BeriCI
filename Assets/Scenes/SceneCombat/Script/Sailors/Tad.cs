@@ -61,7 +61,7 @@ public class Tad : CombatSailor
         targets.Add(main_target.Model.id);
         _params.Add(main_target.CalcDamageTake(new Damage() { physics = damage }, this));
 
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         ClassBonusItem wild = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.WILD);
         float healthGain = 0;
         if (cs.HaveType(SailorClass.WILD) && wild != null)

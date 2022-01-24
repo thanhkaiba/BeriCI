@@ -70,6 +70,7 @@ public class LoadServerDataUI : MonoBehaviour
         progressBar.value = 0;
         ShowLoading(1f, startingPoint, SendGetData);
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
+        GlobalConfigs.InitSyncConfig();
     }
 
     void UpdateTextPercent(float value)

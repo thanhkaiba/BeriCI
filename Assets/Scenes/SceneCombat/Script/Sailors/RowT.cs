@@ -36,7 +36,7 @@ public class RowT : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         var state = CombatState.Instance;
 
         float magic_damage = cs.Power * Model.config_stats.skill_params[0];

@@ -6,13 +6,13 @@ using UnityEngine;
 namespace Piratera.Config {
     public class GlobalConfigs : Object
     {
-        public static ContainerClassBonus ClassBonus = Resources.Load<ContainerClassBonus>("ScriptableObject/ClassBonus/ContainerClassBonus");
         public static SailorGeneralConfig SailorGeneral;
         public static PvEConfig PvE;
         public static LineUpSlot LineUp;
         public static UserStaminaConfig StaminaConfig;
         public static CombatConfig Combat;
         private static Dictionary<string, SailorConfig2> SailorDic = new Dictionary<string, SailorConfig2>();
+        public static SynergiesConfig Synergies;
 
         public static void InitSyncConfig()
         {
@@ -21,6 +21,7 @@ namespace Piratera.Config {
             SailorGeneral = JsonConvert.DeserializeObject<SailorGeneralConfig>(GameConfigSync.GetContent("SailorGeneralConfig.json"));
             StaminaConfig = JsonConvert.DeserializeObject<UserStaminaConfig>(GameConfigSync.GetContent("Stamina.json"));
             Combat = JsonConvert.DeserializeObject<CombatConfig>(GameConfigSync.GetContent("Combat.json"));
+            Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(GameConfigSync.GetContent("ContainerClassBonus.json"));
 
             string[] files = System.IO.Directory.GetFiles(GameConfigSync.GetSailorFolder());
             foreach (string file in files)

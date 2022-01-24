@@ -41,7 +41,7 @@ public class IconClassBonus : MonoBehaviour
     }
     public void SetData(ClassBonusItem data)
     {
-        ContainerClassBonus config = GlobalConfigs.ClassBonus;
+        SynergiesConfig config = GlobalConfigs.Synergies;
         int levelNumber = config.GetLevelCount(data.type);
         int maxPop = config.GetMaxPopNeed(data.type);
 

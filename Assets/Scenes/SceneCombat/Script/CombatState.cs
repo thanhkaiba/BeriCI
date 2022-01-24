@@ -247,7 +247,7 @@ public class CombatState : MonoBehaviour
             // nhieu hon 1 assassin thi skip tinh assassin
             if (type == SailorClass.ASSASSIN && assassinCount > 1) continue;
 
-            ContainerClassBonus config = GlobalConfigs.ClassBonus;
+            SynergiesConfig config = GlobalConfigs.Synergies;
             if (!config.HaveBonus(type)) continue;
             List<int> milestones = config.GetMilestones(type);
             for (int level = milestones.Count - 1; level >= 0; level--)
