@@ -98,6 +98,8 @@ namespace Piratera.Config
             data.PutUtfString("path", "");
             NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
             NetworkController.AddServerActionListener(onReceiveServerAction);
+
+           
         }
 
 
@@ -121,7 +123,9 @@ namespace Piratera.Config
                         }
 
                     }
+                    GlobalConfigs.InitSyncConfig();
                 }
+
          
            } else if (action == SFSAction.GET_CONFIG)
            {
@@ -141,13 +145,11 @@ namespace Piratera.Config
             NetworkController.RemoveServerActionListener(onReceiveServerAction);
         }
 
-        public static string GetContent(string fileName)
+        public static string GetPath(string fileName)
         {
-            if (manifest.ContainsKey("configs" + '/' + fileName))
-            {
-                return manifest[("configs" + '/' + fileName)].Content;
-            }
-            return "";
+            string[] data = { Application.persistentDataPath, "configs", fileName };
+            return Path.Combine(data);
+
         }
 
 
