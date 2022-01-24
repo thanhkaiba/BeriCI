@@ -152,6 +152,12 @@ namespace Piratera.Config
 
         }
 
+        public static string GetContent(string fileName)
+        {
+            string path = GetPath(fileName);
+            return File.ReadAllText(path);
+        }
+
 
        
     }
