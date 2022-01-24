@@ -42,7 +42,7 @@ public class IconSailor : MonoBehaviour
     public void PresentData(SailorModel model)
     {
         gameObject.name = model.id;
-        icon.sprite = model.config_stats.avatar;
+        icon.sprite = GameUtils.GetSailorAvt(model.config_stats.root_name);
         border.color = rankColor[(int)model.config_stats.rank];
         iconLock.gameObject.SetActive(!model.isAvaiable());
         background.color = rankColorInside[(int)model.config_stats.rank];

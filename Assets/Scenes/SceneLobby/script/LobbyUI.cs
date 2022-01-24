@@ -242,7 +242,7 @@ public class LobbyUI : MonoBehaviour
         {
             if (i >= listLineUp.Count) break;
             var model = listLineUp[i];
-            Transform GO = Instantiate(model.config_stats.model, nodeSailors[i]).transform.FindDeepChild("model");
+            Transform GO = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), nodeSailors[i]).transform.FindDeepChild("model");
             GO.GetComponent<Renderer>().sortingOrder = 3;
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }

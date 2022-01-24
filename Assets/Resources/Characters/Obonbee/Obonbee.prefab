@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2989574511855767341}
   - component: {fileID: 3774696206841226144}
   m_Layer: 0
-  m_Name: Obonbee
+  m_Name: OBonbee
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

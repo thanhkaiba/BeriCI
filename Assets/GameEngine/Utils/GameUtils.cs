@@ -5,17 +5,26 @@ using Piratera.Network;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameUtils : UnityEngine.Object
 {
+    public static GameObject GetSailorModelPrefab(string name)
+    {
+        return Resources.Load<GameObject>("Characters/" + name + "/" + name);
+    }
+    public static Sprite GetSailorAvt(string name)
+    {
+        return Resources.Load<Sprite>("Icons/IconSailor/" + name);
+    }
     // test only
     public static CombatSailor CreateCombatSailor(string name)
     {
         SailorModel model = new SailorModel(RandomId(), name);
-        SailorConfig config_stats = model.config_stats;
+        SailorConfig2 config_stats = model.config_stats;
         //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
-        GameObject characterGO = Instantiate(config_stats.model);
+        GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
         sailor.Model = model;
 
@@ -35,13 +44,13 @@ public class GameUtils : UnityEngine.Object
         return sailor;
     }
 
-    public static GameObject AddSailorImage(string name, Transform parent, out SailorConfig config_stats)
+    public static GameObject AddSailorImage(string name, Transform parent, out SailorConfig2 config_stats)
     {
         SailorModel model = new SailorModel(RandomId(), name);
         config_stats = model.config_stats;
-        if (config_stats != null && config_stats.model != null)
+        if (config_stats != null)
         {
-            GameObject sailor = Instantiate(config_stats.model, parent);
+            GameObject sailor = Instantiate(GetSailorModelPrefab(config_stats.root_name), parent);
             return sailor;
 
         }
@@ -49,8 +58,8 @@ public class GameUtils : UnityEngine.Object
     }
     public static CombatSailor CreateCombatSailor(SailorModel model)
     {
-        SailorConfig config_stats = model.config_stats;
-        GameObject characterGO = Instantiate(config_stats.model);
+        SailorConfig2 config_stats = model.config_stats;
+        GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(model.config_stats.root_name)) as CombatSailor;
         sailor.Model = model;
 
@@ -69,19 +78,19 @@ public class GameUtils : UnityEngine.Object
     public static GameObject CreateFakeSailorObject(string name)
     {
         SailorModel model = new SailorModel(RandomId(), name);
-        SailorConfig config_stats = model.config_stats;
-        return Instantiate(config_stats.model);
+        SailorConfig2 config_stats = model.config_stats;
+        return Instantiate(GetSailorModelPrefab(config_stats.root_name));
 
     }
 
     public static Sailor CreateSailor(SailorModel sailorModel)
     {
-        if (sailorModel.config_stats.model == null)
+        if (GetSailorModelPrefab(sailorModel.config_stats.root_name) == null)
         {
             GuiManager.Instance.ShowPopupNotification($"{sailorModel.config_stats.root_name} is not have a model (Chua Code o Client)");
             return null;
         }
-        GameObject characterGO = Instantiate(sailorModel.config_stats.model);
+        GameObject characterGO = Instantiate(GetSailorModelPrefab(sailorModel.config_stats.root_name));
         Sailor sailor = characterGO.AddComponent<Sailor>();
         sailor.Model = sailorModel;
 

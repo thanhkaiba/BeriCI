@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Beel : CombatSailor
 {
-    public SailorConfig config;
     public Beel()
     {
     }

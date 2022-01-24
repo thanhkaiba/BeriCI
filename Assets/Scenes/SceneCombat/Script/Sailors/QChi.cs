@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class QChi : CombatSailor
 {
-    public SailorConfig config;
     public QChi()
     {
     }

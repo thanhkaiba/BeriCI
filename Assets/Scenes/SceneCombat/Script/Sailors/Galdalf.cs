@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Galdalf : CombatSailor
 {
-    public SailorConfig config;
     private Spine.Bone boneTarget;
     public Galdalf()
     {

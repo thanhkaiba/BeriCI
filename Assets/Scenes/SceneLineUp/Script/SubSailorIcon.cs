@@ -45,7 +45,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         GameObject g = new GameObject("drag-" + model.id);
         RectTransform trans = g.AddComponent<RectTransform>();
         Image flyImage = g.AddComponent<Image>();
-        flyImage.sprite = model.config_stats.avatar;
+        flyImage.sprite = GameUtils.GetSailorAvt(model.config_stats.root_name);
         flyImage.SetNativeSize();
         trans.SetParent(parent);
         trans.localScale = new Vector3(-1, 1, 1);

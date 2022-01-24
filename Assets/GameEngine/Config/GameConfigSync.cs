@@ -152,6 +152,12 @@ namespace Piratera.Config
 
         }
 
+        public static string GetSailorFolder()
+        {
+            string[] data = { Application.persistentDataPath, "configs", "Sailors" };
+            return Path.Combine(data);
+        }
+
         public static string GetContent(string fileName)
         {
             string path = GetPath(fileName);

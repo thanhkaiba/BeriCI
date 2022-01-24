@@ -77,14 +77,14 @@ public class LoadServerDataUI : MonoBehaviour
 
     void RandomTip()
     {
-
+        return;
         SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
         foreach (Transform child in sailorNode.transform)
         {
             DestroyImmediate(child.gameObject);
         }
         GameObject sailor;
-        if ((sailor = GameUtils.AddSailorImage(param.root_name, sailorNode.transform, out SailorConfig config_stats)) != null)
+        if ((sailor = GameUtils.AddSailorImage(param.root_name, sailorNode.transform, out SailorConfig2 config_stats)) != null)
         {
             BoxCollider2D box = sailor.GetComponent<BoxCollider2D>();
             sailorRank.transform.position = Camera.main.WorldToScreenPoint(sailorNode.transform.position - new Vector3(box.size.x / 2 - box.offset.x, 0, 0)) + new Vector3(0, 10, 0);

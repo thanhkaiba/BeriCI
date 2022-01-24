@@ -1,12 +1,9 @@
+using Newtonsoft.Json.Linq;
+using Piratera.Config;
 using System.Collections.Generic;
 using UnityEngine;
-using Piratera.Config;
-
-[CreateAssetMenu(fileName = "New Sailor", menuName = "config/Sailor")]
-public class SailorConfig : ScriptableObjectPro
+public class SailorConfig2
 {
-    public GameObject model;
-    public Sprite avatar;
     public string root_name = "Root";
     public SailorRank rank = SailorRank.S;
 
@@ -17,7 +14,6 @@ public class SailorConfig : ScriptableObjectPro
     public float magic_resist = 10;
 
     public float crit = 0;
-
 
     public AttackType attack_type = AttackType.MELEE;
     public List<SailorClass> classes;

@@ -13,7 +13,7 @@ public class SailorInQueue : MonoBehaviour
     public void SetData(CombatSailor s)
     {
         sailorData = s;
-        icon.sprite = s.Model.config_stats.avatar;
+        icon.sprite = GameUtils.GetSailorAvt(s.Model.config_stats.root_name);
         speedSlider.speed = 2.4f;
     }
     public CombatSailor GetData()

@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Herminia : CombatSailor
 {
-    public SailorConfig config;
     private Spine.Bone boneTarget;
     private Spine.Bone boneArr;
     public Herminia()

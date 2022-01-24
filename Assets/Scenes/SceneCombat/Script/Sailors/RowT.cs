@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class RowT : CombatSailor
 {
-    public SailorConfig config;
     private Spine.Bone boneTarget;
     private Spine.Bone boneArr;
     public RowT()

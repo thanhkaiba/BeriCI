@@ -1,3 +1,4 @@
+using Piratera.Config;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     {
         id = _id;
         name = _name;
-        LoadConfig();
+        config_stats = GlobalConfigs.GetSailorConfig(_name);
     }
 
     public SailorModel(ISFSObject obj): this(obj.GetUtfString("id"), obj.GetUtfString("name"))
@@ -21,7 +22,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     }
 
-    public SailorConfig config_stats { get; set; }
+    public SailorConfig2 config_stats { get; set; }
     public readonly string id;
     public readonly string name;
     public int quality { get; set; }
@@ -30,11 +31,6 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     public long lastTrade { get; set; }
     public List<Item> items { get; set; }
-
-    public void LoadConfig()
-    {
-        config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + name);
-    }
 
     public bool HaveType(SailorClass type)
     {

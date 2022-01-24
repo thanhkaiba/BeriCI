@@ -1,3 +1,4 @@
+using Piratera.Config;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,10 +27,10 @@ public class UserAvatar : MonoBehaviour
         }
         else
         {
-            SailorConfig config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/" + url);
+            SailorConfig2 config_stats = GlobalConfigs.GetSailorConfig(url);
             if (config_stats != null)
             {
-                userAvatar.sprite = config_stats.avatar;
+                userAvatar.sprite = GameUtils.GetSailorAvt(config_stats.root_name);
             }
 
         }

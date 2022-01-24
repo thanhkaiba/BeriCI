@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class Geechoso : CombatSailor
 {
-    public SailorConfig config;
     //private Spine.Bone boneTarget;
     public Geechoso()
     {

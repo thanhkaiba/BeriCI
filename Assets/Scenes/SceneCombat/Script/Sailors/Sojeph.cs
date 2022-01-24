@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Sojeph : CombatSailor
 {
-    public SailorConfig config;
     //private Spine.Bone boneTarget;
     public Sojeph()
     {

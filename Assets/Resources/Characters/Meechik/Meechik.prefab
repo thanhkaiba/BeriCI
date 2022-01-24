@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 1901724774873862992}
   - component: {fileID: 1330500174141082925}
   m_Layer: 0
-  m_Name: Meechic
+  m_Name: Meechik
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
