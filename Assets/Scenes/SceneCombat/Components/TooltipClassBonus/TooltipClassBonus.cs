@@ -86,8 +86,26 @@ public class TooltipClassBonus : MonoBehaviour
             case SailorClass.ASSASSIN:
                 content.text = "ASSASSIN gain " + (para[0] * 100) + "% crit chance and crit damage if there is no other ASSASSIN";
                 break;
+            case SailorClass.KNIGHT:
+                content.text = "KNIGHT gain " + (para[0]) + " armor";
+                break;
             case SailorClass.GRAPPLER:
-                content.text = "GRAPPLER speed-up " + (para[0] * 100) + "% after base attack";
+                content.text = "GRAPPLER speed-up " + (para[0] * 100) + "% after use skill";
+                break;
+            case SailorClass.GUNPOWDER:
+                content.text = "GUNPOWDER deal damage ignore " + (para[0] * 100) + "% armor and magic resist";
+                break;
+            case SailorClass.SHIPWRIGHT:
+                content.text = "SHIPWRIGHT gain " + (para[0] * 100) + "% power and health for each item their own";
+                break;
+            case SailorClass.EPIDEMIC:
+                content.text = "EPIDEMIC base attack also place virus on victim";
+                break;
+            case SailorClass.CRIMINAL:
+                content.text = "CRIMINAL deal " + para[0] + "% more damage for each enermy losing health percent";
+                break;
+            case SailorClass.SUMMONER:
+                content.text = "Summon Krackin monster";
                 break;
         }
 
