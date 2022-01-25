@@ -13,6 +13,7 @@ namespace Piratera.Config {
         public static CombatConfig Combat;
         private static Dictionary<string, SailorConfig> SailorDic = new Dictionary<string, SailorConfig>();
         public static SynergiesConfig Synergies;
+        private static bool HaveLoaded = false;
 
         public static void InitSyncConfig()
         {
@@ -41,6 +42,7 @@ namespace Piratera.Config {
                     }
                 }
             }
+            HaveLoaded = true;
         }
         public static SailorConfig GetSailorConfig(string sailorRootName)
         {
@@ -48,6 +50,7 @@ namespace Piratera.Config {
         }
         public static void InitDevConfig()
         {
+            if (HaveLoaded) return;
             LineUp = JsonConvert.DeserializeObject<LineUpSlot>(File.ReadAllText("DEV_CONFIG/LineUpSlot.json"));
             PvE = JsonConvert.DeserializeObject<PvEConfig>(File.ReadAllText("DEV_CONFIG/PvE.json"));
             SailorGeneral = JsonConvert.DeserializeObject<SailorGeneralConfig>(File.ReadAllText("DEV_CONFIG/SailorGeneralConfig.json"));
@@ -73,6 +76,7 @@ namespace Piratera.Config {
                     }
                 }
             }
+            HaveLoaded = true;
         }
     }
 }
