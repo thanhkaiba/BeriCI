@@ -127,8 +127,6 @@ public class CrewManager : MonoBehaviour
         }
         qualityText.text = "Quality: " + model.quality + "/" + GlobalConfigs.SailorGeneral.MAX_QUALITY;
         levelText.text = "" + model.level;
-        Debug.Log("model.exp " + model.exp);
-        Debug.Log("GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level) " + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level));
         exp.fillAmount = (float) model.exp / GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
         expText.text = "" + model.exp + "/" + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
         UpdateRankIconPosition();

@@ -112,11 +112,7 @@ namespace Piratera.Config
             UpdateProgressBar = progressAction;
             OnSuccess = onSuccess;
             OnError = onError;
-          
-            if (CheckSuccess())
-            {
-                return;
-            }
+         
             SFSObject data = new SFSObject();
             data.PutUtfString("path", "");
             NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
