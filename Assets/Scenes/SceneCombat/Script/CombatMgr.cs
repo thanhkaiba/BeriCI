@@ -1,4 +1,5 @@
-﻿using Piratera.GUI;
+﻿using Piratera.Config;
+using Piratera.GUI;
 using Piratera.Sound;
 using System;
 using System.Collections;
@@ -34,10 +35,12 @@ public class CombatMgr : MonoBehaviour
     public byte yourTeamIndex = 0;
     private void Start()
     {
+#if PIRATERA_DEV
+        GlobalConfigs.InitDevConfig();
+#endif
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
-        Time.timeScale = PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1);
-        UpdateSoundSpeed();
+        GameUtils.SetTimeScale(PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1));
         //return;
         PreparingGame();
         StartCoroutine(StartGame());
@@ -45,8 +48,7 @@ public class CombatMgr : MonoBehaviour
 
     private void OnDestroy()
     {
-        Time.timeScale = 1;
-        UpdateSoundSpeed();
+        GameUtils.SetTimeScale(1);
     }
     public void PreparingGame()
     {
@@ -140,7 +142,7 @@ public class CombatMgr : MonoBehaviour
                 }
             case CombatAcionType.GameResult:
                 {
-                    Time.timeScale = 1;
+                    GameUtils.SetTimeScale(1);
                     GameEndData data = actionProcess.gameEndData;
                     switch (modeId)
                     {
@@ -213,8 +215,7 @@ public class CombatMgr : MonoBehaviour
     }
     void GameOver(Team winTeam)
     {
-        Time.timeScale = 1;
-        UpdateSoundSpeed();
+        GameUtils.SetTimeScale(1);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
@@ -257,27 +258,9 @@ public class CombatMgr : MonoBehaviour
     }
     public void ChangeTimeScale()
     {
-        if (Time.timeScale == 1)
-        {
-            Time.timeScale = 2;
-        }
-        else
-        {
-            Time.timeScale = 1;
-        }
-        UpdateSoundSpeed();
+        if (Time.timeScale == 1) GameUtils.SetTimeScale(2);
+        else if (Time.timeScale == 2) GameUtils.SetTimeScale(3);
+        else GameUtils.SetTimeScale(1);
         PlayerPrefs.SetFloat($"TimeCombatScale {UserData.Instance.UID}", Time.timeScale);
-    }
-
-    private void UpdateSoundSpeed()
-    {
-        if (Time.timeScale == 1)
-        {
-            SoundMgr.SetSoundFxSpeed(1f);
-        }
-        else
-        {
-            SoundMgr.SetSoundFxSpeed(1.5f);
-        }
     }
 }

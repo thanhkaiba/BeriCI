@@ -2,6 +2,7 @@ using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Lib;
 using Piratera.Network;
+using Piratera.Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -184,5 +185,10 @@ public class GameUtils : UnityEngine.Object
     {
         yield return new WaitForSeconds(time);
         action();
+    }
+    public static void SetTimeScale(float timescale)
+    {
+        Time.timeScale = timescale;
+        SoundMgr.SetSoundFxSpeed(timescale);
     }
 }

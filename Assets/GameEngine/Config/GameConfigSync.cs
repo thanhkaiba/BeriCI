@@ -222,8 +222,5 @@ namespace Piratera.Config
             string path = GetPath(fileName);
             return File.ReadAllText(path);
         }
-
-
-       
     }
 }

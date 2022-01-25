@@ -46,5 +46,33 @@ namespace Piratera.Config {
         {
             return SailorDic[sailorRootName];
         }
+        public static void InitDevConfig()
+        {
+            LineUp = JsonConvert.DeserializeObject<LineUpSlot>(File.ReadAllText("DEV_CONFIG/LineUpSlot.json"));
+            PvE = JsonConvert.DeserializeObject<PvEConfig>(File.ReadAllText("DEV_CONFIG/PvE.json"));
+            SailorGeneral = JsonConvert.DeserializeObject<SailorGeneralConfig>(File.ReadAllText("DEV_CONFIG/SailorGeneralConfig.json"));
+            StaminaConfig = JsonConvert.DeserializeObject<UserStaminaConfig>(File.ReadAllText("DEV_CONFIG/Stamina.json"));
+            Combat = JsonConvert.DeserializeObject<CombatConfig>(File.ReadAllText("DEV_CONFIG/Combat.json"));
+            Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
+
+            string[] files = Directory.GetFiles("DEV_CONFIG/Sailors");
+            foreach (string file in files)
+            {
+                if (Path.GetExtension(file).ToLower() == ".json")
+                {
+                    string name = Path.GetFileNameWithoutExtension(file);
+
+                    SailorConfig config = JsonConvert.DeserializeObject<SailorConfig>(File.ReadAllText(file));
+                    if (SailorDic.ContainsKey(name))
+                    {
+                        SailorDic[name] = config;
+                    }
+                    else
+                    {
+                        SailorDic.Add(name, config);
+                    }
+                }
+            }
+        }
     }
 }
