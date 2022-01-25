@@ -56,10 +56,16 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         return result;
     }
 
-    internal bool isAvaiable()
+    public bool IsAvaiable()
     {
         return lastTrade < GameTimeMgr.GetCurrentUTCTime() - 24 * 60 * 60 * 1000;
     }
+
+    public long GetRemainingLockTime()
+    {
+        return lastTrade + 24 * 60 * 60 * 1000 - GameTimeMgr.GetCurrentUTCTime();
+    }
+
 
     bool IEquatable<SailorModel>.Equals(SailorModel other)
     {
