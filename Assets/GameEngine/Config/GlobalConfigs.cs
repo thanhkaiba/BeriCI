@@ -46,7 +46,8 @@ namespace Piratera.Config {
         }
         public static SailorConfig GetSailorConfig(string sailorRootName)
         {
-            return SailorDic[sailorRootName];
+            if (SailorDic.ContainsKey(sailorRootName)) return SailorDic[sailorRootName];
+            return null;
         }
         public static void InitDevConfig()
         {
