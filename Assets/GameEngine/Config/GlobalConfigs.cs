@@ -23,16 +23,22 @@ namespace Piratera.Config {
             Combat = JsonConvert.DeserializeObject<CombatConfig>(GameConfigSync.GetContent("Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(GameConfigSync.GetContent("ContainerClassBonus.json"));
 
-            string[] files = System.IO.Directory.GetFiles(GameConfigSync.GetSailorFolder());
+            string[] files = Directory.GetFiles(GameConfigSync.GetSailorFolder());
             foreach (string file in files)
             {
-                if (file.Contains(".json"))
+                if (Path.GetExtension(file).ToLower() == ".json")
                 {
-                    string nameAsset = Path.GetFileName(file);
-                    string name = nameAsset.Split('.')[0];
+                    string name = Path.GetFileNameWithoutExtension(file);
+
                     SailorConfig config = JsonConvert.DeserializeObject<SailorConfig>(File.ReadAllText(file));
-                    if (SailorDic.ContainsKey(name)) SailorDic[name] = config;
-                    else SailorDic.Add(name, config);
+                    if (SailorDic.ContainsKey(name))
+                    {
+                        SailorDic[name] = config;
+                    }
+                    else
+                    {
+                        SailorDic.Add(name, config);
+                    }
                 }
             }
         }

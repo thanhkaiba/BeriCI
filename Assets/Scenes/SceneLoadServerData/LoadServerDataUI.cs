@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System;
@@ -62,15 +61,20 @@ public class LoadServerDataUI : MonoBehaviour
     private GameConfigSync ConfigSync;
 
 
+    private Action ReloadFunc;
+
+
     void Start()
     {
         VisibleErrorUI(false);
-        RandomTip();
-        buttonReload.gameObject.SetActive(false);
+       
         progressBar.value = 0;
-        ShowLoading(1f, startingPoint, SendGetData);
+        ShowLoading(1f, startingPoint, LoadConfig);
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
-        GlobalConfigs.InitSyncConfig();
+
+        Instantiate(GameUtils.GetSailorModelPrefab("QCHI"), sailorNode.transform);
+
+
     }
 
     void UpdateTextPercent(float value)
@@ -80,7 +84,7 @@ public class LoadServerDataUI : MonoBehaviour
 
     void RandomTip()
     {
-        return;
+      
         SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
         foreach (Transform child in sailorNode.transform)
         {
@@ -115,8 +119,9 @@ public class LoadServerDataUI : MonoBehaviour
 
     public void SendGetData()
     {
-        progressBar.value = startingPoint;
-        VisibleErrorUI(false);
+        ReloadFunc = SendGetData;
+        progressBar.value = startingPoint + 0.3f;
+        RandomTip();
         NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
     }
 
@@ -195,15 +200,30 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnLoadSuccess()
     {
+        SceneManager.LoadScene("SceneLobby");
+    }
+
+    private void LoadConfig()
+    {
+        ReloadFunc = LoadConfig;
+        progressBar.value = startingPoint;
         ConfigSync.StartFlowSync(x => progressBar.value += x, () =>
         {
             GlobalConfigs.InitSyncConfig();
-            SceneManager.LoadScene("SceneLobby");
+            SendGetData();
+
         }, () => {
             errorText.text = "Synchronization Failed";
             VisibleErrorUI(true);
         });
-        
+    }
+
+    public void Reload()
+    {
+        if (ReloadFunc != null)
+        {
+            ReloadFunc();
+        }
     }
 
     private void Awake()

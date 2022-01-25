@@ -81,7 +81,7 @@ public class Synergies
     public List<SynergiesLevel> levels;
 }
 
-public class SynergiesLevel : ScriptableObjectPro
+public class SynergiesLevel
 {
     public int pop;
     public List<float> _params;

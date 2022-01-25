@@ -96,7 +96,6 @@ public class RoyalCollectingController : MonoBehaviour {
 					animation = _itemList[i];
 				}
 			}
-			Debug.Log("Animation: " + animation);
 			if (animation == null)
 			{
 				// No free object has been found in pool, so we instantiate a new one
