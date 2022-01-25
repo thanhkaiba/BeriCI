@@ -114,7 +114,7 @@ public class GuiReward : BaseGui
     }
     public void ClickReceive()
     {
-        SceneManager.LoadScene("SceneLobby");
+        SceneManager.LoadScene("SceneLoadServerData");
     }
 
 }

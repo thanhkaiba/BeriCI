@@ -71,7 +71,6 @@ public class LoadServerDataUI : MonoBehaviour
         progressBar.value = 0;
         ShowLoading(1f, startingPoint, LoadConfig);
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
-
         Instantiate(GameUtils.GetSailorModelPrefab("QCHI"), sailorNode.transform);
 
 

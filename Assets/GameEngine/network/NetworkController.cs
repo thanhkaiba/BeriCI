@@ -1,4 +1,5 @@
-﻿using Piratera.Engine;
+﻿using Piratera.Config;
+using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Log;
 using Sfs2X;
@@ -183,6 +184,7 @@ namespace Piratera.Network
 
 
             MaintainManager.ResetData();
+            GameConfigSync.ResetData();
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
             
 

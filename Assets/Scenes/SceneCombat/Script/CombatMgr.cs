@@ -218,7 +218,7 @@ public class CombatMgr : MonoBehaviour
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLobby");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLoadServerData");
     }
     // end client game
     IEnumerator WaitAndDo(float time, Action action)

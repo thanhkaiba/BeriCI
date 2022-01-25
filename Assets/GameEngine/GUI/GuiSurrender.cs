@@ -38,7 +38,7 @@ namespace Piratera.GUI
                         float jumPower = 40;
                         Vector3 pos = beri.transform.position;
                         pos.y += jumPower;
-                        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() => SceneManager.LoadScene("SceneLobby"));
+                        beri.transform.DOJump(pos, jumPower, 1, .5f).OnComplete(() => SceneManager.LoadScene("SceneLoadServerData"));
                     }
                     break;
             }

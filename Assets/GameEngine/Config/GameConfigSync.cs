@@ -93,8 +93,8 @@ namespace Piratera.Config
         private Action<float> UpdateProgressBar;
         private Action OnSuccess;
         private Action OnError;
-        private int TotalUnSync = 0;
-        private int TotalSynced = 0;
+        private static int TotalUnSync = 0;
+        private static int TotalSynced = 0;
 
 
 
@@ -108,18 +108,27 @@ namespace Piratera.Config
 
         public void StartFlowSync(Action<float> progressAction, Action onSuccess, Action onError)
         {
+           
             UpdateProgressBar = progressAction;
             OnSuccess = onSuccess;
             OnError = onError;
-            TotalSynced = 0;
-            TotalUnSync = 0;
-
+          
+            if (CheckSuccess())
+            {
+                return;
+            }
             SFSObject data = new SFSObject();
             data.PutUtfString("path", "");
             NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
             manifest.Clear();
         }
 
+       
+        public static void ResetData()
+        {
+            TotalUnSync = 0;
+            TotalSynced = 0;
+        }
 
 
         private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -183,12 +192,15 @@ namespace Piratera.Config
         
         }
 
-        private void CheckSuccess()
+        private bool CheckSuccess()
         {
             if (TotalSynced >= TotalUnSync)
             {
                 OnSuccess();
+                return true;
             }
+
+            return false;
         }
 
         private void OnDestroy()
