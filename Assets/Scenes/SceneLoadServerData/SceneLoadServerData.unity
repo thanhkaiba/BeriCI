@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5124921, y: 0}
   m_AnchorMax: {x: 0.5124921, y: 0}
-  m_AnchoredPosition: {x: -1.0001221, y: 50.226}
+  m_AnchoredPosition: {x: -1.0001221, y: 50.225952}
   m_SizeDelta: {x: 620.919, y: 91.632}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &23037049
@@ -1046,6 +1046,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8d41a23d2a2971c4eb4499d5737fa06e, type: 3}
   sailorRank: {fileID: 1911381229}
   sailorNode: {fileID: 1376971580}
+  ligh1: {fileID: 610835017}
+  ligh2: {fileID: 610835017}
   sailorClass: {fileID: 1889495521}
   errorText: {fileID: 1334580487}
   canvas: {fileID: 729652085}
@@ -1711,7 +1713,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0.44200003, y: 0.5}
-  m_AnchoredPosition: {x: 0.00012207031, y: -9.295}
+  m_AnchoredPosition: {x: 0, y: -9.295}
   m_SizeDelta: {x: 0.00036621, y: 138.59}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1911381227
@@ -1749,7 +1751,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.70100003, y: 0.19629635}
   m_AnchorMax: {x: 0.70100003, y: 0.19629635}
-  m_AnchoredPosition: {x: 73.34448, y: 22.99997}
+  m_AnchoredPosition: {x: 73.34448, y: 23}
   m_SizeDelta: {x: 324, y: 191}
   m_Pivot: {x: 0.7660696, y: 0.5}
 --- !u!114 &1911381229

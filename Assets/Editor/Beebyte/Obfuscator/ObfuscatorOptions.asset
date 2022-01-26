@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1864490332, guid: 66bd02e2746234647a685703c57241ec, type: 3}
-  m_Name: ObfuscatorOptionsImport
+  m_Name: ObfuscatorOptions
   m_EditorClassIdentifier: 
   classes: 1
   methods: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
   stripLiteralEscapeCharacters: 1
   obfuscateMarkerInDecimal: 94
   RSAKeyLength: 1024
-  addFakeCode: 1
+  addFakeCode: 0
   minFalseMethodsPerClass: 10
   maxFalseMethodsPerClass: 150
   unicodeStartInDecimal: 65
@@ -207,7 +207,7 @@ MonoBehaviour:
   includeProtectedFields: 1
   includeProtectedProperties: 1
   includeProtectedEvents: 1
-  enabled: 1
+  enabled: 0
   onlyObfuscatedSpecifiedNamespaces: 0
   skipNamespacesRecursively: 1
   obfuscateSpecifiedNamespacesRecursively: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
   inheritBeebyteAttributes: 0
   treatScriptableObjectsAsSerializable: 1
   deriveNamesFromCryptoHash: 1
-  sha1seed: 
+  sha1seed: TZfrD1MCGLgsQMgtp3j1SbdC
   numberOfDifferentCharactersAsPowerOfTwo: 4
   numberOfHashBitsToUse: 6
   allowCopyingOfAllAttributesInFakeCode: 0
@@ -280,7 +280,7 @@ MonoBehaviour:
   obfuscateLiteralsInAllMethods: 0
   noPublicFakeMethods: 0
   progressBar: 1
-  obfuscateReleaseOnly: 0
+  obfuscateReleaseOnly: 1
   attributesToRemoveIfObfuscatedMember:
   - UnityEngine.AddComponentMenu
   - UnityEngine.ContextMenu
@@ -296,7 +296,7 @@ MonoBehaviour:
   forcedRandomSeed: 0
   allowShortShaSalt: 0
   printShaSaltInNameTranslationFile: 0
-  randomiseShaSaltOnBuild: 1
+  randomiseShaSaltOnBuild: 0
   equivalentAttributesForSuppressLog: []
   obfuscateAnonymousTypes: 0
   obfuscateAnonymousYieldingEnumeratorTypes: 1
