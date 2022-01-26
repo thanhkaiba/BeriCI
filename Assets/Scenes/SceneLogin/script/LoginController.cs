@@ -11,7 +11,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Piratera.Constance;
 
 public class LoginController : MonoBehaviour
 {
@@ -48,7 +47,7 @@ public class LoginController : MonoBehaviour
         NetworkController.AddServerActionListener(OnReceiveServerAction);
         enableLoginUI(true);
 
-        nameInput.text = PlayerPrefs.GetString("UserName");
+
 
 #if PIRATERA_DEV || PIRATERA_QC
         loginTypeToggle.gameObject.SetActive(true);
@@ -65,6 +64,41 @@ public class LoginController : MonoBehaviour
 #if PIRATERA_QC || PIRATERA_DEV || (PIRATERA_LIVE && UNITY_ANDROID)
         signupText.text = "Guest";
 #endif
+
+    }
+
+    private void Start()
+    {
+        nameInput.text = PlayerPrefs.GetString("UserName");
+        if (NetworkController.AutoLogin)
+        {
+            NetworkController.AutoLogin = false;
+            AutoLogin(nameInput.text);
+        }
+    }
+
+
+    void AutoLogin(string username)
+    {
+
+        string encryptedPassword = PlayerPrefs.GetString("Password");
+        if (string.IsNullOrEmpty(encryptedPassword) || string.IsNullOrEmpty(username))
+        {
+            return;
+        }
+
+
+        string origin = StringCipher.Decrypt(encryptedPassword, "9QfeE7-+sTFZvG7^");
+        if (origin.Contains(username))
+        {
+            passwordInput.text = origin.Substring(username.Length);
+            if (!string.IsNullOrEmpty(passwordInput.text))
+            {
+                OnLoginButtonClick();
+            }
+        }
+
+       
 
     }
 
@@ -216,6 +250,7 @@ public class LoginController : MonoBehaviour
         if (errorCode == SFSErrorCode.SUCCESS)
         {
             PlayerPrefs.SetString("UserName", nameInput.text);
+            PlayerPrefs.SetString("Password", StringCipher.Encrypt(nameInput.text  + passwordInput.text , "9QfeE7-+sTFZvG7^"));
             User user = NetworkController.Connection.MySelf;
             GameTimeMgr.SetServerTime((long)user.GetVariable("login_time").GetDoubleValue());
             UserData.Instance.OnUserVariablesUpdate(user);

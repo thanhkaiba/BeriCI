@@ -23,6 +23,8 @@ public class IconSailor : MonoBehaviour
     [SerializeField]
     private Image iconLock;
     [SerializeField]
+    private Text textLockTime;
+    [SerializeField]
     private Slider qualitySlider;
     [SerializeField]
     private GameObject nodeClass;
@@ -46,7 +48,15 @@ public class IconSailor : MonoBehaviour
         gameObject.name = model.id;
         icon.sprite = GameUtils.GetSailorAvt(model.config_stats.root_name);
         border.color = rankColor[(int)model.config_stats.rank];
-        iconLock.gameObject.SetActive(!model.isAvaiable());
+        iconLock.gameObject.SetActive(!model.IsAvaiable());
+
+        if (!model.IsAvaiable())
+        {
+            textLockTime.text = "<" + MathF.Ceiling(model.GetRemainingLockTime() / (60f * 60 * 1000)) + "h";
+        } else
+        {
+            textLockTime.text = "";
+        }
         background.color = rankColorInside[(int)model.config_stats.rank];
 
         iconRank.gameObject.SetActive(ShowRank);
