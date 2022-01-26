@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 1864490332, guid: 66bd02e2746234647a685703c57241ec, type: 3}
-  m_Name: ObfuscatorOptions
+  m_Name: ObfuscatorOptionsImport
   m_EditorClassIdentifier: 
   classes: 1
   methods: 1
@@ -21,16 +21,16 @@ MonoBehaviour:
   skipRenameOfAllPublicMonobehaviourMethods: 1
   skipRenameOfAllPublicMonobehaviourFields: 1
   searchForUnityReflectionMethods: 1
-  obfuscateLiterals: 0
+  obfuscateLiterals: 1
   stripLiteralEscapeCharacters: 1
   obfuscateMarkerInDecimal: 94
   RSAKeyLength: 1024
-  addFakeCode: 0
+  addFakeCode: 1
   minFalseMethodsPerClass: 10
   maxFalseMethodsPerClass: 150
   unicodeStartInDecimal: 65
   numberOfCharacters: 2
-  createNameTranslationFile: 1
+  createNameTranslationFile: 0
   nameTranslationFile: nameTranslation.txt
   usePreviousObfuscation: 0
   previousNameTranslationFile: nameTranslation.txt
@@ -207,7 +207,7 @@ MonoBehaviour:
   includeProtectedFields: 1
   includeProtectedProperties: 1
   includeProtectedEvents: 1
-  enabled: 0
+  enabled: 1
   onlyObfuscatedSpecifiedNamespaces: 0
   skipNamespacesRecursively: 1
   obfuscateSpecifiedNamespacesRecursively: 1
@@ -217,7 +217,7 @@ MonoBehaviour:
   inheritBeebyteAttributes: 0
   treatScriptableObjectsAsSerializable: 1
   deriveNamesFromCryptoHash: 1
-  sha1seed: xR7aYeqQJ25znAA6sglGR1nU
+  sha1seed: 
   numberOfDifferentCharactersAsPowerOfTwo: 4
   numberOfHashBitsToUse: 6
   allowCopyingOfAllAttributesInFakeCode: 0
@@ -279,8 +279,8 @@ MonoBehaviour:
   onlyObfuscateLiteralsInObfuscatedMethods: 0
   obfuscateLiteralsInAllMethods: 0
   noPublicFakeMethods: 0
-  progressBar: 0
-  obfuscateReleaseOnly: 1
+  progressBar: 1
+  obfuscateReleaseOnly: 0
   attributesToRemoveIfObfuscatedMember:
   - UnityEngine.AddComponentMenu
   - UnityEngine.ContextMenu
@@ -296,7 +296,7 @@ MonoBehaviour:
   forcedRandomSeed: 0
   allowShortShaSalt: 0
   printShaSaltInNameTranslationFile: 0
-  randomiseShaSaltOnBuild: 0
+  randomiseShaSaltOnBuild: 1
   equivalentAttributesForSuppressLog: []
   obfuscateAnonymousTypes: 0
   obfuscateAnonymousYieldingEnumeratorTypes: 1

@@ -6,12 +6,10 @@ using Sfs2X;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
-using Sfs2X.Logging;
 using Sfs2X.Requests;
 using Sfs2X.Util;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -68,6 +66,7 @@ namespace Piratera.Network
         private static readonly string MAINTAINANCE_NOTI = "maintenance_noti";
 
         private static string adminMessage;
+        public static bool AutoLogin = true;
 
         public static SmartFox Connection
         {
@@ -112,7 +111,7 @@ namespace Piratera.Network
 
         private static void OnUserDataUpdate(BaseEvent evt)
         {
-            Debug.Log("Change var" + evt.Params["changedVars"]);
+            
             List<string> changedVars = (List<string>)evt.Params["changedVars"];
             SFSUser user = (SFSUser)evt.Params["user"];
             UserData.Instance.OnUserVariablesUpdate(user, changedVars);
