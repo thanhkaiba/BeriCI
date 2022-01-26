@@ -93,8 +93,10 @@ namespace Piratera.Config
         private Action<float> UpdateProgressBar;
         private Action OnSuccess;
         private Action OnError;
-        private static int TotalUnSync = 0;
-        private static int TotalSynced = 0;
+        private int TotalUnSync = 0;
+        private int TotalSynced = 0;
+
+        public static bool Synced = false;
 
 
 
@@ -110,8 +112,14 @@ namespace Piratera.Config
         {
            
             UpdateProgressBar = progressAction;
-            OnSuccess = onSuccess;
-            OnError = onError;
+            OnSuccess = () => {
+                Synced = true;
+                onSuccess();
+            };
+            OnError = () => {
+                Synced = false;
+                onError();
+            };
          
             SFSObject data = new SFSObject();
             data.PutUtfString("path", "");
@@ -122,8 +130,7 @@ namespace Piratera.Config
        
         public static void ResetData()
         {
-            TotalUnSync = 0;
-            TotalSynced = 0;
+            Synced = false;
         }
 
 

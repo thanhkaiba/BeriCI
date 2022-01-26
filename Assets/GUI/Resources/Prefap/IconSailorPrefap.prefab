@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.7529412}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1160,6 +1160,7 @@ MonoBehaviour:
   background: {fileID: 7434028353638587464}
   border: {fileID: 7725597495769743505}
   iconLock: {fileID: 8221014088598710249}
+  textLockTime: {fileID: 2497150857955619603}
   qualitySlider: {fileID: 5983007453264011779}
   nodeClass: {fileID: 1457314133054356952}
   GOClass: {fileID: 2974581988894073476, guid: 63e6457e971b4f546ac71a8a4bff296b, type: 3}
@@ -1336,8 +1337,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 27.7, y: 7.3}
-  m_SizeDelta: {x: 101.91, y: 50}
+  m_AnchoredPosition: {x: 1.3795, y: -2.5}
+  m_SizeDelta: {x: 143.151, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3836790100039468841
 CanvasRenderer:
@@ -1360,7 +1361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.78039217}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1369,10 +1370,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 8ec3b3fa00e5aa34c81ccf5c7c7c162b, type: 3}
-    m_FontSize: 30
+    m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 5
     m_AlignByGeometry: 0

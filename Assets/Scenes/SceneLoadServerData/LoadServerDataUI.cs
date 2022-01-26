@@ -46,7 +46,10 @@ public class LoadServerDataUI : MonoBehaviour
 
     [SerializeField]
     private GameObject sailorNode;
-
+    [SerializeField]
+    private SpriteRenderer ligh1;
+    [SerializeField]
+    private SpriteRenderer ligh2;
 
     [SerializeField]
     private GameObject sailorClass;
@@ -67,13 +70,52 @@ public class LoadServerDataUI : MonoBehaviour
     void Start()
     {
         VisibleErrorUI(false);
-       
+        PrepareAppear();
+
         progressBar.value = 0;
-        ShowLoading(1f, startingPoint, LoadConfig);
+
+        if (!GameConfigSync.Synced)
+        {
+            errorText.text = "Loading Configuration Files";
+            ShowLoading(1f, startingPoint, LoadConfig);
+        } else
+        {
+            GlobalConfigs.InitSyncConfig();
+            SendGetData();
+        }
+      
+    
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
-        Instantiate(GameUtils.GetSailorModelPrefab("QCHI"), sailorNode.transform);
+      
 
 
+    }
+
+    void PrepareAppear()
+    {
+        GameObject[] list = { sailorRank.gameObject, sailorName.gameObject, sailorBio.gameObject, sailorDescripton.gameObject, ligh1.gameObject, ligh2.gameObject };
+
+        foreach (GameObject GO in list)
+        {
+            GO.SetActive(false);
+        }
+    }
+
+    void AppearTip()
+    {
+        GameObject[] list = { sailorRank.gameObject, sailorName.gameObject, sailorBio.gameObject, sailorDescripton.gameObject, ligh1.gameObject, ligh2.gameObject };
+
+        foreach (GameObject GO in list)
+        {
+            GO.SetActive(true);
+        }
+
+        sailorRank.DOFade(0, 0.4f).From().SetLink(sailorRank.gameObject);
+        sailorName.DOFade(0, 0.4f).From().SetLink(sailorName.gameObject);
+        sailorBio.DOFade(0, 0.4f).From().SetLink(sailorBio.gameObject);
+        sailorDescripton.DOFade(0, 0.4f).From().SetLink(sailorDescripton.gameObject);
+        ligh1.DOFade(0, 0.4f).From().SetLink(ligh1.gameObject);
+        ligh2.DOFade(0, 0.4f).From().SetLink(ligh2.gameObject);
     }
 
     void UpdateTextPercent(float value)
@@ -83,7 +125,8 @@ public class LoadServerDataUI : MonoBehaviour
 
     void RandomTip()
     {
-      
+
+        AppearTip();
         SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
         foreach (Transform child in sailorNode.transform)
         {
@@ -113,11 +156,11 @@ public class LoadServerDataUI : MonoBehaviour
         buttonReload.gameObject.SetActive(visible);
         percentText.gameObject.SetActive(!visible);
         buttonLogout.gameObject.SetActive(visible);
-        errorText.gameObject.SetActive(visible);
     }
 
     public void SendGetData()
     {
+        errorText.text = "Loading Sailors";
         ReloadFunc = SendGetData;
         progressBar.value = startingPoint + 0.3f;
         RandomTip();
@@ -175,7 +218,7 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnLoadError(SFSErrorCode errorCode)
     {
-        errorText.text = $"Load list hero fail! \n {errorCode}: {(int)errorCode}";
+        errorText.text = $"Load sailor list fail! \n {errorCode}: {(int)errorCode}";
         DOTween.Kill(progressBar);
         VisibleErrorUI(true);
 
@@ -204,6 +247,7 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void LoadConfig()
     {
+        errorText.text = "Loading Configuration Files";
         ReloadFunc = LoadConfig;
         progressBar.value = startingPoint;
         ConfigSync.StartFlowSync(x => progressBar.value += x, () =>
