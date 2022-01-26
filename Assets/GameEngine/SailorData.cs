@@ -92,9 +92,10 @@ public class CombatStats
     {
         int level = model.level;
         int quality = model.quality;
-        BasePower = model.config_stats.GetPower(level, quality);
-        MaxHealth = model.config_stats.GetHealth(level, quality);
-        CurHealth = model.config_stats.GetHealth(level, quality);
+        int star = model.star;
+        BasePower = model.config_stats.GetPower(level, quality, star);
+        MaxHealth = model.config_stats.GetHealth(level, quality, star);
+        CurHealth = model.config_stats.GetHealth(level, quality, star);
         BaseArmor = model.config_stats.GetArmor();
         BaseMagicResist = model.config_stats.GetMagicResist();
         Speed = model.config_stats.GetSpeed(level, quality);

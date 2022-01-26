@@ -19,7 +19,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         level = obj.GetInt("level");
         exp = obj.GetLong("exp");
         lastTrade = obj.GetLong("last_trade");
-
+        star = 0;
     }
 
     public SailorConfig config_stats { get; set; }
@@ -28,6 +28,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     public int quality { get; set; }
     public int level { get; set; }
     public long exp { get; set; }
+    public int star { get; set; }
 
     public long lastTrade { get; set; }
     public List<Item> items { get; set; }

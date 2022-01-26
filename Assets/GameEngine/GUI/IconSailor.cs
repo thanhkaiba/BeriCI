@@ -32,12 +32,14 @@ public class IconSailor : MonoBehaviour
     private GameObject GOFocus;
     [SerializeField]
     private Text level, quality;
+    [SerializeField]
+    private Sprite starSpr;
+    [SerializeField]
+    private Transform nodeStar;
     public Action<SailorModel> OnClick;
     public SailorModel sailorModel;
     public bool ShowClass = false;
     public bool ShowRank = false;
-   
-
 
     public void PresentData(SailorModel model)
     {
@@ -60,6 +62,17 @@ public class IconSailor : MonoBehaviour
         }
         level.text = "" + model.level;
         quality.text = "Q:" + model.quality;
+
+        for (int i = 0; i < model.star; i++)
+        {
+            GameObject starObj = new GameObject();
+            Image starImg = starObj.AddComponent<Image>();
+            starImg.sprite = starSpr;
+            starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+            starObj.SetActive(true);
+            starObj.transform.localScale = new Vector3(0.25f, 0.25f);
+            starObj.transform.localPosition = new Vector3(0, -24*i);
+        }
     }
     public void ShowFocus(bool b)
     {

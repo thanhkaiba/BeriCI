@@ -27,12 +27,7 @@ public class UserAvatar : MonoBehaviour
         }
         else
         {
-            SailorConfig config_stats = GlobalConfigs.GetSailorConfig(url);
-            if (config_stats != null)
-            {
-                userAvatar.sprite = GameUtils.GetSailorAvt(config_stats.root_name);
-            }
-
+            userAvatar.sprite = GameUtils.GetSailorAvt(url);
         }
     }
     private void DoLoadAvatar(string url)

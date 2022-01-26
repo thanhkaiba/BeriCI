@@ -124,10 +124,10 @@ public class TooltipSailorInfo : MonoBehaviour
         furySlider.value = (float) model.config_stats.start_fury / model.config_stats.max_fury;
        
 
-        int MaxHealth = (int)model.config_stats.GetHealth(model.level, model.quality);
+        int MaxHealth = (int)model.config_stats.GetHealth(model.level, model.quality, model.star);
         healthSlider.transform.Find("Text").GetComponent<Text>().text = MaxHealth.ToString() + "/" + MaxHealth.ToString();
         healthSlider.value = 1;
-        textPower.text = Mathf.Round(model.config_stats.GetPower(model.level, model.quality)).ToString();
+        textPower.text = Mathf.Round(model.config_stats.GetPower(model.level, model.quality, model.star)).ToString();
         textSpeed.text = Mathf.Round(model.config_stats.GetSpeed(model.level, model.quality)).ToString();
         textArmor.text = Mathf.Round(model.config_stats.GetArmor()).ToString();
         textMagicResist.text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();

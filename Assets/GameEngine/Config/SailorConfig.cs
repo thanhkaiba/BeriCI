@@ -52,13 +52,13 @@ public class SailorConfig
         get { return speed_base * GlobalConfigs.SailorGeneral.MAX_MIN_SPEED_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }
     }
 
-    public float GetPower(int level, int quality)
+    public float GetPower(int level, int quality, int star)
     {
-        return power_base + quality * power_base_step + (power_plv + quality * power_plv_step) * level;
+        return (power_base + quality * power_base_step + (power_plv + quality * power_plv_step) * level) * (1 + star * GlobalConfigs.SailorGeneral.STAR_STAT_RATE);
     }
-    public float GetHealth(int level, int quality)
+    public float GetHealth(int level, int quality, int star)
     {
-        return health_base + quality * health_base_step + (health_plv + quality * health_plv_step) * level;
+        return (health_base + quality * health_base_step + (health_plv + quality * health_plv_step) * level) * (1 + star * GlobalConfigs.SailorGeneral.STAR_STAT_RATE);
     }
     public float GetSpeed(int level, int quality)
     {
