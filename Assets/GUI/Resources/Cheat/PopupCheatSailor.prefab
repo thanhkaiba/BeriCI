@@ -902,6 +902,7 @@ MonoBehaviour:
   textCheatSailor_quality: {fileID: 925801256849590928}
   textCheatSailor_level: {fileID: 3856764325018915213}
   textCheatSailor_exp: {fileID: 4930032314322893897}
+  textCheatSailor_star: {fileID: 4874277997963971109}
   sailorId: 
 --- !u!1 &4079788391230523808
 GameObject:
