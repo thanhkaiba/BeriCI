@@ -69,17 +69,17 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("OBonbee", new CombatPosition(0, 0), Team.A);
-        CreateCombatSailor("Tad", new CombatPosition(0, 1), Team.A);
-        CreateCombatSailor("LiuHi", new CombatPosition(1, 1), Team.A);
+        CreateCombatSailor("FatBrakes", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("FatBrakes", new CombatPosition(0, 1), Team.A);
+        CreateCombatSailor("FatBrakes", new CombatPosition(1, 1), Team.A);
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.A);
         //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("Salvatafo", new CombatPosition(0, 0), Team.B);
-        CreateCombatSailor("Tad", new CombatPosition(0, 1), Team.B);
-        CreateCombatSailor("Helti", new CombatPosition(1, 1), Team.B);
+        CreateCombatSailor("FatBrakes", new CombatPosition(0, 0), Team.B);
+        CreateCombatSailor("FatBrakes", new CombatPosition(0, 1), Team.B);
+        CreateCombatSailor("FatBrakes", new CombatPosition(1, 1), Team.B);
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.B);
         //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.B);
     }
@@ -98,7 +98,6 @@ public class CombatState : MonoBehaviour
             string itemQuality = split[i].Split(char.Parse(":"))[1];
             listItem.Add(GameUtils.CreateItem(itemName, Int32.Parse(itemQuality)));
         }
-
         CombatSailor sailor = GameUtils.CreateCombatSailor(name);
         // sailor.Model.quality = UnityEngine.Random.Range(1, 100 + 1);
         // sailor.Model.level = UnityEngine.Random.Range(1, 10 + 1);

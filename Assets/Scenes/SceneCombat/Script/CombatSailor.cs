@@ -134,7 +134,7 @@ public class CombatSailor : Sailor
     {
         SailorStatus status = cs.listStatus.Find(x => x.name == name);
         if (status == null) return 0;
-        return status.remainTurn;
+        return status.stack;
     }
     public void CountdownStatusRemain()
     {
@@ -145,9 +145,9 @@ public class CombatSailor : Sailor
         foreach (SailorStatusType statusName in listName)
         {
             SailorStatus status = cs.listStatus.Find(status => status.name == statusName);
-            if (status != null) status.remainTurn -= 1;
+            if (status != null) status.stack -= 1;
         }
-        cs.listStatus.RemoveAll(status => status.remainTurn <= 0);
+        cs.listStatus.RemoveAll(status => status.stack <= 0);
     }
     public void CheckDeath()
     {
@@ -354,18 +354,23 @@ public class CombatSailor : Sailor
     }
     public void AddStatus(SailorStatus status)
     {
-        SailorStatus existStatus = cs.listStatus.Find(x => x.name == status.name);
+        SailorStatusType[] statusStacks = {
+            SailorStatusType.EXCITED
+        };
+        SailorStatusType[] statusTurn = {
+            SailorStatusType.STUN
+        };
+        SailorStatusType[] noStack = {
+            SailorStatusType.DEATH,
+            SailorStatusType.EPIDEMIC,
+        };
+        SailorStatus existStatus = cs.GetStatus(status.name);
         if (existStatus != null)
         {
-            if (status.remainTurn > existStatus.remainTurn)
-            {
-                existStatus.remainTurn = status.remainTurn;
-            }
+            if (statusTurn.Contains(status.name) && status.stack > existStatus.stack)  existStatus.stack = status.stack;
+            if (statusStacks.Contains(status.name)) existStatus.stack += status.stack;
         }
-        else
-        {
-            cs.listStatus.Add(status);
-        }
+        else cs.listStatus.Add(status);
         DisplayStatus(cs.listStatus);
     }
     public void InitDisplayStatus()

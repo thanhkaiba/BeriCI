@@ -1,0 +1,132 @@
+
+Fatbrakse.png
+size: 574,1043
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Slash/Slash_00001
+  rotate: true
+  xy: 241, 396
+  size: 645, 52
+  orig: 1086, 174
+  offset: 202, 64
+  index: -1
+Slash/Slash_00002
+  rotate: true
+  xy: 176, 284
+  size: 757, 63
+  orig: 1086, 174
+  offset: 151, 59
+  index: -1
+Slash/Slash_00003
+  rotate: true
+  xy: 92, 276
+  size: 765, 82
+  orig: 1086, 174
+  offset: 170, 48
+  index: -1
+Slash/Slash_00004
+  rotate: true
+  xy: 2, 274
+  size: 767, 88
+  orig: 1086, 174
+  offset: 168, 46
+  index: -1
+Slash/Slash_00005
+  rotate: true
+  xy: 295, 509
+  size: 532, 78
+  orig: 1086, 174
+  offset: 312, 46
+  index: -1
+Slash/Slash_00006
+  rotate: true
+  xy: 374, 16
+  size: 295, 39
+  orig: 1086, 174
+  offset: 397, 46
+  index: -1
+arm_L
+  rotate: true
+  xy: 375, 539
+  size: 155, 194
+  orig: 161, 205
+  offset: 6, 11
+  index: -1
+arm_R
+  rotate: false
+  xy: 375, 313
+  size: 154, 224
+  orig: 154, 224
+  offset: 0, 0
+  index: -1
+cloack
+  rotate: true
+  xy: 375, 696
+  size: 345, 196
+  orig: 345, 196
+  offset: 0, 0
+  index: -1
+hair1
+  rotate: false
+  xy: 415, 115
+  size: 70, 75
+  orig: 70, 75
+  offset: 0, 0
+  index: -1
+hair2
+  rotate: false
+  xy: 463, 60
+  size: 47, 53
+  orig: 47, 53
+  offset: 0, 0
+  index: -1
+hair3
+  rotate: true
+  xy: 531, 470
+  size: 67, 41
+  orig: 67, 41
+  offset: 0, 0
+  index: -1
+hair4
+  rotate: false
+  xy: 295, 423
+  size: 73, 84
+  orig: 73, 84
+  offset: 0, 0
+  index: -1
+hair5
+  rotate: true
+  xy: 415, 31
+  size: 82, 46
+  orig: 82, 46
+  offset: 0, 0
+  index: -1
+hair6
+  rotate: false
+  xy: 487, 127
+  size: 49, 63
+  orig: 49, 63
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 415, 192
+  size: 119, 102
+  orig: 119, 102
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: false
+  xy: 2, 4
+  size: 221, 268
+  orig: 289, 268
+  offset: 68, 0
+  index: -1
+leg_R
+  rotate: false
+  xy: 241, 2
+  size: 131, 392
+  orig: 131, 392
+  offset: 0, 0
+  index: -1

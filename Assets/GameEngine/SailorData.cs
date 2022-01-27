@@ -12,10 +12,11 @@ public enum SailorStatusType
 {
     DEATH,
     STUN,
+    EXCITED,
+    EPIDEMIC,
     FROZEN,
     POISON,
     BURN,
-    EXCITED,
     BLEEDING,
 };
 
@@ -60,13 +61,11 @@ public class ClassBonusItem
 public class SailorStatus
 {
     public SailorStatusType name;
-    public int remainTurn;
-    public List<float> _params;
-    public SailorStatus(SailorStatusType _name, int turn = 1, List<float> _params = null)
+    public int stack;
+    public SailorStatus(SailorStatusType _name, int _stack = 1)
     {
         name = _name;
-        remainTurn = turn;
-        this._params = _params;
+        stack = _stack;
     }
 };
 
@@ -125,7 +124,12 @@ public class CombatStats
     public float BasePower;
     public float Power
     {
-        get { return BasePower; }
+        get {
+            float increase = 0;
+            var excited = GetStatus(SailorStatusType.EXCITED);
+            if (excited != null) increase += excited.stack * GlobalConfigs.SailorStatus.EXCITED * BasePower;
+            return BasePower + increase;
+        }
     }
 
     public float MaxHealth;
@@ -186,5 +190,9 @@ public class CombatStats
     public float GetCurrentHealthRatio()
     {
         return CurHealth / MaxHealth;
+    }
+    public SailorStatus GetStatus(SailorStatusType name)
+    {
+        return listStatus.Find(x => x.name == name);
     }
 }

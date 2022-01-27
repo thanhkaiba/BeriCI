@@ -13,6 +13,7 @@ namespace Piratera.Config {
         public static CombatConfig Combat;
         private static Dictionary<string, SailorConfig> SailorDic = new Dictionary<string, SailorConfig>();
         public static SynergiesConfig Synergies;
+        public static SailorStatusConfig SailorStatus;
         private static bool HaveLoaded = false;
 
         public static void InitSyncConfig()
@@ -23,6 +24,7 @@ namespace Piratera.Config {
             StaminaConfig = JsonConvert.DeserializeObject<UserStaminaConfig>(GameConfigSync.GetContent("Stamina.json"));
             Combat = JsonConvert.DeserializeObject<CombatConfig>(GameConfigSync.GetContent("Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(GameConfigSync.GetContent("ContainerClassBonus.json"));
+            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(GameConfigSync.GetContent("StatusConfig.json"));
 
             string[] files = Directory.GetFiles(GameConfigSync.GetSailorFolder());
             foreach (string file in files)
@@ -58,6 +60,7 @@ namespace Piratera.Config {
             StaminaConfig = JsonConvert.DeserializeObject<UserStaminaConfig>(File.ReadAllText("DEV_CONFIG/Stamina.json"));
             Combat = JsonConvert.DeserializeObject<CombatConfig>(File.ReadAllText("DEV_CONFIG/Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
+            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
 
             string[] files = Directory.GetFiles("DEV_CONFIG/Sailors");
             foreach (string file in files)
