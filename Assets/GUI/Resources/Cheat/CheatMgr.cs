@@ -45,7 +45,7 @@ namespace Piratera.Cheat
             data.PutInt("quality", quality);
             data.PutInt("level", level);
             data.PutLong("exp", exp);
-            data.PutByte("exp", star);
+            data.PutByte("star", star);
             NetworkController.Send(SFSAction.CHEAT_SAILOR_QUANTITY, data);
         }
     }

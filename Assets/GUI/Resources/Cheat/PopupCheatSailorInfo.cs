@@ -70,7 +70,7 @@ namespace Piratera.Cheat
                     sailor.quality = packet.GetInt("quality");
                     sailor.level = packet.GetInt("level");
                     sailor.exp = packet.GetLong("exp");
-                    sailor.exp = packet.GetByte("star");
+                    sailor.star = packet.GetByte("star");
 
                     GameEvent.SailorInfoChanged.Invoke(sailor);
                 }
