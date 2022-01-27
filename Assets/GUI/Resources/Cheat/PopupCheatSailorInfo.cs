@@ -22,6 +22,9 @@ namespace Piratera.Cheat
         [SerializeField]
         private InputField textCheatSailor_exp;
 
+        [SerializeField]
+        private InputField textCheatSailor_star;
+
         public string sailorId;
 
         protected override void Start()
@@ -31,6 +34,7 @@ namespace Piratera.Cheat
             textCheatSailor_quality.text = sailor.quality.ToString();
             textCheatSailor_level.text = sailor.level.ToString();
             textCheatSailor_exp.text = sailor.exp.ToString();
+            textCheatSailor_star.text = sailor.star.ToString();
             NetworkController.AddServerActionListener(OnReceiveServerAction);
         }
 
@@ -40,8 +44,9 @@ namespace Piratera.Cheat
             int quantity = int.Parse(textCheatSailor_quality.text);
             int level = int.Parse(textCheatSailor_level.text);
             long exp = long.Parse(textCheatSailor_exp.text);
+            byte star = byte.Parse(textCheatSailor_star.text);
             GuiManager.Instance.ShowGuiWaiting(true);
-            CheatMgr.CheatSailorQuantity(sailorId, quantity, level, exp);
+            CheatMgr.CheatSailorQuantity(sailorId, quantity, level, exp, star);
         }
 
         private void OnDestroy()
@@ -65,6 +70,7 @@ namespace Piratera.Cheat
                     sailor.quality = packet.GetInt("quality");
                     sailor.level = packet.GetInt("level");
                     sailor.exp = packet.GetLong("exp");
+                    sailor.exp = packet.GetByte("star");
 
                     GameEvent.SailorInfoChanged.Invoke(sailor);
                 }
