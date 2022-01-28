@@ -170,11 +170,6 @@ namespace Piratera.Sound
             {
                 musicOn = PlayerPrefs.GetInt(MUSIC_TOGGLE_KEY, 1) == 1;
                 soundOn = PlayerPrefs.GetInt(SOUND_FX_TOGGLE_KEY, 1) == 1;
-              //  var pitchBendGroup = Resources.Load<UnityEngine.Audio.AudioMixerGroup>("Audio/Pitch_Bend_Mixer");
-              //  soundEfectPlayer.outputAudioMixerGroup = pitchBendGroup;
-
-               // soundEfectPlayer.pitch = 1.5f;
-               // pitchBendGroup.audioMixer.SetFloat("pitchBend", 1f / 1.5f);
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
@@ -188,6 +183,14 @@ namespace Piratera.Sound
             if (Instance != null)
             {
                 Instance.soundEfectPlayer.pitch = pitch;
+            }
+        }
+
+        public static void SetSoundFxVolume(float volume)
+        {
+            if (Instance != null)
+            {
+                Instance.SoundVolume = volume;
             }
         }
 

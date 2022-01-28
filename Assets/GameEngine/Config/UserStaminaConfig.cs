@@ -1,6 +1,5 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Stamina", menuName = "config/Stamina")]
 public class UserStaminaConfig
 {
     public int max_stamina = 200;
