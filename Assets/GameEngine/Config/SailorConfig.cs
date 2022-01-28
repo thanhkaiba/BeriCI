@@ -40,7 +40,7 @@ public class SailorConfig
     public float GetSpeed(int level, int quality)
     {
         float speed = speed_base;
-        speed *= 1 + quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_SPEED_RATIO;
+        speed *= 1 + (float) quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_SPEED_RATIO;
         return speed;
     }
     public float GetCrit()
