@@ -182,10 +182,10 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
+    m_SelectOnUp: {fileID: 10826815}
+    m_SelectOnDown: {fileID: 10826815}
+    m_SelectOnLeft: {fileID: 10826815}
+    m_SelectOnRight: {fileID: 10826815}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -373,7 +373,7 @@ MonoBehaviour:
     m_Mode: 3
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
+    m_SelectOnDown: {fileID: 8475617}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
@@ -1117,6 +1117,7 @@ GameObject:
   - component: {fileID: 671366201}
   - component: {fileID: 671366200}
   - component: {fileID: 671366202}
+  - component: {fileID: 671366203}
   m_Layer: 0
   m_Name: LoginController
   m_TagString: Untagged
@@ -1181,6 +1182,21 @@ MonoBehaviour:
   textboxlbs:
   - {fileID: 1989904207}
   - {fileID: 1759595211}
+--- !u!114 &671366203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671366199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d97691f47857a40bbc986e9a23fd59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectables:
+  - {fileID: 10826815}
+  - {fileID: 8475617}
 --- !u!1 &821471656
 GameObject:
   m_ObjectHideFlags: 0
