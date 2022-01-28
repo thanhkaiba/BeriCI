@@ -189,6 +189,14 @@ public class GameUtils : UnityEngine.Object
     public static void SetTimeScale(float timescale)
     {
         Time.timeScale = timescale;
-        SoundMgr.SetSoundFxSpeed(timescale);
+        if (timescale > 1)
+        {
+            SoundMgr.SetSoundFxSpeed(timescale * 0.1f + 1.3f);
+            SoundMgr.SetSoundFxVolume(0.5f);
+        } else
+        {
+            SoundMgr.SetSoundFxSpeed(timescale);
+            SoundMgr.SetSoundFxVolume(1f);
+        }
     }
 }

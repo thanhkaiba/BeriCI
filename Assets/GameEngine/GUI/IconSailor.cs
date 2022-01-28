@@ -81,7 +81,7 @@ public class IconSailor : MonoBehaviour
             starObj.GetComponent<RectTransform>().SetParent(nodeStar);
             starObj.SetActive(true);
             starObj.transform.localScale = new Vector3(0.25f, 0.25f);
-            starObj.transform.localPosition = new Vector3(0, -24*i);
+            starObj.transform.localPosition = new Vector3(0, -23*i);
         }
     }
     public void ShowFocus(bool b)
