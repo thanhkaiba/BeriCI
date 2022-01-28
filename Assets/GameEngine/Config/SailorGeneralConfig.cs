@@ -17,7 +17,7 @@ public class SailorGeneralConfig
 
     public int GetNextLevelExp(int curLevel)
     {
-        int x = curLevel + 2;
+        int x = curLevel + 1;
         return EXP_PARAMS * x * x - EXP_PARAMS * x;
     }
 }

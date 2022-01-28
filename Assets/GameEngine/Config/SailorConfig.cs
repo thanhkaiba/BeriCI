@@ -21,48 +21,27 @@ public class SailorConfig
     public int start_fury = 0;
     public int max_fury = 20;
     public List<float> skill_params;
-    public float power_base_step
-    {
-        get { return power_base * GlobalConfigs.SailorGeneral.MAX_MIN_POWER_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }
-    }
-    public float power_plv
-    {
-        get { return power_base * GlobalConfigs.SailorGeneral.POWER_PER_LEVEL_RATIO; }
-    }
-    public float power_plv_step
-    {
-        get { return power_base_step * GlobalConfigs.SailorGeneral.POWER_PER_LEVEL_RATIO; }
-    }
-
-    public float health_base_step
-    {
-        get { return health_base * GlobalConfigs.SailorGeneral.MAX_MIN_HEALTH_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }
-    }
-    public float health_plv
-    {
-        get { return health_base * GlobalConfigs.SailorGeneral.HEALTH_PER_LEVEL_RATIO; }
-    }
-    public float health_plv_step
-    {
-        get { return health_base_step * GlobalConfigs.SailorGeneral.HEALTH_PER_LEVEL_RATIO; }
-    }
-
-    public float speed_step
-    {
-        get { return speed_base * GlobalConfigs.SailorGeneral.MAX_MIN_SPEED_RATIO / GlobalConfigs.SailorGeneral.MAX_QUALITY; }
-    }
-
     public float GetPower(int level, int quality, int star)
     {
-        return (power_base + quality * power_base_step + (power_plv + quality * power_plv_step) * level) * (1 + star * GlobalConfigs.SailorGeneral.STAR_STAT_RATE);
+        float power = power_base;
+        power *= 1 + quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_POWER_RATIO;
+        power *= 1 + (level - 1) * GlobalConfigs.SailorGeneral.POWER_PER_LEVEL_RATIO;
+        power *= 1 + (star - 1) * GlobalConfigs.SailorGeneral.STAR_STAT_RATE;
+        return power;
     }
     public float GetHealth(int level, int quality, int star)
     {
-        return (health_base + quality * health_base_step + (health_plv + quality * health_plv_step) * level) * (1 + star * GlobalConfigs.SailorGeneral.STAR_STAT_RATE);
+        float health = health_base;
+        health *= 1 + quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_HEALTH_RATIO;
+        health *= 1 + (level - 1) * GlobalConfigs.SailorGeneral.HEALTH_PER_LEVEL_RATIO;
+        health *= 1 + (star - 1) * GlobalConfigs.SailorGeneral.STAR_STAT_RATE;
+        return health;
     }
     public float GetSpeed(int level, int quality)
     {
-        return speed_base + speed_step * quality;
+        float speed = speed_base;
+        speed *= 1 + quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_SPEED_RATIO;
+        return speed;
     }
     public float GetCrit()
     {
