@@ -2330,6 +2330,7 @@ MonoBehaviour:
   iconAttackType: {fileID: 4741355595980508899}
   background: {fileID: 3121337029614102432}
   sailorDes: {fileID: 11400000, guid: a3a0080a2ebd8ca4da0004cb0994dd10, type: 2}
+  sailorDesc: {fileID: 11400000, guid: 7d226a49a8664d940a253d262b02a9e1, type: 2}
   healthSlider: {fileID: 8768277973629087792}
   furySlider: {fileID: 4408129913161751941}
   qualityBar: {fileID: 1381939657649597123}

@@ -20,7 +20,7 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private Text levelText, expText;
     [SerializeField]
-    private SailorDescription sailorDes;
+    private SailorDesc sailorDesc;
     [SerializeField]
     private Image quality, rank, exp;
     [SerializeField]
@@ -96,14 +96,15 @@ public class CrewManager : MonoBehaviour
         curModel = model;
         texts[0].text = model.name;
         texts[1].text = model.id;
-        foreach (var item in sailorDes.sheets[0].list)
+        foreach (var item in sailorDesc.list)
         {
             if (model.name == item.root_name)
             {
                 texts[2].text = item.title;
-                texts[8].text = item.skill_description;
+                texts[8].text = GameUtils.GetTextDescription(item.skill_description, model);
             }
         }
+
         quality.fillAmount = (float)model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
         texts[3].text = Mathf.Round(model.config_stats.GetPower(model.level, model.quality, model.star)).ToString();
         texts[4].text = Mathf.Round(model.config_stats.GetHealth(model.level, model.quality, model.star)).ToString();

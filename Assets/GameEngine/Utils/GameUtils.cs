@@ -199,4 +199,49 @@ public class GameUtils : UnityEngine.Object
             SoundMgr.SetSoundFxVolume(1f);
         }
     }
+    public static string GetTextDescription(string oriText, SailorModel model)
+    {
+        string result = oriText;
+        List<int> start = new List<int>();
+        List<int> end = new List<int>();
+        for (int i = 0; i < oriText.Length; i++)
+        {
+            if (oriText[i] == '$') start.Add(i);
+            if (oriText[i] == '@') end.Add(i);
+        }
+        for (int j = start.Count - 1; j >= 0; j--)
+        {
+            string subString = oriText.Substring(start[j], end[j] - start[j] + 1);
+
+            string s = subString[1..^1];
+            var split = s.Split("_");
+            if (split[0] == "p")
+            {
+                int skillParamIndex = int.Parse(split[1]);
+                var power = model.config_stats.GetPower(model.level, model.quality, model.star);
+                float param = 0;
+                if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
+                else param = model.config_stats.skill_params[skillParamIndex];
+                oriText = oriText.Replace(subString, "" + Mathf.Round(power * param));
+            }
+            else if (split[0] == "per")
+            {
+                int skillParamIndex = int.Parse(split[1]);
+                float param = 0;
+                if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
+                else param = model.config_stats.skill_params[skillParamIndex];
+                oriText = oriText.Replace(subString, "" + (param * 100) + "%");
+            }
+            else if (split[0] == "i")
+            {
+                int skillParamIndex = int.Parse(split[1]);
+                float param = 0;
+                if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
+                else param = model.config_stats.skill_params[skillParamIndex];
+                oriText = oriText.Replace(subString, "" + param);
+            }
+
+        }
+        return oriText;
+    }
 }

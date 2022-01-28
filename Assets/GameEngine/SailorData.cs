@@ -14,10 +14,6 @@ public enum SailorStatusType
     STUN,
     EXCITED,
     EPIDEMIC,
-    FROZEN,
-    POISON,
-    BURN,
-    BLEEDING,
 };
 
 public enum SailorClass

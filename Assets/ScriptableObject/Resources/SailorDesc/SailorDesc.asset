@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b20fb3053d74f440bdeede50c05ff65, type: 3}
+  m_Name: SailorDesc
+  m_EditorClassIdentifier: 
+  list:
+  - root_name: Helti
+    present_name: Helti
+    title: The amazing captain
+    skill_description: 'Slash 3 times, deal <b><color=#f06060>$p_0@</color></b> to
+      enermy and <b><color=#f06060>$p_1@</color></b> to behinds. '
+  - root_name: Meechik
+    present_name: Meechik
+    title: Eldest of the Pirate Family
+    skill_description: Fire an giant bullet bazooka, deal <b><color=#f06060>$p_0@</color></b>
+      and <b><color=#f06060>$p_1@</color></b> to another in 1-tile radius.
+  - root_name: Sojeph
+    present_name: Sojeph
+    title: The Surgeon captain
+    skill_description: Heal an lowest ally <b><color=#99db37>$p_0@</color></b> and
+      throw his scalpels to enermy.
+  - root_name: Beel
+    present_name: Beel
+    title: Captain of Darkness pirate crew
+    skill_description: Summon Infestissue Ghost from Darkness from her Crystal ball,
+      deal <b><color=#5b59f0>$p_0@</color></b> to all enermy.
+  - root_name: Tons
+    present_name: Tons
+    title: Zetpees criminal-org
+    skill_description: Walk through the darkness, deal <b><color=#f06060>$p_0@</color></b>
+      damage to his target.
+  - root_name: Herminia
+    present_name: Herminia
+    title: The cute elf
+    skill_description: Shoot incantation arrow, deal true damage.
+  - root_name: Herminia
+    present_name: Herminia
+    title: The cute elf
+    skill_description: Shoot incantation arrow, deal true damage.
+  - root_name: Scrub
+    present_name: Scrub
+    title: The guard of Haisan
+    skill_description: Stab his weapon, deal <b><color=#f06060>$p_0@</color></b>
+      to enermy and <b><color=#f06060>$p_1@</color></b> to behind.
+  - root_name: RowT
+    present_name: RowT
+    title: Thunder wizard
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to random enermy.
+  - root_name: Jenkins
+    present_name: Jenkins
+    title: 'The lonely swordsman '
+    skill_description: 'He uses his special technique Consecutive Sadless: deal <b><color=#f06060>$p_0@</color></b>
+      to target addition <b><color=#f06060>$per_1@</color></b>  their health.'
+  - root_name: OBonbee
+    present_name: O-Bonbee
+    title: Baby scared
+    skill_description: Use his sword-arms, deal <b><color=#f06060>$p_0@</color></b>
+      to target addition <b><color=#f06060>$per_1@</color></b> in a column.
+  - root_name: Salvatafo
+    present_name: Salvatafo
+    title: The Salvage of the Wotafo
+    skill_description: Summon power of the sun, deal <b><color=#5b59f0>$p_0@</color></b>
+      and heal <b><color=#99db37>$p_1@</color></b> for each victims.
+  - root_name: Tad
+    present_name: Tad
+    title: Kindergarten Tiger from Mohana
+    skill_description: Attack target three times with tiger technique. Deal <b><color=#f06060>$p_0@</color></b>
+      each and active WILD synergies.
+  - root_name: Alex
+    present_name: Alex
+    title: Acient weapon Defender
+    skill_description: His shield release the golden electrical power, heal <b><color=#99db37>$per_0@</color></b>
+      max health and increase <b><color=#5c5c5e>$i_1@</color></b> armor.
+  - root_name: QChi
+    present_name: Q-CHI
+    title: The Death Mage
+    skill_description: Use hell power deal <b><color=#5b59f0>$p_0@</color></b> to
+      all enemies at the front.
+  - root_name: Galdalf
+    present_name: Galdalf
+    title: Aboriginals Mage from Mohana
+    skill_description: At start of combat, use the secret charm to buff the one at
+      the front <b><color=#99db37>$p_1@</color></b> power, <b><color=#99db37>$i_0@</color></b>
+      fury and speed up <b><color=#99db37>$per_2@</color></b>.
+  - root_name: Galdalf
+    present_name: Galdalf
+    title: Aboriginals Mage from Mohana
+    skill_description: At start of combat, use the secret charm to buff the one at
+      the front <b><color=#99db37>$p_1@</color></b> power, <b><color=#99db37>$i_0@</color></b>
+      fury and speed up <b><color=#99db37>$per_2@</color></b>.
+  - root_name: Mealodo
+    present_name: Mealodo
+    title: A young sailor
+    skill_description: Slash his sword two times, deal damage to target.
+  - root_name: Geechoso
+    present_name: Geechoso
+    title: An old sailor
+    skill_description: Shot his target two times.
+  - root_name: LiuHi
+    present_name: LiuHi
+    title: Yellow Flower
+    skill_description: Heal around plus-sign alies <b><color=#99db37>$p_0@</color></b>.

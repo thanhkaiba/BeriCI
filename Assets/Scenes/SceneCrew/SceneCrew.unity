@@ -261,6 +261,7 @@ MonoBehaviour:
   levelText: {fileID: 1833400171}
   expText: {fileID: 1994353535}
   sailorDes: {fileID: 11400000, guid: a3a0080a2ebd8ca4da0004cb0994dd10, type: 2}
+  sailorDesc: {fileID: 11400000, guid: 7d226a49a8664d940a253d262b02a9e1, type: 2}
   quality: {fileID: 293079919}
   rank: {fileID: 2020860293}
   exp: {fileID: 2135146786}
