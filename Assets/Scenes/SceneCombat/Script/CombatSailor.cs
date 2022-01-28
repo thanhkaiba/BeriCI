@@ -130,6 +130,31 @@ public class CombatSailor : Sailor
     {
         return cs.listStatus.Find(x => x.name == name) != null;
     }
+    public void SyncStatus(List<SailorStatus> statuses)
+    {
+        // update sau, lam cho death truoc
+        statuses.ForEach(status => {
+            var clientStatus = cs.listStatus.Find(x => x.name == status.name);
+            Debug.Log("Check Status: " + status.name);
+            if (clientStatus == null)
+            {
+                Debug.LogWarning(Model.config_stats.root_name + " missing Status " + status.name);
+                AddStatus(status);
+                switch (status.name)
+                {
+                    case SailorStatusType.DEATH:
+                        cs.CurHealth = 0;
+                        gameObject.SetActive(false);
+                        break;
+                }
+            }
+            else
+            {
+                Debug.Log(Model.config_stats.root_name + " have same with server " + status.name);
+                clientStatus.stack = status.stack;
+            }
+        });
+    }
     public int GetStatusRemainTurn(SailorStatusType name)
     {
         SailorStatus status = cs.listStatus.Find(x => x.name == name);

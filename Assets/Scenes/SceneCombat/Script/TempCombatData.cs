@@ -101,6 +101,8 @@ public class CombatAction
     public List<float> _params;
     public bool haveCrit;
 
+    public List<MapStatusItem> mapStatus;
+
     public GameEndData gameEndData;
     public CombatAction(ISFSObject packet)
     {
@@ -127,6 +129,12 @@ public class CombatAction
             case CombatAcionType.GameState:
                 break;
         }
+        mapStatus = new List<MapStatusItem>();
+        if (type == CombatAcionType.BaseAttack || type == CombatAcionType.UseSkill)
+        {
+            ISFSArray _mapStatus = packet.GetSFSArray("mapStatus");
+            if (mapStatus != null) foreach (ISFSObject obj in _mapStatus) mapStatus.Add(new MapStatusItem(obj));
+        }
     }
 }
 public class GameEndData
@@ -149,4 +157,22 @@ public class GameEndData
         team_win = detail.GetByte("team_win");
 
     }
+}
+
+public class MapStatusItem
+{
+    public MapStatusItem(ISFSObject packet)
+    {
+        sailor_id = packet.GetUtfString("sid");
+        listStatus = new List<SailorStatus>();
+        ISFSArray _listStatus = packet.GetSFSArray("status");
+        foreach (ISFSObject obj in _listStatus)
+        {
+            var stack = obj.GetInt("stack");
+            var type = obj.GetByte("type");
+            listStatus.Add(new SailorStatus((SailorStatusType)type, stack));
+        }
+    }
+    public string sailor_id;
+    public List<SailorStatus> listStatus;
 }

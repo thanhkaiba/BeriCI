@@ -120,24 +120,26 @@ public class CombatMgr : MonoBehaviour
                 {
                     CombatSailor actor = GetActorAction(actionProcess);
                     CombatSailor target = GetTargetAction(actionProcess);
-                   /* Debug.Log("actionProcess: " + actionCount);
-                    Debug.Log("actor id: " + actionProcess.actor);
-                    Debug.Log("target id: " + actionProcess.target);*/
+                    var mapStatus = actionProcess.mapStatus;
+                    /* Debug.Log("actionProcess: " + actionCount);
+                     Debug.Log("actor id: " + actionProcess.actor);
+                     Debug.Log("target id: " + actionProcess.target);*/
                     float targetHealthLose = actionProcess._params[0];
                     float healthWildGain = 0;
                     if (actionProcess._params.Count > 1) healthWildGain = actionProcess._params[1];
                     float delayTime = actor.BaseAttack(target, actionProcess.haveCrit, targetHealthLose, healthWildGain) + 0.2f;
                     combatState.lastTeamAction = actor.cs.team;
-                    StartCoroutine(EndLoop(actor, delayTime));
+                    StartCoroutine(EndLoop(actor, delayTime, mapStatus));
                     return delayTime;
                 }
             case CombatAcionType.UseSkill:
                 {
                     CombatSailor actor = GetActorAction(actionProcess);
+                    var mapStatus = actionProcess.mapStatus;
                     float delayTime = actor.ProcessSkill(actionProcess.targets, actionProcess._params);
                     Debug.Log("actionProcess: " + actionCount);
                     combatState.lastTeamAction = actor.cs.team;
-                    StartCoroutine(EndLoop(actor, delayTime));
+                    StartCoroutine(EndLoop(actor, delayTime, mapStatus));
                     return delayTime;
                 }
             case CombatAcionType.GameResult:
@@ -196,9 +198,10 @@ public class CombatMgr : MonoBehaviour
         StartCoroutine(EndLoop(actionChar, delayTime));
         StartCoroutine(NextLoop(delayTime));
     }
-    IEnumerator EndLoop(CombatSailor actor, float delay)
+    IEnumerator EndLoop(CombatSailor actor, float delay, List<MapStatusItem> mapStatus = null)
     {
         yield return new WaitForSeconds(delay);
+        if (mapStatus != null) combatState.SyncServerSailorStatus(mapStatus);
         combatState.RunEndAction(actor);
     }
     IEnumerator NextLoop(float delay)

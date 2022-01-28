@@ -278,7 +278,15 @@ public class CombatState : MonoBehaviour
         List<ClassBonusItem> t = team == Team.A ? classBonusA : classBonusB;
         return t.FirstOrDefault(e => e.type == type);
     }
-
+    public void SyncServerSailorStatus(List<MapStatusItem> mapStatus)
+    {
+        mapStatus.ForEach(item =>
+        {
+            List<SailorStatus> statuses = item.listStatus;
+            CombatSailor s = GetSailor(item.sailor_id);
+            s.SyncStatus(statuses);
+        });
+    }
     public void RunEndAction(CombatSailor actor)
     {
         actor.CountdownStatusRemain();

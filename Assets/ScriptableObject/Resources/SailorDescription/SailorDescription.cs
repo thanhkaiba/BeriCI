@@ -15,7 +15,6 @@ public class SailorDescription : ScriptableObject
     [System.SerializableAttribute]
     public class Param
     {
-
         public string root_name;
         public string present_name;
         public string title;
