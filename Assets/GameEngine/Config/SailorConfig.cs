@@ -24,7 +24,7 @@ public class SailorConfig
     public float GetPower(int level, int quality, int star)
     {
         float power = power_base;
-        power *= 1 + quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_POWER_RATIO;
+        power *= 1 + (float) quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_POWER_RATIO;
         power *= 1 + (level - 1) * GlobalConfigs.SailorGeneral.POWER_PER_LEVEL_RATIO;
         power *= 1 + (star - 1) * GlobalConfigs.SailorGeneral.STAR_STAT_RATE;
         return power;
@@ -32,7 +32,7 @@ public class SailorConfig
     public float GetHealth(int level, int quality, int star)
     {
         float health = health_base;
-        health *= 1 + quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_HEALTH_RATIO;
+        health *= 1 + (float) quality / GlobalConfigs.SailorGeneral.MAX_QUALITY * GlobalConfigs.SailorGeneral.MAX_MIN_HEALTH_RATIO;
         health *= 1 + (level - 1) * GlobalConfigs.SailorGeneral.HEALTH_PER_LEVEL_RATIO;
         health *= 1 + (star - 1) * GlobalConfigs.SailorGeneral.STAR_STAT_RATE;
         return health;
