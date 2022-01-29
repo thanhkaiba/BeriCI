@@ -191,4 +191,64 @@ public class CombatStats
     {
         return listStatus.Find(x => x.name == name);
     }
+    public void UpdateStatsWithSynergy(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam = null)
+    {
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        if (ownTeam != null) ownTeam.ForEach(p =>
+        {
+            switch (p.type)
+            {
+                case SailorClass.MIGHTY:
+                    if (HaveType(SailorClass.MIGHTY))
+                    {
+                        MaxHealth *= 1 + config.GetParams(p.type, p.level)[0];
+                        CurHealth = MaxHealth;
+                    }
+                    break;
+                case SailorClass.SWORD_MAN:
+                    if (HaveType(SailorClass.SWORD_MAN))
+                    {
+                        Speed += config.GetParams(p.type, p.level)[0];
+                    }
+                    break;
+                case SailorClass.MAGE:
+                    if (HaveType(SailorClass.MAGE))
+                    {
+                        BasePower *= 1 + config.GetParams(p.type, p.level)[0];
+                    }
+                    break;
+                case SailorClass.ASSASSIN:
+                    if (HaveType(SailorClass.ASSASSIN))
+                    {
+                        CritDamage += config.GetParams(p.type, p.level)[0];
+                        Crit += config.GetParams(p.type, p.level)[0];
+                    }
+                    break;
+                case SailorClass.SEA_CREATURE:
+                    BaseMagicResist += config.GetParams(p.type, p.level)[0];
+                    break;
+                case SailorClass.SUPPORT:
+                    Fury += (int)config.GetParams(p.type, p.level)[0];
+                    if (Fury > MaxFury) Fury = MaxFury;
+                    break;
+                case SailorClass.KNIGHT:
+                    if (HaveType(SailorClass.KNIGHT))
+                    {
+                        BaseArmor += (int)config.GetParams(p.type, p.level)[0];
+                    }
+                    break;
+            }
+        });
+
+        if (oppTeam != null) oppTeam.ForEach(p =>
+        {
+            switch (p.type)
+            {
+                case SailorClass.DEMON:
+                    BaseArmor -= config.GetParams(p.type, p.level)[0];
+                    BaseMagicResist -= config.GetParams(p.type, p.level)[0];
+                    break;
+            }
+        });
+    }
 }

@@ -45,62 +45,8 @@ public class CombatSailor : Sailor
     // them giam chi so theo toc he
     public void UpdateCombatData(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam)
     {
-        SynergiesConfig config = GlobalConfigs.Synergies;
-        ownTeam.ForEach(p =>
-        {
-            switch (p.type)
-            {
-                case SailorClass.MIGHTY:
-                    if (cs.HaveType(SailorClass.MIGHTY))
-                    {
-                        cs.MaxHealth *= 1 + config.GetParams(p.type, p.level)[0];
-                        cs.CurHealth = cs.MaxHealth;
-                    }
-                    break;
-                case SailorClass.SWORD_MAN:
-                    if (cs.HaveType(SailorClass.SWORD_MAN))
-                    {
-                        cs.Speed += config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.MAGE:
-                    if (cs.HaveType(SailorClass.MAGE))
-                    {
-                        cs.BasePower *= 1 + config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.ASSASSIN:
-                    if (cs.HaveType(SailorClass.ASSASSIN))
-                    {
-                        cs.CritDamage += config.GetParams(p.type, p.level)[0];
-                        cs.Crit += config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.SEA_CREATURE:
-                    cs.BaseMagicResist += config.GetParams(p.type, p.level)[0];
-                    break;
-                case SailorClass.SUPPORT:
-                    GainFury((int)config.GetParams(p.type, p.level)[0]);
-                    break;
-                case SailorClass.KNIGHT:
-                    if (cs.HaveType(SailorClass.KNIGHT))
-                    {
-                        cs.BaseArmor += (int)config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-            }
-        });
-
-        oppTeam.ForEach(p =>
-        {
-            switch (p.type)
-            {
-                case SailorClass.DEMON:
-                    cs.BaseArmor -= config.GetParams(p.type, p.level)[0];
-                    cs.BaseMagicResist -= config.GetParams(p.type, p.level)[0];
-                    break;
-            }
-        });
+        cs.UpdateStatsWithSynergy(ownTeam, oppTeam);
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
         /*
         Debug.Log("-----------------------------------" +
         "\n > Model.id: " + Model.id +

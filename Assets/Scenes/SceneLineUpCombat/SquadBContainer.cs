@@ -47,6 +47,8 @@ public class SquadBContainer : MonoBehaviour
 
     public void OnUpdateSquadB()
     {
-        teamColor.ShowClassBonus(GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.GetSquadModelList(false)));
+        var synergy = GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.GetSquadModelList(false));
+        teamColor.ShowClassBonus(synergy);
+        GameUtils.oppLineUpSynergy = synergy;
     }
 }
