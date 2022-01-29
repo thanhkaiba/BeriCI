@@ -242,8 +242,10 @@ public class GameUtils : UnityEngine.Object
                 else param = model.config_stats.skill_params[skillParamIndex];
                 oriText = oriText.Replace(subString, "" + param);
             }
-
+            
         }
         return oriText;
     }
+    public static List<ClassBonusItem> lineUpSynergy = null;
+    public static List<ClassBonusItem> oppLineUpSynergy = null;
 }

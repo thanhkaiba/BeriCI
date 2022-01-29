@@ -7,7 +7,6 @@ public class TooltipSailorInfo : MonoBehaviour
 {
     private Transform follow;
     private CombatStats stats;
-    private SailorModel model;
     public static TooltipSailorInfo Instance;
     [SerializeField]
     private Color[] rankColorInside;
@@ -71,16 +70,7 @@ public class TooltipSailorInfo : MonoBehaviour
             }
             if (SceneManager.GetActiveScene().name != "SceneCombat2D")
                 return;
-            textPower.text = ((int)stats.Power).ToString();
-            textSpeed.text = ((int)stats.Speed).ToString();
-            textArmor.text = ((int)stats.Armor).ToString();
-            textMagicResist.text = ((int)stats.MagicResist).ToString();
-
-            healthSlider.value = stats.CurHealth / stats.MaxHealth;
-            healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)stats.CurHealth).ToString() + "/" + ((int)stats.MaxHealth).ToString();
-            if (stats.MaxFury == 0) furySlider.value = 1;
-            else furySlider.value = (float)stats.Fury / (float)stats.MaxFury;
-            furySlider.transform.Find("Text").GetComponent<Text>().text = (stats.Fury).ToString() + "/" + (stats.MaxFury).ToString();
+            ShowStatsInfo(stats);
         }
     }
 
@@ -103,41 +93,34 @@ public class TooltipSailorInfo : MonoBehaviour
         }
         else
         {
-            model = sailorGO.GetComponent<Sailor>().Model;
+            var model = sailorGO.GetComponent<Sailor>().Model;
             ShowTooltip(model, sailorGO.transform.Find("nodeBar"));
         }
     }
 
-    public void ShowDynamicTooltip(SailorModel sailorModel, CombatStats cs, Transform target)
+    public void ShowDynamicTooltip(SailorModel model, CombatStats cs, Transform target)
     {
         stats = cs;
-        model = sailorModel;
         follow = target;
-        ShowBasicInfo();
+        ShowUnchangeInfo(model);
     }
 
-    public void ShowTooltip(SailorModel sailorModel, Transform target)
+    public void ShowTooltip(SailorModel model, Transform target)
     {
-        model = sailorModel;
         follow = target;
-        if (model.config_stats.max_fury > 0)
+        CombatStats cs = new CombatStats(model);
+        if (SceneManager.GetActiveScene().name == "ScenePickTeam")
         {
-            furySlider.gameObject.SetActive(true);
-            furySlider.transform.Find("Text").GetComponent<Text>().text = (model.config_stats.start_fury).ToString() + "/" + (model.config_stats.max_fury).ToString();
-            furySlider.value = (float)model.config_stats.start_fury / model.config_stats.max_fury;
+            cs.UpdateStatsWithSynergy(GameUtils.lineUpSynergy);
         }
-        else furySlider.gameObject.SetActive(false);
-
-
-
-        int MaxHealth = (int)model.config_stats.GetHealth(model.level, model.quality, model.star);
-        healthSlider.transform.Find("Text").GetComponent<Text>().text = MaxHealth.ToString() + "/" + MaxHealth.ToString();
-        healthSlider.value = 1;
-        textPower.text = Mathf.Round(model.config_stats.GetPower(model.level, model.quality, model.star)).ToString();
-        textSpeed.text = Mathf.Round(model.config_stats.GetSpeed(model.level, model.quality)).ToString();
-        textArmor.text = Mathf.Round(model.config_stats.GetArmor()).ToString();
-        textMagicResist.text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
-        ShowBasicInfo();
+        else if (SceneManager.GetActiveScene().name == "ScenePickTeamBattle")
+        {
+            var myKey = TeamCombatPrepareData.Instance.YourFightingLine.SlotOf(model.id);
+            if (myKey != -1) cs.UpdateStatsWithSynergy(GameUtils.lineUpSynergy, GameUtils.oppLineUpSynergy);
+            else cs.UpdateStatsWithSynergy(GameUtils.oppLineUpSynergy, GameUtils.lineUpSynergy);
+        }
+        ShowStatsInfo(cs);
+        ShowUnchangeInfo(model);
     }
 
     public void ShowStaticTooltip(SailorModel sailorModel, Vector3 position)
@@ -146,10 +129,26 @@ public class TooltipSailorInfo : MonoBehaviour
         transform.position = position + new Vector3(0, GetComponent<RectTransform>().sizeDelta.y / 2.4f * canvas.transform.localScale.x);
         UpdateTooltipPos();
     }
-
-    public void ShowBasicInfo()
+    public void ShowStatsInfo(CombatStats cs)
     {
+        if (cs.MaxFury > 0)
+        {
+            furySlider.gameObject.SetActive(true);
+            furySlider.transform.Find("Text").GetComponent<Text>().text = (cs.Fury).ToString() + "/" + (cs.MaxFury).ToString();
+            furySlider.value = (float)cs.Fury / cs.MaxFury;
+        }
+        else furySlider.gameObject.SetActive(false);
 
+        int MaxHealth = (int)cs.MaxHealth;
+        healthSlider.value = cs.CurHealth / cs.MaxHealth;
+        healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)cs.CurHealth).ToString() + "/" + ((int)cs.MaxHealth).ToString();
+        textPower.text = Mathf.Round(cs.Power).ToString();
+        textSpeed.text = Mathf.Round(cs.Speed).ToString();
+        textArmor.text = Mathf.Round(cs.Armor).ToString();
+        textMagicResist.text = Mathf.Round(cs.MagicResist).ToString();
+    }
+    public void ShowUnchangeInfo(SailorModel model)
+    {
         gameObject.SetActive(true);
         avtSailor.sprite = GameUtils.GetSailorAvt(model.config_stats.root_name);
         background.color = rankColorInside[(int)model.config_stats.rank];
