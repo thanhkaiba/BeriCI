@@ -16,7 +16,7 @@ namespace Piratera.Build
     public class MyBuildProcessor : Editor
     {
         public static string BuildFolder = $"{Directory.GetCurrentDirectory()}/Build";
-        public static string InnoSetupFile = $"{BuildFolder}/Installer/piratera_installer_l2cpp_DEV.iss";
+        public static string InnoSetupFile = $"{BuildFolder}/Installer/piratera_installer_l2cpp.iss";
 
         [MenuItem("Builds/Reveal In Finder", false, 0)]
         public static void OpenBuildFolder()

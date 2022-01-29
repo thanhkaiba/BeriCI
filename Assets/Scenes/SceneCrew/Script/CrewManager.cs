@@ -97,7 +97,7 @@ public class CrewManager : MonoBehaviour
     {
         curModel = model;
         texts[0].text = model.name;
-        texts[1].text = model.id;
+        texts[1].text = "#" + model.id.PadLeft(6, '0');
         foreach (var item in sailorDesc.list)
         {
             if (model.name == item.root_name)

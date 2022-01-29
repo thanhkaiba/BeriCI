@@ -22,7 +22,7 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private Slider progressBar;
 
-    private float startingPoint = 0.3f;
+    private float startingPoint = 0f;
 
     [SerializeField]
     private SailorDescription sailorDescription;
@@ -77,7 +77,7 @@ public class LoadServerDataUI : MonoBehaviour
         if (!GameConfigSync.Synced)
         {
             errorText.text = "Loading Configuration Files";
-            ShowLoading(1f, startingPoint, LoadConfig);
+            LoadConfig();
         } else
         {
             GlobalConfigs.InitSyncConfig();
