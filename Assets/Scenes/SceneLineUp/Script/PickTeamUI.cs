@@ -50,7 +50,7 @@ public class PickTeamUI : MonoBehaviour
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         GameEvent.FlyBeri.RemoveListener(FlyBeri);
-        CrewData.Instance.OnConfirmSquad();
+       
     }
 
 
@@ -72,11 +72,13 @@ public class PickTeamUI : MonoBehaviour
     }
     public void OnBackToLobby()
     {
+        CrewData.Instance.OnConfirmSquad();
         SceneManager.LoadScene("SceneLobby");
     }
 
     public void OpenSceneCrew()
     {
+        CrewData.Instance.OnConfirmSquad();
         SceneManager.LoadScene("SceneCrew");
     }
     public void FlyBeri()

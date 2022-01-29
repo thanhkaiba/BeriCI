@@ -11,6 +11,9 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+#if PIRATERA_LIVE
+using Piratera.Constance;
+#endif
 
 public class LoginController : MonoBehaviour
 {
