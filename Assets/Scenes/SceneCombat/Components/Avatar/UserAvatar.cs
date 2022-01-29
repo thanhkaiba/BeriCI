@@ -27,7 +27,14 @@ public class UserAvatar : MonoBehaviour
         }
         else
         {
-            userAvatar.sprite = GameUtils.GetSailorAvt(url);
+            Sprite s = GameUtils.GetSailorAvt(url);
+            if (s != null)
+            {
+                userAvatar.sprite = s;
+            } else
+            {
+                SetDefaultAvatar();
+            }
         }
     }
     private void DoLoadAvatar(string url)

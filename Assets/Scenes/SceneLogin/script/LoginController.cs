@@ -64,7 +64,7 @@ public class LoginController : MonoBehaviour
 #endif
 
         signupText.text = "Create One";
-#if PIRATERA_QC || PIRATERA_DEV || (PIRATERA_LIVE && UNITY_ANDROID)
+#if PIRATERA_QC || PIRATERA_DEV
         signupText.text = "Guest";
 #endif
 
@@ -241,7 +241,7 @@ public class LoginController : MonoBehaviour
 
     public void OnButtonCreateOneClick()
     {
-#if PIRATERA_QC || PIRATERA_DEV || (PIRATERA_LIVE && UNITY_ANDROID)
+#if PIRATERA_QC || PIRATERA_DEV
         SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
 #else
         Application.OpenURL(GameConst.ACCOUNT_URL);
