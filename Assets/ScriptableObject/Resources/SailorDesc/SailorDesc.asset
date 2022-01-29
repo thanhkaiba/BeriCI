@@ -60,7 +60,7 @@ MonoBehaviour:
     title: 'The lonely swordsman '
     skill_description: 'He uses his special technique Consecutive Sadless: deal <b><color=#f06060>$p_0@</color></b>
       to target addition <b><color=#f06060>$per_1@</color></b>  their health. Jenkins
-      have <b>25% crit-chance.</b>.'
+      have 25% crit-chance.'
   - root_name: OBonbee
     present_name: O-Bonbee
     title: Baby scared
