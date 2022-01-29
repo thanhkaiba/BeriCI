@@ -2329,7 +2329,6 @@ MonoBehaviour:
   - {fileID: 7295331827299345390}
   iconAttackType: {fileID: 4741355595980508899}
   background: {fileID: 3121337029614102432}
-  sailorDes: {fileID: 11400000, guid: a3a0080a2ebd8ca4da0004cb0994dd10, type: 2}
   sailorDesc: {fileID: 11400000, guid: 7d226a49a8664d940a253d262b02a9e1, type: 2}
   healthSlider: {fileID: 8768277973629087792}
   furySlider: {fileID: 4408129913161751941}
@@ -2571,6 +2570,7 @@ GameObject:
   - component: {fileID: 1917368257224339884}
   - component: {fileID: 7965340276951682865}
   - component: {fileID: 6840002299941511610}
+  - component: {fileID: 7279162062373613119}
   m_Layer: 5
   m_Name: textLevel
   m_TagString: Untagged
@@ -2619,7 +2619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.62144, g: 0.74039674, b: 0.8962264, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2640,6 +2640,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 20
+--- !u!114 &7279162062373613119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6883836728454938392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.018422928, g: 0.117696874, b: 0.16981131, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &7190726261002240502
 GameObject:
   m_ObjectHideFlags: 0

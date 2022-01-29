@@ -34,6 +34,8 @@ public class CrewManager : MonoBehaviour
     private SailorModel curModel;
     [SerializeField]
     private GameObject buttonCheat;
+    [SerializeField]
+    private Slider furySlider;
 
 
     private Transform canvas;
@@ -137,6 +139,15 @@ public class CrewManager : MonoBehaviour
             expText.text = "" + model.exp + "/" + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
             exp.fillAmount = (float)model.exp / GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
         }
+        if (model.config_stats.max_fury > 0)
+        {
+            furySlider.gameObject.SetActive(true);
+            var textFury = "Fury: " + (model.config_stats.max_fury).ToString();
+            if (model.config_stats.start_fury > 0) textFury += " (" + (model.config_stats.start_fury).ToString() + ")";
+            furySlider.transform.Find("Text").GetComponent<Text>().text = textFury;
+            furySlider.value = (float)model.config_stats.start_fury / model.config_stats.max_fury;
+        }
+        else furySlider.gameObject.SetActive(false);
         UpdateRankIconPosition();
     }
     public void BackToLobby()

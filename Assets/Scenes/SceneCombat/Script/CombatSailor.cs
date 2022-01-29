@@ -402,6 +402,7 @@ public class CombatSailor : Sailor
     {
         Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
         transform.position = p;
+        bar.Init(Model);
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);

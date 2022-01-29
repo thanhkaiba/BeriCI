@@ -26,13 +26,13 @@ MonoBehaviour:
   - root_name: Sojeph
     present_name: Sojeph
     title: The Surgeon captain
-    skill_description: Heal an lowest ally <b><color=#99db37>$p_0@</color></b> and
+    skill_description: Heal an lowest ally <b><color=#228514>$p_0@</color></b> and
       throw his scalpels to enermy.
   - root_name: Beel
     present_name: Beel
     title: Captain of Darkness pirate crew
     skill_description: Summon Infestissue Ghost from Darkness from her Crystal ball,
-      deal <b><color=#5b59f0>$p_0@</color></b> to all enermy.
+      deal <b><color=#198709>$p_0@</color></b> to all enermy.
   - root_name: Tons
     present_name: Tons
     title: Zetpees criminal-org
@@ -60,7 +60,7 @@ MonoBehaviour:
     title: 'The lonely swordsman '
     skill_description: 'He uses his special technique Consecutive Sadless: deal <b><color=#f06060>$p_0@</color></b>
       to target addition <b><color=#f06060>$per_1@</color></b>  their health. Jenkins
-      have 25% crit-chance..'
+      have <b>25% crit-chance.</b>.'
   - root_name: OBonbee
     present_name: O-Bonbee
     title: Baby scared
@@ -70,7 +70,7 @@ MonoBehaviour:
     present_name: Salvatafo
     title: The Salvage of the Wotafo
     skill_description: Summon power of the sun, deal <b><color=#5b59f0>$p_0@</color></b>
-      and heal <b><color=#99db37>$p_1@</color></b> for each victims.
+      and heal <b><color=#228514>$p_1@</color></b> for each victims.
   - root_name: Tad
     present_name: Tad
     title: Kindergarten Tiger from Mohana
@@ -79,8 +79,8 @@ MonoBehaviour:
   - root_name: Alex
     present_name: Alex
     title: Acient weapon Defender
-    skill_description: His shield release the golden electrical power, heal <b><color=#99db37>$per_0@</color></b>
-      max health and increase <b><color=#5c5c5e>$i_1@</color></b> armor.
+    skill_description: His shield release the golden electrical power, heal <b><color=#228514>$per_0@</color></b>
+      max health and increase <b><color=#228514>$i_1@</color></b> armor.
   - root_name: QChi
     present_name: Q-CHI
     title: The Death Mage
@@ -90,14 +90,8 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#99db37>$p_1@</color></b> power, <b><color=#99db37>$i_0@</color></b>
-      fury and speed up <b><color=#99db37>$per_2@</color></b>.
-  - root_name: Galdalf
-    present_name: Galdalf
-    title: Aboriginals Mage from Mohana
-    skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#99db37>$p_1@</color></b> power, <b><color=#99db37>$i_0@</color></b>
-      fury and speed up <b><color=#99db37>$per_2@</color></b>.
+      the front <b><color=#228514>$p_1@</color></b> power, <b><color=#228514>$i_0@</color></b>
+      fury and speed up <b><color=#228514>$per_2@</color></b>.
   - root_name: Mealodo
     present_name: Mealodo
     title: A young sailor
@@ -109,4 +103,4 @@ MonoBehaviour:
   - root_name: LiuHi
     present_name: LiuHi
     title: Yellow Flower
-    skill_description: Heal around plus-sign alies <b><color=#99db37>$p_0@</color></b>.
+    skill_description: Heal around plus-sign alies <b><color=#228514>$p_0@</color></b>.

@@ -16,6 +16,8 @@ public class GeneralInfoBar : MonoBehaviour
     private Sprite starSpr;
     [SerializeField]
     private Transform nodeStar;
+    [SerializeField]
+    private Image iconAttackType;
     public void PresentData(SailorModel model)
     {
         level.text = "" + model.level;
@@ -32,5 +34,6 @@ public class GeneralInfoBar : MonoBehaviour
             starObj.transform.localScale = new Vector3(0.1f, 0.1f);
             starObj.transform.localPosition = new Vector3((i - (float)model.star/2 + 0.5f) * 10, 0);
         }
+        iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + model.config_stats.attack_type);
     }
 }
