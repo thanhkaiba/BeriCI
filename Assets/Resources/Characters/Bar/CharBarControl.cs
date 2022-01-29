@@ -11,7 +11,11 @@ public class CharBarControl : MonoBehaviour
     public Text furyText;
     public Image iconType;
     public Image iconSkill;
-    public Text textName;
+    public Text textName, textLevel, textQuality;
+    [SerializeField]
+    private Sprite starSpr;
+    [SerializeField]
+    private Transform nodeStar;
     private void Awake()
     {
 #if PIRATERA_DEV
@@ -19,6 +23,21 @@ public class CharBarControl : MonoBehaviour
 #else
         healthText.gameObject.SetActive(false);
 #endif
+    }
+    public void Init(SailorModel model)
+    {
+        for (int i = 0; i < model.star; i++)
+        {
+            GameObject starObj = new GameObject();
+            Image starImg = starObj.AddComponent<Image>();
+            starImg.sprite = starSpr;
+            starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+            starObj.SetActive(true);
+            starObj.transform.localScale = new Vector3(0.1f, 0.1f);
+            starObj.transform.localPosition = new Vector3(i * 10, 0);
+        }
+        textLevel.text = "" + model.level;
+        textQuality.text = "" + model.quality;
     }
     public void SetName(string name)
     {
