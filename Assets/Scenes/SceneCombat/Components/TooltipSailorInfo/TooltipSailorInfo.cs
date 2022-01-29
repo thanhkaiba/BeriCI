@@ -165,7 +165,7 @@ public class TooltipSailorInfo : MonoBehaviour
         {
             if (model.name == item.root_name)
             {
-                textDes.text = GameUtils.GetTextDescription(item.skill_description, model);
+                textDes.text = GameUtils.GetTextDescription(item.skill_description, model, stats);
             }
         }
         qualityBar.value = (float)model.quality / 200;

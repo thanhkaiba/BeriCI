@@ -199,7 +199,7 @@ public class GameUtils : UnityEngine.Object
             SoundMgr.SetSoundFxVolume(1f);
         }
     }
-    public static string GetTextDescription(string oriText, SailorModel model)
+    public static string GetTextDescription(string oriText, SailorModel model, CombatStats stats = null)
     {
         string result = oriText;
         List<int> start = new List<int>();
@@ -218,7 +218,9 @@ public class GameUtils : UnityEngine.Object
             if (split[0] == "p")
             {
                 int skillParamIndex = int.Parse(split[1]);
-                var power = model.config_stats.GetPower(model.level, model.quality, model.star);
+                float power;
+                if (stats != null) power = stats.Power;
+                else power = model.config_stats.GetPower(model.level, model.quality, model.star);
                 float param = 0;
                 if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
                 else param = model.config_stats.skill_params[skillParamIndex];
