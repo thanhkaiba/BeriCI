@@ -73,6 +73,10 @@ public class IconSailor : MonoBehaviour
         level.text = "" + model.level;
         quality.text = "Q:" + model.quality;
 
+        foreach (Transform child in nodeStar.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
         for (int i = 0; i < model.star; i++)
         {
             GameObject starObj = new GameObject();
