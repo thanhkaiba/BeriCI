@@ -85,7 +85,6 @@ namespace Piratera.Config
         public static bool Synced = false;
 
 
-
         private void Start()
         {
             
@@ -185,6 +184,8 @@ namespace Piratera.Config
         {
             if (TotalSynced >= TotalUnSync)
             {
+                GlobalConfigs.InitSyncConfig();
+                Clean();
                 OnSuccess();
                 return true;
             }
@@ -211,5 +212,12 @@ namespace Piratera.Config
             }
             return "";
         }
+
+        public static void Clean()
+        {
+            manifest.Clear();
+        }
+
+  
     }
 }

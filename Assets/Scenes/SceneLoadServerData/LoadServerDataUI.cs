@@ -80,7 +80,6 @@ public class LoadServerDataUI : MonoBehaviour
             LoadConfig();
         } else
         {
-            GlobalConfigs.InitSyncConfig();
             SendGetData();
         }
       
@@ -251,8 +250,7 @@ public class LoadServerDataUI : MonoBehaviour
         ReloadFunc = LoadConfig;
         progressBar.value = startingPoint;
         ConfigSync.StartFlowSync(x => progressBar.value += x, () =>
-        {
-            GlobalConfigs.InitSyncConfig();
+        {         
             SendGetData();
 
         }, () => {
