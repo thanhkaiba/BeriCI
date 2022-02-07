@@ -33,13 +33,13 @@ public class GuiReward : BaseGui
         var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         Sequence seqe = DOTween.Sequence();
         coin.transform.localScale = Vector3.zero;
-        seqe.Append(coin.rectTransform.DOMoveY(50 * canvas.transform.localScale.x, 0.25f).From());
-        seqe.Append(coin.DOFade(0, 0.2f).From());
-        seqe.Join(coin.transform.DOScale(new Vector3(0.8f, 2f), 0.4f));
-        seqe.Append(coin.transform.DOScale(new Vector3(1.4f, 0.9f), 0.4f));
-        seqe.Append(coin.transform.DOScale(Vector3.one, 0.25f));
+        //seqe.Append(coin.rectTransform.DOMoveY(50 * canvas.transform.localScale.x, 0.25f).From());
+        coin.transform.localScale = Vector3.zero;
+        seqe.AppendInterval(0.2f);
+        seqe.Join(coin.DOFade(1, 0.2f));
+        seqe.Join(coin.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
         seqe.AppendCallback(() => {
-            DoTweenUtils.UpdateNumber(texts[0], 0, r.mode_reward + r.hard_bonus + r.win_rank_bonus, x => $"x{x}");
+            DoTweenUtils.UpdateNumber(texts[0], 0, r.mode_reward + r.hard_bonus + r.win_rank_bonus + r.team_bonus, x => $"x{x}");
         });
     
         seqe.SetLink(coin.gameObject).SetTarget(coin.transform);
@@ -48,6 +48,7 @@ public class GuiReward : BaseGui
         texts[1].text = r.mode_reward.ToString();
         texts[2].text = r.win_rank_bonus.ToString();
         texts[3].text = r.hard_bonus.ToString();
+        texts[4].text = r.team_bonus.ToString();
         if (r.team_win == 0)
         {
             SoundMgr.PlaySound(PirateraSoundEffect.WIN);
