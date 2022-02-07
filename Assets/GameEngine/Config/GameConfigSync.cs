@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
@@ -89,7 +90,7 @@ namespace Piratera.Config
         }
 
 
-        private Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
+        private static Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
         private Action<float> UpdateProgressBar;
         private Action OnSuccess;
         private Action OnError;
@@ -199,6 +200,8 @@ namespace Piratera.Config
         {
             if (TotalSynced >= TotalUnSync)
             {
+                GlobalConfigs.InitSyncConfig();
+                manifest.Clear();
                 OnSuccess();
                 return true;
             }
@@ -213,15 +216,14 @@ namespace Piratera.Config
 
         public static string GetPath(string fileName)
         {
-            string[] data = { Application.persistentDataPath, "configs", fileName };
+            string[] data = { Application.persistentDataPath, fileName };
             return Path.Combine(data);
 
         }
 
-        public static string GetSailorFolder()
+        public static string[] GetSailorFolder()
         {
-            string[] data = { Application.persistentDataPath, "configs", "Sailors" };
-            return Path.Combine(data);
+            return manifest.Keys.Where(filePath => filePath.Contains("configs/Sailor")).ToArray();
         }
 
         public static string GetContent(string fileName)
