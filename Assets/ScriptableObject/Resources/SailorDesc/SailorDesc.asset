@@ -104,3 +104,8 @@ MonoBehaviour:
     present_name: LiuHi
     title: Yellow Flower
     skill_description: Heal around plus-sign alies <b><color=#228514>$p_0@</color></b>.
+  - root_name: Scott
+    present_name: Scott & Papagal
+    title: The Elder Pirate
+    skill_description: Papagal attack furthes enemy, deal <b><color=#f06060>$p_0@</color></b>.
+      It can be critical.

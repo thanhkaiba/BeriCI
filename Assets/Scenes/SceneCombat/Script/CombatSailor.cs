@@ -161,7 +161,7 @@ public class CombatSailor : Sailor
         }
         // Deal damage
         float d = cs.Power;
-        if (isCrit) d *= GlobalConfigs.Combat.base_crit_damage;
+        if (isCrit) d *= cs.CritDamage;
         Damage damage = new Damage()
         {
             physics = cs.HaveType(SailorClass.MAGE) ? 0 : d,
@@ -237,7 +237,7 @@ public class CombatSailor : Sailor
         DisplayStatus(cs.listStatus);
         return RunImmobile() + 0.2f;
     }
-    bool IsCrit()
+    protected bool IsCrit()
     {
         float r = Random.Range(0f, 1f);
         return r < cs.Crit;
