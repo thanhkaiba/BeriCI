@@ -36,6 +36,9 @@ public enum SailorClass
     EPIDEMIC,
     CRIMINAL,
     SUMMONER,
+    PIONEER,
+    BRAVE,
+    ELF,
 };
 
 public enum SailorRank
