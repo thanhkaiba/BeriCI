@@ -34,14 +34,23 @@ namespace Piratera.Config
                 FileName = packet.GetUtfString("file_name");
                 MD5Hash = packet.GetUtfString("md5_hash");
                 Content = packet.GetUtfString("content");
-                
+                SaveFile();
             }
 
-          
+            private void SaveFile()
+            {
+                string absolutePath = Path.Combine(Application.persistentDataPath, FileName);
+                if (!Directory.Exists(Path.GetDirectoryName(absolutePath))) {
+                    Directory.CreateDirectory(Path.GetDirectoryName(absolutePath));
+                }
+                File.WriteAllText(absolutePath, Content);
+               
+                Debug.Log("Saved Config JSON to: " + absolutePath);
+            }
 
             public bool NeedUpdate()
             {
-                string localMD5Hash = CalculateMD5();
+                string localMD5Hash = CalculateMD5(FileName);
                 if (localMD5Hash != MD5Hash)
                 {
                     return true;
@@ -56,13 +65,19 @@ namespace Piratera.Config
                 NetworkController.Send(SFSAction.GET_CONFIG, data);
             }
 
-            private string CalculateMD5()
+            private static string CalculateMD5(string filename)
             {
-                if (!string.IsNullOrEmpty(Content))
+                string path = Path.Combine(Application.persistentDataPath, filename);
+                if (File.Exists(path))
                 {
-                    using var md5 = MD5.Create();
-                    var hash = md5.ComputeHash(System.Text.Encoding.ASCII.GetBytes(Content));
-                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                    using (var md5 = MD5.Create())
+                    {
+                        using (var stream = File.OpenRead(path))
+                        {
+                            var hash = md5.ComputeHash(stream);
+                            return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                        }
+                    }
                 }
                 else
                 {
@@ -75,7 +90,7 @@ namespace Piratera.Config
         }
 
 
-        public static Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
+        private static Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
         private Action<float> UpdateProgressBar;
         private Action OnSuccess;
         private Action OnError;
@@ -83,6 +98,7 @@ namespace Piratera.Config
         private int TotalSynced = 0;
 
         public static bool Synced = false;
+
 
 
         private void Start()
@@ -185,7 +201,7 @@ namespace Piratera.Config
             if (TotalSynced >= TotalUnSync)
             {
                 GlobalConfigs.InitSyncConfig();
-                Clean();
+                manifest.Clear();
                 OnSuccess();
                 return true;
             }
@@ -198,26 +214,22 @@ namespace Piratera.Config
             NetworkController.RemoveServerActionListener(onReceiveServerAction);
         }
 
-     
+        public static string GetPath(string fileName)
+        {
+            string[] data = { Application.persistentDataPath, fileName };
+            return Path.Combine(data);
+
+        }
+
         public static string[] GetSailorFolder()
         {
-            return manifest.Keys.Where(fileName => fileName.StartsWith("configs/Sailors")).ToArray();
+            return manifest.Keys.Where(filePath => filePath.Contains("configs/Sailor")).ToArray();
         }
 
         public static string GetContent(string fileName)
         {
-            if (manifest.ContainsKey(fileName))
-            {
-                return manifest[fileName].Content;
-            }
-            return "";
+            string path = GetPath(fileName);
+            return File.ReadAllText(path);
         }
-
-        public static void Clean()
-        {
-            manifest.Clear();
-        }
-
-  
     }
 }
