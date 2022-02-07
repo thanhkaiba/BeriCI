@@ -35,9 +35,6 @@ public class CombatMgr : MonoBehaviour
     public byte yourTeamIndex = 0;
     private void Start()
     {
-#if PIRATERA_DEV
-        GlobalConfigs.InitDevConfig();
-#endif
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
         GameUtils.SetTimeScale(PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1));
