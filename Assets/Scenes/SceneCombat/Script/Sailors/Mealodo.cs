@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
+using Spine.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,18 @@ public class Mealodo : CombatSailor
     {
         base.Awake();
         modelObject = transform.Find("model").gameObject;
+    }
+    void Start()
+    {
+        // appear eff
+        Spine.Skeleton skeleton = transform.GetComponentInChildren<SkeletonMecanim>().skeleton;
+        skeleton.SetColor(new Color(0, 0, 0, 0));
+        Sequence seq = DOTween.Sequence();
+        Vector3 pos = transform.position;
+        pos.y += 6.1f;
+        pos.z -= 0.1f;
+        var eff = Instantiate(Resources.Load<GameObject>("Effect2D/lazer/Lazer_purple"), pos, Quaternion.identity);
+        eff.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
     }
     public override void GainFury(int value)
     {

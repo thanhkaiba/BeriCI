@@ -336,6 +336,14 @@ public class CombatState : MonoBehaviour
             return sailor.Model.id == id;
         });
     }
+    public CombatSailor GetSailor(Team t, CombatPosition p)
+    {
+        var l = GetAllTeamAliveSailors(t);
+        return l.Find(sailor =>
+        {
+            return (sailor.cs.position.x == p.x && sailor.cs.position.y == p.y);
+        });
+    }
     public CombatSailor GetSailor(string id)
     {
         var l = GetAllSailors();
