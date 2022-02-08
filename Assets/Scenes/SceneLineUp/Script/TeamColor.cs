@@ -7,17 +7,24 @@ public class TeamColor : MonoBehaviour
 
     public void ShowClassBonus(List<ClassBonusItem> passiveType)
     {
-
-
         ClearChildren();
-
+        int count1 = 0;
+        int count2 = 0;
         for (int i = 0; i < passiveType.Count; i++)
         {
+            var item = passiveType[i];
             GameObject icon = Resources.Load<GameObject>("Icons/SailorType/combine");
             IconClassBonus s = Instantiate(icon, transform).GetComponent<IconClassBonus>();
             Vector3 pos = s.transform.GetChild(0).transform.localPosition;
             s.transform.GetChild(0).transform.localPosition = new Vector3(teamA ? pos.x : -pos.x, pos.y, pos.z);
             s.SetData(passiveType[i]);
+            if (item.level >= 0) s.transform.localPosition = new Vector3(0, -120 * count1++, 0);
+            else
+            {
+                var offsetX = count2 >= 5 ? 84 : 0;
+                s.transform.localPosition = new Vector3(offsetX + (count1 == 0 ? 0 : 86), 5 - 102 * (count2%5), 0);
+                count2++;
+            }
         }
     }
 

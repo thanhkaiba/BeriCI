@@ -44,6 +44,12 @@ public class SynergiesConfig
         }
         return result;
     }
+    public int GetNextLevelPopNeed(SailorClass type, int level)
+    {
+        var config = GetPassiveConfig(type);
+        if (config.levels.Count <= level + 1) return GetMaxPopNeed(type);
+        else return config.levels[level + 1].pop;
+    }
     public List<int> GetListPop(SailorClass type)
     {
         List<int> result = new List<int>();

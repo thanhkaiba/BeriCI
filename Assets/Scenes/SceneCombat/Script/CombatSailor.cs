@@ -303,12 +303,20 @@ public class CombatSailor : Sailor
     {
         float damage = CalcDamageTake(d);
         var state = CombatState.Instance;
-        ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
         SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
         if (actor.cs.HaveType(SailorClass.MARKSMAN) && marksman != null)
         {
             float bonusDamagePerTile = config.GetParams(marksman.type, marksman.level)[0];
             damage += damage * bonusDamagePerTile * (actor.cs.position.x + cs.position.x + 1);
+        }
+        ClassBonusItem criminal = state.GetTeamClassBonus(actor.cs.team, SailorClass.CRIMINAL);
+        if (actor.cs.HaveType(SailorClass.CRIMINAL) && criminal != null)
+        {
+            float bonusUnit = config.GetParams(criminal.type, criminal.level)[0];
+            float percentLoseHealth = 1 - cs.CurHealth / cs.MaxHealth;
+            float bonusPercent = percentLoseHealth * bonusUnit;
+            damage *= 1 + bonusPercent;
         }
         return damage;
     }

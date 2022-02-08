@@ -23,9 +23,9 @@ public class Scott : CombatSailor
         targetPos.y += 2.8f;
 
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.6f);
+        seq.AppendInterval(0.55f);
         seq.AppendCallback(() => SoundMgr.PlaySoundSkillSailor(13));
-        return 0.7f;
+        return 0.65f;
     }
 
     public override void SetFaceDirection()
@@ -54,7 +54,7 @@ public class Scott : CombatSailor
         bool isCrit = IsCrit();
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Backstab(this, enermy);
+        CombatSailor target = TargetsUtils.LowestHealth(enermy);
         targets.Add(target.Model.id);
         _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage * (isCrit ? cs.CritDamage : 1) }, this));
         _params.Add(isCrit ? 1 : -1);
