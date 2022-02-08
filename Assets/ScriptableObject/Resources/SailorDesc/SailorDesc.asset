@@ -107,5 +107,5 @@ MonoBehaviour:
   - root_name: Scott
     present_name: Scott & Papagal
     title: The Elder Pirate
-    skill_description: Papagal attack furthes enemy, deal <b><color=#f06060>$p_0@</color></b>.
-      It can be critical.
+    skill_description: Papagal attack furthes enemy, deal <b><color=#f06060>$p_0@</color></b>,
+      it can be critical, also Scott have 25% crit chance. Game Start, summon 1 <color=#666><b>Mealodo</b>.</color>

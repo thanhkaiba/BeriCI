@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TeamColor : MonoBehaviour
 {
@@ -22,7 +23,8 @@ public class TeamColor : MonoBehaviour
             else
             {
                 var offsetX = count2 >= 5 ? 84 : 0;
-                s.transform.localPosition = new Vector3(offsetX + (count1 == 0 ? 0 : 86), 5 - 102 * (count2%5), 0);
+                s.transform.localPosition = new Vector3(offsetX + (count1 == 0 ? 0 : 86), 10 - 92 * (count2%5), 0);
+                s.transform.localScale = Vector3.one / 1.1f;
                 count2++;
             }
         }

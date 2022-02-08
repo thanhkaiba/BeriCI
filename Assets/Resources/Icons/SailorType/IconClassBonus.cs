@@ -32,7 +32,9 @@ public class IconClassBonus : MonoBehaviour
         if (level == -1)
         {
             GetComponent<Image>().sprite = bg_none;
-            icon.color = new Color(180 / 255f, 180 / 255f, 180 / 255f);
+            icon.color = new Color(160 / 255f, 160 / 255f, 160 / 255f);
+            foreach (Outline o in GetComponentsInChildren<Outline>()) o.enabled = false;
+            text.color = new Color(120 / 255f, 120 / 255f, 120 / 255f);
         }
         else if (levelNumber - level == 1) GetComponent<Image>().sprite = bg_2;
         else if (levelNumber - level == 2) GetComponent<Image>().sprite = bg_1;
