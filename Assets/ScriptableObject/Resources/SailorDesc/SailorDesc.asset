@@ -32,16 +32,12 @@ MonoBehaviour:
     present_name: Beel
     title: Captain of Darkness pirate crew
     skill_description: Summon Infestissue Ghost from Darkness from her Crystal ball,
-      deal <b><color=#198709>$p_0@</color></b> to all enermy.
+      deal <b><color=#5b59f0>$p_0@</color></b> to all enermy.
   - root_name: Tons
     present_name: Tons
     title: Zetpees criminal-org
     skill_description: Walk through the darkness, deal <b><color=#f06060>$p_0@</color></b>
       damage to his target.
-  - root_name: Herminia
-    present_name: Herminia
-    title: The cute elf
-    skill_description: Shoot incantation arrow, deal true damage.
   - root_name: Herminia
     present_name: Herminia
     title: The cute elf
@@ -104,3 +100,12 @@ MonoBehaviour:
     present_name: LiuHi
     title: Yellow Flower
     skill_description: Heal around plus-sign alies <b><color=#228514>$p_0@</color></b>.
+  - root_name: Scott
+    present_name: Scott
+    title: The Elder Pirate
+    skill_description: Papagal attack lowest health enemy, deal <b><color=#f06060>$p_0@</color></b>,
+      it can be critical, also Scott have 25% crit chance. Game Start, summon 1 <color=#666><b>Mealodo</b>.</color>
+  - root_name: FatBrakes
+    present_name: FatBrakes
+    title: Member of Scott Pirates
+    skill_description: Perform Death Dance, all your crew go <color=#b5b800><b>EXCITED</b></color>.

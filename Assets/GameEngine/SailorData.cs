@@ -1,5 +1,6 @@
 using Piratera.Config;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum AttackType
 {
@@ -39,6 +40,7 @@ public enum SailorClass
     PIONEER,
     BRAVE,
     ELF,
+    SAMURAI,
 };
 
 public enum SailorRank
@@ -199,7 +201,8 @@ public class CombatStats
         SynergiesConfig config = GlobalConfigs.Synergies;
         if (ownTeam != null) ownTeam.ForEach(p =>
         {
-            switch (p.type)
+            if (p.level < 0) return;
+            switch (p.type) 
             {
                 case SailorClass.MIGHTY:
                     if (HaveType(SailorClass.MIGHTY))
@@ -245,6 +248,7 @@ public class CombatStats
 
         if (oppTeam != null) oppTeam.ForEach(p =>
         {
+            if (p.level < 0) return;
             switch (p.type)
             {
                 case SailorClass.DEMON:

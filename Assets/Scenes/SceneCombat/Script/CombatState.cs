@@ -69,17 +69,22 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("FatBrakes", new CombatPosition(0, 0), Team.A);
-        CreateCombatSailor("FatBrakes", new CombatPosition(0, 1), Team.A);
-        CreateCombatSailor("FatBrakes", new CombatPosition(1, 1), Team.A);
-        //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.A);
+        CreateCombatSailor("Scott", new CombatPosition(2, 2), Team.A);
+        CreateCombatSailor("Meechik", new CombatPosition(2, 1), Team.A);
+        CreateCombatSailor("Herminia", new CombatPosition(2, 0), Team.A);
+        CreateCombatSailor("Scrub", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("Alex", new CombatPosition(0, 2), Team.A);
+
         //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("FatBrakes", new CombatPosition(0, 0), Team.B);
-        CreateCombatSailor("FatBrakes", new CombatPosition(0, 1), Team.B);
-        CreateCombatSailor("FatBrakes", new CombatPosition(1, 1), Team.B);
+        CreateCombatSailor("Helti", new CombatPosition(0, 0), Team.B);
+        CreateCombatSailor("OBonbee", new CombatPosition(2, 0), Team.B);
+        CreateCombatSailor("Jenkins", new CombatPosition(2, 2), Team.B);
+        CreateCombatSailor("QChi", new CombatPosition(1, 2), Team.B);
+        CreateCombatSailor("Salvatafo", new CombatPosition(0, 2), Team.B);
+
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.B);
         //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.B);
     }
@@ -329,6 +334,14 @@ public class CombatState : MonoBehaviour
         return l.Find(sailor =>
         {
             return sailor.Model.id == id;
+        });
+    }
+    public CombatSailor GetSailor(Team t, CombatPosition p)
+    {
+        var l = GetAllTeamAliveSailors(t);
+        return l.Find(sailor =>
+        {
+            return (sailor.cs.position.x == p.x && sailor.cs.position.y == p.y);
         });
     }
     public CombatSailor GetSailor(string id)

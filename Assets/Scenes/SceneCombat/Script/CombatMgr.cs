@@ -88,10 +88,16 @@ public class CombatMgr : MonoBehaviour
     }
     private void ActivateAllStartPassive()
     {
-        combatState.GetAllAliveCombatSailors().ForEach(sailor =>
+        for (int x = 0; x < 3; x++)
         {
-            sailor.ActiveStartPassive();
-        });
+            for (int y = 0; y < 3; y++)
+            {
+                var sailorA = combatState.GetSailor(Team.A, new CombatPosition(x, y));
+                if (sailorA != null) sailorA.ActiveStartPassive();
+                var sailorB = combatState.GetSailor(Team.B, new CombatPosition(x, y));
+                if (sailorB != null) sailorB.ActiveStartPassive();
+            }
+        }
     }
     // serverGame
     void CombatLoopServer()

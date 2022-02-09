@@ -42,7 +42,6 @@ public class TooltipClassBonus : MonoBehaviour
         gameObject.SetActive(true);
         gameObject.transform.position = _pos.position;
         gameObject.transform.localScale = SceneManager.GetActiveScene().name == "SceneCombat2D" ? new Vector3(.6f, .6f, .6f) : Vector3.one;
-        int maxPop = config.GetMaxPopNeed(data.type);
         List<float> para = config.GetParams(data.type, data.level);
         // iconType.SetData(data);
         List<int> listPop = config.GetListPop(data.type);

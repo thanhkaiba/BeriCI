@@ -155,10 +155,8 @@ public class GameEndData
         mode_reward = detail.GetInt("mode_reward");
         win_rank_bonus = detail.GetInt("win_rank_bonus");
         hard_bonus = detail.GetInt("hard_bonus");
-        //team_bonus = detail.GetInt("team_bonus");
-        team_bonus = 0;
+        team_bonus = detail.GetInt("team_bonus");
         team_win = detail.GetByte("team_win");
-
     }
 }
 

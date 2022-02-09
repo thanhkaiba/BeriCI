@@ -96,8 +96,17 @@ public class CombatSailor : Sailor
             }
             else
             {
-                Debug.Log(Model.config_stats.root_name + " have same with server " + status.name);
                 clientStatus.stack = status.stack;
+            }
+        });
+
+        cs.listStatus.ForEach(status =>
+        {
+            var serverStatus = statuses.Find(x => x.name == status.name);
+            if (serverStatus == null)
+            {
+                Debug.LogWarning("Client status wrong: " + status.name);
+                RemoveStatus(status.name);
             }
         });
     }
@@ -161,7 +170,7 @@ public class CombatSailor : Sailor
         }
         // Deal damage
         float d = cs.Power;
-        if (isCrit) d *= GlobalConfigs.Combat.base_crit_damage;
+        if (isCrit) d *= cs.CritDamage;
         Damage damage = new Damage()
         {
             physics = cs.HaveType(SailorClass.MAGE) ? 0 : d,
@@ -237,7 +246,7 @@ public class CombatSailor : Sailor
         DisplayStatus(cs.listStatus);
         return RunImmobile() + 0.2f;
     }
-    bool IsCrit()
+    protected bool IsCrit()
     {
         float r = Random.Range(0f, 1f);
         return r < cs.Crit;
@@ -303,12 +312,20 @@ public class CombatSailor : Sailor
     {
         float damage = CalcDamageTake(d);
         var state = CombatState.Instance;
-        ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
         SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
         if (actor.cs.HaveType(SailorClass.MARKSMAN) && marksman != null)
         {
             float bonusDamagePerTile = config.GetParams(marksman.type, marksman.level)[0];
             damage += damage * bonusDamagePerTile * (actor.cs.position.x + cs.position.x + 1);
+        }
+        ClassBonusItem criminal = state.GetTeamClassBonus(actor.cs.team, SailorClass.CRIMINAL);
+        if (actor.cs.HaveType(SailorClass.CRIMINAL) && criminal != null)
+        {
+            float bonusUnit = config.GetParams(criminal.type, criminal.level)[0];
+            float percentLoseHealth = 1 - cs.CurHealth / cs.MaxHealth;
+            float bonusPercent = percentLoseHealth * bonusUnit;
+            damage *= 1 + bonusPercent;
         }
         return damage;
     }
@@ -343,6 +360,10 @@ public class CombatSailor : Sailor
         }
         else cs.listStatus.Add(status);
         DisplayStatus(cs.listStatus);
+    }
+    public void RemoveStatus(SailorStatusType name)
+    {
+        cs.listStatus = cs.listStatus.Where(status => status.name != name).ToList();
     }
     public void InitDisplayStatus()
     {
@@ -444,17 +465,9 @@ public class CombatSailor : Sailor
     }
     public void DisplayStatus(List<SailorStatus> listStatus)
     {
-        ShowInIce(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
-    }
-    public void ShowInIce(bool b)
-    {
-        if (b)
-            if (iceBlock == null)
-            {
-                iceBlock = Instantiate(Resources.Load<GameObject>("GameComponents/IceBlock"), transform);
-            }
-            else iceBlock.SetActive(b);
-        else if (iceBlock != null) iceBlock.SetActive(b);
+
+        ShowInStun(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
+        ShowInExcited(listStatus.Find(x => x.name == SailorStatusType.EXCITED) != null);
     }
     public virtual void SetFaceDirection()
     {
@@ -497,5 +510,35 @@ public class CombatSailor : Sailor
         Color curColor = skeleton.GetColor();
         if (curColor == modelColor) return;
         skeleton.SetColor(Color.Lerp(curColor, modelColor, Mathf.PingPong(Time.time, 0.1f)));
+    }
+    private GameObject stunEff;
+    public void ShowInStun(bool isShow)
+    {
+        if (isShow)
+        {
+            if (stunEff == null)
+            {
+                var prefab = Resources.Load<GameObject>("Effect2D/Duong_FX/status/fx_stun");
+                stunEff = Instantiate(prefab, transform.Find("nodeBar"));
+                stunEff.transform.localScale = Vector3.one * 1.3f;
+            }
+            stunEff.SetActive(true);
+        }
+        else if (stunEff != null) stunEff.SetActive(false);
+    }
+    private GameObject excitedEff;
+    public void ShowInExcited(bool isShow)
+    {
+        if (isShow)
+        {
+            if (excitedEff == null)
+            {
+                var prefab = Resources.Load<GameObject>("Effect2D/Duong_FX/status/fx_buffdamage_yelow");
+                excitedEff = Instantiate(prefab, transform);
+                excitedEff.transform.localScale = Vector3.one * 1.3f;
+            }
+            excitedEff.SetActive(true);
+        }
+        else if (excitedEff != null) excitedEff.SetActive(false);
     }
 };

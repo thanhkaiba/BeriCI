@@ -165,11 +165,11 @@ public class TooltipSailorInfo : MonoBehaviour
         var attackType = model.config_stats.attack_type;
         iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + attackType);
         textLevel.text = model.level.ToString();
-        textName.text = model.name.ToString();
         foreach (var item in sailorDesc.list)
         {
             if (model.name == item.root_name)
             {
+                textName.text = item.present_name;
                 textDes.text = GameUtils.GetTextDescription(item.skill_description, model, stats);
             }
         }

@@ -112,7 +112,7 @@ public class GameUtils : UnityEngine.Object
 
         return item;
     }
-    public static List<ClassBonusItem> CalculateClassBonus(List<SailorModel> t)
+    public static List<ClassBonusItem> CalculateClassBonus(List<SailorModel> t, bool countDeficient = false)
     {
         List<ClassBonusItem> result = new List<ClassBonusItem>();
         List<int> typeCount = new List<int>();
@@ -159,8 +159,11 @@ public class GameUtils : UnityEngine.Object
                     result.Add(new ClassBonusItem() { type = type, level = level, current = typeCount[(int)type] });
                     break;
                 }
+                if (typeCount[(int)type] > 0 && level == 0 && countDeficient)
+                    result.Add(new ClassBonusItem() { type = type, level = -1, current = typeCount[(int)type] });
             }
         }
+        result.Sort((a, b) => b.level - a.level);
         return result;
     }
     private static System.Random rd = new System.Random();
