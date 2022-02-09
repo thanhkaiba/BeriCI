@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class StaminaData : Singleton<StaminaData>
 {
-    public int Stamina;
+    public int Stamina = -1;
     private long LastCountStamina;
     
     public string GetCurrentStaminaFormat()
@@ -38,7 +38,7 @@ public class StaminaData : Singleton<StaminaData>
 
     public long TimeToHaveNewStamina()
     {
-        if (Stamina > GlobalConfigs.StaminaConfig.max_stamina)
+        if (Stamina > GlobalConfigs.StaminaConfig.max_stamina || Stamina < 0)
         {
             return -1;
         }
@@ -68,4 +68,5 @@ public class StaminaData : Singleton<StaminaData>
     {
         return GlobalConfigs.StaminaConfig.pve_cost;
     }
+
 }

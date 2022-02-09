@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Piratera.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,14 +9,20 @@ using UnityEngine;
 
 namespace Piratera.Notification
 {
+    public class GameNotificationRequest
+    {
+        public string Title;
+        public string Content;
+        public DateTime FireTime;
+    }
     public class GameNotificationManager : MonoBehaviour
     {
         private static string CHANNEL_ID = "piratera_channel_0";
+        private static readonly List<GameNotificationRequest> requests = new();
 
         void Awake()
         {
 #if UNITY_ANDROID
-            Debug.Log("Da dang ky");
             AndroidNotificationChannel channel = new()
             {
                 Id = CHANNEL_ID,
@@ -25,19 +32,17 @@ namespace Piratera.Notification
             };
             AndroidNotificationCenter.RegisterNotificationChannel(channel);
             DontDestroyOnLoad(gameObject);
-            SendGameNotification();
 #endif
         }
         
-        public static void SendGameNotification()
+        private static void SendGameNotification(GameNotificationRequest request)
         {
 #if UNITY_ANDROID
-            Debug.Log("da Send noti");
             var notification = new AndroidNotification
             {
-                Title = "Your Stamina was restored",
-                Text = "3/15",
-                FireTime = DateTime.Now.AddMinutes(1)
+                Title = request.Title,
+                Text = request.Content,
+                FireTime = request.FireTime,
             };
 
             AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
@@ -48,13 +53,51 @@ namespace Piratera.Notification
 
         private void OnApplicationFocus(bool focus)
         {
-            if (!focus)
-            {
-                SendGameNotification();
-            } else
+            if (focus)
             {
                 AndroidNotificationCenter.CancelAllScheduledNotifications();
+            } else
+            {
+                RegisterStaminaNotification();
+                foreach (var request in requests)
+                {
+                    SendGameNotification(request);
+                }
             }
+        }
+
+        private void RegisterStaminaNotification()
+        {
+          
+            if (GlobalConfigs.StaminaConfig != null)
+            {
+                long remainTime = StaminaData.Instance.TimeToHaveNewStamina();
+                int curStamina = StaminaData.Instance.Stamina;
+                int maxStamina = GlobalConfigs.StaminaConfig.max_stamina;
+                int countdownTime = GlobalConfigs.StaminaConfig.recovering_time;
+                if (remainTime > 0 || curStamina < maxStamina)
+                {
+                    if (remainTime < 0)
+                    {
+                        remainTime = 0;
+                    }
+                    for (int i = curStamina + 1; i <= maxStamina; i++)
+                    {
+                        if (i % 3 == 0)
+                        {
+                            Debug.Log("Da dang ky stamina notification: " + $"{i}/{maxStamina}" + " after " + ((i - curStamina - 1) * countdownTime + remainTime));
+                            SendGameNotification(new GameNotificationRequest
+                            {
+                                Title = "🔋 Your Stamina was restored! ⚡⚡⚡",
+                                Content = $"{i}/{maxStamina} ⚡",
+                                FireTime = DateTime.Now.AddSeconds((i - curStamina - 1) * countdownTime + remainTime)
+                            });
+                        }
+
+                    }
+                }
+            }
+         
         }
     }
 }

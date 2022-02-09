@@ -16,7 +16,7 @@ public class SceneLoadingUI : MonoBehaviour
 
     private void Awake()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || !PIRATERA_LIVE
         Debug.unityLogger.logEnabled = true;
 #else
         Debug.unityLogger.logEnabled = false;
