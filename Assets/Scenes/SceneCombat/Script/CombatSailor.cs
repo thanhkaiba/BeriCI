@@ -96,8 +96,17 @@ public class CombatSailor : Sailor
             }
             else
             {
-                Debug.Log(Model.config_stats.root_name + " have same with server " + status.name);
                 clientStatus.stack = status.stack;
+            }
+        });
+
+        cs.listStatus.ForEach(status =>
+        {
+            var serverStatus = statuses.Find(x => x.name == status.name);
+            if (serverStatus == null)
+            {
+                Debug.LogWarning("Client status wrong: " + status.name);
+                RemoveStatus(status.name);
             }
         });
     }
@@ -352,6 +361,10 @@ public class CombatSailor : Sailor
         else cs.listStatus.Add(status);
         DisplayStatus(cs.listStatus);
     }
+    public void RemoveStatus(SailorStatusType name)
+    {
+        cs.listStatus = cs.listStatus.Where(status => status.name != name).ToList();
+    }
     public void InitDisplayStatus()
     {
         Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
@@ -452,17 +465,9 @@ public class CombatSailor : Sailor
     }
     public void DisplayStatus(List<SailorStatus> listStatus)
     {
-        ShowInIce(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
-    }
-    public void ShowInIce(bool b)
-    {
-        if (b)
-            if (iceBlock == null)
-            {
-                iceBlock = Instantiate(Resources.Load<GameObject>("GameComponents/IceBlock"), transform);
-            }
-            else iceBlock.SetActive(b);
-        else if (iceBlock != null) iceBlock.SetActive(b);
+
+        ShowInStun(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
+        ShowInExcited(listStatus.Find(x => x.name == SailorStatusType.EXCITED) != null);
     }
     public virtual void SetFaceDirection()
     {
@@ -505,5 +510,35 @@ public class CombatSailor : Sailor
         Color curColor = skeleton.GetColor();
         if (curColor == modelColor) return;
         skeleton.SetColor(Color.Lerp(curColor, modelColor, Mathf.PingPong(Time.time, 0.1f)));
+    }
+    private GameObject stunEff;
+    public void ShowInStun(bool isShow)
+    {
+        if (isShow)
+        {
+            if (stunEff == null)
+            {
+                var prefab = Resources.Load<GameObject>("Effect2D/Duong_FX/status/fx_stun");
+                stunEff = Instantiate(prefab, transform.Find("nodeBar"));
+                stunEff.transform.localScale = Vector3.one * 1.3f;
+            }
+            stunEff.SetActive(true);
+        }
+        else if (stunEff != null) stunEff.SetActive(false);
+    }
+    private GameObject excitedEff;
+    public void ShowInExcited(bool isShow)
+    {
+        if (isShow)
+        {
+            if (excitedEff == null)
+            {
+                var prefab = Resources.Load<GameObject>("Effect2D/Duong_FX/status/fx_buffdamage_yelow");
+                excitedEff = Instantiate(prefab, transform);
+                excitedEff.transform.localScale = Vector3.one * 1.3f;
+            }
+            excitedEff.SetActive(true);
+        }
+        else if (excitedEff != null) excitedEff.SetActive(false);
     }
 };

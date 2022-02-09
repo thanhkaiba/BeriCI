@@ -101,7 +101,11 @@ MonoBehaviour:
     title: Yellow Flower
     skill_description: Heal around plus-sign alies <b><color=#228514>$p_0@</color></b>.
   - root_name: Scott
-    present_name: Scott & Papagal
+    present_name: Scott
     title: The Elder Pirate
     skill_description: Papagal attack lowest health enemy, deal <b><color=#f06060>$p_0@</color></b>,
       it can be critical, also Scott have 25% crit chance. Game Start, summon 1 <color=#666><b>Mealodo</b>.</color>
+  - root_name: FatBrakes
+    present_name: FatBrakes
+    title: Member of Scott Pirates
+    skill_description: Perform Death Dance, all your crew go <color=#b5b800><b>EXCITED</b></color>.
