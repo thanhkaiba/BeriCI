@@ -66,10 +66,9 @@ public class Galdalf : CombatSailor
         TriggerAnimation("Attack");
         SoundMgr.PlaySoundSkillSailor(1);
         float fury_buff = Model.config_stats.skill_params[0];
-        float power_buff = cs.Power * Model.config_stats.skill_params[1];
-        float speed_buff = Model.config_stats.skill_params[2];
+        float speed_buff = Model.config_stats.skill_params[1];
         _targets.GainFury((int)fury_buff);
-        _targets.GainPower(power_buff);
+        _targets.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
         _targets.SpeedUp(speed_buff);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.4f);
