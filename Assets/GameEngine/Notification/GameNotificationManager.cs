@@ -11,6 +11,7 @@ namespace Piratera.Notification
 {
     public class GameNotificationRequest
     {
+        public int Id;
         public string Title;
         public string Content;
         public DateTime FireTime;
@@ -26,7 +27,7 @@ namespace Piratera.Notification
             AndroidNotificationChannel channel = new()
             {
                 Id = CHANNEL_ID,
-                Name = "Default Channel",
+                Name = "Dead men tell no tales",
                 Importance = Importance.Default,
                 Description = "Generic notifications",
             };
@@ -45,7 +46,19 @@ namespace Piratera.Notification
                 FireTime = request.FireTime,
             };
 
-            AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
+
+            var notificationStatus = AndroidNotificationCenter.CheckScheduledNotificationStatus(request.Id);
+
+            if (notificationStatus == NotificationStatus.Scheduled)
+            {
+                // Replace the scheduled notification with a new notification.
+                AndroidNotificationCenter.UpdateScheduledNotification(request.Id, notification, CHANNEL_ID);
+            }
+            else 
+            {
+                AndroidNotificationCenter.SendNotification(notification, CHANNEL_ID);
+            }
+          
 #endif
 
 
@@ -71,7 +84,7 @@ namespace Piratera.Notification
           
             if (GlobalConfigs.StaminaConfig != null)
             {
-                long remainTime = StaminaData.Instance.TimeToHaveNewStamina();
+                long remainTime = StaminaData.Instance.TimeToHaveNewStamina() / 1000;
                 int curStamina = StaminaData.Instance.Stamina;
                 int maxStamina = GlobalConfigs.StaminaConfig.max_stamina;
                 int countdownTime = GlobalConfigs.StaminaConfig.recovering_time;
@@ -85,16 +98,19 @@ namespace Piratera.Notification
                     {
                         if (i % 3 == 0)
                         {
-                            Debug.Log("Da dang ky stamina notification: " + $"{i}/{maxStamina}" + " after " + ((i - curStamina - 1) * countdownTime + remainTime));
+                            long afterTime = ((i - curStamina - 1) * countdownTime + remainTime);
+                            Debug.Log("Da dang ky stamina notification: " + $"{i}/{maxStamina}" + " after " + afterTime);
                             SendGameNotification(new GameNotificationRequest
                             {
-                                Title = "🔋 Your Stamina was restored! ⚡⚡⚡",
+                                Title = "🔋Yo-ho-ho! Your Stamina was restored!⚡⚡⚡",
                                 Content = $"{i}/{maxStamina} ⚡",
-                                FireTime = DateTime.Now.AddSeconds((i - curStamina - 1) * countdownTime + remainTime)
+                                FireTime = DateTime.Now.AddSeconds(afterTime),
+                                Id = 30 + i,
                             });
                         }
 
                     }
+
                 }
             }
          
