@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using EasyUI.PickerWheelUI;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -62,6 +63,18 @@ public class LobbyUI : MonoBehaviour
     public RoyalCollectingController royal;
     [SerializeField]
     private Button buttonCheat;
+
+    [SerializeField]
+    private Button luckyButton;
+    [SerializeField]
+    private GameObject luckyGame;
+    [SerializeField]
+    private PickerWheel wheel;
+    [SerializeField]
+    private Button spinButton;
+    private bool isShowLuckyUI = false;
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -86,6 +99,9 @@ public class LobbyUI : MonoBehaviour
         RunAppearAction();
         ShowListSailors();
         Time.timeScale = 1;
+
+        setSpin();
+        //showLuckyUI();
     }
 
     void UpdateMaintain()
@@ -247,6 +263,44 @@ public class LobbyUI : MonoBehaviour
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
     }
+    private void setSpin()
+    {
+        bool b = false;
+        spinButton.onClick.AddListener(() =>
+        {
+            wheel.Spin();
+            wheel.OnSpinEnd(wheelPiece => {
+                Debug.Log("Prize: " + wheelPiece.Amount);
+            });
+        });
+        luckyButton.onClick.AddListener(() =>
+        {
+            showLuckyUI();
+        });
+    }
+    public void showLuckyUI()
+    {
+        if (isShowLuckyUI)
+        {
+            isShowLuckyUI = false;
+            Sequence s = DOTween.Sequence();
+            s.AppendInterval(0f);
+            s.Append(luckyGame.transform.DOScale(new Vector2(-1, -1), .1f).SetRelative().SetEase(Ease.InOutQuart));
+            //s.AppendInterval(0.05f);
+            s.Append(luckyGame.transform.DOMove(new Vector2(-600, 0f), 0f, false).SetRelative().SetEase(Ease.OutCirc));
+        }
+        else
+        {
+            isShowLuckyUI = true;
+            Sequence s = DOTween.Sequence();
+            s.AppendInterval(0f);
+            //s.Append(luckyGame.transform.DOMove(new Vector2(1000f, 0f), 0.1f, true).SetRelative().SetEase(Ease.InCirc));
+            s.Append(luckyGame.transform.DOMove(new Vector2(600, 0f), 0f, false).SetRelative().SetEase(Ease.InCirc))
+            .Join(luckyGame.transform.DOScale(new Vector2(1, 1), .2f).SetRelative().SetEase(Ease.InCirc));
+        }
+    }
+
+
     public void ShowGuiCheat()
     {
 #if PIRATERA_DEV || PIRATERA_QC
