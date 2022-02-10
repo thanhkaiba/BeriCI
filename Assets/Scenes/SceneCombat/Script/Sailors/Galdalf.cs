@@ -68,18 +68,12 @@ public class Galdalf : CombatSailor
         float fury_buff = Model.config_stats.skill_params[0];
         float speed_buff = Model.config_stats.skill_params[1];
         _targets.GainFury((int)fury_buff);
-        _targets.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
         _targets.SpeedUp(speed_buff);
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.4f);
         seq.AppendCallback(() =>
         {
-            Vector3 pos = _targets.transform.position;
-            pos.y += 4f;
-
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_7_purple"), pos, Quaternion.identity);
-            seq.AppendInterval(0.3f);
-            seq.AppendCallback(() => Destroy(eff));
+            _targets.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
         });
         base.ActiveStartPassive();
     }

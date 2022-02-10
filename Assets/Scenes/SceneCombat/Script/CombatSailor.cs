@@ -84,7 +84,7 @@ public class CombatSailor : Sailor
             Debug.Log("Check Status: " + status.name);
             if (clientStatus == null)
             {
-                Debug.LogWarning(Model.config_stats.root_name + " missing Status " + status.name);
+                Debug.LogError(Model.config_stats.root_name + " missing Status " + status.name);
                 AddStatus(status);
                 switch (status.name)
                 {
@@ -96,6 +96,13 @@ public class CombatSailor : Sailor
             }
             else
             {
+                if (clientStatus.name != SailorStatusType.DEATH && clientStatus.stack != status.stack)
+                {
+                    Debug.LogError("Client status stack wrong: "
+                        + " " + Model.config_stats.root_name
+                        + " " + clientStatus.name.ToString()
+                        + "\n client | server: " + clientStatus.stack + " | " + status.stack); ;
+                }
                 clientStatus.stack = status.stack;
             }
         });
@@ -105,10 +112,11 @@ public class CombatSailor : Sailor
             var serverStatus = statuses.Find(x => x.name == status.name);
             if (serverStatus == null)
             {
-                Debug.LogWarning("Client status wrong: " + status.name);
+                Debug.LogError("Client status wrong: " + status.name);
                 RemoveStatus(status.name);
             }
         });
+        DisplayStatus();
     }
     public int GetStatusRemainTurn(SailorStatusType name)
     {
@@ -243,7 +251,7 @@ public class CombatSailor : Sailor
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
 
-        DisplayStatus(cs.listStatus);
+        DisplayStatus();
         return RunImmobile() + 0.2f;
     }
     protected bool IsCrit()
@@ -359,7 +367,7 @@ public class CombatSailor : Sailor
             if (statusStacks.Contains(status.name)) existStatus.stack += status.stack;
         }
         else cs.listStatus.Add(status);
-        DisplayStatus(cs.listStatus);
+        DisplayStatus();
     }
     public void RemoveStatus(SailorStatusType name)
     {
@@ -463,11 +471,11 @@ public class CombatSailor : Sailor
         seq.AppendCallback(() => { gameObject.SetActive(false); });
         return 0f;
     }
-    public void DisplayStatus(List<SailorStatus> listStatus)
+    public void DisplayStatus()
     {
-
+        var listStatus = cs.listStatus;
         ShowInStun(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
-        ShowInExcited(listStatus.Find(x => x.name == SailorStatusType.EXCITED) != null);
+        ShowInExcited(listStatus.Find(x => x.name == SailorStatusType.EXCITED));
     }
     public virtual void SetFaceDirection()
     {
@@ -527,17 +535,31 @@ public class CombatSailor : Sailor
         else if (stunEff != null) stunEff.SetActive(false);
     }
     private GameObject excitedEff;
-    public void ShowInExcited(bool isShow)
+    public void ShowInExcited(SailorStatus excited)
     {
-        if (isShow)
+        if (excited != null)
         {
             if (excitedEff == null)
             {
                 var prefab = Resources.Load<GameObject>("Effect2D/Duong_FX/status/fx_buffdamage_yelow");
                 excitedEff = Instantiate(prefab, transform);
-                excitedEff.transform.localScale = Vector3.one * 1.3f;
             }
             excitedEff.SetActive(true);
+            switch (excited.stack)
+            {
+                case 1:
+                    excitedEff.transform.localScale = Vector3.one * 0.7f;
+                    break;
+                case 2:
+                    excitedEff.transform.localScale = Vector3.one * 1.0f;
+                    break;
+                case 3:
+                    excitedEff.transform.localScale = Vector3.one * 1.3f;
+                    break;
+                default:
+                    excitedEff.transform.localScale = Vector3.one * 1.6f;
+                    break;
+            }
         }
         else if (excitedEff != null) excitedEff.SetActive(false);
     }
