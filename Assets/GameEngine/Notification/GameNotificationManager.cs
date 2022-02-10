@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+#if UNITY_ANDROID
 using Unity.Notifications.Android;
+#endif
 using UnityEngine;
 
 namespace Piratera.Notification
@@ -68,7 +70,9 @@ namespace Piratera.Notification
         {
             if (focus)
             {
+#if UNITY_ANDROID
                 AndroidNotificationCenter.CancelAllScheduledNotifications();
+#endif
             } else
             {
                 RegisterStaminaNotification();

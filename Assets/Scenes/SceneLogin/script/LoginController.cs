@@ -198,23 +198,21 @@ public class LoginController : MonoBehaviour
 
     private void SendRequestLogin(string username, string password, GameLoginType loginType)
     {
-        StartCoroutine(CheckInternetConnection(isConnected =>
+        if (true)
         {
-            if (isConnected)
-            {
-                enableLoginUI(false);
-                NetworkController.LoginToServer(new LoginData(username, password, loginType));
-                NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
-                NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
-                NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
-                NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
-            }
-            else
-            {
-                GuiManager.Instance.ShowGuiWaiting(false);
-                errorText.text = "Error. Check Internet connection!";
-            }
-        }));
+            GuiManager.Instance.ShowGuiWaiting(true);
+            enableLoginUI(false);
+            NetworkController.LoginToServer(new LoginData(username, password, loginType));
+            NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
+            NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
+            NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+            NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
+        }
+        else
+        {
+            GuiManager.Instance.ShowGuiWaiting(false);
+            errorText.text = "Error. Check Internet connection!";
+        }
     }
 
     private void OnCryptoInit(BaseEvent evt)

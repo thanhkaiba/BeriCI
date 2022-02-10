@@ -58,7 +58,7 @@ namespace Piratera.Network
 #else
         
 #endif
-        private static readonly int WSPort = 8080;
+        private static readonly int WSPort = 9933;
         private static readonly string Zone = "Piratera";
         private static readonly string CLIENT_REQUEST = "clrq";
         private static readonly string ACTION_INCORE = "acc";
@@ -167,7 +167,7 @@ namespace Piratera.Network
 #if !UNITY_WEBGL
             sfs = new SmartFox();
 #else
-			sfs = new SmartFox(UseWebSocket.WS_BIN);
+			sfs = new SmartFox(UseWebSocket.WSS);
 #endif
             // Register event listeners
             AddEventListener(SFSEvent.CONNECTION, OnConnection);
@@ -247,7 +247,7 @@ namespace Piratera.Network
             {
                 Debug.Log("SFS2X API version: " + sfs.Version);
                 Debug.Log("Connection mode is: " + sfs.ConnectionMode);
-#if PIRATERA_QC || PIRATERA_DEV
+#if PIRATERA_QC || PIRATERA_DEV || UNITY_WEBGL
                 DoLogin();
 #else
                 new CustomCryptoInitializerV2(sfs).Run();
