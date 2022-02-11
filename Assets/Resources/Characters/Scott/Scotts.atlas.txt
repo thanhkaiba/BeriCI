@@ -1,222 +1,215 @@
 
 Scotts.png
-size: 1701,464
+size: 739,1044
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 Belt
   rotate: false
-  xy: 632, 55
+  xy: 186, 169
   size: 112, 169
   orig: 112, 169
   offset: 0, 0
   index: -1
 Body
   rotate: false
-  xy: 549, 226
+  xy: 488, 214
   size: 138, 238
   orig: 138, 238
   offset: 0, 0
   index: -1
 COAT
   rotate: false
-  xy: 0, 108
+  xy: 0, 688
   size: 285, 356
   orig: 285, 356
   offset: 0, 0
   index: -1
 GUN_01
   rotate: false
-  xy: 932, 4
+  xy: 628, 243
   size: 100, 122
   orig: 102, 124
   offset: 1, 1
   index: -1
 HEAD
   rotate: false
-  xy: 689, 233
+  xy: 549, 665
   size: 184, 231
   orig: 184, 231
   offset: 0, 0
   index: -1
 HEAD_angry
   rotate: false
-  xy: 746, 0
+  xy: 0, 133
   size: 184, 231
   orig: 184, 231
   offset: 0, 0
   index: -1
 LEGS
   rotate: false
-  xy: 1380, 147
+  xy: 206, 340
   size: 73, 153
   orig: 73, 153
   offset: 0, 0
   index: -1
 Layer 10
   rotate: false
-  xy: 0, 2
+  xy: 386, 348
   size: 100, 104
   orig: 100, 104
   offset: 0, 0
   index: -1
 Layer 11
   rotate: false
-  xy: 962, 298
+  xy: 260, 1
   size: 102, 166
   orig: 102, 166
   offset: 0, 0
   index: -1
 Layer 13
   rotate: false
-  xy: 269, 56
+  xy: 224, 495
   size: 53, 50
   orig: 55, 52
   offset: 1, 1
   index: -1
 Layer 14
   rotate: false
-  xy: 530, 49
+  xy: 364, 15
   size: 100, 153
   orig: 100, 153
   offset: 0, 0
   index: -1
 Layer 15
   rotate: false
-  xy: 1548, 188
+  xy: 628, 367
   size: 100, 128
   orig: 100, 128
   offset: 0, 0
   index: -1
 Layer 16
   rotate: false
-  xy: 1426, 6
+  xy: 224, 547
   size: 61, 139
   orig: 63, 142
   offset: 1, 2
   index: -1
 Layer 17
   rotate: false
-  xy: 1489, 15
+  xy: 466, 61
   size: 66, 136
   orig: 66, 136
   offset: 0, 0
   index: -1
 Layer 18
   rotate: false
-  xy: 875, 296
+  xy: 300, 170
   size: 85, 168
   orig: 85, 168
   offset: 0, 0
   index: -1
 Layer 19
   rotate: false
-  xy: 102, 5
+  xy: 628, 140
   size: 90, 101
   orig: 90, 101
   offset: 0, 0
   index: -1
 Layer 9
   rotate: false
-  xy: 1166, 1
+  xy: 0, 0
   size: 95, 131
   orig: 95, 131
   offset: 0, 0
   index: -1
 Parrot copy
   rotate: false
-  xy: 1034, 5
+  xy: 534, 17
   size: 130, 121
   orig: 130, 124
   offset: 0, 0
   index: -1
 head1
   rotate: false
-  xy: 1557, 74
+  xy: 281, 340
   size: 103, 112
   orig: 103, 112
   offset: 0, 0
   index: -1
 impact/00
   rotate: false
-  xy: 194, 46
+  xy: 666, 78
   size: 73, 60
   orig: 300, 200
   offset: 125, 4
   index: -1
 impact/01
   rotate: false
-  xy: 1263, 4
+  xy: 97, 3
   size: 161, 128
   orig: 300, 200
   offset: 77, 2
   index: -1
 impact/02
   rotate: false
-  xy: 1513, 318
+  xy: 549, 898
   size: 188, 146
   orig: 300, 200
   offset: 59, 3
   index: -1
 impact/03
   rotate: false
-  xy: 324, 48
+  xy: 0, 366
   size: 204, 154
   orig: 300, 200
   offset: 50, 4
   index: -1
 impact/04
   rotate: false
-  xy: 1292, 302
+  xy: 287, 454
   size: 219, 162
   orig: 300, 200
   offset: 40, 4
   index: -1
 impact/05
   rotate: false
-  xy: 932, 128
+  xy: 513, 497
   size: 222, 166
   orig: 300, 200
   offset: 38, 5
   index: -1
 impact/06
   rotate: false
-  xy: 1066, 300
+  xy: 287, 618
   size: 224, 164
   orig: 300, 200
   offset: 36, 8
   index: -1
 impact/07
   rotate: false
-  xy: 1156, 134
+  xy: 0, 522
   size: 222, 164
   orig: 300, 200
   offset: 34, 11
   index: -1
 ring
   rotate: false
-  xy: 287, 204
+  xy: 287, 784
   size: 260, 260
   orig: 260, 260
   offset: 0, 0
   index: -1
-shadow copy
-  rotate: false
-  xy: 239, 20
-  size: 317, 24
-  orig: 319, 26
-  offset: 1, 1
-  index: -1
 vector-anime-mouth-anime-angry-face-11563263527mblqcng2gz
   rotate: false
-  xy: 194, 3
+  xy: 508, 454
   size: 43, 41
   orig: 43, 41
   offset: 0, 0
   index: -1
 wings
   rotate: false
-  xy: 1455, 153
+  xy: 387, 199
   size: 91, 147
   orig: 91, 147
   offset: 0, 0
