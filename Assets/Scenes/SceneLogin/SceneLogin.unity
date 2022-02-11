@@ -2106,6 +2106,7 @@ MonoBehaviour:
   draw: {fileID: 8300000, guid: e4836f1ef6a2aec479eb7d9667635a8c, type: 3}
   receiveGift: {fileID: 8300000, guid: c1f193f5f409b89438bdfc1c69bd54e1, type: 3}
   openSlot: {fileID: 8300000, guid: 6934bf9ef2c430846b27b2b4ac382014, type: 3}
+  summon: {fileID: 8300000, guid: f186d4f1fb74504478714b4739420e75, type: 3}
   findMatchVoice:
   - {fileID: 8300000, guid: a8f13e9bf84fcef4193d9e2d9c5b3a4f, type: 3}
   LobbyMusic: {fileID: 8300000, guid: b685f1635c2a2a84db81fc0daedea0d9, type: 3}
@@ -2127,6 +2128,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7e6baf6070434874da200012a00d0692, type: 3}
   - {fileID: 8300000, guid: bc1b00634b372ef42b39d19dce431abb, type: 3}
   - {fileID: 8300000, guid: 8647a223e9249b340a2b2df5924f778e, type: 3}
+  - {fileID: 8300000, guid: bb67faad5f63d7b4baf04f0d8fdcb3fe, type: 3}
+  - {fileID: 8300000, guid: 2be3e0d4f9665374cb960754cf919b9a, type: 3}
   attacks:
   - {fileID: 8300000, guid: f89a4da7f0c728341b8f90140d66feaf, type: 3}
   - {fileID: 8300000, guid: 1c3aaeef86b17cf4bbcf5e9523d860cc, type: 3}
@@ -2143,6 +2146,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4702482e579939f4d8b57644754c8b63, type: 3}
   - {fileID: 8300000, guid: 7c29d92b37e53634480b2bbeaa0b4c49, type: 3}
   - {fileID: 8300000, guid: 0fb59e031116cb9458d0cb87d4712fa4, type: 3}
+  - {fileID: 8300000, guid: 08386dab1e5912b48bc0951d6926d977, type: 3}
   soundVolume: 1
   musicVolume: 1
   soundOn: 1
