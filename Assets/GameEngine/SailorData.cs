@@ -15,6 +15,7 @@ public enum SailorStatusType
     STUN,
     EXCITED,
     EPIDEMIC,
+    SUMMONED,
 };
 
 public enum SailorClass

@@ -115,6 +115,11 @@ public class CrewManager : MonoBehaviour
         texts[7].text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
         if (sailor != null) Destroy(sailor);
         sailor = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), sailorPos);
+        if (model.config_stats.root_name == "FatBrakes")
+        {
+            sailor.transform.localPosition = new Vector3(0, 1.4f, 0);
+            sailor.transform.localScale = Vector3.one*0.8f;
+        }
         rank.sprite = Resources.Load<Sprite>("Icons/IconRank/" + model.config_stats.rank.ToString());
         int classCount = model.config_stats.classes.Count - classImgs.Length;
         for (int i = 0; i < classImgs.Length; i++)

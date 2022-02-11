@@ -73,16 +73,17 @@ public class FatBrakes : CombatSailor
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
         var listTargets = CombatState.Instance.GetSailors(targets);
-        listTargets.ForEach(sailor =>
-        {
-            sailor.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
-        });
         TriggerAnimation("Skill");
         GameObject ex = Instantiate(Resources.Load<GameObject>("Effect2D/FatBrakesBall/VFX_Piratera/fatbrakes_skill"), transform);
         Sequence seq2 = DOTween.Sequence();
         ex.transform.localScale = ex.transform.localScale * 2;
         ex.transform.DOLocalMoveY(5, 3);
-        seq2.AppendInterval(4.0f);
+        seq2.AppendInterval(1.0f);
+        seq2.AppendCallback(() => listTargets.ForEach(sailor =>
+        {
+            sailor.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
+        }));
+        seq2.AppendInterval(3.0f);
         seq2.AppendCallback(() => Destroy(ex));
         base.ProcessSkill();
         return 2.0f;
