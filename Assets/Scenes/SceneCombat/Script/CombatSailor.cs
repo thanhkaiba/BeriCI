@@ -84,7 +84,7 @@ public class CombatSailor : Sailor
             Debug.Log("Check Status: " + status.name);
             if (clientStatus == null)
             {
-                Debug.LogError(Model.config_stats.root_name + " missing Status " + status.name);
+                Debug.LogWarning(Model.config_stats.root_name + " missing Status " + status.name);
                 AddStatus(status);
                 switch (status.name)
                 {
@@ -98,7 +98,7 @@ public class CombatSailor : Sailor
             {
                 if (clientStatus.name != SailorStatusType.DEATH && clientStatus.stack != status.stack)
                 {
-                    Debug.LogError("Client status stack wrong: "
+                    Debug.LogWarning("Client status stack wrong: "
                         + " " + Model.config_stats.root_name
                         + " " + clientStatus.name.ToString()
                         + "\n client | server: " + clientStatus.stack + " | " + status.stack); ;
@@ -112,7 +112,7 @@ public class CombatSailor : Sailor
             var serverStatus = statuses.Find(x => x.name == status.name);
             if (serverStatus == null)
             {
-                Debug.LogError("Client status wrong: " + status.name);
+                Debug.LogWarning("Client status wrong: " + status.name);
                 RemoveStatus(status.name);
             }
         });

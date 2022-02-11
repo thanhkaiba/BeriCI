@@ -86,8 +86,8 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#228514>$p_1@</color></b> power, <b><color=#228514>$i_0@</color></b>
-      fury and speed up <b><color=#228514>$per_2@</color></b>.
+      the front <b><color=#228514>$i_0@</color></b> fury, speed up <b><color=#228514>$per_1@</color></b>
+      and go <color=#b5b800><b>EXCITED</b></color>
   - root_name: Mealodo
     present_name: Mealodo
     title: A young sailor
