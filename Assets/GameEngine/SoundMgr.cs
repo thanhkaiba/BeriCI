@@ -168,8 +168,15 @@ namespace Piratera.Sound
 
             if (Instance == null)
             {
+
+#if UNITY_WEBGL
+                // if sound play in start game, some browser won't load game 
+                musicOn = false;
+                soundOn = false;
+#else
                 musicOn = PlayerPrefs.GetInt(MUSIC_TOGGLE_KEY, 1) == 1;
                 soundOn = PlayerPrefs.GetInt(SOUND_FX_TOGGLE_KEY, 1) == 1;
+#endif
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }

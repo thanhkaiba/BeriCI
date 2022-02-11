@@ -16,7 +16,7 @@ namespace Piratera.Build
     public class MyBuildProcessor : Editor
     {
         public static string BuildFolder = $"{Directory.GetCurrentDirectory()}/Build";
-        public static string InnoSetupFile = $"{BuildFolder}/Installer/piratera_installer_l2cpp.iss";
+        public static string InnoSetupFile = $"{BuildFolder}/Installer/piratera_installer_l2cpp_DEV.iss";
 
         [MenuItem("Builds/Reveal In Finder", false, 0)]
         public static void OpenBuildFolder()
@@ -43,11 +43,13 @@ namespace Piratera.Build
                 }
 
                 OnPreprocessBuild(WindowBuildVersion.OnPreprocessBuild);
-                BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-                buildPlayerOptions.scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
-                buildPlayerOptions.locationPathName = path + "/Piratera.exe";
-                buildPlayerOptions.target = BuildTarget.StandaloneWindows;
-                buildPlayerOptions.options = BuildOptions.None;
+                BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
+                {
+                    scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray(),
+                    locationPathName = path + "/Piratera.exe",
+                    target = BuildTarget.StandaloneWindows,
+                    options = BuildOptions.None
+                };
 
 
                 BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);

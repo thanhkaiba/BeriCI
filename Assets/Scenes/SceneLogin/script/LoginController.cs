@@ -237,10 +237,21 @@ public class LoginController : MonoBehaviour
 
     }
 
+    private string GetUniqueID()
+    {
+#if UNITY_WEBGL
+        if (!PlayerPrefs.HasKey("UniqueIdentifierWEBGL"))
+            PlayerPrefs.SetString("UniqueIdentifierWEBGL", Guid.NewGuid().ToString());
+        return PlayerPrefs.GetString("UniqueIdentifierWEBGL");
+#else
+        return SystemInfo.deviceUniqueIdentifier;
+#endif
+    }
+
     public void OnButtonCreateOneClick()
     {
 #if PIRATERA_QC || PIRATERA_DEV
-        SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
+        SendRequestLogin(GetUniqueID(), "guest", GameLoginType.DUMMY);
 #else
         Application.OpenURL(GameConst.ACCOUNT_URL);
 #endif
