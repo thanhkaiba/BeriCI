@@ -18,11 +18,11 @@ namespace Piratera.Network
 
     public static class GAME_NETWORK_ADDRESS
     {
-        public const string QC_HOST = "dev-game1.piratera.local";
+        public const string QC_HOST = "dev-game.piratera.io";
         public const int QC_PORT = 9933;
 
 
-        public const string DEV_HOST = "dev-game1.piratera.local";
+        public const string DEV_HOST = "dev-game.piratera.io";
         public const int DEV_PORT = 9933;
 
 
@@ -58,7 +58,7 @@ namespace Piratera.Network
 #else
         
 #endif
-        private static readonly int WSPort = 9933;
+        private static readonly int WSPort = 8443;
         private static readonly string Zone = "Piratera";
         private static readonly string CLIENT_REQUEST = "clrq";
         private static readonly string ACTION_INCORE = "acc";
@@ -167,7 +167,7 @@ namespace Piratera.Network
 #if !UNITY_WEBGL
             sfs = new SmartFox();
 #else
-			sfs = new SmartFox(UseWebSocket.WSS);
+			sfs = new SmartFox(UseWebSocket.WSS_BIN);
 #endif
             // Register event listeners
             AddEventListener(SFSEvent.CONNECTION, OnConnection);
