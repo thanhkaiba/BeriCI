@@ -39,6 +39,8 @@ public class LobbyUI : MonoBehaviour
     [SerializeField]
     private Text userStaminaCountDown;
 
+    [SerializeField]
+    private Text prizes;
 
     [SerializeField]
     private Button[] leftButtons;
@@ -153,6 +155,13 @@ public class LobbyUI : MonoBehaviour
         userName.text = UserData.Instance.Username.LimitLength(15);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
         userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
+        //prizes.text = PirateWheelData.Instance.getPrize();
+            
+
+        //for (int i = 0; i < PirateWheelData.Instance.Length; i++)
+        //{
+        //    Debug.Log(ps[i]);
+        //}
     }
 
     public void OnLogoutButtonClick()
@@ -265,12 +274,47 @@ public class LobbyUI : MonoBehaviour
     }
     private void setSpin()
     {
+        //WheelPiece[] pieces = new WheelPiece[8];
+        /*
+        wheel.InitWheel();
+        string[] part = PirateWheelData.Instance.getPrize().Split(char.Parse(":"));
+        for (int i = 0; i < part.Length - 1; i++)
+        {
+            Debug.Log(i + ": " + part[i]);
+        }
+        for (int i = 0; i < part.Length-1; i++)
+        {
+            Debug.Log(i + ": " + part[i]);
+            if (i%2 == 0)
+            {
+                wheel.wheelPieces[i/2].Amount = int.Parse(part[i]);
+                wheel.wheelPieces[i/2].Amount = int.Parse(part[i]);
+                wheel.wheelPieces[i/2].Label = part[i + 1];
+                switch(part[i + 1])
+                {
+                    case "stamina":
+                        wheel.wheelPieces[i/2].Icon = gifts[0];
+                        break;
+                    case "beri":
+                        wheel.wheelPieces[i/2].Icon = gifts[1];
+                        break;
+                }
+            }
+        }
+        //for (int i = 0; i < wheel.wheelPieces.Length; i++)
+        //    wheel.DrawPiece(i) ;
+            //wheel.setPieces(pieces);
+
+    
+        */
+
+
         bool b = false;
         spinButton.onClick.AddListener(() =>
         {
             wheel.Spin();
             wheel.OnSpinEnd(wheelPiece => {
-                Debug.Log("Prize: " + wheelPiece.Amount);
+                Debug.Log("Prize: " + wheelPiece.Label+ ": "+ wheelPiece.Amount);
             });
         });
         luckyButton.onClick.AddListener(() =>

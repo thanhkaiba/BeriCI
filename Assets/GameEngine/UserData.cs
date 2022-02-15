@@ -7,6 +7,7 @@ public class UserInfoPropertiesKey
     public const string USERNAME = "displayName";
     public const string BERI = "beri";
     public const string STAMINA = "stamina";
+    public const string ROLL = "roll";
     public const string LAST_COUNT = "last_count";
     public const string EXP = "exp";
     public const string LEVEL = "level";

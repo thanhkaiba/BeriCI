@@ -30,9 +30,14 @@ namespace EasyUI.PickerWheelUI {
       [Range (1, 20)] public int spinDuration = 8 ;
       [SerializeField] [Range (.2f, 2f)] private float wheelSize = 1f ;
 
-      [Space]
+        [Space]
+        [SerializeField]
+        private Sprite[] gifts;
+
+        [Space]
       [Header ("Picker wheel pieces :")]
       public WheelPiece[] wheelPieces ;
+        
 
       // Events
       private UnityAction onSpinStartEvent ;
@@ -71,11 +76,31 @@ namespace EasyUI.PickerWheelUI {
             Debug.LogError ("You can't set all pieces chance to zero") ;
 
 
+            /*
          SetupAudio () ;
+         */
+        }
+        public void setPieces(WheelPiece[] pieces)
+        {
+            wheelPieces = pieces;
+        }
+        public void InitWheel()
+        {
 
-      }
+            pieceAngle = 360 / wheelPieces.Length;
+            halfPieceAngle = pieceAngle / 2f;
+            halfPieceAngleWithPaddings = halfPieceAngle - (halfPieceAngle / 4f);
 
-      private void SetupAudio () {
+            Generate();
+
+            CalculateWeightsAndIndices();
+            if (nonZeroChancesIndices.Count == 0)
+                Debug.LogError("You can't set all pieces chance to zero");
+
+            
+        }
+
+        private void SetupAudio () {
          audioSource.clip = tickAudioClip ;
          audioSource.volume = volume ;
          audioSource.pitch = pitch ;
@@ -90,13 +115,33 @@ namespace EasyUI.PickerWheelUI {
          rt.SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, pieceWidth) ;
          rt.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, pieceHeight) ;
 
-         for (int i = 0; i < wheelPieces.Length; i++)
+            string[] part = PirateWheelData.Instance.getPrize().Split(char.Parse(":"));
+            for (int i = 0; i < part.Length - 1; i++)
+            {
+                Debug.Log(i + ": " + part[i]);
+                if (i % 2 == 0)
+                {
+                    wheelPieces[i / 2].Amount = int.Parse(part[i]);
+                    wheelPieces[i / 2].Amount = int.Parse(part[i]);
+                    wheelPieces[i / 2].Label = part[i + 1];
+                    switch (part[i + 1])
+                    {
+                        case "stamina":
+                            wheelPieces[i / 2].Icon = gifts[0];
+                            break;
+                        case "beri":
+                            wheelPieces[i / 2].Icon = gifts[1];
+                            break;
+                    }
+                }
+            }
+            for (int i = 0; i < wheelPieces.Length; i++)
             DrawPiece (i) ;
 
          Destroy (wheelPiecePrefab) ;
       }
 
-      private void DrawPiece (int index) {
+      public void DrawPiece (int index) {
          WheelPiece piece = wheelPieces [ index ] ;
          Transform pieceTrns = InstantiatePiece ().transform.GetChild (0) ;
 
