@@ -23,6 +23,7 @@
         GET_CONFIG_MANIFEST = 24,
         CONFIRM_LINEUP = 25,
         GET_CONFIG = 26,
+        PIRATE_WHEEL = 27,
 
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat

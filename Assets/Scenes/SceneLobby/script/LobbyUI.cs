@@ -40,6 +40,8 @@ public class LobbyUI : MonoBehaviour
     private Text userStaminaCountDown;
 
     [SerializeField]
+    private Text userPirateWheelCountDown;
+    [SerializeField]
     private Text prizes;
 
     [SerializeField]
@@ -234,6 +236,7 @@ public class LobbyUI : MonoBehaviour
             userStaminaCountDown.text = "";
 
         }
+
     }
 
     private void RunAppearAction()
@@ -274,47 +277,26 @@ public class LobbyUI : MonoBehaviour
     }
     private void setSpin()
     {
-        //WheelPiece[] pieces = new WheelPiece[8];
-        /*
-        wheel.InitWheel();
-        string[] part = PirateWheelData.Instance.getPrize().Split(char.Parse(":"));
-        for (int i = 0; i < part.Length - 1; i++)
-        {
-            Debug.Log(i + ": " + part[i]);
-        }
-        for (int i = 0; i < part.Length-1; i++)
-        {
-            Debug.Log(i + ": " + part[i]);
-            if (i%2 == 0)
-            {
-                wheel.wheelPieces[i/2].Amount = int.Parse(part[i]);
-                wheel.wheelPieces[i/2].Amount = int.Parse(part[i]);
-                wheel.wheelPieces[i/2].Label = part[i + 1];
-                switch(part[i + 1])
-                {
-                    case "stamina":
-                        wheel.wheelPieces[i/2].Icon = gifts[0];
-                        break;
-                    case "beri":
-                        wheel.wheelPieces[i/2].Icon = gifts[1];
-                        break;
-                }
-            }
-        }
-        //for (int i = 0; i < wheel.wheelPieces.Length; i++)
-        //    wheel.DrawPiece(i) ;
-            //wheel.setPieces(pieces);
-
-    
-        */
-
-
         bool b = false;
         spinButton.onClick.AddListener(() =>
         {
-            wheel.Spin();
+            wheel.SendSpin();
+            TimeSpan remainTimeRoll = TimeSpan.FromMilliseconds( wheel.getTimeRemaining());
+            string s = string.Format("{0:00}:{1:00}:{2:00}", remainTimeRoll.Hours, remainTimeRoll.Minutes, remainTimeRoll.Seconds);
+            Debug.Log("Time to new roll: " + s);
+
             wheel.OnSpinEnd(wheelPiece => {
                 Debug.Log("Prize: " + wheelPiece.Label+ ": "+ wheelPiece.Amount);
+                switch (wheelPiece.Label)
+                {
+                    case "stamina":
+                        GameEvent.FlyStamina.Invoke();
+                        break;
+                    case "beri":
+                        GameEvent.FlyBeri.Invoke();
+                        break;
+                }
+                SoundMgr.PlaySound(PirateraSoundEffect.RECEIVE_GIFT);
             });
         });
         luckyButton.onClick.AddListener(() =>

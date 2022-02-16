@@ -3,6 +3,10 @@ using UnityEngine.UI ;
 using DG.Tweening ;
 using UnityEngine.Events ;
 using System.Collections.Generic ;
+using Piratera.Network;
+using Sfs2X.Entities.Data;
+using Piratera.Sound;
+using Piratera.Config;
 
 namespace EasyUI.PickerWheelUI {
 
@@ -33,6 +37,9 @@ namespace EasyUI.PickerWheelUI {
         [Space]
         [SerializeField]
         private Sprite[] gifts;
+
+        private string[] giftString;
+        private long lastRoll;
 
         [Space]
       [Header ("Picker wheel pieces :")]
@@ -75,6 +82,7 @@ namespace EasyUI.PickerWheelUI {
          if (nonZeroChancesIndices.Count == 0)
             Debug.LogError ("You can't set all pieces chance to zero") ;
 
+         NetworkController.AddServerActionListener(OnReceiveServerAction);
 
             /*
          SetupAudio () ;
@@ -115,16 +123,16 @@ namespace EasyUI.PickerWheelUI {
          rt.SetSizeWithCurrentAnchors (RectTransform.Axis.Horizontal, pieceWidth) ;
          rt.SetSizeWithCurrentAnchors (RectTransform.Axis.Vertical, pieceHeight) ;
 
-            string[] part = PirateWheelData.Instance.getPrize().Split(char.Parse(":"));
-            for (int i = 0; i < part.Length - 1; i++)
+            giftString = PirateWheelData.Instance.getPrize().Split(char.Parse(":"));
+            for (int i = 0; i < giftString.Length - 1; i++)
             {
-                Debug.Log(i + ": " + part[i]);
+                Debug.Log(i + ": " + giftString[i]);
                 if (i % 2 == 0)
                 {
-                    wheelPieces[i / 2].Amount = int.Parse(part[i]);
-                    wheelPieces[i / 2].Amount = int.Parse(part[i]);
-                    wheelPieces[i / 2].Label = part[i + 1];
-                    switch (part[i + 1])
+                    wheelPieces[i / 2].Amount = int.Parse(giftString[i]);
+                    wheelPieces[i / 2].Amount = int.Parse(giftString[i]);
+                    wheelPieces[i / 2].Label = giftString[i + 1];
+                    switch (giftString[i + 1])
                     {
                         case "stamina":
                             wheelPieces[i / 2].Icon = gifts[0];
@@ -161,13 +169,62 @@ namespace EasyUI.PickerWheelUI {
       }
 
 
-      public void Spin () {
-         if (!_isSpinning) {
+        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        {
+            if (action == SFSAction.PIRATE_WHEEL)
+            {
+                if (errorCode != SFSErrorCode.SUCCESS)
+                {
+                    GameUtils.ShowPopupPacketError(errorCode);
+                }
+                else
+                {
+                    Debug.Log("epoch: " + packet.GetLong("reward_epoch") +" timeCycle: "+  GlobalConfigs.PirateWheelConfig.timeCycle + " currentTime: "+ GameTimeMgr.GetCurrentTime());
+                    lastRoll = packet.GetLong("reward_epoch");
+                    if(GameTimeMgr.GetCurrentTime() - lastRoll > GlobalConfigs.PirateWheelConfig.timeCycle * 1000 || GameTimeMgr.GetCurrentTime() - lastRoll < 0)
+                    {
+                        string[] part = packet.GetUtfString("reward").Split(char.Parse(":"));
+                        GetGiftPiece(part);
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+        }
+        public long getTimeRemaining()
+        {
+            return GlobalConfigs.PirateWheelConfig.timeCycle * 1000 - GameTimeMgr.GetCurrentTime() + lastRoll;
+        }
+        public void OnClose()
+        {
+            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        }
+        private void GetGiftPiece(string[] p)
+        {
+            for (int i = 0; i < giftString.Length-1; i++)
+            {
+                if (i % 2 == 0)
+                    if (p[0] == giftString[i] && p[1] == giftString[i + 1])
+                    {
+                        Spin(i/2);
+                        //Debug.Log("Piece:" + i/2 );
+                        break;
+                    }
+            }
+        }
+        public void SendSpin()
+        {
+            NetworkController.Send(SFSAction.PIRATE_WHEEL);
+        }
+        private void Spin (int gift) {
+            if (!_isSpinning) {
             _isSpinning = true ;
             if (onSpinStartEvent != null)
                onSpinStartEvent.Invoke () ;
 
-            int index = GetRandomPieceIndex () ;
+            //int index = GetRandomPieceIndex () ;
+            int    index = gift;
             WheelPiece piece = wheelPieces [ index ] ;
 
             if (piece.Chance == 0 && nonZeroChancesIndices.Count != 0) {
@@ -197,7 +254,7 @@ namespace EasyUI.PickerWheelUI {
                float diff = Mathf.Abs (prevAngle - currentAngle) ;
                if (diff >= halfPieceAngle) {
                   if (isIndicatorOnTheLine) {
-                     audioSource.PlayOneShot (audioSource.clip) ;
+                     //audioSource.PlayOneShot (audioSource.clip) ;
                   }
                   prevAngle = currentAngle ;
                   isIndicatorOnTheLine = !isIndicatorOnTheLine ;
