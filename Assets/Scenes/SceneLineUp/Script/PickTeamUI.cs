@@ -50,7 +50,7 @@ public class PickTeamUI : MonoBehaviour
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         GameEvent.FlyBeri.RemoveListener(FlyBeri);
-       
+
     }
 
 

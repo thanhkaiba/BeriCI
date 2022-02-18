@@ -39,7 +39,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 
-   
+
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)

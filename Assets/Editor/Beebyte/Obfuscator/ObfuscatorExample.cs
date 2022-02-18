@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using Beebyte.Obfuscator;
+﻿using Beebyte.Obfuscator;
+using UnityEngine;
 
 public class ObfuscatorExample : MonoBehaviour
 {
@@ -45,7 +45,7 @@ public class ObfuscatorExample : MonoBehaviour
         return obfuscatedParameter;
     }
 
-    [System.Reflection.Obfuscation(ApplyToMembers=false)] // This is equivalent to [SkipRename]
+    [System.Reflection.Obfuscation(ApplyToMembers = false)] // This is equivalent to [SkipRename]
     public Color EquivalentMethod(Color obfuscatedParameter) // <- Method name is left as EquivalentMethod, parameter is obfuscated
     {
         return obfuscatedParameter;
@@ -84,7 +84,7 @@ public class ObfuscatorExample : MonoBehaviour
     [SkipRename]
     public void OnAnimationEvent() // Animation events assigned through the inspector should be excluded from obfuscation
     {
-    }    
+    }
 
     public void ObfuscatedButtonMethod() // Button click methods can be obfuscated if they are assigned programatically, e.g. button.onClick.AddListener(ObfuscatedButtonMethod);
     {
@@ -102,11 +102,11 @@ public class ObfuscatorExample : MonoBehaviour
         //...
         yield return null;
     }
-    
+
     private void SomeMethodCallingACoroutine()
     {
         StartCoroutine("MyAmazingMethod"); // <-- With default options "MyAmazingMethod" here will be automatically
-                                                      // substituted for the new obfuscated name assigned to MyAmazingMethod()
+                                           // substituted for the new obfuscated name assigned to MyAmazingMethod()
     }
 
 

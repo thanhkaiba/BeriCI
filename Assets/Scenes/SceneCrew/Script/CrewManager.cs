@@ -118,7 +118,7 @@ public class CrewManager : MonoBehaviour
         if (model.config_stats.root_name == "FatBrakes")
         {
             sailor.transform.localPosition = new Vector3(0, 1.4f, 0);
-            sailor.transform.localScale = Vector3.one*0.8f;
+            sailor.transform.localScale = Vector3.one * 0.8f;
         }
         rank.sprite = Resources.Load<Sprite>("Icons/IconRank/" + model.config_stats.rank.ToString());
         int classCount = model.config_stats.classes.Count - classImgs.Length;
@@ -139,7 +139,8 @@ public class CrewManager : MonoBehaviour
         {
             expText.text = "MAX";
             exp.fillAmount = 1;
-        } else
+        }
+        else
         {
             expText.text = "" + model.exp + "/" + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
             exp.fillAmount = (float)model.exp / GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
@@ -174,7 +175,7 @@ public class CrewManager : MonoBehaviour
         {
             rank.transform.position += new Vector3(0, 65 * canvas.localScale.x);
         }
-        
+
     }
 
 

@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace Piratera.Utils
 {
-  
-    public class UnicodeTextField: MonoBehaviour
+
+    public class UnicodeTextField : MonoBehaviour
     {
         [SerializeField]
         private InputField inputField;
         private string ime;
-    
+
 
         private void Start()
         {

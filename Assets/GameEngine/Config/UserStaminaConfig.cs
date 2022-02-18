@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class UserStaminaConfig
 {
     public int max_stamina = 200;

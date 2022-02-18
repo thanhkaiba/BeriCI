@@ -101,7 +101,7 @@ public class LoginController : MonoBehaviour
             }
         }
 
-       
+
 
     }
 
@@ -124,11 +124,12 @@ public class LoginController : MonoBehaviour
             {
                 int err = int.Parse(evt.Params["errorCode"].ToString());
                 description = EnumHelper.GetDescription((SFSErrorCode)err);
-            } catch
+            }
+            catch
             {
                 description = evt.Params["errorMessage"].ToString();
             }
-          
+
         }
         OnError(description);
     }
@@ -219,14 +220,14 @@ public class LoginController : MonoBehaviour
 
     private void OnCryptoInit(BaseEvent evt)
     {
-      
+
         if (!(bool)evt.Params["success"])
         {
             // Send a login request
             OnError((string)evt.Params["errorMessage"]);
         }
-     
-        
+
+
     }
 
     private void OnConnectionLost(BaseEvent evt)
@@ -253,7 +254,7 @@ public class LoginController : MonoBehaviour
         if (errorCode == SFSErrorCode.SUCCESS)
         {
             PlayerPrefs.SetString("UserName", nameInput.text);
-            PlayerPrefs.SetString("Password", StringCipher.Encrypt(nameInput.text  + passwordInput.text , "9QfeE7-+sTFZvG7^"));
+            PlayerPrefs.SetString("Password", StringCipher.Encrypt(nameInput.text + passwordInput.text, "9QfeE7-+sTFZvG7^"));
             User user = NetworkController.Connection.MySelf;
             GameTimeMgr.SetServerTime((long)user.GetVariable("login_time").GetDoubleValue());
             UserData.Instance.OnUserVariablesUpdate(user);
@@ -279,7 +280,7 @@ public class LoginController : MonoBehaviour
         }
     }
 
-   
+
     private void OpenLobby()
     {
         SceneManager.LoadScene("SceneLoadServerData");

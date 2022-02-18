@@ -1,6 +1,4 @@
-﻿using Piratera.Config;
-using Piratera.GUI;
-using Piratera.Sound;
+﻿using Piratera.GUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -175,7 +173,7 @@ public class CombatMgr : MonoBehaviour
         return combatState.GetSailor(action.target);
     }
 
-   
+
     IEnumerator NextLoopServer(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -249,7 +247,7 @@ public class CombatMgr : MonoBehaviour
         return Math.Max(speedAdd, 0);
     }
 
-   
+
     CombatSailor AddCurSpeedAllSailor(int speedAdd)
     {
         combatState.GetAllAliveCombatSailors().ForEach(character => character.AddCurSpeed(speedAdd));

@@ -1,7 +1,6 @@
 ﻿#if PIRATERA_DEV || PIRATERA_QC
 using Piratera.Network;
 using Sfs2X.Entities.Data;
-using UnityEngine;
 
 namespace Piratera.Cheat
 {

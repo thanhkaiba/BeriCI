@@ -1,13 +1,13 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
 
 public class RoyalCollectingAnimation : MonoBehaviour
 {
     /// <summary>
     /// RoyalCollectionSystem Package
     /// </summary>
-    
+
 
     public enum EXPANSION_MODE
     {
@@ -101,7 +101,7 @@ public class RoyalCollectingAnimation : MonoBehaviour
         float t = 0;
         float speed = 1.0f;
 
-     
+
 
         // 1st step : Move up animation
         Vector3 direction;
@@ -143,11 +143,11 @@ public class RoyalCollectingAnimation : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
 
-      
+
 
         // Adding the gem
         //_itemDisplayer.AddItem (1);
-        if(_itemDisplayer != null) _itemDisplayer.AddItem();
+        if (_itemDisplayer != null) _itemDisplayer.AddItem();
         _animationRunning = false;
 
         //this.number--;

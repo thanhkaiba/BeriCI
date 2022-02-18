@@ -83,7 +83,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     public void OnDrag(PointerEventData eventData)
     {
-        if(!model.IsAvaiable())
+        if (!model.IsAvaiable())
         {
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.dragHandler);
             return;
@@ -100,7 +100,7 @@ public class SubSailorIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         }
         else if (!showedSubsailor)
         {
-    
+
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.dragHandler);
         }
     }

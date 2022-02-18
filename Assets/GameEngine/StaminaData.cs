@@ -1,13 +1,12 @@
 ﻿using Piratera.Config;
 using Piratera.Utils;
 using Sfs2X.Entities;
-using UnityEngine;
 
 public class StaminaData : Singleton<StaminaData>
 {
     public int Stamina;
     private long LastCountStamina;
-    
+
     public string GetCurrentStaminaFormat()
     {
         return GetStaminaFormat(Stamina);

@@ -5,7 +5,7 @@ public class PirateWheelConfig
 {
     public int timeCycle = 28800;
     public string[] listItems = {
-        
+
     };
-    
+
 }

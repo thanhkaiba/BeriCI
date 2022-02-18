@@ -53,7 +53,8 @@ public class IconSailor : MonoBehaviour
         if (!model.IsAvaiable())
         {
             textLockTime.text = "<" + MathF.Ceiling(model.GetRemainingLockTime() / (60f * 60 * 1000)) + "h";
-        } else
+        }
+        else
         {
             textLockTime.text = "";
         }
@@ -85,7 +86,7 @@ public class IconSailor : MonoBehaviour
             starObj.GetComponent<RectTransform>().SetParent(nodeStar);
             starObj.SetActive(true);
             starObj.transform.localScale = new Vector3(0.25f, 0.25f);
-            starObj.transform.localPosition = new Vector3(0, -23*i);
+            starObj.transform.localPosition = new Vector3(0, -23 * i);
         }
     }
     public void ShowFocus(bool b)

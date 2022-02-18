@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 
 public class RoyalItemDisplayer : MonoBehaviour
@@ -27,7 +27,7 @@ public class RoyalItemDisplayer : MonoBehaviour
     public void AddItem(int quantity)
     {
         _itemQuantity += quantity;
- 
+
         _itemDisplay.text = nameItem + _itemQuantity.ToString();
         gameObject.transform.DOScale(1.1f, 1).SetEase(Ease.OutElastic).Play().OnComplete(() =>
         {
@@ -48,7 +48,7 @@ public class RoyalItemDisplayer : MonoBehaviour
 
     public void AddItem()
     {
-       
+
         // _itemQuantity += quantity;       
         gameObject.transform.DOScale(1.1f, 1).SetEase(Ease.OutElastic).Play().OnComplete(() =>
         {

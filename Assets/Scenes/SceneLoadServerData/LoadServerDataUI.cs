@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Piratera.Config;
 
 public class LoadServerDataUI : MonoBehaviour
 {
@@ -78,14 +78,15 @@ public class LoadServerDataUI : MonoBehaviour
         {
             errorText.text = "Loading Configuration Files";
             LoadConfig();
-        } else
+        }
+        else
         {
             SendGetData();
         }
-      
-    
+
+
         progressBar.onValueChanged.AddListener(UpdateTextPercent);
-      
+
 
 
     }
@@ -250,10 +251,11 @@ public class LoadServerDataUI : MonoBehaviour
         ReloadFunc = LoadConfig;
         progressBar.value = startingPoint;
         ConfigSync.StartFlowSync(x => progressBar.value += x, () =>
-        {         
+        {
             SendGetData();
 
-        }, () => {
+        }, () =>
+        {
             errorText.text = "Synchronization Failed";
             VisibleErrorUI(true);
         });

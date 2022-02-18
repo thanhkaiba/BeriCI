@@ -1,11 +1,10 @@
 ﻿#if UNITY_EDITOR
-using UnityEngine.Networking;
-using System.Collections;
-using System.Text;
 using Newtonsoft.Json;
-using Piratera.Constance;
+using System.Collections;
 using System.Diagnostics;
+using System.Text;
 using UnityEditor;
+using UnityEngine.Networking;
 
 namespace Piratera.Build
 {

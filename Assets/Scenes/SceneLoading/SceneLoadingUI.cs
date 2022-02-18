@@ -1,10 +1,10 @@
 using DG.Tweening;
 using Piratera.Engine;
 using Piratera.GUI;
+using Piratera.Log;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Piratera.Log;
 
 public class SceneLoadingUI : MonoBehaviour
 {
@@ -50,7 +50,8 @@ public class SceneLoadingUI : MonoBehaviour
     {
         // SceneManager.LoadScene("SceneLogin");
         GuiManager.Instance.ShowPopupNotification("Check New Version Fail!", "Try Again", () => gameVersionController.GetVersionInfo());
-    ;}
+        ;
+    }
 
     public void OnNeedUpdate(string url)
     {

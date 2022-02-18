@@ -79,7 +79,8 @@ public class CombatSailor : Sailor
     public void SyncStatus(List<SailorStatus> statuses)
     {
         // update sau, lam cho death truoc
-        statuses.ForEach(status => {
+        statuses.ForEach(status =>
+        {
             var clientStatus = cs.listStatus.Find(x => x.name == status.name);
             Debug.Log("Check Status: " + status.name);
             if (clientStatus == null)
@@ -363,7 +364,7 @@ public class CombatSailor : Sailor
         SailorStatus existStatus = cs.GetStatus(status.name);
         if (existStatus != null)
         {
-            if (statusTurn.Contains(status.name) && status.stack > existStatus.stack)  existStatus.stack = status.stack;
+            if (statusTurn.Contains(status.name) && status.stack > existStatus.stack) existStatus.stack = status.stack;
             if (statusStacks.Contains(status.name)) existStatus.stack += status.stack;
         }
         else cs.listStatus.Add(status);

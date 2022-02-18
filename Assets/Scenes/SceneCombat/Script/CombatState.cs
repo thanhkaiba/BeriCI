@@ -314,7 +314,7 @@ public class CombatState : MonoBehaviour
         return health / total_health;
     }
 
- #if PIRATERA_DEV
+#if PIRATERA_DEV
     public string GetTeamHealthRatioString(Team t)
     {
         List<CombatSailor> list = t == Team.A ? sailorsTeamA : sailorsTeamB;

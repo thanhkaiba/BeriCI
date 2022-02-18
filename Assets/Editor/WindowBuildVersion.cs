@@ -1,6 +1,6 @@
 ﻿#if UNITY_EDITOR 
-using UnityEngine;
 using UnityEditor;
+using UnityEngine;
 
 public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
 {
@@ -22,7 +22,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
         IncreaseBuild();
     }
 
- 
+
 
     [MenuItem("Builds/Window/Create Version File", false, 2)]
     private static void Create()
@@ -30,7 +30,7 @@ public class WindowBuildVersion : EditorResourceSingleton<WindowBuildVersion>
         Instance.Make();
     }
 
-  
+
 
     private static void IncreaseBuild()
     {

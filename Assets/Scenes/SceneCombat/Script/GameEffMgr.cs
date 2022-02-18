@@ -223,7 +223,7 @@ public class GameEffMgr : MonoBehaviour
         int times = Mathf.RoundToInt(dur / s);
         for (int i = 0; i < times; i++)
         {
-            float delta = max_delta * Mathf.Sqrt( 1f / (i + 1));
+            float delta = max_delta * Mathf.Sqrt(1f / (i + 1));
             float x = Random.Range(-delta, delta);
             float y = Random.Range(-delta, delta) * 0.6f;
             seq.Append(cam.transform.DOMove(new Vector3(x, y, z), 0));

@@ -240,7 +240,7 @@ namespace Piratera.Sound
         {
             if (soundOn)
             {
-                
+
                 soundEfectPlayer.PlayOneShot(audioClip, soundVolume);
             }
         }

@@ -2,7 +2,6 @@ using Piratera.Config;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 {
@@ -13,7 +12,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         config_stats = GlobalConfigs.GetSailorConfig(_name);
     }
 
-    public SailorModel(ISFSObject obj): this(obj.GetUtfString("id"), obj.GetUtfString("name"))
+    public SailorModel(ISFSObject obj) : this(obj.GetUtfString("id"), obj.GetUtfString("name"))
     {
         quality = obj.GetInt("quality");
         level = obj.GetInt("level");

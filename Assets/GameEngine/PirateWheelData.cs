@@ -1,7 +1,5 @@
 using Piratera.Config;
-using Piratera.Utils;
 using Sfs2X.Entities;
-using UnityEngine;
 
 
 public class PirateWheelData : Singleton<PirateWheelData>
@@ -52,7 +50,7 @@ public class PirateWheelData : Singleton<PirateWheelData>
     public void OnUserVariablesUpdate(User user)
     {
         LastCountRoll = (long)user.GetVariable(UserInfoPropertiesKey.LAST_COUNT).GetDoubleValue();
-        int oldRoll= Roll;
+        int oldRoll = Roll;
         Roll = user.GetVariable(UserInfoPropertiesKey.ROLL).GetIntValue();
 
         if (oldRoll != Roll)

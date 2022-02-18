@@ -1,7 +1,7 @@
 namespace Beebyte.Obfuscator
 {
-	public enum MessageCode
-	{
-		UnityReflectionMethodNotFound
-	}
+    public enum MessageCode
+    {
+        UnityReflectionMethodNotFound
+    }
 }

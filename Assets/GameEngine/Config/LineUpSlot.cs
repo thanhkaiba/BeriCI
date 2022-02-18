@@ -1,6 +1,3 @@
-using Newtonsoft.Json.Linq;
-using UnityEngine;
-
 namespace Piratera.Config
 {
     public class LineUpSlot

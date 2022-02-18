@@ -1,6 +1,4 @@
 using Piratera.Config;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,7 +20,7 @@ public class GeneralInfoBar : MonoBehaviour
     {
         level.text = "" + model.level;
         quality.text = "" + model.quality;
-        qualitySlider.value = (float) model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
+        qualitySlider.value = (float)model.quality / GlobalConfigs.SailorGeneral.MAX_QUALITY;
 
         for (int i = 0; i < model.star; i++)
         {
@@ -32,7 +30,7 @@ public class GeneralInfoBar : MonoBehaviour
             starObj.GetComponent<RectTransform>().SetParent(nodeStar);
             starObj.SetActive(true);
             starObj.transform.localScale = new Vector3(0.1f, 0.1f);
-            starObj.transform.localPosition = new Vector3((i - (float)model.star/2 + 0.5f) * 10, 0);
+            starObj.transform.localPosition = new Vector3((i - (float)model.star / 2 + 0.5f) * 10, 0);
         }
         iconAttackType.sprite = Resources.Load<Sprite>("Icons/AttackType/" + model.config_stats.attack_type);
     }

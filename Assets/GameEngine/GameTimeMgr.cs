@@ -9,7 +9,7 @@ public static class GameTimeMgr
     {
         Debug.Log("Server Time: " + loginTime);
         long now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        DeltaTime = loginTime - now; 
+        DeltaTime = loginTime - now;
     }
 
     public static long GetCurrentTime()

@@ -1,7 +1,7 @@
 using DG.Tweening;
 using Piratera.GUI;
-using Piratera.Utils;
 using Piratera.Sound;
+using Piratera.Utils;
 using Spine.Unity;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,10 +38,11 @@ public class GuiReward : BaseGui
         seqe.AppendInterval(0.2f);
         seqe.Join(coin.DOFade(1, 0.2f));
         seqe.Join(coin.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
-        seqe.AppendCallback(() => {
+        seqe.AppendCallback(() =>
+        {
             DoTweenUtils.UpdateNumber(texts[0], 0, r.mode_reward + r.hard_bonus + r.win_rank_bonus + r.team_bonus, x => $"x{x}");
         });
-    
+
         seqe.SetLink(coin.gameObject).SetTarget(coin.transform);
 
         anim.initialSkinName = "";

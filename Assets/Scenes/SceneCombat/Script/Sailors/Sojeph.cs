@@ -29,7 +29,7 @@ public class Sojeph : CombatSailor
         seq.AppendInterval(.4f);
         seq.AppendCallback(() =>
         {
-            
+
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("knife2");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
             KnifeToTarget(startPos, targetPos, 0f, 0.2f);
@@ -82,7 +82,7 @@ public class Sojeph : CombatSailor
         seq.AppendCallback(() => StartEffHealth(healthTarget, healthGain));
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() => StartEffDame(target, damage));
-    
+
         return 1.8f;
     }
     public void StartEffHealth(CombatSailor target, float health)
@@ -127,7 +127,7 @@ public class Sojeph : CombatSailor
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() =>
         {
-           
+
             target.LoseHealth(new Damage() { physics = damage });
         });
     }
@@ -158,7 +158,7 @@ public class Sojeph : CombatSailor
             seq.AppendInterval(flyTime - i * 0.02f);
             seq.AppendCallback(() => Destroy(bulletGO)).SetLink(bulletGO).SetTarget(bulletGO);
         }
-        
+
 
     }
     public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
@@ -168,12 +168,12 @@ public class Sojeph : CombatSailor
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-        targetPos.y += 1; 
+        targetPos.y += 1;
         int isFlip = 1;
         if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
         bulletGO.transform.localScale = new Vector3(isFlip * 2, 2, 2);
         Sequence seq = DOTween.Sequence();
-        seq.Append(bulletGO.transform.DOJump(targetPos,5,1, flyTime).SetEase(Ease.InSine));
+        seq.Append(bulletGO.transform.DOJump(targetPos, 5, 1, flyTime).SetEase(Ease.InSine));
         seq.AppendCallback(() => Destroy(bulletGO));
     }
 }

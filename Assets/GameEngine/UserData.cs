@@ -45,7 +45,8 @@ public class UserData : Singleton<UserData>
         try
         {
             Username = user.GetVariable(UserInfoPropertiesKey.USERNAME).GetStringValue();
-        } catch
+        }
+        catch
         {
             Username = user.Name;
         }
@@ -56,9 +57,10 @@ public class UserData : Singleton<UserData>
         try
         {
             PVERank = user.GetVariable(UserInfoPropertiesKey.PVE_RANK).GetIntValue();
-        } catch
+        }
+        catch
         {
-           
+
         }
         GameEvent.UserDataChanged.Invoke(changedVars);
 

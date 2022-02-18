@@ -1,4 +1,5 @@
 using DG.Tweening;
+using EasyUI.PickerWheelUI;
 using Piratera.Cheat;
 using Piratera.Constance;
 using Piratera.Engine;
@@ -6,13 +7,11 @@ using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
-using Spine.Unity;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using EasyUI.PickerWheelUI;
 
 public class LobbyUI : MonoBehaviour
 {
@@ -69,14 +68,11 @@ public class LobbyUI : MonoBehaviour
     private Button buttonCheat;
 
     [SerializeField]
-    private Button luckyButton;
-    [SerializeField]
     private GameObject luckyGame;
     [SerializeField]
     private PickerWheel wheel;
     [SerializeField]
     private Button spinButton;
-    private bool isShowLuckyUI = false;
 
 
     // Start is called before the first frame update
@@ -104,8 +100,6 @@ public class LobbyUI : MonoBehaviour
         ShowListSailors();
         Time.timeScale = 1;
 
-        setSpin();
-        //showLuckyUI();
     }
 
     void UpdateMaintain()
@@ -118,7 +112,8 @@ public class LobbyUI : MonoBehaviour
             s.AppendInterval(1);
             s.SetTarget(maintainText.gameObject).SetLink(maintainText.gameObject);
             s.SetLoops(-1);
-        } else
+        }
+        else
         {
             maintainText.text = "";
         }
@@ -132,11 +127,11 @@ public class LobbyUI : MonoBehaviour
 
     public void OnStaminaChanged(int oldValue, int newValue)
     {
-       DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6))); 
+        DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6)));
     }
     public void FlyStamina()
     {
-        royal.CollectItem(5, 1, () => {});
+        royal.CollectItem(5, 1, () => { });
     }
     private void OnDestroy()
     {
@@ -158,7 +153,7 @@ public class LobbyUI : MonoBehaviour
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
         userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
         //prizes.text = PirateWheelData.Instance.getPrize();
-            
+
 
         //for (int i = 0; i < PirateWheelData.Instance.Length; i++)
         //{
@@ -254,8 +249,8 @@ public class LobbyUI : MonoBehaviour
         buttonCol.Translate(250, 0, 0);
         buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(buttonCol).SetLink(buttonCol.gameObject);
 
-       /* sail.Translate(50, 180, 0);
-        sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);*/
+        /* sail.Translate(50, 180, 0);
+         sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);*/
 
         var scale = new Vector3(0.6f, 0.6f, 0.6f);
         background.localScale += scale;
@@ -275,18 +270,17 @@ public class LobbyUI : MonoBehaviour
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
     }
-    private void setSpin()
+    private void SetSpin()
     {
-        bool b = false;
         spinButton.onClick.AddListener(() =>
         {
             wheel.SendSpin();
-            TimeSpan remainTimeRoll = TimeSpan.FromMilliseconds( wheel.getTimeRemaining());
+            TimeSpan remainTimeRoll = TimeSpan.FromMilliseconds(wheel.getTimeRemaining());
             string s = string.Format("{0:00}:{1:00}:{2:00}", remainTimeRoll.Hours, remainTimeRoll.Minutes, remainTimeRoll.Seconds);
-            Debug.Log("Time to new roll: " + s);
 
-            wheel.OnSpinEnd(wheelPiece => {
-                Debug.Log("Prize: " + wheelPiece.Label+ ": "+ wheelPiece.Amount);
+            wheel.OnSpinEnd(wheelPiece =>
+            {
+                Debug.Log("Prize: " + wheelPiece.Label + ": " + wheelPiece.Amount);
                 switch (wheelPiece.Label)
                 {
                     case "stamina":
@@ -299,31 +293,11 @@ public class LobbyUI : MonoBehaviour
                 SoundMgr.PlaySound(PirateraSoundEffect.RECEIVE_GIFT);
             });
         });
-        luckyButton.onClick.AddListener(() =>
-        {
-            showLuckyUI();
-        });
+
     }
-    public void showLuckyUI()
+    public void ShowLuckyWheel()
     {
-        if (isShowLuckyUI)
-        {
-            isShowLuckyUI = false;
-            Sequence s = DOTween.Sequence();
-            s.AppendInterval(0f);
-            s.Append(luckyGame.transform.DOScale(new Vector2(-1, -1), .1f).SetRelative().SetEase(Ease.InOutQuart));
-            //s.AppendInterval(0.05f);
-            s.Append(luckyGame.transform.DOMove(new Vector2(-600, 0f), 0f, false).SetRelative().SetEase(Ease.OutCirc));
-        }
-        else
-        {
-            isShowLuckyUI = true;
-            Sequence s = DOTween.Sequence();
-            s.AppendInterval(0f);
-            //s.Append(luckyGame.transform.DOMove(new Vector2(1000f, 0f), 0.1f, true).SetRelative().SetEase(Ease.InCirc));
-            s.Append(luckyGame.transform.DOMove(new Vector2(600, 0f), 0f, false).SetRelative().SetEase(Ease.InCirc))
-            .Join(luckyGame.transform.DOScale(new Vector2(1, 1), .2f).SetRelative().SetEase(Ease.InCirc));
-        }
+        GuiManager.Instance.AddGui<PopupCheatGame>("GuiLuckyWheel");
     }
 
 

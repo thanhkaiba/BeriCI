@@ -80,7 +80,7 @@ public class UIIngameMgr : MonoBehaviour
             IconClassBonus s = Instantiate(GO, nodeLeft).GetComponent<IconClassBonus>();
             s.SetData(passiveTypeA[i]);
             s.transform.localScale = new Vector3(0.8f, 0.8f, 1);
-            s.transform.DOLocalMoveX(72*i, 0.5f).SetLink(s.gameObject).SetTarget(s);
+            s.transform.DOLocalMoveX(72 * i, 0.5f).SetLink(s.gameObject).SetTarget(s);
         }
 
         for (int i = 0; i < passiveTypeB.Count; i++)

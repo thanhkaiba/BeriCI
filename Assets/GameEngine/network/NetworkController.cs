@@ -103,7 +103,7 @@ namespace Piratera.Network
         private static void reset()
         {
             // Remove SFS2X listeners
-           // Instance.CancelInvoke("GetServerTime");
+            // Instance.CancelInvoke("GetServerTime");
             UserData.Instance.Reset();
             sfs.RemoveAllEventListeners();
             sfs = null;
@@ -111,7 +111,7 @@ namespace Piratera.Network
 
         private static void OnUserDataUpdate(BaseEvent evt)
         {
-            
+
             List<string> changedVars = (List<string>)evt.Params["changedVars"];
             SFSUser user = (SFSUser)evt.Params["user"];
             UserData.Instance.OnUserVariablesUpdate(user, changedVars);
@@ -185,10 +185,10 @@ namespace Piratera.Network
             MaintainManager.ResetData();
             GameConfigSync.ResetData();
             Debug.Log("Connect to: " + cfg.Host + ":" + cfg.Port);
-            
+
 
             sfs.Connect(cfg);
-           
+
         }
         // Handle encryption initialization event
         private static void OnCryptoInit(BaseEvent evt)
@@ -198,7 +198,8 @@ namespace Piratera.Network
             {
                 // Send a login request
                 DoLogin();
-            } else
+            }
+            else
             {
                 LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME, evt.Params["errorMessage"].ToString());
                 Debug.Log(evt.Params["errorMessage"].ToString());
@@ -209,7 +210,7 @@ namespace Piratera.Network
         {
             string message = (string)evt.Params["message"];
             Debug.Log("[SFS2X INFO] " + message);                           // .Net / Unity
-            
+
         }
 
         private static void OnSocketError(BaseEvent evt)
@@ -260,7 +261,7 @@ namespace Piratera.Network
         // Send a login request
         private static void DoLogin()
         {
-            
+
 
             SFSObject sfso = new SFSObject();
             sfso.PutUtfString("passwd", loginData.Password);
@@ -302,8 +303,8 @@ namespace Piratera.Network
                     {
                         text = adminMessage;
                         adminMessage = "";
-                    } 
-                        
+                    }
+
                 }
 
                 if (reason == ClientDisconnectionReason.UNKNOWN)
@@ -312,7 +313,7 @@ namespace Piratera.Network
                     {
                         text = adminMessage;
                         adminMessage = "";
-                    }  
+                    }
                 }
 
 
@@ -335,7 +336,7 @@ namespace Piratera.Network
         private static void OnLogin(BaseEvent evt)
         {
 
-      
+
             Debug.Log("Login success as " + sfs.MySelf.Name);
         }
 
@@ -403,7 +404,7 @@ namespace Piratera.Network
         }
         protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            
+
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");

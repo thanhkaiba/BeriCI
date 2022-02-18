@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Piratera.Config {
+namespace Piratera.Config
+{
     public class GlobalConfigs : Object
     {
         public static SailorGeneralConfig SailorGeneral;
@@ -42,7 +43,7 @@ namespace Piratera.Config {
                     SailorDic.Add(name, config);
                 }
             }
-           
+
         }
         public static SailorConfig GetSailorConfig(string sailorRootName)
         {
