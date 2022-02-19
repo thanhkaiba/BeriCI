@@ -20,6 +20,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         exp = obj.GetLong("exp");
         lastTrade = obj.GetLong("last_trade") * 1000;
         star = obj.GetByte("star");
+        pve_count = obj.GetInt("pve_count");
     }
 
     public SailorConfig config_stats { get; set; }
@@ -29,6 +30,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     public int level { get; set; }
     public long exp { get; set; }
     public byte star { get; set; }
+    public int pve_count { get; set; }
 
     public long lastTrade { get; set; }
     public List<Item> items { get; set; }
