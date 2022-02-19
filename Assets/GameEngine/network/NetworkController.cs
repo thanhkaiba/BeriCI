@@ -380,7 +380,7 @@ namespace Piratera.Network
             string cmd = (string)evt.Params["cmd"];
             if (cmd == CLIENT_REQUEST)
             {
-                Debug.Log("response:" + packet.GetDump());
+               // Debug.Log("response:" + packet.GetDump());
 
                 SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
                 SFSErrorCode errorCode = (SFSErrorCode)packet.GetShort(ERROR_CODE);

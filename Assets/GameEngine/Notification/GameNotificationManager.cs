@@ -1,4 +1,5 @@
 ﻿using Piratera.Config;
+using Piratera.Network;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,9 +51,11 @@ namespace Piratera.Notification
 
 
             var notificationStatus = AndroidNotificationCenter.CheckScheduledNotificationStatus(request.Id);
+            Debug.Log("Notification Status: " + notificationStatus);
 
             if (notificationStatus == NotificationStatus.Scheduled)
             {
+                Debug.Log("da update notification");
                 // Replace the scheduled notification with a new notification.
                 AndroidNotificationCenter.UpdateScheduledNotification(request.Id, notification, CHANNEL_ID);
             }
@@ -68,9 +71,10 @@ namespace Piratera.Notification
 
         private void OnApplicationFocus(bool focus)
         {
-            if (focus)
+            if (focus && NetworkController.IsInitialized)
             {
 #if UNITY_ANDROID
+                Debug.Log("da remove all notification");
                 AndroidNotificationCenter.CancelAllScheduledNotifications();
 #endif
             } else
