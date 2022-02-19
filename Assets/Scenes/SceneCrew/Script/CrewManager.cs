@@ -119,7 +119,7 @@ public class CrewManager : MonoBehaviour
         texts[7].text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
         fightCount.text = "Fight: <color=#CCCF44>"+ model.pve_count +"</color>";
         var EF_remain = (GlobalConfigs.SailorGeneral.EARNABLE_FIGHT - model.pve_count);
-        EFRemain.text = "EF Remain: <color=#F5FF17>"
+        EFRemain.text = "EF(*) Remain: <color=#F5FF17>"
             + (EF_remain < 0 ? 0 : EF_remain)
             +"</color>";
         if (sailor != null) Destroy(sailor);
