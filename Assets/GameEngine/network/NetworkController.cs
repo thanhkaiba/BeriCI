@@ -64,6 +64,7 @@ namespace Piratera.Network
         private static readonly string ACTION_INCORE = "acc";
         private static readonly string ERROR_CODE = "error_code";
         private static readonly string MAINTAINANCE_NOTI = "maintenance_noti";
+        private static bool needCheck = false;
 
         private static string adminMessage;
         public static bool AutoLogin = true;
@@ -82,7 +83,6 @@ namespace Piratera.Network
 
         private static SmartFox sfs;
         private static LoginData loginData;
-        private static bool shuttingDown;
         //----------------------------------------------------------
         // Unity callback methods
         //----------------------------------------------------------
@@ -107,6 +107,7 @@ namespace Piratera.Network
             UserData.Instance.Reset();
             sfs.RemoveAllEventListeners();
             sfs = null;
+            needCheck = false;
         }
 
         private static void OnUserDataUpdate(BaseEvent evt)
@@ -132,7 +133,6 @@ namespace Piratera.Network
         }
         void OnApplicationQuit()
         {
-            shuttingDown = true;
             if (sfs != null && sfs.IsConnected)
             {
                 sfs.Disconnect();
@@ -272,17 +272,11 @@ namespace Piratera.Network
 #endif
         }
 
-        protected static void OnConnectionLost(BaseEvent evt)
+        private static void ShowDisconnect(string reason)
         {
             Debug.Log("Disconnect");
             reset();
             GuiManager.Instance.ShowGuiWaiting(false);
-            if (shuttingDown == true)
-            {
-                return;
-            }
-            string reason = (string)evt.Params["reason"];
-
             if (reason != ClientDisconnectionReason.MANUAL)
             {
                 string text = "Server Disconnected";
@@ -302,8 +296,8 @@ namespace Piratera.Network
                     {
                         text = adminMessage;
                         adminMessage = "";
-                    } 
-                        
+                    }
+
                 }
 
                 if (reason == ClientDisconnectionReason.UNKNOWN)
@@ -312,7 +306,7 @@ namespace Piratera.Network
                     {
                         text = adminMessage;
                         adminMessage = "";
-                    }  
+                    }
                 }
 
 
@@ -322,8 +316,36 @@ namespace Piratera.Network
             {
                 ForceStartScene();
             }
+        }
+
+        protected static void OnConnectionLost(BaseEvent evt)
+        {
+        
+         
+            string reason = (string)evt.Params["reason"];
+
+            ShowDisconnect(reason);
 
 
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            if (focus)
+            {
+                if (sfs != null && !sfs.IsConnected && needCheck)
+                {
+                    ShowDisconnect(ClientDisconnectionReason.MANUAL);
+                }
+
+            } else
+            {
+                if (sfs != null && sfs.IsConnected)
+                {
+                    needCheck = true;
+                }
+            }
+          
         }
         public static void SendSurrenderPVEToSever()
         {
