@@ -3808,7 +3808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.82087135, g: 0.8301887, b: 0.55998576, a: 1}
+  m_Color: {r: 0.7745078, g: 0.7830189, b: 0.5872642, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3828,7 +3828,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'EF Remain: 1150'
+  m_Text: 'EF(*) Remain: 1150'
 --- !u!222 &1559418207
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4761,8 +4761,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.600006, y: -210.6}
-  m_SizeDelta: {x: 407.1, y: 107.2}
+  m_AnchoredPosition: {x: -4.600006, y: -212}
+  m_SizeDelta: {x: 407.1, y: 162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1846198188
 MonoBehaviour:
@@ -4777,7 +4777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 0.5}
-  m_EffectDistance: {x: 1, y: -1}
+  m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
 --- !u!114 &1846198189
 MonoBehaviour:
@@ -4812,8 +4812,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.5
-  m_Text: '* You will be received Team bonus Beri from this sailor if EF Remain is
-    still over 0.'
+  m_Text: '(*) Earnable-fight: You will be received Team bonus Beri from this sailor
+    if sill have EF Remain.'
 --- !u!222 &1846198190
 CanvasRenderer:
   m_ObjectHideFlags: 0
