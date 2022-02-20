@@ -268,7 +268,7 @@ public class CombatMgr : MonoBehaviour
     public void ChangeTimeScale()
     {
         if (Time.timeScale == 1) GameUtils.SetTimeScale(2);
-        else if (Time.timeScale == 2) GameUtils.SetTimeScale(3);
+        else if (Time.timeScale == 2) GameUtils.SetTimeScale(10);
         else GameUtils.SetTimeScale(1);
         PlayerPrefs.SetFloat($"TimeCombatScale {UserData.Instance.UID}", Time.timeScale);
     }
