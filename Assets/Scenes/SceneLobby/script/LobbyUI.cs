@@ -1,5 +1,4 @@
 using DG.Tweening;
-using EasyUI.PickerWheelUI;
 using Piratera.Cheat;
 using Piratera.Constance;
 using Piratera.Engine;
@@ -272,7 +271,7 @@ public class LobbyUI : MonoBehaviour
     }
     private void SetSpin()
     {
-        spinButton.onClick.AddListener(() =>
+  /*      spinButton.onClick.AddListener(() =>
         {
             wheel.SendSpin();
             TimeSpan remainTimeRoll = TimeSpan.FromMilliseconds(wheel.getTimeRemaining());
@@ -292,12 +291,12 @@ public class LobbyUI : MonoBehaviour
                 }
                 SoundMgr.PlaySound(PirateraSoundEffect.RECEIVE_GIFT);
             });
-        });
+        });*/
 
     }
     public void ShowLuckyWheel()
     {
-        GuiManager.Instance.AddGui<PopupCheatGame>("GuiLuckyWheel");
+        GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
     }
 
 

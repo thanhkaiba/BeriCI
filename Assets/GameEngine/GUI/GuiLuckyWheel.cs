@@ -17,6 +17,8 @@ namespace Piratera.GUI
         [SerializeField]
         private Button buttonSpin;
 
+        [SerializeField]
+        private Button buttonClose;
 
         protected override void Start()
         {

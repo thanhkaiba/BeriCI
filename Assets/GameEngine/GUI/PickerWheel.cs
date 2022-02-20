@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-namespace EasyUI.PickerWheelUI
+namespace Piratera.GUI
 {
 
     public class PickerWheel : MonoBehaviour
@@ -87,7 +87,6 @@ namespace EasyUI.PickerWheelUI
             giftString = PirateWheelData.Instance.getPrize().Split(char.Parse(":"));
             for (int i = 0; i < giftString.Length - 1; i++)
             {
-                Debug.Log(i + ": " + giftString[i]);
                 if (i % 2 == 0)
                 {
                     wheelPieces[i / 2].Amount = int.Parse(giftString[i]);

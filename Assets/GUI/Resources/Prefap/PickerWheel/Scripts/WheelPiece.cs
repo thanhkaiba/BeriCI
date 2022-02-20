@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EasyUI.PickerWheelUI
+namespace Piratera.GUI
 {
     [System.Serializable]
     public class WheelPiece
