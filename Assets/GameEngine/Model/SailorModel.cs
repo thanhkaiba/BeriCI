@@ -2,7 +2,7 @@ using Piratera.Config;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Piratera.Constance;
 
 public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 {
@@ -61,7 +61,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     public bool IsAvaiable()
     {
-        return lastTrade < GameTimeMgr.GetCurrentUTCTime() - 24 * 60 * 60 * 1000;
+        return lastTrade < GameTimeMgr.GetCurrentUTCTime() - GameConst.TIME_LOCK_SAILOR;
     }
 
     public long GetRemainingLockTime()

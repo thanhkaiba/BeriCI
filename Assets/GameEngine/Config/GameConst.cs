@@ -14,6 +14,8 @@ namespace Piratera.Constance
         public const string TWITTER_URL = "https://twitter.com/PirateraBay";
         public const string CUSTOMER_CARE_URL = "https://forms.gle/Vt9hcDC7WuEQHQTM8";
 
+        public const long TIME_LOCK_SAILOR = 8 * 60 * 60 * 1000;
+
         public static Vector2 DESIGN_SCREEN_SIZE = new Vector2(1920, 1080);
     }
 }
