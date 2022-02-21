@@ -66,7 +66,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     public long GetRemainingLockTime()
     {
-        return lastTrade + 24 * 60 * 60 * 1000 - GameTimeMgr.GetCurrentUTCTime();
+        return lastTrade + GameConst.TIME_LOCK_SAILOR - GameTimeMgr.GetCurrentUTCTime();
     }
 
 
