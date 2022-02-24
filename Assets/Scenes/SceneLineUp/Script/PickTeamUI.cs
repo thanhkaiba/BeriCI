@@ -18,7 +18,6 @@ public class PickTeamUI : MonoBehaviour
     void Start()
     {
         SquadContainer.Draging = false;
-        SquadAContainer.Draging = false;
         UpdateSlotMaxCapacity();
         NetworkController.AddServerActionListener(OnReceiveServerAction);
         GameEvent.FlyBeri.AddListener(FlyBeri);
