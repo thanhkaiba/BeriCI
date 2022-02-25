@@ -136,6 +136,7 @@ public class CombatSailor : Sailor
             if (status != null) status.stack -= 1;
         }
         cs.listStatus.RemoveAll(status => status.stack <= 0);
+        DisplayStatus();
     }
     public void CheckDeath()
     {
@@ -154,10 +155,14 @@ public class CombatSailor : Sailor
 
     public float DoCombatAction(CombatState combatState)
     {
+        float delay = 0;
         bool useSkillCondition = UseSkillCondition(combatState);
-        if (HaveStatus(SailorStatusType.STUN)) return Immobile();
-        else if (useSkillCondition) return CastSkill(combatState);
-        else return BaseAttack(combatState);
+        if (HaveStatus(SailorStatusType.STUN)) delay = Immobile();
+        else if (useSkillCondition) delay = CastSkill(combatState);
+        else delay = BaseAttack(combatState);
+
+        CountdownStatusRemain();
+        return delay;
     }
     // Base attack
     // ... client tính

@@ -13,6 +13,7 @@ public class GameUtils : UnityEngine.Object
 {
     public static GameObject GetSailorModelPrefab(string name)
     {
+        Debug.Log("Characters/" + name + "/" + name);
         return Resources.Load<GameObject>("Characters/" + name + "/" + name);
     }
     public static Sprite GetSailorAvt(string name)
@@ -24,6 +25,7 @@ public class GameUtils : UnityEngine.Object
     {
         SailorModel model = new SailorModel(RandomId(), name);
         SailorConfig config_stats = model.config_stats;
+
         //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
