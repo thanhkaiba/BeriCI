@@ -28,7 +28,7 @@ public class Anglersei : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.1f, () => SoundMgr.PlaySoundAttackSailor(9)));
+        StartCoroutine(GameUtils.WaitAndDo(0.3f, () => SoundMgr.PlaySoundAttackSailor(9)));
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.8f);

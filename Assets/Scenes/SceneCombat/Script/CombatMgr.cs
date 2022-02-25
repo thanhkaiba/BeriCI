@@ -163,6 +163,17 @@ public class CombatMgr : MonoBehaviour
                     }
                     return 0;
                 }
+            case CombatAcionType.Immobile:
+                {
+                    CombatSailor actor = GetActorAction(actionProcess);
+                    var mapStatus = actionProcess.mapStatus;
+                    float delayTime = actor.RunImmobile() + 0.2f;
+                    combatState.lastTeamAction = actor.cs.team;
+                    StartCoroutine(EndLoop(actor, delayTime, mapStatus));
+                    Debug.Log("delayTime " + delayTime);
+                    Debug.Log("actionCount " + actionCount);
+                    return delayTime;
+                }
             default:
                 return 0;
         }

@@ -160,8 +160,6 @@ public class CombatSailor : Sailor
         if (HaveStatus(SailorStatusType.STUN)) delay = Immobile();
         else if (useSkillCondition) delay = CastSkill(combatState);
         else delay = BaseAttack(combatState);
-
-        CountdownStatusRemain();
         return delay;
     }
     // Base attack
@@ -252,11 +250,6 @@ public class CombatSailor : Sailor
     }
     float Immobile()
     {
-        cs.CurrentSpeed -= cs.SpeedNeed;
-        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
-
-        DisplayStatus();
         return RunImmobile() + 0.2f;
     }
     protected bool IsCrit()
@@ -463,7 +456,14 @@ public class CombatSailor : Sailor
         seq.Append(transform.DOMoveX(oriX - 0.2f, 0.05f));
         seq.Append(transform.DOMoveX(oriX + 0.2f, 0.05f));
         seq.Append(transform.DOMoveX(oriX, 0.05f));
-        return 0.15f;
+
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
+
+        CountdownStatusRemain();
+        DisplayStatus();
+        return 0.3f;
     }
     public virtual float RunBaseAttack(CombatSailor target) { return 0f; }
     public virtual float RunSkill(CombatSailor target) { return 0f; }
