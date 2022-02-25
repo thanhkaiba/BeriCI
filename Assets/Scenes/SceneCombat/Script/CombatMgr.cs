@@ -115,7 +115,11 @@ public class CombatMgr : MonoBehaviour
         int speedAdd = CalculateSpeedAddThisLoop();
         AddCurSpeedAllSailor(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        if (actionProcess.type == CombatAcionType.BaseAttack || actionProcess.type == CombatAcionType.UseSkill)
+        if (
+            actionProcess.type == CombatAcionType.BaseAttack
+            || actionProcess.type == CombatAcionType.UseSkill
+            || actionProcess.type == CombatAcionType.Immobile
+            )
         {
             actionCountShow++;
         }
@@ -170,8 +174,6 @@ public class CombatMgr : MonoBehaviour
                     float delayTime = actor.RunImmobile() + 0.2f;
                     combatState.lastTeamAction = actor.cs.team;
                     StartCoroutine(EndLoop(actor, delayTime, mapStatus));
-                    Debug.Log("delayTime " + delayTime);
-                    Debug.Log("actionCount " + actionCount);
                     return delayTime;
                 }
             default:
