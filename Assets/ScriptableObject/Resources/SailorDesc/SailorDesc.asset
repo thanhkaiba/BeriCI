@@ -109,3 +109,8 @@ MonoBehaviour:
     present_name: FatBrakes
     title: Member of Scott Pirates
     skill_description: Perform Death Dance, all your crew go <color=#b5b800><b>EXCITED</b></color>.
+  - root_name: Anglersei
+    present_name: Anglersei
+    title: Master of the Deep
+    skill_description: Deal  <b><color=#f06060>$p_0@</color></b> to enermy and STUN
+      1 turn..
