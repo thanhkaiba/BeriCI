@@ -52,7 +52,7 @@ public class SailorInQueue : MonoBehaviour
         float newValue = (float)sailorData.cs.CurrentSpeed / sailorData.cs.SpeedNeed;
         if (speedSlider.value < newValue) speedSlider.ChangeValue(newValue);
         else speedSlider.SetValue(newValue);
-        textSpeed.text = sailorData.cs.CurrentSpeed + "/" + sailorData.cs.SpeedNeed;
+        //textSpeed.text = sailorData.cs.CurrentSpeed + "/" + sailorData.cs.SpeedNeed;
     }
     public void OnClick()
     {
