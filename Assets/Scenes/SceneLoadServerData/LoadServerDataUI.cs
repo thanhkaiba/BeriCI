@@ -67,6 +67,14 @@ public class LoadServerDataUI : MonoBehaviour
     private Action ReloadFunc;
 
 
+    private HashSet<SFSAction> ActionRequires = new() { 
+        SFSAction.PIRATE_WHEEL_DATA, 
+        SFSAction.LOAD_LIST_HERO_INFO
+    };
+
+    private int TotalActionRequire = 0;
+
+
     void Start()
     {
         VisibleErrorUI(false);
@@ -166,7 +174,11 @@ public class LoadServerDataUI : MonoBehaviour
         ReloadFunc = SendGetData;
         progressBar.value = startingPoint + 0.3f;
         RandomTip();
-        NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
+        TotalActionRequire = ActionRequires.Count;
+        foreach (SFSAction action in ActionRequires)
+        {
+            NetworkController.Send(action);
+        }
     }
 
     private void OnDestroy()
@@ -208,7 +220,19 @@ public class LoadServerDataUI : MonoBehaviour
         {
             if (errorCode == SFSErrorCode.SUCCESS)
             {
-                ShowLoading(1f, 0.4f, OnLoadSuccess);
+                if (ActionRequires.Contains(action))
+                {
+                    ActionRequires.Remove(action);
+                    if (ActionRequires.Count == 0)
+                    {
+                        ShowLoading(1f, 0.4f / TotalActionRequire, () => { });
+
+                    } else
+                    {
+                        ShowLoading(1f, 0.4f / TotalActionRequire, OnLoadSuccess);
+                    }
+                }
+               
             }
             else
             {

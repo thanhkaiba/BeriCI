@@ -57,5 +57,8 @@ namespace Piratera.Network
         [Description("A suitable opponent could not be found right now")]
         NO_OPPONENT_FOUND = 820,
 
+        [Description("Lucky wheel is not ready!")]
+        PIRATERA_LUCKY_WHEEL_NOT_READY = 821,
+
     }
 }

@@ -38,9 +38,10 @@ public class LobbyUI : MonoBehaviour
     private Text userStaminaCountDown;
 
     [SerializeField]
-    private Text userPirateWheelCountDown;
+    private Text luckyWheelCountDown;
+
     [SerializeField]
-    private Text prizes;
+    private GameObject wheelAlert;
 
     [SerializeField]
     private Button[] leftButtons;
@@ -65,13 +66,7 @@ public class LobbyUI : MonoBehaviour
     public RoyalCollectingController royal;
     [SerializeField]
     private Button buttonCheat;
-
-    [SerializeField]
-    private GameObject luckyGame;
-    [SerializeField]
-    private PickerWheel wheel;
-    [SerializeField]
-    private Button spinButton;
+   
 
 
     // Start is called before the first frame update
@@ -231,6 +226,18 @@ public class LobbyUI : MonoBehaviour
 
         }
 
+        if (PirateWheelData.Instance.IsWaiting())
+        {
+            TimeSpan remaining = TimeSpan.FromMilliseconds(PirateWheelData.Instance.TimeToHaveNewRoll());
+            luckyWheelCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
+            wheelAlert.SetActive(false);
+        }
+        else
+        {
+            luckyWheelCountDown.text = "";
+            wheelAlert.SetActive(true);
+        }
+
     }
 
     private void RunAppearAction()
@@ -296,7 +303,8 @@ public class LobbyUI : MonoBehaviour
     }
     public void ShowLuckyWheel()
     {
-        GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
+        NetworkController.Send(SFSAction.PIRATE_WHEEL);
+       // GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
     }
 
 

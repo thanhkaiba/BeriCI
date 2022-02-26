@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+﻿/*using DG.Tweening;
 using Piratera.Config;
 using UnityEngine;
 using UnityEngine.Events;
@@ -219,4 +219,4 @@ namespace Piratera.GUI
                 PickerWheelTransform.localScale = new Vector3(wheelSize, wheelSize, 1f);
         }
     }
-}
+}*/

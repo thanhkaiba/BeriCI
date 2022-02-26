@@ -1,4 +1,5 @@
-﻿using Piratera.GUI;
+﻿using Piratera.Config;
+using Piratera.GUI;
 using System;
 using System.Collections;
 using System.Collections.Generic;

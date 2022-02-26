@@ -24,6 +24,7 @@
         CONFIRM_LINEUP = 25,
         GET_CONFIG = 26,
         PIRATE_WHEEL = 27,
+        PIRATE_WHEEL_DATA = 28,
 
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat

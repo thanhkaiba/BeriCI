@@ -107,7 +107,7 @@ namespace Piratera.Notification
                         if (i % 3 == 0)
                         {
                             long afterTime = ((i - curStamina - 1) * countdownTime + remainTime);
-                            Debug.Log("Da dang ky stamina notification: " + $"{i}/{maxStamina}" + " after " + afterTime);
+                           // Debug.Log("Da dang ky stamina notification: " + $"{i}/{maxStamina}" + " after " + afterTime);
                             SendGameNotification(new GameNotificationRequest
                             {
                                 Title = "🔋Yo-ho-ho! Your Stamina was restored!⚡⚡⚡",
