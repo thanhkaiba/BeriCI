@@ -39,7 +39,6 @@ public enum SailorClass
     CRIMINAL,
     SUMMONER,
     PIONEER,
-    BRAVE,
     ELF,
     SAMURAI,
 };
