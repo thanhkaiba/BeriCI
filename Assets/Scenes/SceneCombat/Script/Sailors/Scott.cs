@@ -64,6 +64,7 @@ public class Scott : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
+        SoundMgr.PlaySoundSkillSailor(16);
         var target = CombatState.Instance.GetSailor(targets[0]);
         {
             Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);

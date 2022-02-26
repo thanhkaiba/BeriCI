@@ -37,6 +37,12 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private Slider furySlider;
 
+    [SerializeField]
+    private Text fightCount;
+    [SerializeField]
+    private Text EFRemain;
+    [SerializeField]
+    private Text TextTeamBonus;
 
     private Transform canvas;
 
@@ -113,6 +119,13 @@ public class CrewManager : MonoBehaviour
         texts[5].text = Mathf.Round(model.config_stats.GetSpeed(model.level, model.quality)).ToString();
         texts[6].text = Mathf.Round(model.config_stats.GetArmor()).ToString();
         texts[7].text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
+        fightCount.text = "Fight: <color=#CCCF44>"+ model.pve_count +"</color>";
+        var EF_remain = (GlobalConfigs.SailorGeneral.EARNABLE_FIGHT - model.pve_count);
+        EFRemain.text = "EF(*) Remain: <color=#F5FF17>"
+            + (EF_remain < 0 ? 0 : EF_remain)
+            +"</color>";
+        var teamBonus = GlobalConfigs.PvE.sailor_rank_bonus[(int)model.config_stats.rank] * Mathf.Pow(2, model.star);
+        TextTeamBonus.text = "(*) You'll get <color=#e6e9ff>" + teamBonus + "</color> more win Beri as \"Team Bonus\" if this sailor have EF point.";
         if (sailor != null) Destroy(sailor);
         sailor = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), sailorPos);
         if (model.config_stats.root_name == "FatBrakes")

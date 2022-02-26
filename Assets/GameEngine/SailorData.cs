@@ -244,6 +244,12 @@ public class CombatStats
                         BaseArmor += (int)config.GetParams(p.type, p.level)[0];
                     }
                     break;
+                case SailorClass.PIONEER:
+                    if (HaveType(SailorClass.PIONEER))
+                    {
+                        CurrentSpeed += (int)(config.GetParams(p.type, p.level)[0] * SpeedNeed);
+                    }
+                    break;
             }
         });
 

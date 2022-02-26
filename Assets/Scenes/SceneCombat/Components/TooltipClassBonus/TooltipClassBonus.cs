@@ -107,6 +107,9 @@ public class TooltipClassBonus : MonoBehaviour
             case SailorClass.SUMMONER:
                 content.text = "Summon Krackin monster";
                 break;
+            case SailorClass.PIONEER:
+                content.text = "PIONEER speed-up " + (para[0] * 100) + "%";
+                break;
         }
 
     }

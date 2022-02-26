@@ -199,23 +199,21 @@ public class LoginController : MonoBehaviour
 
     private void SendRequestLogin(string username, string password, GameLoginType loginType)
     {
-        StartCoroutine(CheckInternetConnection(isConnected =>
+        if (true)
         {
-            if (isConnected)
-            {
-                enableLoginUI(false);
-                NetworkController.LoginToServer(new LoginData(username, password, loginType));
-                NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
-                NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
-                NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
-                NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
-            }
-            else
-            {
-                GuiManager.Instance.ShowGuiWaiting(false);
-                errorText.text = "Error. Check Internet connection!";
-            }
-        }));
+            GuiManager.Instance.ShowGuiWaiting(true);
+            enableLoginUI(false);
+            NetworkController.LoginToServer(new LoginData(username, password, loginType));
+            NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
+            NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
+            NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+            NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
+        }
+        else
+        {
+            GuiManager.Instance.ShowGuiWaiting(false);
+            errorText.text = "Error. Check Internet connection!";
+        }
     }
 
     private void OnCryptoInit(BaseEvent evt)
@@ -240,10 +238,21 @@ public class LoginController : MonoBehaviour
 
     }
 
+    private string GetUniqueID()
+    {
+#if UNITY_WEBGL
+        if (!PlayerPrefs.HasKey("UniqueIdentifierWEBGL"))
+            PlayerPrefs.SetString("UniqueIdentifierWEBGL", Guid.NewGuid().ToString());
+        return PlayerPrefs.GetString("UniqueIdentifierWEBGL");
+#else
+        return SystemInfo.deviceUniqueIdentifier;
+#endif
+    }
+
     public void OnButtonCreateOneClick()
     {
 #if PIRATERA_QC || PIRATERA_DEV
-        SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
+        SendRequestLogin(GetUniqueID(), "guest", GameLoginType.DUMMY);
 #else
         Application.OpenURL(GameConst.ACCOUNT_URL);
 #endif

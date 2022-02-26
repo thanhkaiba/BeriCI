@@ -1197,6 +1197,50 @@ MonoBehaviour:
   selectables:
   - {fileID: 10826815}
   - {fileID: 8475617}
+--- !u!1 &753282749
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 753282751}
+  - component: {fileID: 753282750}
+  m_Layer: 0
+  m_Name: GameNotification
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &753282750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753282749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6615dee8848368f4bad13e4f27f729ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &753282751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 753282749}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 327.8986, y: 240.32837, z: -3.2755942}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &821471656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,6 +2106,7 @@ MonoBehaviour:
   draw: {fileID: 8300000, guid: e4836f1ef6a2aec479eb7d9667635a8c, type: 3}
   receiveGift: {fileID: 8300000, guid: c1f193f5f409b89438bdfc1c69bd54e1, type: 3}
   openSlot: {fileID: 8300000, guid: 6934bf9ef2c430846b27b2b4ac382014, type: 3}
+  summon: {fileID: 8300000, guid: f186d4f1fb74504478714b4739420e75, type: 3}
   findMatchVoice:
   - {fileID: 8300000, guid: a8f13e9bf84fcef4193d9e2d9c5b3a4f, type: 3}
   LobbyMusic: {fileID: 8300000, guid: b685f1635c2a2a84db81fc0daedea0d9, type: 3}
@@ -2083,6 +2128,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7e6baf6070434874da200012a00d0692, type: 3}
   - {fileID: 8300000, guid: bc1b00634b372ef42b39d19dce431abb, type: 3}
   - {fileID: 8300000, guid: 8647a223e9249b340a2b2df5924f778e, type: 3}
+  - {fileID: 8300000, guid: bb67faad5f63d7b4baf04f0d8fdcb3fe, type: 3}
+  - {fileID: 8300000, guid: 2be3e0d4f9665374cb960754cf919b9a, type: 3}
   attacks:
   - {fileID: 8300000, guid: f89a4da7f0c728341b8f90140d66feaf, type: 3}
   - {fileID: 8300000, guid: 1c3aaeef86b17cf4bbcf5e9523d860cc, type: 3}
@@ -2099,6 +2146,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4702482e579939f4d8b57644754c8b63, type: 3}
   - {fileID: 8300000, guid: 7c29d92b37e53634480b2bbeaa0b4c49, type: 3}
   - {fileID: 8300000, guid: 0fb59e031116cb9458d0cb87d4712fa4, type: 3}
+  - {fileID: 8300000, guid: 08386dab1e5912b48bc0951d6926d977, type: 3}
   soundVolume: 1
   musicVolume: 1
   soundOn: 1

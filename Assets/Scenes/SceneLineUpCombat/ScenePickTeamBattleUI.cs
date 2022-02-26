@@ -59,6 +59,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
+        SquadAContainer.Draging = false;
         Init();
     }
 

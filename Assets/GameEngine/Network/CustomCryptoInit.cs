@@ -1,5 +1,7 @@
 ﻿namespace Piratera.Network
 {
+#if UNITY_EDITOR || !UNITY_WEBGL
+
     using Sfs2X;
     using Sfs2X.Core;
     using Sfs2X.Util;
@@ -9,6 +11,7 @@
     using System.Runtime.CompilerServices;
     using UnityEngine;
     using UnityEngine.Networking;
+
 
     public class CustomCryptoInitializerV2 : ICryptoInitializer
     {
@@ -191,4 +194,5 @@
 
         }
     }
+#endif
 }

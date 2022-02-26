@@ -51,6 +51,9 @@ namespace Piratera.Network
         [Description("Unable to connect to the authentication service")]
         AUTHENTICATION_SERVICE_ERROR = 13,
 
+        [Description("Access Denied")]
+        GAME_ACCESS_DENIED = 40,
+
         [Description("A suitable opponent could not be found right now")]
         NO_OPPONENT_FOUND = 820,
 

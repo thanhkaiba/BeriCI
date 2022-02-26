@@ -73,6 +73,8 @@ public class LoadServerDataUI : MonoBehaviour
         PrepareAppear();
 
         progressBar.value = 0;
+        UpdateTextPercent(0);
+        progressBar.onValueChanged.AddListener(UpdateTextPercent);
 
         if (!GameConfigSync.Synced)
         {
@@ -83,10 +85,10 @@ public class LoadServerDataUI : MonoBehaviour
         {
             SendGetData();
         }
-
-
-        progressBar.onValueChanged.AddListener(UpdateTextPercent);
-
+      
+    
+  
+      
 
 
     }

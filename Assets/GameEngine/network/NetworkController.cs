@@ -18,11 +18,11 @@ namespace Piratera.Network
 
     public static class GAME_NETWORK_ADDRESS
     {
-        public const string QC_HOST = "dev-game1.piratera.local";
+        public const string QC_HOST = "dev-game.piratera.io";
         public const int QC_PORT = 9933;
 
 
-        public const string DEV_HOST = "dev-game1.piratera.local";
+        public const string DEV_HOST = "dev-game.piratera.io";
         public const int DEV_PORT = 9933;
 
 
@@ -58,12 +58,13 @@ namespace Piratera.Network
 #else
         
 #endif
-        private static readonly int WSPort = 8080;
+        private static readonly int WSPort = 8443;
         private static readonly string Zone = "Piratera";
         private static readonly string CLIENT_REQUEST = "clrq";
         private static readonly string ACTION_INCORE = "acc";
         private static readonly string ERROR_CODE = "error_code";
         private static readonly string MAINTAINANCE_NOTI = "maintenance_noti";
+        private static bool needCheck = false;
 
         private static string adminMessage;
         public static bool AutoLogin = true;
@@ -82,7 +83,6 @@ namespace Piratera.Network
 
         private static SmartFox sfs;
         private static LoginData loginData;
-        private static bool shuttingDown;
         //----------------------------------------------------------
         // Unity callback methods
         //----------------------------------------------------------
@@ -107,6 +107,7 @@ namespace Piratera.Network
             UserData.Instance.Reset();
             sfs.RemoveAllEventListeners();
             sfs = null;
+            needCheck = false;
         }
 
         private static void OnUserDataUpdate(BaseEvent evt)
@@ -132,7 +133,6 @@ namespace Piratera.Network
         }
         void OnApplicationQuit()
         {
-            shuttingDown = true;
             if (sfs != null && sfs.IsConnected)
             {
                 sfs.Disconnect();
@@ -167,7 +167,7 @@ namespace Piratera.Network
 #if !UNITY_WEBGL
             sfs = new SmartFox();
 #else
-			sfs = new SmartFox(UseWebSocket.WS_BIN);
+			sfs = new SmartFox(UseWebSocket.WSS_BIN);
 #endif
             // Register event listeners
             AddEventListener(SFSEvent.CONNECTION, OnConnection);
@@ -248,7 +248,7 @@ namespace Piratera.Network
             {
                 Debug.Log("SFS2X API version: " + sfs.Version);
                 Debug.Log("Connection mode is: " + sfs.ConnectionMode);
-#if PIRATERA_QC || PIRATERA_DEV
+#if PIRATERA_QC || PIRATERA_DEV || UNITY_WEBGL
                 DoLogin();
 #else
                 new CustomCryptoInitializerV2(sfs).Run();
@@ -273,17 +273,11 @@ namespace Piratera.Network
 #endif
         }
 
-        protected static void OnConnectionLost(BaseEvent evt)
+        private static void ShowDisconnect(string reason)
         {
             Debug.Log("Disconnect");
             reset();
             GuiManager.Instance.ShowGuiWaiting(false);
-            if (shuttingDown == true)
-            {
-                return;
-            }
-            string reason = (string)evt.Params["reason"];
-
             if (reason != ClientDisconnectionReason.MANUAL)
             {
                 string text = "Server Disconnected";
@@ -323,8 +317,36 @@ namespace Piratera.Network
             {
                 ForceStartScene();
             }
+        }
+
+        protected static void OnConnectionLost(BaseEvent evt)
+        {
+        
+         
+            string reason = (string)evt.Params["reason"];
+
+            ShowDisconnect(reason);
 
 
+        }
+
+        private void OnApplicationFocus(bool focus)
+        {
+            if (focus)
+            {
+                if (sfs != null && !sfs.IsConnected && needCheck)
+                {
+                    ShowDisconnect(ClientDisconnectionReason.MANUAL);
+                }
+
+            } else
+            {
+                if (sfs != null && sfs.IsConnected)
+                {
+                    needCheck = true;
+                }
+            }
+          
         }
         public static void SendSurrenderPVEToSever()
         {
@@ -359,7 +381,7 @@ namespace Piratera.Network
             string cmd = (string)evt.Params["cmd"];
             if (cmd == CLIENT_REQUEST)
             {
-                Debug.Log("response:" + packet.GetDump());
+               // Debug.Log("response:" + packet.GetDump());
 
                 SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
                 SFSErrorCode errorCode = (SFSErrorCode)packet.GetShort(ERROR_CODE);

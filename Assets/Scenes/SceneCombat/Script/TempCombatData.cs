@@ -73,7 +73,7 @@ public enum CombatAcionType
     BaseAttack,
     UseSkill,
     GameResult,
-    GameState,
+    Immobile,
     Lose
 }
 public enum RankBonus
@@ -126,7 +126,9 @@ public class CombatAction
             case CombatAcionType.GameResult:
                 gameEndData = new GameEndData(packet);
                 break;
-            case CombatAcionType.GameState:
+            case CombatAcionType.Immobile:
+                actorTeam = detail.GetByte("actor_team");
+                actor = detail.GetUtfString("actor");
                 break;
         }
         mapStatus = new List<MapStatusItem>();

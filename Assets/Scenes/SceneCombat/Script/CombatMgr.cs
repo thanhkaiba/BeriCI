@@ -36,6 +36,7 @@ public class CombatMgr : MonoBehaviour
 #if PIRATERA_DEV
         GlobalConfigs.InitDevConfig();
 #endif
+        //GlobalConfigs.InitDevConfig();
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
         GameUtils.SetTimeScale(PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1));
@@ -112,7 +113,11 @@ public class CombatMgr : MonoBehaviour
         int speedAdd = CalculateSpeedAddThisLoop();
         AddCurSpeedAllSailor(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        if (actionProcess.type == CombatAcionType.BaseAttack || actionProcess.type == CombatAcionType.UseSkill)
+        if (
+            actionProcess.type == CombatAcionType.BaseAttack
+            || actionProcess.type == CombatAcionType.UseSkill
+            || actionProcess.type == CombatAcionType.Immobile
+            )
         {
             actionCountShow++;
         }
@@ -159,6 +164,15 @@ public class CombatMgr : MonoBehaviour
                             }
                     }
                     return 0;
+                }
+            case CombatAcionType.Immobile:
+                {
+                    CombatSailor actor = GetActorAction(actionProcess);
+                    var mapStatus = actionProcess.mapStatus;
+                    float delayTime = actor.RunImmobile() + 0.2f;
+                    combatState.lastTeamAction = actor.cs.team;
+                    StartCoroutine(EndLoop(actor, delayTime, mapStatus));
+                    return delayTime;
                 }
             default:
                 return 0;

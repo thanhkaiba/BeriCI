@@ -32,7 +32,7 @@ public class FatBrakes : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
+        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(15)));
         StartCoroutine(GameUtils.WaitAndDo(0.5f, () => GameEffMgr.Instance.Shake(0.1f, 0.5f)));
         seq.AppendInterval(0.25f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
@@ -78,6 +78,8 @@ public class FatBrakes : CombatSailor
         Sequence seq2 = DOTween.Sequence();
         ex.transform.localScale = ex.transform.localScale * 2;
         ex.transform.DOLocalMoveY(5, 3);
+
+        SoundMgr.PlaySoundSkillSailor(17);
         seq2.AppendInterval(1.0f);
         seq2.AppendCallback(() => listTargets.ForEach(sailor =>
         {

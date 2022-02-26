@@ -11,6 +11,7 @@ public class PvEConfig
     public float hard_bonus_ratio = 0.2f; // beri = (int) rank/5;
 
     public List<float> excellent_rank_inc;
+    public List<int> sailor_rank_bonus;
     public float lose_rank_dec;
     public float min_rank = 0f;
     public float max_rank = 100f;
