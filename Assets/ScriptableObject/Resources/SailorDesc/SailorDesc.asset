@@ -113,4 +113,9 @@ MonoBehaviour:
     present_name: Anglersei
     title: Master of the Deep
     skill_description: Deal  <b><color=#f06060>$p_0@</color></b> to enermy and STUN
-      1 turn..
+      1 turn.
+  - root_name: Yuchik
+    present_name: Yuchik
+    title: Lady-bird
+    skill_description: Heal herself <b><color=#228514>$p_0@</color></b>, gain <b><color=#228514>$i_1@</color></b>
+      speed and +1 <color=#b5b800><b>EXCITED</b></color>.

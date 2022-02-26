@@ -59,7 +59,7 @@ namespace Piratera.Config {
             StaminaConfig = JsonConvert.DeserializeObject<UserStaminaConfig>(File.ReadAllText("DEV_CONFIG/Stamina.json"));
             Combat = JsonConvert.DeserializeObject<CombatConfig>(File.ReadAllText("DEV_CONFIG/Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
-            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
+            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/StatusConfig.json"));
 
             string[] files = Directory.GetFiles("DEV_CONFIG/Sailors");
             foreach (string file in files)
