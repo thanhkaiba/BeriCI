@@ -12,6 +12,7 @@ public class SailorInQueue : MonoBehaviour
     public Image colorTeam;
     public Sprite starSpr;
     public Transform nodeStar;
+    public Text textSpeed;
     public void SetData(CombatSailor s)
     {
         sailorData = s;
@@ -51,7 +52,7 @@ public class SailorInQueue : MonoBehaviour
         float newValue = (float)sailorData.cs.CurrentSpeed / sailorData.cs.SpeedNeed;
         if (speedSlider.value < newValue) speedSlider.ChangeValue(newValue);
         else speedSlider.SetValue(newValue);
-
+        textSpeed.text = sailorData.cs.CurrentSpeed + "/" + sailorData.cs.SpeedNeed;
     }
     public void OnClick()
     {

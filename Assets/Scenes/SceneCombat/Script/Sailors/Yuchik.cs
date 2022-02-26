@@ -35,7 +35,7 @@ public class Yuchik : CombatSailor
         seq.AppendInterval(.3f);
         seq.AppendCallback(() =>
         {
-            SoundMgr.PlaySoundAttackSailor(0);
+            SoundMgr.PlaySoundAttackSailor(4);
         });
         seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
@@ -76,6 +76,7 @@ public class Yuchik : CombatSailor
         Sequence seq = DOTween.Sequence();
         SoundMgr.PlaySoundSkillSailor(0);
         seq.AppendInterval(1.8f);
+        target.GainSpeed((int)_params[1]);
         seq.AppendCallback(() =>
         {
             Vector3 pos = transform.position;
@@ -83,7 +84,7 @@ public class Yuchik : CombatSailor
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));
-            target.GainSpeed((int)_params[1]);
+            Debug.Log("Speed gain: " + _params[1]);
             target.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
         });
         seq.AppendInterval(.1f);
