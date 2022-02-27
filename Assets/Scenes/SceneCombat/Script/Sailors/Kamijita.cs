@@ -71,14 +71,16 @@ public class Kamijita : CombatSailor
         TriggerAnimation("Skill");
         Debug.Log("targets length: " + targets.Count);
         var buffTarget = CombatState.Instance.GetSailor(targets[0]);
-        var furyGain = Model.config_stats.skill_params[0];
-        var speedUp = Model.config_stats.skill_params[1];
+        var furyGain = _params[0];
+        var speedUp = _params[1];
+        Debug.Log("kami_params 0" + _params[0]);
+        Debug.Log("kami_params 1" + _params[1]);
 
         var seq = DOTween.Sequence();
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() => StartEffBuff(buffTarget, (int)furyGain, speedUp));
 
-        return 1.8f;
+        return 2.4f;
     }
     public void StartEffBuff(CombatSailor target, int furyGain, float speedUp)
     {
