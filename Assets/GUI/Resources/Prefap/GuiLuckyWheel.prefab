@@ -2401,6 +2401,7 @@ MonoBehaviour:
   spriteGifts:
   - {fileID: 21300000, guid: 7a2ce2b8e17b6aa42a868032acae52d5, type: 3}
   - {fileID: 21300000, guid: 0e0b6ce92552ffd40bb303b0ff74f75e, type: 3}
+  wheelCircle: {fileID: 756458113095576511}
 --- !u!114 &6719007460666405018
 MonoBehaviour:
   m_ObjectHideFlags: 0

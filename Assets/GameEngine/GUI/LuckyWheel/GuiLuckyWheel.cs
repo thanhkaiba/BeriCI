@@ -22,8 +22,10 @@ namespace Piratera.GUI
         [SerializeField]
         private Sprite[] spriteGifts;
 
+        [SerializeField]
+        private Image wheelCircle;
 
-     
+
 
 
         protected override void Start()
@@ -76,9 +78,62 @@ namespace Piratera.GUI
             if (action == SFSAction.PIRATE_WHEEL)
             {
                 GuiManager.Instance.ShowGuiWaiting(false);
-                OnClose();
+                buttonSpin.interactable = !PirateWheelData.Instance.IsWaiting();
+
+                if (errorCode != SFSErrorCode.SUCCESS)
+                {
+                    OnClose();
+                }
 
             }
+        }
+
+        private void DoSpin()
+        {
+            Sequence seq = DOTween.Sequence();
+            seq.SetLink(wheelCircle.gameObject);
+            seq.SetTarget(wheelCircle.transform);
+            seq.Append(wheelCircle.transform.DORotate(Vector3.forward * 360, 1f, RotateMode.LocalAxisAdd));
+
+            seq.OnComplete(() => {
+                if (PirateWheelData.Instance.Reward != null)
+                {
+                    seq.Kill();
+                    wheelCircle.transform.DORotate(new Vector3(0, 0, GetAngleOfReward(PirateWheelData.Instance.Reward)), 0.6f, RotateMode.LocalAxisAdd).SetEase(Ease.OutBack);
+                    FlyGift(PirateWheelData.Instance.Reward);
+                    PirateWheelData.Instance.Reward = null;
+                }
+                else
+                {
+                    seq.Restart();
+
+                }
+            });
+             
+        }
+
+        private void FlyGift(string gift)
+        {
+            switch(gift.Split(':')[1])
+            {
+                case "stamina":
+                    {
+                        GameEvent.FlyStamina.Invoke();
+                        break;
+                    }
+                case "beri":
+                    {
+                        GameEvent.FlyBeri.Invoke();
+                        break;
+                    }
+            }
+           
+        }
+
+        private float GetAngleOfReward(string reward)
+        {
+            int index = System.Array.IndexOf(GlobalConfigs.PirateWheelConfig.ListItems, reward);
+            return 8 + 46 * index;
         }
 
 
@@ -90,6 +145,7 @@ namespace Piratera.GUI
         }
         public void SendSpin()
         {
+            DoSpin();
             GuiManager.Instance.ShowGuiWaiting(true);
             NetworkController.Send(SFSAction.PIRATE_WHEEL);
         }

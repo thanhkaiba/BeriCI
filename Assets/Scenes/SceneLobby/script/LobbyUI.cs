@@ -84,6 +84,7 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
         GameEvent.FlyStamina.AddListener(FlyStamina);
+        GameEvent.FlyBeri.AddListener(FlyBeri);
         GameEvent.MaintainDataChanged.AddListener(UpdateMaintain);
         UpdateMaintain();
         RunAppearAction();
@@ -120,6 +121,11 @@ public class LobbyUI : MonoBehaviour
         DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6)));
     }
     public void FlyStamina()
+    {
+        royal.CollectItem(5, 1, () => { });
+    }
+
+    public void FlyBeri()
     {
         royal.CollectItem(5, 1, () => { });
     }

@@ -427,16 +427,6 @@ namespace Piratera.Network
         protected static void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
 
-            if (errorCode != SFSErrorCode.SUCCESS)
-            {
-                Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
-            }
-            foreach (NetworkActionListenerDelegate listener in new List<NetworkActionListenerDelegate>(serverActionListeners))
-            {
-                listener(action, errorCode, packet);
-            }
-
-
             switch (action)
             {
 
@@ -558,6 +548,15 @@ namespace Piratera.Network
                         break;
                     }
 
+            }
+
+            if (errorCode != SFSErrorCode.SUCCESS)
+            {
+                Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
+            }
+            foreach (NetworkActionListenerDelegate listener in new List<NetworkActionListenerDelegate>(serverActionListeners))
+            {
+                listener(action, errorCode, packet);
             }
         }
 
