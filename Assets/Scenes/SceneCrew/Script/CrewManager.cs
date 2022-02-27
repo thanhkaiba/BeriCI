@@ -160,7 +160,7 @@ public class CrewManager : MonoBehaviour
         if (model.config_stats.max_fury > 0)
         {
             furySlider.gameObject.SetActive(true);
-            var textFury = "Fury: " + (model.config_stats.max_fury).ToString();
+            var textFury = "Mana: " + (model.config_stats.max_fury).ToString();
             if (model.config_stats.start_fury > 0) textFury += " (" + (model.config_stats.start_fury).ToString() + ")";
             furySlider.transform.Find("Text").GetComponent<Text>().text = textFury;
             furySlider.value = (float)model.config_stats.start_fury / model.config_stats.max_fury;

@@ -32,7 +32,7 @@ public class Kamijita : CombatSailor
 
             Spine.Bone gun2 = modelObject.GetComponent<SkeletonMecanim>().skeleton.FindBone("shoot");
             Vector3 startPos = gun2.GetWorldPosition(modelObject.transform);
-            KnifeToTarget(startPos, targetPos, 0f, 0.2f);
+            KnifeToTarget(startPos, targetPos, 0.2f);
         });
         return 0.95f;
     }
@@ -49,7 +49,7 @@ public class Kamijita : CombatSailor
     // skill
     public override bool CanActiveSkill(CombatState cbState)
     {
-        List<CombatSailor> teams = cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this);
+        List<CombatSailor> teams = cbState.GetAllTeamAliveSailors(cs.team);
         CombatSailor target = TargetsUtils.FurthestMaxFury(teams);
         return target.cs.MaxFury - target.cs.Fury > 0;
     }
@@ -69,6 +69,7 @@ public class Kamijita : CombatSailor
     {
         base.ProcessSkill();
         TriggerAnimation("Skill");
+        Debug.Log("targets length: " + targets.Count);
         var buffTarget = CombatState.Instance.GetSailor(targets[0]);
         var furyGain = Model.config_stats.skill_params[0];
         var speedUp = Model.config_stats.skill_params[1];
@@ -98,9 +99,10 @@ public class Kamijita : CombatSailor
             target.GainFury(furyGain);
             target.SpeedUp(speedUp);
             var pos = target.transform.position;
-            pos.y += 4f;
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
-            seq.AppendInterval(0.3f);
+            pos.y += 2.8f;
+            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
+            eff.transform.localScale = Vector3.one * 1.8f;
+            seq.AppendInterval(2f);
             seq.AppendCallback(() => Destroy(eff));
         });
     }
@@ -117,7 +119,7 @@ public class Kamijita : CombatSailor
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySoundAttackSailor(13);
-            KnifeToTarget(startPos, targetPos, 0, .2f);
+            KnifeToTarget(startPos, targetPos, .2f);
         });
         seq.AppendInterval(0.2f);
         seq.AppendCallback(() =>
@@ -126,49 +128,36 @@ public class Kamijita : CombatSailor
             target.LoseHealth(new Damage() { physics = damage });
         });
     }
-    public void KnifeToTarget(Vector3 startPos, Vector3 targetPos, float delay, float flyTime)
+    public void KnifeToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
     {
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = targetPos;
-        for (int i = 0; i < 3; i++)
-        {
-            var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/knife/knife"), startPos - new Vector3(0, i * 0.2f), Quaternion.identity);
+            var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/kamijita_attack"), startPos, Quaternion.identity);
             bulletGO.SetActive(false);
             Vector3 theScale = transform.localScale;
             if (startPos.x > desPos.x) theScale.x = -1;
             else theScale.x = 1;
 
-            float rZ = (float)Math.Atan2(targetPos.y - startPos.y, targetPos.x - startPos.x);
-            bulletGO.transform.eulerAngles = new Vector3(0, 0, rZ * 57.3f + (theScale.x == -1 ? 180 : 0));
-
-            bulletGO.transform.localScale = theScale * 4f;
+            bulletGO.transform.localScale = theScale * 1f;
             Sequence seq = DOTween.Sequence();
-            seq.AppendInterval(delay + i * 0.02f);
             seq.AppendCallback(() => bulletGO.SetActive(true));
             seq.Append(bulletGO.transform.DOMove(desPos, flyTime).SetEase(Ease.Linear));
-            seq.Join(bulletGO.transform.DOScaleX(2 * theScale.x, flyTime));
-            seq.Join(bulletGO.transform.DOScaleY(2, flyTime));
-            seq.Join(bulletGO.transform.DOScaleZ(2, flyTime));
-            seq.AppendInterval(flyTime - i * 0.02f);
+            seq.AppendInterval(flyTime);
             seq.AppendCallback(() => Destroy(bulletGO)).SetLink(bulletGO).SetTarget(bulletGO);
-        }
-
 
     }
     public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
     {
         Debug.Log("Medicine");
-        var bulletGO = Instantiate(Resources.Load<GameObject>("Characters/Sojeph/Medicine/Medicine"), startPos, Quaternion.identity);
+        var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/kamijita_skill"), startPos, Quaternion.identity);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-        targetPos.y += 1;
-        int isFlip = 1;
-        if (bulletGO.transform.position.x > desPos.x) isFlip = -1;
-        bulletGO.transform.localScale = new Vector3(isFlip * 2, 2, 2);
+        targetPos.y += 2.2f;
+        bulletGO.transform.localScale = Vector3.one * 2;
         Sequence seq = DOTween.Sequence();
-        seq.Append(bulletGO.transform.DOJump(targetPos, 5, 1, flyTime).SetEase(Ease.InSine));
+        seq.Append(bulletGO.transform.DOJump(targetPos, 0.5f, 1, flyTime).SetEase(Ease.InSine));
         seq.AppendCallback(() => Destroy(bulletGO));
     }
 }
