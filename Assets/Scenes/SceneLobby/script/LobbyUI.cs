@@ -276,35 +276,10 @@ public class LobbyUI : MonoBehaviour
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
     }
-    private void SetSpin()
-    {
-  /*      spinButton.onClick.AddListener(() =>
-        {
-            wheel.SendSpin();
-            TimeSpan remainTimeRoll = TimeSpan.FromMilliseconds(wheel.getTimeRemaining());
-            string s = string.Format("{0:00}:{1:00}:{2:00}", remainTimeRoll.Hours, remainTimeRoll.Minutes, remainTimeRoll.Seconds);
-
-            wheel.OnSpinEnd(wheelPiece =>
-            {
-                Debug.Log("Prize: " + wheelPiece.Label + ": " + wheelPiece.Amount);
-                switch (wheelPiece.Label)
-                {
-                    case "stamina":
-                        GameEvent.FlyStamina.Invoke();
-                        break;
-                    case "beri":
-                        GameEvent.FlyBeri.Invoke();
-                        break;
-                }
-                SoundMgr.PlaySound(PirateraSoundEffect.RECEIVE_GIFT);
-            });
-        });*/
-
-    }
     public void ShowLuckyWheel()
     {
-        NetworkController.Send(SFSAction.PIRATE_WHEEL);
-       // GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
+       
+       GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
     }
 
 

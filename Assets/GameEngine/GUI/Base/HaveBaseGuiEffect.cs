@@ -71,7 +71,7 @@ namespace Piratera.GUI
                             s.Insert(0, canvasGroup.DOFade(1, appearTime / 2).From());
                             s.AppendCallback(() => canvasGroup.interactable = true);
                         }
-                        s.Insert(0, (transform as RectTransform).DOAnchorPosY(Screen.height + (transform as RectTransform).sizeDelta.y, appearTime).From().SetEase(Ease.OutBack));
+                        s.Insert(0, (transform as RectTransform).DOAnchorPosY(Screen.height + (transform as RectTransform).sizeDelta.y, appearTime).From().SetEase(Ease.OutExpo));
                         if (haveFog != null)
                         {
                             haveFog.FadeIn(appearTime);

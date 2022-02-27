@@ -1928,6 +1928,7 @@ GameObject:
   - component: {fileID: 6622859053586173898}
   - component: {fileID: 4205533686576437244}
   - component: {fileID: 3805573507284045886}
+  - component: {fileID: 7357764471202931076}
   m_Layer: 5
   m_Name: Wheel
   m_TagString: Untagged
@@ -1960,7 +1961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 18}
+  m_AnchoredPosition: {x: 0, y: 27}
   m_SizeDelta: {x: 946.074, y: 1031.7144}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4205533686576437244
@@ -2001,6 +2002,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &7357764471202931076
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7747030346498885089}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8135429336218519560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,7 +2192,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.7738964, g: 0.8773585, b: 0.8354186, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -2197,7 +2210,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4651019489433195245}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8722869545887128753}
+        m_TargetAssemblyTypeName: Piratera.GUI.GuiLuckyWheel, Assembly-CSharp
+        m_MethodName: SendSpin
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8494548860023358560
 GameObject:
   m_ObjectHideFlags: 0
@@ -2287,6 +2312,7 @@ GameObject:
   - component: {fileID: 698507038245314361}
   - component: {fileID: 3995793739782315075}
   - component: {fileID: 8722869545887128753}
+  - component: {fileID: 6719007460666405018}
   m_Layer: 5
   m_Name: GuiLuckyWheel
   m_TagString: Untagged
@@ -2361,10 +2387,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874ebb13d1b99e3459842dd65cec90aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  background: {fileID: 0}
+  background: {fileID: 6622859053586173898}
   textCountDown: {fileID: 0}
   buttonSpin: {fileID: 2463668987748448273}
-  buttonClose: {fileID: 0}
+--- !u!114 &6719007460666405018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8668211247592919436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appearEffect: 3
+  disappearEffect: 2
+  appearTime: 0.4
+  disappearTime: 0.4
 --- !u!1 &9130602917720731367
 GameObject:
   m_ObjectHideFlags: 0
