@@ -508,6 +508,16 @@ namespace Piratera.Network
 
                         break;
                     }
+                case SFSAction.PIRATE_WHEEL:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            PirateWheelData.Instance.ReceiveGiftPack(packet);
+                        }
+
+
+                        break;
+                    }
                 case SFSAction.GET_LINEUP_SLOT_PACK:
                     {
                         GuiManager.Instance.ShowGuiWaiting(false);

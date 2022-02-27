@@ -4,7 +4,7 @@
     {
         public LoginData(string username, string password, GameLoginType type)
         {
-            Username = username.ToLower();
+            Username = username;
             Password = password;
             Type = type;
         }
