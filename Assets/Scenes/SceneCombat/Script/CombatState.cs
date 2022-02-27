@@ -69,20 +69,20 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("Anglersei", new CombatPosition(2, 2), Team.A);
-        //CreateCombatSailor("Meechik", new CombatPosition(2, 1), Team.A);
-        //CreateCombatSailor("Herminia", new CombatPosition(2, 0), Team.A);
-        //CreateCombatSailor("Scrub", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("Yuchik", new CombatPosition(2, 2), Team.A);
+        CreateCombatSailor("Scott", new CombatPosition(2, 1), Team.A);
+        CreateCombatSailor("Alex", new CombatPosition(0, 0), Team.A);
+        CreateCombatSailor("Kamijita", new CombatPosition(2, 0), Team.A);
         //CreateCombatSailor("Alex", new CombatPosition(0, 2), Team.A);
 
         //CreateCombatSailor("Beel", new CombatPosition(1, 0), Team.A);
     }
     void CreateTeamB()
     {
-        CreateCombatSailor("Anglersei", new CombatPosition(0, 0), Team.B);
-        //CreateCombatSailor("OBonbee", new CombatPosition(2, 0), Team.B);
-        //CreateCombatSailor("Jenkins", new CombatPosition(2, 2), Team.B);
-        //CreateCombatSailor("QChi", new CombatPosition(1, 2), Team.B);
+        CreateCombatSailor("Anglersei", new CombatPosition(0, 2), Team.B);
+        CreateCombatSailor("Salvatafo", new CombatPosition(2, 1), Team.B);
+        CreateCombatSailor("Scrub", new CombatPosition(2, 0), Team.B);
+        CreateCombatSailor("Kamijita", new CombatPosition(2, 2), Team.B);
         //CreateCombatSailor("Salvatafo", new CombatPosition(0, 2), Team.B);
 
         //CreateCombatSailor("Galdalf", new CombatPosition(2, 0), Team.B);
@@ -294,7 +294,7 @@ public class CombatState : MonoBehaviour
     }
     public void RunEndAction(CombatSailor actor)
     {
-        //actor.CountdownStatusRemain();
+        actor.CountdownStatusRemain();
         var listSailor = GetAllSailors();
         listSailor.ForEach(sailor =>
         {

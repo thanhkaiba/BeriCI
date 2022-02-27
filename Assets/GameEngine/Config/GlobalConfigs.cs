@@ -62,7 +62,7 @@ namespace Piratera.Config
             PirateWheelConfig = JsonConvert.DeserializeObject<PirateWheelConfig>(File.ReadAllText("DEV_CONFIG/PirateWheel.json"));
             Combat = JsonConvert.DeserializeObject<CombatConfig>(File.ReadAllText("DEV_CONFIG/Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
-            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
+            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/StatusConfig.json"));
 
             string[] files = Directory.GetFiles("DEV_CONFIG/Sailors");
             foreach (string file in files)

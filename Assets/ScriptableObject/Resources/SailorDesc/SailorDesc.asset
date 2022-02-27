@@ -86,8 +86,8 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#228514>$i_0@</color></b> fury, speed up <b><color=#228514>$per_1@</color></b>
-      and go <color=#b5b800><b>EXCITED</b></color>
+      the front <b><color=#228514>$i_0@</color></b> mana, speed up <b><color=#228514>$per_1@</color></b>
+      and +1 <color=#b5b800><b>FURY</b></color>
   - root_name: Mealodo
     present_name: Mealodo
     title: A young sailor
@@ -108,4 +108,19 @@ MonoBehaviour:
   - root_name: FatBrakes
     present_name: FatBrakes
     title: Member of Scott Pirates
-    skill_description: Perform Death Dance, all your crew go <color=#b5b800><b>EXCITED</b></color>.
+    skill_description: Perform Death Dance, all your crew +1 <color=#b5b800><b>FURY</b></color>.
+  - root_name: Anglersei
+    present_name: Anglersei
+    title: Master of the Deep
+    skill_description: Deal  <b><color=#f06060>$p_0@</color></b> to enermy and STUN
+      1 turn.
+  - root_name: Yuchik
+    present_name: Yuchik
+    title: Lady-bird
+    skill_description: Heal herself <b><color=#228514>$p_0@</color></b>, gain <b><color=#228514>$i_1@</color></b>
+      speed and +1 <color=#b5b800><b>FURY</b></color>.
+  - root_name: Kamijita
+    present_name: Kamijita
+    title: Haisan's Princess
+    skill_description: Buff Ally needing mana the most <b><color=#228514>$i_0@</color></b>
+      mana,  speed-up <b><color=#228514>$per_1@</color></b>.

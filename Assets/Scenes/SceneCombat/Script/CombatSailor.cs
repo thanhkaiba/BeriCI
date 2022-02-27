@@ -461,9 +461,6 @@ public class CombatSailor : Sailor
         cs.CurrentSpeed -= cs.SpeedNeed;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
-
-        CountdownStatusRemain();
-        DisplayStatus();
         return 0.3f;
     }
     public virtual float RunBaseAttack(CombatSailor target) { return 0f; }

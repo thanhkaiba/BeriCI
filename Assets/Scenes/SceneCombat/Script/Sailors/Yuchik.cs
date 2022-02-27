@@ -3,9 +3,9 @@ using Piratera.Sound;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Anglersei : CombatSailor
+public class Yuchik : CombatSailor
 {
-    public Anglersei()
+    public Yuchik()
     {
     }
     public override void Awake()
@@ -21,19 +21,25 @@ public class Anglersei : CombatSailor
     {
         TriggerAnimation("Attack");
         Vector3 oriPos = transform.position;
+        Debug.Log("target: " + target);
+        Debug.Log("target id: " + target.Model.id);
+        Debug.Log("target id: " + target.Model.config_stats.root_name);
         int offset = transform.position.x < target.transform.position.x ? -1 : 1;
         Vector3 desPos = new Vector3(
-            target.transform.position.x + offset * 3,
+            target.transform.position.x + offset * 5,
             target.transform.position.y,
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.3f, () => SoundMgr.PlaySoundAttackSailor(0)));
-        seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
+        seq.AppendInterval(.3f);
+        seq.AppendCallback(() =>
+        {
+            SoundMgr.PlaySoundAttackSailor(4);
+        });
         seq.AppendInterval(0.8f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
-        return 0.8f;
+        return .65f;
     }
     public override float TakeDamage(Damage d)
     {
@@ -50,18 +56,14 @@ public class Anglersei : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        float scale_damage_ratio = Model.config_stats.skill_params[0];
+        float gain_health = Model.config_stats.skill_params[0];
+        float gain_speed = Model.config_stats.skill_params[1];
 
-        float main_damage = cs.Power * scale_damage_ratio;
-
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Melee(this, enermy);
-
+        float main_health = cs.Power * gain_health;
+        CombatSailor target = TargetsUtils.Self(this);
         targets.Add(target.Model.id);
-        float dmgDeal = target.CalcDamageTake(new Damage() { physics = main_damage }, this);
-        _params.Add(dmgDeal);
-        if (dmgDeal > target.cs.CurHealth) _params.Add(1);
-        else _params.Add(-1);
+        _params.Add(main_health);
+        _params.Add(gain_speed);
 
         return ProcessSkill(targets, _params);
     }
@@ -70,30 +72,25 @@ public class Anglersei : CombatSailor
         base.ProcessSkill();
         TriggerAnimation("Skill");
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
-
         CombatEvents.Instance.highlightTarget.Invoke(target);
-        Vector3 oriPos = transform.position;
-
-        int offset = transform.position.x < target.transform.position.x ? -1 : 1;
-        Vector3 desPos = new Vector3(
-            target.transform.position.x + offset * 4,
-            target.transform.position.y,
-            target.transform.position.z
-        );
-        desPos.z -= 0.1f;
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.3f);
-        seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.35f);
-        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
+        SoundMgr.PlaySoundSkillSailor(0);
+        seq.AppendInterval(1.8f);
         seq.AppendCallback(() =>
         {
-            target.LoseHealth(new Damage() { physics = _params[0] });
-            target.AddStatus(new SailorStatus(SailorStatusType.STUN, 1));
-            if (_params[1] > 0) GainFury(cs.MaxFury);
+            Vector3 pos = transform.position;
+            pos.y += 4f;
+            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
+            seq.AppendInterval(0.3f);
+            seq.AppendCallback(() => Destroy(eff));
+            Debug.Log("Speed gain: " + _params[1]);
+            target.GainSpeed((int)_params[1]);
+            target.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
         });
-        seq.AppendInterval(0.45f);
-        seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
-        return 2.0f;
+        seq.AppendInterval(.1f);
+        seq.AppendCallback(() => target.GainHealth(_params[0]));
+        // CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = 0 });
+        seq.AppendInterval(.1f);
+        return 2f;
     }
 }
