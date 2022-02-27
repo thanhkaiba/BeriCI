@@ -12,7 +12,7 @@ public class PirateWheelData : Singleton<PirateWheelData>
       
         long now = GameTimeMgr.GetCurrentTime();
         long delta = now - LastCountRoll;
-        int recoveringTime = GlobalConfigs.PirateWheelConfig.timeCycle * 1000;
+        int recoveringTime = GlobalConfigs.PirateWheelConfig.TimeCycle * 1000;
         long remain = recoveringTime - delta % recoveringTime;
 
         return remain;
@@ -25,7 +25,7 @@ public class PirateWheelData : Singleton<PirateWheelData>
     {
         long now = GameTimeMgr.GetCurrentTime();
         long delta = now - LastCountRoll;
-        int recoveringTime = GlobalConfigs.PirateWheelConfig.timeCycle * 1000;
+        int recoveringTime = GlobalConfigs.PirateWheelConfig.TimeCycle * 1000;
 
         return delta < recoveringTime;
     }

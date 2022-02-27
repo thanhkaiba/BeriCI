@@ -2388,8 +2388,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 6622859053586173898}
-  textCountDown: {fileID: 0}
   buttonSpin: {fileID: 2463668987748448273}
+  slots:
+  - {fileID: 6912465340414099535}
+  - {fileID: 1939475619978977896}
+  - {fileID: 3277964252617348011}
+  - {fileID: 2108714310152233583}
+  - {fileID: 1807247481575804694}
+  - {fileID: 5522541252649252024}
+  - {fileID: 6701168355074599592}
+  - {fileID: 2173476494484264564}
+  spriteGifts:
+  - {fileID: 21300000, guid: 7a2ce2b8e17b6aa42a868032acae52d5, type: 3}
+  - {fileID: 21300000, guid: 0e0b6ce92552ffd40bb303b0ff74f75e, type: 3}
 --- !u!114 &6719007460666405018
 MonoBehaviour:
   m_ObjectHideFlags: 0

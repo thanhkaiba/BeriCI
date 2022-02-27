@@ -37,11 +37,7 @@ public class LobbyUI : MonoBehaviour
     [SerializeField]
     private Text userStaminaCountDown;
 
-    [SerializeField]
-    private Text luckyWheelCountDown;
-
-    [SerializeField]
-    private GameObject wheelAlert;
+  
 
     [SerializeField]
     private Button[] leftButtons;
@@ -226,17 +222,7 @@ public class LobbyUI : MonoBehaviour
 
         }
 
-        if (PirateWheelData.Instance.IsWaiting())
-        {
-            TimeSpan remaining = TimeSpan.FromMilliseconds(PirateWheelData.Instance.TimeToHaveNewRoll());
-            luckyWheelCountDown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
-            wheelAlert.SetActive(false);
-        }
-        else
-        {
-            luckyWheelCountDown.text = "";
-            wheelAlert.SetActive(true);
-        }
+      
 
     }
 
@@ -276,11 +262,7 @@ public class LobbyUI : MonoBehaviour
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
     }
-    public void ShowLuckyWheel()
-    {
-       
-       GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
-    }
+   
 
 
     public void ShowGuiCheat()
