@@ -83,6 +83,7 @@ public class Yuchik : CombatSailor
             var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
             seq.AppendInterval(0.3f);
             seq.AppendCallback(() => Destroy(eff));
+            Debug.Log("Speed gain: " + _params[1]);
             target.GainSpeed((int)_params[1]);
             target.AddStatus(new SailorStatus(SailorStatusType.EXCITED, 1));
         });
