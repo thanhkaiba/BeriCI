@@ -3099,11 +3099,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b6aec9e0a4b6f24e8d48eb967818da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _expansionMode: 1
+  _expansionMode: 0
   emissionRate: 0.2
   itemDisplayer:
-  - {fileID: 1748305013}
-  - {fileID: 105141829}
+  - {fileID: 1586180698}
+  - {fileID: 864519003}
   popPosition: {fileID: 0}
   itemPrefab:
   - {fileID: 143000, guid: 1c13470aeaf43864393c09738ca1cd68, type: 3}
