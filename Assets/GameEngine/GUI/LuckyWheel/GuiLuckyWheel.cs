@@ -119,17 +119,22 @@ namespace Piratera.GUI
              
         }
 
-        private void FlyGift(string gift)
+        private void FlyGift(string giftString)
         {
-            switch(gift.Split(':')[1])
+            string gift = giftString.Split(':')[1];
+            int quantity = int.Parse(giftString.Split(':')[0]);
+
+            switch (gift)
             {
                 case "stamina":
                     {
+                        StaminaData.Instance.AddStamina(quantity);
                         GameEvent.FlyStamina.Invoke();
                         break;
                     }
                 case "beri":
                     {
+                        UserData.Instance.AddBeri(quantity);
                         GameEvent.FlyBeri.Invoke();
                         break;
                     }

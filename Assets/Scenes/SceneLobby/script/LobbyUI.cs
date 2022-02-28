@@ -59,7 +59,7 @@ public class LobbyUI : MonoBehaviour
     private Transform nodeUser;
     [SerializeField]
     private Transform background;
-    public RoyalCollectingController royal;
+    public MultiRoyalCollectingController royal;
     [SerializeField]
     private Button buttonCheat;
    
@@ -122,12 +122,14 @@ public class LobbyUI : MonoBehaviour
     }
     public void FlyStamina()
     {
-        royal.CollectItem(5, 1, () => { });
+        Debug.Log("da vao day");
+        royal.CollectItem(1, 5, 1, () => { });
     }
 
     public void FlyBeri()
     {
-        royal.CollectItem(5, 1, () => { });
+        Debug.Log("da vao day");
+        royal.CollectItem(0, 5, 1, () => { });
     }
     private void OnDestroy()
     {
@@ -135,6 +137,7 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
         GameEvent.FlyStamina.RemoveListener(FlyStamina);
+        GameEvent.FlyBeri.RemoveListener(FlyBeri);
         GameEvent.MaintainDataChanged.RemoveListener(UpdateMaintain);
     }
 

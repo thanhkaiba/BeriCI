@@ -61,6 +61,11 @@ namespace Piratera.GUI
 
         }
 
+        public GameObject GetLayer(LayerId id)
+        {
+            return layers[((int)id)];
+        }
+
         internal void DestroyGui(string guiId)
         {
             if (guis.ContainsKey(guiId))

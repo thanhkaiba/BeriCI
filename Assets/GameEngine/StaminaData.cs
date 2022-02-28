@@ -63,6 +63,12 @@ public class StaminaData : Singleton<StaminaData>
             GameEvent.UserStaminaChanged.Invoke(oldStamina, Stamina);
         }
     }
+    public void AddStamina(int quantity)
+    {
+        int oldStamina = Stamina;
+        Stamina += quantity;
+        GameEvent.UserStaminaChanged.Invoke(oldStamina, Stamina);
+    }
     public int GetPvECost()
     {
         return GlobalConfigs.StaminaConfig.pve_cost;

@@ -9,8 +9,6 @@ public class RoyalCollectingController : MonoBehaviour
     /// RoyalCollectionSystem Package
     /// </summary>
 
-
-
     public RoyalCollectingAnimation.EXPANSION_MODE _expansionMode = RoyalCollectingAnimation.EXPANSION_MODE.Going_Up;
     // The emission rate in seconds
     public float emissionRate = 0.2f;
@@ -58,7 +56,7 @@ public class RoyalCollectingController : MonoBehaviour
     }
 
     // Here we pop all the necessary items
-    IEnumerator PopItems(int quantity)
+    public virtual IEnumerator PopItems(int quantity)
     {
         WaitForSeconds delay = new WaitForSeconds(emissionRate);
         for (int i = 0; i < quantity; i++)
@@ -82,7 +80,7 @@ public class RoyalCollectingController : MonoBehaviour
             }
 
             // Initialize object
-            animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _expansionMode, this);
+            animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _expansionMode);
             // Start animation
             animation.StartAnimation();
             yield return delay;
@@ -114,7 +112,7 @@ public class RoyalCollectingController : MonoBehaviour
             }
 
             // Initialize object
-            animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _expansionMode, this, newValue, () =>
+            animation.Initialize(itemDisplayer, popPosition, Vector3.zero, Vector3.one, _expansionMode, newValue, () =>
             {
                 number--;
                 // Debug.Log("NUMBER_CHEKED: " + number);

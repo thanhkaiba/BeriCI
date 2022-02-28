@@ -39,9 +39,6 @@ public class RoyalCollectingAnimation : MonoBehaviour
     // Flag telling if animation is running or not for this item
     [HideInInspector] public bool _animationRunning = false;
 
-    // Reference to the collecting Effect Controller
-    private RoyalCollectingController Royal_collectinController;
-
     // The transform component of the currency displayer
     private Transform _itemDisplayerTransform;
 
@@ -61,22 +58,20 @@ public class RoyalCollectingAnimation : MonoBehaviour
     private System.Action OnCompleted;
 
     public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale, EXPANSION_MODE expansionMode,
-        RoyalCollectingController collectingEffectController, int newValue, System.Action action)
+   int newValue, System.Action action)
     {
         _itemDisplayerTransform = destination;
         transform.SetParent(parent);
         transform.localPosition = localPosition;
         transform.localScale = localScale;
         _expansionMode = expansionMode;
-        Royal_collectinController = collectingEffectController;
         this.newValue = newValue;
         this.OnCompleted = action;
         //this.number = num;
     }
 
     // Initialize this item
-    public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale, EXPANSION_MODE expansionMode,
-        RoyalCollectingController collectingEffectController)
+    public void Initialize(Transform destination, Transform parent, Vector3 localPosition, Vector3 localScale, EXPANSION_MODE expansionMode)
     {
         _itemDisplayerTransform = destination;
         _itemDisplayer = _itemDisplayerTransform.GetComponent<RoyalItemDisplayer>();
@@ -84,7 +79,6 @@ public class RoyalCollectingAnimation : MonoBehaviour
         transform.localPosition = localPosition;
         transform.localScale = localScale;
         _expansionMode = expansionMode;
-        Royal_collectinController = collectingEffectController;
     }
 
     // Start the animation for this item

@@ -74,6 +74,15 @@ public class UserData : Singleton<UserData>
 
     }
 
+    public void AddBeri(long quantity)
+    {
+        long oldBeri = Beri;
+        Beri += quantity;
+        GameEvent.UserBeriChanged.Invoke(oldBeri, Beri);
+    }
+
+   
+
     public void OnUserVariablesUpdate(User user)
     {
 

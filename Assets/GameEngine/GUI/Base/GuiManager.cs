@@ -24,6 +24,12 @@ namespace Piratera.GUI
             return null;
         }
 
+        public GameObject GetLayer(LayerId layer)
+        {
+            GuiLayerSystem guiLayerSystem = FindObjectOfType<GuiLayerSystem>();
+            return guiLayerSystem.GetLayer(layer);
+        }
+
 
         public GameObject ShowPopupNotification(string text)
         {
