@@ -43,6 +43,8 @@ public class CrewManager : MonoBehaviour
     private Text EFRemain;
     [SerializeField]
     private Text TextTeamBonus;
+    [SerializeField]
+    private Text TextLockTrade;
 
     private Transform canvas;
 
@@ -126,6 +128,15 @@ public class CrewManager : MonoBehaviour
             +"</color>";
         var teamBonus = GlobalConfigs.PvE.sailor_rank_bonus[(int)model.config_stats.rank] * Mathf.Pow(2, model.star);
         TextTeamBonus.text = "(*) You'll get <color=#e6e9ff>" + teamBonus + "</color> more win Beri as \"Team Bonus\" if this sailor have EF point.";
+        if (!model.IsAvaiable())
+        {
+            TextLockTrade.gameObject.SetActive(true);
+            TextLockTrade.text = "Sailor is locked for " + System.MathF.Ceiling(model.GetRemainingLockTime() / (60f * 60 * 1000)) + " hour(s) because it's been trade recently.";
+        }
+        else
+        {
+            TextLockTrade.gameObject.SetActive(false);
+        }
         if (sailor != null) Destroy(sailor);
         sailor = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), sailorPos);
         if (model.config_stats.root_name == "FatBrakes")
