@@ -139,9 +139,8 @@ public class TooltipSailorInfo : MonoBehaviour
         }
         else furySlider.gameObject.SetActive(false);
 
-        int MaxHealth = (int)cs.MaxHealth;
         healthSlider.value = cs.CurHealth / cs.MaxHealth;
-        healthSlider.transform.Find("Text").GetComponent<Text>().text = ((int)cs.CurHealth).ToString() + "/" + ((int)cs.MaxHealth).ToString();
+        healthSlider.transform.Find("Text").GetComponent<Text>().text = Mathf.Round(cs.CurHealth).ToString() + "/" + Mathf.Round(cs.MaxHealth).ToString();
         textPower.text = Mathf.Round(cs.Power).ToString();
         textSpeed.text = Mathf.Round(cs.Speed).ToString();
         textArmor.text = Mathf.Round(cs.Armor).ToString();
