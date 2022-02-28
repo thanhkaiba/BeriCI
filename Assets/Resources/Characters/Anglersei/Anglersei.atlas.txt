@@ -1,264 +1,271 @@
 
 Anglersei.png
-size: 1878,1802
+size: 1983,1676
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 AT/AT_00
-  rotate: true
-  xy: 1259, 6
+  rotate: false
+  xy: 1453, 799
   size: 298, 284
   orig: 485, 380
   offset: 187, 66
   index: -1
 AT/AT_01
   rotate: false
-  xy: 194, 264
+  xy: 194, 138
   size: 367, 301
   orig: 485, 380
   offset: 101, 79
   index: -1
 AT/AT_02
   rotate: false
-  xy: 701, 1420
+  xy: 701, 1294
   size: 378, 380
   orig: 485, 380
   offset: 102, 0
   index: -1
 AT/AT_03
   rotate: false
-  xy: 306, 1420
+  xy: 306, 1294
   size: 393, 380
   orig: 485, 380
   offset: 87, 0
   index: -1
 AT/AT_04
   rotate: false
-  xy: 1081, 1431
+  xy: 1081, 1305
   size: 372, 369
   orig: 485, 380
   offset: 102, 0
   index: -1
 AT/AT_05
   rotate: false
-  xy: 1455, 1452
+  xy: 1455, 1326
   size: 380, 348
   orig: 485, 380
   offset: 94, 15
   index: -1
 AT/AT_06
   rotate: false
-  xy: 240, 854
+  xy: 240, 728
   size: 388, 334
   orig: 485, 380
   offset: 87, 21
   index: -1
 AT/AT_07
   rotate: false
-  xy: 701, 1109
+  xy: 701, 983
   size: 388, 309
   orig: 485, 380
   offset: 87, 31
   index: -1
 AT/AT_08
   rotate: false
-  xy: 240, 567
+  xy: 240, 441
   size: 386, 285
   orig: 485, 380
   offset: 87, 55
   index: -1
 AT/AT_09
   rotate: false
-  xy: 628, 549
+  xy: 628, 423
   size: 359, 285
   orig: 485, 380
   offset: 112, 53
   index: -1
 AT/AT_10
-  rotate: false
-  xy: 1320, 330
+  rotate: true
+  xy: 1395, 529
   size: 268, 292
   orig: 485, 380
   offset: 204, 50
   index: -1
 AT/AT_11
   rotate: false
-  xy: 1545, 39
+  xy: 1689, 508
   size: 265, 289
   orig: 485, 380
   offset: 204, 47
   index: -1
 AT/AT_12
-  rotate: true
-  xy: 1346, 635
+  rotate: false
+  xy: 1753, 826
   size: 228, 257
   orig: 485, 380
   offset: 207, 53
   index: -1
 AT/AT_13
-  rotate: true
-  xy: 783, 31
+  rotate: false
+  xy: 449, 34
   size: 78, 102
   orig: 485, 380
   offset: 257, 76
   index: -1
+Glow
+  rotate: false
+  xy: 630, 998
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
 Slash/Slash_00
   rotate: true
-  xy: 1722, 803
+  xy: 786, 40
   size: 140, 152
   orig: 294, 482
   offset: 15, 273
   index: -1
 Slash/Slash_02
   rotate: true
-  xy: 1009, 865
+  xy: 1009, 739
   size: 209, 384
   orig: 294, 482
   offset: 28, 32
   index: -1
 Slash/Slash_04
   rotate: true
-  xy: 306, 1190
+  xy: 306, 1064
   size: 228, 393
   orig: 294, 482
   offset: 42, 0
   index: -1
 Slash/Slash_06
   rotate: true
-  xy: 563, 308
+  xy: 563, 182
   size: 239, 384
   orig: 294, 482
   offset: 48, 6
   index: -1
 Slash/Slash_08
   rotate: true
-  xy: 194, 42
+  xy: 1009, 517
   size: 220, 364
   orig: 294, 482
   offset: 58, 16
   index: -1
 Slash/Slash_10
   rotate: true
-  xy: 563, 111
+  xy: 989, 320
   size: 195, 364
   orig: 294, 482
   offset: 85, 23
   index: -1
 Slash/Slash_12
-  rotate: true
-  xy: 2, 26
+  rotate: false
+  xy: 1823, 42
   size: 129, 184
   orig: 294, 482
   offset: 116, 24
   index: -1
 Slash/Slash_14
-  rotate: false
-  xy: 1552, 959
+  rotate: true
+  xy: 1610, 64
   size: 162, 211
   orig: 294, 482
   offset: 92, 33
   index: -1
 Slash/Slash_16
   rotate: false
-  xy: 1395, 867
+  xy: 1487, 320
   size: 155, 207
   orig: 294, 482
   offset: 93, 36
   index: -1
 arm_L_01
   rotate: true
-  xy: 560, 11
+  xy: 563, 82
   size: 98, 221
   orig: 98, 221
   offset: 0, 0
   index: -1
 arm_L_02
-  rotate: false
-  xy: 1453, 1176
+  rotate: true
+  xy: 194, 24
   size: 112, 253
   orig: 112, 253
   offset: 0, 0
   index: -1
 arm_R_01
   rotate: false
-  xy: 1716, 945
+  xy: 1792, 1099
   size: 148, 225
   orig: 148, 225
   offset: 0, 0
   index: -1
 arm_R_02
   rotate: false
-  xy: 1590, 359
+  xy: 1837, 1400
   size: 130, 274
   orig: 130, 274
   offset: 0, 0
   index: -1
 arm_R_frame
   rotate: true
-  xy: 1091, 1076
+  xy: 1091, 950
   size: 353, 360
   orig: 402, 360
   offset: 0, 0
   index: -1
 body
   rotate: true
-  xy: 630, 836
+  xy: 630, 710
   size: 271, 377
   orig: 271, 377
   offset: 0, 0
   index: -1
 body_f
   rotate: true
-  xy: 989, 306
+  xy: 949, 2
   size: 316, 329
   orig: 316, 329
   offset: 0, 0
   index: -1
 head
   rotate: false
-  xy: 1590, 1172
+  xy: 1644, 228
   size: 286, 278
   orig: 286, 278
   offset: 0, 0
   index: -1
 head_f
   rotate: false
-  xy: 929, 2
+  xy: 1280, 16
   size: 328, 302
   orig: 328, 302
   offset: 0, 0
   index: -1
 leg_L
   rotate: false
-  xy: 2, 157
+  xy: 2, 31
   size: 190, 508
   orig: 190, 508
   offset: 0, 0
   index: -1
 leg_L_f
   rotate: true
-  xy: 1009, 624
+  xy: 1455, 1085
   size: 239, 335
   orig: 239, 335
   offset: 0, 0
   index: -1
 leg_R
   rotate: false
-  xy: 2, 1247
+  xy: 2, 1121
   size: 302, 553
   orig: 302, 553
   offset: 0, 0
   index: -1
 leg_R_f
   rotate: false
-  xy: 2, 667
+  xy: 2, 541
   size: 236, 578
   orig: 236, 578
   offset: 0, 0
   index: -1
 rau
-  rotate: false
-  xy: 1605, 671
+  rotate: true
+  xy: 1355, 320
   size: 195, 130
   orig: 195, 130
   offset: 0, 0
