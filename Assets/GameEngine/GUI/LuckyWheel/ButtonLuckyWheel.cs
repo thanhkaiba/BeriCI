@@ -18,12 +18,19 @@ namespace Piratera.GUI
         [SerializeField]
         private Sprite[] sprites;
 
-
+        private void Start()
+        {
+            if (CrewData.Instance.IsEmpty())
+            {
+                gameObject.SetActive(false);
+            }
+        }
 
 
 
         private void Update()
         {
+
             if (PirateWheelData.Instance.IsWaiting())
             {
                 TimeSpan remaining = TimeSpan.FromMilliseconds(PirateWheelData.Instance.TimeToHaveNewRoll());

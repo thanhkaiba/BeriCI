@@ -25,6 +25,9 @@ namespace Piratera.GUI
         [SerializeField]
         private Image wheelCircle;
 
+        [SerializeField]
+        private GameObject iconLock;
+
 
 
 
@@ -36,8 +39,7 @@ namespace Piratera.GUI
         }
         public void InitData()
         {
-            buttonSpin.interactable = !PirateWheelData.Instance.IsWaiting();
-
+           
             string[] gifts = GlobalConfigs.PirateWheelConfig.ListItems;
 
             for(int i = 0; i < gifts.Length; i++)
@@ -47,7 +49,8 @@ namespace Piratera.GUI
                 string gift = data[1];
                 string quantity = data[0];
 
-                slots[i].transform.Find("Quantity").GetComponent<Text>().text = quantity;
+                Text text = slots[i].transform.Find("Quantity").GetComponent<Text>();
+                text.text = quantity;
                 Image icon = slots[i].transform.Find("Icon").GetComponent<Image>();
 
                 switch (gift)
@@ -55,12 +58,14 @@ namespace Piratera.GUI
                     case "beri":
                         {
                             icon.sprite = spriteGifts[0];
+                            text.color = new Color32(45, 134, 188, 255);
                             icon.GetComponent<RectTransform>().sizeDelta = new Vector2(49.068f, 48.8367f);
                             break;
                         }
                     case "stamina":
                         {
                             icon.sprite = spriteGifts[1];
+                            text.color = new Color32(247, 185, 36, 255);
                             icon.GetComponent<RectTransform>().sizeDelta = new Vector2(41.0958f, 57.1768f);
                             break;
                         }
@@ -78,7 +83,7 @@ namespace Piratera.GUI
             if (action == SFSAction.PIRATE_WHEEL)
             {
                 GuiManager.Instance.ShowGuiWaiting(false);
-                buttonSpin.interactable = !PirateWheelData.Instance.IsWaiting();
+             
 
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
@@ -93,17 +98,19 @@ namespace Piratera.GUI
             Sequence seq = DOTween.Sequence();
             seq.SetLink(wheelCircle.gameObject);
             seq.SetTarget(wheelCircle.transform);
-            seq.Append(wheelCircle.transform.DORotate(Vector3.forward * 360, 1f, RotateMode.LocalAxisAdd));
+            seq.Append(wheelCircle.transform.DORotate(Vector3.forward * 360, 1f, RotateMode.FastBeyond360));
 
             seq.OnComplete(() => {
-                if (PirateWheelData.Instance.Reward != null)
-                {
-                    seq.Kill();
-                    wheelCircle.transform.DORotate(new Vector3(0, 0, GetAngleOfReward(PirateWheelData.Instance.Reward)), 0.6f, RotateMode.LocalAxisAdd).SetEase(Ease.OutBack);
+            if (PirateWheelData.Instance.Reward != null)
+            {
+                seq.Kill();
+                float angle = GetAngleOfReward(PirateWheelData.Instance.Reward);
+                wheelCircle.transform.DORotate(new Vector3(0, 0, 360 + angle), 1f + 1.2f/360 * angle, RotateMode.FastBeyond360).OnComplete(() => {
                     FlyGift(PirateWheelData.Instance.Reward);
                     PirateWheelData.Instance.Reward = null;
-                }
-                else
+                });
+            }
+            else
                 {
                     seq.Restart();
 
@@ -149,7 +156,12 @@ namespace Piratera.GUI
             GuiManager.Instance.ShowGuiWaiting(true);
             NetworkController.Send(SFSAction.PIRATE_WHEEL);
         }
-      
-      
+
+        private void Update()
+        {
+            buttonSpin.interactable = !PirateWheelData.Instance.IsWaiting();
+            iconLock.SetActive(PirateWheelData.Instance.IsWaiting());
+        }
+
     }
 }
