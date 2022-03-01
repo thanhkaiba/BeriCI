@@ -3,6 +3,7 @@ using Piratera.Config;
 using Piratera.Network;
 using Piratera.Sound;
 using Sfs2X.Entities.Data;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,12 @@ namespace Piratera.GUI
 
         [SerializeField]
         private GameObject iconLock;
+
+
+        [SerializeField]
+        private GameObject bgCountDown;
+
+        private bool UpdateCountDown = false;
 
 
 
@@ -108,6 +115,7 @@ namespace Piratera.GUI
                 buttonClose.gameObject.SetActive(true);
                 FlyGift(PirateWheelData.Instance.Reward);
                 PirateWheelData.Instance.Reward = null;
+                UpdateCountDown = true;
             });
 
         }
@@ -159,7 +167,21 @@ namespace Piratera.GUI
         private void Update()
         {
             buttonSpin.interactable = !PirateWheelData.Instance.IsWaiting();
+           
             iconLock.SetActive(PirateWheelData.Instance.IsWaiting());
+            bgCountDown.SetActive(PirateWheelData.Instance.IsWaiting());
+
+            if (PirateWheelData.Instance.IsWaiting() && UpdateCountDown)
+            {
+                TimeSpan remaining = TimeSpan.FromMilliseconds(PirateWheelData.Instance.TimeToHaveNewRoll());
+                bgCountDown.transform.Find("TextNote").GetComponent<Text>().text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
+
+            } else
+            {
+                bgCountDown.SetActive(false);
+            }
+
+
         }
 
     }
