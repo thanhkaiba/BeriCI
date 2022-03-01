@@ -249,7 +249,7 @@ namespace Piratera.Sound
             }
         }
 
-        private void PlaySoundEffect(AudioClip audioClip)
+        public void PlaySoundEffect(AudioClip audioClip)
         {
             if (soundOn)
             {

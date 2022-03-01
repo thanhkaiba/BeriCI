@@ -25,7 +25,7 @@ public class Kamijita : CombatSailor
 
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.4f);
-        seq.AppendCallback(() => SoundMgr.PlaySoundAttackSailor(13));
+        seq.AppendCallback(() => SoundMgr.Instance.PlaySoundEffect(Resources.Load<AudioClip>("Audio/Sailor/play_harp")));
         seq.AppendInterval(.4f);
         seq.AppendCallback(() =>
         {
@@ -84,7 +84,7 @@ public class Kamijita : CombatSailor
     }
     public void StartEffBuff(CombatSailor target, int furyGain, float speedUp)
     {
-        SoundMgr.PlaySoundSkillSailor(14);
+        SoundMgr.Instance.PlaySoundEffect(Resources.Load<AudioClip>("Audio/Sailor/play_harp"));
         Sequence seq = DOTween.Sequence();
         seq.AppendCallback(() =>
         {
