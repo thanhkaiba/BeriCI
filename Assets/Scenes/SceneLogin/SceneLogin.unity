@@ -2105,6 +2105,7 @@ MonoBehaviour:
   lose: {fileID: 8300000, guid: 0b42e79372a12984cbb72af74a899bf4, type: 3}
   draw: {fileID: 8300000, guid: e4836f1ef6a2aec479eb7d9667635a8c, type: 3}
   receiveGift: {fileID: 8300000, guid: c1f193f5f409b89438bdfc1c69bd54e1, type: 3}
+  wheelRunning: {fileID: 8300000, guid: d92e4e7d0f5ab984693c0915649b02b3, type: 3}
   openSlot: {fileID: 8300000, guid: 6934bf9ef2c430846b27b2b4ac382014, type: 3}
   summon: {fileID: 8300000, guid: f186d4f1fb74504478714b4739420e75, type: 3}
   findMatchVoice:

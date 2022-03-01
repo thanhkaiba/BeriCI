@@ -2466,6 +2466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 6622859053586173898}
   buttonSpin: {fileID: 2463668987748448273}
+  buttonClose: {fileID: 3713460672270792578}
   slots:
   - {fileID: 6912465340414099535}
   - {fileID: 1939475619978977896}

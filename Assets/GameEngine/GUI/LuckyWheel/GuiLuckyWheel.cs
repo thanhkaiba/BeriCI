@@ -1,6 +1,7 @@
 ﻿using DG.Tweening;
 using Piratera.Config;
 using Piratera.Network;
+using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +16,9 @@ namespace Piratera.GUI
     
         [SerializeField]
         private Button buttonSpin;
+
+        [SerializeField]
+        private Button buttonClose;
 
         [SerializeField]
         private GameObject[] slots;
@@ -83,11 +87,14 @@ namespace Piratera.GUI
             if (action == SFSAction.PIRATE_WHEEL)
             {
                 GuiManager.Instance.ShowGuiWaiting(false);
-             
+          
 
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     OnClose();
+                } else
+                {
+                    DoSpin();
                 }
 
             }
@@ -95,32 +102,19 @@ namespace Piratera.GUI
 
         private void DoSpin()
         {
-            Sequence seq = DOTween.Sequence();
-            seq.SetLink(wheelCircle.gameObject);
-            seq.SetTarget(wheelCircle.transform);
-            seq.Append(wheelCircle.transform.DORotate(Vector3.forward * 360, 1f, RotateMode.FastBeyond360));
-
-            seq.OnComplete(() => {
-            if (PirateWheelData.Instance.Reward != null)
-            {
-                seq.Kill();
-                float angle = GetAngleOfReward(PirateWheelData.Instance.Reward);
-                wheelCircle.transform.DORotate(new Vector3(0, 0, 360 + angle), 1f + 1.2f/360 * angle, RotateMode.FastBeyond360).OnComplete(() => {
-                    FlyGift(PirateWheelData.Instance.Reward);
-                    PirateWheelData.Instance.Reward = null;
-                });
-            }
-            else
-                {
-                    seq.Restart();
-
-                }
+            SoundMgr.PlaySound(PirateraSoundEffect.WHEEL_RUNNING);
+            float angle = GetAngleOfReward(PirateWheelData.Instance.Reward);
+            wheelCircle.transform.DORotate(new Vector3(0, 0, 720 + angle), 3f + 1.2f / 360 * angle, RotateMode.LocalAxisAdd).OnComplete(() => {
+                buttonClose.gameObject.SetActive(true);
+                FlyGift(PirateWheelData.Instance.Reward);
+                PirateWheelData.Instance.Reward = null;
             });
-             
+
         }
 
         private void FlyGift(string giftString)
         {
+            SoundMgr.PlaySound(PirateraSoundEffect.RECEIVE_GIFT);
             string gift = giftString.Split(':')[1];
             int quantity = int.Parse(giftString.Split(':')[0]);
 
@@ -157,7 +151,7 @@ namespace Piratera.GUI
         }
         public void SendSpin()
         {
-            DoSpin();
+            buttonClose.gameObject.SetActive(false);
             GuiManager.Instance.ShowGuiWaiting(true);
             NetworkController.Send(SFSAction.PIRATE_WHEEL);
         }
