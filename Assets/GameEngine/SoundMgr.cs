@@ -15,6 +15,7 @@ namespace Piratera.Sound
         LOSE,
         DRAW,
         RECEIVE_GIFT,
+        WHEEL_RUNNING,
         OPEN_SLOT,
         SUMMON,
     }
@@ -37,6 +38,8 @@ namespace Piratera.Sound
 
         [SerializeField]
         private AudioClip receiveGift;
+        [SerializeField]
+        private AudioClip wheelRunning;
 
         [SerializeField]
         private AudioClip openSlot;
@@ -235,6 +238,9 @@ namespace Piratera.Sound
                         break;
                     case PirateraSoundEffect.SUMMON:
                         Instance.PlaySoundEffect(Instance.summon);
+                        break;
+                    case PirateraSoundEffect.WHEEL_RUNNING:
+                        Instance.PlaySoundEffect(Instance.wheelRunning);
                         break;
                 }
 
