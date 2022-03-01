@@ -31,11 +31,9 @@ namespace Piratera.GUI
         private Image wheelCircle;
 
         [SerializeField]
-        private GameObject iconLock;
-
-
+        private Text textCountdown;
         [SerializeField]
-        private GameObject bgCountDown;
+        private GameObject textSpin;
 
         private bool UpdateCountDown = false;
 
@@ -69,14 +67,14 @@ namespace Piratera.GUI
                     case "beri":
                         {
                             icon.sprite = spriteGifts[0];
-                            text.color = new Color32(45, 134, 188, 255);
+                            text.color = new Color32(157, 205, 233, 255);
                             icon.GetComponent<RectTransform>().sizeDelta = new Vector2(49.068f, 48.8367f);
                             break;
                         }
                     case "stamina":
                         {
                             icon.sprite = spriteGifts[1];
-                            text.color = new Color32(247, 185, 36, 255);
+                            text.color = new Color32(247, 245, 36, 255);
                             icon.GetComponent<RectTransform>().sizeDelta = new Vector2(41.0958f, 57.1768f);
                             break;
                         }
@@ -111,7 +109,7 @@ namespace Piratera.GUI
         {
             SoundMgr.PlaySound(PirateraSoundEffect.WHEEL_RUNNING);
             float angle = GetAngleOfReward(PirateWheelData.Instance.Reward);
-            wheelCircle.transform.DORotate(new Vector3(0, 0, 720 + angle), 3f + 1.2f / 360 * angle, RotateMode.LocalAxisAdd).OnComplete(() => {
+            wheelCircle.transform.DORotate(new Vector3(0, 0, 360*5 + angle), 5f + 3.0f / 360 * angle, RotateMode.LocalAxisAdd).SetEase(Ease.InOutSine).OnComplete(() => {
                 buttonClose.gameObject.SetActive(true);
                 FlyGift(PirateWheelData.Instance.Reward);
                 PirateWheelData.Instance.Reward = null;
@@ -147,7 +145,7 @@ namespace Piratera.GUI
         private float GetAngleOfReward(string reward)
         {
             int index = System.Array.IndexOf(GlobalConfigs.PirateWheelConfig.ListItems, reward);
-            return 8 + 46 * index;
+            return 45 * index;
         }
 
 
@@ -168,20 +166,19 @@ namespace Piratera.GUI
         {
             buttonSpin.interactable = !PirateWheelData.Instance.IsWaiting();
            
-            iconLock.SetActive(PirateWheelData.Instance.IsWaiting());
-            bgCountDown.SetActive(PirateWheelData.Instance.IsWaiting());
+            textCountdown.gameObject.SetActive(PirateWheelData.Instance.IsWaiting());
 
             if (PirateWheelData.Instance.IsWaiting() && UpdateCountDown)
             {
                 TimeSpan remaining = TimeSpan.FromMilliseconds(PirateWheelData.Instance.TimeToHaveNewRoll());
-                bgCountDown.transform.Find("TextNote").GetComponent<Text>().text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
-
-            } else
+                textCountdown.text = string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
+            }
+            else
             {
-                bgCountDown.SetActive(false);
+                textCountdown.gameObject.SetActive(false);
             }
 
-
+            textSpin.SetActive(!textCountdown.gameObject.activeSelf);
         }
 
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1237,6 +1237,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7442459025545994924, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442459025545994924, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7442459025545994924, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1273,12 +1283,12 @@ PrefabInstance:
     - target: {fileID: 7442459025545994924, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 595
+      value: 522
       objectReference: {fileID: 0}
     - target: {fileID: 7442459025545994924, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 7
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 7442459025545994924, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
         type: 3}
@@ -2707,6 +2717,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1360784800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7442459025545994925, guid: 9f2e1af20b218ab4ea9bf3f6f2cc3d43,
+    type: 3}
+  m_PrefabInstance: {fileID: 588422107}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1360784805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360784800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 806358c04cf8f4646bb43263c8a9fe4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayTime: 0.4
+  duration: 0.8
+  x: 0
+  y: 140
+  ease: 21
 --- !u!1 &1377608185
 GameObject:
   m_ObjectHideFlags: 0
