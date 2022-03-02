@@ -2736,7 +2736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delayTime: 0.4
-  duration: 0.8
+  duration: 0.5
   x: 0
   y: 140
   ease: 21
