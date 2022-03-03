@@ -61,7 +61,7 @@ MonoBehaviour:
     present_name: O-Bonbee
     title: Baby scared
     skill_description: Use his sword-arms, deal <b><color=#f06060>$p_0@</color></b>
-      to target addition <b><color=#f06060>$per_1@</color></b> in a column.
+      in a column.
   - root_name: Salvatafo
     present_name: Salvatafo
     title: The Salvage of the Wotafo
