@@ -102,7 +102,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "EPIDEMIC base attack also place virus on victim";
                 break;
             case SailorClass.CRIMINAL:
-                content.text = "CRIMINAL deal " + para[0] + "% more damage for each enermy losing health percent";
+                content.text = "CRIMINAL deal " + para[0] + "% more damage for each enemy losing health percent";
                 break;
             case SailorClass.SUMMONER:
                 content.text = "Summon Krackin monster";
