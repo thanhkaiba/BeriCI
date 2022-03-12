@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public class SquadAContainer : MonoBehaviour
+public class DefenseSquadContainer : MonoBehaviour
 {
     [SerializeField]
     private TeamColor teamColor;
@@ -15,7 +15,7 @@ public class SquadAContainer : MonoBehaviour
             {
                 short key = FightingLine.Position2SlotIndex(i, j);
                 SquadSlot slot = slots[key];
-                string sailorId = TeamCombatPrepareData.Instance.YourFightingLine.SailorIdAt(i, j);
+                string sailorId = DefenseCrewData.Instance.FightingTeam.SailorIdAt(i, j);
 
                 if (sailorId.Length > 0)
                 {
@@ -30,14 +30,14 @@ public class SquadAContainer : MonoBehaviour
             }
         }
 
-        OnUpdateSquadA();
-        GameEvent.PrepareSquadChanged.AddListener(OnUpdateSquadA);
+        OnUpdateSquad();
+        GameEvent.DefenseSquadChanged.AddListener(OnUpdateSquad);
 
     }
 
     private void OnDestroy()
     {
-        GameEvent.PrepareSquadChanged.RemoveListener(OnUpdateSquadA);
+        GameEvent.DefenseSquadChanged.RemoveListener(OnUpdateSquad);
     }
 
     public Sailor AddSubSailor(string sailorId)
@@ -55,25 +55,25 @@ public class SquadAContainer : MonoBehaviour
     private void CreateDragableSailorComponent(GameObject gameObject)
     {
         DragableSailor drag = gameObject.AddComponent<DragableSailor>();
-        drag.IsSlotEmpty = (short index) => TeamCombatPrepareData.Instance.YourFightingLine.IsSlotEmpty(index);
-        drag.UnEquipSailor = (string id) => TeamCombatPrepareData.Instance.UnEquip(id);
-        drag.OccupieSailor = (string id, short index) => TeamCombatPrepareData.Instance.Occupie(id, index);
-        drag.SwapSailor = (string id, short index) => TeamCombatPrepareData.Instance.Swap(id, TeamCombatPrepareData.Instance.YourFightingLine.OwnerOf(index));
+        drag.IsSlotEmpty = (short index) => DefenseCrewData.Instance.FightingTeam.IsSlotEmpty(index);
+        drag.UnEquipSailor = (string id) => DefenseCrewData.Instance.UnEquip(id);
+        drag.OccupieSailor = (string id, short index) => DefenseCrewData.Instance.Occupie(id, index);
+        drag.SwapSailor = (string id, short index) => DefenseCrewData.Instance.Swap(id, DefenseCrewData.Instance.FightingTeam.OwnerOf(index));
         drag.Slots = slots;
     }
 
     private void CreateSubDragableSailorComponent(GameObject gameObject)
     {
         DragableSubsailor drag = gameObject.AddComponent<DragableSubsailor>();
-        drag.ReplaceSailorAction = (string id, short index) => TeamCombatPrepareData.Instance.Replace(id, index);
-        drag.IsSquadFull = () => !TeamCombatPrepareData.Instance.YourFightingLine.IsFull();
+        drag.ReplaceSailorAction = (string id, short index) => DefenseCrewData.Instance.Replace(id, index);
+        drag.IsSquadFull = () => !DefenseCrewData.Instance.FightingTeam.IsFull();
         drag.Slots = slots;
         drag.OnTransfromSailor = (gameObject) => CreateDragableSailorComponent(gameObject);
     }
 
     public Sailor AddSailor(string sailorId)
     {
-        Sailor sailor = GameUtils.CreateSailor(TeamCombatPrepareData.Instance.GetYourSailorModel(sailorId));
+        Sailor sailor = GameUtils.CreateSailor(sailorId);
         CreateDragableSailorComponent(sailor.gameObject);
         sailor.transform.parent = transform;
         sailor.transform.localScale = Vector3.one;
@@ -82,19 +82,10 @@ public class SquadAContainer : MonoBehaviour
 
         return sailor;
     }
-    public bool HaveSailor()
+
+    public void OnUpdateSquad()
     {
-        bool result = false;
-        foreach (var s in slots)
-        {
-            if (s.GetState() == SquadSlot.State.SELECTED)
-                result = true;
-        }
-        return result;
-    }
-    public void OnUpdateSquadA()
-    {
-        var synergy = GameUtils.CalculateClassBonus(TeamCombatPrepareData.Instance.GetSquadModelList(true));
+        var synergy = GameUtils.CalculateClassBonus(DefenseCrewData.Instance.GetSquadModelList(), true);
         teamColor.ShowClassBonus(synergy);
         GameUtils.lineUpSynergy = synergy;
     }

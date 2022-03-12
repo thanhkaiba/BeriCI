@@ -26,6 +26,9 @@
         PIRATE_WHEEL = 27,
         PIRATE_WHEEL_DATA = 28,
 
+
+        UPDATE_ARENA_FGL = 53,
+
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat
         CHEAT_SAILOR = 101,

@@ -4,6 +4,7 @@ using UnityEngine.Events;
 public class GameEvent
 {
     public static readonly UnityEvent SquadChanged = new UnityEvent();
+    public static readonly UnityEvent DefenseSquadChanged = new UnityEvent();
     public static readonly UnityEvent<SailorModel> SailorInfoChanged = new UnityEvent<SailorModel>();
     public static readonly UnityEvent PrepareSquadChanged = new UnityEvent();
     public static readonly UnityEvent<List<string>> UserDataChanged = new UnityEvent<List<string>>();

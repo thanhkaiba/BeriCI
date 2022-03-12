@@ -235,6 +235,11 @@ public class LobbyUI : MonoBehaviour
 
     }
 
+    public void OnArenaClick()
+    {
+        GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
+    }
+
     private void RunAppearAction()
     {
         for (int i = 0; i < leftButtons.Length; i++)

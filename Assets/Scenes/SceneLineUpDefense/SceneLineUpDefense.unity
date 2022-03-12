@@ -199,6 +199,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99790277}
   m_CullTransparentMesh: 1
+--- !u!1 &119441275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 119441276}
+  - component: {fileID: 119441278}
+  - component: {fileID: 119441277}
+  m_Layer: 5
+  m_Name: TextInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &119441276
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119441275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1234413708}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.000030518, y: -264}
+  m_SizeDelta: {x: 1241.17, y: 201.55}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &119441277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119441275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 8ec3b3fa00e5aa34c81ccf5c7c7c162b, type: 3}
+    m_FontSize: 57
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 57
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 0.5
+  m_Text: "Line up your defense team agains other players. \nYou can change your
+    defense team anytime you want."
+--- !u!222 &119441278
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 119441275}
+  m_CullTransparentMesh: 1
 --- !u!1 &120528595
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,7 +1091,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1072998034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PickTeamUI, Assembly-CSharp
         m_MethodName: OnBuySlot
         m_Mode: 1
@@ -1586,10 +1667,7 @@ MonoBehaviour:
   iconSailorPrefap: {fileID: 7725597495769743507, guid: ac1b2cc54f78e714c94c55d0cc2e2b79,
     type: 3}
   scrollRect: {fileID: 1433130410}
-  Speed: 0
-  Acceleration: 20
-  MaxSpeed: 600
-  squadContainer: {fileID: 877664650}
+  squadContainer: {fileID: 0}
 --- !u!114 &756254532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2050,7 +2128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 877664651}
-  - component: {fileID: 877664650}
+  - component: {fileID: 877664652}
   m_Layer: 7
   m_Name: Squad
   m_TagString: Untagged
@@ -2058,29 +2136,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &877664650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 877664649}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45de89da81203b24aa292797321c373e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamColor: {fileID: 1364231199}
-  slots:
-  - {fileID: 906783385}
-  - {fileID: 188251586}
-  - {fileID: 493402243}
-  - {fileID: 1550287701}
-  - {fileID: 1382823892}
-  - {fileID: 1019031643}
-  - {fileID: 236412443}
-  - {fileID: 1526332786}
-  - {fileID: 804818438}
 --- !u!4 &877664651
 Transform:
   m_ObjectHideFlags: 0
@@ -2096,6 +2151,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &877664652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 877664649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3cdc96f3f84170429cf0e96e2534f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamColor: {fileID: 1364231199}
+  slots:
+  - {fileID: 906783385}
+  - {fileID: 188251586}
+  - {fileID: 493402243}
+  - {fileID: 1550287701}
+  - {fileID: 1382823892}
+  - {fileID: 1019031643}
+  - {fileID: 236412443}
+  - {fileID: 1526332786}
+  - {fileID: 804818438}
 --- !u!1 &906783381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2240,8 +2318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.11933332}
   m_AnchorMax: {x: 1, y: 0.11933332}
-  m_AnchoredPosition: {x: -52, y: -109}
-  m_SizeDelta: {x: 159, y: 202}
+  m_AnchoredPosition: {x: -12, y: -75}
+  m_SizeDelta: {x: 193, y: 103}
   m_Pivot: {x: 1, y: 0}
 --- !u!114 &996213809
 MonoBehaviour:
@@ -2287,7 +2365,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1072998034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PickTeamUI, Assembly-CSharp
         m_MethodName: OpenSceneCrew
         m_Mode: 1
@@ -2319,7 +2397,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 897e6c8dbfddee64dbe348c61cfd3eb9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2d5260d78783ac04298ff7b0656bd807, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2676,8 +2754,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1072998032}
-  - component: {fileID: 1072998034}
   - component: {fileID: 1072998033}
+  - component: {fileID: 1072998034}
   m_Layer: 0
   m_Name: PickTeamController
   m_TagString: Untagged
@@ -2726,7 +2804,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1072998031}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a73d5940dd7f40e4badd1873392ad2f, type: 3}
+  m_Script: {fileID: 11500000, guid: e0ae99c1d00752047af4a45093ed174f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TextMaxCapacity: {fileID: 1833091284}
@@ -2990,6 +3068,7 @@ RectTransform:
   - {fileID: 654974500}
   - {fileID: 1259725237}
   - {fileID: 1968131697}
+  - {fileID: 119441276}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3524,7 +3603,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1072998034}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PickTeamUI, Assembly-CSharp
         m_MethodName: OnBackToLobby
         m_Mode: 1
@@ -4000,7 +4079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.4, y: -58.8}
+  m_AnchoredPosition: {x: 2.4, y: 7}
   m_SizeDelta: {x: 216.9, y: 101.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1587093643
@@ -4040,18 +4119,18 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 83dfc4e701d99e24fa403cb5763d7bfa, type: 3}
-    m_FontSize: 62
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 222
-    m_Alignment: 1
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: CREW
+  m_Text: CONFIRM
 --- !u!222 &1587093645
 CanvasRenderer:
   m_ObjectHideFlags: 0

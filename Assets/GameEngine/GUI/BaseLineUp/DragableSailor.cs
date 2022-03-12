@@ -8,7 +8,7 @@ public class DragableSailor : MonoBehaviour
     protected const int TransformHeight = 200;
     protected BoxCollider boxAround;
     protected Canvas canvas;
-    public SquadSlot[] slots { get; set; }
+    public SquadSlot[] Slots { get; set; }
     [SerializeField]
     protected short selectingIndex = -1;
     protected Sailor sailor;
@@ -35,21 +35,21 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        if (!SquadContainer.Draging || !SquadAContainer.Draging)
+        if (!SquadContainer.Draging || !SquadAContainer.Draging || !DefenseSquadContainer.Draging)
         {
             dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);
             dragImage.enabled = false;
             SetSailorOpacity(0.8f);
-            for (short i = 0; i < slots.Length; i++)
+            for (short i = 0; i < Slots.Length; i++)
             {
-                slots[i].Selectable = true;
-                if (slots[i].GetOwner() == sailor)
+                Slots[i].Selectable = true;
+                if (Slots[i].GetOwner() == sailor)
                 {
                     originIndex = i;
                 }
             }
             selectingIndex = originIndex;
-            slots[originIndex].OnSelecting();
+            Slots[originIndex].OnSelecting();
 
             Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             originZ = transform.position.z;
@@ -114,13 +114,14 @@ public class DragableSailor : MonoBehaviour
         {
             SquadContainer.Draging = false;
             SquadAContainer.Draging = false;
+            DefenseSquadContainer.Draging = false;
             draging = false;
-            if (!dragImage.enabled)
+            if (!dragImage)
             {
                 SetSailorOpacity(1f);
-                for (short i = 0; i < slots.Length; i++)
+                for (short i = 0; i < Slots.Length; i++)
                 {
-                    if (slots[i].GetOwner() == sailor)
+                    if (Slots[i].GetOwner() == sailor)
                     {
                         originIndex = i;
                     }
@@ -142,14 +143,14 @@ public class DragableSailor : MonoBehaviour
 
         if (dragImage != null)
         {
-            Destroy(dragImage.gameObject);
+            Destroy(dragImage);
         }
     }
 
     private void OnUnEquip()
     {
         UpdateSlots(originIndex);
-        slots[originIndex].OnFree();
+        Slots[originIndex].OnFree();
         Destroy(gameObject);
         UnEquipSailor(sailor.Model.id);
 
@@ -170,7 +171,7 @@ public class DragableSailor : MonoBehaviour
 
         }
 
-        slots[selectingIndex].SetSelectedSailer(sailor);
+        Slots[selectingIndex].SetSelectedSailer(sailor);
         originIndex = selectingIndex;
         selectingIndex = -1;
     }
@@ -183,10 +184,10 @@ public class DragableSailor : MonoBehaviour
 
     private void CheckNewSelecting(Vector3 mousePositon)
     {
-        for (short i = 0; i < slots.Length; i++)
+        for (short i = 0; i < Slots.Length; i++)
         {
-            SquadSlot slot = slots[i];
-            if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot.Selectable)
+            SquadSlot slot = Slots[i];
+            if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot)
             {
                 if (i != selectingIndex)
                 {
@@ -202,14 +203,14 @@ public class DragableSailor : MonoBehaviour
         // neu dang chiem 1 vi tri nao do => tra gia tri cho vi tri do
         if (selectingIndex >= 0)
         {
-            slots[selectingIndex].Swap(slots[originIndex]);
+            Slots[selectingIndex].Swap(Slots[originIndex]);
         }
 
         // doi quan tuong o vi tri moi sang vi tri ban dau cua tướng đang drag
-        slots[originIndex].Swap(slots[newSelecting]);
+        Slots[originIndex].Swap(Slots[newSelecting]);
 
         // set trang thai cho vi tri moi
-        slots[newSelecting].OnSelecting();
+        Slots[newSelecting].OnSelecting();
 
         // luu lai vi tri moi
         selectingIndex = newSelecting;

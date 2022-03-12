@@ -59,7 +59,7 @@ public class SquadContainer : MonoBehaviour
         drag.UnEquipSailor = (string id) => CrewData.Instance.UnEquip(id);
         drag.OccupieSailor = (string id, short index) => CrewData.Instance.Occupie(id, index);
         drag.SwapSailor = (string id, short index) => CrewData.Instance.Swap(id, CrewData.Instance.FightingTeam.OwnerOf(index));
-        drag.slots = slots;
+        drag.Slots = slots;
     }
 
     private void CreateSubDragableSailorComponent(GameObject gameObject)
@@ -67,7 +67,7 @@ public class SquadContainer : MonoBehaviour
         DragableSubsailor drag = gameObject.AddComponent<DragableSubsailor>();
         drag.ReplaceSailorAction = (string id, short index) => CrewData.Instance.Replace(id, index);
         drag.IsSquadFull = () => !CrewData.Instance.FightingTeam.IsFull();
-        drag.slots = slots;
+        drag.Slots = slots;
         drag.OnTransfromSailor = (gameObject) => CreateDragableSailorComponent(gameObject);
     }
 
