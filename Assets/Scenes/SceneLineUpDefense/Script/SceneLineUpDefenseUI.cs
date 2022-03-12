@@ -17,6 +17,7 @@ public class SceneLineUpDefenseUI : MonoBehaviour
     public RoyalCollectingController royal;
     void Start()
     {
+        GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupDefenseLineUpGuide");
         SquadContainer.Draging = false;
         UpdateSlotMaxCapacity();
         NetworkController.AddServerActionListener(OnReceiveServerAction);
