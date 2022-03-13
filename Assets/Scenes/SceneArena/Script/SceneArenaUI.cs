@@ -7,16 +7,12 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneLineUpDefenseUI : MonoBehaviour
+public class SceneArenaUI : MonoBehaviour
 {
-    [SerializeField]
-    private Text TextMaxCapacity;
-
+   
     void Start()
     {
-        GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupDefenseLineUpGuide");
-        DefenseSquadContainer.Draging = false;
-        TextMaxCapacity.text = "Max capacity: " + UserData.Instance.NumSlot;
+        GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupCongratJoinArena");
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 
@@ -30,7 +26,7 @@ public class SceneLineUpDefenseUI : MonoBehaviour
 
         if (action == SFSAction.BUY_SLOT)
         {
-          
+         
         }
     }
 
@@ -42,21 +38,16 @@ public class SceneLineUpDefenseUI : MonoBehaviour
 
 
 
-
     public void OnBackToLobby()
     {
         CrewData.Instance.OnConfirmSquad();
         SceneManager.LoadScene("SceneLobby");
     }
 
-    public void OpenSceneCrew()
+    public void OpenSceneLineUp()
     {
         CrewData.Instance.OnConfirmSquad();
-        SceneManager.LoadScene("SceneCrew");
+        SceneManager.LoadScene("SceneDefenseLineUP");
     }
-   
-    public void OnConfirm()
-    {
-        SceneManager.LoadScene("SceneArena");
-    }
+ 
 }
