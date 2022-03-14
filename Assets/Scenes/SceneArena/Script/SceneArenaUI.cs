@@ -40,7 +40,6 @@ public class SceneArenaUI : MonoBehaviour
 
     public void OnBackToLobby()
     {
-        CrewData.Instance.OnConfirmSquad();
         SceneManager.LoadScene("SceneLobby");
     }
 

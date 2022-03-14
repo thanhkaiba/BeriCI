@@ -16,7 +16,7 @@ namespace Piratera.GUI
         }
         public void OnOK()
         {
-            SceneManager.LoadScene("SceneLineUpDefense");
+            ClosePopup();
         }
 
 

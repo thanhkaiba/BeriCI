@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Cheat;
+using Piratera.Config;
 using Piratera.Constance;
 using Piratera.Engine;
 using Piratera.GUI;
@@ -237,6 +238,17 @@ public class LobbyUI : MonoBehaviour
 
     public void OnArenaClick()
     {
+        if (CrewData.Instance.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupBuySailor();
+            return;
+        }
+
+        if (UserData.Instance.NumSlot < GlobalConfigs.LineUp.max)
+        {
+            GuiManager.Instance.ShowPopupNotification("You must have 5 slot to join Arena!");
+            return;
+        }
         GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
     }
 
