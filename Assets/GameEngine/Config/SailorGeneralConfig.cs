@@ -16,6 +16,8 @@ public class SailorGeneralConfig
     public int MAX_STAR = 5;
 
     public int EARNABLE_FIGHT = 1200;
+    public int TRIAL_EARNABLE_FIGHT = 5;
+    public int TRIAL_FIGHT = 10;
 
     public int GetNextLevelExp(int curLevel)
     {
