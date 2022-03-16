@@ -70,7 +70,6 @@ public class DragableSubsailor : DragableSailor
 
     new void OnMouseUpWithSlot()
     {
-
         if (swapSailor != null)
         {
             subSailorIcon.UpdateSailorImage(swapSailor.Model);
@@ -88,7 +87,7 @@ public class DragableSubsailor : DragableSailor
 
         ReplaceSailorAction(sailor.Model.id, selectingIndex);
         Destroy(this);
-
+        TutorialMgr.Instance.CheckRunTutStartUp_StepLineUpBack2Lobby();
     }
 
     private void Update()

@@ -60,6 +60,7 @@ public class CrewManager : MonoBehaviour
 #else
         buttonCheat.SetActive(false);
 #endif
+        if (TutorialMgr.Instance.CheckTutStartUp()) ShowCrewTut1();
     }
 
     private void OnSailorInfoChanged(SailorModel model)
@@ -208,7 +209,18 @@ public class CrewManager : MonoBehaviour
         }
 
     }
-
+    private void ShowCrewTut1()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/CrewTut1");
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+    }
+    public void ShowTutOpenLineUp()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonLineUp").transform.position;
+        hand.transform.position = new Vector3(pos.x - 80, pos.y + 80, pos.z);
+    }
 
     public void ShowCheatSailorInfo()
     {

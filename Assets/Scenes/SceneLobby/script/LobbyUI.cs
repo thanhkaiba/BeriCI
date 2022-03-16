@@ -90,7 +90,13 @@ public class LobbyUI : MonoBehaviour
         RunAppearAction();
         ShowListSailors();
         Time.timeScale = 1;
-
+        TutorialMgr.Instance.CheckTutStartUp();
+        if (TutorialMgr.Instance.CheckTutStartUp_Greeting()) ShowNPCTut();
+        else
+        {
+            ShowFocusPvE();
+            TutorialMgr.Instance.CompleteStartUp();
+        }
     }
 
     void UpdateMaintain()
@@ -166,6 +172,8 @@ public class LobbyUI : MonoBehaviour
     }
     public void OnStartPVEMode()
     {
+        var hand = GameObject.Find("hand_pve");
+        if (hand) Destroy(hand);
         if (!MaintainManager.CanPlay())
         {
             GuiManager.Instance.ShowPopupNotification("This function is locked due to upcoming server maintenance");
@@ -205,7 +213,8 @@ public class LobbyUI : MonoBehaviour
 
     public void ShowCommingSoon()
     {
-        GuiManager.Instance.ShowPopupNotification("Coming Soon!");
+        //GuiManager.Instance.ShowPopupNotification("Coming Soon!");
+        ShowTutOpenCrew();
     }
 
     public void ShowSceneCrew()
@@ -230,9 +239,6 @@ public class LobbyUI : MonoBehaviour
             userStaminaCountDown.text = "";
 
         }
-
-      
-
     }
 
     private void RunAppearAction()
@@ -271,9 +277,26 @@ public class LobbyUI : MonoBehaviour
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
     }
-   
-
-
+    private void ShowNPCTut()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/NPCTut");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+    }
+    public void ShowTutOpenCrew()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonCrew").transform.position;
+        hand.transform.position = new Vector3(pos.x, pos.y + 80, pos.z);
+    }
+    public void ShowFocusPvE()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonPVE").transform.position;
+        hand.transform.position = new Vector3(pos.x - 250, pos.y, pos.z);
+        hand.name = "hand_pve";
+    }
     public void ShowGuiCheat()
     {
 #if PIRATERA_DEV || PIRATERA_QC

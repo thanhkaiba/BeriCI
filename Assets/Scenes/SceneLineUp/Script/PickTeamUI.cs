@@ -21,6 +21,7 @@ public class PickTeamUI : MonoBehaviour
         UpdateSlotMaxCapacity();
         NetworkController.AddServerActionListener(OnReceiveServerAction);
         GameEvent.FlyBeri.AddListener(FlyBeri);
+        if (TutorialMgr.Instance.CheckTutStartUp()) ShowTutBuildLineUp();
     }
 
     void Awake()
@@ -93,6 +94,19 @@ public class PickTeamUI : MonoBehaviour
         }
         GuiManager.Instance.ShowGuiWaiting(true);
         NetworkController.Send(SFSAction.GET_LINEUP_SLOT_PACK);
-
+    }
+    private void ShowTutBuildLineUp()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/LineUpTut1");
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject.Find("BgBuySlot").SetActive(false);
+        GameObject.Find("ButtonCrew").SetActive(false);
+    }
+    public void ShowTutBackToLobby()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonBack").transform.position;
+        hand.transform.position = new Vector3(pos.x + 40, pos.y-80, pos.z);
     }
 }
