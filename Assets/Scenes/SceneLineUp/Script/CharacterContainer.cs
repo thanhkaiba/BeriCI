@@ -9,8 +9,10 @@ public class CharacterContainer : BaseCharacterContainer
 
     protected override void Start()
     {
+       
+        addSubSailor = squadContainer.AddSubSailor;
+        getSubstituteSailors = CrewData.Instance.GetSubstituteSailors;
         GameEvent.SquadChanged.AddListener(RenderListSubSailor);
-        addSubSailor = (id) => squadContainer.AddSubSailor(id);
         base.Start();
     }
     void OnDestroy()

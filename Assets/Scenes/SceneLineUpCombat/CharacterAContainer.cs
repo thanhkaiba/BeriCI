@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class CharacterAContainer : BaseCharacterContainer
 { 
@@ -8,8 +6,9 @@ public class CharacterAContainer : BaseCharacterContainer
     private SquadAContainer squadAContainer;
     protected override void Start()
     {
-        GameEvent.SquadChanged.AddListener(RenderListSubSailor);
-        addSubSailor = (id) => squadAContainer.AddSubSailor(id);
+        addSubSailor = squadAContainer.AddSubSailor;
+        getSubstituteSailors = TeamCombatPrepareData.Instance.GetSubstituteSailors;
+        GameEvent.PrepareSquadChanged.AddListener(RenderListSubSailor);
         base.Start();
     }
     void OnDestroy()

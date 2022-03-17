@@ -14,7 +14,11 @@ public class SceneLineUpDefenseUI : MonoBehaviour
 
     void Start()
     {
-        GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupDefenseLineUpGuide");
+        if (!PvPData.Instance.HaveJoin)
+        {
+            GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupDefenseLineUpGuide");
+        }
+     
         DefenseSquadContainer.Draging = false;
         TextMaxCapacity.text = "Max capacity: " + UserData.Instance.NumSlot;
         NetworkController.AddServerActionListener(OnReceiveServerAction);

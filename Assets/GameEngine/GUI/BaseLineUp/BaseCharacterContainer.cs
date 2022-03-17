@@ -12,6 +12,7 @@ public abstract class BaseCharacterContainer : MonoBehaviour
     protected ScrollRect scrollRect;
 
     protected Func<string, Sailor> addSubSailor;
+    protected Func<List<SailorModel>> getSubstituteSailors;
 
     protected virtual void Start()
     {
@@ -20,7 +21,7 @@ public abstract class BaseCharacterContainer : MonoBehaviour
    
     protected void RenderListSubSailor()
     {
-        substituteSailors = CrewData.Instance.GetSubstituteSailors();
+        substituteSailors = getSubstituteSailors();
         int childCount = transform.childCount;
         if (substituteSailors.Count < childCount)
         {

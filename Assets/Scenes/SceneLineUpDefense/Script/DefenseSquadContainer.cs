@@ -15,7 +15,7 @@ public class DefenseSquadContainer : MonoBehaviour
             {
                 short key = FightingLine.Position2SlotIndex(i, j);
                 SquadSlot slot = slots[key];
-                string sailorId = DefenseCrewData.Instance.FightingTeam.SailorIdAt(i, j);
+                string sailorId = PvPData.Instance.DefenseCrew.FightingTeam.SailorIdAt(i, j);
 
                 if (sailorId.Length > 0)
                 {
@@ -55,18 +55,18 @@ public class DefenseSquadContainer : MonoBehaviour
     private void CreateDragableSailorComponent(GameObject gameObject)
     {
         DragableSailor drag = gameObject.AddComponent<DragableSailor>();
-        drag.IsSlotEmpty = (short index) => DefenseCrewData.Instance.FightingTeam.IsSlotEmpty(index);
-        drag.UnEquipSailor = (string id) => DefenseCrewData.Instance.UnEquip(id);
-        drag.OccupieSailor = (string id, short index) => DefenseCrewData.Instance.Occupie(id, index);
-        drag.SwapSailor = (string id, short index) => DefenseCrewData.Instance.Swap(id, DefenseCrewData.Instance.FightingTeam.OwnerOf(index));
+        drag.IsSlotEmpty = (short index) => PvPData.Instance.DefenseCrew.FightingTeam.IsSlotEmpty(index);
+        drag.UnEquipSailor = (string id) => PvPData.Instance.DefenseCrew.UnEquip(id);
+        drag.OccupieSailor = (string id, short index) => PvPData.Instance.DefenseCrew.Occupie(id, index);
+        drag.SwapSailor = (string id, short index) => PvPData.Instance.DefenseCrew.Swap(id, PvPData.Instance.DefenseCrew.FightingTeam.OwnerOf(index));
         drag.Slots = slots;
     }
 
     private void CreateSubDragableSailorComponent(GameObject gameObject)
     {
         DragableSubsailor drag = gameObject.AddComponent<DragableSubsailor>();
-        drag.ReplaceSailorAction = (string id, short index) => DefenseCrewData.Instance.Replace(id, index);
-        drag.IsSquadFull = () => !DefenseCrewData.Instance.FightingTeam.IsFull();
+        drag.ReplaceSailorAction = (string id, short index) => PvPData.Instance.DefenseCrew.Replace(id, index);
+        drag.IsSquadFull = () => !PvPData.Instance.DefenseCrew.FightingTeam.IsFull();
         drag.Slots = slots;
         drag.OnTransfromSailor = (gameObject) => CreateDragableSailorComponent(gameObject);
     }
@@ -85,7 +85,7 @@ public class DefenseSquadContainer : MonoBehaviour
 
     public void OnUpdateSquad()
     {
-        var synergy = GameUtils.CalculateClassBonus(DefenseCrewData.Instance.GetSquadModelList(), true);
+        var synergy = GameUtils.CalculateClassBonus(PvPData.Instance.DefenseCrew.GetSquadModelList(), true);
         teamColor.ShowClassBonus(synergy);
         GameUtils.lineUpSynergy = synergy;
     }

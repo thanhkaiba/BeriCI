@@ -116,7 +116,7 @@ public class DragableSailor : MonoBehaviour
             SquadAContainer.Draging = false;
             DefenseSquadContainer.Draging = false;
             draging = false;
-            if (!dragImage)
+            if (dragImage != null)
             {
                 SetSailorOpacity(1f);
                 for (short i = 0; i < Slots.Length; i++)

@@ -123,13 +123,11 @@ public class LobbyUI : MonoBehaviour
     }
     public void FlyStamina()
     {
-        Debug.Log("da vao day");
         royal.CollectItem(1, 5, 1, () => { });
     }
 
     public void FlyBeri()
     {
-        Debug.Log("da vao day");
         royal.CollectItem(0, 5, 1, () => { });
     }
     private void OnDestroy()
@@ -249,7 +247,13 @@ public class LobbyUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("You must have 5 slot to join Arena!");
             return;
         }
-        GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
+        if (!PvPData.Instance.HaveJoin)
+        {
+            GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
+        } else
+        {
+            SceneManager.LoadScene("SceneArena");
+        }
     }
 
     private void RunAppearAction()

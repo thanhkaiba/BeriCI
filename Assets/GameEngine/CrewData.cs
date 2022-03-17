@@ -1,6 +1,7 @@
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CrewData : Singleton<CrewData>
 {
@@ -64,10 +65,12 @@ public class CrewData : Singleton<CrewData>
     {
         if (GetSailorModel(sailorId) == null)
         {
+            Debug.LogError("Get sailor model null, occupie fail!");
             return;
         }
         if (FightingTeam.Occupie(sailorId, slot))
         {
+            Debug.Log("Get sailor model null, occupie success!");
             GameEvent.SquadChanged.Invoke();
         }
     }

@@ -67,9 +67,10 @@ public class LoadServerDataUI : MonoBehaviour
     private Action ReloadFunc;
 
 
-    private HashSet<SFSAction> ActionRequires = new() { 
+    private readonly HashSet<SFSAction> ActionRequires = new() { 
         SFSAction.PIRATE_WHEEL_DATA, 
-        SFSAction.LOAD_LIST_HERO_INFO
+        SFSAction.LOAD_LIST_HERO_INFO,
+        SFSAction.PVP_DATA,
     };
 
     private int TotalActionRequire = 0;

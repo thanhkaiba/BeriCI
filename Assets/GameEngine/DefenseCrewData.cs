@@ -2,15 +2,16 @@ using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 
-public class DefenseCrewData : Singleton<DefenseCrewData>
+public class DefenseCrewData
 {
     public FightingLine FightingTeam = new();
 
-    protected override void OnAwake()
+    public DefenseCrewData()
     {
         ResetData();
         GameEvent.DefenseSquadChanged.AddListener(OnUpdateSquad);
     }
+
     private void OnUpdateSquad()
     {
         NetworkController.Send(SFSAction.UPDATE_ARENA_FGL, FightingTeam.ToSFSObject());

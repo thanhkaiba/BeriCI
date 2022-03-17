@@ -9,9 +9,11 @@ public class DefenseCharacterContainer : BaseCharacterContainer
 
     protected override void Start()
     {
-        GameEvent.DefenseSquadChanged.AddListener(RenderListSubSailor);
-        addSubSailor = (id) => squadContainer.AddSubSailor(id);
+        addSubSailor = squadContainer.AddSubSailor;
+        getSubstituteSailors = PvPData.Instance.DefenseCrew.GetSubstituteSailors;
         base.Start();
+        GameEvent.DefenseSquadChanged.AddListener(RenderListSubSailor);
+
     }
     void OnDestroy() => GameEvent.DefenseSquadChanged.RemoveListener(RenderListSubSailor);
 }

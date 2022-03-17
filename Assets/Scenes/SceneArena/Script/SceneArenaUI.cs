@@ -1,5 +1,4 @@
 
-using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
@@ -12,7 +11,12 @@ public class SceneArenaUI : MonoBehaviour
    
     void Start()
     {
-        GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupCongratJoinArena");
+        if (!PvPData.Instance.HaveJoin)
+        {
+            GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupCongratJoinArena");
+            PvPData.Instance.HaveJoin = true;
+            NetworkController.Send(SFSAction.PVP_JOIN);
+        }
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 
@@ -24,10 +28,7 @@ public class SceneArenaUI : MonoBehaviour
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
 
-        if (action == SFSAction.BUY_SLOT)
-        {
-         
-        }
+       
     }
 
     private void OnDestroy()
@@ -46,7 +47,7 @@ public class SceneArenaUI : MonoBehaviour
     public void OpenSceneLineUp()
     {
         CrewData.Instance.OnConfirmSquad();
-        SceneManager.LoadScene("SceneDefenseLineUP");
+        SceneManager.LoadScene("SceneLineUpDefense");
     }
  
 }

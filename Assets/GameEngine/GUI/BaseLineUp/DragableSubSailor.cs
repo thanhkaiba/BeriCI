@@ -53,7 +53,7 @@ public class DragableSubsailor : DragableSailor
         SetSailorOpacity(1f);
         Destroy(dragImage);
 
-        if (selectingIndex >= 0 && !dragImage)
+        if (selectingIndex >= 0 && dragImage != null)
         {
             OnMouseUpWithSlot();
         }
