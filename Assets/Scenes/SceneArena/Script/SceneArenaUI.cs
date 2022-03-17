@@ -53,6 +53,11 @@ public class SceneArenaUI : MonoBehaviour
         GuiManager.Instance.ShowPopupNotification("Coming Soon!");
     }
 
+    public void ShowGuide()
+    {
+        GuiManager.Instance.AddGui<PopupNotification>("Prefap/PopupArenaGuide");
+    }
+
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
