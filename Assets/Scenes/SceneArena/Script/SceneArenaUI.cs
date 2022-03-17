@@ -10,9 +10,17 @@ public class SceneArenaUI : MonoBehaviour
 {
     [SerializeField]
     private Text LbTicket;
+
+    [SerializeField]
+    private Text LbElo;
+
+    [SerializeField]
+    private Text LbRank;
     void Start()
     {
+
         UpdateTicket();
+        UpdateRank();
         if (!PvPData.Instance.HaveJoin)
         {
             GuiManager.Instance.AddGui<PopupCongratJoinArena>("prefap/PopupCongratJoinArena");
@@ -20,6 +28,12 @@ public class SceneArenaUI : MonoBehaviour
             NetworkController.Send(SFSAction.PVP_JOIN);
         }
         NetworkController.AddServerActionListener(OnReceiveServerAction);
+    }
+
+    private void UpdateRank()
+    {
+        LbRank.text = "Rank: " + PvPData.Instance.Rank;
+        LbElo.text = "Elo: " + PvPData.Instance.Elo;
     }
 
     private void UpdateTicket()

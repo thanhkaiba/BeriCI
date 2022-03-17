@@ -1510,6 +1510,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LbTicket: {fileID: 421575625}
+  LbElo: {fileID: 1440988341}
+  LbRank: {fileID: 1015361185}
 --- !u!1 &1157298410
 GameObject:
   m_ObjectHideFlags: 0
