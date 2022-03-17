@@ -14,12 +14,12 @@ public class DefenseCrewData
 
     private void OnUpdateSquad()
     {
-        NetworkController.Send(SFSAction.UPDATE_ARENA_FGL, FightingTeam.ToSFSObject());
+        NetworkController.Send(SFSAction.PVP_UPDATE_FIGHTING_LINE, FightingTeam.ToSFSObject());
     }
 
     public void OnConfirmSquad()
     {
-        NetworkController.Send(SFSAction.UPDATE_ARENA_FGL, FightingTeam.ToSFSObject());
+        NetworkController.Send(SFSAction.PVP_UPDATE_FIGHTING_LINE, FightingTeam.ToSFSObject());
     }
     private void ResetData()
     {

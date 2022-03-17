@@ -73,36 +73,40 @@ public class LoginController : MonoBehaviour
     private void Start()
     {
         nameInput.text = PlayerPrefs.GetString("UserName");
+        FillPasswork(nameInput.text);
         if (NetworkController.AutoLogin)
         {
             NetworkController.AutoLogin = false;
-            AutoLogin(nameInput.text);
+            AutoLogin();
         }
     }
 
 
-    void AutoLogin(string username)
+    void AutoLogin()
     {
 
+        if (!string.IsNullOrEmpty(passwordInput.text))
+        {
+            OnLoginButtonClick();
+        }
+
+
+
+    }
+
+    void FillPasswork(string username)
+    {
         string encryptedPassword = PlayerPrefs.GetString("Password");
         if (string.IsNullOrEmpty(encryptedPassword) || string.IsNullOrEmpty(username))
         {
             return;
         }
 
-
         string origin = StringCipher.Decrypt(encryptedPassword, "9QfeE7-+sTFZvG7^");
         if (origin.Contains(username))
         {
-            passwordInput.text = origin.Substring(username.Length);
-            if (!string.IsNullOrEmpty(passwordInput.text))
-            {
-                OnLoginButtonClick();
-            }
+            passwordInput.text = origin[username.Length..];
         }
-
-
-
     }
 
     private void OnConnection(BaseEvent evt)

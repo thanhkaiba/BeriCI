@@ -26,7 +26,7 @@
         PIRATE_WHEEL = 27,
         PIRATE_WHEEL_DATA = 28,
 
-        UPDATE_ARENA_FGL = 42,
+        PVP_UPDATE_FIGHTING_LINE = 42,
         PVP_DATA = 40,
         PVP_PLAY = 46,
         PVP_COMBAT_PREPARE = 47,
