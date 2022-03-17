@@ -7,6 +7,7 @@ public class GameEvent
     public static readonly UnityEvent DefenseSquadChanged = new UnityEvent();
     public static readonly UnityEvent<SailorModel> SailorInfoChanged = new UnityEvent<SailorModel>();
     public static readonly UnityEvent PrepareSquadChanged = new UnityEvent();
+    public static readonly UnityEvent PreparePvPSquadChanged = new UnityEvent();
     public static readonly UnityEvent<List<string>> UserDataChanged = new UnityEvent<List<string>>();
     public static readonly UnityEvent<int, int> UserStaminaChanged = new UnityEvent<int, int>();
     public static readonly UnityEvent<int, int> UserRollChanged = new UnityEvent<int, int>();

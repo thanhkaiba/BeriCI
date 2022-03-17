@@ -442,6 +442,7 @@ namespace Piratera.Network
                         break;
                     }
                 case SFSAction.COMBAT_DATA:
+                case SFSAction.PVP_CONFIRM:
                     {
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
@@ -475,6 +476,24 @@ namespace Piratera.Network
                         {
                             TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
                             SceneManager.LoadScene("ScenePickTeamBattle");
+                        }
+                        break;
+                    }
+                case SFSAction.PVP_COMBAT_PREPARE:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            TeamPvPCombatPrepareData.Instance.NewFromSFSObject(packet);
+                            SceneManager.LoadScene("ScenePreparePvP");
+                        }
+                        break;
+                    }
+                case SFSAction.PVP_PLAY:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            PvPData.Instance.Ticket = packet.GetInt("ticket");
+                  
                         }
                         break;
                     }
