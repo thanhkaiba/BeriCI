@@ -12,7 +12,6 @@ public class GameUtils : UnityEngine.Object
 {
     public static GameObject GetSailorModelPrefab(string name)
     {
-        Debug.Log("Characters/" + name + "/" + name);
         return Resources.Load<GameObject>("Characters/" + name + "/" + name);
     }
     public static Sprite GetSailorAvt(string name)

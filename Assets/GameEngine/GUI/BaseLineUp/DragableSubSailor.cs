@@ -28,7 +28,7 @@ public class DragableSubsailor : DragableSailor
         }
 
 
-        foreach (SquadSlot slot in Slots)
+        foreach (SquadSlot slot in slots)
         {
             if (slot.GetOwner() == null)
             {
@@ -51,9 +51,9 @@ public class DragableSubsailor : DragableSailor
     new void OnMouseUp()
     {
         SetSailorOpacity(1f);
-        Destroy(dragImage);
+        Destroy(dragImage.gameObject);
 
-        if (selectingIndex >= 0 && dragImage != null)
+        if (selectingIndex >= 0 && !dragImage.enabled)
         {
             OnMouseUpWithSlot();
         }
@@ -62,7 +62,7 @@ public class DragableSubsailor : DragableSailor
             OnMouseUpEmpty();
         }
 
-        foreach (SquadSlot slot in Slots)
+        foreach (SquadSlot slot in slots)
         {
             slot.Selectable = true;
         }
@@ -75,15 +75,15 @@ public class DragableSubsailor : DragableSailor
         {
             subSailorIcon.UpdateSailorImage(swapSailor.Model);
             subSailorIcon.iconSailor.SetVisible(true);
-            Destroy(swapSailor);
+            Destroy(swapSailor.gameObject);
         }
         else
         {
-            DestroyImmediate(subSailorIcon);
+            DestroyImmediate(subSailorIcon.gameObject);
         }
 
         OnTransfromSailor(gameObject);
-        Slots[selectingIndex].SetSelectedSailer(sailor);
+        slots[selectingIndex].SetSelectedSailer(sailor);
 
 
         ReplaceSailorAction(sailor.Model.id, selectingIndex);
@@ -111,7 +111,7 @@ public class DragableSubsailor : DragableSailor
                     {
                         swapSailor.gameObject.SetActive(true);
                     }
-                    Slots[selectingIndex].SetSelectedSailer(swapSailor);
+                    slots[selectingIndex].SetSelectedSailer(swapSailor);
                     selectingIndex = -1;
                 }
                 dragImage.enabled = true;
@@ -139,14 +139,14 @@ public class DragableSubsailor : DragableSailor
             {
                 swapSailor.gameObject.SetActive(true);
             }
-            Slots[selectingIndex].SetSelectedSailer(swapSailor);
+            slots[selectingIndex].SetSelectedSailer(swapSailor);
         }
-        swapSailor = Slots[newSelecting].GetOwner();
+        swapSailor = slots[newSelecting].GetOwner();
         if (swapSailor != null)
         {
             swapSailor.gameObject.SetActive(false);
         }
-        Slots[newSelecting].OnSelecting();
+        slots[newSelecting].OnSelecting();
         selectingIndex = newSelecting;
     }
 }

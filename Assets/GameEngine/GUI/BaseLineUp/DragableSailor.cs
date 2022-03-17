@@ -8,7 +8,7 @@ public class DragableSailor : MonoBehaviour
     protected const int TransformHeight = 200;
     protected BoxCollider boxAround;
     protected Canvas canvas;
-    public SquadSlot[] Slots { get; set; }
+    public SquadSlot[] slots { get; set; }
     [SerializeField]
     protected short selectingIndex = -1;
     protected Sailor sailor;
@@ -35,21 +35,21 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseDown()
     {
-        if (!SquadContainer.Draging || !SquadAContainer.Draging || !DefenseSquadContainer.Draging)
+        if (!SquadContainer.Draging || !SquadAContainer.Draging)
         {
             dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);
             dragImage.enabled = false;
             SetSailorOpacity(0.8f);
-            for (short i = 0; i < Slots.Length; i++)
+            for (short i = 0; i < slots.Length; i++)
             {
-                Slots[i].Selectable = true;
-                if (Slots[i].GetOwner() == sailor)
+                slots[i].Selectable = true;
+                if (slots[i].GetOwner() == sailor)
                 {
                     originIndex = i;
                 }
             }
             selectingIndex = originIndex;
-            Slots[originIndex].OnSelecting();
+            slots[originIndex].OnSelecting();
 
             Vector3 movePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             originZ = transform.position.z;
@@ -116,12 +116,12 @@ public class DragableSailor : MonoBehaviour
             SquadAContainer.Draging = false;
             DefenseSquadContainer.Draging = false;
             draging = false;
-            if (dragImage != null)
+            if (!dragImage.enabled)
             {
                 SetSailorOpacity(1f);
-                for (short i = 0; i < Slots.Length; i++)
+                for (short i = 0; i < slots.Length; i++)
                 {
-                    if (Slots[i].GetOwner() == sailor)
+                    if (slots[i].GetOwner() == sailor)
                     {
                         originIndex = i;
                     }
@@ -143,14 +143,14 @@ public class DragableSailor : MonoBehaviour
 
         if (dragImage != null)
         {
-            Destroy(dragImage);
+            Destroy(dragImage.gameObject);
         }
     }
 
     private void OnUnEquip()
     {
         UpdateSlots(originIndex);
-        Slots[originIndex].OnFree();
+        slots[originIndex].OnFree();
         Destroy(gameObject);
         UnEquipSailor(sailor.Model.id);
 
@@ -171,7 +171,7 @@ public class DragableSailor : MonoBehaviour
 
         }
 
-        Slots[selectingIndex].SetSelectedSailer(sailor);
+        slots[selectingIndex].SetSelectedSailer(sailor);
         originIndex = selectingIndex;
         selectingIndex = -1;
     }
@@ -184,9 +184,9 @@ public class DragableSailor : MonoBehaviour
 
     private void CheckNewSelecting(Vector3 mousePositon)
     {
-        for (short i = 0; i < Slots.Length; i++)
+        for (short i = 0; i < slots.Length; i++)
         {
-            SquadSlot slot = Slots[i];
+            SquadSlot slot = slots[i];
             if (slot.boxAround.Contains(new Vector3(mousePositon.x, mousePositon.y, slot.transform.position.z)) && slot.Selectable)
             {
                 if (i != selectingIndex)
@@ -203,14 +203,14 @@ public class DragableSailor : MonoBehaviour
         // neu dang chiem 1 vi tri nao do => tra gia tri cho vi tri do
         if (selectingIndex >= 0)
         {
-            Slots[selectingIndex].Swap(Slots[originIndex]);
+            slots[selectingIndex].Swap(slots[originIndex]);
         }
 
         // doi quan tuong o vi tri moi sang vi tri ban dau cua tướng đang drag
-        Slots[originIndex].Swap(Slots[newSelecting]);
+        slots[originIndex].Swap(slots[newSelecting]);
 
         // set trang thai cho vi tri moi
-        Slots[newSelecting].OnSelecting();
+        slots[newSelecting].OnSelecting();
 
         // luu lai vi tri moi
         selectingIndex = newSelecting;

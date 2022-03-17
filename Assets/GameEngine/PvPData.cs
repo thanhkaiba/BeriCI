@@ -8,6 +8,8 @@ public class PvPData : Singleton<PvPData>
     public int Ticket;
     public int[] OpenedAdvantage;
     public int SelectingAdvantage;
+    public int Rank = 0;
+    public long Elo = 0;
 
     public void NewFromSFSObject(ISFSObject packet)
     {
@@ -15,6 +17,15 @@ public class PvPData : Singleton<PvPData>
         Ticket = packet.GetInt("ticket");
         OpenedAdvantage = packet.GetIntArray("oppened_advantage");
         SelectingAdvantage = packet.GetInt("selecting_advantage");
+        try
+        {
+            Rank = packet.GetInt("rank");
+            Elo = packet.GetLong("elo");
+        } catch
+        {
+
+        }
+       
         DefenseCrew.NewFromSFSObject(packet);
     }
 
