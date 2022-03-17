@@ -15,7 +15,7 @@ public class SceneArenaUI : MonoBehaviour
         UpdateTicket();
         if (!PvPData.Instance.HaveJoin)
         {
-            GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupCongratJoinArena");
+            GuiManager.Instance.AddGui<PopupCongratJoinArena>("prefap/PopupCongratJoinArena");
             PvPData.Instance.HaveJoin = true;
             NetworkController.Send(SFSAction.PVP_JOIN);
         }

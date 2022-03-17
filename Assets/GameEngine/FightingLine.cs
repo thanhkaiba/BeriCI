@@ -230,18 +230,20 @@ public class FightingLine
 
     public FightingLine NewFromSFSObject(ISFSArray sFSArray)
     {
-
-        foreach (ISFSObject obj in sFSArray)
+        if (sFSArray != null)
         {
-            string uid = obj.GetUtfString("sid");
-            ISFSObject pos = obj.GetSFSObject("pos");
-            byte x = pos.GetByte("x");
-            byte y = pos.GetByte("y");
+            foreach (ISFSObject obj in sFSArray)
+            {
+                string uid = obj.GetUtfString("sid");
+                ISFSObject pos = obj.GetSFSObject("pos");
+                byte x = pos.GetByte("x");
+                byte y = pos.GetByte("y");
 
-            short slotIndex = Position2SlotIndex(x, y);
-            slots[slotIndex] = uid;
+                short slotIndex = Position2SlotIndex(x, y);
+                slots[slotIndex] = uid;
+            }
         }
-
+       
         return this;
     }
 

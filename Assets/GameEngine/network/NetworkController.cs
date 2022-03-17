@@ -40,7 +40,7 @@ namespace Piratera.Network
         //----------------------------------------------------------
         public static NetworkController Instance;
 
-        private static List<NetworkActionListenerDelegate> serverActionListeners = new List<NetworkActionListenerDelegate>();
+        private static List<NetworkActionListenerDelegate> serverActionListeners = new();
 
         internal static void AddServerActionListener(object onReceiveServerAction)
         {

@@ -217,28 +217,26 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.LOAD_LIST_HERO_INFO)
+        if (errorCode == SFSErrorCode.SUCCESS)
         {
-            if (errorCode == SFSErrorCode.SUCCESS)
+            if (ActionRequires.Contains(action))
             {
-                if (ActionRequires.Contains(action))
+                ActionRequires.Remove(action);
+                if (ActionRequires.Count != 0)
                 {
-                    ActionRequires.Remove(action);
-                    if (ActionRequires.Count == 0)
-                    {
-                        ShowLoading(1f, 0.4f / TotalActionRequire, () => { });
+                    ShowLoading(1f, 0.4f / TotalActionRequire, () => { });
 
-                    } else
-                    {
-                        ShowLoading(1f, 0.4f / TotalActionRequire, OnLoadSuccess);
-                    }
                 }
-               
+                else
+                {
+                    ShowLoading(1f, 0.4f / TotalActionRequire, OnLoadSuccess);
+                }
             }
-            else
-            {
-                OnLoadError(errorCode);
-            }
+
+        }
+        else
+        {
+            OnLoadError(errorCode);
         }
 
     }
