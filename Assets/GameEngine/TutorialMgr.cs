@@ -12,7 +12,7 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
     public bool CheckTutStartUp()
     {
-        return UserData.Instance.PVECount <= 0 && !haveStartUp;
+        return UserData.Instance.PVECount <= 0 && !haveStartUp && CrewData.Instance.Sailors.Count > 0;
     }
     public bool CheckTutStartUp_Greeting()
     {
