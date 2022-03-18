@@ -317,7 +317,7 @@ GameObject:
   - component: {fileID: 8470599627989654931}
   - component: {fileID: 1770106950045035949}
   - component: {fileID: 8960527434119217733}
-  - component: {fileID: 8817327759365730886}
+  - component: {fileID: 6014355260833505658}
   m_Layer: 5
   m_Name: NPCTut
   m_TagString: Untagged
@@ -444,8 +444,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8817327759365730886}
-        m_TargetAssemblyTypeName: NPCTutOpenSlot, Assembly-CSharp
+      - m_Target: {fileID: 6014355260833505658}
+        m_TargetAssemblyTypeName: NPCTut, Assembly-CSharp
         m_MethodName: OnClickPanel
         m_Mode: 1
         m_Arguments:
@@ -456,7 +456,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8817327759365730886
+--- !u!114 &6014355260833505658
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -465,7 +465,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8021976928784428481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1eeaabb5a7fbc4b88084a1f4e660ae, type: 3}
+  m_Script: {fileID: 11500000, guid: 9af95e0172703c94daab68b2bb618aab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 6215586222068144513}
