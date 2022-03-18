@@ -114,6 +114,7 @@ public class DragableSailor : MonoBehaviour
         {
             SquadContainer.Draging = false;
             SquadAContainer.Draging = false;
+            DefenseSquadContainer.Draging = false;
             draging = false;
             if (!dragImage.enabled)
             {

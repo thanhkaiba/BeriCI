@@ -40,7 +40,7 @@ namespace Piratera.Network
         //----------------------------------------------------------
         public static NetworkController Instance;
 
-        private static List<NetworkActionListenerDelegate> serverActionListeners = new List<NetworkActionListenerDelegate>();
+        private static List<NetworkActionListenerDelegate> serverActionListeners = new();
 
         internal static void AddServerActionListener(object onReceiveServerAction)
         {
@@ -382,7 +382,7 @@ namespace Piratera.Network
             string cmd = (string)evt.Params["cmd"];
             if (cmd == CLIENT_REQUEST)
             {
-               // Debug.Log("response:" + packet.GetDump());
+                Debug.Log("response:" + packet.GetDump());
 
                 SFSAction action = (SFSAction)packet.GetInt(ACTION_INCORE);
                 SFSErrorCode errorCode = (SFSErrorCode)packet.GetShort(ERROR_CODE);
@@ -442,6 +442,7 @@ namespace Piratera.Network
                         break;
                     }
                 case SFSAction.COMBAT_DATA:
+                case SFSAction.PVP_CONFIRM:
                     {
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
@@ -475,6 +476,24 @@ namespace Piratera.Network
                         {
                             TeamCombatPrepareData.Instance.NewFromSFSObject(packet);
                             SceneManager.LoadScene("ScenePickTeamBattle");
+                        }
+                        break;
+                    }
+                case SFSAction.PVP_COMBAT_PREPARE:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            TeamPvPCombatPrepareData.Instance.NewFromSFSObject(packet);
+                            SceneManager.LoadScene("ScenePreparePvP");
+                        }
+                        break;
+                    }
+                case SFSAction.PVP_PLAY:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            PvPData.Instance.Ticket = packet.GetInt("ticket");
+                  
                         }
                         break;
                     }
@@ -545,6 +564,14 @@ namespace Piratera.Network
                         if (Instance != null)
                         {
                             Instance.GetServerTime();
+                        }
+                        break;
+                    }
+                case SFSAction.PVP_DATA:
+                    {
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            PvPData.Instance.NewFromSFSObject(packet);
                         }
                         break;
                     }

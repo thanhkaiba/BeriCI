@@ -13,7 +13,7 @@ namespace Piratera.Config
         public static UserStaminaConfig StaminaConfig;
         public static PirateWheelConfig PirateWheelConfig;
         public static CombatConfig Combat;
-        private static Dictionary<string, SailorConfig> SailorDic = new Dictionary<string, SailorConfig>();
+        private static Dictionary<string, SailorConfig> SailorDic = new();
         public static SynergiesConfig Synergies;
         public static SailorStatusConfig SailorStatus;
         public static bool HaveLoaded;

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3708985, g: 0.3783704, b: 0.35722548, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -422,7 +422,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 188251584}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -695,7 +695,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 236412441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -1191,7 +1191,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 493402241}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -1586,9 +1586,6 @@ MonoBehaviour:
   iconSailorPrefap: {fileID: 7725597495769743507, guid: ac1b2cc54f78e714c94c55d0cc2e2b79,
     type: 3}
   scrollRect: {fileID: 1433130410}
-  Speed: 0
-  Acceleration: 20
-  MaxSpeed: 600
   squadContainer: {fileID: 877664650}
 --- !u!114 &756254532
 MonoBehaviour:
@@ -1673,7 +1670,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 804818436}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -2191,7 +2188,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 906783381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -2491,7 +2488,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1019031641}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -3062,10 +3059,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1364231197}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f760f00cb8504024a94168e7643de3ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f2701e000ce2d2c45964dd71304b2871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamA: 1
+  teamA: 0
 --- !u!114 &1364231200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3152,7 +3149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1382823890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -3711,7 +3708,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1526332784}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -3816,7 +3813,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1550287699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:

@@ -530,7 +530,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 244238638}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -1112,14 +1112,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 467039602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &467039605
@@ -1489,14 +1489,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 487833496}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &487833499
@@ -1959,7 +1959,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 624617705}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -2131,9 +2131,6 @@ MonoBehaviour:
   iconSailorPrefap: {fileID: 7725597495769743507, guid: ac1b2cc54f78e714c94c55d0cc2e2b79,
     type: 3}
   scrollRect: {fileID: 1604218061}
-  Speed: 0
-  Acceleration: 20
-  MaxSpeed: 600
   squadAContainer: {fileID: 1745113250}
 --- !u!224 &680574077
 RectTransform:
@@ -2397,14 +2394,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 810494746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &810494749
@@ -2502,7 +2499,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 850199856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -2667,14 +2664,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 998302882}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &998302885
@@ -3047,14 +3044,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245888907}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &1245888910
@@ -3151,14 +3148,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1311566715}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &1311566718
@@ -3495,7 +3492,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1396376650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f760f00cb8504024a94168e7643de3ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f2701e000ce2d2c45964dd71304b2871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   teamA: 0
@@ -3541,14 +3538,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1404907599}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &1404907602
@@ -3646,7 +3643,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1466630642}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -3887,7 +3884,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1523800494}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -4271,10 +4268,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1576203428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f760f00cb8504024a94168e7643de3ff, type: 3}
+  m_Script: {fileID: 11500000, guid: f2701e000ce2d2c45964dd71304b2871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamA: 1
+  teamA: 0
 --- !u!1001 &1601703301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4625,14 +4622,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1735566768}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &1735566771
@@ -4785,7 +4782,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1764084169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -5160,14 +5157,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1843969865}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0, y: 0, z: 0}
-  spriteOpen: {fileID: 0}
-  spriteLock: {fileID: 0}
+  spriteOpen: {fileID: 21300000, guid: 00544ffa6ca02cf43af106b0d199aeeb, type: 3}
+  spriteLock: {fileID: 21300000, guid: 5a6fb928f92eceb49a619cb6a5e99f45, type: 3}
   blackCircle: {fileID: 0}
   state: 0
 --- !u!212 &1843969868
@@ -5265,7 +5262,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1883756345}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -5578,7 +5575,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1984950024}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:
@@ -5805,7 +5802,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2088601989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80efd20b403d944b86827b3e368f0fe, type: 3}
+  m_Script: {fileID: 11500000, guid: c32d66862cb6e3448bff79dbbb2d4f46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   boxAround:

@@ -46,7 +46,7 @@ public class TeamColor : MonoBehaviour
         //Now destroy them
         foreach (GameObject child in allChildren)
         {
-            DestroyImmediate(child.gameObject);
+            DestroyImmediate(child);
         }
 
     }

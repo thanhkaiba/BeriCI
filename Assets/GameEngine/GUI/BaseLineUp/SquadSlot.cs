@@ -99,6 +99,6 @@ public class SquadSlot : MonoBehaviour
 
     public State GetState()
     {
-        return this.state;
+        return state;
     }
 }

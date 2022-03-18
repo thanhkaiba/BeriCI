@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Cheat;
+using Piratera.Config;
 using Piratera.Constance;
 using Piratera.Engine;
 using Piratera.GUI;
@@ -136,13 +137,11 @@ public class LobbyUI : MonoBehaviour
     }
     public void FlyStamina()
     {
-        Debug.Log("da vao day");
         royal.CollectItem(1, 5, 1, () => { });
     }
 
     public void FlyBeri()
     {
-        Debug.Log("da vao day");
         royal.CollectItem(0, 5, 1, () => { });
     }
     private void OnDestroy()
@@ -245,6 +244,28 @@ public class LobbyUI : MonoBehaviour
         {
             userStaminaCountDown.text = "";
 
+        }
+    }
+
+    public void OnArenaClick()
+    {
+        if (CrewData.Instance.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupBuySailor();
+            return;
+        }
+
+        if (UserData.Instance.NumSlot < GlobalConfigs.LineUp.max)
+        {
+            GuiManager.Instance.ShowPopupNotification("You must have 5 slot to join Arena!");
+            return;
+        }
+        if (!PvPData.Instance.HaveJoin)
+        {
+            GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
+        } else
+        {
+            SceneManager.LoadScene("SceneArena");
         }
     }
 
