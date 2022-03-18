@@ -1,5 +1,6 @@
 ﻿using Sfs2X.Entities;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class UserInfoPropertiesKey
 {
@@ -15,6 +16,7 @@ public class UserInfoPropertiesKey
     public const string NUMBER_OF_POSITIONS = "number_of_positions";
     public const string CREATE_AT = "createdAt";
     public const string PVE_RANK = "pve_rank";
+    public const string PVE_COUNT = "pve_count";
 }
 
 public class UserData : Singleton<UserData>
@@ -33,8 +35,8 @@ public class UserData : Singleton<UserData>
     /// </summary>
     public int Level { get; set; }
     public int NumSlot { get; set; }
-
     public long CreateAt { get; set; }
+    public int PVECount { get; set; }
 
     public void OnUserVariablesUpdate(User user, List<string> changedVars)
     {
@@ -52,6 +54,8 @@ public class UserData : Singleton<UserData>
         Exp = (long)user.GetVariable(UserInfoPropertiesKey.EXP).GetDoubleValue();
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
+        PVECount = user.GetVariable(UserInfoPropertiesKey.PVE_COUNT).GetIntValue();
+        Debug.Log("PVECount: " + PVECount);
         CreateAt = (long)user.GetVariable(UserInfoPropertiesKey.CREATE_AT).GetDoubleValue();
         try
         {

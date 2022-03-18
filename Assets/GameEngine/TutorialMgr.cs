@@ -12,7 +12,7 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
     public bool CheckTutStartUp()
     {
-        return true && !haveStartUp;
+        return UserData.Instance.PVECount <= 0 && !haveStartUp;
     }
     public bool CheckTutStartUp_Greeting()
     {
