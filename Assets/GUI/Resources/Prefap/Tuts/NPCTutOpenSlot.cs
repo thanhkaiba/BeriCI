@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPCTut : MonoBehaviour
+public class NPCTutOpenSlot : MonoBehaviour
 {
     private int step = 0;
     private bool block = true;
@@ -33,17 +33,6 @@ public class NPCTut : MonoBehaviour
             step += 1;
             switch (step)
             {
-                case 1:
-                    {
-                        Sequence s = DOTween.Sequence();
-                        var canvasGroup = bubble.GetComponent<CanvasGroup>();
-                        s.Append(canvasGroup.DOFade(0, 0.4f));
-                        s.AppendCallback(() => text.text = "Sail with me and fight against other crews...");
-                        s.Append(canvasGroup.DOFade(1, 0.2f));
-                        block = true;
-                        StartCoroutine(UnlockClick(2));
-                        break;
-                    } 
                 case 2:
                     {
                         Sequence s = DOTween.Sequence();
@@ -52,8 +41,8 @@ public class NPCTut : MonoBehaviour
                         s.AppendCallback(() =>
                         {
                             Destroy(gameObject);
-                            var lobbyUI = GameObject.Find("LobbyManager").GetComponent<LobbyUI>();
-                            lobbyUI.ShowTutOpenCrew();
+                            var lobbyUI = GameObject.Find("PickTeamController").GetComponent<PickTeamUI>();
+                            lobbyUI.ShowFocusOpenSlot();
                         });
                         block = true;
                         break;

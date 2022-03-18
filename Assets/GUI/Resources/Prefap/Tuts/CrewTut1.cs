@@ -17,7 +17,7 @@ public class CrewTut1 : MonoBehaviour
     private Transform fog;
     private void Start()
     {
-        StartCoroutine(UnlockClick(2));
+        StartCoroutine(UnlockClick(1.0f));
         ArrowClickLoop();
     }
     private void ArrowClickLoop()
@@ -48,7 +48,7 @@ public class CrewTut1 : MonoBehaviour
                         s.AppendCallback(() => text.text = "You're provided with 2 trial-sailors");
                         s.Append(canvasGroup.DOFade(1, 0.2f));
                         block = true;
-                        StartCoroutine(UnlockClick(1.5f));
+                        StartCoroutine(UnlockClick(1.0f));
                         break;
                     }
                 case 2:
@@ -56,24 +56,13 @@ public class CrewTut1 : MonoBehaviour
                         Sequence s = DOTween.Sequence();
                         var canvasGroup = text.GetComponent<CanvasGroup>();
                         s.Append(canvasGroup.DOFade(0, 0.4f));
-                        s.AppendCallback(() => text.text = "Each Trial-sailor will leave you after several combat");
+                        s.AppendCallback(() => text.text = "Trial-sailor will leave you after several combat");
                         s.Append(canvasGroup.DOFade(1, 0.2f));
                         block = true;
-                        StartCoroutine(UnlockClick(1.5f));
+                        StartCoroutine(UnlockClick(1.0f));
                         break;
                     }
                 case 4:
-                    {
-                        Sequence s = DOTween.Sequence();
-                        var canvasGroup = text.GetComponent<CanvasGroup>();
-                        s.Append(canvasGroup.DOFade(0, 0.4f));
-                        s.AppendCallback(() => text.text = "Sailors buy on marketplace will go with you forever");
-                        s.Append(canvasGroup.DOFade(1, 0.2f));
-                        block = true;
-                        StartCoroutine(UnlockClick(1.5f));
-                        break;
-                    }
-                case 5:
                     {
                         Sequence s = DOTween.Sequence();
                         var canvasGroup = GetComponent<CanvasGroup>();

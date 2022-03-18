@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 4489780570912930887}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5233563745292342234}
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 1410, y: -236}
+  m_AnchoredPosition: {x: 549, y: -236}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7464996321595011882
@@ -115,7 +115,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayTime: 1
   duration: 0.6
-  x: 1000
+  x: -1000
   y: 0
   ease: 4
 --- !u!1 &5415550719292082374
@@ -145,7 +145,7 @@ RectTransform:
   m_GameObject: {fileID: 5415550719292082374}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7877634541971188264}
@@ -197,7 +197,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.5
-  m_Text: Welcome to my pirate ship
+  m_Text: 'You can unlock slot to have more sailors in your line-up. '
 --- !u!1 &7617005309177739679
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,16 +227,16 @@ RectTransform:
   m_GameObject: {fileID: 7617005309177739679}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7651114680307912490}
   m_Father: {fileID: 5233563745292342234}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -1077, y: 170}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 1113, y: 170}
   m_SizeDelta: {x: 600, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2427727208547369440
@@ -317,9 +317,9 @@ GameObject:
   - component: {fileID: 8470599627989654931}
   - component: {fileID: 1770106950045035949}
   - component: {fileID: 8960527434119217733}
-  - component: {fileID: 8817327759365730886}
+  - component: {fileID: 3433029958984919653}
   m_Layer: 5
-  m_Name: NPCTut
+  m_Name: NPCTutOpenSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -444,7 +444,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8817327759365730886}
+      - m_Target: {fileID: 3433029958984919653}
         m_TargetAssemblyTypeName: NPCTutOpenSlot, Assembly-CSharp
         m_MethodName: OnClickPanel
         m_Mode: 1
@@ -456,7 +456,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8817327759365730886
+--- !u!114 &3433029958984919653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

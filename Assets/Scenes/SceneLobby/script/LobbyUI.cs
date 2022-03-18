@@ -90,12 +90,20 @@ public class LobbyUI : MonoBehaviour
         RunAppearAction();
         ShowListSailors();
         Time.timeScale = 1;
-        TutorialMgr.Instance.CheckTutStartUp();
-        if (TutorialMgr.Instance.CheckTutStartUp_Greeting()) ShowNPCTut();
-        else
+
+        if (TutorialMgr.Instance.CheckTutOpenSlot())
         {
-            ShowFocusPvE();
-            TutorialMgr.Instance.CompleteStartUp();
+            ShowFocusLineUp();
+        }
+
+        if (TutorialMgr.Instance.CheckTutStartUp())
+        {
+            if (TutorialMgr.Instance.CheckTutStartUp_Greeting()) ShowNPCTut();
+            else
+            {
+                ShowFocusPvE();
+                TutorialMgr.Instance.CompleteStartUp();
+            }
         }
     }
 
@@ -287,15 +295,47 @@ public class LobbyUI : MonoBehaviour
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
         GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
         var pos = GameObject.Find("ButtonCrew").transform.position;
-        hand.transform.position = new Vector3(pos.x, pos.y + 80, pos.z);
+        hand.transform.position = pos;
     }
     public void ShowFocusPvE()
     {
-        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
-        var pos = GameObject.Find("ButtonPVE").transform.position;
-        hand.transform.position = new Vector3(pos.x - 250, pos.y, pos.z);
-        hand.name = "hand_pve";
+        var blockScene = AddBlockScene();
+        Sequence s = DOTween.Sequence();
+        s.AppendInterval(1);
+        s.AppendCallback(() => {
+            Destroy(blockScene);
+            var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+            GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+            hand.transform.position = GameObject.Find("ButtonPVE").transform.position;
+            hand.name = "hand_pve";
+        });
+    }
+    private void ShowFocusLineUp()
+    {
+        var blockScene = AddBlockScene();
+        Sequence s = DOTween.Sequence();
+        s.AppendInterval(1);
+        s.AppendCallback(() => {
+            Destroy(blockScene);
+            var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+            GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+            var pos = GameObject.Find("ButtonLineUp").transform.position;
+            hand.transform.position = pos;
+        });
+    }
+    private GameObject AddBlockScene()
+    {
+        var blockScene = new GameObject();
+        blockScene.transform.SetParent(transform);
+        blockScene.transform.localPosition = Vector3.zero;
+        blockScene.AddComponent<CanvasRenderer>();
+        RectTransform rectTransform = blockScene.AddComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(Screen.width * 2, Screen.height * 2);
+        blockScene.transform.SetAsFirstSibling();
+        Image image = blockScene.AddComponent<Image>();
+        image.color = new Color(0, 0, 0, 0);
+        image.raycastTarget = true;
+        return blockScene;
     }
     public void ShowGuiCheat()
     {
