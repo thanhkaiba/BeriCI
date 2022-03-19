@@ -139,7 +139,7 @@ public class CrewManager : MonoBehaviour
         else if (isTrial)
         {
             TextLockTrade.gameObject.SetActive(true);
-            TextLockTrade.text = "This is trial sailors. He will leave you after <b><color=#eb4c34>" + (GlobalConfigs.SailorGeneral.TRIAL_FIGHT - model.pve_count) + "</color></b> fight(s).";
+            TextLockTrade.text = "This is trial sailors. He will leave you after <b><color=#f2b5b1>" + (GlobalConfigs.SailorGeneral.TRIAL_FIGHT - model.pve_count) + "</color></b> fight(s).";
         }
         else
         {
