@@ -84,7 +84,7 @@ public class LoginController : MonoBehaviour
 
     void AutoLogin()
     {
-
+        return;
         if (!string.IsNullOrEmpty(passwordInput.text))
         {
             OnLoginButtonClick();

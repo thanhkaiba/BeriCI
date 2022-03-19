@@ -347,7 +347,7 @@ public class LobbyUI : MonoBehaviour
     private GameObject AddBlockScene()
     {
         var blockScene = new GameObject();
-        blockScene.transform.SetParent(transform);
+        blockScene.transform.SetParent(GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
         blockScene.transform.localPosition = Vector3.zero;
         blockScene.AddComponent<CanvasRenderer>();
         RectTransform rectTransform = blockScene.AddComponent<RectTransform>();
