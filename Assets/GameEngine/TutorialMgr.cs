@@ -12,6 +12,9 @@ public class TutorialMgr : Singleton<TutorialMgr>
 
     public bool CheckTutStartUp()
     {
+#if PIRATERA_DEV
+        return false;
+#endif
         return UserData.Instance.PVECount <= 0 && !haveStartUp && CrewData.Instance.Sailors.Count > 0;
     }
     public bool CheckTutStartUp_Greeting()
@@ -39,6 +42,9 @@ public class TutorialMgr : Singleton<TutorialMgr>
     bool have_show_open_slot = false;
     public bool CheckTutOpenSlot()
     {
+#if PIRATERA_DEV
+        return false;
+#endif
         if (CheckTutStartUp() || have_show_open_slot) return false;
         return UserData.Instance.NumSlot <= 1 && UserData.Instance.Beri >= GlobalConfigs.LineUp.costs[0] && CrewData.Instance.Sailors.Count >= 2;
     }
