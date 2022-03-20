@@ -60,6 +60,7 @@ public class CrewManager : MonoBehaviour
 #else
         buttonCheat.SetActive(false);
 #endif
+        if (TutorialMgr.Instance.CheckTutStartUp()) ShowCrewTut1();
     }
 
     private void OnSailorInfoChanged(SailorModel model)
@@ -122,7 +123,9 @@ public class CrewManager : MonoBehaviour
         texts[6].text = Mathf.Round(model.config_stats.GetArmor()).ToString();
         texts[7].text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
         fightCount.text = "Fight: <color=#CCCF44>"+ model.pve_count +"</color>";
-        var EF_remain = (GlobalConfigs.SailorGeneral.EARNABLE_FIGHT - model.pve_count);
+        bool isTrial = model.id.StartsWith("trial-");
+        var maxEF = isTrial ? GlobalConfigs.SailorGeneral.TRIAL_EARNABLE_FIGHT : GlobalConfigs.SailorGeneral.EARNABLE_FIGHT;
+        var EF_remain = (maxEF - model.pve_count);
         EFRemain.text = "EF(*) Remain: <color=#F5FF17>"
             + (EF_remain < 0 ? 0 : EF_remain)
             +"</color>";
@@ -132,6 +135,11 @@ public class CrewManager : MonoBehaviour
         {
             TextLockTrade.gameObject.SetActive(true);
             TextLockTrade.text = "Sailor is locked for " + System.MathF.Ceiling(model.GetRemainingLockTime() / (60f * 60 * 1000)) + " hour(s) because it's been trade recently.";
+        }
+        else if (isTrial)
+        {
+            TextLockTrade.gameObject.SetActive(true);
+            TextLockTrade.text = "This is trial sailors. He will leave you after <b><color=#f2b5b1>" + (GlobalConfigs.SailorGeneral.TRIAL_FIGHT - model.pve_count) + "</color></b> fight(s).";
         }
         else
         {
@@ -201,7 +209,18 @@ public class CrewManager : MonoBehaviour
         }
 
     }
-
+    private void ShowCrewTut1()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/CrewTut1");
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+    }
+    public void ShowTutOpenLineUp()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonLineUp").transform.position;
+        hand.transform.position = new Vector3(pos.x - 80, pos.y + 80, pos.z);
+    }
 
     public void ShowCheatSailorInfo()
     {

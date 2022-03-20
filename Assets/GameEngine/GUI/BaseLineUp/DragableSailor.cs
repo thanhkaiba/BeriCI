@@ -170,10 +170,10 @@ public class DragableSailor : MonoBehaviour
             SwapSailor(sailor.Model.id, selectingIndex);
 
         }
-
         slots[selectingIndex].SetSelectedSailer(sailor);
         originIndex = selectingIndex;
         selectingIndex = -1;
+        TutorialMgr.Instance.CheckRunTutStartUp_StepLineUpBack2Lobby();
     }
 
     protected void OnMouseUpEmpty()

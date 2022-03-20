@@ -162,6 +162,11 @@ public class FightingLine
 
     public bool IsFull()
     {
+        return GetCount() >= NumSlot;
+    }
+
+    public int GetCount()
+    {
         int count = 0;
         Dictionary<short, string>.ValueCollection values = slots.Values;
         foreach (string val in values)
@@ -171,9 +176,8 @@ public class FightingLine
                 count++;
             }
         }
-        return count >= NumSlot;
+        return count;
     }
-
 
     /// <summary>
     /// Get a sailor in squad by a combatPosition {x, y}

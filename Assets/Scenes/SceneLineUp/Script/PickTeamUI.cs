@@ -1,4 +1,5 @@
 
+using DG.Tweening;
 using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
@@ -21,13 +22,16 @@ public class PickTeamUI : MonoBehaviour
         UpdateSlotMaxCapacity();
         NetworkController.AddServerActionListener(OnReceiveServerAction);
         GameEvent.FlyBeri.AddListener(FlyBeri);
+        if (TutorialMgr.Instance.CheckTutStartUp()) ShowTutBuildLineUp();
+        if (TutorialMgr.Instance.CheckTutOpenSlot())
+        {
+            ShowNPCTutOpenSlot();
+        }
     }
-
     void Awake()
     {
         Input.multiTouchEnabled = false;
     }
-
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
 
@@ -44,16 +48,12 @@ public class PickTeamUI : MonoBehaviour
             }
         }
     }
-
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         GameEvent.FlyBeri.RemoveListener(FlyBeri);
 
     }
-
-
-
     void UpdateSlotMaxCapacity()
     {
         TextMaxCapacity.text = "" + UserData.Instance.NumSlot;
@@ -93,6 +93,38 @@ public class PickTeamUI : MonoBehaviour
         }
         GuiManager.Instance.ShowGuiWaiting(true);
         NetworkController.Send(SFSAction.GET_LINEUP_SLOT_PACK);
-
+    }
+    private void ShowTutBuildLineUp()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/LineUpTut1");
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject.Find("BgBuySlot").SetActive(false);
+        GameObject.Find("ButtonCrew").SetActive(false);
+    }
+    public void ShowTutBackToLobby()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonBack").transform.position;
+        hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
+    }
+    public void ShowFocusOpenSlot()
+    {
+        TutorialMgr.Instance.CompleteOpenSlot();
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonOpenSlot").transform.position;
+        hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
+        hand.name = "hand_open_slot";
+    }
+    private void ShowNPCTutOpenSlot()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/NPCTutOpenSlot");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+    }
+    public void ClickOpenSlot()
+    {
+        var hand = GameObject.Find("hand_open_slot");
+        if (hand) Destroy(hand);
     }
 }
