@@ -159,6 +159,7 @@ public class CombatMgr : MonoBehaviour
                     switch (modeId)
                     {
                         case ModeID.PvE:
+                        case ModeID.Arena:
                             {
                                 StartCoroutine(WaitAndDo(0.5f, () => ShowResult(data)));
                                 break;

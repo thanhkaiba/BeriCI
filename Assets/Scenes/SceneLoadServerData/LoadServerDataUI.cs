@@ -66,6 +66,8 @@ public class LoadServerDataUI : MonoBehaviour
 
     private Action ReloadFunc;
 
+    public static string NextScene = "SceneLobby";
+
 
     private readonly HashSet<SFSAction> ActionRequires = new() { 
         SFSAction.PIRATE_WHEEL_DATA, 
@@ -267,7 +269,7 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnLoadSuccess()
     {
-        SceneManager.LoadScene("SceneLobby");
+        SceneManager.LoadScene(NextScene);
     }
 
     private void LoadConfig()

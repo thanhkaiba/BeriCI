@@ -296,6 +296,7 @@ public class LoginController : MonoBehaviour
 
     private void OpenLobby()
     {
+        LoadServerDataUI.NextScene = "SceneLobby";
         SceneManager.LoadScene("SceneLoadServerData");
     }
     //----------------------------------------------------------

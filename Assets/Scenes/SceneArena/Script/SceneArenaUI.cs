@@ -16,6 +16,9 @@ public class SceneArenaUI : MonoBehaviour
 
     [SerializeField]
     private Text LbRank;
+
+    [SerializeField]
+    private Text LbResetTicket;
     void Start()
     {
 
@@ -44,6 +47,12 @@ public class SceneArenaUI : MonoBehaviour
     void Awake()
     {
         Input.multiTouchEnabled = false;
+    }
+
+    private void Update()
+    {
+        System.TimeSpan remaining = System.TimeSpan.FromMilliseconds(GameTimeMgr.GetTimeToNextDayUTC());
+        LbResetTicket.text = $"Reset After: {string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds)}";
     }
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)

@@ -1,5 +1,4 @@
 
-using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;

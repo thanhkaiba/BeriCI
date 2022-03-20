@@ -21,4 +21,12 @@ public static class GameTimeMgr
     {
         return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
     }
+
+    public static double GetTimeToNextDayUTC()
+    {
+        DateTime now = DateTime.UtcNow;
+        DateTime tomorrow = now.AddDays(1).Date;
+
+       return (tomorrow - now).TotalMilliseconds;
+    }
 }
