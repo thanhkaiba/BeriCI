@@ -17,15 +17,9 @@ public class PvPData : Singleton<PvPData>
         Ticket = packet.GetInt("ticket");
         OpenedAdvantage = packet.GetIntArray("oppened_advantage");
         SelectingAdvantage = packet.GetInt("selecting_advantage");
-        try
-        {
-            Rank = packet.GetInt("rank");
-            Elo = packet.GetLong("elo");
-        } catch
-        {
+        Rank = packet.GetInt("rank");
+        Elo = packet.GetLong("elo");
 
-        }
-       
         DefenseCrew.NewFromSFSObject(packet);
     }
 

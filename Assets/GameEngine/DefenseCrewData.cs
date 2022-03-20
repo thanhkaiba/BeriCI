@@ -11,6 +11,11 @@ public class DefenseCrewData
         ResetData();
         GameEvent.DefenseSquadChanged.AddListener(OnUpdateSquad);
     }
+    
+    public bool IsFightingLineEmpty()
+    {
+        return FightingTeam.IsEmpty();
+    }
 
     private void OnUpdateSquad()
     {

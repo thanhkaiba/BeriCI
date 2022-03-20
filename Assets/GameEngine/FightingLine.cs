@@ -165,6 +165,11 @@ public class FightingLine
         return GetCount() >= NumSlot;
     }
 
+    public bool IsEmpty()
+    {
+        return GetCount() == 0;
+    }
+
     public int GetCount()
     {
         int count = 0;
