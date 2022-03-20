@@ -58,7 +58,8 @@ public class SceneLineUpDefenseUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("You must select at least one fighter");
             return;
         }
-       
+
+        PvPData.Instance.DefenseCrew.OnConfirmSquad();
         SceneManager.LoadScene("SceneArena");
     }
 }

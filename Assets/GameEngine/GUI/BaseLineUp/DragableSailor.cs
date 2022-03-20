@@ -1,4 +1,5 @@
-﻿using Spine.Unity;
+﻿using Piratera.GUI;
+using Spine.Unity;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,6 +25,7 @@ public class DragableSailor : MonoBehaviour
     public Func<short, bool> IsSlotEmpty;
     public Action<string, short> OccupieSailor;
     public Action<string, short> SwapSailor;
+    public Func<string, bool> CanUnEquip = delegate { return true; };
 
     protected void Start()
     {
@@ -137,7 +139,14 @@ public class DragableSailor : MonoBehaviour
             }
             else
             {
-                OnUnEquip();
+                if (CanUnEquip(sailor.Model.id))
+                {
+                    OnUnEquip();
+                } else {
+                    ShowChild(true);
+                    OnMouseUpEmpty();
+                    GuiManager.Instance.ShowPopupNotification("You must select at least one fighter");
+                }
             }
         }
 
@@ -179,6 +188,10 @@ public class DragableSailor : MonoBehaviour
     protected void OnMouseUpEmpty()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, originZ);
+        if (originIndex >= 0)
+        {
+            slots[originIndex].SetSelectedSailer(sailor);
+        }
     }
 
 

@@ -9,7 +9,6 @@ public class DefenseCrewData
     public DefenseCrewData()
     {
         ResetData();
-        GameEvent.DefenseSquadChanged.AddListener(OnUpdateSquad);
     }
     
     public bool IsFightingLineEmpty()
@@ -17,10 +16,7 @@ public class DefenseCrewData
         return FightingTeam.IsEmpty();
     }
 
-    private void OnUpdateSquad()
-    {
-        NetworkController.Send(SFSAction.PVP_UPDATE_FIGHTING_LINE, FightingTeam.ToSFSObject());
-    }
+  
 
     public void OnConfirmSquad()
     {
