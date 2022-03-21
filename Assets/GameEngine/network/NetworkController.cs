@@ -21,7 +21,11 @@ namespace Piratera.Network
     {
         public const string QC_HOST = "dev-game.piratera.io";
         public const int QC_PORT = 9933;
+        //public const string QC_HOST = "192.168.102.2";
+        //public const int QC_PORT = 9933;
 
+        public const string QC_HOST = "dev-game.piratera.io";
+        public const int QC_PORT = 9933;
 
         public const string DEV_HOST = "dev-game.piratera.io";
         public const int DEV_PORT = 9933;
