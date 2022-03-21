@@ -15,7 +15,7 @@ public class TutorialMgr : Singleton<TutorialMgr>
 #if PIRATERA_DEV
         return false;
 #endif
-        return UserData.Instance.PVECount <= 0 && !haveStartUp && CrewData.Instance.Sailors.Count > 0;
+        return !haveStartUp && CrewData.Instance.Sailors.Count > 0 && UserData.Instance.NumSlot <= 1;
     }
     public bool CheckTutStartUp_Greeting()
     {
