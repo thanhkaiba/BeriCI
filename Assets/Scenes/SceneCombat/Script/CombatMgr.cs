@@ -159,9 +159,13 @@ public class CombatMgr : MonoBehaviour
                     switch (modeId)
                     {
                         case ModeID.PvE:
-                        case ModeID.Arena:
                             {
                                 StartCoroutine(WaitAndDo(0.5f, () => ShowResult(data)));
+                                break;
+                            }
+                        case ModeID.Arena:
+                            {
+                                StartCoroutine(WaitAndDo(0.5f, () => ShowPvPResult((GameEndPvPData)data)));
                                 break;
                             }
                     }
@@ -235,6 +239,11 @@ public class CombatMgr : MonoBehaviour
     {
         GameObject go = GuiManager.Instance.AddGui<GuiReward>("Prefap/GuiReward", LayerId.GUI);
         go.GetComponent<GuiReward>().SetReward(d);
+    }
+    void ShowPvPResult(GameEndPvPData d)
+    {
+        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        go.GetComponent<GuiRewardPvP>().SetReward(d);
     }
     void GameOver(Team winTeam)
     {
