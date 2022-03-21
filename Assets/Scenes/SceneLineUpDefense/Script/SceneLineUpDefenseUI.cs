@@ -1,5 +1,4 @@
 
-using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
@@ -44,23 +43,23 @@ public class SceneLineUpDefenseUI : MonoBehaviour
 
     }
 
-
-
-
     public void OnBackToLobby()
     {
         CrewData.Instance.OnConfirmSquad();
         SceneManager.LoadScene("SceneLobby");
     }
 
-    public void OpenSceneCrew()
-    {
-        CrewData.Instance.OnConfirmSquad();
-        SceneManager.LoadScene("SceneCrew");
-    }
+
    
     public void OnConfirm()
     {
+        if (PvPData.Instance.DefenseCrew.IsFightingLineEmpty())
+        {
+            GuiManager.Instance.ShowPopupNotification("You must select at least one fighter");
+            return;
+        }
+
+        PvPData.Instance.DefenseCrew.OnConfirmSquad();
         SceneManager.LoadScene("SceneArena");
     }
 }
