@@ -26,13 +26,17 @@
         PIRATE_WHEEL = 27,
         PIRATE_WHEEL_DATA = 28,
 
-        PVP_UPDATE_FIGHTING_LINE = 42,
         PVP_DATA = 40,
+        PVP_UPDATE_FIGHTING_LINE = 42,
+        PVP_RANKING = 43,
+        PVP_HISTORY = 44,
+        PVP_WATCH_HISTORY = 45,
         PVP_PLAY = 46,
         PVP_COMBAT_PREPARE = 47,
         PVP_COMBAT_DATA = 48,
         PVP_CONFIRM = 49,
         PVP_JOIN = 50,
+       
 
 
 #if PIRATERA_DEV || PIRATERA_QC

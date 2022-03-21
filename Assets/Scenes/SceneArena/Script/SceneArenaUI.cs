@@ -21,7 +21,7 @@ public class SceneArenaUI : MonoBehaviour
     private Text LbResetTicket;
     void Start()
     {
-
+        NetworkController.AddServerActionListener(OnReceiveServerAction);
         UpdateTicket();
         UpdateRank();
         if (!PvPData.Instance.HaveJoin)
@@ -42,7 +42,7 @@ public class SceneArenaUI : MonoBehaviour
     {
         GuiManager.Instance.ShowGuiWaiting(true);
         NetworkController.Send(SFSAction.PVP_DATA);
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+      
     }
 
     private void UpdateRank()
@@ -100,6 +100,18 @@ public class SceneArenaUI : MonoBehaviour
                     }
                     break;
                 }
+            case SFSAction.PVP_RANKING:
+                {
+                    GuiManager.Instance.ShowGuiWaiting(false);
+                    if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+                        GameObject GO = GuiManager.Instance.AddGui<PopupTopArena>("Prefap/PopupTopArena");
+                        PopupTopArena popup = GO.GetComponent<PopupTopArena>();
+                        popup.NewFromSFSObject(packet.GetSFSArray("list"));
+                    }
+                    break;
+                } 
+                
         }
        
     }
@@ -112,6 +124,15 @@ public class SceneArenaUI : MonoBehaviour
     public void ShowGuide()
     {
         GuiManager.Instance.AddGui<PopupNotification>("Prefap/PopupArenaGuide");
+    }
+
+    public void ShowTop()
+    {
+        GuiManager.Instance.ShowGuiWaiting(true);
+        SFSObject s = new SFSObject();
+        s.PutInt("from", 0);
+        s.PutInt("to", 10);
+        NetworkController.Send(SFSAction.PVP_RANKING, s);
     }
 
     private void OnDestroy()
