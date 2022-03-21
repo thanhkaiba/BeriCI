@@ -113,7 +113,7 @@ MonoBehaviour:
     present_name: Anglersei
     title: Master of the Deep
     skill_description: Deal <b><color=#f06060>$p_0@</color></b> to enemy and STUN
-      1 turn. If its executed enemy, recharge full mana.
+      1 turn. If it executed enemy, recharge full mana.
   - root_name: Yuchik
     present_name: Yuchik
     title: Lady-bird
@@ -127,6 +127,6 @@ MonoBehaviour:
   - root_name: Camelia
     present_name: Camelia
     title: Deep Cave Queen
-    skill_description: Deal <b><color=#5b59f0>$i_0@</color></b> addition <b>$i_1</b>%
-      for each % losing health and heal herself <b><color=#228514>$per_2@</color></b>
-      damage_deal..
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> addition <b>$i_1@</b>%
+      for each 1% losing health and heal herself <b><color=#228514>$per_2@</color></b>
+      damage_deal.  If it executed enemy, recharge full mana and speed-up 100%.
