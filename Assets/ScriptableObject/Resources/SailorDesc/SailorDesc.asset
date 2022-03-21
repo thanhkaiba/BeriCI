@@ -124,3 +124,9 @@ MonoBehaviour:
     title: Haisan's Princess
     skill_description: Buff Ally needing mana the most <b><color=#228514>$i_0@</color></b>
       mana,  speed-up <b><color=#228514>$per_1@</color></b>.
+  - root_name: Camelia
+    present_name: Camelia
+    title: Deep Cave Queen
+    skill_description: Deal <b><color=#5b59f0>$i_0@</color></b> addition <b>$i_1</b>%
+      for each % losing health and heal herself <b><color=#228514>$per_2@</color></b>
+      damage_deal..
