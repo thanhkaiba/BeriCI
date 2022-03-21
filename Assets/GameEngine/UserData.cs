@@ -55,7 +55,6 @@ public class UserData : Singleton<UserData>
         Level = user.GetVariable(UserInfoPropertiesKey.LEVEL).GetIntValue();
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
         PVECount = user.GetVariable(UserInfoPropertiesKey.PVE_COUNT).GetIntValue();
-        Debug.Log("PVECount: " + PVECount);
         CreateAt = (long)user.GetVariable(UserInfoPropertiesKey.CREATE_AT).GetDoubleValue();
         try
         {

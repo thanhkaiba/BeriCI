@@ -7,6 +7,7 @@ using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
+using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -107,6 +108,8 @@ public class LobbyUI : MonoBehaviour
             }
         }
     }
+
+ 
 
     void UpdateMaintain()
     {
@@ -249,9 +252,9 @@ public class LobbyUI : MonoBehaviour
 
     public void OnArenaClick()
     {
-        if (CrewData.Instance.IsEmpty())
+        if (!PvPData.Instance.HaveEnoughSailor())
         {
-            GuiManager.Instance.ShowPopupBuySailor();
+            GuiManager.Instance.ShowPopupNotification("You need at least 1 non-trial sailor to enter the Arena");
             return;
         }
 
@@ -260,13 +263,19 @@ public class LobbyUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("You must have 5 slot to join Arena!");
             return;
         }
-        if (!PvPData.Instance.HaveJoin)
+
+        if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_WELCOME_ARENA)
         {
             GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
-        } else
+        } else if (!PvPData.Instance.HaveJoin)
+        {
+            SceneManager.LoadScene("SceneLineUpDefense");
+        }
+        else
         {
             SceneManager.LoadScene("SceneArena");
         }
+     
     }
 
     private void RunAppearAction()

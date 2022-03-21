@@ -1,5 +1,5 @@
 ﻿using Sfs2X.Entities.Data;
-
+using UnityEngine;
 
 public class PvPData : Singleton<PvPData>
 {
@@ -10,6 +10,27 @@ public class PvPData : Singleton<PvPData>
     public int SelectingAdvantage;
     public int Rank = 0;
     public long Elo = 0;
+    
+    public enum PVP_TURORIAL_STEP {
+        POPUP_DEFENSE_LINEUP = 2,
+        POPUP_DEFENSE_LINEUP_DONE = 3,
+        POPUP_WELCOME_ARENA = 1,
+        POPUP_WELCOME_ARENA_DONE = 4,
+
+    }
+    
+    public PVP_TURORIAL_STEP ShowedTutorial
+    {
+        get
+        {
+            return (PVP_TURORIAL_STEP)PlayerPrefs.GetInt("Showed-ARENA_TUT", 0);
+        }
+        
+        set
+        {
+            PlayerPrefs.SetInt("Showed-ARENA_TUT", (int)value);
+        }
+    }
 
     public void NewFromSFSObject(ISFSObject packet)
     {
@@ -21,6 +42,11 @@ public class PvPData : Singleton<PvPData>
         Elo = packet.GetInt("elo");
 
         DefenseCrew.NewFromSFSObject(packet);
+    }
+
+    public bool HaveEnoughSailor()
+    {
+        return CrewData.Instance.GetNonTrialModelList().Count >= DefenseCrew.SailorLimit;
     }
 
 }

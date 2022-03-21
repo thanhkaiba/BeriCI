@@ -90,7 +90,7 @@ public class IconSailor : MonoBehaviour
             starObj.transform.localScale = new Vector3(0.25f, 0.25f);
             starObj.transform.localPosition = new Vector3(0, -23 * i);
         }
-        iconTrial.SetActive(model.id.StartsWith("trial-"));
+        iconTrial.SetActive(model.IsTrial());
     }
     public void ShowFocus(bool b)
     {
