@@ -145,7 +145,7 @@ public class DragableSailor : MonoBehaviour
                 } else {
                     ShowChild(true);
                     OnMouseUpEmpty();
-                    GuiManager.Instance.ShowPopupNotification("You must select at least one fighter");
+                 
                 }
             }
         }

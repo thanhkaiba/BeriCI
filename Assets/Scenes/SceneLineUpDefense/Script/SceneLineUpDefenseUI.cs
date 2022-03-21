@@ -13,7 +13,7 @@ public class SceneLineUpDefenseUI : MonoBehaviour
 
     void Start()
     {
-        if (!PvPData.Instance.HaveJoin)
+        if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_DEFENSE_LINEUP)
         {
             GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupDefenseLineUpGuide");
         }

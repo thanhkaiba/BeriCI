@@ -10,6 +10,7 @@ namespace Piratera.GUI
         private Transform background;
         protected override void Start()
         {
+            PvPData.Instance.ShowedTutorial = PvPData.PVP_TURORIAL_STEP.POPUP_DEFENSE_LINEUP;
             Appear();
         }
         public void OnOK()

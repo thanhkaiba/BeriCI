@@ -44,6 +44,11 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         });
         return found;
     }
+
+    public bool IsTrial()
+    {
+        return id.StartsWith("trial-");
+    }
     public List<SailorClass> GetListClasses()
     {
         List<SailorClass> result = new List<SailorClass>(config_stats.classes);

@@ -34,6 +34,21 @@ public class CrewData : Singleton<CrewData>
         FightingTeam.Clean();
 
     }
+
+    public List<SailorModel> GetNonTrialModelList()
+    {
+        List<SailorModel> nonTrialList = new ();
+        foreach (SailorModel sailor in Sailors)
+        {
+            if (sailor.IsTrial())
+            {
+                continue;
+            }
+            nonTrialList.Add(sailor);
+        }
+        return nonTrialList;
+    }
+    
     public void NewFromSFSObject(ISFSObject packet)
     {
         ResetData();

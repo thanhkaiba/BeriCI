@@ -6,6 +6,8 @@ public class DefenseCrewData
 {
     public FightingLine FightingTeam = new();
 
+    public int SailorLimit { get; internal set; } = 1;
+
     public DefenseCrewData()
     {
         ResetData();
@@ -100,7 +102,7 @@ public class DefenseCrewData
         List<SailorModel> result = new();
         foreach (SailorModel model in CrewData.Instance.Sailors)
         {
-            if (!FightingTeam.IsInSquad(model.id))
+            if (!FightingTeam.IsInSquad(model.id) && !model.IsTrial())
             {
                 result.Add(model);
             }

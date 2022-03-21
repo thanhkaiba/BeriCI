@@ -26,10 +26,22 @@ public class SceneArenaUI : MonoBehaviour
         UpdateRank();
         if (!PvPData.Instance.HaveJoin)
         {
+           
             GuiManager.Instance.AddGui<PopupCongratJoinArena>("prefap/PopupCongratJoinArena");
-            PvPData.Instance.HaveJoin = true;
+            GuiManager.Instance.ShowGuiWaiting(true);
             NetworkController.Send(SFSAction.PVP_JOIN);
+        } else
+        {
+            SyncData();
         }
+      
+      
+    }
+    
+    private void SyncData()
+    {
+        GuiManager.Instance.ShowGuiWaiting(true);
+        NetworkController.Send(SFSAction.PVP_DATA);
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 
@@ -64,6 +76,27 @@ public class SceneArenaUI : MonoBehaviour
                     if (errorCode != SFSErrorCode.SUCCESS)
                     {
                         GuiManager.Instance.ShowGuiWaiting(false);
+                    }
+                    break;
+                }
+            case SFSAction.PVP_DATA:
+                {
+                    GuiManager.Instance.ShowGuiWaiting(false);
+                    if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+                        UpdateTicket();
+                        UpdateRank();
+                    }
+                  
+                    break;
+                }
+            case SFSAction.PVP_JOIN:
+                {
+                    GuiManager.Instance.ShowGuiWaiting(false);
+                    if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+                        PvPData.Instance.HaveJoin = true;
+                        SyncData();
                     }
                     break;
                 }
