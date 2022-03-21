@@ -219,7 +219,9 @@ public class CrewManager : MonoBehaviour
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
         GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
         var pos = GameObject.Find("ButtonLineUp").transform.position;
-        hand.transform.position = new Vector3(pos.x - 80, pos.y + 80, pos.z);
+        hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
+
+        GameObject.Find("SlotBack").SetActive(false);
     }
 
     public void ShowCheatSailorInfo()
