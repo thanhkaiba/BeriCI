@@ -13,7 +13,7 @@ namespace Piratera.GUI
         {
             public string name;
             public int rank;
-            public int elo;
+            public long elo;
             public string avatar;
 
             public PVPRankPlayer(ISFSObject packet)
@@ -25,7 +25,7 @@ namespace Piratera.GUI
             {
                 name = packet.GetUtfString("name");
                 rank = packet.GetInt("rank");
-                elo = (int)packet.GetLong("elo");
+                elo = packet.GetLong("elo");
                 avatar = packet.GetUtfString("avatar");
                 
             }
