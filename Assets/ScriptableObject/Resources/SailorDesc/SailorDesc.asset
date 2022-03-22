@@ -86,7 +86,7 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#228514>$i_0@</color></b> mana, speed up <b><color=#228514>$per_1@</color></b>
+      the front <b><color=#008ab0>$i_0@</color></b> mana, speed up <b><color=#228514>$per_1@</color></b>
       and +1 <color=#b5b800><b>FURY</b></color>
   - root_name: Mealodo
     present_name: Mealodo
@@ -122,11 +122,16 @@ MonoBehaviour:
   - root_name: Kamijita
     present_name: Kamijita
     title: Haisan's Princess
-    skill_description: Buff Ally needing mana the most <b><color=#228514>$i_0@</color></b>
+    skill_description: Buff Ally needing mana the most <b><color=#008ab0>$i_0@</color></b>
       mana,  speed-up <b><color=#228514>$per_1@</color></b>.
   - root_name: Camelia
     present_name: Camelia
     title: Deep Cave Queen
-    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> addition <b>$i_1@</b>%
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> addition <b><color=#5b59f0>$i_1@</color></b>%
       for each 1% losing health and heal herself <b><color=#228514>$per_2@</color></b>
-      damage_deal.  If it executed enemy, recharge full mana and speed-up 100%.
+      damage deal.  If it executed enemy, recharge full mana and speed-up 100%.
+  - root_name: Daedra
+    present_name: Daedra
+    title: Underworld Knight
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> and steal maximum
+      <b><color=#008ab0>$i_1@</color></b> mana

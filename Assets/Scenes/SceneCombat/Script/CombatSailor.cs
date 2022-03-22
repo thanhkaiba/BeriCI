@@ -414,6 +414,12 @@ public class CombatSailor : Sailor
         if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
     }
+    public virtual void LoseFury(int value)
+    {
+        cs.Fury -= value;
+        if (cs.Fury < 0) cs.Fury = 0;
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
+    }
     public virtual void GainPower(float value)
     {
         cs.BasePower += value;

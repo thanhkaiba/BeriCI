@@ -77,12 +77,12 @@ public class Meechik : CombatSailor
         List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, false);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }, this));
+        _params.Add(target.CalcDamageTake(new Damage() { magic = main_damage }, this));
 
         around_target.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = aoe_damage }, this));
+            _params.Add(t.CalcDamageTake(new Damage() { magic = aoe_damage }, this));
         });
 
         return ProcessSkill(targets, _params);
@@ -123,7 +123,7 @@ public class Meechik : CombatSailor
         seq.AppendCallback(() =>
         {
             GameEffMgr.Instance.Shake(0.3f, 3.0f);
-            for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { physics = _params[i] });
+            for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
         });
 
         seq.AppendInterval(0.3f);
