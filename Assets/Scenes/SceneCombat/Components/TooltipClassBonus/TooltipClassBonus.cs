@@ -69,7 +69,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "Enemies lose " + para[0] + " armor and magic-resist";
                 break;
             case SailorClass.CYBORG:
-                content.text = "CYBORG gain " + para[0] + " mana when base attacking";
+                content.text = "CYBORG base-attack: +" + para[0] + " mana" + (data.level >= 1 ? ("\n +" + para[1] + " speed"): "") + (data.level >= 2 ? ("and +" + para[2] + " power") : "");
                 break;
             case SailorClass.SEA_CREATURE:
                 content.text = "Alies gain " + para[0] + " magic resist";

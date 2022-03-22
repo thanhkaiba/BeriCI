@@ -249,6 +249,13 @@ public class CombatStats
                         CurrentSpeed += (int)(config.GetParams(p.type, p.level)[0] * SpeedNeed);
                     }
                     break;
+                case SailorClass.CYBORG:
+                    if (HaveType(SailorClass.CYBORG))
+                    {
+                        Speed += config.GetParams(p.type, p.level)[1];
+                        BasePower += config.GetParams(p.type, p.level)[2];
+                    }
+                    break;
             }
         });
 
