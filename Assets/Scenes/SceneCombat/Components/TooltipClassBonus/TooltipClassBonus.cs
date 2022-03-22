@@ -66,10 +66,10 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "SWORD MAN gain " + para[0] + " speed";
                 break;
             case SailorClass.DEMON:
-                content.text = "Emenies lose " + para[0] + " armor and magic resist";
+                content.text = "Enemies lose " + para[0] + " armor and magic-resist";
                 break;
             case SailorClass.CYBORG:
-                content.text = "CYBORG gain " + para[0] + " armor";
+                content.text = "CYBORG gain " + para[0] + " mana when base attacking";
                 break;
             case SailorClass.SEA_CREATURE:
                 content.text = "Alies gain " + para[0] + " magic resist";
@@ -78,7 +78,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "MAGE gain " + (para[0] * 100) + "% power";
                 break;
             case SailorClass.SUPPORT:
-                content.text = "Alies gain " + para[0] + " mana";
+                content.text = "Alies gain " + para[0] + " mana\n +" + (para[1] * 100) + "% healing effect";
                 break;
             case SailorClass.MARKSMAN:
                 content.text = "Marksman deal " + (para[0] * 100) + "% more damage for each distance-tiles";
@@ -90,10 +90,10 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "KNIGHT gain " + (para[0]) + " armor";
                 break;
             case SailorClass.GRAPPLER:
-                content.text = "GRAPPLER speed-up " + (para[0] * 100) + "% after use skill";
+                content.text = "GRAPPLER speed-up " + (para[0] * 100) + "% after using skill";
                 break;
             case SailorClass.GUNPOWDER:
-                content.text = "GUNPOWDER deal damage ignore " + (para[0] * 100) + "% armor and magic resist";
+                content.text = "GUNPOWDER deal damage ignore " + (para[0] * 100) + "% armor and magic-resist";
                 break;
             case SailorClass.SHIPWRIGHT:
                 content.text = "SHIPWRIGHT gain " + (para[0] * 100) + "% power and health for each item their own";

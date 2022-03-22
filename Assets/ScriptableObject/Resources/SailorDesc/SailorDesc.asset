@@ -21,8 +21,8 @@ MonoBehaviour:
   - root_name: Meechik
     present_name: Meechik
     title: Eldest of the Pirate Family
-    skill_description: Fire an giant bullet bazooka, deal <b><color=#f06060>$p_0@</color></b>
-      and <b><color=#f06060>$p_1@</color></b> to another in 1-tile radius.
+    skill_description: Fire an giant bullet bazooka, deal <b><color=#5b59f0>$p_0@</color></b>
+      and <b><color=#5b59f0>$p_1@</color></b> to another in 1-tile radius.
   - root_name: Sojeph
     present_name: Sojeph
     title: The Surgeon captain
@@ -135,3 +135,8 @@ MonoBehaviour:
     title: Underworld Knight
     skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> and steal maximum
       <b><color=#008ab0>$i_1@</color></b> mana
+  - root_name: Lade
+    present_name: Lade
+    title: Serious Cyborg
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to all enemies in
+      a line.

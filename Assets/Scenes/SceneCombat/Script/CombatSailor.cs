@@ -386,6 +386,14 @@ public class CombatSailor : Sailor
     }
     public void GainHealth(float health)
     {
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem support = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.SUPPORT);
+        if (support != null)
+        {
+            float extra_health_percent = config.GetParams(support.type, support.level)[1];
+            health += health * extra_health_percent;
+        }
+
         cs.CurHealth += health;
         if (cs.CurHealth > cs.MaxHealth) cs.CurHealth = cs.MaxHealth;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
