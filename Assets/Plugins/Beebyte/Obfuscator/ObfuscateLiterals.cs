@@ -5,11 +5,11 @@ using System;
 
 namespace Beebyte.Obfuscator
 {
-	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class)]
-	public class ObfuscateLiteralsAttribute : System.Attribute
-	{
-		public ObfuscateLiteralsAttribute()
-		{
-		}
-	}
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class)]
+    public class ObfuscateLiteralsAttribute : System.Attribute
+    {
+        public ObfuscateLiteralsAttribute()
+        {
+        }
+    }
 }

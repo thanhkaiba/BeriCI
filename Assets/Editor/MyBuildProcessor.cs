@@ -1,13 +1,10 @@
 #if UNITY_EDITOR
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using System.Linq;
-using System.IO;
-using System.Diagnostics;
-using System;
-
-using Unity.EditorCoroutines.Editor;
-using Piratera.Constance;
 
 // Output the build size or a failure depending on BuildPlayer.
 
@@ -16,7 +13,7 @@ namespace Piratera.Build
     public class MyBuildProcessor : Editor
     {
         public static string BuildFolder = $"{Directory.GetCurrentDirectory()}/Build";
-        public static string InnoSetupFile = $"{BuildFolder}/Installer/piratera_installer_l2cpp.iss";
+        public static string InnoSetupFile = $"{BuildFolder}/Installer/piratera_installer_l2cpp_DEV.iss";
 
         [MenuItem("Builds/Reveal In Finder", false, 0)]
         public static void OpenBuildFolder()
@@ -43,11 +40,13 @@ namespace Piratera.Build
                 }
 
                 OnPreprocessBuild(WindowBuildVersion.OnPreprocessBuild);
-                BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions();
-                buildPlayerOptions.scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray();
-                buildPlayerOptions.locationPathName = path + "/Piratera.exe";
-                buildPlayerOptions.target = BuildTarget.StandaloneWindows;
-                buildPlayerOptions.options = BuildOptions.None;
+                BuildPlayerOptions buildPlayerOptions = new BuildPlayerOptions
+                {
+                    scenes = EditorBuildSettings.scenes.Where(s => s.enabled).Select(s => s.path).ToArray(),
+                    locationPathName = path + "/Piratera.exe",
+                    target = BuildTarget.StandaloneWindows,
+                    options = BuildOptions.None
+                };
 
 
                 BuildReport report = BuildPipeline.BuildPlayer(buildPlayerOptions);
@@ -68,9 +67,9 @@ namespace Piratera.Build
             }
         }
 
-        public static void BuildInnoSetup( string version)
+        public static void BuildInnoSetup(string version)
         {
-           
+
             Process p = new Process();
             ProcessStartInfo psi = new ProcessStartInfo();
             psi.FileName = @"D:/Program Files/Inno Setup 6/iscc.exe";
@@ -82,7 +81,7 @@ namespace Piratera.Build
             p.WaitForExit();
         }
 
-       
+
 
         [MenuItem("Builds/Android/Build", false, 0)]
         public static void AndroidBuild()
@@ -142,7 +141,7 @@ namespace Piratera.Build
             }
         }
 
-   
+
         [MenuItem("Builds/Window/Upload/Dev", false, 1)]
         public static void SyncWindowVersion()
         {

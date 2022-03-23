@@ -63,7 +63,7 @@ public class TempCombatData : Singleton<TempCombatData>
 
         ca = new List<CombatAction>();
         ISFSArray _ca = packet.GetSFSArray("ca");
-        foreach (ISFSObject obj in _ca) ca.Add(new CombatAction(obj));
+        foreach (ISFSObject obj in _ca) ca.Add(new CombatAction(obj, modeID));
     }
 
 }
@@ -73,7 +73,7 @@ public enum CombatAcionType
     BaseAttack,
     UseSkill,
     GameResult,
-    GameState,
+    Immobile,
     Lose
 }
 public enum RankBonus
@@ -101,10 +101,12 @@ public class CombatAction
     public List<float> _params;
     public bool haveCrit;
 
+
+
     public List<MapStatusItem> mapStatus;
 
     public GameEndData gameEndData;
-    public CombatAction(ISFSObject packet)
+    public CombatAction(ISFSObject packet, ModeID mode)
     {
         type = (CombatAcionType)packet.GetByte("actionType");
         ISFSObject detail = packet.GetSFSObject("detail");
@@ -124,9 +126,19 @@ public class CombatAction
                 _params = detail.GetFloatArray("params").OfType<float>().ToList();
                 break;
             case CombatAcionType.GameResult:
-                gameEndData = new GameEndData(packet);
+                if (mode == ModeID.PvE)
+                {
+                    gameEndData = new GameEndData(packet);
+                }
+                else if (mode == ModeID.Arena)
+                {
+                    gameEndData = new GameEndPvPData(packet);
+                }
+
                 break;
-            case CombatAcionType.GameState:
+            case CombatAcionType.Immobile:
+                actorTeam = detail.GetByte("actor_team");
+                actor = detail.GetUtfString("actor");
                 break;
         }
         mapStatus = new List<MapStatusItem>();
@@ -156,6 +168,20 @@ public class GameEndData
         win_rank_bonus = detail.GetInt("win_rank_bonus");
         hard_bonus = detail.GetInt("hard_bonus");
         team_bonus = detail.GetInt("team_bonus");
+        team_win = detail.GetByte("team_win");
+        
+    }
+
+    
+}
+
+public class GameEndPvPData : GameEndData
+{
+    public int elo_delta;
+    public GameEndPvPData(ISFSObject packet) : base(packet)
+    {
+        ISFSObject detail = packet.GetSFSObject("detail");
+        elo_delta = detail.GetInt("elo_delta");
         team_win = detail.GetByte("team_win");
     }
 }

@@ -9,7 +9,7 @@ public class LoginUI : MonoBehaviour
     private Image loginBox;
     [SerializeField]
     private CanvasGroup chain;
-  
+
     [SerializeField]
     private Image buttonLogin;
 
@@ -117,6 +117,6 @@ public class LoginUI : MonoBehaviour
             seq.Append(buttonSignup.transform.DOScale(0.4f, 0));
             seq.Append(buttonSignup.transform.DOScale(1, 0.4f));
         }
-     
+
     }
 }

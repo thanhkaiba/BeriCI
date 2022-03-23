@@ -1,6 +1,5 @@
 ﻿using Piratera.Config;
 using Piratera.GUI;
-using Piratera.Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -38,6 +37,7 @@ public class CombatMgr : MonoBehaviour
 #if PIRATERA_DEV
         GlobalConfigs.InitDevConfig();
 #endif
+        // GlobalConfigs.InitDevConfig();
         Instance = this;
         if (UIMgr == null) UIMgr = GameObject.Find("UI_Ingame").GetComponent<UIIngameMgr>();
         GameUtils.SetTimeScale(PlayerPrefs.GetFloat($"TimeCombatScale {UserData.Instance.UID}", 1));
@@ -114,7 +114,11 @@ public class CombatMgr : MonoBehaviour
         int speedAdd = CalculateSpeedAddThisLoop();
         AddCurSpeedAllSailor(speedAdd);
         UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
-        if (actionProcess.type == CombatAcionType.BaseAttack || actionProcess.type == CombatAcionType.UseSkill)
+        if (
+            actionProcess.type == CombatAcionType.BaseAttack
+            || actionProcess.type == CombatAcionType.UseSkill
+            || actionProcess.type == CombatAcionType.Immobile
+            )
         {
             actionCountShow++;
         }
@@ -159,8 +163,22 @@ public class CombatMgr : MonoBehaviour
                                 StartCoroutine(WaitAndDo(0.5f, () => ShowResult(data)));
                                 break;
                             }
+                        case ModeID.Arena:
+                            {
+                                StartCoroutine(WaitAndDo(0.5f, () => ShowPvPResult((GameEndPvPData)data)));
+                                break;
+                            }
                     }
                     return 0;
+                }
+            case CombatAcionType.Immobile:
+                {
+                    CombatSailor actor = GetActorAction(actionProcess);
+                    var mapStatus = actionProcess.mapStatus;
+                    float delayTime = actor.RunImmobile() + 0.2f;
+                    combatState.lastTeamAction = actor.cs.team;
+                    StartCoroutine(EndLoop(actor, delayTime, mapStatus));
+                    return delayTime;
                 }
             default:
                 return 0;
@@ -175,7 +193,7 @@ public class CombatMgr : MonoBehaviour
         return combatState.GetSailor(action.target);
     }
 
-   
+
     IEnumerator NextLoopServer(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -222,6 +240,11 @@ public class CombatMgr : MonoBehaviour
         GameObject go = GuiManager.Instance.AddGui<GuiReward>("Prefap/GuiReward", LayerId.GUI);
         go.GetComponent<GuiReward>().SetReward(d);
     }
+    void ShowPvPResult(GameEndPvPData d)
+    {
+        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        go.GetComponent<GuiRewardPvP>().SetReward(d);
+    }
     void GameOver(Team winTeam)
     {
         GameUtils.SetTimeScale(1);
@@ -249,7 +272,7 @@ public class CombatMgr : MonoBehaviour
         return Math.Max(speedAdd, 0);
     }
 
-   
+
     CombatSailor AddCurSpeedAllSailor(int speedAdd)
     {
         combatState.GetAllAliveCombatSailors().ForEach(character => character.AddCurSpeed(speedAdd));

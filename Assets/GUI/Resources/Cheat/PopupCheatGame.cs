@@ -1,7 +1,5 @@
 using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

@@ -37,6 +37,14 @@ public class CrewManager : MonoBehaviour
     [SerializeField]
     private Slider furySlider;
 
+    [SerializeField]
+    private Text fightCount;
+    [SerializeField]
+    private Text EFRemain;
+    [SerializeField]
+    private Text TextTeamBonus;
+    [SerializeField]
+    private Text TextLockTrade;
 
     private Transform canvas;
 
@@ -52,6 +60,7 @@ public class CrewManager : MonoBehaviour
 #else
         buttonCheat.SetActive(false);
 #endif
+        if (TutorialMgr.Instance.CheckTutStartUp()) ShowCrewTut1();
     }
 
     private void OnSailorInfoChanged(SailorModel model)
@@ -113,12 +122,35 @@ public class CrewManager : MonoBehaviour
         texts[5].text = Mathf.Round(model.config_stats.GetSpeed(model.level, model.quality)).ToString();
         texts[6].text = Mathf.Round(model.config_stats.GetArmor()).ToString();
         texts[7].text = Mathf.Round(model.config_stats.GetMagicResist()).ToString();
+        fightCount.text = "Fight: <color=#CCCF44>"+ model.pve_count +"</color>";
+        bool isTrial = model.id.StartsWith("trial-");
+        var maxEF = isTrial ? GlobalConfigs.SailorGeneral.TRIAL_EARNABLE_FIGHT : GlobalConfigs.SailorGeneral.EARNABLE_FIGHT;
+        var EF_remain = (maxEF - model.pve_count);
+        EFRemain.text = "EF(*) Remain: <color=#F5FF17>"
+            + (EF_remain < 0 ? 0 : EF_remain)
+            +"</color>";
+        var teamBonus = GlobalConfigs.PvE.sailor_rank_bonus[(int)model.config_stats.rank] * Mathf.Pow(2, model.star);
+        TextTeamBonus.text = "(*) You'll get <color=#e6e9ff>" + teamBonus + "</color> more win Beri as \"Team Bonus\" if this sailor have EF point.";
+        if (!model.IsAvaiable())
+        {
+            TextLockTrade.gameObject.SetActive(true);
+            TextLockTrade.text = "Sailor is locked for " + System.MathF.Ceiling(model.GetRemainingLockTime() / (60f * 60 * 1000)) + " hour(s) because it's been trade recently.";
+        }
+        else if (isTrial)
+        {
+            TextLockTrade.gameObject.SetActive(true);
+            TextLockTrade.text = "This is trial sailors. He will leave you after <b><color=#f2b5b1>" + (GlobalConfigs.SailorGeneral.TRIAL_FIGHT - model.pve_count) + "</color></b> fight(s).";
+        }
+        else
+        {
+            TextLockTrade.gameObject.SetActive(false);
+        }
         if (sailor != null) Destroy(sailor);
         sailor = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), sailorPos);
         if (model.config_stats.root_name == "FatBrakes")
         {
             sailor.transform.localPosition = new Vector3(0, 1.4f, 0);
-            sailor.transform.localScale = Vector3.one*0.8f;
+            sailor.transform.localScale = Vector3.one * 0.8f;
         }
         rank.sprite = Resources.Load<Sprite>("Icons/IconRank/" + model.config_stats.rank.ToString());
         int classCount = model.config_stats.classes.Count - classImgs.Length;
@@ -139,7 +171,8 @@ public class CrewManager : MonoBehaviour
         {
             expText.text = "MAX";
             exp.fillAmount = 1;
-        } else
+        }
+        else
         {
             expText.text = "" + model.exp + "/" + GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
             exp.fillAmount = (float)model.exp / GlobalConfigs.SailorGeneral.GetNextLevelExp(model.level);
@@ -147,7 +180,7 @@ public class CrewManager : MonoBehaviour
         if (model.config_stats.max_fury > 0)
         {
             furySlider.gameObject.SetActive(true);
-            var textFury = "Fury: " + (model.config_stats.max_fury).ToString();
+            var textFury = "Mana: " + (model.config_stats.max_fury).ToString();
             if (model.config_stats.start_fury > 0) textFury += " (" + (model.config_stats.start_fury).ToString() + ")";
             furySlider.transform.Find("Text").GetComponent<Text>().text = textFury;
             furySlider.value = (float)model.config_stats.start_fury / model.config_stats.max_fury;
@@ -174,9 +207,20 @@ public class CrewManager : MonoBehaviour
         {
             rank.transform.position += new Vector3(0, 65 * canvas.localScale.x);
         }
-        
-    }
 
+    }
+    private void ShowCrewTut1()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/CrewTut1");
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+    }
+    public void ShowTutOpenLineUp()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonLineUp").transform.position;
+        hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
+    }
 
     public void ShowCheatSailorInfo()
     {

@@ -1,6 +1,5 @@
 using Piratera.Config;
 using System.Collections.Generic;
-using UnityEngine;
 
 public enum AttackType
 {
@@ -39,7 +38,6 @@ public enum SailorClass
     CRIMINAL,
     SUMMONER,
     PIONEER,
-    BRAVE,
     ELF,
     SAMURAI,
 };
@@ -126,7 +124,8 @@ public class CombatStats
     public float BasePower;
     public float Power
     {
-        get {
+        get
+        {
             float increase = 0;
             var excited = GetStatus(SailorStatusType.EXCITED);
             if (excited != null) increase += excited.stack * GlobalConfigs.SailorStatus.EXCITED * BasePower;
@@ -203,7 +202,7 @@ public class CombatStats
         if (ownTeam != null) ownTeam.ForEach(p =>
         {
             if (p.level < 0) return;
-            switch (p.type) 
+            switch (p.type)
             {
                 case SailorClass.MIGHTY:
                     if (HaveType(SailorClass.MIGHTY))
@@ -242,6 +241,12 @@ public class CombatStats
                     if (HaveType(SailorClass.KNIGHT))
                     {
                         BaseArmor += (int)config.GetParams(p.type, p.level)[0];
+                    }
+                    break;
+                case SailorClass.PIONEER:
+                    if (HaveType(SailorClass.PIONEER))
+                    {
+                        CurrentSpeed += (int)(config.GetParams(p.type, p.level)[0] * SpeedNeed);
                     }
                     break;
             }

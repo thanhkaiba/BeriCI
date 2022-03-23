@@ -44,7 +44,6 @@ namespace Piratera.GUI
 
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
             if (action == SFSAction.BUY_STAMINA)
             {
                 GuiManager.Instance.ShowGuiWaiting(false);

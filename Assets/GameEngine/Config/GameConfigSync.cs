@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Piratera.Network;
+using Sfs2X.Entities.Data;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using Piratera.Network;
-using Sfs2X.Entities.Data;
 using UnityEngine;
 
 namespace Piratera.Config
@@ -26,7 +26,7 @@ namespace Piratera.Config
             {
                 FileName = packet.GetUtfString("file_name");
                 MD5Hash = packet.GetUtfString("md5_hash");
-               
+
             }
 
             public void NewFromSFSObject(ISFSObject packet)
@@ -40,11 +40,12 @@ namespace Piratera.Config
             private void SaveFile()
             {
                 string absolutePath = Path.Combine(Application.persistentDataPath, FileName);
-                if (!Directory.Exists(Path.GetDirectoryName(absolutePath))) {
+                if (!Directory.Exists(Path.GetDirectoryName(absolutePath)))
+                {
                     Directory.CreateDirectory(Path.GetDirectoryName(absolutePath));
                 }
                 File.WriteAllText(absolutePath, Content);
-               
+
                 Debug.Log("Saved Config JSON to: " + absolutePath);
             }
 
@@ -103,32 +104,34 @@ namespace Piratera.Config
 
         private void Start()
         {
-            
+
             NetworkController.AddServerActionListener(onReceiveServerAction);
 
-           
+
         }
 
         public void StartFlowSync(Action<float> progressAction, Action onSuccess, Action onError)
         {
-           
+
             UpdateProgressBar = progressAction;
-            OnSuccess = () => {
+            OnSuccess = () =>
+            {
                 Synced = true;
                 onSuccess();
             };
-            OnError = () => {
+            OnError = () =>
+            {
                 Synced = false;
                 onError();
             };
-         
+
             SFSObject data = new SFSObject();
             data.PutUtfString("path", "");
             NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
             manifest.Clear();
         }
 
-       
+
         public static void ResetData()
         {
             Synced = false;
@@ -162,7 +165,8 @@ namespace Piratera.Config
                             }
                             CheckSuccess();
 
-                        } else
+                        }
+                        else
                         {
                             OnError();
                         }
@@ -193,7 +197,7 @@ namespace Piratera.Config
 
 
             }
-        
+
         }
 
         private bool CheckSuccess()

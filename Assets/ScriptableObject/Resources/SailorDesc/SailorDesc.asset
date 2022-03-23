@@ -17,12 +17,12 @@ MonoBehaviour:
     present_name: Helti
     title: The amazing captain
     skill_description: 'Slash 3 times, deal <b><color=#f06060>$p_0@</color></b> to
-      enermy and <b><color=#f06060>$p_1@</color></b> to behinds. '
+      enemy and <b><color=#f06060>$p_1@</color></b> to behinds. '
   - root_name: Meechik
     present_name: Meechik
     title: Eldest of the Pirate Family
-    skill_description: Fire an giant bullet bazooka, deal <b><color=#f06060>$p_0@</color></b>
-      and <b><color=#f06060>$p_1@</color></b> to another in 1-tile radius.
+    skill_description: Fire an giant bullet bazooka, deal <b><color=#5b59f0>$p_0@</color></b>
+      and <b><color=#5b59f0>$p_1@</color></b> to another in 1-tile radius.
   - root_name: Sojeph
     present_name: Sojeph
     title: The Surgeon captain
@@ -32,7 +32,7 @@ MonoBehaviour:
     present_name: Beel
     title: Captain of Darkness pirate crew
     skill_description: Summon Infestissue Ghost from Darkness from her Crystal ball,
-      deal <b><color=#5b59f0>$p_0@</color></b> to all enermy.
+      deal <b><color=#5b59f0>$p_0@</color></b> to all enermies.
   - root_name: Tons
     present_name: Tons
     title: Zetpees criminal-org
@@ -46,22 +46,22 @@ MonoBehaviour:
     present_name: Scrub
     title: The guard of Haisan
     skill_description: Stab his weapon, deal <b><color=#f06060>$p_0@</color></b>
-      to enermy and <b><color=#f06060>$p_1@</color></b> to behind.
+      to enemy and <b><color=#f06060>$p_1@</color></b> to behind.
   - root_name: RowT
     present_name: RowT
     title: Thunder wizard
-    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to random enermy.
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to random enemy.
   - root_name: Jenkins
     present_name: Jenkins
     title: 'The lonely swordsman '
-    skill_description: 'He uses his special technique Consecutive Sadless: deal <b><color=#f06060>$p_0@</color></b>
+    skill_description: 'He uses his special technique Consecutive Sadness: deal <b><color=#f06060>$p_0@</color></b>
       to target addition <b><color=#f06060>$per_1@</color></b>  their health. Jenkins
       have 25% crit-chance.'
   - root_name: OBonbee
     present_name: O-Bonbee
     title: Baby scared
     skill_description: Use his sword-arms, deal <b><color=#f06060>$p_0@</color></b>
-      to target addition <b><color=#f06060>$per_1@</color></b> in a column.
+      in a column.
   - root_name: Salvatafo
     present_name: Salvatafo
     title: The Salvage of the Wotafo
@@ -86,8 +86,8 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#228514>$i_0@</color></b> fury, speed up <b><color=#228514>$per_1@</color></b>
-      and go <color=#b5b800><b>EXCITED</b></color>
+      the front <b><color=#008ab0>$i_0@</color></b> mana, speed up <b><color=#228514>$per_1@</color></b>
+      and +1 <color=#b5b800><b>FURY</b></color>
   - root_name: Mealodo
     present_name: Mealodo
     title: A young sailor
@@ -108,4 +108,35 @@ MonoBehaviour:
   - root_name: FatBrakes
     present_name: FatBrakes
     title: Member of Scott Pirates
-    skill_description: Perform Death Dance, all your crew go <color=#b5b800><b>EXCITED</b></color>.
+    skill_description: Perform Death Dance, all your crew +1 <color=#b5b800><b>FURY</b></color>.
+  - root_name: Anglersei
+    present_name: Anglersei
+    title: Master of the Deep
+    skill_description: Deal <b><color=#f06060>$p_0@</color></b> to enemy and STUN
+      1 turn. If it executed enemy, recharge full mana.
+  - root_name: Yuchik
+    present_name: Yuchik
+    title: Lady-bird
+    skill_description: Heal herself <b><color=#228514>$p_0@</color></b>, gain <b><color=#228514>$i_1@</color></b>
+      speed and +1 <color=#b5b800><b>FURY</b></color>.
+  - root_name: Kamijita
+    present_name: Kamijita
+    title: Haisan's Princess
+    skill_description: Buff Ally needing mana the most <b><color=#008ab0>$i_0@</color></b>
+      mana,  speed-up <b><color=#228514>$per_1@</color></b>.
+  - root_name: Camelia
+    present_name: Camelia
+    title: Deep Cave Queen
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> addition <b><color=#5b59f0>$i_1@</color></b>%
+      for each 1% losing health and heal herself <b><color=#228514>$per_2@</color></b>
+      damage deal.  If it executed enemy, recharge full mana and speed-up 100%.
+  - root_name: Daedra
+    present_name: Daedra
+    title: Underworld Knight
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> and steal maximum
+      <b><color=#008ab0>$i_1@</color></b> mana
+  - root_name: Lade
+    present_name: Lade
+    title: Serious Cyborg
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to all enemies in
+      a line.

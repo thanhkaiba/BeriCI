@@ -48,7 +48,7 @@ namespace Piratera.GUI
             textVersion.text = "LIVE_" + Application.version;
 #endif
             textName.text = UserData.Instance.Username.LimitLength(22);
-            textUID.text = UserData.Instance.UID.LimitLength(22);
+            textUID.text =  UserData.Instance.UID.LimitLength(22);
             userAvatar.LoadAvatar(UserData.Instance.Avatar);
 
             DateTime date = (new DateTime(1970, 1, 1)).AddMilliseconds(UserData.Instance.CreateAt);

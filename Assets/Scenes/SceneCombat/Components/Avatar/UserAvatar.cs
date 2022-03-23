@@ -1,4 +1,3 @@
-using Piratera.Config;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -31,7 +30,8 @@ public class UserAvatar : MonoBehaviour
             if (s != null)
             {
                 userAvatar.sprite = s;
-            } else
+            }
+            else
             {
                 SetDefaultAvatar();
             }

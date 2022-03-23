@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 
 public class RoyalBoxManager : MonoBehaviour
@@ -47,7 +44,7 @@ public class RoyalBoxManager : MonoBehaviour
             //Other than this is our time
             else
             {
-               // Our time will be reduced by Delta frame
+                // Our time will be reduced by Delta frame
                 TimeClose -= Time.deltaTime;
             }
         }

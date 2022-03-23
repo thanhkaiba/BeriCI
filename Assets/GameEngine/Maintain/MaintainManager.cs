@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Piratera.Engine
 {
@@ -30,14 +26,14 @@ namespace Piratera.Engine
             return startTime - GameTimeMgr.GetCurrentTime();
         }
 
-       public static void ResetData()
-       {
+        public static void ResetData()
+        {
             startTime = 0;
             endTime = 0;
             message = "";
 
             GameEvent.MaintainDataChanged.Invoke();
-       }
+        }
 
         public static string GetMaintainMessage()
         {
@@ -45,12 +41,12 @@ namespace Piratera.Engine
             {
                 TimeSpan remaining = TimeSpan.FromMilliseconds(GetRemainTimeToMaintain());
                 return string.Format(" Server will be maintained after {0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds);
-            } 
+            }
             else
             {
                 return "";
             }
-           
+
         }
 
         public static bool CanPlay()

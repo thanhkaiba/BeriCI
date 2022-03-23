@@ -201,7 +201,7 @@ public class TargetsUtils
             )
             {
                 result = character;
-                distance = character.cs.MaxFury - character.cs.MaxFury;
+                distance = character.cs.MaxFury - character.cs.Fury;
             }
         });
         return result;

@@ -14,10 +14,6 @@ public class Scrub : CombatSailor
         base.Awake();
         modelObject = transform.Find("model").gameObject;
     }
-    public override void GainFury(int value)
-    {
-        base.GainFury(value);
-    }
     public override float RunBaseAttack(CombatSailor target)
     {
         TriggerAnimation("Attack");

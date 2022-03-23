@@ -162,6 +162,16 @@ public class FightingLine
 
     public bool IsFull()
     {
+        return GetCount() >= NumSlot;
+    }
+
+    public bool IsEmpty()
+    {
+        return GetCount() == 0;
+    }
+
+    public int GetCount()
+    {
         int count = 0;
         Dictionary<short, string>.ValueCollection values = slots.Values;
         foreach (string val in values)
@@ -171,9 +181,8 @@ public class FightingLine
                 count++;
             }
         }
-        return count >= NumSlot;
+        return count;
     }
-
 
     /// <summary>
     /// Get a sailor in squad by a combatPosition {x, y}
@@ -230,18 +239,20 @@ public class FightingLine
 
     public FightingLine NewFromSFSObject(ISFSArray sFSArray)
     {
-
-        foreach (ISFSObject obj in sFSArray)
+        if (sFSArray != null)
         {
-            string uid = obj.GetUtfString("sid");
-            ISFSObject pos = obj.GetSFSObject("pos");
-            byte x = pos.GetByte("x");
-            byte y = pos.GetByte("y");
+            foreach (ISFSObject obj in sFSArray)
+            {
+                string uid = obj.GetUtfString("sid");
+                ISFSObject pos = obj.GetSFSObject("pos");
+                byte x = pos.GetByte("x");
+                byte y = pos.GetByte("y");
 
-            short slotIndex = Position2SlotIndex(x, y);
-            slots[slotIndex] = uid;
+                short slotIndex = Position2SlotIndex(x, y);
+                slots[slotIndex] = uid;
+            }
         }
-
+       
         return this;
     }
 

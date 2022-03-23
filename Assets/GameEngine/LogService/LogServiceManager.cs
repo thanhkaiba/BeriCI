@@ -24,17 +24,17 @@ namespace Piratera.Log
             };
 
             StartCoroutine(Post(JsonConvert.SerializeObject(myData)));
-          
+
         }
 
-        public string getHeaderFormat() 
+        public string getHeaderFormat()
         {
             return $"{SystemInfo.deviceUniqueIdentifier};{SystemInfo.deviceName};{SystemInfo.operatingSystem};{Application.version};{UserData.Instance.UID}";
         }
 
         IEnumerator Post(string text)
         {
-            
+
             using (UnityWebRequest www = new UnityWebRequest(URL, "POST"))
             {
                 byte[] bodyRaw = Encoding.UTF8.GetBytes(text);
@@ -52,8 +52,8 @@ namespace Piratera.Log
 
                 }
             }
-             
-             
+
+
         }
     }
 }

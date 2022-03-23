@@ -24,7 +24,7 @@ public abstract class EditorResourceSingleton<T> : ScriptableObject
                 }
                 else
                 {
-                    Debug.Log("ResourceSingleton Loaded: " + typeof (T).ToString());
+                    Debug.Log("ResourceSingleton Loaded: " + typeof(T).ToString());
                 }
 #endif
                 var inst = m_Instance as EditorResourceSingleton<T>;

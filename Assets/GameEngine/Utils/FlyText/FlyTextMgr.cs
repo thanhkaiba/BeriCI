@@ -52,5 +52,6 @@ public class FlyTextMgr : MonoBehaviour
         c.GetComponent<Text>().text = text;
         //c.GetComponent<Text>().fontSize = 50;
         c.transform.position = p;
+        c.GetComponent<TextDamage>().iconCrit.SetActive(false);
     }
 }

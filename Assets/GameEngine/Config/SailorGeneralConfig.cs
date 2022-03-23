@@ -15,6 +15,10 @@ public class SailorGeneralConfig
     public float STAR_STAT_RATE = 0.2f;
     public int MAX_STAR = 5;
 
+    public int EARNABLE_FIGHT = 1200;
+    public int TRIAL_EARNABLE_FIGHT = 5;
+    public int TRIAL_FIGHT = 10;
+
     public int GetNextLevelExp(int curLevel)
     {
         int x = curLevel + 1;

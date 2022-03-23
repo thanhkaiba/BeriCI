@@ -1,12 +1,13 @@
 using DG.Tweening;
 using Piratera.Cheat;
+using Piratera.Config;
 using Piratera.Constance;
 using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
-using Spine.Unity;
+using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,7 @@ public class LobbyUI : MonoBehaviour
     [SerializeField]
     private Text userStaminaCountDown;
 
+  
 
     [SerializeField]
     private Button[] leftButtons;
@@ -59,9 +61,12 @@ public class LobbyUI : MonoBehaviour
     private Transform nodeUser;
     [SerializeField]
     private Transform background;
-    public RoyalCollectingController royal;
+    public MultiRoyalCollectingController royal;
     [SerializeField]
     private Button buttonCheat;
+   
+
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -81,12 +86,30 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
         GameEvent.FlyStamina.AddListener(FlyStamina);
+        GameEvent.FlyBeri.AddListener(FlyBeri);
         GameEvent.MaintainDataChanged.AddListener(UpdateMaintain);
         UpdateMaintain();
         RunAppearAction();
         ShowListSailors();
         Time.timeScale = 1;
+
+        if (TutorialMgr.Instance.CheckTutOpenSlot())
+        {
+            ShowFocusLineUp();
+        }
+
+        if (TutorialMgr.Instance.CheckTutStartUp())
+        {
+            if (TutorialMgr.Instance.CheckTutStartUp_Greeting()) ShowNPCTut();
+            else
+            {
+                ShowFocusPvE();
+                TutorialMgr.Instance.CompleteStartUp();
+            }
+        }
     }
+
+ 
 
     void UpdateMaintain()
     {
@@ -98,7 +121,8 @@ public class LobbyUI : MonoBehaviour
             s.AppendInterval(1);
             s.SetTarget(maintainText.gameObject).SetLink(maintainText.gameObject);
             s.SetLoops(-1);
-        } else
+        }
+        else
         {
             maintainText.text = "";
         }
@@ -112,11 +136,16 @@ public class LobbyUI : MonoBehaviour
 
     public void OnStaminaChanged(int oldValue, int newValue)
     {
-       DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6))); 
+        DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6)));
     }
     public void FlyStamina()
     {
-        royal.CollectItem(5, 1, () => {});
+        royal.CollectItem(1, 5, 1, () => { });
+    }
+
+    public void FlyBeri()
+    {
+        royal.CollectItem(0, 5, 1, () => { });
     }
     private void OnDestroy()
     {
@@ -124,6 +153,7 @@ public class LobbyUI : MonoBehaviour
         GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
         GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
         GameEvent.FlyStamina.RemoveListener(FlyStamina);
+        GameEvent.FlyBeri.RemoveListener(FlyBeri);
         GameEvent.MaintainDataChanged.RemoveListener(UpdateMaintain);
     }
 
@@ -137,6 +167,13 @@ public class LobbyUI : MonoBehaviour
         userName.text = UserData.Instance.Username.LimitLength(15);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
         userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
+        //prizes.text = PirateWheelData.Instance.getPrize();
+
+
+        //for (int i = 0; i < PirateWheelData.Instance.Length; i++)
+        //{
+        //    Debug.Log(ps[i]);
+        //}
     }
 
     public void OnLogoutButtonClick()
@@ -145,6 +182,8 @@ public class LobbyUI : MonoBehaviour
     }
     public void OnStartPVEMode()
     {
+        var hand = GameObject.Find("hand_pve");
+        if (hand) Destroy(hand);
         if (!MaintainManager.CanPlay())
         {
             GuiManager.Instance.ShowPopupNotification("This function is locked due to upcoming server maintenance");
@@ -211,6 +250,34 @@ public class LobbyUI : MonoBehaviour
         }
     }
 
+    public void OnArenaClick()
+    {
+        if (!PvPData.Instance.HaveEnoughSailor())
+        {
+            GuiManager.Instance.ShowPopupNotification("You need at least 1 non-trial sailor to enter the Arena");
+            return;
+        }
+
+        if (UserData.Instance.NumSlot < GlobalConfigs.LineUp.max)
+        {
+            GuiManager.Instance.ShowPopupNotification("You must have 5 slot to join Arena!");
+            return;
+        }
+
+        if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_WELCOME_ARENA)
+        {
+            GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
+        } else if (!PvPData.Instance.HaveJoin)
+        {
+            SceneManager.LoadScene("SceneLineUpDefense");
+        }
+        else
+        {
+            SceneManager.LoadScene("SceneArena");
+        }
+     
+    }
+
     private void RunAppearAction()
     {
         for (int i = 0; i < leftButtons.Length; i++)
@@ -226,8 +293,8 @@ public class LobbyUI : MonoBehaviour
         buttonCol.Translate(250, 0, 0);
         buttonCol.DOMove(new Vector3(-250, 0, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(buttonCol).SetLink(buttonCol.gameObject);
 
-       /* sail.Translate(50, 180, 0);
-        sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);*/
+        /* sail.Translate(50, 180, 0);
+         sail.DOMove(new Vector3(-50, -180, 0), 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(sail).SetLink(sail.gameObject);*/
 
         var scale = new Vector3(0.6f, 0.6f, 0.6f);
         background.localScale += scale;
@@ -246,6 +313,59 @@ public class LobbyUI : MonoBehaviour
             GO.GetComponent<Renderer>().sortingOrder = 3;
             GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
         }
+    }
+    private void ShowNPCTut()
+    {
+        var go = Resources.Load<GameObject>("Prefap/Tuts/NPCTut");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+    }
+    public void ShowTutOpenCrew()
+    {
+        Debug.Log("??????????????? ShowTutOpenCrew");
+        var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        var pos = GameObject.Find("ButtonCrew").transform.position;
+        hand.transform.position = pos;
+    }
+    public void ShowFocusPvE()
+    {
+        var blockScene = AddBlockScene();
+        Sequence s = DOTween.Sequence();
+        s.AppendInterval(1);
+        s.AppendCallback(() => {
+            Destroy(blockScene);
+            var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+            GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+            hand.transform.position = GameObject.Find("ButtonPVE").transform.position;
+            hand.name = "hand_pve";
+        });
+    }
+    private void ShowFocusLineUp()
+    {
+        var blockScene = AddBlockScene();
+        Sequence s = DOTween.Sequence();
+        s.AppendInterval(1);
+        s.AppendCallback(() => {
+            Destroy(blockScene);
+            var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
+            GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+            var pos = GameObject.Find("ButtonLineUp").transform.position;
+            hand.transform.position = pos;
+        });
+    }
+    private GameObject AddBlockScene()
+    {
+        var blockScene = new GameObject();
+        blockScene.transform.SetParent(GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        blockScene.transform.localPosition = Vector3.zero;
+        blockScene.AddComponent<CanvasRenderer>();
+        RectTransform rectTransform = blockScene.AddComponent<RectTransform>();
+        rectTransform.sizeDelta = new Vector2(Screen.width * 2, Screen.height * 2);
+        blockScene.transform.SetAsFirstSibling();
+        Image image = blockScene.AddComponent<Image>();
+        image.color = new Color(0, 0, 0, 0);
+        image.raycastTarget = true;
+        return blockScene;
     }
     public void ShowGuiCheat()
     {

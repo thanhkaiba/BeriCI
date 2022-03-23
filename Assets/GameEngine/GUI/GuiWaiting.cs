@@ -16,7 +16,8 @@ public class GuiWaiting : MonoBehaviour
         seq.Append(icon.DOFade(opacity, 0.5f));
         seq.Join(icon.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.2f, 1, 0));
         seq.AppendInterval(15f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             GuiManager.Instance.ShowPopupNotification("Server Not Responding");
             GuiManager.Instance.DestroyGui<GuiWaiting>();
         });

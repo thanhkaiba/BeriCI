@@ -1,6 +1,7 @@
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CrewData : Singleton<CrewData>
 {
@@ -33,6 +34,21 @@ public class CrewData : Singleton<CrewData>
         FightingTeam.Clean();
 
     }
+
+    public List<SailorModel> GetNonTrialModelList()
+    {
+        List<SailorModel> nonTrialList = new ();
+        foreach (SailorModel sailor in Sailors)
+        {
+            if (sailor.IsTrial())
+            {
+                continue;
+            }
+            nonTrialList.Add(sailor);
+        }
+        return nonTrialList;
+    }
+    
     public void NewFromSFSObject(ISFSObject packet)
     {
         ResetData();
@@ -64,10 +80,12 @@ public class CrewData : Singleton<CrewData>
     {
         if (GetSailorModel(sailorId) == null)
         {
+            Debug.LogError("Get sailor model null, occupie fail!");
             return;
         }
         if (FightingTeam.Occupie(sailorId, slot))
         {
+            Debug.Log("Get sailor model null, occupie success!");
             GameEvent.SquadChanged.Invoke();
         }
     }

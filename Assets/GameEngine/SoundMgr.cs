@@ -15,7 +15,9 @@ namespace Piratera.Sound
         LOSE,
         DRAW,
         RECEIVE_GIFT,
-        OPEN_SLOT
+        WHEEL_RUNNING,
+        OPEN_SLOT,
+        SUMMON,
     }
 
     class SoundMgr : MonoBehaviour
@@ -36,9 +38,13 @@ namespace Piratera.Sound
 
         [SerializeField]
         private AudioClip receiveGift;
+        [SerializeField]
+        private AudioClip wheelRunning;
 
         [SerializeField]
         private AudioClip openSlot;
+        [SerializeField]
+        private AudioClip summon;
 
         [Header("Voice")]
         [SerializeField]
@@ -168,8 +174,15 @@ namespace Piratera.Sound
 
             if (Instance == null)
             {
+
+#if UNITY_WEBGL
+                // if sound play in start game, some browser won't load game 
+                musicOn = false;
+                soundOn = false;
+#else
                 musicOn = PlayerPrefs.GetInt(MUSIC_TOGGLE_KEY, 1) == 1;
                 soundOn = PlayerPrefs.GetInt(SOUND_FX_TOGGLE_KEY, 1) == 1;
+#endif
                 Instance = this;
                 DontDestroyOnLoad(gameObject);
             }
@@ -223,6 +236,12 @@ namespace Piratera.Sound
                     case PirateraSoundEffect.OPEN_SLOT:
                         Instance.PlaySoundEffect(Instance.openSlot);
                         break;
+                    case PirateraSoundEffect.SUMMON:
+                        Instance.PlaySoundEffect(Instance.summon);
+                        break;
+                    case PirateraSoundEffect.WHEEL_RUNNING:
+                        Instance.PlaySoundEffect(Instance.wheelRunning);
+                        break;
                 }
 
             }
@@ -236,11 +255,11 @@ namespace Piratera.Sound
             }
         }
 
-        private void PlaySoundEffect(AudioClip audioClip)
+        public void PlaySoundEffect(AudioClip audioClip)
         {
             if (soundOn)
             {
-                
+
                 soundEfectPlayer.PlayOneShot(audioClip, soundVolume);
             }
         }

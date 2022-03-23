@@ -73,36 +73,40 @@ public class LoginController : MonoBehaviour
     private void Start()
     {
         nameInput.text = PlayerPrefs.GetString("UserName");
+        FillPasswork(nameInput.text);
         if (NetworkController.AutoLogin)
         {
             NetworkController.AutoLogin = false;
-            AutoLogin(nameInput.text);
+            AutoLogin();
         }
     }
 
 
-    void AutoLogin(string username)
+    void AutoLogin()
     {
+        return;
+        if (!string.IsNullOrEmpty(passwordInput.text))
+        {
+            OnLoginButtonClick();
+        }
 
+
+
+    }
+
+    void FillPasswork(string username)
+    {
         string encryptedPassword = PlayerPrefs.GetString("Password");
         if (string.IsNullOrEmpty(encryptedPassword) || string.IsNullOrEmpty(username))
         {
             return;
         }
 
-
         string origin = StringCipher.Decrypt(encryptedPassword, "9QfeE7-+sTFZvG7^");
         if (origin.Contains(username))
         {
-            passwordInput.text = origin.Substring(username.Length);
-            if (!string.IsNullOrEmpty(passwordInput.text))
-            {
-                OnLoginButtonClick();
-            }
+            passwordInput.text = origin[username.Length..];
         }
-
-       
-
     }
 
     private void OnConnection(BaseEvent evt)
@@ -124,11 +128,12 @@ public class LoginController : MonoBehaviour
             {
                 int err = int.Parse(evt.Params["errorCode"].ToString());
                 description = EnumHelper.GetDescription((SFSErrorCode)err);
-            } catch
+            }
+            catch
             {
                 description = evt.Params["errorMessage"].ToString();
             }
-          
+
         }
         OnError(description);
     }
@@ -198,35 +203,33 @@ public class LoginController : MonoBehaviour
 
     private void SendRequestLogin(string username, string password, GameLoginType loginType)
     {
-        StartCoroutine(CheckInternetConnection(isConnected =>
+        if (true)
         {
-            if (isConnected)
-            {
-                enableLoginUI(false);
-                NetworkController.LoginToServer(new LoginData(username, password, loginType));
-                NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
-                NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
-                NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
-                NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
-            }
-            else
-            {
-                GuiManager.Instance.ShowGuiWaiting(false);
-                errorText.text = "Error. Check Internet connection!";
-            }
-        }));
+            GuiManager.Instance.ShowGuiWaiting(true);
+            enableLoginUI(false);
+            NetworkController.LoginToServer(new LoginData(username, password, loginType));
+            NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
+            NetworkController.AddEventListener(SFSEvent.CONNECTION, OnConnection);
+            NetworkController.AddEventListener(SFSEvent.CONNECTION_LOST, OnConnectionLost);
+            NetworkController.AddEventListener(SFSEvent.CRYPTO_INIT, OnCryptoInit);
+        }
+        else
+        {
+            GuiManager.Instance.ShowGuiWaiting(false);
+            errorText.text = "Error. Check Internet connection!";
+        }
     }
 
     private void OnCryptoInit(BaseEvent evt)
     {
-      
+
         if (!(bool)evt.Params["success"])
         {
             // Send a login request
             OnError((string)evt.Params["errorMessage"]);
         }
-     
-        
+
+
     }
 
     private void OnConnectionLost(BaseEvent evt)
@@ -239,10 +242,21 @@ public class LoginController : MonoBehaviour
 
     }
 
+    private string GetUniqueID()
+    {
+#if UNITY_WEBGL
+        if (!PlayerPrefs.HasKey("UniqueIdentifierWEBGL"))
+            PlayerPrefs.SetString("UniqueIdentifierWEBGL", Guid.NewGuid().ToString());
+        return PlayerPrefs.GetString("UniqueIdentifierWEBGL");
+#else
+        return SystemInfo.deviceUniqueIdentifier;
+#endif
+    }
+
     public void OnButtonCreateOneClick()
     {
 #if PIRATERA_QC || PIRATERA_DEV
-        SendRequestLogin(SystemInfo.deviceUniqueIdentifier, "guest", GameLoginType.DUMMY);
+        SendRequestLogin(GetUniqueID(), "guest", GameLoginType.DUMMY);
 #else
         Application.OpenURL(GameConst.ACCOUNT_URL);
 #endif
@@ -253,7 +267,7 @@ public class LoginController : MonoBehaviour
         if (errorCode == SFSErrorCode.SUCCESS)
         {
             PlayerPrefs.SetString("UserName", nameInput.text);
-            PlayerPrefs.SetString("Password", StringCipher.Encrypt(nameInput.text  + passwordInput.text , "9QfeE7-+sTFZvG7^"));
+            PlayerPrefs.SetString("Password", StringCipher.Encrypt(nameInput.text + passwordInput.text, "9QfeE7-+sTFZvG7^"));
             User user = NetworkController.Connection.MySelf;
             GameTimeMgr.SetServerTime((long)user.GetVariable("login_time").GetDoubleValue());
             UserData.Instance.OnUserVariablesUpdate(user);
@@ -279,9 +293,10 @@ public class LoginController : MonoBehaviour
         }
     }
 
-   
+
     private void OpenLobby()
     {
+        LoadServerDataUI.NextScene = "SceneLobby";
         SceneManager.LoadScene("SceneLoadServerData");
     }
     //----------------------------------------------------------

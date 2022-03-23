@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace Piratera.Config {
+namespace Piratera.Config
+{
     public class GlobalConfigs : Object
     {
         public static SailorGeneralConfig SailorGeneral;
         public static PvEConfig PvE;
         public static LineUpSlot LineUp;
         public static UserStaminaConfig StaminaConfig;
+        public static PirateWheelConfig PirateWheelConfig;
         public static CombatConfig Combat;
-        private static Dictionary<string, SailorConfig> SailorDic = new Dictionary<string, SailorConfig>();
+        private static Dictionary<string, SailorConfig> SailorDic = new();
         public static SynergiesConfig Synergies;
         public static SailorStatusConfig SailorStatus;
         public static bool HaveLoaded;
@@ -25,7 +27,7 @@ namespace Piratera.Config {
             Combat = JsonConvert.DeserializeObject<CombatConfig>(GameConfigSync.GetContent("configs/Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(GameConfigSync.GetContent("configs/ContainerClassBonus.json"));
             SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(GameConfigSync.GetContent("configs/StatusConfig.json"));
-
+            PirateWheelConfig = JsonConvert.DeserializeObject<PirateWheelConfig>(GameConfigSync.GetContent("configs/PirateWheel.json"));
             string[] files = GameConfigSync.GetSailorFolder();
             foreach (string file in files)
             {
@@ -41,7 +43,7 @@ namespace Piratera.Config {
                     SailorDic.Add(name, config);
                 }
             }
-           
+
         }
         public static SailorConfig GetSailorConfig(string sailorRootName)
         {
@@ -57,9 +59,10 @@ namespace Piratera.Config {
             PvE = JsonConvert.DeserializeObject<PvEConfig>(File.ReadAllText("DEV_CONFIG/PvE.json"));
             SailorGeneral = JsonConvert.DeserializeObject<SailorGeneralConfig>(File.ReadAllText("DEV_CONFIG/SailorGeneralConfig.json"));
             StaminaConfig = JsonConvert.DeserializeObject<UserStaminaConfig>(File.ReadAllText("DEV_CONFIG/Stamina.json"));
+            PirateWheelConfig = JsonConvert.DeserializeObject<PirateWheelConfig>(File.ReadAllText("DEV_CONFIG/PirateWheel.json"));
             Combat = JsonConvert.DeserializeObject<CombatConfig>(File.ReadAllText("DEV_CONFIG/Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
-            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
+            SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/StatusConfig.json"));
 
             string[] files = Directory.GetFiles("DEV_CONFIG/Sailors");
             foreach (string file in files)

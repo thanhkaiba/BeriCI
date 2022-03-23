@@ -83,7 +83,7 @@ namespace Beebyte.Obfuscator.Assembly
                     continue;
                 }
 
-		string scriptDllLocation = Path.Combine(projectDir, assembly.outputPath).Replace('\\', '/');
+                string scriptDllLocation = Path.Combine(projectDir, assembly.outputPath).Replace('\\', '/');
 #if !UNITY_2019_2_OR_NEWER || UNITY_2019_2_0 || UNITY_2019_2_1 || UNITY_2019_2_2 || UNITY_2019_2_3 || UNITY_2019_2_4 || UNITY_2019_2_5 || UNITY_2019_2_6 || UNITY_2019_2_7
                 string dllLocation = scriptDllLocation;
 #else

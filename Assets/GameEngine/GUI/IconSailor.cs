@@ -38,6 +38,8 @@ public class IconSailor : MonoBehaviour
     private Sprite starSpr;
     [SerializeField]
     private Transform nodeStar;
+    [SerializeField]
+    private GameObject iconTrial;
     public Action<SailorModel> OnClick;
     public SailorModel sailorModel;
     public bool ShowClass = false;
@@ -53,7 +55,8 @@ public class IconSailor : MonoBehaviour
         if (!model.IsAvaiable())
         {
             textLockTime.text = "<" + MathF.Ceiling(model.GetRemainingLockTime() / (60f * 60 * 1000)) + "h";
-        } else
+        }
+        else
         {
             textLockTime.text = "";
         }
@@ -85,8 +88,9 @@ public class IconSailor : MonoBehaviour
             starObj.GetComponent<RectTransform>().SetParent(nodeStar);
             starObj.SetActive(true);
             starObj.transform.localScale = new Vector3(0.25f, 0.25f);
-            starObj.transform.localPosition = new Vector3(0, -23*i);
+            starObj.transform.localPosition = new Vector3(0, -23 * i);
         }
+        iconTrial.SetActive(model.IsTrial());
     }
     public void ShowFocus(bool b)
     {

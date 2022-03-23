@@ -9,7 +9,7 @@ public static class GameTimeMgr
     {
         Debug.Log("Server Time: " + loginTime);
         long now = DateTimeOffset.Now.ToUnixTimeMilliseconds();
-        DeltaTime = loginTime - now; 
+        DeltaTime = loginTime - now;
     }
 
     public static long GetCurrentTime()
@@ -20,5 +20,13 @@ public static class GameTimeMgr
     public static long GetCurrentUTCTime()
     {
         return DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+    }
+
+    public static double GetTimeToNextDayUTC()
+    {
+        DateTime now = DateTime.UtcNow;
+        DateTime tomorrow = now.AddDays(1).Date;
+
+       return (tomorrow - now).TotalMilliseconds;
     }
 }

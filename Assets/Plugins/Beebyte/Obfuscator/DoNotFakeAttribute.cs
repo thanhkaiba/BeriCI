@@ -5,11 +5,11 @@ using System;
 
 namespace Beebyte.Obfuscator
 {
-	[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
-	public class DoNotFakeAttribute: System.Attribute
-	{
-		public DoNotFakeAttribute()
-		{
-		}
-	}
+    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class)]
+    public class DoNotFakeAttribute : System.Attribute
+    {
+        public DoNotFakeAttribute()
+        {
+        }
+    }
 }

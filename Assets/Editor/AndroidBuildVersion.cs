@@ -1,7 +1,6 @@
 ﻿#if UNITY_EDITOR 
-using UnityEngine;
 using UnityEditor;
-using UnityEditor.Callbacks;
+using UnityEngine;
 
 public class AndroidBuildVersion : EditorResourceSingleton<AndroidBuildVersion>
 {

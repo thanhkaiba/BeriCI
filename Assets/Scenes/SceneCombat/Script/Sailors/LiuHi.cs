@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
 using Spine.Unity;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -64,7 +63,8 @@ public class LiuHi : CombatSailor
 
         float heal = cs.Power * Model.config_stats.skill_params[0];
 
-        listTargets.ForEach(sailor => {
+        listTargets.ForEach(sailor =>
+        {
             targets.Add(sailor.Model.id);
             _params.Add(heal);
         });
@@ -82,7 +82,8 @@ public class LiuHi : CombatSailor
         TriggerAnimation("Skill");
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(1.2f);
-        seq.AppendCallback(() => {
+        seq.AppendCallback(() =>
+        {
             for (int i = 0; i < alies.Count; i++)
             {
                 alies[i].GainHealth(_params[i]);

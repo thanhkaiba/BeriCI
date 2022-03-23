@@ -1,13 +1,12 @@
 ﻿using Piratera.Config;
 using Piratera.Utils;
 using Sfs2X.Entities;
-using UnityEngine;
 
 public class StaminaData : Singleton<StaminaData>
 {
-    public int Stamina;
+    public int Stamina = -1;
     private long LastCountStamina;
-    
+
     public string GetCurrentStaminaFormat()
     {
         return GetStaminaFormat(Stamina);
@@ -38,7 +37,7 @@ public class StaminaData : Singleton<StaminaData>
 
     public long TimeToHaveNewStamina()
     {
-        if (Stamina > GlobalConfigs.StaminaConfig.max_stamina)
+        if (Stamina > GlobalConfigs.StaminaConfig.max_stamina || Stamina < 0)
         {
             return -1;
         }
@@ -64,8 +63,15 @@ public class StaminaData : Singleton<StaminaData>
             GameEvent.UserStaminaChanged.Invoke(oldStamina, Stamina);
         }
     }
+    public void AddStamina(int quantity)
+    {
+        int oldStamina = Stamina;
+        Stamina += quantity;
+        GameEvent.UserStaminaChanged.Invoke(oldStamina, Stamina);
+    }
     public int GetPvECost()
     {
         return GlobalConfigs.StaminaConfig.pve_cost;
     }
+
 }

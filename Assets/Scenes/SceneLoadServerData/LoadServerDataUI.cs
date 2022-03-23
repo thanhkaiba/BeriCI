@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System;
@@ -6,7 +7,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Piratera.Config;
 
 public class LoadServerDataUI : MonoBehaviour
 {
@@ -66,6 +66,17 @@ public class LoadServerDataUI : MonoBehaviour
 
     private Action ReloadFunc;
 
+    public static string NextScene = "SceneLobby";
+
+
+    private readonly HashSet<SFSAction> ActionRequires = new() { 
+        SFSAction.PIRATE_WHEEL_DATA, 
+        SFSAction.LOAD_LIST_HERO_INFO,
+        SFSAction.PVP_DATA,
+    };
+
+    private int TotalActionRequire = 0;
+
 
     void Start()
     {
@@ -73,18 +84,21 @@ public class LoadServerDataUI : MonoBehaviour
         PrepareAppear();
 
         progressBar.value = 0;
+        UpdateTextPercent(0);
+        progressBar.onValueChanged.AddListener(UpdateTextPercent);
 
         if (!GameConfigSync.Synced)
         {
             errorText.text = "Loading Configuration Files";
             LoadConfig();
-        } else
+        }
+        else
         {
             SendGetData();
         }
       
     
-        progressBar.onValueChanged.AddListener(UpdateTextPercent);
+  
       
 
 
@@ -163,7 +177,11 @@ public class LoadServerDataUI : MonoBehaviour
         ReloadFunc = SendGetData;
         progressBar.value = startingPoint + 0.3f;
         RandomTip();
-        NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
+        TotalActionRequire = ActionRequires.Count;
+        foreach (SFSAction action in ActionRequires)
+        {
+            NetworkController.Send(action);
+        }
     }
 
     private void OnDestroy()
@@ -201,16 +219,26 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.LOAD_LIST_HERO_INFO)
+        if (errorCode == SFSErrorCode.SUCCESS)
         {
-            if (errorCode == SFSErrorCode.SUCCESS)
+            if (ActionRequires.Contains(action))
             {
-                ShowLoading(1f, 0.4f, OnLoadSuccess);
+                ActionRequires.Remove(action);
+                if (ActionRequires.Count != 0)
+                {
+                    ShowLoading(1f, 0.4f / TotalActionRequire, () => { });
+
+                }
+                else
+                {
+                    ShowLoading(1f, 0.4f / TotalActionRequire, OnLoadSuccess);
+                }
             }
-            else
-            {
-                OnLoadError(errorCode);
-            }
+
+        }
+        else
+        {
+            OnLoadError(errorCode);
         }
 
     }
@@ -241,7 +269,7 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void OnLoadSuccess()
     {
-        SceneManager.LoadScene("SceneLobby");
+        SceneManager.LoadScene(NextScene);
     }
 
     private void LoadConfig()
@@ -250,10 +278,11 @@ public class LoadServerDataUI : MonoBehaviour
         ReloadFunc = LoadConfig;
         progressBar.value = startingPoint;
         ConfigSync.StartFlowSync(x => progressBar.value += x, () =>
-        {         
+        {
             SendGetData();
 
-        }, () => {
+        }, () =>
+        {
             errorText.text = "Synchronization Failed";
             VisibleErrorUI(true);
         });

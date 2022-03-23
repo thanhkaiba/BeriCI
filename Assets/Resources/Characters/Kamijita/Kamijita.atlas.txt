@@ -1,0 +1,76 @@
+
+Kamijita.png
+size: 366,971
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Circle_04
+  rotate: true
+  xy: 2, 18
+  size: 253, 252
+  orig: 256, 256
+  offset: 1, 2
+  index: -1
+Harp
+  rotate: true
+  xy: 216, 537
+  size: 124, 136
+  orig: 124, 136
+  offset: 0, 0
+  index: -1
+arm1
+  rotate: true
+  xy: 216, 663
+  size: 155, 113
+  orig: 155, 113
+  offset: 0, 0
+  index: -1
+arm_2
+  rotate: true
+  xy: 256, 139
+  size: 156, 96
+  orig: 156, 96
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 2, 599
+  size: 212, 370
+  orig: 212, 370
+  offset: 0, 0
+  index: -1
+face
+  rotate: true
+  xy: 256, 2
+  size: 135, 108
+  orig: 135, 108
+  offset: 0, 0
+  index: -1
+hair
+  rotate: true
+  xy: 216, 820
+  size: 149, 141
+  orig: 149, 141
+  offset: 0, 0
+  index: -1
+hair_2
+  rotate: false
+  xy: 2, 273
+  size: 180, 324
+  orig: 180, 324
+  offset: 0, 0
+  index: -1
+necklace
+  rotate: true
+  xy: 331, 762
+  size: 56, 32
+  orig: 56, 32
+  offset: 0, 0
+  index: -1
+tail
+  rotate: false
+  xy: 184, 297
+  size: 170, 238
+  orig: 170, 238
+  offset: 0, 0
+  index: -1

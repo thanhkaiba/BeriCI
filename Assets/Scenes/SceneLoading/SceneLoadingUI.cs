@@ -1,10 +1,11 @@
 using DG.Tweening;
+using Facebook.Unity;
 using Piratera.Engine;
 using Piratera.GUI;
+using Piratera.Log;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Piratera.Log;
 
 public class SceneLoadingUI : MonoBehaviour
 {
@@ -16,13 +17,56 @@ public class SceneLoadingUI : MonoBehaviour
 
     private void Awake()
     {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || !PIRATERA_LIVE
         Debug.unityLogger.logEnabled = true;
 #else
         Debug.unityLogger.logEnabled = false;
 #endif
         LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME);
 
+
+
+        if (!FB.IsInitialized)
+        {
+            // Initialize the Facebook SDK
+            FB.Init(InitCallback, OnHideUnity);
+        }
+        else
+        {
+            // Already initialized, signal an app activation App Event
+            FB.ActivateApp();
+        }
+
+    }
+
+    private void InitCallback()
+    {
+        if (FB.IsInitialized)
+        {
+            // Signal an app activation App Event
+            FB.ActivateApp();
+            Debug.Log("Success to Initialize the Facebook SDK");
+            // Continue with Facebook SDK
+            // ...
+        }
+        else
+        {
+            Debug.Log("Failed to Initialize the Facebook SDK");
+        }
+    }
+
+    private void OnHideUnity(bool isGameShown)
+    {
+        if (!isGameShown)
+        {
+            // Pause the game - we will need to hide
+            Time.timeScale = 0;
+        }
+        else
+        {
+            // Resume the game - we're getting focus again
+            Time.timeScale = 1;
+        }
     }
 
     private void Start()
@@ -50,7 +94,8 @@ public class SceneLoadingUI : MonoBehaviour
     {
         // SceneManager.LoadScene("SceneLogin");
         GuiManager.Instance.ShowPopupNotification("Check New Version Fail!", "Try Again", () => gameVersionController.GetVersionInfo());
-    ;}
+        ;
+    }
 
     public void OnNeedUpdate(string url)
     {

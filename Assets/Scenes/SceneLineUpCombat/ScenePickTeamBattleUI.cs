@@ -39,7 +39,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
 
-   
+
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
@@ -59,6 +59,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
+        SquadAContainer.Draging = false;
         Init();
     }
 

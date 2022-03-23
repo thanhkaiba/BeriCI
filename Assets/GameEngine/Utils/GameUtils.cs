@@ -6,7 +6,6 @@ using Piratera.Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 
 public class GameUtils : UnityEngine.Object
@@ -24,6 +23,7 @@ public class GameUtils : UnityEngine.Object
     {
         SailorModel model = new SailorModel(RandomId(), name);
         SailorConfig config_stats = model.config_stats;
+
         //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));
         CombatSailor sailor = characterGO.AddComponent(Type.GetType(name)) as CombatSailor;
@@ -196,7 +196,8 @@ public class GameUtils : UnityEngine.Object
         {
             SoundMgr.SetSoundFxSpeed(timescale * 0.1f + 1.3f);
             SoundMgr.SetSoundFxVolume(0.5f);
-        } else
+        }
+        else
         {
             SoundMgr.SetSoundFxSpeed(timescale);
             SoundMgr.SetSoundFxVolume(1f);
@@ -245,7 +246,7 @@ public class GameUtils : UnityEngine.Object
                 else param = model.config_stats.skill_params[skillParamIndex];
                 oriText = oriText.Replace(subString, "" + param);
             }
-            
+
         }
         return oriText;
     }

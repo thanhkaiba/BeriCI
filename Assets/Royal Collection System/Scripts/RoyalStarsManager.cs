@@ -1,11 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 
-public class RoyalStarsManager : MonoBehaviour {
+public class RoyalStarsManager : MonoBehaviour
+{
 
     /// <summary>
     /// RoyalCollectionSystem Package
@@ -24,7 +23,7 @@ public class RoyalStarsManager : MonoBehaviour {
     public bool[] foulStars;//Active or not active stars
     private int numberStars = 0; //Count of stars
 
-     [Space(15)]
+    [Space(15)]
     [Header("PrefabsStars")]
     public GameObject startStarPrefabs;//Prefab Star Created
     public GameObject endStarPrefabs;//Prefab End Star Created
@@ -84,8 +83,8 @@ public class RoyalStarsManager : MonoBehaviour {
                 //Using Tween and the Move method, the star object is created, or StarsCreate moves towards the star in which num refers to it and, if it happens, it ends.
                 starsCreate.transform.DOMove(stars[numberStars].gameObject.transform.position, 1).SetEase(EaseEffect).Play().OnComplete(() =>
                 {
-                //The starsCreate object will be deleted
-                Destroy(starsCreate.gameObject);
+                    //The starsCreate object will be deleted
+                    Destroy(starsCreate.gameObject);
 
                     //The endStarPrefabs variable is created in the star named numberStars by starsEndCreate
                     GameObject starsEndCreate = Instantiate(endStarPrefabs, stars[numberStars].gameObject.transform.position, Quaternion.identity, stars[numberStars].gameObject.transform) as GameObject;
@@ -110,15 +109,15 @@ public class RoyalStarsManager : MonoBehaviour {
                     foulStars[numberStars] = true;
 
 
-                //The variable numberStars Add ++
-                numberStars++;
-  
-                //Debug To Console numberStars
-                Debug.Log(numberStars);
+                    //The variable numberStars Add ++
+                    numberStars++;
+
+                    //Debug To Console numberStars
+                    Debug.Log(numberStars);
 
 
-                //Play The function of checking the activation of all three stars 
-                CheckStarsComplate();
+                    //Play The function of checking the activation of all three stars 
+                    CheckStarsComplate();
 
                     //After the star is over, our current function will be executed
                     On3Stars();
@@ -130,7 +129,7 @@ public class RoyalStarsManager : MonoBehaviour {
     }
 
 
-  //  The function of checking the activation of all three stars
+    //  The function of checking the activation of all three stars
     void CheckStarsComplate()
     {
         //If the numberStars variable is greater than the size of the foulStars variable

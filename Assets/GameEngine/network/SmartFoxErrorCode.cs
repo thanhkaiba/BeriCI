@@ -20,7 +20,7 @@ namespace Piratera.Network
         COMBAT_FIGHTING_FINISHED = 806,   //Chặn lệnh đúp ( chưa xử lý )
         [Description("Sailor configuration invalid")]
         SAILOR_CONFIG_INVALID = 807, //Không load được sailor config file
-        [Description("Combat sailor and fighiting line invalid")]
+        [Description("Combat sailor and fightiting line invalid")]
         COMBAT_SAILOR_AND_FIGHITING_LINE_INVALID = 808,   //sailor và ft không hợp lệ ( kể cả số lượng lẫn id phải khớp nhau )
         [Description("Stamina sold out")]
         STAMINA_SOLD_OUT = 809,   //hết lượt mua
@@ -51,8 +51,14 @@ namespace Piratera.Network
         [Description("Unable to connect to the authentication service")]
         AUTHENTICATION_SERVICE_ERROR = 13,
 
+        [Description("Access Denied")]
+        GAME_ACCESS_DENIED = 40,
+
         [Description("A suitable opponent could not be found right now")]
         NO_OPPONENT_FOUND = 820,
+
+        [Description("Lucky wheel is not ready!")]
+        PIRATERA_LUCKY_WHEEL_NOT_READY = 821,
 
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
 using Piratera.Build;
-using Piratera.Constance;
 using Piratera.Log;
 using System;
 using System.Collections;
@@ -14,7 +13,7 @@ namespace Piratera.Engine
     {
 #if UNITY_STANDALONE_WIN
 #if PIRATERA_QC || PIRATERA_DEV
-     private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
+        private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_DEV;
 #else
      private static string URL = "https://api.piratera.io/v1/game/version/" + (int)BuildType.WINDOW_LIVE;
 #endif
@@ -76,11 +75,11 @@ namespace Piratera.Engine
                 }
                 else
                 {
-    
+
                     CheckVersion(www.downloadHandler.text);
                 }
             }
-            
+
         }
 
         private void CheckVersion(string data)
@@ -102,7 +101,7 @@ namespace Piratera.Engine
 
         IEnumerator GetTextWithCustomCertificate()
         {
-           
+
             using (UnityWebRequest www = UnityWebRequest.Get(URL))
             {
                 www.certificateHandler = new CustomCertificateHandler();

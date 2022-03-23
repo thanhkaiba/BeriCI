@@ -2,7 +2,7 @@ using Piratera.Config;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
+using Piratera.Constance;
 
 public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 {
@@ -13,13 +13,14 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         config_stats = GlobalConfigs.GetSailorConfig(_name);
     }
 
-    public SailorModel(ISFSObject obj): this(obj.GetUtfString("id"), obj.GetUtfString("name"))
+    public SailorModel(ISFSObject obj) : this(obj.GetUtfString("id"), obj.GetUtfString("name"))
     {
         quality = obj.GetInt("quality");
         level = obj.GetInt("level");
         exp = obj.GetLong("exp");
         lastTrade = obj.GetLong("last_trade") * 1000;
         star = obj.GetByte("star");
+        pve_count = obj.GetInt("pve_count");
     }
 
     public SailorConfig config_stats { get; set; }
@@ -29,6 +30,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     public int level { get; set; }
     public long exp { get; set; }
     public byte star { get; set; }
+    public int pve_count { get; set; }
 
     public long lastTrade { get; set; }
     public List<Item> items { get; set; }
@@ -41,6 +43,11 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
             if (_t == type) found = true;
         });
         return found;
+    }
+
+    public bool IsTrial()
+    {
+        return id.StartsWith("trial-");
     }
     public List<SailorClass> GetListClasses()
     {
@@ -59,12 +66,12 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     public bool IsAvaiable()
     {
-        return lastTrade < GameTimeMgr.GetCurrentUTCTime() - 24 * 60 * 60 * 1000;
+        return lastTrade < GameTimeMgr.GetCurrentUTCTime() - GameConst.TIME_LOCK_SAILOR;
     }
 
     public long GetRemainingLockTime()
     {
-        return lastTrade + 24 * 60 * 60 * 1000 - GameTimeMgr.GetCurrentUTCTime();
+        return lastTrade + GameConst.TIME_LOCK_SAILOR - GameTimeMgr.GetCurrentUTCTime();
     }
 
 

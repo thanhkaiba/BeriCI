@@ -79,7 +79,8 @@ public class CombatSailor : Sailor
     public void SyncStatus(List<SailorStatus> statuses)
     {
         // update sau, lam cho death truoc
-        statuses.ForEach(status => {
+        statuses.ForEach(status =>
+        {
             var clientStatus = cs.listStatus.Find(x => x.name == status.name);
             Debug.Log("Check Status: " + status.name);
             if (clientStatus == null)
@@ -136,6 +137,7 @@ public class CombatSailor : Sailor
             if (status != null) status.stack -= 1;
         }
         cs.listStatus.RemoveAll(status => status.stack <= 0);
+        DisplayStatus();
     }
     public void CheckDeath()
     {
@@ -154,10 +156,12 @@ public class CombatSailor : Sailor
 
     public float DoCombatAction(CombatState combatState)
     {
+        float delay = 0;
         bool useSkillCondition = UseSkillCondition(combatState);
-        if (HaveStatus(SailorStatusType.STUN)) return Immobile();
-        else if (useSkillCondition) return CastSkill(combatState);
-        else return BaseAttack(combatState);
+        if (HaveStatus(SailorStatusType.STUN)) delay = Immobile();
+        else if (useSkillCondition) delay = CastSkill(combatState);
+        else delay = BaseAttack(combatState);
+        return delay;
     }
     // Base attack
     // ... client tính
@@ -247,11 +251,6 @@ public class CombatSailor : Sailor
     }
     float Immobile()
     {
-        cs.CurrentSpeed -= cs.SpeedNeed;
-        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
-
-        DisplayStatus();
         return RunImmobile() + 0.2f;
     }
     protected bool IsCrit()
@@ -363,7 +362,7 @@ public class CombatSailor : Sailor
         SailorStatus existStatus = cs.GetStatus(status.name);
         if (existStatus != null)
         {
-            if (statusTurn.Contains(status.name) && status.stack > existStatus.stack)  existStatus.stack = status.stack;
+            if (statusTurn.Contains(status.name) && status.stack > existStatus.stack) existStatus.stack = status.stack;
             if (statusStacks.Contains(status.name)) existStatus.stack += status.stack;
         }
         else cs.listStatus.Add(status);
@@ -387,6 +386,14 @@ public class CombatSailor : Sailor
     }
     public void GainHealth(float health)
     {
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem support = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.SUPPORT);
+        if (support != null)
+        {
+            float extra_health_percent = config.GetParams(support.type, support.level)[1];
+            health += health * extra_health_percent;
+        }
+
         cs.CurHealth += health;
         if (cs.CurHealth > cs.MaxHealth) cs.CurHealth = cs.MaxHealth;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
@@ -413,6 +420,12 @@ public class CombatSailor : Sailor
     {
         cs.Fury += value;
         if (cs.Fury > cs.MaxFury) cs.Fury = cs.MaxFury;
+        bar.SetFuryBar(cs.MaxFury, cs.Fury);
+    }
+    public virtual void LoseFury(int value)
+    {
+        cs.Fury -= value;
+        if (cs.Fury < 0) cs.Fury = 0;
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
     }
     public virtual void GainPower(float value)
@@ -458,7 +471,11 @@ public class CombatSailor : Sailor
         seq.Append(transform.DOMoveX(oriX - 0.2f, 0.05f));
         seq.Append(transform.DOMoveX(oriX + 0.2f, 0.05f));
         seq.Append(transform.DOMoveX(oriX, 0.05f));
-        return 0.15f;
+
+        cs.CurrentSpeed -= cs.SpeedNeed;
+        bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
+        return 0.3f;
     }
     public virtual float RunBaseAttack(CombatSailor target) { return 0f; }
     public virtual float RunSkill(CombatSailor target) { return 0f; }
