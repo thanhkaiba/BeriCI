@@ -1,13 +1,10 @@
-name: Actions 😎
-
-on: 
+name: Build WEBGL
+on:
   workflow_dispatch:
     inputs:
      unity_license:
         required: true
-        description: 'Unity License content'
         type: string
-
 jobs:
   build:
     name: Build my project ✨
