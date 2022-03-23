@@ -95,29 +95,29 @@ public class Lade : CombatSailor
         {
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
         });
-        seq.AppendInterval(.2f);
+        seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
         });
-        seq.AppendInterval(.2f);
+        seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
         });
-        seq.AppendInterval(.2f);
+        seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
         });
-        seq.AppendInterval(.2f);
+        seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
         });
-        seq.AppendInterval(0.2f);
+        seq.AppendInterval(0.35f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
 
-        return 2.8f;
+        return 3.6f;
     }
 }
