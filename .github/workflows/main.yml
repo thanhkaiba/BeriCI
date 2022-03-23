@@ -43,7 +43,7 @@ jobs:
       - name: Run tests
         uses: game-ci/unity-test-runner@v2
         env:
-          UNITY_LICENSE: ${{ github.event.inputs.unity_license }}
+          UNITY_LICENSE: ${{ inputs.unity_license }}
         with:
           githubToken: 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
 
@@ -51,7 +51,7 @@ jobs:
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
-          UNITY_LICENSE: = ${{ github.event.inputs.unity_license }}
+          UNITY_LICENSE: ${{ inputs.unity_license }}
           UNITY_EMAIL: tienthanhit97@gmail.com
           UNITY_PASSWORD: Thanhtien01
         with:
