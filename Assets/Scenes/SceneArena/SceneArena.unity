@@ -2599,7 +2599,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1072998033}
         m_TargetAssemblyTypeName: SceneArenaUI, Assembly-CSharp
-        m_MethodName: ShowCommingSoon
+        m_MethodName: ShowHistory
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

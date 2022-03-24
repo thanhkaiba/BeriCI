@@ -577,6 +577,17 @@ namespace Piratera.Network
                         }
                         break;
                     }
+                case SFSAction.PVP_WATCH_HISTORY:
+                    {
+                        GuiManager.Instance.ShowGuiWaiting(false);
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            string json = packet.GetUtfString("combat_data");
+                            TempCombatData.Instance.LoadCombatDataFromSfs(SFSObject.NewFromJsonData(json));
+                            SceneManager.LoadScene("SceneCombat2D");
+                        }
+                        break;
+                    }
 
             }
 
