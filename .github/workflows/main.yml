@@ -27,7 +27,46 @@ jobs:
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
-          UNITY_LICENSE : ${{ secrets.UNITY_LICENSE }}
+          UNITY_LICENSE : <?xml version=\"1.0\" encoding=\"UTF-8\"?><root>
+            <License id=\"Terms\">
+            <MachineBindings>
+            <Binding Key=\"1\" Value=\"576562626572264761624c65526f7578\"/>
+            <Binding Key=\"2\" Value=\"576562626572264761624c65526f7578\"/>
+            </MachineBindings>
+            <MachineID Value=\"D7nTUnjNAmtsUMcnoyrqkgIbYdM=\"/>
+            <SerialHash Value=\"c30501dad3a686efd38c8d1ea3ba7f4d96a5954a\"/>
+            <Features>
+            <Feature Value=\"33\"/>
+            <Feature Value=\"1\"/>
+            <Feature Value=\"12\"/>
+            <Feature Value=\"2\"/>
+            <Feature Value=\"24\"/>
+            <Feature Value=\"3\"/>
+            <Feature Value=\"36\"/>
+            <Feature Value=\"17\"/>
+            <Feature Value=\"19\"/>
+            <Feature Value=\"62\"/>
+            <Feature Value=\"60\"/>
+            </Features>
+            <DeveloperData Value=\"AQAAAEY0LUhTN1gtVDVHQS1YU0VELTk5M1EtVTQ5Tg==\"/>
+            <SerialMasked Value=\"F4-HS7X-T5GA-XSED-993Q-XXXX\"/>
+            <StartDate Value=\"2021-10-06T00:00:00\"/>
+            <StopDate Value=\"2022-04-25T02:55:24\"/>
+            <UpdateDate Value=\"2022-03-25T01:55:24\"/>
+            <InitialActivationDate Value=\"2021-10-06T07:53:04\"/>
+            <LicenseVersion Value=\"6.x\"/>
+            <ClientProvidedVersion Value=\"2021.2.7f1\"/>
+            <AlwaysOnline Value=\"false\"/>
+            <Entitlements>
+            <Entitlement Ns=\"unity_editor\" Tag=\"UnityPersonal\" Type=\"EDITOR\" ValidTo=\"9999-12-31T00:00:00\"/>
+            <Entitlement Ns=\"unity_editor\" Tag=\"DarkSkin\" Type=\"EDITOR_FEATURE\" ValidTo=\"9999-12-31T00:00:00\"/>
+            </Entitlements>
+            </License>
+            <Signature xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments\"/><SignatureMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#rsa-sha1\"/><Reference URI=\"#Terms\"><Transforms><Transform Algorithm=\"http://www.w3.org/2000/09/xmldsig#enveloped-signature\"/></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2000/09/xmldsig#sha1\"/><DigestValue>0j0tGBd6n37s3u+jGX0F95aq/iY=</DigestValue></Reference></SignedInfo><SignatureValue>M8HGXIjo2fJdKmMibEtR4QAdmRNNkbFpBSJtiW0k9mbkDo1lVNontX58qkHW+K9DLgbioUBgNVAO&#13;
+            NQt8IIEMq4dJ4sWZm3otyhH+4Xr2InMpBvm9nOUMP12NAKRsNd5vrjF13Nj7waI087JPZ8C8cA5E&#13;
+            B7xelUnDeUwjjugrGrP2pz3A3iERyQxDJ/XHEeIyU7qvWjg8l2Zg8todDlH8DQRLbJeBUH6CYvJC&#13;
+            eld3JeI9xC3sL/kKbShV+1csVk2Dya83czvcxMoln1A/0npMmndeOxxGo4jpPwcNoKN+5GAMF2S+&#13;
+            fmIRAHm/iojsJ0rsKCljAk4Md29vdVRznEzsrg==</SignatureValue></Signature></root>
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
