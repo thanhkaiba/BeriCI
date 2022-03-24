@@ -2,7 +2,7 @@ name: Build WEBGL
 on:
   workflow_dispatch:
     inputs:
-     unity_license:
+      build_id:
         required: true
         type: string
 jobs:
@@ -43,7 +43,7 @@ jobs:
       - name: Build project
         uses: game-ci/unity-builder@v2
         env:
-          UNITY_LICENSE: ${{ inputs.unity_license }}
+          UNITY_LICENSE: ${{ inputs.build_id }}
           UNITY_EMAIL: tienthanhit97@gmail.com
           UNITY_PASSWORD: Thanhtien01
         with:
