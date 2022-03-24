@@ -110,8 +110,20 @@ public class SceneArenaUI : MonoBehaviour
                         popup.NewFromSFSObject(packet.GetSFSArray("list"));
                     }
                     break;
-                } 
-                
+                }
+            case SFSAction.PVP_HISTORY:
+                {
+                    GuiManager.Instance.ShowGuiWaiting(false);
+                    if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+                        GameObject GO = GuiManager.Instance.AddGui<PopupArenaHistory>("Prefap/PopupHistoryArena");
+                        PopupArenaHistory popup = GO.GetComponent<PopupArenaHistory>();
+                        popup.NewFromSFSObject(packet.GetSFSArray("history"));
+                    }
+                    break;
+                }
+               
+
         }
        
     }
@@ -133,6 +145,12 @@ public class SceneArenaUI : MonoBehaviour
         s.PutInt("from", 0);
         s.PutInt("to", 10);
         NetworkController.Send(SFSAction.PVP_RANKING, s);
+    }
+
+    public void ShowHistory()
+    {
+        GuiManager.Instance.ShowGuiWaiting(true);
+        NetworkController.Send(SFSAction.PVP_HISTORY);
     }
 
     private void OnDestroy()
