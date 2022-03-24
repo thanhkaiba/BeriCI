@@ -23,7 +23,7 @@ namespace Piratera.GUI
             
             public string Position
             {
-                get { return attacker == UserData.Instance.name ? "attacker" : "defender"; }
+                get { return attacker == UserData.Instance.UID ? "attacker" : "defender"; }
             }
 
             public string OpponentAvatar
@@ -40,7 +40,7 @@ namespace Piratera.GUI
 
             public string Result { get
                 {
-                    if (winner == UserData.Instance.Username)
+                    if (winner == UserData.Instance.UID)
                     {
                         return "Victory";
                     }

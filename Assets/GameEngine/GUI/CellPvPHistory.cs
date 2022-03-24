@@ -30,11 +30,14 @@ namespace Piratera.GUI
             avatar.LoadAvatar(history.OpponentAvatar);
             textName.text = history.Opponent; ;
             textElo.text = history.EloDelta.ToString();
+            textElo.color = history.EloDelta < 0 ? Color.red : Color.green;
             textPos.text = history.Position.ToString();
-            textPos.color = history.Position == "attacker" ? Color.green : Color.red;
+            
+            
+            textPos.color = history.Position == "attacker" ? Color.gray : Color.blue;
 
             textResult.text = history.Result;
-            textResult.color = history.Result == "win" ? Color.green : history.Result == "draw" ? Color.magenta : Color.red;
+            textResult.color = history.Result == "Victory" ? Color.green : history.Result == "Draw" ? Color.magenta : Color.red;
         }
         
         public void OnReplay()

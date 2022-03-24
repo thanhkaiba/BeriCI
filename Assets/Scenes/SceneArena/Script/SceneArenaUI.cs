@@ -116,7 +116,7 @@ public class SceneArenaUI : MonoBehaviour
                     GuiManager.Instance.ShowGuiWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui<PopupArenaHistory>("Prefap/PopupHistoryArena");
+                        GameObject GO = GuiManager.Instance.AddGui<PopupArenaHistory>("Prefap/PopupArenaHistory");
                         PopupArenaHistory popup = GO.GetComponent<PopupArenaHistory>();
                         popup.NewFromSFSObject(packet.GetSFSArray("history"));
                     }
