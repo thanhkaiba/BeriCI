@@ -1,0 +1,118 @@
+
+Wuone.png
+size: 911,305
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ar
+  rotate: false
+  xy: 312, 2
+  size: 148, 69
+  orig: 148, 69
+  offset: 0, 0
+  index: -1
+arm_L_01
+  rotate: false
+  xy: 854, 11
+  size: 36, 78
+  orig: 36, 78
+  offset: 0, 0
+  index: -1
+arm_L_02
+  rotate: false
+  xy: 462, 2
+  size: 97, 89
+  orig: 97, 89
+  offset: 0, 0
+  index: -1
+arm_R_01
+  rotate: true
+  xy: 778, 4
+  size: 85, 74
+  orig: 85, 74
+  offset: 0, 0
+  index: -1
+arm_R_02
+  rotate: false
+  xy: 778, 152
+  size: 129, 68
+  orig: 129, 68
+  offset: 0, 0
+  index: -1
+arrow
+  rotate: true
+  xy: 778, 222
+  size: 81, 131
+  orig: 81, 131
+  offset: 0, 0
+  index: -1
+bag
+  rotate: true
+  xy: 705, 243
+  size: 60, 69
+  orig: 60, 69
+  offset: 0, 0
+  index: -1
+body
+  rotate: false
+  xy: 142, 30
+  size: 168, 273
+  orig: 168, 273
+  offset: 0, 0
+  index: -1
+cl
+  rotate: false
+  xy: 561, 3
+  size: 115, 122
+  orig: 115, 122
+  offset: 0, 0
+  index: -1
+crossbow
+  rotate: true
+  xy: 2, 10
+  size: 293, 138
+  orig: 293, 138
+  offset: 0, 0
+  index: -1
+day
+  rotate: true
+  xy: 705, 152
+  size: 89, 67
+  orig: 89, 67
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 538, 127
+  size: 165, 176
+  orig: 165, 176
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: false
+  xy: 447, 93
+  size: 89, 210
+  orig: 89, 210
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: false
+  xy: 312, 73
+  size: 133, 230
+  orig: 133, 230
+  offset: 0, 0
+  index: -1
+long
+  rotate: false
+  xy: 778, 91
+  size: 115, 59
+  orig: 115, 59
+  offset: 0, 0
+  index: -1
+tail
+  rotate: true
+  xy: 678, 5
+  size: 120, 98
+  orig: 120, 98
+  offset: 0, 0
+  index: -1

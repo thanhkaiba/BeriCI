@@ -69,13 +69,13 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("Zeke", new CombatPosition(2, 2), Team.A);
+        CreateCombatSailor("Wuone", new CombatPosition(0, 2), Team.A);
         //CreateCombatSailor("Zeke", new CombatPosition(2, 1), Team.A);
     }
     void CreateTeamB()
     {
         //CreateCombatSailor("Zeke", new CombatPosition(1, 2), Team.B);
-        CreateCombatSailor("Zeke", new CombatPosition(1, 1), Team.B);
+        CreateCombatSailor("Wuone", new CombatPosition(0, 0), Team.B);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
