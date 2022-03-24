@@ -1,0 +1,83 @@
+
+Zeke.png
+size: 1685,190
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 1
+  rotate: false
+  xy: 1489, 42
+  size: 106, 75
+  orig: 106, 75
+  offset: 0, 0
+  index: -1
+arm_L_01
+  rotate: true
+  xy: 1489, 119
+  size: 69, 194
+  orig: 69, 194
+  offset: 0, 0
+  index: -1
+arm_L_02
+  rotate: false
+  xy: 1597, 70
+  size: 67, 47
+  orig: 67, 47
+  offset: 0, 0
+  index: -1
+arm_R
+  rotate: true
+  xy: 269, 11
+  size: 136, 204
+  orig: 136, 204
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 1260, 2
+  size: 186, 227
+  orig: 186, 227
+  offset: 0, 0
+  index: -1
+d
+  rotate: false
+  xy: 2, 149
+  size: 615, 39
+  orig: 615, 39
+  offset: 0, 0
+  index: -1
+d2
+  rotate: false
+  xy: 562, 6
+  size: 40, 141
+  orig: 40, 141
+  offset: 0, 0
+  index: -1
+gun
+  rotate: false
+  xy: 944, 8
+  size: 314, 180
+  orig: 314, 180
+  offset: 0, 0
+  index: -1
+head
+  rotate: false
+  xy: 475, 37
+  size: 85, 110
+  orig: 85, 110
+  offset: 0, 0
+  index: -1
+leg_L
+  rotate: true
+  xy: 2, 3
+  size: 144, 265
+  orig: 144, 265
+  offset: 0, 0
+  index: -1
+leg_R
+  rotate: true
+  xy: 619, 4
+  size: 184, 323
+  orig: 184, 323
+  offset: 0, 0
+  index: -1

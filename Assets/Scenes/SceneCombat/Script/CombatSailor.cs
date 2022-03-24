@@ -374,8 +374,7 @@ public class CombatSailor : Sailor
     }
     public void InitDisplayStatus()
     {
-        Vector3 p = GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + cs.position.x + cs.position.y).transform.position;
-        transform.position = p;
+        transform.position = GetScenePosition();
         bar.Init(Model);
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
@@ -383,6 +382,11 @@ public class CombatSailor : Sailor
         bar.SetIconType(Model.config_stats.attack_type);
         bar.SetName(Model.config_stats.root_name);
         SetFaceDirection();
+    }
+    public Vector3 GetScenePosition()
+    {
+        var p = cs.position;
+        return GameObject.Find(cs.team == Team.A ? "FieldA" : "FieldB").transform.Find("slot_A" + p.x + p.y).transform.position;
     }
     public void GainHealth(float health)
     {
