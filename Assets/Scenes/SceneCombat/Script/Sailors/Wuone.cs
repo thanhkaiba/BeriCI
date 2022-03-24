@@ -33,7 +33,6 @@ public class Wuone : CombatSailor
         TriggerAnimation("Attack");
         Sequence sq = DOTween.Sequence();
 
-
         StartCoroutine(GameUtils.WaitAndDo(0.55f, () => SoundMgr.PlaySound("Audio/Sailor/slide_hit")));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.7f);
