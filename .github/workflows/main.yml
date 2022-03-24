@@ -39,14 +39,6 @@ jobs:
           restore-keys: |
             Library-
 
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ inputs.unity_license }}
-        with:
-          githubToken: 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
-
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v2
@@ -55,7 +47,7 @@ jobs:
           UNITY_EMAIL: tienthanhit97@gmail.com
           UNITY_PASSWORD: Thanhtien01
         with:
-          targetPlatform: WebGL
+          targetPlatform: Android
 
       # Output
       - uses: actions/upload-artifact@v2
