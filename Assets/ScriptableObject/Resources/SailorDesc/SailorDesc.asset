@@ -140,3 +140,8 @@ MonoBehaviour:
     title: Serious Cyborg
     skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to all enemies in
       a line.
+  - root_name: Zeke
+    present_name: Zeke
+    title: Kraken hunter
+    skill_description: If Zeke's pulling his target to first line, deal <b><color=#f06060>$zekeDmg@</color></b>
+      their health as physical damage.

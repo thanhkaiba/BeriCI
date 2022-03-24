@@ -246,7 +246,13 @@ public class GameUtils : UnityEngine.Object
                 else param = model.config_stats.skill_params[skillParamIndex];
                 oriText = oriText.Replace(subString, "" + param);
             }
-
+            else if (split[0] == "zekeDmg")
+            {
+                float param0 = model.config_stats.skill_params[0];
+                float param1 = model.config_stats.skill_params[1];
+                float total = param0 + param1 * model.star;
+                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
+            }
         }
         return oriText;
     }
