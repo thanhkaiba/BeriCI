@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.Sound;
 using Spine.Unity;
 using System;
@@ -74,6 +75,15 @@ public class Wuone : CombatSailor
         targets.Add(target.Model.id);
         _params.Add(target.CalcDamageTake(new Damage() { magic = main_damage }, this));
 
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem wild = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.WILD);
+        float healthGain = 0;
+        if (cs.HaveType(SailorClass.WILD) && wild != null)
+        {
+            float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
+            healthGain = percentHealthGain * cs.MaxHealth;
+        }
+        _params.Add(healthGain);
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
@@ -93,6 +103,7 @@ public class Wuone : CombatSailor
 
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
+        targetPos.z -= 0.5f;
         Sequence sq = DOTween.Sequence();
         sq.AppendInterval(1);
         sq.AppendCallback(() =>
@@ -103,6 +114,7 @@ public class Wuone : CombatSailor
         seq.AppendInterval(0.7f);
         seq.AppendCallback(() =>
         {
+            GainHealth(_params[1]);
             Vector3 startPos = boneArr.GetWorldPosition(modelObject.transform);
             NetToTarget(startPos, targetPos, 0.02f * Vector3.Distance(startPos, targetPos));
         });

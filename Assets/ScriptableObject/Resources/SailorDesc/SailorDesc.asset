@@ -143,10 +143,10 @@ MonoBehaviour:
   - root_name: Zeke
     present_name: Zeke
     title: Kraken hunter
-    skill_description: If Zeke's pulling his target to first line, deal <b><color=#f06060>$zekeDmg@</color></b>
-      their health as physical damage.
+    skill_description: Zeke's pulling the same line target to the front, deal <b><color=#f06060>$zekeDmg@</color></b>
+      their health as physical damage. \nZeke have 45% crit-change.
   - root_name: Wuone
     present_name: Wuone
     title: Ton WuOne
     skill_description: Shoot a net, deal <b><color=#5b59f0>$p_0@</color></b> and
-      stun them
+      stun them.

@@ -95,7 +95,8 @@ public class Camelia : CombatSailor
             relativePos.x *= modelObject.transform.localScale.x;
             boneTarget.SetLocalPosition(relativePos);
         }
-        seq.AppendInterval(1.6f);
+        seq.AppendInterval(1.0f);
+        seq.Append(transform.DOMoveZ(desPos.z - 0.5f, 0.6f));
         StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
         seq.AppendCallback(() =>
         {
@@ -108,6 +109,7 @@ public class Camelia : CombatSailor
             }
             bar.gameObject.SetActive(true);
         });
+        seq.Append(transform.DOMove(oriPos, 0.3f));
         seq.AppendInterval(0.45f);
         return 2.6f;
     }
