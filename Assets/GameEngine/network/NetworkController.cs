@@ -19,7 +19,6 @@ namespace Piratera.Network
 
     public static class GAME_NETWORK_ADDRESS
     {
-
         //public const string QC_HOST = "192.168.102.2";
         //public const int QC_PORT = 9933;
 
