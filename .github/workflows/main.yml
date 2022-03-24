@@ -1,10 +1,11 @@
 name: Actions 😎
 
-on: [push, pull_request]
+on:
+  workflow_dispatch: {}
 
 jobs:
   build:
-    name: Build my project ✨
+    name: Build Piratera Android ✨
     runs-on: ubuntu-latest
     steps:
       # Checkout
@@ -20,14 +21,6 @@ jobs:
           key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
             Library-
-
-      # Test
-      - name: Run tests
-        uses: game-ci/unity-test-runner@v2
-        env:
-          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # Build
       - name: Build project
