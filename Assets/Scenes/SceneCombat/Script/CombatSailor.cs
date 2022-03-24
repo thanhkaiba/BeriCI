@@ -251,7 +251,7 @@ public class CombatSailor : Sailor
     }
     float Immobile()
     {
-        return RunImmobile() + 0.2f;
+        return RunImmobile() + 0.4f;
     }
     protected bool IsCrit()
     {

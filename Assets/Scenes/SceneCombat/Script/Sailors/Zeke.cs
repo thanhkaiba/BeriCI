@@ -31,12 +31,9 @@ public class Zeke : CombatSailor
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
 
-        Sequence sq = DOTween.Sequence();
-        sq.AppendInterval(.3f);
-        sq.AppendCallback(() =>
-        {
-            SoundMgr.PlaySoundAttackSailor(3);
-        });
+        SoundMgr.PlaySound("Audio/Sailor/gear");
+        StartCoroutine(GameUtils.WaitAndDo(0.55f, () => SoundMgr.PlaySound("Audio/Sailor/air_whistle_punch")));
+
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.7f);
         seq.AppendCallback(() =>
@@ -96,12 +93,9 @@ public class Zeke : CombatSailor
         target.cs.position.x = 0;
         var newTargetPos = target.GetScenePosition();
 
-        Sequence sq = DOTween.Sequence();
-        sq.AppendInterval(1);
-        sq.AppendCallback(() =>
-        {
-            SoundMgr.PlaySoundSkillSailor(3);
-        });
+        SoundMgr.PlaySound("Audio/Sailor/gear");
+        StartCoroutine(GameUtils.WaitAndDo(0.55f, () => SoundMgr.PlaySound("Audio/Sailor/air_whistle_punch")));
+        StartCoroutine(GameUtils.WaitAndDo(1.0f, () => SoundMgr.PlaySoundSkillSailor(3)));
 
         Vector3 oriPos = transform.position;
         Sequence seq = DOTween.Sequence();

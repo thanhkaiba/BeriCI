@@ -26,11 +26,11 @@ public class Lade : CombatSailor
         {
             Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
             relativePos.x *= modelObject.transform.localScale.x;
-            relativePos.y += 2.5f;
+            relativePos.y += 3.5f;
             boneTarget.SetLocalPosition(relativePos);
         }
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
+        StartCoroutine(GameUtils.WaitAndDo(0.65f, () => SoundMgr.PlaySound("Audio/Sailor/laze_attack")));
         return 1.0f;
     }
     public override void SetFaceDirection()
@@ -86,11 +86,16 @@ public class Lade : CombatSailor
             targetPos.z - 0.1f
         );
 
+        StartCoroutine(GameUtils.WaitAndDo(0.2f, () => SoundMgr.PlaySound("Audio/Sailor/gear")));
+        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySound("Audio/Sailor/sucking_surfacing")));
+        StartCoroutine(GameUtils.WaitAndDo(1.2f, () => SoundMgr.PlaySound("Audio/Sailor/sucking_surfacing")));
+        StartCoroutine(GameUtils.WaitAndDo(1.6f, () => SoundMgr.PlaySound("Audio/Sailor/sucking_surfacing")));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.2f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.8f);
         seq.AppendCallback(() => GameEffMgr.Instance.Shake(0.8f, 3));
+
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });

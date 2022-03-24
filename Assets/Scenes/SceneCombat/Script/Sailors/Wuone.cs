@@ -33,11 +33,8 @@ public class Wuone : CombatSailor
         TriggerAnimation("Attack");
         Sequence sq = DOTween.Sequence();
 
-        sq.AppendInterval(.3f);
-        sq.AppendCallback(() =>
-        {
-            SoundMgr.PlaySoundAttackSailor(3);
-        });
+
+        StartCoroutine(GameUtils.WaitAndDo(0.55f, () => SoundMgr.PlaySound("Audio/Sailor/slide_hit")));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.7f);
         seq.AppendCallback(() =>
@@ -104,12 +101,8 @@ public class Wuone : CombatSailor
         Vector3 targetPos = target.transform.position;
         targetPos.y += 3.0f;
         targetPos.z -= 0.5f;
-        Sequence sq = DOTween.Sequence();
-        sq.AppendInterval(1);
-        sq.AppendCallback(() =>
-        {
-            SoundMgr.PlaySoundSkillSailor(3);
-        });
+        StartCoroutine(GameUtils.WaitAndDo(0.25f, () => SoundMgr.PlaySound("Audio/Sailor/mechanical")));
+        StartCoroutine(GameUtils.WaitAndDo(0.7f, () => SoundMgr.PlaySound("Audio/Sailor/wing_flap_2")));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.7f);
         seq.AppendCallback(() =>
@@ -124,7 +117,7 @@ public class Wuone : CombatSailor
             target.AddStatus(new SailorStatus(SailorStatusType.STUN, 1));
             target.LoseHealth(new Damage() { magic = loseHealth });
         });
-        return 1.4f;
+        return 1.8f;
     }
     private void ArrowTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
     {
@@ -142,6 +135,8 @@ public class Wuone : CombatSailor
         seq.AppendCallback(() => arrGO.SetActive(true));
         seq.Append(arrGO.transform.DOMove(desPos, flyTime).SetEase(Ease.OutSine));
         seq.AppendCallback(() => Destroy(arrGO));
+
+        arrGO.transform.Find("eff").gameObject.SetActive(false);
     }
     private void NetToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
     {

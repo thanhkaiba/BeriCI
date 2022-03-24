@@ -254,12 +254,18 @@ namespace Piratera.Sound
                 Instance.PlaySoundEffect(audioClip);
             }
         }
+        public static void PlaySound(string src)
+        {
+            if (Instance != null)
+            {
+                Instance.PlaySoundEffect(Resources.Load<AudioClip>(src));
+            }
+        }
 
         public void PlaySoundEffect(AudioClip audioClip)
         {
             if (soundOn)
             {
-
                 soundEfectPlayer.PlayOneShot(audioClip, soundVolume);
             }
         }

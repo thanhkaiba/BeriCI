@@ -31,7 +31,7 @@ public class Camelia : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.45f, () => SoundMgr.PlaySoundAttackSailor(0)));
+        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySound("Audio/Sailor/slash_at_body")));
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.75f);
@@ -97,7 +97,8 @@ public class Camelia : CombatSailor
         }
         seq.AppendInterval(1.0f);
         seq.Append(transform.DOMoveZ(desPos.z - 0.5f, 0.6f));
-        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
+        StartCoroutine(GameUtils.WaitAndDo(0.2f, () => SoundMgr.PlaySound("Audio/Sailor/wing_flap_by")));
+        StartCoroutine(GameUtils.WaitAndDo(0.7f, () => SoundMgr.PlaySound("Audio/Sailor/blood_gush")));
         seq.AppendCallback(() =>
         {
             target.LoseHealth(new Damage() { magic = _params[0] });

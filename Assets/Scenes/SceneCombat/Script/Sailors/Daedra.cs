@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Daedra : CombatSailor
 {
-    private GameObject circle;
     public Daedra()
     {
     }
@@ -25,10 +24,10 @@ public class Daedra : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.1f, () => SoundMgr.PlaySoundAttackSailor(9)));
+        StartCoroutine(GameUtils.WaitAndDo(0.3f, () => SoundMgr.PlaySound("Audio/Sailor/sword_slash")));
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
-        seq.AppendInterval(0.8f);
+        seq.AppendInterval(1.0f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 0.8f;
     }
@@ -81,11 +80,12 @@ public class Daedra : CombatSailor
             target.transform.position.z
         );
         desPos.z -= 0.1f;
+        StartCoroutine(GameUtils.WaitAndDo(0.45f, () => SoundMgr.PlaySound("Audio/Sailor/slash_at_body")));
+        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySound("Audio/Sailor/sucking_surfacing")));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.6f);
-        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
         seq.AppendCallback(() =>
         {
             target.LoseHealth(new Damage() { magic = _params[0] });
