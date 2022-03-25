@@ -25,6 +25,7 @@ jobs:
       # Build
       - name: Build project
         uses: game-ci/unity-builder@v2
+        id: myBuildStep
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
           UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
@@ -32,9 +33,10 @@ jobs:
         with:
           targetPlatform: Android
           versioning: Semantic
+          buildName: Android ${{ steps.myBuildStep.outputs.buildVersion }}
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Build
-          path: build
+          name: Android ${{ steps.myBuildStep.outputs.buildVersion }}.apk
+          path: Android ${{ steps.myBuildStep.outputs.buildVersion }}.apk
