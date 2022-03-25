@@ -62,7 +62,7 @@ namespace Piratera.GUI
 
             public void NewFromSFSObject(ISFSObject packet)
             {
-                matchId = packet.GetLong("matchId");
+                matchId = packet.GetLong("match_id");
                 attacker = packet.GetUtfString("attacker");
                 defender = packet.GetUtfString("defender");
                 attackerEloDelta = packet.GetInt("attacker_elo_delta");
