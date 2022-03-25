@@ -33,10 +33,9 @@ jobs:
         with:
           targetPlatform: Android
           versioning: Semantic
-          buildName: Android ${{ steps.myBuildStep.outputs.buildVersion }}
 
       # Output
       - uses: actions/upload-artifact@v2
         with:
-          name: Android ${{ steps.myBuildStep.outputs.buildVersion }}.apk
-          path: Android ${{ steps.myBuildStep.outputs.buildVersion }}.apk
+          name: Piratera v${{ steps.myBuildStep.outputs.buildVersion }}
+          path: build/Android.apk

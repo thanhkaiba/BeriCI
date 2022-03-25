@@ -80,7 +80,7 @@ public class Daedra : CombatSailor
             target.transform.position.z
         );
         desPos.z -= 0.1f;
-        StartCoroutine(GameUtils.WaitAndDo(0.45f, () => SoundMgr.PlaySound("Audio/Sailor/slash_at_body")));
+        StartCoroutine(GameUtils.WaitAndDo(0.7f, () => SoundMgr.PlaySound("Audio/Sailor/slash_at_body")));
         StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySound("Audio/Sailor/sucking_surfacing")));
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.3f);
