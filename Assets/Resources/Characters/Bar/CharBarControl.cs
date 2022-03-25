@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class CharBarControl : MonoBehaviour
 {
     public SmoothSlider healthBar;
+    public Image fakeBloodBar;
     public Text healthText;
     public Slider speedBar;
     public Text speedText;
@@ -56,9 +57,18 @@ public class CharBarControl : MonoBehaviour
         }
         else iconSkill.sprite = Resources.Load<Sprite>("IconSkill/None");
     }
-    public void SetHealthBar(float max, float min)
+    public void SetHealthBar(float max, float min, float fakeBlood = 0)
     {
-        healthBar.ChangeValue(min / max);
+        float maxWidth = healthBar.GetComponent<Image>().rectTransform.sizeDelta.x;
+        float realMax = Mathf.Max(max, min + fakeBlood);
+        
+        if (max < min + fakeBlood) healthBar.SetValue(min / realMax);
+        else healthBar.ChangeValue(min / realMax);
+
+        float curY = fakeBloodBar.rectTransform.sizeDelta.y;
+        fakeBloodBar.rectTransform.sizeDelta = new Vector2(fakeBlood / realMax * maxWidth, curY);
+
+
 #if PIRATERA_DEV
         healthText.text = $"{min}/{max}";
 #else

@@ -376,7 +376,7 @@ public class CombatSailor : Sailor
     {
         transform.position = GetScenePosition();
         bar.Init(Model);
-        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetIconType(Model.config_stats.attack_type);
@@ -400,8 +400,20 @@ public class CombatSailor : Sailor
 
         cs.CurHealth += health;
         if (cs.CurHealth > cs.MaxHealth) cs.CurHealth = cs.MaxHealth;
-        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
         CombatEvents.Instance.gainHealth.Invoke(this, health);
+    }
+    public void AddShield(float shield)
+    {
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem support = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.SUPPORT);
+        if (support != null)
+        {
+            float extra_health_percent = config.GetParams(support.type, support.level)[1];
+            shield += shield * extra_health_percent;
+        }
+        cs.Shield += shield;
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
     }
     public void GainArmor(float armor)
     {
@@ -412,9 +424,16 @@ public class CombatSailor : Sailor
         TriggerAnimation("Hurt");
         GainFury(d.fury_gain);
 
-        cs.CurHealth -= d.physics + d.magic + d.pure;
+        float total = d.physics + d.magic + d.pure;
+        if (total < cs.Shield) cs.Shield -= total;
+        else
+        {
+            cs.CurHealth -= total - cs.Shield;
+            cs.Shield = 0;
+        }
+
         if (cs.CurHealth <= 0) cs.CurHealth = 0;
-        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth);
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
         if (checkDeath) CheckDeath();
 
         CombatEvents.Instance.takeDamage.Invoke(this, d);

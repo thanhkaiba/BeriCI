@@ -75,8 +75,9 @@ MonoBehaviour:
   - root_name: Alex
     present_name: Alex
     title: Acient weapon Defender
-    skill_description: His shield release the golden electrical power, heal <b><color=#228514>$per_0@</color></b>
-      max health and increase <b><color=#228514>$i_1@</color></b> armor.
+    skill_description: His shield release the golden electrical power, protect him
+      shield equal <b><color=#228514>$per_0@</color></b> max health and increase
+      <b><color=#228514>$i_1@</color></b> armor.
   - root_name: QChi
     present_name: Q-CHI
     title: The Death Mage
@@ -86,7 +87,7 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#008ab0>$i_0@</color></b> mana, speed up <b><color=#228514>$per_1@</color></b>
+      the front <b><color=#008ab0>$i_0@</color></b> mana, speed up <b><color=#228514>$galdalfSpeedUp@</color></b>
       and +1 <color=#b5b800><b>FURY</b></color>
   - root_name: Mealodo
     present_name: Mealodo
@@ -108,7 +109,8 @@ MonoBehaviour:
   - root_name: FatBrakes
     present_name: FatBrakes
     title: Member of Scott Pirates
-    skill_description: Perform Death Dance, all your crew +1 <color=#b5b800><b>FURY</b></color>.
+    skill_description: Perform Death Dance, all crewmates +1 <color=#b5b800><b>FURY</b></color>,
+      then speed-up 100%.
   - root_name: Anglersei
     present_name: Anglersei
     title: Master of the Deep
@@ -123,7 +125,8 @@ MonoBehaviour:
     present_name: Kamijita
     title: Haisan's Princess
     skill_description: Buff Ally needing mana the most <b><color=#008ab0>$i_0@</color></b>
-      mana,  speed-up <b><color=#228514>$per_1@</color></b>.
+      mana,  speed-up <b><color=#228514>$kamijitaSpeedUp@</color></b> and <b><color=#00706b>$p_3@</color></b>
+      shield
   - root_name: Camelia
     present_name: Camelia
     title: Deep Cave Queen

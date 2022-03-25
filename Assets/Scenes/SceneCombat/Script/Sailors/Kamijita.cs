@@ -55,6 +55,7 @@ public class Kamijita : CombatSailor
     }
     public override float CastSkill(CombatState cbState)
     {
+        // ham nay client thieu speedup va shield
         base.CastSkill(cbState);
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
@@ -73,8 +74,6 @@ public class Kamijita : CombatSailor
         var buffTarget = CombatState.Instance.GetSailor(targets[0]);
         var furyGain = _params[0];
         var speedUp = _params[1];
-        Debug.Log("kami_params 0" + _params[0]);
-        Debug.Log("kami_params 1" + _params[1]);
 
         var seq = DOTween.Sequence();
         seq.AppendInterval(0.3f);

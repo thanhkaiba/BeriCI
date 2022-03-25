@@ -95,6 +95,7 @@ public class CombatStats
         BasePower = model.config_stats.GetPower(level, quality, star);
         MaxHealth = model.config_stats.GetHealth(level, quality, star);
         CurHealth = model.config_stats.GetHealth(level, quality, star);
+        Shield = 0;
         BaseArmor = model.config_stats.GetArmor();
         BaseMagicResist = model.config_stats.GetMagicResist();
         Speed = model.config_stats.GetSpeed(level, quality);
@@ -135,6 +136,8 @@ public class CombatStats
 
     public float MaxHealth;
     public float CurHealth;
+
+    public float Shield;
 
     public float BaseArmor;
     public float Armor

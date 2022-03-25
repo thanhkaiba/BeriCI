@@ -88,13 +88,21 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     int IComparable<SailorModel>.CompareTo(SailorModel other)
     {
+        if (IsTrial()) return 1;
         if (config_stats.rank.Equals(other.config_stats.rank))
         {
-            if (quality == other.quality)
+            if (star == other.star)
             {
                 if (level == other.level)
                 {
-                    return name.CompareTo(other.name);
+                    if (name.Equals(other.name))
+                    {
+                        return quality.CompareTo(other.quality);
+                    }
+                    else
+                    {
+                        return name.CompareTo(other.name);
+                    }
                 }
                 else
                 {
@@ -103,7 +111,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
             }
             else
             {
-                return quality.CompareTo(other.quality);
+                return star.CompareTo(other.star);
             }
         }
         else

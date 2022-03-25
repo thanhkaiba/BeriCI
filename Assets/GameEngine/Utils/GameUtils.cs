@@ -253,6 +253,20 @@ public class GameUtils : UnityEngine.Object
                 float total = param0 + param1 * model.star;
                 oriText = oriText.Replace(subString, "" + (total * 100) + "%");
             }
+            else if (split[0] == "kamijitaSpeedUp")
+            {
+                float baseSpeed = model.config_stats.skill_params[1];
+                float speedPerStar = model.config_stats.skill_params[2];
+                float total = baseSpeed + speedPerStar * model.star;
+                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
+            }
+            else if (split[0] == "galdalfSpeedUp")
+            {
+                float baseSpeed = model.config_stats.skill_params[1];
+                float speedPerStar = model.config_stats.skill_params[2];
+                float total = baseSpeed + speedPerStar * model.star;
+                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
+            }
         }
         return oriText;
     }

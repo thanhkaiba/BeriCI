@@ -78,7 +78,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "MAGE gain " + (para[0] * 100) + "% power";
                 break;
             case SailorClass.SUPPORT:
-                content.text = "Alies gain " + para[0] + " mana\n +" + (para[1] * 100) + "% healing effect";
+                content.text = "Alies gain " + para[0] + " mana\nAlies +" + (para[1] * 100) + "% healing/shield";
                 break;
             case SailorClass.MARKSMAN:
                 content.text = "Marksman deal " + (para[0] * 100) + "% more damage for each distance-tiles";

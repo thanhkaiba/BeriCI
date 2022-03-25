@@ -17,6 +17,7 @@ public class TooltipSailorInfo : MonoBehaviour
     [SerializeField]
     private SailorDesc sailorDesc;
     public Slider healthSlider;
+    public Image shield;
     public Slider furySlider;
     public Slider qualityBar;
 
@@ -141,8 +142,18 @@ public class TooltipSailorInfo : MonoBehaviour
         }
         else furySlider.gameObject.SetActive(false);
 
-        healthSlider.value = cs.CurHealth / cs.MaxHealth;
-        healthSlider.transform.Find("Text").GetComponent<Text>().text = Mathf.Round(cs.CurHealth).ToString() + "/" + Mathf.Round(cs.MaxHealth).ToString();
+
+        float maxWidth = healthSlider.GetComponent<Image>().rectTransform.sizeDelta.x;
+        float realMax = Mathf.Max(cs.MaxHealth, cs.CurHealth + cs.Shield);
+        healthSlider.value = cs.CurHealth / realMax;
+        float curY = shield.rectTransform.sizeDelta.y;
+        shield.rectTransform.sizeDelta = new Vector2(cs.Shield / realMax * maxWidth, curY);
+
+        healthSlider.transform.Find("Text").GetComponent<Text>().text =
+            Mathf.Round(cs.CurHealth).ToString()
+            + "/" + Mathf.Round(cs.MaxHealth).ToString()
+            + (cs.Shield > 0.5f ? " | " + Mathf.Round(cs.Shield).ToString() : "");
+        
         textPower.text = Mathf.Round(cs.Power).ToString();
         textSpeed.text = Mathf.Round(cs.Speed).ToString();
         textArmor.text = Mathf.Round(cs.Armor).ToString();
