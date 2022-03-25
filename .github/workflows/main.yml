@@ -38,4 +38,4 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: Piratera v${{ steps.myBuildStep.outputs.buildVersion }}
-          path: build/Android.apk
+          path: build/Android/Android.apk
