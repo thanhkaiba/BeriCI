@@ -219,7 +219,14 @@ public class GameUtils : UnityEngine.Object
 
             string s = subString[1..^1];
             var split = s.Split("_");
-            if (split[0] == "p")
+            if (split[0] == "pow")
+            {
+                float power;
+                if (stats != null) power = stats.Power;
+                else power = model.config_stats.GetPower(model.level, model.quality, model.star);
+                oriText = oriText.Replace(subString, "" + Mathf.Round(power));
+            }
+            else if (split[0] == "p")
             {
                 int skillParamIndex = int.Parse(split[1]);
                 float power;
@@ -254,37 +261,6 @@ public class GameUtils : UnityEngine.Object
                 float param1 = model.config_stats.skill_params[idx_sub];
                 float total = param0 + param1 * model.star;
 
-                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
-            }
-            else if (split[0] == "zekeDmg")
-            {
-                float param0 = model.config_stats.skill_params[0];
-                float param1 = model.config_stats.skill_params[1];
-                float total = param0 + param1 * model.star;
-                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
-            }
-            else if (split[0] == "kamijitaSpeedUp")
-            {
-                float baseSpeed = model.config_stats.skill_params[1];
-                float speedPerStar = model.config_stats.skill_params[2];
-                float total = baseSpeed + speedPerStar * model.star;
-                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
-            }
-            else if (split[0] == "galdalfSpeedUp")
-            {
-                float baseSpeed = model.config_stats.skill_params[1];
-                float speedPerStar = model.config_stats.skill_params[2];
-                float total = baseSpeed + speedPerStar * model.star;
-                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
-            }
-            else if (split[0] == "jenkinDmg")
-            {
-                float baseDmg = model.config_stats.skill_params[1];
-                float dmgPerStar = model.config_stats.skill_params[2];
-                Debug.Log("baseDmg: " + baseDmg);
-                Debug.Log("dmgPerStar: " + dmgPerStar);
-                Debug.Log("dmgPerStar * model.star: " + dmgPerStar * model.star);
-                float total = baseDmg + dmgPerStar * model.star;
                 oriText = oriText.Replace(subString, "" + (total * 100) + "%");
             }
         }

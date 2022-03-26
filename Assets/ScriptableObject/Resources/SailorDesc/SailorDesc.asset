@@ -146,8 +146,9 @@ MonoBehaviour:
   - root_name: Zeke
     present_name: Zeke
     title: Kraken hunter
-    skill_description: Zeke's pulling his target to the front, deal <b><color=#f06060>$perT_0_1@</color></b>
-      their health as physical damage. Zeke have 45% crit-change.
+    skill_description: Zeke's pulling his target to the front, deal <b><color=#f06060>$pow@</color></b>
+      + <b><color=#f06060>$perT_0_1@</color></b> their health as physical damage.
+      Zeke have 45% crit-change.
   - root_name: Wuone
     present_name: Wuone
     title: Ton WuOne
