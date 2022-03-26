@@ -31,7 +31,7 @@ namespace Piratera.GUI
         protected override void Start()
         {
             base.Start();
-            SoundMgr.PlayFindMatchSound();
+            // SoundMgr.PlayFindMatchSound();
             priceStamina = GlobalConfigs.PvE.stamina_cost;
             staminaCost.text = "" + priceStamina;
 
