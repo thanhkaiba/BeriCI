@@ -88,6 +88,7 @@ public class Tons : CombatSailor
         List<float> _params = new List<float>();
 
         float scale_damage_ratio = Model.config_stats.skill_params[0];
+        int attackTime = (int) Model.config_stats.skill_params[1];
         base.CastSkill(cbState);
         float damage = cs.Power * scale_damage_ratio;
 
@@ -95,14 +96,14 @@ public class Tons : CombatSailor
         CombatSailor target = TargetsUtils.Backstab(this, enermy);
 
         targets.Add(target.Model.id);
-        _params.Add(target.CalcDamageTake(new Damage() { physics = damage }, this));
+        for (int i = 0; i < attackTime; i++)
+            _params.Add(target.CalcDamageTake(new Damage() { physics = damage }, this));
 
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
-        float damage = _params[0];
         TriggerAnimation("Skill");
         base.ProcessSkill();
         Vector3 posEnemy = target.transform.position;
@@ -129,16 +130,18 @@ public class Tons : CombatSailor
             ex.transform.localScale = new Vector3(2f, 2f, 2f);
             SoundMgr.PlaySoundSkillSailor(11);
             Sequence seq2 = DOTween.Sequence();
-            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5, isCrit = true }, false));
+            // khong hieu sao k dua vao for dc
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = _params[0], isCrit = true }));
             seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5, isCrit = true }, false));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = _params[1], isCrit = true }));
             seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5, isCrit = true }, false));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = _params[2], isCrit = true }));
             seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5, isCrit = true }, false));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = _params[3], isCrit = true }));
             seq2.AppendInterval(.2f);
-            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = damage / 5, isCrit = true }));
+            seq2.AppendCallback(() => target.LoseHealth(new Damage() { physics = _params[4], isCrit = true }));
             seq2.AppendInterval(.2f);
+
             seq2.AppendCallback(() => Destroy(ex));
         });
         seq.AppendInterval(1.0f);

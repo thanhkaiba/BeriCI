@@ -99,8 +99,9 @@ public class Zeke : CombatSailor
 
         Vector3 oriPos = transform.position;
         Sequence seq = DOTween.Sequence();
-        if (cs.position.y == target.cs.position.y) seq.AppendInterval(0.3f);
-        else seq.Append(transform.DOMove(new Vector3(0f, target.transform.position.y, target.transform.position.z + 0.1f), 0.3f).SetEase(Ease.OutSine));
+        //if (cs.position.y == target.cs.position.y) seq.AppendInterval(0.3f);
+        //else seq.Append(transform.DOMove(new Vector3(0f, target.transform.position.y, target.transform.position.z + 0.1f), 0.3f).SetEase(Ease.OutSine));
+        seq.AppendInterval(0.3f);
         seq.AppendCallback(() => {
             Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);
             relativePos.y += 3f;

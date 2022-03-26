@@ -56,15 +56,12 @@ public class Alex : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        float shield_percent = Model.config_stats.skill_params[0];
-        float gain_armor = Model.config_stats.skill_params[1];
+        float shield_percent = Model.config_stats.skill_params[0] + Model.config_stats.skill_params[1]*Model.star;
 
         float shield = cs.MaxHealth * shield_percent;
-        float main_armor = gain_armor;
         CombatSailor target = TargetsUtils.Self(this);
         targets.Add(target.Model.id);
         _params.Add(shield);
-        _params.Add(main_armor);
 
         return ProcessSkill(targets, _params);
     }
@@ -87,9 +84,13 @@ public class Alex : CombatSailor
         });
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.AddShield(_params[0]));
-        // CombatEvents.Instance.takeDamage.Invoke(this, new Damage() { physics = 0 });
         seq.AppendInterval(.1f);
-        seq.AppendCallback(() => target.GainArmor((int)_params[1]));
         return 2f;
+    }
+    public override float CalcDamageTake(Damage d)
+    {
+        float dmg = base.CalcDamageTake(d);
+        if (cs.Shield > 0) dmg *= 1 - Model.config_stats.skill_params[2];
+        return dmg;
     }
 }

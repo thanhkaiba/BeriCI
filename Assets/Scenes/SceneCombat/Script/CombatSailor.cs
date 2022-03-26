@@ -336,7 +336,7 @@ public class CombatSailor : Sailor
         }
         return damage;
     }
-    public float CalcDamageTake(Damage d)
+    public virtual float CalcDamageTake(Damage d)
     {
         float physicTake, magicTake;
 

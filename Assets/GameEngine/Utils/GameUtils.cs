@@ -246,6 +246,16 @@ public class GameUtils : UnityEngine.Object
                 else param = model.config_stats.skill_params[skillParamIndex];
                 oriText = oriText.Replace(subString, "" + param);
             }
+            else if (split[0] == "perT")
+            {
+                int idx_base = int.Parse(split[1]);
+                int idx_sub = int.Parse(split[2]);
+                float param0 = model.config_stats.skill_params[idx_base];
+                float param1 = model.config_stats.skill_params[idx_sub];
+                float total = param0 + param1 * model.star;
+
+                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
+            }
             else if (split[0] == "zekeDmg")
             {
                 float param0 = model.config_stats.skill_params[0];
@@ -265,6 +275,16 @@ public class GameUtils : UnityEngine.Object
                 float baseSpeed = model.config_stats.skill_params[1];
                 float speedPerStar = model.config_stats.skill_params[2];
                 float total = baseSpeed + speedPerStar * model.star;
+                oriText = oriText.Replace(subString, "" + (total * 100) + "%");
+            }
+            else if (split[0] == "jenkinDmg")
+            {
+                float baseDmg = model.config_stats.skill_params[1];
+                float dmgPerStar = model.config_stats.skill_params[2];
+                Debug.Log("baseDmg: " + baseDmg);
+                Debug.Log("dmgPerStar: " + dmgPerStar);
+                Debug.Log("dmgPerStar * model.star: " + dmgPerStar * model.star);
+                float total = baseDmg + dmgPerStar * model.star;
                 oriText = oriText.Replace(subString, "" + (total * 100) + "%");
             }
         }

@@ -55,8 +55,8 @@ MonoBehaviour:
     present_name: Jenkins
     title: 'The lonely swordsman '
     skill_description: 'He uses his special technique Consecutive Sadness: deal <b><color=#f06060>$p_0@</color></b>
-      to target addition <b><color=#f06060>$per_1@</color></b>  their health. Jenkins
-      have 25% crit-chance.'
+      to target addition <b><color=#f06060>$perT_1_2@</color></b>  their health.
+      Jenkins have 25% crit-chance.'
   - root_name: OBonbee
     present_name: O-Bonbee
     title: Baby scared
@@ -87,7 +87,7 @@ MonoBehaviour:
     present_name: Galdalf
     title: Aboriginals Mage from Mohana
     skill_description: At start of combat, use the secret charm to buff the one at
-      the front <b><color=#008ab0>$i_0@</color></b> mana, speed up <b><color=#228514>$galdalfSpeedUp@</color></b>
+      the front <b><color=#008ab0>$i_0@</color></b> mana, speed up <b><color=#228514>$perT_1_2@</color></b>
       and +1 <color=#b5b800><b>FURY</b></color>
   - root_name: Mealodo
     present_name: Mealodo
@@ -125,7 +125,7 @@ MonoBehaviour:
     present_name: Kamijita
     title: Haisan's Princess
     skill_description: Buff Ally needing mana the most <b><color=#008ab0>$i_0@</color></b>
-      mana,  speed-up <b><color=#228514>$kamijitaSpeedUp@</color></b> and <b><color=#00706b>$p_3@</color></b>
+      mana,  speed-up <b><color=#228514>$perT_1_2@</color></b> and <b><color=#00706b>$p_3@</color></b>
       shield
   - root_name: Camelia
     present_name: Camelia
@@ -146,7 +146,7 @@ MonoBehaviour:
   - root_name: Zeke
     present_name: Zeke
     title: Kraken hunter
-    skill_description: Zeke's pulling the same line target to the front, deal <b><color=#f06060>$zekeDmg@</color></b>
+    skill_description: Zeke's pulling his target to the front, deal <b><color=#f06060>$perT_0_1@</color></b>
       their health as physical damage. Zeke have 45% crit-change.
   - root_name: Wuone
     present_name: Wuone
