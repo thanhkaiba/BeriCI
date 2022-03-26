@@ -59,11 +59,12 @@ public class Lade : CombatSailor
         targets.Add(firstTarget.Model.id);
         _params.Add(firstTarget.CalcDamageTake(new Damage() { magic = main_damage }, this));
 
-        listTargets.ForEach(t =>
-        {
-            targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { magic = main_damage }, this));
-        });
+        listTargets.ForEach(t => targets.Add(t.Model.id));
+        for (int i = 0; i < 5; i++)
+            listTargets.ForEach(t =>
+            {
+                _params.Add(t.CalcDamageTake(new Damage() { magic = main_damage/5f }, this));
+            });
 
         return ProcessSkill(targets, _params);
     }
@@ -98,27 +99,27 @@ public class Lade : CombatSailor
 
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
+            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
+            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count + i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
+            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count * 2 + i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
+            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count * 3 + i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i]/5 });
+            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count * 4 + i] });
         });
         seq.AppendInterval(0.35f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));

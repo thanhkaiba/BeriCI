@@ -88,7 +88,7 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     int IComparable<SailorModel>.CompareTo(SailorModel other)
     {
-        if (IsTrial()) return 1;
+        //if (IsTrial()) return 1;
         if (config_stats.rank.Equals(other.config_stats.rank))
         {
             if (star == other.star)

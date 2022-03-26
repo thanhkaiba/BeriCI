@@ -53,13 +53,16 @@ public class Tad : CombatSailor
 
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float attackTimes = Model.config_stats.skill_params[1];
-        float damage = cs.Power * scale_damage_ratio * attackTimes;
+        float damage = cs.Power * scale_damage_ratio;
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
         CombatSailor main_target = TargetsUtils.Melee(this, enermy);
 
         targets.Add(main_target.Model.id);
-        _params.Add(main_target.CalcDamageTake(new Damage() { physics = damage }, this));
+        for (int i = 0; i < attackTimes; i++)
+        {
+            _params.Add(main_target.CalcDamageTake(new Damage() { physics = damage }, this));
+        }
 
         SynergiesConfig config = GlobalConfigs.Synergies;
         ClassBonusItem wild = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.WILD);
@@ -100,23 +103,23 @@ public class Tad : CombatSailor
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
-            mainTarget.LoseHealth(new Damage() { physics = _params[0] * 3 / 10, isCrit = true }, false);
-            GainHealth(_params[1] * 3 / 10);
+            mainTarget.LoseHealth(new Damage() { physics = _params[1] }, false);
+            GainHealth(_params[0] / 3f);
             GameEffMgr.Instance.Shake(0.2f, 1);
         });
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
-            mainTarget.LoseHealth(new Damage() { physics = _params[0] * 3 / 10, isCrit = true }, false);
+            mainTarget.LoseHealth(new Damage() { physics = _params[2] }, false);
             GameEffMgr.Instance.Shake(0.2f, 1);
-            GainHealth(_params[1] * 3 / 10);
+            GainHealth(_params[0] / 3f);
         });
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
-            mainTarget.LoseHealth(new Damage() { physics = _params[0] * 4 / 10, isCrit = true });
+            mainTarget.LoseHealth(new Damage() { physics = _params[3] });
             GameEffMgr.Instance.Shake(0.3f, 2);
-            GainHealth(_params[1] * 4 / 10);
+            GainHealth(_params[0] / 3f);
         });
 
         seq.AppendInterval(0.8f);

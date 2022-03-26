@@ -68,20 +68,22 @@ public class Helti : CombatSailor
         List<CombatSailor> behind_targets = TargetsUtils.AllBehind(main_target, enermy);
 
         targets.Add(main_target.Model.id);
-        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage }, this));
+        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage / 3.5f }, this));
+        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage / 3.5f }, this));
+        _params.Add(main_target.CalcDamageTake(new Damage() { physics = main_damage / 3.5f * 1.5f }, this));
 
         behind_targets.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage }, this));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage / 3.5f }, this));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage / 3.5f }, this));
+            _params.Add(t.CalcDamageTake(new Damage() { physics = secondary_damage / 3.5f * 1.5f }, this));
         });
 
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
-        Debug.Log("targets " + targets.Count);
-        Debug.Log("_params " + _params.Count);
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var listTargets = CombatState.Instance.GetSailors(targets);
@@ -112,7 +114,7 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
+                listTargets[i].LoseHealth(new Damage() { physics = _params[listTargets.Count * i + 0] }, false);
             windAnimator.SetTrigger("run");
             GameEffMgr.Instance.Shake(0.2f, 1);
         });
@@ -120,7 +122,7 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 3 / 10 }, false);
+                listTargets[i].LoseHealth(new Damage() { physics = _params[listTargets.Count * i + 1] }, false);
             windAnimator.SetTrigger("run");
             GameEffMgr.Instance.Shake(0.2f, 1);
         });
@@ -128,7 +130,7 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[i] * 4 / 10, isCrit = true });
+                listTargets[i].LoseHealth(new Damage() { physics = _params[listTargets.Count * i + 2], isCrit = true });
             windAnimator.SetTrigger("run");
             GameEffMgr.Instance.Shake(0.3f, 2);
         });
