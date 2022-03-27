@@ -32,6 +32,7 @@ public class CombatMgr : MonoBehaviour
     private ModeID modeId = ModeID.Test;
     private List<CombatAction> listActions;
     public byte yourTeamIndex = 0;
+    private HomefieldAdvantage defenseAdvantage;
     private void Start()
     {
 #if PIRATERA_DEV
@@ -44,7 +45,6 @@ public class CombatMgr : MonoBehaviour
         //return;
         PreparingGame();
         StartCoroutine(StartGame());
-        Debug.Log("modeId: " + modeId);
         if (modeId == ModeID.Arena) ChangeBattleFieldPvP();
     }
 
@@ -64,6 +64,7 @@ public class CombatMgr : MonoBehaviour
             listActions = TempCombatData.Instance.ca;
             yourTeamIndex = TempCombatData.Instance.yourTeamIndex;
             serverGame = true;
+            if (modeId == ModeID.Arena) defenseAdvantage = TempCombatData.Instance.defense_advantage;
         }
         else
         {
@@ -303,6 +304,6 @@ public class CombatMgr : MonoBehaviour
     {
         var scale = battleField.transform.localScale;
         battleField.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
-        battleField.sprite = PvPData.Instance.GetAdvantageBackgroundSprite();
+        battleField.sprite = PvPData.Instance.GetAdvantageBackgroundSprite(defenseAdvantage);
     }
 }

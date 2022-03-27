@@ -60,6 +60,7 @@ public class PvPData : Singleton<PvPData>
     }
     public Sprite GetAdvantageBackgroundSprite(HomefieldAdvantage ha)
     {
+        Debug.Log("HomefieldAdvantage : " + ha);
         var src = "";
         switch(ha)
         {
@@ -73,7 +74,7 @@ public class PvPData : Singleton<PvPData>
                 src = "Background/battlefield/sand";
                 break;
             default:
-                src = "Background/line_up";
+                src = "Background/battlefield/shield";
                 break;
         }
         return Resources.Load<Sprite>(src);
