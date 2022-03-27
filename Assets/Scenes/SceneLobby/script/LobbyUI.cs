@@ -321,7 +321,6 @@ public class LobbyUI : MonoBehaviour
     }
     public void ShowTutOpenCrew()
     {
-        Debug.Log("??????????????? ShowTutOpenCrew");
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
         GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
         var pos = GameObject.Find("ButtonCrew").transform.position;

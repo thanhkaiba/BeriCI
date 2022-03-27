@@ -1,4 +1,5 @@
 
+using DG.Tweening;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
@@ -10,7 +11,8 @@ public class SceneLineUpDefenseUI : MonoBehaviour
 {
     [SerializeField]
     private Text TextMaxCapacity;
-
+    [SerializeField]
+    private SpriteRenderer battlefield;
     void Start()
     {
         if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_DEFENSE_LINEUP)
@@ -21,36 +23,29 @@ public class SceneLineUpDefenseUI : MonoBehaviour
         DefenseSquadContainer.Draging = false;
         TextMaxCapacity.text = "Max capacity: " + UserData.Instance.NumSlot;
         NetworkController.AddServerActionListener(OnReceiveServerAction);
+        UpdateBattleFieldImage();
     }
-
     void Awake()
     {
         Input.multiTouchEnabled = false;
     }
-
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-
         if (action == SFSAction.BUY_SLOT)
         {
           
         }
     }
-
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
 
     }
-
     public void OnBackToLobby()
     {
         CrewData.Instance.OnConfirmSquad();
         SceneManager.LoadScene("SceneLobby");
     }
-
-
-   
     public void OnConfirm()
     {
         if (PvPData.Instance.DefenseCrew.IsFightingLineEmpty())
@@ -58,8 +53,11 @@ public class SceneLineUpDefenseUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("You must select at least one fighter");
             return;
         }
-
         PvPData.Instance.DefenseCrew.OnConfirmSquad();
         SceneManager.LoadScene("SceneArena");
+    }
+    private void UpdateBattleFieldImage()
+    {
+        battlefield.sprite = PvPData.Instance.GetAdvantageBackgroundSprite();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Sfs2X.Entities.Data;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
 {
@@ -15,6 +16,7 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
     private FightingLine fgl0 = new();
     private FightingLine fgl1 = new();
     public byte countdown;
+    public HomefieldAdvantage defense_advantage;
 
     public string YourName
     {
@@ -165,6 +167,8 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
         fgl0.NumSlot = packet.GetInt("num_positions_0");
         fgl1.NumSlot = packet.GetInt("num_positions_1");
 
+        defense_advantage = (HomefieldAdvantage) packet.GetInt("defense_advantage");
+        Debug.Log("defense_advantage: " + defense_advantage);
         countdown = packet.GetByte("countdown");
     }
 
