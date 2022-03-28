@@ -112,11 +112,11 @@ public class TooltipSailorInfo : MonoBehaviour
     {
         follow = target;
         CombatStats cs = new CombatStats(model);
-        if (SceneManager.GetActiveScene().name == "ScenePickTeam")
+        if (SceneManager.GetActiveScene().name == "ScenePickTeam" || SceneManager.GetActiveScene().name == "SceneLineUpDefense")
         {
             cs.UpdateStatsWithSynergy(GameUtils.lineUpSynergy);
         }
-        else if (SceneManager.GetActiveScene().name == "ScenePickTeamBattle")
+        else if (SceneManager.GetActiveScene().name == "ScenePickTeamBattle" || SceneManager.GetActiveScene().name == "ScenePreparePvP")
         {
             var myKey = TeamCombatPrepareData.Instance.YourFightingLine.SlotOf(model.id);
             if (myKey != -1) cs.UpdateStatsWithSynergy(GameUtils.lineUpSynergy, GameUtils.oppLineUpSynergy);

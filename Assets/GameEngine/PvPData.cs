@@ -41,13 +41,13 @@ public class PvPData : Singleton<PvPData>
     {
         HaveJoin = packet.GetBool("have_join");
         Ticket = packet.GetInt("ticket");
-        var adv_int = packet.GetIntArray(" ");
-        //OpenedAdvantage = new List<HomefieldAdvantage>();
-        //for (int i = 0; i < adv_int.Length; i++)
-        //{
-        //    OpenedAdvantage.Add((HomefieldAdvantage)adv_int[i]);
-        //}
-        // SelectingAdvantage = (HomefieldAdvantage) packet.GetInt("selecting_advantage");
+        var adv_int = packet.GetIntArray("oppened_advantage");
+        OpenedAdvantage = new List<HomefieldAdvantage>();
+        for (int i = 0; i < adv_int.Length; i++)
+        {
+            OpenedAdvantage.Add((HomefieldAdvantage)adv_int[i]);
+        }
+        SelectingAdvantage = (HomefieldAdvantage)packet.GetInt("selecting_advantage");
         SelectingAdvantage = HomefieldAdvantage.DESERT;
         Rank = packet.GetInt("rank");
         Elo = packet.GetLong("elo");

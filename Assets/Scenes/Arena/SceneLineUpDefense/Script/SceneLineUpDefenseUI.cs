@@ -25,10 +25,6 @@ public class SceneLineUpDefenseUI : MonoBehaviour
         NetworkController.AddServerActionListener(OnReceiveServerAction);
         UpdateBattleFieldImage();
     }
-    void Awake()
-    {
-        Input.multiTouchEnabled = false;
-    }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         if (action == SFSAction.BUY_SLOT)
@@ -59,5 +55,22 @@ public class SceneLineUpDefenseUI : MonoBehaviour
     private void UpdateBattleFieldImage()
     {
         battlefield.sprite = PvPData.Instance.GetAdvantageBackgroundSprite();
+    }
+    [SerializeField]
+    private GameObject popupSelectAdvantage;
+    public void OpenPopupAdvantage()
+    {
+        if (!popupSelectAdvantage.activeSelf)
+            popupSelectAdvantage.SetActive(true);
+    }
+    private void Awake()
+    {
+        Input.multiTouchEnabled = false;
+        popupSelectAdvantage.SetActive(false);
+    }
+    public void ClosePopupAdvantage()
+    {
+        if (popupSelectAdvantage.activeSelf)
+            popupSelectAdvantage.SetActive(false);
     }
 }
