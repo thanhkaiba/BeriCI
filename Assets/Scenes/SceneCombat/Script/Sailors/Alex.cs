@@ -74,14 +74,14 @@ public class Alex : CombatSailor
         Sequence seq = DOTween.Sequence();
         SoundMgr.PlaySoundSkillSailor(0);
         seq.AppendInterval(1.8f);
-        seq.AppendCallback(() =>
-        {
-            Vector3 pos = transform.position;
-            pos.y += 4f;
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
-            seq.AppendInterval(0.3f);
-            seq.AppendCallback(() => Destroy(eff));
-        });
+        //seq.AppendCallback(() =>
+        //{
+        //    Vector3 pos = transform.position;
+        //    pos.y += 4f;
+        //    var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
+        //    seq.AppendInterval(0.3f);
+        //    seq.AppendCallback(() => Destroy(eff));
+        //});
         seq.AppendInterval(.1f);
         seq.AppendCallback(() => target.AddShield(_params[0]));
         seq.AppendInterval(.1f);
