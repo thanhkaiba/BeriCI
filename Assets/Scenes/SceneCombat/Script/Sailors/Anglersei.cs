@@ -27,8 +27,8 @@ public class Anglersei : CombatSailor
             target.transform.position.y,
             target.transform.position.z - 0.1f
         );
-        Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.45f, () => SoundMgr.PlaySoundAttackSailor(0)));
+        Sequence seq = DOTween.Sequence(); 
+        StartCoroutine(GameUtils.WaitAndDo(0.45f, () => SoundMgr.PlaySound("Audio/Sailor/punch_1")));
         seq.AppendInterval(0.1f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
         seq.AppendInterval(1.0f);
@@ -85,7 +85,7 @@ public class Anglersei : CombatSailor
         seq.AppendInterval(0.3f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.35f);
-        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
+        StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySound("Audio/Sailor/punch_2")));
         seq.AppendCallback(() =>
         {
             target.LoseHealth(new Damage() { physics = _params[0] });
