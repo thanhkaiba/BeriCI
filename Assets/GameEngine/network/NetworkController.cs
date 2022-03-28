@@ -19,15 +19,14 @@ namespace Piratera.Network
 
     public static class GAME_NETWORK_ADDRESS
     {
-        //public const string QC_HOST = "192.168.102.2";
-        //public const int QC_PORT = 9933;
+        public const string DEV_HOST = "192.168.102.2";
+        public const int DEV_PORT = 9933;
 
         public const string QC_HOST = "dev-game.piratera.io";
         public const int QC_PORT = 9933;
 
-        public const string DEV_HOST = "dev-game.piratera.io";
-        public const int DEV_PORT = 9933;
-
+        public const string STAGING_HOST = "dev-game2.piratera.io";
+        public const int STAGING_PORT = 9933;
 
         public const string PROD_HOST = "game.piratera.io";
         public const int PROD_PORT = 9933;
@@ -55,6 +54,9 @@ namespace Piratera.Network
 #elif PIRATERA_DEV
 		private static readonly string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
 		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
+#elif PIRATERA_STAGING
+		private static readonly string Host = GAME_NETWORK_ADDRESS.STAGING_HOST;
+		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.STAGING_PORT;
 #elif PIRATERA_LIVE
         private static readonly string Host = GAME_NETWORK_ADDRESS.PROD_HOST;
 		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.PROD_PORT;
