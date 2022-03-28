@@ -76,8 +76,8 @@ MonoBehaviour:
     present_name: Alex
     title: Acient weapon Defender
     skill_description: His shield release the golden electrical power, protect him
-      shield equal <b><color=#228514>$per_0@</color></b> max health and increase
-      <b><color=#228514>$i_1@</color></b> armor.
+      shield equal <b><color=#228514>$perT_0_1@</color></b> max health. When has
+      shield, Alex take <b><color=#228514>$per_2@</color></b> less damage.
   - root_name: QChi
     present_name: Q-CHI
     title: The Death Mage

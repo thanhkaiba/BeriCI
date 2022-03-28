@@ -18,6 +18,7 @@ public class TempCombatData : Singleton<TempCombatData>
     public FightingLine fgl0;
     public FightingLine fgl1;
     public List<CombatAction> ca;
+    public HomefieldAdvantage defense_advantage;
 
     public void LoadCombatDataFromSfs(ISFSObject packet)
     {
@@ -64,8 +65,10 @@ public class TempCombatData : Singleton<TempCombatData>
         ca = new List<CombatAction>();
         ISFSArray _ca = packet.GetSFSArray("ca");
         foreach (ISFSObject obj in _ca) ca.Add(new CombatAction(obj, modeID));
-    }
 
+        if (modeID == ModeID.Arena) defense_advantage = (HomefieldAdvantage)packet.GetInt("defense_advantage");
+        Debug.Log("defense_advantage " + defense_advantage);
+    }
 }
 
 public enum CombatAcionType

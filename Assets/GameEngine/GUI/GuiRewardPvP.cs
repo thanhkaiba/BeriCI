@@ -46,7 +46,7 @@ namespace Piratera.GUI
             seqe.Join(coin.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
             seqe.AppendCallback(() =>
             {
-                DoTweenUtils.UpdateNumber(textElo, 0, r.elo_delta, x => $"x{x}");
+                DoTweenUtils.UpdateNumber(textElo, 0, r.elo_delta, x => ((x > 0 ? "+" + x : "" + x) + " ELO"));
             });
 
             seqe.SetLink(coin.gameObject).SetTarget(coin.transform);

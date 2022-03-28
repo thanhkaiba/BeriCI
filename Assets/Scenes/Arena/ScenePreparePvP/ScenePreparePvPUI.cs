@@ -23,6 +23,8 @@ public class ScenePreparePvPUI : MonoBehaviour
     private Text userNameB;
     [SerializeField]
     private UserAvatar avatarB;
+    [SerializeField]
+    private SpriteRenderer battlefield;
     public PvPSquadAContainer squaA;
 
     [Header("UI")]
@@ -32,14 +34,11 @@ public class ScenePreparePvPUI : MonoBehaviour
     private float maxTime;
     private bool counting = false;
 
-
     private void Awake()
     {
         Input.multiTouchEnabled = false;
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
-
-
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
@@ -49,21 +48,17 @@ public class ScenePreparePvPUI : MonoBehaviour
                 break;
         }
     }
-
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
     }
-
     private void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.COMBAT);
         PvPSquadAContainer.Draging = false;
         Init();
+        UpdateBattleFieldImage();
     }
-
-
-
     public void Init()
     {
         TeamPvPCombatPrepareData data = TeamPvPCombatPrepareData.Instance;
@@ -95,15 +90,10 @@ public class ScenePreparePvPUI : MonoBehaviour
             counting = false;
         }
     }
-
     public void OnTimeOut()
     {
-
         SendStartCombat();
-
-
     }
-
     public void SendStartCombat()
     {
         if (!squaA.HaveSailor())
@@ -118,8 +108,8 @@ public class ScenePreparePvPUI : MonoBehaviour
             NetworkController.Send(SFSAction.PVP_CONFIRM, sfsObject);
         }
     }
-
-
-
-
+    private void UpdateBattleFieldImage()
+    {
+        battlefield.sprite = PvPData.Instance.GetAdvantageBackgroundSprite(TeamPvPCombatPrepareData.Instance.defense_advantage);
+    }
 }
