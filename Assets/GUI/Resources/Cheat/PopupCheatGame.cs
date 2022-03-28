@@ -110,6 +110,10 @@ namespace Piratera.Cheat
             CheatMgr.CheatBotAndPlay(sailorCheatData);
 
         }
+        public void ClearCache()
+        {
+            PlayerPrefs.DeleteAll();
+        }
 
     }
 #endif
