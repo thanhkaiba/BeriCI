@@ -111,10 +111,14 @@ public class Helti : CombatSailor
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);
+	for (int i = 0; i < _params.Count; i++) Debug.Log("Helti skill params:" + i + " " + _params[i]);
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[listTargets.Count * i + 0] }, false);
+	    Debug.Log("Helti skill COUNT: " + listTargets.Count);
+            for (int i = 0; i < listTargets.Count; i++) {
+                listTargets[i].LoseHealth(new Damage() { physics = _params[3 * i + 0] }, false);
+		Debug.Log("Helti skill G: " + i + " " + (listTargets.Count * i + 0) + " " + _params[listTargets.Count * i + 0]);
+	    }
             windAnimator.SetTrigger("run");
             GameEffMgr.Instance.Shake(0.2f, 1);
         });
@@ -122,7 +126,7 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[listTargets.Count * i + 1] }, false);
+                listTargets[i].LoseHealth(new Damage() { physics = _params[3 * i + 1] }, false);
             windAnimator.SetTrigger("run");
             GameEffMgr.Instance.Shake(0.2f, 1);
         });
@@ -130,7 +134,7 @@ public class Helti : CombatSailor
         seq.AppendCallback(() =>
         {
             for (int i = 0; i < listTargets.Count; i++)
-                listTargets[i].LoseHealth(new Damage() { physics = _params[listTargets.Count * i + 2], isCrit = true });
+                listTargets[i].LoseHealth(new Damage() { physics = _params[3 * i + 2], isCrit = true });
             windAnimator.SetTrigger("run");
             GameEffMgr.Instance.Shake(0.3f, 2);
         });
