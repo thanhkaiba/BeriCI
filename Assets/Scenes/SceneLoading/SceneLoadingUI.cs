@@ -1,9 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using Facebook.Unity;
 using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Log;
+using Piratera.Network;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -24,7 +28,7 @@ public class SceneLoadingUI : MonoBehaviour
 #endif
         LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME);
 
-
+        StartCoroutine(GetUrlAndPort());
 
         if (!FB.IsInitialized)
         {
@@ -104,5 +108,40 @@ public class SceneLoadingUI : MonoBehaviour
         PopupNewVersion popup = GuiManager.Instance.AddGui<PopupNewVersion>("Prefap/PopupNewVersion", LayerId.IMPORTANT).GetComponent<PopupNewVersion>();
         Debug.Log(url);
         popup.SetData(() => Application.OpenURL(GameVersionController.DownloadUrl));
+    }
+
+    IEnumerator GetUrlAndPort()
+    {
+        Debug.Log("url_get_host_and_port: " + Application.version);
+        //yield return new WaitForSeconds(1f);
+        string url = "https://crash-log.piratera.io/api/check-version?version=" + Application.version;
+        using (UnityWebRequest request = UnityWebRequest.Get(url))
+        {
+            // request.certificateHandler = new CustomCertificateHandler(); // certificate cho android  cu~
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("url_get_host_and_port: " + request.error);
+            }
+            else
+            {
+                ResponseLiveServerURL response = JsonUtility.FromJson<ResponseLiveServerURL>(request.downloadHandler.text);
+                GAME_NETWORK_ADDRESS.PROD_HOST = response.uri;
+                GAME_NETWORK_ADDRESS.PROD_PORT = response.port;
+                response.Log();
+                Debug.Log("GAME_NETWORK_ADDRESS.PROD_HOST: " + GAME_NETWORK_ADDRESS.PROD_HOST);
+                Debug.Log("GAME_NETWORK_ADDRESS.PROD_PORT: " + GAME_NETWORK_ADDRESS.PROD_PORT);
+            }
+        }
+    }
+}
+
+public class ResponseLiveServerURL {
+    public string environment;
+    public string uri;
+    public int port;
+    public void Log()
+    {
+        Debug.Log("ResponseLiveServerURL environment: " + environment + " uri: " + uri + " port: " + port);
     }
 }

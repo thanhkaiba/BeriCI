@@ -29,7 +29,7 @@ public class Tad : CombatSailor
             target.transform.position.z - 0.1f
         );
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.35f, () => SoundMgr.PlaySoundAttackSailor(2)));
+        StartCoroutine(GameUtils.WaitAndDo(0.4f, () => SoundMgr.PlaySound("Audio/Sailor/claw_2")));
         StartCoroutine(GameUtils.WaitAndDo(0.5f, () => GameEffMgr.Instance.Shake(0.1f, 0.5f)));
         seq.AppendInterval(0.05f);
         seq.Append(transform.DOMove(desPos, 0.2f).SetEase(Ease.OutSine));
@@ -97,12 +97,12 @@ public class Tad : CombatSailor
         //listHighlight.AddRange(listTargets);
 
         Sequence seq = DOTween.Sequence();
-        StartCoroutine(GameUtils.WaitAndDo(0.0f, () => SoundMgr.PlaySoundSkillSailor(2)));
         seq.AppendInterval(0.15f);
         seq.Append(transform.DOMove(desPos, 0.3f).SetEase(Ease.OutSine));
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySound("Audio/Sailor/claw_2");
             mainTarget.LoseHealth(new Damage() { physics = _params[1] }, false);
             GainHealth(_params[0] / 3f);
             GameEffMgr.Instance.Shake(0.2f, 1);
@@ -110,6 +110,7 @@ public class Tad : CombatSailor
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySound("Audio/Sailor/claw_2");
             mainTarget.LoseHealth(new Damage() { physics = _params[2] }, false);
             GameEffMgr.Instance.Shake(0.2f, 1);
             GainHealth(_params[0] / 3f);
@@ -117,6 +118,7 @@ public class Tad : CombatSailor
         seq.AppendInterval(0.3f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySound("Audio/Sailor/claw_2");
             mainTarget.LoseHealth(new Damage() { physics = _params[3] });
             GameEffMgr.Instance.Shake(0.3f, 2);
             GainHealth(_params[0] / 3f);

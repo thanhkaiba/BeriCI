@@ -17,9 +17,6 @@ using Piratera.Constance;
 
 public class LoginController : MonoBehaviour
 {
-
-
-
     //----------------------------------------------------------
     // UI elements
     //----------------------------------------------------------
@@ -255,7 +252,7 @@ public class LoginController : MonoBehaviour
 
     public void OnButtonCreateOneClick()
     {
-#if PIRATERA_QC || PIRATERA_DEV
+#if !PIRATERA_LIVE
         SendRequestLogin(GetUniqueID(), "guest", GameLoginType.DUMMY);
 #else
         Application.OpenURL(GameConst.ACCOUNT_URL);

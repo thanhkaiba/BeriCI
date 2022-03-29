@@ -19,18 +19,17 @@ namespace Piratera.Network
 
     public static class GAME_NETWORK_ADDRESS
     {
-        //public const string QC_HOST = "192.168.102.2";
-        //public const int QC_PORT = 9933;
+        public const string DEV_HOST = "192.168.102.2";
+        public const int DEV_PORT = 9933;
 
         public const string QC_HOST = "dev-game.piratera.io";
         public const int QC_PORT = 9933;
 
-        public const string DEV_HOST = "dev-game.piratera.io";
-        public const int DEV_PORT = 9933;
+        public const string STAGING_HOST = "dev-game2.piratera.io";
+        public const int STAGING_PORT = 9933;
 
-
-        public const string PROD_HOST = "game.piratera.io";
-        public const int PROD_PORT = 9933;
+        public static string PROD_HOST = "game.piratera.io";
+        public static int PROD_PORT = 9933;
     }
 
     public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
@@ -48,19 +47,6 @@ namespace Piratera.Network
         {
             throw new NotImplementedException();
         }
-
-#if PIRATERA_QC
-        private static readonly string Host = GAME_NETWORK_ADDRESS.QC_HOST;
-        private static readonly int TcpPort = GAME_NETWORK_ADDRESS.QC_PORT;
-#elif PIRATERA_DEV
-		private static readonly string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
-		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
-#elif PIRATERA_LIVE
-        private static readonly string Host = GAME_NETWORK_ADDRESS.PROD_HOST;
-		private static readonly int TcpPort = GAME_NETWORK_ADDRESS.PROD_PORT;
-#else
-        
-#endif
         private static readonly int WSPort = 8443;
         private static readonly string Zone = "Piratera";
         private static readonly string CLIENT_REQUEST = "clrq";
@@ -147,14 +133,25 @@ namespace Piratera.Network
             {
                 SceneManager.LoadScene("SceneLogin");
             }
-
         }
         //----------------------------------------------------------
         // Private helper methods
         //----------------------------------------------------------
         public static void LoginToServer(LoginData data)
         {
-            loginData = data;
+#if PIRATERA_QC
+        string Host = GAME_NETWORK_ADDRESS.QC_HOST;
+         int TcpPort = GAME_NETWORK_ADDRESS.QC_PORT;
+#elif PIRATERA_DEV
+		string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
+		int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
+#elif PIRATERA_LIVE
+        string Host = GAME_NETWORK_ADDRESS.PROD_HOST;
+		int TcpPort = GAME_NETWORK_ADDRESS.PROD_PORT;
+#else
+        
+#endif
+        loginData = data;
             // Set connection parameters
             ConfigData cfg = new ConfigData();
             cfg.Host = Host;
@@ -166,6 +163,11 @@ namespace Piratera.Network
             cfg.Zone = Zone;
 
 
+            Debug.Log("Host: " + Host);
+            Debug.Log("TcpPort: " + TcpPort);
+
+            Debug.Log("GAME_NETWORK_ADDRESS.PROD_HOST: " + GAME_NETWORK_ADDRESS.PROD_HOST);
+            Debug.Log("GAME_NETWORK_ADDRESS.PROD_PORT: " + GAME_NETWORK_ADDRESS.PROD_PORT);
             // Initialize SFS2X client and add listeners
 #if !UNITY_WEBGL
             sfs = new SmartFox();
@@ -660,6 +662,5 @@ namespace Piratera.Network
                 sfs.RemoveEventListener(eventType, listener);
             }
         }
-
     }
 }
