@@ -17,9 +17,6 @@ using Piratera.Constance;
 
 public class LoginController : MonoBehaviour
 {
-
-
-
     //----------------------------------------------------------
     // UI elements
     //----------------------------------------------------------
