@@ -41,7 +41,7 @@ public class TutorialMgr : Singleton<TutorialMgr>
     public bool CheckTutOpenSlot()
     {
         if (CheckTutStartUp()) return false;
-        if (UserData.Instance.NumSlot > 1) PlayerPrefs.GetInt("ShowTutOpenSlot", 1);
+        if (UserData.Instance.NumSlot > 1) PlayerPrefs.SetInt("ShowTutOpenSlot", 1);
         int haveShown = PlayerPrefs.GetInt("ShowTutOpenSlot", 0);
         if (haveShown == 1) return false;
         return  UserData.Instance.Beri >= GlobalConfigs.LineUp.costs[0] && CrewData.Instance.Sailors.Count >= 2;
