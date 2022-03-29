@@ -1,9 +1,13 @@
+using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
 using Facebook.Unity;
 using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Log;
+using Piratera.Network;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -24,7 +28,7 @@ public class SceneLoadingUI : MonoBehaviour
 #endif
         LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME);
 
-
+        StartCoroutine(GetUrlAndPort());
 
         if (!FB.IsInitialized)
         {
@@ -104,5 +108,26 @@ public class SceneLoadingUI : MonoBehaviour
         PopupNewVersion popup = GuiManager.Instance.AddGui<PopupNewVersion>("Prefap/PopupNewVersion", LayerId.IMPORTANT).GetComponent<PopupNewVersion>();
         Debug.Log(url);
         popup.SetData(() => Application.OpenURL(GameVersionController.DownloadUrl));
+    }
+
+    IEnumerator GetUrlAndPort()
+    {
+        Debug.Log("url_get_host_and_port: " + Application.version);
+        //yield return new WaitForSeconds(1f);
+        var formContent = new Dictionary<string, string>();
+        formContent.Add("app_version", Application.version);
+        using (UnityWebRequest www = UnityWebRequest.Post("url_get_host_and_port", formContent))
+        {
+            yield return www.SendWebRequest();
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log("url_get_host_and_port" + www.error);
+            }
+            else
+            {
+                GAME_NETWORK_ADDRESS.PROD_HOST = "";
+                GAME_NETWORK_ADDRESS.PROD_PORT = 0;
+            }
+        }
     }
 }

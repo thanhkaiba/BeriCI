@@ -28,8 +28,8 @@ namespace Piratera.Network
         public const string STAGING_HOST = "dev-game2.piratera.io";
         public const int STAGING_PORT = 9933;
 
-        public const string PROD_HOST = "game.piratera.io";
-        public const int PROD_PORT = 9933;
+        public static string PROD_HOST = "game.piratera.io";
+        public static int PROD_PORT = 9933;
     }
 
     public delegate void NetworkActionListenerDelegate(SFSAction action, SFSErrorCode errorCode, ISFSObject packet);
@@ -149,7 +149,6 @@ namespace Piratera.Network
             {
                 SceneManager.LoadScene("SceneLogin");
             }
-
         }
         //----------------------------------------------------------
         // Private helper methods
@@ -662,6 +661,5 @@ namespace Piratera.Network
                 sfs.RemoveEventListener(eventType, listener);
             }
         }
-
     }
 }
