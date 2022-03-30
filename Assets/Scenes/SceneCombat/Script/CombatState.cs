@@ -393,7 +393,7 @@ public class CombatState : MonoBehaviour
             }
         });
 
-        SpriteRenderer bg = GameObject.Find("bg").GetComponent<SpriteRenderer>();
+        SpriteRenderer bg = GameObject.Find("battlefield").GetComponent<SpriteRenderer>();
 
         Sequence seq = DOTween.Sequence();
         seq.Append(bg.DOColor(new Color(0.4f, 0.4f, 0.4f), 0.2f));
