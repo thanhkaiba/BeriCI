@@ -134,6 +134,11 @@ namespace Piratera.Network
                 SceneManager.LoadScene("SceneLoading");
             }
         }
+        public static void RunSceneLogin()
+        {
+            if (SceneManager.GetActiveScene().name != "SceneLogin")
+                SceneManager.LoadScene("SceneLogin");
+        }
         //----------------------------------------------------------
         // Private helper methods
         //----------------------------------------------------------
@@ -241,8 +246,7 @@ namespace Piratera.Network
             {
                 sfs.Disconnect();
             }
-
-            ForceStartScene();
+            RunSceneLogin();
         }
         //----------------------------------------------------------
         // SmartFoxServer event listeners
@@ -316,11 +320,11 @@ namespace Piratera.Network
                 }
 
 
-                GuiManager.Instance.ShowPopupNotification(text, ForceStartScene);
+                GuiManager.Instance.ShowPopupNotification(text, RunSceneLogin);
             }
             else
             {
-                ForceStartScene();
+                RunSceneLogin();
             }
         }
 
@@ -420,7 +424,7 @@ namespace Piratera.Network
             }
             else
             {
-                GuiManager.Instance.ShowPopupNotification("Server Disconnected", ForceStartScene);
+                GuiManager.Instance.ShowPopupNotification("Server Disconnected", RunSceneLogin);
             }
 
         }
