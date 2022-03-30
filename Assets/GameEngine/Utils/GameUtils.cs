@@ -259,7 +259,7 @@ public class GameUtils : UnityEngine.Object
                 int idx_sub = int.Parse(split[2]);
                 float param0 = model.config_stats.skill_params[idx_base];
                 float param1 = model.config_stats.skill_params[idx_sub];
-                float total = param0 + param1 * model.star;
+                double total = Math.Round(param0 + param1 * model.star, 1);
 
                 oriText = oriText.Replace(subString, "" + (total * 100) + "%");
             }

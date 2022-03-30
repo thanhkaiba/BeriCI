@@ -36,8 +36,8 @@ MonoBehaviour:
   - root_name: Tons
     present_name: Tons
     title: Zetpees criminal-org
-    skill_description: Walk through the darkness, deal total <b><color=#f06060>$p_0@</color></b>
-      damage to his target.
+    skill_description: Walk through the darkness, deal <b><color=#f06060>$p_0@</color></b>
+      5 times to his target.
   - root_name: Herminia
     present_name: Herminia
     title: The cute elf
