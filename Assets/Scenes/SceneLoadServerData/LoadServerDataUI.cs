@@ -63,21 +63,16 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private GameConfigSync ConfigSync;
 
-
     private Action ReloadFunc;
 
     public static string NextScene = "SceneLobby";
-
 
     private readonly HashSet<SFSAction> ActionRequires = new HashSet<SFSAction>() { 
         SFSAction.PIRATE_WHEEL_DATA, 
         SFSAction.LOAD_LIST_HERO_INFO,
         // SFSAction.PVP_DATA,
     };
-
     private int TotalActionRequire = 0;
-
-
     void Start()
     {
         VisibleErrorUI(false);
@@ -96,14 +91,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             SendGetData();
         }
-      
-    
-  
-      
-
-
     }
-
     void PrepareAppear()
     {
         GameObject[] list = { sailorRank.gameObject, sailorName.gameObject, sailorBio.gameObject, sailorDescripton.gameObject, ligh1.gameObject, ligh2.gameObject };
@@ -113,7 +101,6 @@ public class LoadServerDataUI : MonoBehaviour
             GO.SetActive(false);
         }
     }
-
     void AppearTip()
     {
         GameObject[] list = { sailorRank.gameObject, sailorName.gameObject, sailorBio.gameObject, sailorDescripton.gameObject, ligh1.gameObject, ligh2.gameObject };
@@ -122,7 +109,6 @@ public class LoadServerDataUI : MonoBehaviour
         {
             GO.SetActive(true);
         }
-
         sailorRank.DOFade(0, 0.4f).From().SetLink(sailorRank.gameObject);
         sailorName.DOFade(0, 0.4f).From().SetLink(sailorName.gameObject);
         sailorBio.DOFade(0, 0.4f).From().SetLink(sailorBio.gameObject);
@@ -130,15 +116,12 @@ public class LoadServerDataUI : MonoBehaviour
         ligh1.DOFade(0, 0.4f).From().SetLink(ligh1.gameObject);
         ligh2.DOFade(0, 0.4f).From().SetLink(ligh2.gameObject);
     }
-
     void UpdateTextPercent(float value)
     {
         percentText.text = value.ToString("P1");
     }
-
     void RandomTip()
     {
-
         AppearTip();
         SailorDescription.Param param = sailorDescription.sheets[0].list[UnityEngine.Random.Range(0, sailorDescription.sheets[0].list.Count)];
         foreach (Transform child in sailorNode.transform)
@@ -160,9 +143,7 @@ public class LoadServerDataUI : MonoBehaviour
         {
             RandomTip();
         }
-
     }
-
     public void VisibleErrorUI(bool visible)
     {
         progressBar.gameObject.SetActive(!visible);
@@ -170,7 +151,6 @@ public class LoadServerDataUI : MonoBehaviour
         percentText.gameObject.SetActive(!visible);
         buttonLogout.gameObject.SetActive(visible);
     }
-
     public void SendGetData()
     {
         errorText.text = "Loading Sailors";
@@ -183,13 +163,11 @@ public class LoadServerDataUI : MonoBehaviour
             NetworkController.Send(action);
         }
     }
-
     private void OnDestroy()
     {
         NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         progressBar.onValueChanged.RemoveListener(UpdateTextPercent);
     }
-
     private void RenderClass(List<SailorClass> classes)
     {
 
@@ -227,22 +205,22 @@ public class LoadServerDataUI : MonoBehaviour
                 if (ActionRequires.Count != 0)
                 {
                     ShowLoading(1f, 0.4f / TotalActionRequire, () => { });
-
                 }
                 else
                 {
                     ShowLoading(1f, 0.4f / TotalActionRequire, OnLoadSuccess);
                 }
             }
-
         }
         else
         {
             OnLoadError(errorCode);
         }
-
     }
-
+    private void OnLoadSuccess()
+    {
+        SceneManager.LoadScene(NextScene);
+    }
     private void OnLoadError(SFSErrorCode errorCode)
     {
         errorText.text = $"Load sailor list fail! \n {errorCode}: {(int)errorCode}";
@@ -250,13 +228,10 @@ public class LoadServerDataUI : MonoBehaviour
         VisibleErrorUI(true);
 
     }
-
     public void OnLogout()
     {
         NetworkController.Logout();
     }
-
-
     public void ShowLoading(float actionTime, float value, Action callback)
     {
         Sequence seq = DOTween.Sequence();
@@ -265,13 +240,6 @@ public class LoadServerDataUI : MonoBehaviour
         seq.SetLink(progressBar.gameObject);
         seq.SetTarget(progressBar);
     }
-
-
-    private void OnLoadSuccess()
-    {
-        SceneManager.LoadScene(NextScene);
-    }
-
     private void LoadConfig()
     {
         errorText.text = "Loading Configuration Files";

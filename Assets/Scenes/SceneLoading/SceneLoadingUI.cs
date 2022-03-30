@@ -72,7 +72,8 @@ public class SceneLoadingUI : MonoBehaviour
             Time.timeScale = 1;
         }
     }
-
+    private bool haveGetServerHost = false;
+    private bool haveCheckGameVersion = false;
     private void Start()
     {
         Sequence seq = DOTween.Sequence();
@@ -91,14 +92,13 @@ public class SceneLoadingUI : MonoBehaviour
     }
     public void OnLoadSuccess()
     {
-        SceneManager.LoadScene("SceneLogin");
+        haveCheckGameVersion = true;
+        CheckCompleteAndRunSceneLogin();
     }
-
     public void OnLoadError(string error)
     {
         // SceneManager.LoadScene("SceneLogin");
         GuiManager.Instance.ShowPopupNotification("Check New Version Fail!", "Try Again", () => gameVersionController.GetVersionInfo());
-        ;
     }
 
     public void OnNeedUpdate(string url)
@@ -113,7 +113,6 @@ public class SceneLoadingUI : MonoBehaviour
     IEnumerator GetUrlAndPort()
     {
         Debug.Log("url_get_host_and_port: " + Application.version);
-        //yield return new WaitForSeconds(1f);
         string url = "https://crash-log.piratera.io/api/check-version?version=" + Application.version;
         using (UnityWebRequest request = UnityWebRequest.Get(url))
         {
@@ -132,7 +131,14 @@ public class SceneLoadingUI : MonoBehaviour
                 Debug.Log("GAME_NETWORK_ADDRESS.PROD_HOST: " + GAME_NETWORK_ADDRESS.PROD_HOST);
                 Debug.Log("GAME_NETWORK_ADDRESS.PROD_PORT: " + GAME_NETWORK_ADDRESS.PROD_PORT);
             }
+            haveGetServerHost = true;
+            CheckCompleteAndRunSceneLogin();
         }
+    }
+    private void CheckCompleteAndRunSceneLogin()
+    {
+        if (haveCheckGameVersion && haveGetServerHost)
+            SceneManager.LoadScene("SceneLogin");
     }
 }
 
