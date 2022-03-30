@@ -129,9 +129,9 @@ namespace Piratera.Network
         }
         private static void ForceStartScene()
         {
-            if (SceneManager.GetActiveScene().name != "SceneLogin" && SceneManager.GetActiveScene().name != "SceneLoading")
+            if (SceneManager.GetActiveScene().name != "SceneLoading")
             {
-                SceneManager.LoadScene("SceneLogin");
+                SceneManager.LoadScene("SceneLoading");
             }
         }
         //----------------------------------------------------------
@@ -141,7 +141,7 @@ namespace Piratera.Network
         {
 #if PIRATERA_QC
         string Host = GAME_NETWORK_ADDRESS.QC_HOST;
-         int TcpPort = GAME_NETWORK_ADDRESS.QC_PORT;
+        int TcpPort = GAME_NETWORK_ADDRESS.QC_PORT;
 #elif PIRATERA_DEV
 		string Host = GAME_NETWORK_ADDRESS.DEV_HOST;
 		int TcpPort = GAME_NETWORK_ADDRESS.DEV_PORT;
