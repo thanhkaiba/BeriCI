@@ -125,7 +125,7 @@ MonoBehaviour:
     present_name: Kamijita
     title: Haisan's Princess
     skill_description: Buff Ally needing mana the most <b><color=#008ab0>$i_0@</color></b>
-      mana,  speed-up <b><color=#228514>$perT_1_2@</color></b> and <b><color=#00706b>$p_3@</color></b>
+      mana, speed-up <b><color=#228514>$perT_1_2@</color></b> and <b><color=#00706b>$p_3@</color></b>
       shield
   - root_name: Camelia
     present_name: Camelia
