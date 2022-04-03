@@ -56,9 +56,6 @@ public class Lade : CombatSailor
         listTargets.Add(firstTarget);
         listTargets.AddRange(TargetsUtils.AllBehind(firstTarget, enermy));
 
-        targets.Add(firstTarget.Model.id);
-        _params.Add(firstTarget.CalcDamageTake(new Damage() { magic = main_damage }, this));
-
         listTargets.ForEach(t => targets.Add(t.Model.id));
         for (int i = 0; i < 5; i++)
             listTargets.ForEach(t =>

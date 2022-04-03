@@ -72,7 +72,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "CYBORG base-attack: +" + para[0] + " mana" + (data.level >= 1 ? ("\n +" + para[1] + " speed"): "") + (data.level >= 2 ? ("and +" + para[2] + " power") : "");
                 break;
             case SailorClass.SEA_CREATURE:
-                content.text = "Alies gain " + para[0] + " magic resist";
+                content.text = "Alies gain " + para[0] + " magic resist and grant shield equal " + (para[1] * 100) + "% their power";
                 break;
             case SailorClass.MAGE:
                 content.text = "MAGE gain " + (para[0] * 100) + "% power";

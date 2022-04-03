@@ -1,5 +1,6 @@
 using Piratera.Config;
 using System.Collections.Generic;
+using UnityEngine;
 
 public enum AttackType
 {
@@ -202,65 +203,81 @@ public class CombatStats
     public void UpdateStatsWithSynergy(List<ClassBonusItem> ownTeam, List<ClassBonusItem> oppTeam = null)
     {
         SynergiesConfig config = GlobalConfigs.Synergies;
-        if (ownTeam != null) ownTeam.ForEach(p =>
+        if (ownTeam != null)
         {
-            if (p.level < 0) return;
-            switch (p.type)
+            int support_level = -1;
+            ownTeam.ForEach(p =>
             {
-                case SailorClass.MIGHTY:
-                    if (HaveType(SailorClass.MIGHTY))
-                    {
-                        MaxHealth *= 1 + config.GetParams(p.type, p.level)[0];
-                        CurHealth = MaxHealth;
-                    }
-                    break;
-                case SailorClass.SWORD_MAN:
-                    if (HaveType(SailorClass.SWORD_MAN))
-                    {
-                        Speed += config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.MAGE:
-                    if (HaveType(SailorClass.MAGE))
-                    {
-                        BasePower *= 1 + config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.ASSASSIN:
-                    if (HaveType(SailorClass.ASSASSIN))
-                    {
-                        CritDamage += config.GetParams(p.type, p.level)[0];
-                        Crit += config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.SEA_CREATURE:
-                    BaseMagicResist += config.GetParams(p.type, p.level)[0];
-                    break;
-                case SailorClass.SUPPORT:
-                    Fury += (int)config.GetParams(p.type, p.level)[0];
-                    if (Fury > MaxFury) Fury = MaxFury;
-                    break;
-                case SailorClass.KNIGHT:
-                    if (HaveType(SailorClass.KNIGHT))
-                    {
-                        BaseArmor += (int)config.GetParams(p.type, p.level)[0];
-                    }
-                    break;
-                case SailorClass.PIONEER:
-                    if (HaveType(SailorClass.PIONEER))
-                    {
-                        CurrentSpeed += (int)(config.GetParams(p.type, p.level)[0] * SpeedNeed);
-                    }
-                    break;
-                case SailorClass.CYBORG:
-                    if (HaveType(SailorClass.CYBORG))
-                    {
-                        Speed += config.GetParams(p.type, p.level)[1];
-                        BasePower += config.GetParams(p.type, p.level)[2];
-                    }
-                    break;
-            }
-        });
+                if (p.level < 0) return;
+                switch (p.type)
+                {
+                    case SailorClass.MIGHTY:
+                        if (HaveType(SailorClass.MIGHTY))
+                        {
+                            MaxHealth *= 1 + config.GetParams(p.type, p.level)[0];
+                            CurHealth = MaxHealth;
+                        }
+                        break;
+                    case SailorClass.SWORD_MAN:
+                        if (HaveType(SailorClass.SWORD_MAN))
+                        {
+                            Speed += config.GetParams(p.type, p.level)[0];
+                        }
+                        break;
+                    case SailorClass.MAGE:
+                        if (HaveType(SailorClass.MAGE))
+                        {
+                            BasePower *= 1 + config.GetParams(p.type, p.level)[0];
+                        }
+                        break;
+                    case SailorClass.ASSASSIN:
+                        if (HaveType(SailorClass.ASSASSIN))
+                        {
+                            CritDamage += config.GetParams(p.type, p.level)[0];
+                            Crit += config.GetParams(p.type, p.level)[0];
+                        }
+                        break;
+                    case SailorClass.SEA_CREATURE:
+                        BaseMagicResist += config.GetParams(p.type, p.level)[0];
+                        break;
+                    case SailorClass.SUPPORT:
+                        Fury += (int)config.GetParams(p.type, p.level)[0];
+                        if (Fury > MaxFury) Fury = MaxFury;
+                        support_level = Mathf.Max(p.level, support_level);
+                        break;
+                    case SailorClass.KNIGHT:
+                        if (HaveType(SailorClass.KNIGHT))
+                        {
+                            BaseArmor += (int)config.GetParams(p.type, p.level)[0];
+                        }
+                        break;
+                    case SailorClass.PIONEER:
+                        if (HaveType(SailorClass.PIONEER))
+                        {
+                            CurrentSpeed += (int)(config.GetParams(p.type, p.level)[0] * SpeedNeed);
+                        }
+                        break;
+                    case SailorClass.CYBORG:
+                        if (HaveType(SailorClass.CYBORG))
+                        {
+                            Speed += config.GetParams(p.type, p.level)[1];
+                            BasePower += config.GetParams(p.type, p.level)[2];
+                        }
+                        break;
+                }
+            });
+            // client phai cong rieng de tinh seacreature do dong goi data rieng
+            if (ownTeam != null) ownTeam.ForEach(p => {
+                if (p.level < 0) return;
+                if (p.type == SailorClass.SEA_CREATURE)
+                {
+                    var shield_buff = Power * config.GetParams(p.type, p.level)[1];
+                    if (support_level >= 0) shield_buff += shield_buff * config.GetParams(SailorClass.SUPPORT, support_level)[1];
+                    Shield += shield_buff;
+                }
+            });
+        }
+
 
         if (oppTeam != null) oppTeam.ForEach(p =>
         {

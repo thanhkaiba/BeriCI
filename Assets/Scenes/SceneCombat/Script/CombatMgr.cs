@@ -5,12 +5,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum ModeID
 {
     Test,
     PvE,
     Arena,
+    Training,
 };
 
 public enum Team
@@ -30,13 +32,14 @@ public class CombatMgr : MonoBehaviour
     public static CombatMgr Instance;
     private bool serverGame = false;
     private ModeID modeId = ModeID.Test;
+    private int trainLevel = 0;
     private List<CombatAction> listActions;
     public byte yourTeamIndex = 0;
     private HomefieldAdvantage defenseAdvantage;
     private void Start()
     {
 #if PIRATERA_DEV
-        GlobalConfigs.InitDevConfig();
+        // GlobalConfigs.InitDevConfig();
 #endif
         // GlobalConfigs.InitDevConfig();
         Instance = this;
@@ -46,6 +49,7 @@ public class CombatMgr : MonoBehaviour
         PreparingGame();
         StartCoroutine(StartGame());
         if (modeId == ModeID.Arena) ChangeBattleFieldPvP();
+        if (modeId == ModeID.Training) ChangeBattleFieldTraining();
     }
 
     private void OnDestroy()
@@ -65,6 +69,14 @@ public class CombatMgr : MonoBehaviour
             yourTeamIndex = TempCombatData.Instance.yourTeamIndex;
             serverGame = true;
             if (modeId == ModeID.Arena) defenseAdvantage = TempCombatData.Instance.defense_advantage;
+        }
+        else if (TempCombatData.Instance.trainingGameLevel != -1)
+        {
+            trainLevel = TempCombatData.Instance.trainingGameLevel;
+            combatState.CreateTrainGame(trainLevel);
+            TempCombatData.Instance.trainingGameLevel = -1;
+            modeId = ModeID.Training;
+            serverGame = false;
         }
         else
         {
@@ -157,6 +169,7 @@ public class CombatMgr : MonoBehaviour
                 }
             case CombatAcionType.GameResult:
                 {
+                    Debug.Log("modeId: " + modeId);
                     GameUtils.SetTimeScale(1);
                     GameEndData data = actionProcess.gameEndData;
                     switch (modeId)
@@ -250,11 +263,21 @@ public class CombatMgr : MonoBehaviour
     }
     void GameOver(Team winTeam)
     {
-        GameUtils.SetTimeScale(1);
-        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
         Debug.Log(">>>>>>> Game Over <<<<<<<<<");
         Debug.Log("Team " + winTeam + " win");
-        UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLoadServerData");
+        GameUtils.SetTimeScale(1);
+        UIMgr.UpdateListSailorInQueue(combatState.GetQueueNextActionSailor());
+        if (modeId == ModeID.Training)
+        {
+            combatState.ShowTrainComplete(trainLevel);
+            StartCoroutine(WaitAndDo(0.5f, () => {
+                LoadServerDataUI.NextScene = "ScenePickTeam";
+                SceneManager.LoadScene("SceneLoadServerData");
+            }));
+        } else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLoadServerData");
+        }
     }
     // end client game
     IEnumerator WaitAndDo(float time, Action action)
@@ -305,5 +328,9 @@ public class CombatMgr : MonoBehaviour
         var scale = battleField.transform.localScale;
         battleField.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
         battleField.sprite = PvPData.Instance.GetAdvantageBackgroundSprite(defenseAdvantage);
+    }
+    private void ChangeBattleFieldTraining()
+    {
+        //battleField.sprite = PvPData.Instance.GetAdvantageBackgroundSprite(defenseAdvantage);
     }
 }

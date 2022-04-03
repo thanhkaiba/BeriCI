@@ -36,8 +36,9 @@
         PVP_COMBAT_DATA = 48,
         PVP_CONFIRM = 49,
         PVP_JOIN = 50,
-       
 
+        TRAIN_SAILORS = 80,
+        TRAIN_SAILORS_REMAIN = 81,
 
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat

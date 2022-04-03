@@ -70,7 +70,7 @@ public class CharBarControl : MonoBehaviour
 
 
 #if PIRATERA_DEV
-        healthText.text = $"{min}/{max}";
+        healthText.text = $"{System.Math.Ceiling(min)}/{System.Math.Ceiling(max)}";
 #else
         healthText.text = (System.Math.Ceiling(min)).ToString();
 #endif

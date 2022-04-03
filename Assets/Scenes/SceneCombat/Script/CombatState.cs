@@ -75,10 +75,10 @@ public class CombatState : MonoBehaviour
     void CreateTeamB()
     {
         //CreateCombatSailor("Zeke", new CombatPosition(1, 2), Team.B);
-        CreateCombatSailor("Wuone", new CombatPosition(0, 0), Team.B);
+        CreateCombatSailor("Wuone", new CombatPosition(2, 0), Team.B, 3, 20, 180);
     }
 
-    CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team)
+    CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team, int star = 1, int level = 1, int quality = 160)
     {
         string[] split = sailorString.Split(char.Parse("|"));
         string name = split[0];
@@ -95,9 +95,9 @@ public class CombatState : MonoBehaviour
         CombatSailor sailor = GameUtils.CreateCombatSailor(name);
         // sailor.Model.quality = UnityEngine.Random.Range(1, 100 + 1);
         // sailor.Model.level = UnityEngine.Random.Range(1, 10 + 1);
-        sailor.Model.quality = 200;
-        sailor.Model.level = 1;
-        sailor.Model.star = 5;
+        sailor.Model.quality = quality;
+        sailor.Model.level = level;
+        sailor.Model.star = (byte)star;
 
         sailor.SetEquipItems(listItem);
         sailor.InitCombatData(pos, team);
@@ -401,5 +401,113 @@ public class CombatState : MonoBehaviour
         seq.Append(bg.DOColor(new Color(0.4f, 0.4f, 0.4f), 0.2f));
         seq.AppendInterval(time2 - 0.3f);
         seq.Append(bg.DOColor(Color.white, 0.2f));
+    }
+    public void CreateTrainGame(int train_level)
+    {
+        var listSailor = CrewData.Instance.Sailors;
+        var fgl0 = CrewData.Instance.FightingTeam;
+
+        float totalStar = 0;
+        float totalLevel = 0;
+        int sailorNumber = 0;
+
+        for (short x = 0; x < 3; x++)
+        {
+            for (short y = 0; y < 3; y++)
+            {
+                {
+                    string sailorID = fgl0.SailorIdAt(x, y);
+                    if (sailorID != "")
+                    {
+                        SailorModel sailor = listSailor.Find(sailor => sailor.id == sailorID);
+                        CreateCombatSailor(sailor, new CombatPosition(x, y), Team.A);
+                        sailorNumber++;
+                        totalLevel += sailor.level;
+                        totalStar += sailor.star;
+                    }
+                }
+            }
+        }
+        int level, star, quality;
+        switch (train_level)
+        {
+            case 0:
+                level = (int)Math.Floor(totalLevel / sailorNumber);
+                star = (int)Math.Floor(totalStar / sailorNumber);
+                quality = 100;
+                break;
+            case 1:
+                level = (int) Math.Round(totalLevel / sailorNumber) + 5;
+                star = (int) Math.Round(totalStar / sailorNumber);
+                quality = 140;
+                break;
+            default:
+                level = (int) Math.Ceiling(totalLevel / sailorNumber) + 8;
+                star = (int)Math.Floor(totalStar / sailorNumber) + 1;
+                quality = 200;
+                break;
+        }
+        if (level > 30) level = 30;
+        CreateTrainTeamB(sailorNumber, level, star, quality);
+    }
+    private void CreateTrainTeamB(int number, int level, int star, int quality)
+    {
+        for (int i = 0; i < number; i++)
+        {
+            var pos = new CombatPosition(2, 0);
+            var sailor = "Wuone";
+            var random = new System.Random();
+            switch (i)
+            {
+                case 0:
+                    {
+                        pos.x = 1;
+                        pos.y = 1;
+                        var list = new List<string> { "Anglersei" };
+                        sailor = list[random.Next(list.Count)];
+                        break;
+                    }
+                case 1:
+                    {
+                        pos.x = 2;
+                        pos.y = 0;
+                        var list = new List<string> { "Anglersei" };
+                        sailor = list[random.Next(list.Count)];
+                        break;
+                    }
+                case 2:
+                    {
+                        pos.x = 0;
+                        pos.y = 2;
+                        var list = new List<string> { "Anglersei" };
+                        sailor = list[random.Next(list.Count)];
+                        break;
+                    }
+                case 3:
+                    {
+                        pos.x = 0;
+                        pos.y = 0;
+                        var list = new List<string> { "Anglersei" };
+                        sailor = list[random.Next(list.Count)];
+                        break;
+                    }
+                case 4:
+                    {
+                        pos.x = 2;
+                        pos.y = 2;
+                        var list = new List<string> { "Anglersei" };
+                        sailor = list[random.Next(list.Count)];
+                        break;
+                    }
+            }
+            CreateCombatSailor(sailor, pos, Team.B, star, level, quality);
+        }
+    }
+    public void ShowTrainComplete(int trainLevel)
+    {
+        var exp = trainLevel == 0 ? 1000 : 20000;
+        sailorsTeamA.ForEach(character => {
+            FlyTextMgr.Instance.ShowTextAddExp(character, exp);
+        });
     }
 };

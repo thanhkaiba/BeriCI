@@ -47,6 +47,7 @@ public class CombatSailor : Sailor
     {
         cs.UpdateStatsWithSynergy(ownTeam, oppTeam);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
+        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
         /*
         Debug.Log("-----------------------------------" +
         "\n > Model.id: " + Model.id +

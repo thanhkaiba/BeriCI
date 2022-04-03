@@ -15,6 +15,8 @@ public class PickTeamUI : MonoBehaviour
     private Text TextMaxCapacity;
     [SerializeField]
     private Button ButtonBuySlot;
+    [SerializeField]
+    private Button[] TrainsButton;
     public RoyalCollectingController royal;
     void Start()
     {
@@ -31,10 +33,25 @@ public class PickTeamUI : MonoBehaviour
     void Awake()
     {
         Input.multiTouchEnabled = false;
+        var config = GlobalConfigs.Training;
+        var listTimes = UserData.Instance.TrainedToday;
+        Debug.Log("UserData.Instance.PVECount: " + UserData.Instance.PVECount);
+        for (int i = 0; i < TrainsButton.Length; i++)
+        {
+            Debug.Log("config.game_require[i]: " + config.game_require[i]);
+            var btn = TrainsButton[i];
+            //btn.gameObject.SetActive(UserData.Instance.PVECount >= config.game_require[i]);
+            btn.transform.Find("textPrice").GetComponent<Text>().text = "" + config.cost[i];
+            btn.transform.Find("textEXP").GetComponent<Text>().text = "+" + config.exp_receive[i].ToString("N0") + " EXP";
+
+            int times = 0;
+            if (listTimes.Length > i) times = listTimes[i];
+            btn.transform.Find("textTimes").GetComponent<Text>().text = "today: " + times + "/" + config.limit_day;
+            btn.interactable = times < config.limit_day;
+        }
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-
         if (action == SFSAction.BUY_SLOT)
         {
             GuiManager.Instance.ShowGuiWaiting(false);
@@ -45,6 +62,19 @@ public class PickTeamUI : MonoBehaviour
             else
             {
                 UpdateSlotMaxCapacity();
+            }
+        }
+        if (action == SFSAction.TRAIN_SAILORS)
+        {
+            GuiManager.Instance.ShowGuiWaiting(false);
+            if (errorCode != SFSErrorCode.SUCCESS)
+            {
+                GameUtils.ShowPopupPacketError(errorCode);
+            }
+            else
+            {
+                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneManager.LoadScene("SceneCombat2D");
             }
         }
     }
@@ -126,5 +156,21 @@ public class PickTeamUI : MonoBehaviour
     {
         var hand = GameObject.Find("hand_open_slot");
         if (hand) Destroy(hand);
+    }
+    public void Train (int level)
+    {
+        int cost = GlobalConfigs.Training.cost[level];
+        if (UserData.Instance.Beri < cost)
+        {
+            GuiManager.Instance.ShowPopupNotification("You do not have enough BERI");
+        }
+        else
+        {
+            GuiManager.Instance.ShowGuiWaiting(true);
+            TempCombatData.Instance.trainingGameLevel = level;
+            SFSObject sfsObject = new SFSObject();
+            sfsObject.PutInt("level", level);
+            NetworkController.Send(SFSAction.TRAIN_SAILORS, sfsObject);
+        }
     }
 }
