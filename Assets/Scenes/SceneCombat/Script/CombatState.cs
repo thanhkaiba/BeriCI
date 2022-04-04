@@ -437,13 +437,13 @@ public class CombatState : MonoBehaviour
                 quality = 100;
                 break;
             case 1:
-                level = (int) Math.Round(totalLevel / sailorNumber) + 5;
+                level = (int) Math.Round(totalLevel / sailorNumber) + 1;
                 star = (int) Math.Round(totalStar / sailorNumber);
                 quality = 140;
                 break;
             default:
-                level = (int) Math.Ceiling(totalLevel / sailorNumber) + 8;
-                star = (int)Math.Floor(totalStar / sailorNumber) + 1;
+                level = (int) Math.Ceiling(totalLevel / sailorNumber) + 1;
+                star = (int) Math.Floor(totalStar / sailorNumber) + 1;
                 quality = 200;
                 break;
         }
@@ -505,7 +505,7 @@ public class CombatState : MonoBehaviour
     }
     public void ShowTrainComplete(int trainLevel)
     {
-        var exp = trainLevel == 0 ? 1000 : 20000;
+        var exp = GlobalConfigs.Training.exp_receive[trainLevel];
         sailorsTeamA.ForEach(character => {
             FlyTextMgr.Instance.ShowTextAddExp(character, exp);
         });

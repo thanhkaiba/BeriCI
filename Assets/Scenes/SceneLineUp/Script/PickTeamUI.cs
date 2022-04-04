@@ -157,15 +157,21 @@ public class PickTeamUI : MonoBehaviour
         var hand = GameObject.Find("hand_open_slot");
         if (hand) Destroy(hand);
     }
-    public void Train (int level)
+    public void Train(int level)
     {
+        CrewData.Instance.OnConfirmSquad();
         int cost = GlobalConfigs.Training.cost[level];
-        if (UserData.Instance.Beri < cost)
+        if (CrewData.Instance.FightingTeam.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupNotification("No sailor for trainning");
+        }
+        else if (UserData.Instance.Beri < cost)
         {
             GuiManager.Instance.ShowPopupNotification("You do not have enough BERI");
         }
         else
         {
+            UserData.Instance.Beri -= cost;
             GuiManager.Instance.ShowGuiWaiting(true);
             TempCombatData.Instance.trainingGameLevel = level;
             SFSObject sfsObject = new SFSObject();

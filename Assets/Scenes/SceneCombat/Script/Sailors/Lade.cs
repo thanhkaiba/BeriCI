@@ -60,6 +60,7 @@ public class Lade : CombatSailor
         for (int i = 0; i < 5; i++)
             listTargets.ForEach(t =>
             {
+                t.cs.Shield = 0;
                 _params.Add(t.CalcDamageTake(new Damage() { magic = main_damage/5f }, this));
             });
 
@@ -96,7 +97,11 @@ public class Lade : CombatSailor
 
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+            for (int i = 0; i < listTargets.Count; i++)
+            {
+                listTargets[i].cs.Shield = 0;
+                listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+            }
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>

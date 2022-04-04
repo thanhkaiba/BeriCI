@@ -59,11 +59,13 @@ public class Kamijita : CombatSailor
         base.CastSkill(cbState);
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
-        float furyGain = Model.config_stats.skill_params[0] * cs.Power;
+        float furyGain = Model.config_stats.skill_params[0];
+        float speedUp = Model.config_stats.skill_params[1] + Model.config_stats.skill_params[2] * Model.star;
         List<CombatSailor> teams = cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this);
         CombatSailor buffTarget = TargetsUtils.FurthestMaxFury(teams);
         targets.Add(buffTarget.Model.id);
         _params.Add(furyGain);
+        _params.Add(speedUp);
         return ProcessSkill(targets, _params);
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
