@@ -142,8 +142,8 @@ MonoBehaviour:
   - root_name: Lade
     present_name: Lade
     title: Ulti-serious Cyborg
-    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to all enemies in
-      a line.
+    skill_description: Destroy shield and deal <b><color=#5b59f0>$p_0@</color></b>
+      to all enemies in a line.
   - root_name: Zeke
     present_name: Zeke
     title: Kraken hunter
