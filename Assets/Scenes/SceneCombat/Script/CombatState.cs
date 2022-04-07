@@ -437,13 +437,13 @@ public class CombatState : MonoBehaviour
                 quality = 100;
                 break;
             case 1:
-                level = (int) Math.Round(totalLevel / sailorNumber) + 1;
+                level = (int) Math.Round(totalLevel / sailorNumber) + 2;
                 star = (int) Math.Round(totalStar / sailorNumber);
                 quality = 140;
                 break;
             default:
                 level = (int) Math.Ceiling(totalLevel / sailorNumber) + 1;
-                star = (int) Math.Floor(totalStar / sailorNumber) + 1;
+                star = (int) Math.Ceiling(totalStar / sailorNumber) + 1;
                 quality = 200;
                 break;
         }

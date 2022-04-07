@@ -49,7 +49,6 @@ public class CombatMgr : MonoBehaviour
         PreparingGame();
         StartCoroutine(StartGame());
         if (modeId == ModeID.Arena) ChangeBattleFieldPvP();
-        if (modeId == ModeID.Training) ChangeBattleFieldTraining();
     }
 
     private void OnDestroy()
@@ -77,6 +76,7 @@ public class CombatMgr : MonoBehaviour
             TempCombatData.Instance.trainingGameLevel = -1;
             modeId = ModeID.Training;
             serverGame = false;
+            ChangeBattleFieldTraining(trainLevel);
         }
         else
         {
@@ -329,8 +329,9 @@ public class CombatMgr : MonoBehaviour
         battleField.transform.localScale = new Vector3(-scale.x, scale.y, scale.z);
         battleField.sprite = PvPData.Instance.GetAdvantageBackgroundSprite(defenseAdvantage);
     }
-    private void ChangeBattleFieldTraining()
+    private void ChangeBattleFieldTraining(int trainLevel)
     {
-        //battleField.sprite = PvPData.Instance.GetAdvantageBackgroundSprite(defenseAdvantage);
+        var scale = battleField.transform.localScale;
+        battleField.sprite = Resources.Load<Sprite>("Background/train/train_lv_"+trainLevel);
     }
 }
