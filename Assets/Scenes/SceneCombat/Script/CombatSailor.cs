@@ -558,7 +558,7 @@ public class CombatSailor : Sailor
         Spine.Skeleton skeleton = skel.skeleton;
         Color curColor = skeleton.GetColor();
         if (curColor == modelColor) return;
-        skeleton.SetColor(Color.Lerp(curColor, modelColor, Mathf.PingPong(Time.time, 0.1f)));
+        skeleton.SetColor(Color.Lerp(curColor, modelColor, Mathf.PingPong(Time.time, 0.25f)));
     }
     private GameObject stunEff;
     public void ShowInStun(bool isShow)
