@@ -40,7 +40,7 @@ public class PickTeamUI : MonoBehaviour
         {
             Debug.Log("config.game_require[i]: " + config.game_require[i]);
             var btn = TrainsButton[i];
-            //btn.gameObject.SetActive(UserData.Instance.PVECount >= config.game_require[i]);
+            btn.gameObject.SetActive(UserData.Instance.PVECount >= config.game_require[i]);
             btn.transform.Find("textPrice").GetComponent<Text>().text = "" + config.cost[i];
             btn.transform.Find("textEXP").GetComponent<Text>().text = "+" + config.exp_receive[i].ToString("N0") + "\nEXP";
 
