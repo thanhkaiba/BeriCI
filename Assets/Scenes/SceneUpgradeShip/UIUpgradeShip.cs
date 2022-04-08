@@ -9,7 +9,7 @@ public class UIUpgradeShip : MonoBehaviour
     [SerializeField] private CanvasGroup fadeBackground;
     [SerializeField] private GameObject ship, tempShip, shipShadow;
     [SerializeField] private Camera mainCamera, sailCamera, helmCamera;
-    [SerializeField] private GameObject zoomButtonGroup, upgradeButtonGroup;
+    [SerializeField] private GameObject zoomButtonGroup, upgradeSail, upgradeHelm;
     [SerializeField] private Button backButton;
 
     private Vector3 originCameraPosition;
@@ -23,7 +23,8 @@ public class UIUpgradeShip : MonoBehaviour
         float seqDelay = 0.5f;
         originCameraPosition = mainCamera.transform.position;
         originCameraFOV = mainCamera.fieldOfView;
-        upgradeButtonGroup.SetActive(false);
+        upgradeSail.SetActive(false);
+        upgradeHelm.SetActive(false);
 
         // Wave animation
         Sequence waveSequence = DOTween.Sequence();
@@ -53,16 +54,16 @@ public class UIUpgradeShip : MonoBehaviour
         ).SetDelay(seqDelay);
         shipSequenceRotate.SetLoops(-1, LoopType.Restart);
 
-        // Ship shadow animation
-        Vector3 oldShadowScale = ship.transform.localScale;
+        //// Ship shadow animation
+        //Vector3 oldShadowScale = ship.transform.localScale;
 
-        Sequence shipShadowScale = DOTween.Sequence();
-        shipShadowScale.Append(
-            shipShadow.transform.DOScale(shipShadow.transform.localScale + new Vector3(0.05f, 0.05f, 0.05f), animTime).SetEase(Ease.InOutSine)
-        ).Append(
-            shipShadow.transform.DOScale(oldShadowScale, animTime * 1.5f).SetEase(Ease.InOutSine)
-        ).SetDelay(seqDelay);
-        shipShadowScale.SetLoops(-1, LoopType.Restart);
+        //Sequence shipShadowScale = DOTween.Sequence();
+        //shipShadowScale.Append(
+        //    shipShadow.transform.DOScale(shipShadow.transform.localScale + new Vector3(0.05f, 0.05f, 0.05f), animTime).SetEase(Ease.InOutSine)
+        //).Append(
+        //    shipShadow.transform.DOScale(oldShadowScale, animTime * 1.5f).SetEase(Ease.InOutSine)
+        //).SetDelay(seqDelay);
+        //shipShadowScale.SetLoops(-1, LoopType.Restart);
     }
 
     // Update is called once per frame
@@ -80,7 +81,7 @@ public class UIUpgradeShip : MonoBehaviour
 
         // Update UI button
         zoomButtonGroup.SetActive(false);
-        upgradeButtonGroup.SetActive(true);
+        upgradeSail.SetActive(true);
 
         // Update BackButton event
         backButton.onClick.AddListener(zoomOut);
@@ -95,7 +96,7 @@ public class UIUpgradeShip : MonoBehaviour
 
         // Update UI button
         zoomButtonGroup.SetActive(false);
-        upgradeButtonGroup.SetActive(true);
+        upgradeHelm.SetActive(true);
 
         // Update BackButton event
         backButton.onClick.AddListener(zoomOut);
@@ -110,6 +111,7 @@ public class UIUpgradeShip : MonoBehaviour
 
         // Hide button
         zoomButtonGroup.SetActive(true);
-        upgradeButtonGroup.SetActive(false);
+        upgradeSail.SetActive(false);
+        upgradeHelm.SetActive(false);
     }
 }
