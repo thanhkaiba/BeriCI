@@ -357,7 +357,7 @@ public class CombatState : MonoBehaviour
             {
                 Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
                 Sequence seq = DOTween.Sequence();
-                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.2f, 0.2f, 0.2f)));
+                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.4f, 0.4f, 0.4f)));
                 seq.AppendInterval(time - 0.2f);
                 seq.AppendCallback(() => sailor.DoModelColor(Color.white));
             }
@@ -366,7 +366,7 @@ public class CombatState : MonoBehaviour
         SpriteRenderer bg = GameObject.Find("battlefield").GetComponent<SpriteRenderer>();
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(bg.DOColor(new Color(0.2f, 0.2f, 0.2f), 0.2f));
+        seq.Append(bg.DOColor(new Color(0.4f, 0.4f, 0.4f), 0.4f));
         seq.AppendInterval(time - 0.4f);
         seq.Append(bg.DOColor(Color.white, 0.2f));
     }
@@ -379,7 +379,7 @@ public class CombatState : MonoBehaviour
             else if (!sailors.Contains(sailor))
             {
                 Sequence seq = DOTween.Sequence();
-                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.2f, 0.2f, 0.2f)));
+                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.4f, 0.4f, 0.4f)));
                 seq.AppendInterval(time1 + time2 - 0.2f);
                 seq.AppendCallback(() => sailor.DoModelColor(Color.white));
             }
@@ -387,7 +387,7 @@ public class CombatState : MonoBehaviour
             {
                 Spine.Skeleton skeleton = sailor.modelObject.GetComponent<SkeletonMecanim>().skeleton;
                 Sequence seq = DOTween.Sequence();
-                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.2f, 0.2f, 0.2f)));
+                seq.AppendCallback(() => sailor.DoModelColor(new Color(0.4f, 0.4f, 0.4f)));
                 seq.AppendInterval(time1 - 0.2f);
                 seq.AppendCallback(() => sailor.DoModelColor(Color.white));
             }
@@ -396,9 +396,9 @@ public class CombatState : MonoBehaviour
         SpriteRenderer bg = GameObject.Find("battlefield").GetComponent<SpriteRenderer>();
 
         Sequence seq = DOTween.Sequence();
-        seq.Append(bg.DOColor(new Color(0.2f, 0.2f, 0.2f), 0.2f));
+        seq.Append(bg.DOColor(new Color(0.4f, 0.4f, 0.4f), 0.2f));
         seq.AppendInterval(time1 - 0.3f);
-        seq.Append(bg.DOColor(new Color(0.2f, 0.2f, 0.2f), 0.2f));
+        seq.Append(bg.DOColor(new Color(0.4f, 0.4f, 0.4f), 0.2f));
         seq.AppendInterval(time2 - 0.3f);
         seq.Append(bg.DOColor(Color.white, 0.2f));
     }
