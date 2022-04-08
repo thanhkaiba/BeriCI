@@ -55,8 +55,6 @@ namespace Piratera.GUI
         {
             UpdateCurrentStamina();
         }
-
-
         private void UpdateCurrentStamina()
         {
             textCurrentStamina.text = StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6);
@@ -71,7 +69,6 @@ namespace Piratera.GUI
             }
             else
             {
-
                 backBtn.GetComponent<Button>().enabled = false;
                 findBtn.GetComponent<Button>().enabled = false;
                 textCurrentStamina.text = StringUtils.ShortNumber(StaminaData.Instance.Stamina - priceStamina, 6);
@@ -81,13 +78,11 @@ namespace Piratera.GUI
                 staminaMinusGO.GetComponent<Text>().text = "-" + priceStamina;
                 var trs = staminaMinusGO.transform as RectTransform;
 
-
                 Sequence seq = DOTween.Sequence();
                 seq.Append(trs.DOAnchorPosY(100, 0.8f).SetRelative().SetEase(Ease.OutQuint));
                 seq.Join(trs.GetComponent<CanvasGroup>().DOFade(0, 2f));
                 seq.AppendCallback(() => Destroy(staminaMinusGO));
                 seq.SetLink(gameObject).SetTarget(transform);
-
 
                 Sequence s = DOTween.Sequence();
                 s.AppendInterval(0.6f);
@@ -95,16 +90,11 @@ namespace Piratera.GUI
                 {
                     fight.SetActive(false);
                     find.SetActive(true);
-
-
                 });
                 s.AppendInterval(1.5f);
                 s.AppendCallback(() => NetworkController.Send(SFSAction.PVE_PLAY));
                 s.SetLink(gameObject).SetTarget(transform);
-
-
             }
-
         }
         public void OnClose()
         {
