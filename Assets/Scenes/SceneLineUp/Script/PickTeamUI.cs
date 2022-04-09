@@ -18,6 +18,8 @@ public class PickTeamUI : MonoBehaviour
     [SerializeField]
     private Button[] TrainsButton;
     public RoyalCollectingController royal;
+    [SerializeField]
+    private GameObject PopupGoTrain;
     void Start()
     {
         SquadContainer.Draging = false;
@@ -62,19 +64,6 @@ public class PickTeamUI : MonoBehaviour
             else
             {
                 UpdateSlotMaxCapacity();
-            }
-        }
-        if (action == SFSAction.TRAIN_SAILORS)
-        {
-            GuiManager.Instance.ShowGuiWaiting(false);
-            if (errorCode != SFSErrorCode.SUCCESS)
-            {
-                GameUtils.ShowPopupPacketError(errorCode);
-            }
-            else
-            {
-                GuiManager.Instance.ShowGuiWaiting(false);
-                SceneManager.LoadScene("SceneCombat2D");
             }
         }
     }
@@ -171,12 +160,8 @@ public class PickTeamUI : MonoBehaviour
         }
         else
         {
-            UserData.Instance.Beri -= cost;
-            GuiManager.Instance.ShowGuiWaiting(true);
-            TempCombatData.Instance.trainingGameLevel = level;
-            SFSObject sfsObject = new SFSObject();
-            sfsObject.PutInt("level", level);
-            NetworkController.Send(SFSAction.TRAIN_SAILORS, sfsObject);
+            var gui = GuiManager.Instance.AddGui<GuiGoTrain>(PopupGoTrain);
+            gui.GetComponent<GuiGoTrain>().SetLevel(level);
         }
     }
 }
