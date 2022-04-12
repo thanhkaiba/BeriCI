@@ -26,6 +26,8 @@ public class ScenePreparePvPUI : MonoBehaviour
     [SerializeField]
     private SpriteRenderer battlefield;
     public PvPSquadAContainer squaA;
+    [SerializeField]
+    private GameObject defenseTeamAdvantage;
 
     [Header("UI")]
     [SerializeField]
@@ -36,6 +38,7 @@ public class ScenePreparePvPUI : MonoBehaviour
 
     private void Awake()
     {
+        defenseTeamAdvantage.SetActive(false);
         Input.multiTouchEnabled = false;
         NetworkController.AddServerActionListener(OnReceiveServerAction);
     }
@@ -74,6 +77,14 @@ public class ScenePreparePvPUI : MonoBehaviour
             buttons[1].interactable = true;
         }
         counting = true;
+        if (data.modeID == ModeID.Arena)
+        {
+            defenseTeamAdvantage.SetActive(true);
+            var transform = defenseTeamAdvantage.transform;
+            transform.Find("icon").GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + data.defense_advantage.ToString());
+            transform.Find("text").GetComponent<Text>().text = GameUtils.GetHomeAdvantageStr(data.defense_advantage);
+            transform.Find("desc").GetComponent<Text>().text = GameUtils.GetHomeAdvantageDesc(data.defense_advantage);
+        }
     }
     private void LateUpdate()
     {

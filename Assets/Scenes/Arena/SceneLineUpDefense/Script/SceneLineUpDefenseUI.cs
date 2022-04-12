@@ -3,6 +3,7 @@ using DG.Tweening;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -10,7 +11,9 @@ using UnityEngine.UI;
 public class SceneLineUpDefenseUI : MonoBehaviour
 {
     [SerializeField]
-    private Text TextMaxCapacity;
+    private Text TextMaxCapacity, textCurrentAdvantage, textDescAdvantage;
+    [SerializeField]
+    private Image iconCurrentAdvantage;
     [SerializeField]
     private SpriteRenderer battlefield;
     void Start()
@@ -27,9 +30,9 @@ public class SceneLineUpDefenseUI : MonoBehaviour
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.BUY_SLOT)
+        if (action == SFSAction.PVP_OPEN_HOME_ADVANTAGE)
         {
-          
+            PresentListAdvantage();
         }
     }
     private void OnDestroy()
@@ -55,22 +58,78 @@ public class SceneLineUpDefenseUI : MonoBehaviour
     private void UpdateBattleFieldImage()
     {
         battlefield.sprite = PvPData.Instance.GetAdvantageBackgroundSprite();
+        var curAdvantage = PvPData.Instance.SelectingAdvantage;
+        textCurrentAdvantage.text = GameUtils.GetHomeAdvantageStr(curAdvantage);
+        textDescAdvantage.text = GameUtils.GetHomeAdvantageDesc(curAdvantage);
+        iconCurrentAdvantage.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + curAdvantage.ToString());
     }
     [SerializeField]
     private GameObject popupSelectAdvantage;
-    public void OpenPopupAdvantage()
-    {
-        if (!popupSelectAdvantage.activeSelf)
-            popupSelectAdvantage.SetActive(true);
-    }
+    [SerializeField]
+    private GameObject CellAdvantage;
+    [SerializeField]
+    private Transform ContentAdvantageView;
+    [SerializeField]
+    private GameObject popupConfirm;
+
+    private List<CellAdvantage> listCell = new List<CellAdvantage>();
     private void Awake()
     {
         Input.multiTouchEnabled = false;
         popupSelectAdvantage.SetActive(false);
+        CreateListAdvantage();
+        PresentListAdvantage();
+    }
+    public void OpenPopupAdvantage()
+    {
+        if (!popupSelectAdvantage.activeSelf)
+        {
+            popupSelectAdvantage.SetActive(true);
+            PresentListAdvantage();
+        }
     }
     public void ClosePopupAdvantage()
     {
         if (popupSelectAdvantage.activeSelf)
             popupSelectAdvantage.SetActive(false);
+    }
+    private void CreateListAdvantage()
+    {
+        foreach (HomefieldAdvantage ele in (HomefieldAdvantage[]) System.Enum.GetValues(typeof(HomefieldAdvantage)))
+        {
+            var cell = Instantiate(CellAdvantage, ContentAdvantageView);
+            listCell.Add(cell.GetComponent<CellAdvantage>());
+            var btn = cell.AddComponent<Button>();
+            btn.onClick.AddListener(() => SelectAdvantage(ele));
+        }
+    }
+    private void PresentListAdvantage()
+    {
+        for (int i = 0; i < listCell.Count; i++)
+        {
+            var cell = listCell[i];
+            cell.SetType((HomefieldAdvantage) i);
+        }
+    }
+    private void SelectAdvantage(HomefieldAdvantage type)
+    {
+        Debug.Log("Select Advantage: " + type);
+        // neu da mua thi chon, chua mua thi hien bo tien mua
+
+        var data = PvPData.Instance.OpenedAdvantage;
+        if (data.Contains(type))
+        {
+            PvPData.Instance.SelectingAdvantage = type;
+            SFSObject sfsObj = new SFSObject();
+            sfsObj.PutInt("advantage_idx", (int)type);
+            NetworkController.Send(SFSAction.PVP_SELECT_HOME_ADVANTAGE, sfsObj);
+            UpdateBattleFieldImage();
+            PresentListAdvantage();
+        }
+        else
+        {
+            var gui = GuiManager.Instance.AddGui<PopupConfirmUnlockAdvantage>(popupConfirm);
+            gui.GetComponent<PopupConfirmUnlockAdvantage>().SetType(type);
+        }
     }
 }

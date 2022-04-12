@@ -7,7 +7,6 @@ public enum HomefieldAdvantage
     ELECTRONIC,
     ARMOR,
     CANNON,
-    DESERT,
     SPEED,
 };
 public class PvPData : Singleton<PvPData>
@@ -15,7 +14,7 @@ public class PvPData : Singleton<PvPData>
     public DefenseCrewData DefenseCrew = new DefenseCrewData();
     public bool HaveJoin;
     public int Ticket;
-    public List<HomefieldAdvantage> OpenedAdvantage;
+    public List<HomefieldAdvantage> OpenedAdvantage = new List<HomefieldAdvantage>();
     public HomefieldAdvantage SelectingAdvantage;
     public int Rank = 0;
     public long Elo = 0;
@@ -43,12 +42,14 @@ public class PvPData : Singleton<PvPData>
         Ticket = packet.GetInt("ticket");
         var adv_int = packet.GetIntArray("oppened_advantage");
         OpenedAdvantage = new List<HomefieldAdvantage>();
+        Debug.Log("Length: " + adv_int.Length);
         for (int i = 0; i < adv_int.Length; i++)
         {
+            Debug.Log("(HomefieldAdvantage)adv_int[i]: " + (HomefieldAdvantage)adv_int[i]);
             OpenedAdvantage.Add((HomefieldAdvantage)adv_int[i]);
         }
         SelectingAdvantage = (HomefieldAdvantage)packet.GetInt("selecting_advantage");
-        SelectingAdvantage = HomefieldAdvantage.DESERT;
+        Debug.Log("SelectingAdvantage: " + SelectingAdvantage.ToString());
         Rank = packet.GetInt("rank");
         Elo = packet.GetLong("elo");
 
@@ -64,13 +65,16 @@ public class PvPData : Singleton<PvPData>
         var src = "";
         switch(ha)
         {
+            case HomefieldAdvantage.SWEET_HOME:
+                src = "Background/battlefield/orange";
+                break;
             case HomefieldAdvantage.ARMOR:
                 src = "Background/battlefield/shield";
                 break;
             case HomefieldAdvantage.SPEED:
                 src = "Background/battlefield/sea";
                 break;
-            case HomefieldAdvantage.DESERT:
+            case HomefieldAdvantage.CANNON:
                 src = "Background/battlefield/sand";
                 break;
             default:
