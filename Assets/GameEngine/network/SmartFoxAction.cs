@@ -36,6 +36,9 @@
         PVP_COMBAT_DATA = 48,
         PVP_CONFIRM = 49,
         PVP_JOIN = 50,
+        PVP_TICKET_GET = 51,
+        PVP_OPEN_HOME_ADVANTAGE = 52,
+        PVP_SELECT_HOME_ADVANTAGE = 53,
 
         TRAIN_SAILORS = 80,
         TRAIN_SAILORS_REMAIN = 81,

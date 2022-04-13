@@ -1,5 +1,6 @@
 
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
@@ -55,7 +56,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void UpdateTicket()
     {
-        LbTicket.text = PvPData.Instance.Ticket + "/" + 5;
+        LbTicket.text = PvPData.Instance.Ticket + "/" + GlobalConfigs.PvP.max_ticket;
     }
     void Awake()
     {
@@ -180,9 +181,16 @@ public class SceneArenaUI : MonoBehaviour
         }
     }
     private void ShowAppearEffect() {
-        var scale = new Vector3(0.6f, 0.6f, 0.6f);
-        background.localScale += scale;
-        background.DOScale(-scale, 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(background).SetLink(background.gameObject);
+        var pos = background.position;
+        var oriPos = Camera.main.transform.position;
+        pos.z = oriPos.z;
+        //Camera.main.transform.position = pos;
+        Camera.main.orthographicSize = 10.5f;
+        Camera.main.DOOrthoSize(8, 0.8f).SetEase(Ease.OutCirc);
+        //Camera.main.transform.DOMove(oriPos, 0.8f).SetEase(Ease.OutCirc);
+        //var scale = new Vector3(0.6f, 0.6f, 0.6f);
+        //background.localScale += scale;
+        //background.DOScale(-scale, 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(background).SetLink(background.gameObject);
     }
     private void UpdateBattleFieldImage()
     {

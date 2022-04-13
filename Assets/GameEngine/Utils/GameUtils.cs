@@ -266,6 +266,43 @@ public class GameUtils : UnityEngine.Object
         }
         return oriText;
     }
+    public static string GetHomeAdvantageStr(HomefieldAdvantage type)
+    {
+        switch (type)
+        {
+            case HomefieldAdvantage.SWEET_HOME:
+                return "Sweet home";
+            case HomefieldAdvantage.ELECTRONIC:
+                return "Electronic";
+            case HomefieldAdvantage.ARMOR:
+                return "Armored";
+            case HomefieldAdvantage.CANNON:
+                return "Canon";
+            case HomefieldAdvantage.SPEED:
+                return "Moonlight";
+            default:
+                return "Not exist";
+        }
+    }
+    public static string GetHomeAdvantageDesc(HomefieldAdvantage type)
+    {
+        var config = GlobalConfigs.HomefieldAdvantage.GetAdvantage(type);
+        switch (type)
+        {
+            case HomefieldAdvantage.SWEET_HOME:
+                return $"Your allies gain {config._params[0]*100}% max health";
+            case HomefieldAdvantage.ELECTRONIC:
+                return $"Your allies receive shield equal {config._params[0] * 100}% max health";
+            case HomefieldAdvantage.ARMOR:
+                return $"Your allies receive {config._params[0]} AR and MR";
+            case HomefieldAdvantage.CANNON:
+                return $"Enemies take magic damage equal {config._params[0]*100}% their max health";
+            case HomefieldAdvantage.SPEED:
+                return $"Your allies gain {config._params[0]} speed";
+            default:
+                return "Not exist";
+        }
+    }
     public static List<ClassBonusItem> lineUpSynergy = null;
     public static List<ClassBonusItem> oppLineUpSynergy = null;
 }

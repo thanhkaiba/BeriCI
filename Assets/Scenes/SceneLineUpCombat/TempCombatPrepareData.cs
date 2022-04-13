@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TeamCombatPrepareData : Singleton<TeamCombatPrepareData>
 {
-    private ModeID modeID;
+    public ModeID modeID;
     private byte yourTeamIndex;
     private string userName0;
     private string userName1;
