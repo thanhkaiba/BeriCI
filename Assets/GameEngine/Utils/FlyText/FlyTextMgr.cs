@@ -54,4 +54,11 @@ public class FlyTextMgr : MonoBehaviour
         c.transform.position = p;
         c.GetComponent<TextDamage>().iconCrit.SetActive(false);
     }
+    public void ShowTextAddExp(CombatSailor s, int exp)
+    {
+        Vector3 v3 = Camera.main.WorldToScreenPoint(s.transform.position);
+        v3.y += 30;
+        GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
+        c.GetComponent<TextDamage>().AddExp(exp, v3, new Color32(255, 254, 189, 255));
+    }
 }

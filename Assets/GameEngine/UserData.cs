@@ -27,7 +27,6 @@ public class UserData : Singleton<UserData>
     public string Avatar { get; set; }
     public long Beri { get; set; }
     public long Exp { get; set; }
-
     public long PVERank { get; set; }
 
     /// <summary>
@@ -37,6 +36,7 @@ public class UserData : Singleton<UserData>
     public int NumSlot { get; set; }
     public long CreateAt { get; set; }
     public int PVECount { get; set; }
+    public int[] TrainedToday = new int[] { };
 
     public void OnUserVariablesUpdate(User user, List<string> changedVars)
     {

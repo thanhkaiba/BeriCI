@@ -56,13 +56,11 @@ public class Lade : CombatSailor
         listTargets.Add(firstTarget);
         listTargets.AddRange(TargetsUtils.AllBehind(firstTarget, enermy));
 
-        targets.Add(firstTarget.Model.id);
-        _params.Add(firstTarget.CalcDamageTake(new Damage() { magic = main_damage }, this));
-
         listTargets.ForEach(t => targets.Add(t.Model.id));
         for (int i = 0; i < 5; i++)
             listTargets.ForEach(t =>
             {
+                t.cs.Shield = 0;
                 _params.Add(t.CalcDamageTake(new Damage() { magic = main_damage/5f }, this));
             });
 
@@ -73,7 +71,7 @@ public class Lade : CombatSailor
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var listTargets = CombatState.Instance.GetSailors(targets);
-        CombatState.Instance.HighlightSailor2Step(this, listTargets, 1.0f, 1.4f);
+        CombatState.Instance.HighlightSailor2Step(this, listTargets, 1.0f, 1.6f);
 
         var mainTarget = listTargets[0];
         Vector3 oriPos = transform.position;
@@ -99,26 +97,34 @@ public class Lade : CombatSailor
 
         seq.AppendCallback(() =>
         {
-            for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+            for (int i = 0; i < listTargets.Count; i++)
+            {
+                listTargets[i].cs.Shield = 0;
+                listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+            }
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
+            GameEffMgr.Instance.Shake(0.2f, 1);
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count + i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
+            GameEffMgr.Instance.Shake(0.2f, 1);
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count * 2 + i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
+            GameEffMgr.Instance.Shake(0.2f, 1);
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count * 3 + i] });
         });
         seq.AppendInterval(.35f);
         seq.AppendCallback(() =>
         {
+            GameEffMgr.Instance.Shake(0.2f, 1);
             for (int i = 0; i < listTargets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[listTargets.Count * 4 + i] });
         });
         seq.AppendInterval(0.35f);

@@ -6,6 +6,7 @@ using UnityEngine;
 public class TempCombatData : Singleton<TempCombatData>
 {
     public bool waitForAServerGame = false;
+    public int trainingGameLevel = -1;
 
     public ModeID modeID;
     public byte yourTeamIndex;

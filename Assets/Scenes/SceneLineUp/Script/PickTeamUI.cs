@@ -15,7 +15,11 @@ public class PickTeamUI : MonoBehaviour
     private Text TextMaxCapacity;
     [SerializeField]
     private Button ButtonBuySlot;
+    [SerializeField]
+    private Button[] TrainsButton;
     public RoyalCollectingController royal;
+    [SerializeField]
+    private GameObject PopupGoTrain;
     void Start()
     {
         SquadContainer.Draging = false;
@@ -31,10 +35,25 @@ public class PickTeamUI : MonoBehaviour
     void Awake()
     {
         Input.multiTouchEnabled = false;
+        var config = GlobalConfigs.Training;
+        var listTimes = UserData.Instance.TrainedToday;
+        Debug.Log("UserData.Instance.PVECount: " + UserData.Instance.PVECount);
+        for (int i = 0; i < TrainsButton.Length; i++)
+        {
+            Debug.Log("config.game_require[i]: " + config.game_require[i]);
+            var btn = TrainsButton[i];
+            btn.gameObject.SetActive(UserData.Instance.PVECount >= config.game_require[i]);
+            btn.transform.Find("textPrice").GetComponent<Text>().text = "" + config.cost[i];
+            btn.transform.Find("textEXP").GetComponent<Text>().text = "+" + config.exp_receive[i].ToString("N0") + "\nEXP";
+
+            int times = 0;
+            if (listTimes.Length > i) times = listTimes[i];
+            btn.transform.Find("textTimes").GetComponent<Text>().text = "today: " + times + "/" + config.limit_day;
+            btn.interactable = times < config.limit_day;
+        }
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-
         if (action == SFSAction.BUY_SLOT)
         {
             GuiManager.Instance.ShowGuiWaiting(false);
@@ -126,5 +145,23 @@ public class PickTeamUI : MonoBehaviour
     {
         var hand = GameObject.Find("hand_open_slot");
         if (hand) Destroy(hand);
+    }
+    public void Train(int level)
+    {
+        CrewData.Instance.OnConfirmSquad();
+        int cost = GlobalConfigs.Training.cost[level];
+        if (CrewData.Instance.FightingTeam.IsEmpty())
+        {
+            GuiManager.Instance.ShowPopupNotification("No sailor for trainning");
+        }
+        else if (UserData.Instance.Beri < cost)
+        {
+            GuiManager.Instance.ShowPopupNotification("You do not have enough BERI");
+        }
+        else
+        {
+            var gui = GuiManager.Instance.AddGui<GuiGoTrain>(PopupGoTrain);
+            gui.GetComponent<GuiGoTrain>().SetLevel(level);
+        }
     }
 }

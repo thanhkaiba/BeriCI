@@ -51,12 +51,20 @@ public class Beel : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
+
+        List<string> targets = new List<string>();
+        List<float> _params = new List<float>();
+
         float magic_damage = cs.Power * Model.config_stats.skill_params[0];
+        List<CombatSailor> enemies = cbState.GetAliveCharacterEnermy(cs.team);
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        enemies.ForEach(t =>
+        {
+            targets.Add(t.Model.id);
+            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }, this));
+        });
 
-
-        return RunAnimation(enermy, new List<float> { magic_damage });
+        return ProcessSkill(targets, _params);
     }
 
     public override float ProcessSkill(List<string> targets, List<float> _params)

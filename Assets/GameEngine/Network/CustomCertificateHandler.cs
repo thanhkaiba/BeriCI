@@ -1,6 +1,7 @@
 ﻿// Based on https://www.owasp.org/index.php/Certificate_and_Public_Key_Pinning#.Net
 using System.Security.Cryptography.X509Certificates;
 using UnityEngine.Networking;
+using UnityEngine;
 
 class CustomCertificateHandler : CertificateHandler
 {
@@ -33,6 +34,14 @@ class CustomCertificateHandler : CertificateHandler
         "72D6F6F623451B96A69E901F5F68775A4475965FFF41E534FA7C6DDF335A4B97FCFF2B413C" +
         "550A502B31CEC9389766919CE1953AF69730FE5B9B5E8C5935976733BB9889F0203010001";
 
+    public const string PUB_KEY_4 = "3082010A0282010100C1A6206815EF0539356741E122BBBFE" +
+        "FE4CEE6A4AB69E358B2B1228E26635F0DB23855568B71B2651FE6E7BD67159F87B1A7E085D4B0A" +
+        "9EA1EAB8AB7A86F24CF54A4CC8D6505E6423CF8F53182DBDAE79BFE33535B691235969658E5EDE6" +
+        "7E6DF63CB6152CA7322BABF45954AE8EB274C034DEE93C4ADF72A8E7639A0D86116F565BD40C7230" +
+        "8FDFB66248315F81287190D168ACACFA0E642820A502C0DEB412718F0339C4399B2F6DE72C8AF39AC" +
+        "B280BFD6C321152E143B622DE2427CD93DDBAC8D165E3C2B4423B5F06AC97F16AA5BB75B36B4F804D0D" +
+        "679F4DF794FF9DB74DDA001C69066FCC556CAF06F1BEA5D7DF15B215DD1509F29F9440AD891FA0830203010001";
+
 
     protected override bool ValidateCertificate(byte[] certificateData)
     {
@@ -40,8 +49,8 @@ class CustomCertificateHandler : CertificateHandler
 
         string pk = certificate.GetPublicKeyString();
 
+        //Debug.Log("SGSGSGSGS-" + pk);
 
-
-        return pk.Equals(PUB_KEY) || pk.Equals(PUB_KEY_2) || pk.Equals(PUB_KEY_3);
+        return pk.Equals(PUB_KEY) || pk.Equals(PUB_KEY_2) || pk.Equals(PUB_KEY_3) || pk.Equals(PUB_KEY_4);
     }
 }

@@ -17,6 +17,7 @@ namespace Piratera.Config
         public static SynergiesConfig Synergies;
         public static SailorStatusConfig SailorStatus;
         public static UpgradeShipConf UpgradeShipConfig;
+        public static TrainingConfig Training;
         public static bool HaveLoaded;
 
         public static void InitSyncConfig()
@@ -30,6 +31,7 @@ namespace Piratera.Config
             SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(GameConfigSync.GetContent("configs/StatusConfig.json"));
             PirateWheelConfig = JsonConvert.DeserializeObject<PirateWheelConfig>(GameConfigSync.GetContent("configs/PirateWheel.json"));
             UpgradeShipConfig = JsonConvert.DeserializeObject<UpgradeShipConf>(GameConfigSync.GetContent("configs/UpgradeShip.json"));
+            Training = JsonConvert.DeserializeObject<TrainingConfig>(GameConfigSync.GetContent("configs/Training.json"));
             string[] files = GameConfigSync.GetSailorFolder();
             foreach (string file in files)
             {

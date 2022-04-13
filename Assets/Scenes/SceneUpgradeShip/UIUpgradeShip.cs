@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using Piratera.Config;
 
 public class UIUpgradeShip : MonoBehaviour
 {

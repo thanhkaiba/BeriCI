@@ -23,4 +23,11 @@ public class TextDamage : MonoBehaviour
         GetComponent<Text>().color = color;
         if (iconCrit != null) iconCrit.SetActive(isCrit);
     }
+    public void AddExp(int exp, Vector3 p, Color color)
+    {
+        GetComponent<Text>().text = "+ " + exp.ToString("N0") + " exp";
+        transform.position = p;
+        GetComponent<Text>().color = color;
+        if (iconCrit != null) iconCrit.SetActive(false);
+    }
 }
