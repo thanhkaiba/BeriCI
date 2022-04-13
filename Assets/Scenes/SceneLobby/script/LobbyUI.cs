@@ -208,6 +208,10 @@ public class LobbyUI : MonoBehaviour
         }
         SceneManager.LoadScene("ScenePickTeam");
     }
+    public void OnButtonShipClick()
+    {
+        SceneManager.LoadScene("SceneUpgradeShip");
+    }
 
     public void ShowStaminaPack()
     {

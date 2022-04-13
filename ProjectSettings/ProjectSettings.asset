@@ -154,6 +154,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.DefaultCompany.piratera_client
+    Standalone: com.DefaultCompany.pirateraclient
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -723,6 +724,7 @@ PlayerSettings:
   webGLDecompressionFallback: 0
   scriptingDefineSymbols:
     Android: PIRATERA_QC
+    Standalone: UNITY_POST_PROCESSING_STACK_V2;PIRATERA_QC
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
