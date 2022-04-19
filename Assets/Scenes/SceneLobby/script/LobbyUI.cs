@@ -269,11 +269,13 @@ public class LobbyUI : MonoBehaviour
             GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
         } else if (!PvPData.Instance.HaveJoin)
         {
-            SceneManager.LoadScene("SceneLineUpDefense");
+            //SceneManager.LoadScene("SceneLineUpDefense");
+            SceneTransition.Instance.LoadScene("SceneLineUpDefense");
         }
         else
         {
-            SceneManager.LoadScene("SceneArena");
+            //SceneManager.LoadScene("SceneArena");
+            SceneTransition.Instance.LoadScene("SceneArena");
         }
      
     }
