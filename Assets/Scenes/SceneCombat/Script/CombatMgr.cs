@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public enum ModeID
 {
@@ -48,7 +50,15 @@ public class CombatMgr : MonoBehaviour
         //return;
         PreparingGame();
         StartCoroutine(StartGame());
-        if (modeId == ModeID.Arena) ChangeBattleFieldPvP();
+        if (modeId == ModeID.Arena)
+        {
+            ShowAdvantage();
+            ChangeBattleFieldPvP();
+        }
+        else
+        {
+            advantageGO.gameObject.SetActive(false);
+        }
     }
 
     private void OnDestroy()
@@ -94,10 +104,15 @@ public class CombatMgr : MonoBehaviour
     }
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(1);
+        //yield return new WaitForSeconds(1);
         ActivateAllStartPassive();
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.8f);
         combatState.status = CombatStatus.STARTED;
+        if (modeId == ModeID.Arena)
+        {
+            float delay = ActiveHomeFieldAdvantage();
+            yield return new WaitForSeconds(delay);
+        }
         if (!serverGame) CombatLoop();
         else CombatLoopServer();
     }
@@ -113,6 +128,94 @@ public class CombatMgr : MonoBehaviour
                 if (sailorB != null) sailorB.ActiveStartPassive();
             }
         }
+    }
+    private float ActiveHomeFieldAdvantage()
+    {
+        var config = GlobalConfigs.HomefieldAdvantage.GetAdvantage(defenseAdvantage);
+        switch (defenseAdvantage)
+        {
+            case HomefieldAdvantage.SWEET_HOME:
+                combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
+                {
+                    sailor.cs.MaxHealth += config._params[0] * sailor.cs.MaxHealth;
+                    sailor.cs.CurHealth = sailor.cs.MaxHealth;
+
+                    var img = (new GameObject()).AddComponent<SpriteRenderer>();
+                    img.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
+                    var pos = sailor.transform.position;
+                    pos.y += 2.8f;
+                    pos.z -= 0.1f;
+                    img.transform.localPosition = pos;
+
+                    Sequence seq = DOTween.Sequence();
+                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
+                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.AppendInterval(2f);
+                    seq.AppendCallback(() => Destroy(img));
+                });
+                return 1;
+            case HomefieldAdvantage.ELECTRONIC:
+                combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
+                {
+                    sailor.AddShield(config._params[0] * sailor.cs.MaxHealth);
+
+                    var img = (new GameObject()).AddComponent<SpriteRenderer>();
+                    img.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
+                    var pos = sailor.transform.position;
+                    pos.y += 2.8f;
+                    pos.z -= 0.1f;
+                    img.transform.localPosition = pos;
+
+                    Sequence seq = DOTween.Sequence();
+                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
+                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.AppendInterval(2f);
+                    seq.AppendCallback(() => Destroy(img));
+                });
+                break;
+            case HomefieldAdvantage.ARMOR:
+                combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
+                {
+                    sailor.cs.BaseArmor += config._params[0];
+                    sailor.cs.BaseMagicResist += config._params[1];
+
+                    var img = (new GameObject()).AddComponent<SpriteRenderer>();
+                    img.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
+                    var pos = sailor.transform.position;
+                    pos.y += 2.8f;
+                    pos.z -= 0.1f;
+                    img.transform.localPosition = pos;
+
+                    Sequence seq = DOTween.Sequence();
+                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
+                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.AppendInterval(2f);
+                    seq.AppendCallback(() => Destroy(img));
+                });
+                break;
+            case HomefieldAdvantage.CANNON:
+                combatState.GetAllTeamAliveSailors(Team.A).ForEach(sailor =>
+                {
+                float damageTake = sailor.CalcDamageTake(new Damage() { magic = sailor.cs.MaxHealth * config._params[0] }, null);
+                    sailor.LoseHealth(new Damage() { magic = damageTake });
+                });
+                break;
+            case HomefieldAdvantage.SPEED:
+                combatState.GetAllTeamAliveSailors(Team.A).ForEach(sailor =>
+                {
+                    sailor.cs.Speed += config._params[0];
+
+                    Sequence seq = DOTween.Sequence();
+                    var pos = sailor.transform.position;
+                    pos.y += 2.8f;
+                    var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
+                    eff.transform.localScale = Vector3.one * 1.8f;
+                    seq.AppendInterval(2f);
+                    seq.AppendCallback(() => Destroy(eff));
+                });
+                return 1;
+        }
+        return 1;
     }
     // serverGame
     void CombatLoopServer()
@@ -333,5 +436,13 @@ public class CombatMgr : MonoBehaviour
     {
         var scale = battleField.transform.localScale;
         battleField.sprite = Resources.Load<Sprite>("Background/train/train_lv_"+trainLevel);
+    }
+    [SerializeField]
+    private Transform advantageGO;
+    private void ShowAdvantage()
+    {
+        advantageGO.transform.Find("text").GetComponent<Text>().text = GameUtils.GetHomeAdvantageStr(defenseAdvantage);
+        advantageGO.transform.Find("desc").GetComponent<Text>().text = GameUtils.GetHomeAdvantageDesc(defenseAdvantage);
+        advantageGO.transform.Find("icon").GetComponent<Image>().sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
     }
 }

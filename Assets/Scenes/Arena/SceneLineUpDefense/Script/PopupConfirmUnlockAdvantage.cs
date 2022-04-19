@@ -34,7 +34,7 @@ public class PopupConfirmUnlockAdvantage : BaseGui
         type = advantage;
         title.text = "Unlock " + GameUtils.GetHomeAdvantageStr(advantage);
         yourBeri.text = UserData.Instance.Beri.ToString("N0");
-        price.text = "" + GlobalConfigs.PvP.advantage_price;
+        price.text = "" + GlobalConfigs.PvP.advantage_price.ToString("N0");
         icon.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + advantage.ToString());
     }
     public void OnClose()

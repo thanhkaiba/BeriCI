@@ -286,7 +286,8 @@ public class GameUtils : UnityEngine.Object
     }
     public static string GetHomeAdvantageDesc(HomefieldAdvantage type)
     {
-        var config = GlobalConfigs.HomefieldAdvantage.GetAdvantage(type);
+        Debug.Log("type " + (int)type);
+        var config = GlobalConfigs.HomefieldAdvantage.GetAdvantage(type);   
         switch (type)
         {
             case HomefieldAdvantage.SWEET_HOME:

@@ -26,8 +26,14 @@ public class SceneTransition : MonoBehaviour
     }
     IEnumerator LoadSceneT (string sceneName, TransitionType type)
     {
+        transition.SetTrigger("End");
+        yield return new WaitForSeconds(1.0f);
+        var progress = SceneManager.LoadSceneAsync(sceneName);
+        while (!progress.isDone)
+        {
+            yield return null;
+        }
         transition.SetTrigger("Start");
-        yield return new WaitForSeconds(0.5f);
-        SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
     }
 }
