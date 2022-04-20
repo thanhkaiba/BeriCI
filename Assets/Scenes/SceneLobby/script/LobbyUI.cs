@@ -270,12 +270,12 @@ public class LobbyUI : MonoBehaviour
         } else if (!PvPData.Instance.HaveJoin)
         {
             //SceneManager.LoadScene("SceneLineUpDefense");
-            SceneTransition.Instance.LoadScene("SceneLineUpDefense");
+            SceneTransition.Instance.LoadScene("SceneLineUpDefense", TransitionType.ARENA);
         }
         else
         {
             //SceneManager.LoadScene("SceneArena");
-            SceneTransition.Instance.LoadScene("SceneArena");
+            SceneTransition.Instance.LoadScene("SceneArena", TransitionType.ARENA);
         }
      
     }

@@ -6,11 +6,12 @@ using UnityEngine.SceneManagement;
 public enum TransitionType
 {
     ARENA,
+    FADE,
 };
 public class SceneTransition : MonoBehaviour
 {
     public static SceneTransition Instance;
-    public Animator transition;
+    public List<Animator> transitions;
     void Awake()
     {
         if (Instance == null)
@@ -22,18 +23,42 @@ public class SceneTransition : MonoBehaviour
     }
     public void LoadScene(string sceneName, TransitionType type = TransitionType.ARENA)
     {
+        transitions.ForEach(ani => ani.gameObject.SetActive(false));
         StartCoroutine(LoadSceneT(sceneName, type));
     }
     IEnumerator LoadSceneT (string sceneName, TransitionType type)
     {
-        transition.SetTrigger("End");
-        yield return new WaitForSeconds(1.0f);
-        var progress = SceneManager.LoadSceneAsync(sceneName);
-        while (!progress.isDone)
+        Animator transition;
+        switch (type)
         {
-            yield return null;
+            case TransitionType.ARENA:
+                {
+                    transition = transitions[0];
+                    transition.gameObject.SetActive(true);
+                    transition.SetTrigger("End");
+                    yield return new WaitForSeconds(1.1f);
+                    var progress = SceneManager.LoadSceneAsync(sceneName);
+                    while (!progress.isDone)
+                        yield return null;
+                    transition.SetTrigger("Start");
+                    break;
+                }
+            case TransitionType.FADE:
+                {
+                    transition = transitions[1];
+                    transition.gameObject.SetActive(true);
+                    transition.SetTrigger("Start");
+                    yield return new WaitForSeconds(0.5f);
+                    var progress = SceneManager.LoadSceneAsync(sceneName);
+                    while (!progress.isDone)
+                        yield return null;
+                    transition.SetTrigger("End");
+                    break;
+                }
+            default:
+                SceneManager.LoadScene(sceneName);
+                break;
         }
-        transition.SetTrigger("Start");
         //SceneManager.LoadScene(sceneName);
     }
 }
