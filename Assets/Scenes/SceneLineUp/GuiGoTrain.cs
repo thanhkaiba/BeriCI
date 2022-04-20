@@ -49,7 +49,7 @@ public class GuiGoTrain : BaseGui
             else
             {
                 GuiManager.Instance.ShowGuiWaiting(false);
-                SceneManager.LoadScene("SceneCombat2D");
+                SceneTransition.Instance.LoadScene("SceneCombat2D");
             }
         }
     }

@@ -21,6 +21,8 @@ public class TempCombatData : Singleton<TempCombatData>
     public List<CombatAction> ca;
     public HomefieldAdvantage defense_advantage;
 
+    public bool isReplayMatch = false;
+
     public void LoadCombatDataFromSfs(ISFSObject packet)
     {
         Debug.Log("Read Combat Data");
@@ -69,6 +71,7 @@ public class TempCombatData : Singleton<TempCombatData>
 
         if (modeID == ModeID.Arena) defense_advantage = (HomefieldAdvantage)packet.GetInt("defense_advantage");
         Debug.Log("defense_advantage " + defense_advantage);
+        isReplayMatch = false;
     }
 }
 

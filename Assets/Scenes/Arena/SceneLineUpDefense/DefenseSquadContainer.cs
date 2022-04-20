@@ -19,7 +19,6 @@ public class DefenseSquadContainer : MonoBehaviour
 
                 if (sailorId.Length > 0)
                 {
-
                     Sailor sailor = AddSailor(sailorId);
                     slot.SetSelectedSailer(sailor);
                 }

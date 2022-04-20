@@ -13,7 +13,6 @@ public class DefenseCharacterContainer : BaseCharacterContainer
         getSubstituteSailors = PvPData.Instance.DefenseCrew.GetSubstituteSailors;
         base.Start();
         GameEvent.DefenseSquadChanged.AddListener(RenderListSubSailor);
-
     }
     void OnDestroy() => GameEvent.DefenseSquadChanged.RemoveListener(RenderListSubSailor);
 }

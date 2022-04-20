@@ -31,13 +31,13 @@ public class PvPSquadAContainer : MonoBehaviour
         }
 
         OnUpdateSquadA();
-        GameEvent.PrepareSquadChanged.AddListener(OnUpdateSquadA);
+        GameEvent.PreparePvPSquadChanged.AddListener(OnUpdateSquadA);
 
     }
 
     private void OnDestroy()
     {
-        GameEvent.PrepareSquadChanged.RemoveListener(OnUpdateSquadA);
+        GameEvent.PreparePvPSquadChanged.RemoveListener(OnUpdateSquadA);
     }
 
     public Sailor AddSubSailor(string sailorId)

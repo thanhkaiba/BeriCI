@@ -2769,7 +2769,7 @@ GameObject:
   - component: {fileID: 1133007009}
   - component: {fileID: 1133007010}
   m_Layer: 0
-  m_Name: SceneUI
+  m_Name: SceneMgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
