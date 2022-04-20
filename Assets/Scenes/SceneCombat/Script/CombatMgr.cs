@@ -33,6 +33,7 @@ public class CombatMgr : MonoBehaviour
     public int actionCountShow = 0;
     public static CombatMgr Instance;
     private bool serverGame = false;
+    private bool watchReplay = false;
     private ModeID modeId = ModeID.Test;
     private int trainLevel = 0;
     private List<CombatAction> listActions;
@@ -59,6 +60,7 @@ public class CombatMgr : MonoBehaviour
         {
             advantageGO.gameObject.SetActive(false);
         }
+        GameObject.Find("BtnSkip").SetActive(watchReplay);
     }
 
     private void OnDestroy()
@@ -78,6 +80,7 @@ public class CombatMgr : MonoBehaviour
             yourTeamIndex = TempCombatData.Instance.yourTeamIndex;
             serverGame = true;
             if (modeId == ModeID.Arena) defenseAdvantage = TempCombatData.Instance.defense_advantage;
+            watchReplay = TempCombatData.Instance.isReplayMatch;
         }
         else if (TempCombatData.Instance.trainingGameLevel != -1)
         {
@@ -423,6 +426,16 @@ public class CombatMgr : MonoBehaviour
         else if (Time.timeScale == 2) GameUtils.SetTimeScale(3);
         else GameUtils.SetTimeScale(1);
         PlayerPrefs.SetFloat($"TimeCombatScale {UserData.Instance.UID}", Time.timeScale);
+    }
+    public void SkipWatch()
+    {
+        CombatAction actionProcess = listActions[listActions.Count - 1];
+        actionCount = listActions.Count + 1;
+        GameUtils.SetTimeScale(1);
+        GameEndData data = actionProcess.gameEndData;
+        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        go.GetComponent<GuiRewardPvP>().SetReward((GameEndPvPData)data);
+        go.GetComponent<GuiRewardPvP>().isWatchReplay = true;
     }
     [SerializeField]
     private SpriteRenderer battleField;

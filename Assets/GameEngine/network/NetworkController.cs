@@ -590,6 +590,7 @@ namespace Piratera.Network
                         {
                             string json = packet.GetUtfString("combat_data");
                             TempCombatData.Instance.LoadCombatDataFromSfs(SFSObject.NewFromJsonData(json));
+                            TempCombatData.Instance.isReplayMatch = true;
                             SceneManager.LoadScene("SceneCombat2D");
                         }
                         break;
