@@ -3,12 +3,14 @@ using Sfs2X.Entities.Data;
 using System.Linq;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    
     public class PopupTopArena : BaseGui
     {
+        [SerializeField]
+        private List<Transform> slotTop;
         public class PVPRankPlayer
         {
             public string name;
@@ -32,7 +34,7 @@ namespace Piratera.GUI
         }
 
         List<PVPRankPlayer> Players = new();
-        [SerializeField] RectTransform content;
+        [SerializeField] Transform content;
         [SerializeField] GameObject cellPrefap;
 
         [SerializeField]
@@ -69,7 +71,7 @@ namespace Piratera.GUI
             s.AppendCallback(() => canvasGroup.interactable = true);
 
             background.localScale = new Vector3(0.6f, 0.6f, 0.6f);
-            background.DOScale(new Vector3(1f, 1f, 1f), 0.3f).SetEase(Ease.OutBack).SetLink(background.gameObject).SetTarget(background.transform);
+            background.DOScale(Vector3.one * 1.2f, 0.3f).SetEase(Ease.OutBack).SetLink(background.gameObject).SetTarget(background.transform);
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeIn(0.3f);
@@ -88,8 +90,20 @@ namespace Piratera.GUI
 
         protected void RenderCells()
         {
-           
-            for (int i = 0; i < Players.Count; i++)
+            for (int j = 0; j < slotTop.Count; j++)
+            {
+                var slot = slotTop[j];
+                if (Players.Count < j)
+                {
+                    slot.gameObject.SetActive(false);
+                    continue;
+                }
+                slot.gameObject.SetActive(true);
+                slot.Find("textName").GetComponent<Text>().text = Players[j].name;
+                slot.Find("textElo").GetComponent<Text>().text = "Elo:" + Players[j].elo;
+                slot.Find("avt").GetComponent<UserAvatar>().LoadAvatar(Players[j].avatar);
+            }
+            for (int i = 2; i < Players.Count; i++)
             {
                 GameObject imgObject = Instantiate(cellPrefap, content);
                 CellPvPRank cell = imgObject.GetComponent<CellPvPRank>();
