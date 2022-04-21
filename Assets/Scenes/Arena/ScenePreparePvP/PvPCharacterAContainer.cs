@@ -8,7 +8,7 @@ public class PvPCharacterAContainer : BaseCharacterContainer
     {
         addSubSailor = squadAContainer.AddSubSailor;
         getSubstituteSailors = TeamPvPCombatPrepareData.Instance.GetSubstituteSailors;
-        GameEvent.PrepareSquadChanged.AddListener(RenderListSubSailor);
+        GameEvent.PreparePvPSquadChanged.AddListener(RenderListSubSailor);
         base.Start();
     }
     void OnDestroy()

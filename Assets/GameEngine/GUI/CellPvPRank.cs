@@ -20,13 +20,9 @@ namespace Piratera.GUI
         {
             avatar.LoadAvatar(player.avatar);
             textName.text = player.name;
-            textRank.text = "Rank: " + player.rank;
+            textRank.text = "" + player.rank;
             textElo.text = "Elo: " + player.elo;
         }
-
-
-
-
     }
 }
 

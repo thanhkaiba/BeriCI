@@ -21,6 +21,8 @@ namespace Piratera.GUI
         [SerializeField]
         private SkeletonGraphic anim;
 
+        public bool isWatchReplay = false;
+
         protected override void Start()
         {
 
@@ -103,6 +105,11 @@ namespace Piratera.GUI
         }
         public void ClickReceive()
         {
+            if (isWatchReplay)
+            {
+                SceneTransition.Instance.LoadScene("SceneArena", TransitionType.ARENA);
+                return;
+            }
             if (TempCombatData.Instance.modeID == ModeID.PvE)
             {
                 LoadServerDataUI.NextScene = "SceneLobby";

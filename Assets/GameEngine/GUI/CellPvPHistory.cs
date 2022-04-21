@@ -12,15 +12,11 @@ namespace Piratera.GUI
         [SerializeField]
         private UserAvatar avatar;
         [SerializeField]
-        private Text textName;
+        private Text textName, textElo;
         [SerializeField]
-        private Text textElo;
-
+        private Image iconPos, iconResult;
         [SerializeField]
-        private Text textResult;
-
-        [SerializeField]
-        private Text textPos;
+        private Sprite iconAttack, iconDefense, iconWin, iconLose, iconDraw;
 
         PopupArenaHistory.PvPHistory data;
 
@@ -29,17 +25,16 @@ namespace Piratera.GUI
             data = history;
             avatar.LoadAvatar(history.OpponentAvatar);
             textName.text = history.Opponent; ;
-            textElo.text = history.EloDelta.ToString();
-            textElo.color = history.EloDelta < 0 ? Color.red : Color.green;
-            textPos.text = history.Position.ToString();
-            
-            
-            textPos.color = history.Position == "attacker" ? Color.gray : Color.blue;
+            textElo.text = (history.EloDelta > 0 ? "+" + history.EloDelta.ToString() : history.EloDelta.ToString()) + " elo";
+            textElo.color = history.EloDelta < 0 ? new Color32(0, 132, 183, 255) : new Color32(123, 179, 57, 255);
 
-            textResult.text = history.Result;
-            textResult.color = history.Result == "Victory" ? Color.green : history.Result == "Draw" ? Color.magenta : Color.red;
+            if (history.Position == "attacker") iconPos.sprite = iconAttack;
+            else iconPos.sprite = iconDefense;
+
+            if (history.Result == "Victory") iconResult.sprite = iconWin;
+            else if (history.Result == "Draw") iconResult.sprite = iconDraw;
+            else iconResult.sprite = iconLose;
         }
-        
         public void OnReplay()
         {
             GuiManager.Instance.ShowGuiWaiting(true);
@@ -47,10 +42,6 @@ namespace Piratera.GUI
             sfsObject.PutLong("match", data.matchId);
             NetworkController.Send(SFSAction.PVP_WATCH_HISTORY, sfsObject);
         }
-
-
-
-
     }
 }
 

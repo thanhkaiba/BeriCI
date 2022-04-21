@@ -77,6 +77,9 @@ public class PvPData : Singleton<PvPData>
             case HomefieldAdvantage.CANNON:
                 src = "Background/battlefield/sand";
                 break;
+            case HomefieldAdvantage.ELECTRONIC:
+                src = "Background/battlefield/lab";
+                break;
             default:
                 src = "Background/battlefield/shield";
                 break;
