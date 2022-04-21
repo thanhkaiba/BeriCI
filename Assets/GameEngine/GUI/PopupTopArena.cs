@@ -100,10 +100,11 @@ namespace Piratera.GUI
                 }
                 slot.gameObject.SetActive(true);
                 slot.Find("textName").GetComponent<Text>().text = Players[j].name;
-                slot.Find("textElo").GetComponent<Text>().text = "Elo:" + Players[j].elo;
+                slot.Find("textElo").GetComponent<Text>().text = "Elo: " + Players[j].elo;
                 slot.Find("avt").GetComponent<UserAvatar>().LoadAvatar(Players[j].avatar);
+                Debug.Log("Players[j].avatar: " + Players[j].avatar);
             }
-            for (int i = 2; i < Players.Count; i++)
+            for (int i = 3; i < Players.Count; i++)
             {
                 GameObject imgObject = Instantiate(cellPrefap, content);
                 CellPvPRank cell = imgObject.GetComponent<CellPvPRank>();
