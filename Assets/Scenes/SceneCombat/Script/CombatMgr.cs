@@ -204,7 +204,7 @@ public class CombatMgr : MonoBehaviour
                 });
                 break;
             case HomefieldAdvantage.SPEED:
-                combatState.GetAllTeamAliveSailors(Team.A).ForEach(sailor =>
+                combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
                     sailor.cs.Speed += config._params[0];
 
