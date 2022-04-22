@@ -33,7 +33,7 @@ public class SceneArenaUI : MonoBehaviour
         if (!PvPData.Instance.HaveJoin)
         {
             GuiManager.Instance.AddGui("prefap/PopupCongratJoinArena");
-            SceneTransition.Instance.ShowWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true, false);
             NetworkController.Send(SFSAction.PVP_JOIN);
         } else
         {
@@ -45,7 +45,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void SyncData()
     {
-        //SceneTransition.Instance.ShowWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_DATA);
     }
     private void UpdateRank()
@@ -133,7 +133,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowTop()
     {
-        SceneTransition.Instance.ShowWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         SFSObject s = new SFSObject();
         s.PutInt("from", 0);
         s.PutInt("to", 10);
@@ -141,7 +141,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowHistory()
     {
-        SceneTransition.Instance.ShowWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_HISTORY);
     }
     private void OnDestroy()
@@ -165,7 +165,7 @@ public class SceneArenaUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Not Enough Ticket!");
             return;
         }
-        SceneTransition.Instance.ShowWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_PLAY);
     }
     private void ShowListSailors()
