@@ -51,7 +51,7 @@ namespace Piratera.GUI
         public void ShowLuckyWheel()
         {
 
-            GuiManager.Instance.AddGui<GuiLuckyWheel>("Prefap/GuiLuckyWheel");
+            GuiManager.Instance.AddGui("Prefap/GuiLuckyWheel");
         }
     }
 

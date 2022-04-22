@@ -2887,7 +2887,7 @@ RectTransform:
   - {fileID: 294666946}
   - {fileID: 1760396242}
   m_Father: {fileID: 1234413708}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -3122,8 +3122,8 @@ RectTransform:
   - {fileID: 119441276}
   - {fileID: 1259725237}
   - {fileID: 1968131697}
-  - {fileID: 930996706}
   - {fileID: 1220181564}
+  - {fileID: 930996706}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4945,7 +4945,7 @@ PrefabInstance:
     - target: {fileID: 2778162367661141502, guid: 733e1e8c5fe0aa142ae336a60efc1756,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: -591.89
       objectReference: {fileID: 0}
     - target: {fileID: 2778162367719816109, guid: 733e1e8c5fe0aa142ae336a60efc1756,
         type: 3}
@@ -4960,7 +4960,7 @@ PrefabInstance:
     - target: {fileID: 2778162367719816109, guid: 733e1e8c5fe0aa142ae336a60efc1756,
         type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2778162367719816109, guid: 733e1e8c5fe0aa142ae336a60efc1756,
         type: 3}
@@ -5056,6 +5056,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PopupSelectAdvantage
+      objectReference: {fileID: 0}
+    - target: {fileID: 2778162367719816110, guid: 733e1e8c5fe0aa142ae336a60efc1756,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2778162368545808559, guid: 733e1e8c5fe0aa142ae336a60efc1756,
         type: 3}

@@ -36,7 +36,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private void Awake()
     {
         Input.multiTouchEnabled = false;
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
     }
 
 
@@ -124,12 +124,9 @@ public class ScenePickTeamBattleUI : MonoBehaviour
             sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
         }
-    }
-
+    }   
     public void Surrender()
     {
-        GuiManager.Instance.AddGui<GuiSurrender>("Prefap/GuiSurrender", LayerId.GUI);
+        GuiManager.Instance.AddGui("Prefap/GuiSurrender");
     }
-
-
 }

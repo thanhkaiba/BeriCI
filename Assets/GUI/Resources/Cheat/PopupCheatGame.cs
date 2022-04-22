@@ -9,7 +9,7 @@ namespace Piratera.Cheat
 {
 #if PIRATERA_DEV || PIRATERA_QC
 
-    public class PopupCheatGame : BaseGui
+    public class PopupCheatGame : MonoBehaviour
     {
         [SerializeField]
         private Text textCheatSailor_name;
@@ -23,34 +23,23 @@ namespace Piratera.Cheat
         private InputField textCheatStamina_quality;
         [SerializeField]
         private InputField textCheatRank_quality;
-
-
         private void Awake()
         {
             GameEvent.UserDataChanged.AddListener(UpdatePVERank);
             textCheatRank_quality.text = UserData.Instance.PVERank.ToString();
         }
-
         private void UpdatePVERank(List<string> arg0)
         {
             textCheatRank_quality.text = UserData.Instance.PVERank.ToString();
         }
-
         private void OnDestroy()
         {
             GameEvent.UserDataChanged.RemoveListener(UpdatePVERank);
         }
-
-
         public void SendCheatSailor()
         {
-
-
             CheatMgr.CheatSailor(textCheatSailor_name.text, textCheatSailor_quality.text, textCheatSailor_level.text);
-
-
         }
-
         public void SendCheatStamina()
         {
             if (string.IsNullOrEmpty(textCheatStamina_quality.text))
@@ -68,7 +57,6 @@ namespace Piratera.Cheat
             }
             CheatMgr.CheatResource("beri", int.Parse(textCheatBeri_quality.text));
         }
-
         public void SendCheatRank()
         {
             if (string.IsNullOrEmpty(textCheatRank_quality.text))
@@ -77,7 +65,6 @@ namespace Piratera.Cheat
             }
             CheatMgr.CheatRank(int.Parse(textCheatRank_quality.text));
         }
-
         public void CheatBot()
         {
             var fgl = CrewData.Instance.FightingTeam;
@@ -108,13 +95,15 @@ namespace Piratera.Cheat
             sailorCheatData.PutSFSArray("sailorcheats", sailorcheats);
 
             CheatMgr.CheatBotAndPlay(sailorCheatData);
-
         }
         public void ClearCache()
         {
             PlayerPrefs.DeleteAll();
         }
-
+        public void DestorySelf()
+        {
+            Destroy(gameObject);
+        }
     }
 #endif
 }

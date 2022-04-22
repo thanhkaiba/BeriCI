@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PopupConfirmUnlockAdvantage : BaseGui
+public class PopupConfirmUnlockAdvantage : MonoBehaviour
 {
     private HomefieldAdvantage type;
     [SerializeField]
@@ -16,10 +16,9 @@ public class PopupConfirmUnlockAdvantage : BaseGui
     private Text title, yourBeri, price;
     [SerializeField]
     private Image icon;
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-        NetworkController.AddServerActionListener(onReceiveServerAction);
+        NetworkController.Listen(onReceiveServerAction);
     }
     private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
@@ -40,7 +39,7 @@ public class PopupConfirmUnlockAdvantage : BaseGui
     public void OnClose()
     {
         NetworkController.RemoveServerActionListener(onReceiveServerAction);
-        DestroySelf();
+        Destroy(gameObject);
     }
     public void OnConfirm()
     {

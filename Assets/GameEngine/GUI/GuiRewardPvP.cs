@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiRewardPvP : BaseGui
+    public class GuiRewardPvP : MonoBehaviour
     {
         [SerializeField]
         Text textElo;
@@ -23,10 +23,8 @@ namespace Piratera.GUI
 
         public bool isWatchReplay = false;
 
-        protected override void Start()
+        protected void Start()
         {
-
-            base.Start();
             Appear();
         }
 
@@ -40,7 +38,7 @@ namespace Piratera.GUI
             {
                 textElo.color = Color.red;
             }
-            var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+            var canvas = GuiManager.Instance.GetCanvas().GetComponent<Canvas>();
             Sequence seqe = DOTween.Sequence();
             coin.transform.localScale = Vector3.zero;
             seqe.AppendInterval(0.2f);
@@ -76,9 +74,7 @@ namespace Piratera.GUI
                 anim.Initialize(true);
                 ChangeStateAnim();
             }
-
-        }
-
+        }   
         private void Appear()
         {
             Sequence s = DOTween.Sequence();

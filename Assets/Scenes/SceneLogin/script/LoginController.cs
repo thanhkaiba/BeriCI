@@ -44,7 +44,7 @@ public class LoginController : MonoBehaviour
     //----------------------------------------------------------
     void Awake()
     {
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
         enableLoginUI(true);
 
 

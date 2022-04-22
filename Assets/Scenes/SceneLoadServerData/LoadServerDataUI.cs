@@ -267,7 +267,7 @@ public class LoadServerDataUI : MonoBehaviour
 
     private void Awake()
     {
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
     }
 
 }

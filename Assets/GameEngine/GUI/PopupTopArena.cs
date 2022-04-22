@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class PopupTopArena : BaseGui
+    public class PopupTopArena : MonoBehaviour
     {
         [SerializeField]
         private List<Transform> slotTop;
@@ -39,18 +39,14 @@ namespace Piratera.GUI
 
         [SerializeField]
         private Transform background;
-        protected override void Start()
+        protected void Start()
         {
-            
             Appear();
         }
         public void OnOK()
         {
             ClosePopup();
-           
         }
-
-        
         public void NewFromSFSObject(ISFSArray packet)
         {
             foreach (SFSObject obj in packet)
@@ -82,7 +78,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

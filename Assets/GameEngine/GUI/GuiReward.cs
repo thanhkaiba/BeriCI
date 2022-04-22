@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiReward : BaseGui
+    public class GuiReward : MonoBehaviour
     {
         [SerializeField]
         Text[] texts;
@@ -22,10 +22,8 @@ namespace Piratera.GUI
         [SerializeField]
         private SkeletonGraphic anim;
 
-        protected override void Start()
+        protected void Start()
         {
-
-            base.Start();
             Appear();
         }
 

@@ -8,8 +8,7 @@ using UnityEngine.UI;
 
 namespace Piratera.Cheat
 {
-
-    public class PopupCheatSailorInfo : BaseGui
+    public class PopupCheatSailorInfo : MonoBehaviour
     {
         [SerializeField]
         private Text textCheatSailor_name;
@@ -30,7 +29,7 @@ namespace Piratera.Cheat
 
         public string sailorId;
 
-        protected override void Start()
+        protected void Start()
         {
             SailorModel sailor = CrewData.Instance.GetSailorModel(sailorId);
             textCheatSailor_name.text = sailor.name;
@@ -39,10 +38,8 @@ namespace Piratera.Cheat
             textCheatSailor_exp.text = sailor.exp.ToString();
             textCheatSailor_star.text = sailor.star.ToString();
             textCheatSailor_fight.text = sailor.pve_count.ToString();
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
         }
-
-
         public void SendCheatSailor()
         {
             int quantity = int.Parse(textCheatSailor_quality.text);
@@ -53,12 +50,14 @@ namespace Piratera.Cheat
             SceneTransition.Instance.ShowWaiting(true);
             CheatMgr.CheatSailorQuantity(sailorId, quantity, level, exp, star, fight);
         }
-
         private void OnDestroy()
         {
             NetworkController.RemoveServerActionListener(OnReceiveServerAction);
         }
-
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
+        }
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
             SceneTransition.Instance.ShowWaiting(false);

@@ -178,7 +178,7 @@ public class LobbyUI : MonoBehaviour
 
     public void OnLogoutButtonClick()
     {
-        GuiManager.Instance.AddGui<GuiSetting>("Prefap/GuiSetting", LayerId.GUI);
+        GuiManager.Instance.AddGui("Prefap/GuiSetting");
     }
     public void OnStartPVEMode()
     {
@@ -196,7 +196,7 @@ public class LobbyUI : MonoBehaviour
             return;
         }
 
-        GameObject go = GuiManager.Instance.AddGui<GuiConfirmPVE>("Prefap/GuiConfirmPVE", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiConfirmPVE");
         go.GetComponent<GuiConfirmPVE>().lobby = this;
     }
     public void OnButtonPickTeamClick()
@@ -266,7 +266,7 @@ public class LobbyUI : MonoBehaviour
 
         if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_WELCOME_ARENA)
         {
-            GuiManager.Instance.AddGui<PopupWelcomeArena>("Prefap/PopupWelcomeArena");
+            GuiManager.Instance.AddGui("Prefap/PopupWelcomeArena");
         } else if (!PvPData.Instance.HaveJoin)
         {
             //SceneManager.LoadScene("SceneLineUpDefense");
@@ -319,12 +319,12 @@ public class LobbyUI : MonoBehaviour
     private void ShowNPCTut()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/NPCTut");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
     }
     public void ShowTutOpenCrew()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
         var pos = GameObject.Find("ButtonCrew").transform.position;
         hand.transform.position = pos;
     }
@@ -336,7 +336,7 @@ public class LobbyUI : MonoBehaviour
         s.AppendCallback(() => {
             Destroy(blockScene);
             var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-            GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+            GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
             hand.transform.position = GameObject.Find("ButtonPVE").transform.position;
             hand.name = "hand_pve";
         });
@@ -349,7 +349,7 @@ public class LobbyUI : MonoBehaviour
         s.AppendCallback(() => {
             Destroy(blockScene);
             var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-            GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+            GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
             var pos = GameObject.Find("ButtonLineUp").transform.position;
             hand.transform.position = pos;
         });
@@ -357,7 +357,7 @@ public class LobbyUI : MonoBehaviour
     private GameObject AddBlockScene()
     {
         var blockScene = new GameObject();
-        blockScene.transform.SetParent(GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        blockScene.transform.SetParent(GuiManager.Instance.GetCanvas().transform);
         blockScene.transform.localPosition = Vector3.zero;
         blockScene.AddComponent<CanvasRenderer>();
         RectTransform rectTransform = blockScene.AddComponent<RectTransform>();
@@ -371,7 +371,7 @@ public class LobbyUI : MonoBehaviour
     public void ShowGuiCheat()
     {
 #if PIRATERA_DEV || PIRATERA_QC
-        GuiManager.Instance.AddGui<PopupCheatGame>("Cheat/PopupCheat");
+        GuiManager.Instance.AddGui("Cheat/PopupCheat");
 #endif
     }
 }

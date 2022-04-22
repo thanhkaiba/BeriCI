@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace Piratera.GUI
 {
-    public class PopupDefenseLineUpGuide : BaseGui
+    public class PopupDefenseLineUpGuide : MonoBehaviour
     {
         [SerializeField]
         private Transform background;
-        protected override void Start()
+        protected void Start()
         {
             PvPData.Instance.ShowedTutorial = PvPData.PVP_TURORIAL_STEP.POPUP_DEFENSE_LINEUP;
             Appear();
@@ -17,9 +17,6 @@ namespace Piratera.GUI
         {
             ClosePopup();
         }
-
-
-
         private void Appear()
         {
             Sequence s = DOTween.Sequence();
@@ -41,7 +38,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

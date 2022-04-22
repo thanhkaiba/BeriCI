@@ -386,7 +386,6 @@ GameObject:
   - component: {fileID: 5039031301503140839}
   - component: {fileID: 6318472476279571796}
   - component: {fileID: 5595297527213939020}
-  - component: {fileID: 5992000369517596873}
   - component: {fileID: 5810340151272006942}
   m_Layer: 5
   m_Name: GuiSetting
@@ -507,22 +506,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.5
   blockTouchBehind: 1
---- !u!114 &5992000369517596873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1105822818634266081}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearEffect: 1
-  disappearEffect: 2
-  appearTime: 0.6
-  disappearTime: 0.4
 --- !u!225 &5810340151272006942
 CanvasGroup:
   m_ObjectHideFlags: 0

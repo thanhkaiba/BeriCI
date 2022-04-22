@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiSetting : BaseGui
+    public class GuiSetting : MonoBehaviour
     {
         [SerializeField]
         private Text textName;
@@ -33,13 +33,8 @@ namespace Piratera.GUI
 
         [SerializeField]
         private Image iconMusic;
-
-
-
-
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
 #if PIRATERA_DEV
             textVersion.text = "DEV_" + Application.version;
 #elif PIRATERA_QC
@@ -55,7 +50,6 @@ namespace Piratera.GUI
             textCreateAt.text = date.ToString("MM/dd/yyyy");
             UpdateSoundIcon();
             UpdateMusicIcon();
-
         }
 
         public void Logout()
@@ -70,7 +64,7 @@ namespace Piratera.GUI
 
         public void OnClose()
         {
-            RunDestroy();
+            Destroy(gameObject);
         }
 
 

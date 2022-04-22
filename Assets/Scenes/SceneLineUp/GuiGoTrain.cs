@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GuiGoTrain : BaseGui
+public class GuiGoTrain : MonoBehaviour
 {
     private int train_level;
     [SerializeField]
@@ -23,10 +23,9 @@ public class GuiGoTrain : BaseGui
     [SerializeField]
     private GameObject beriMinus;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-        NetworkController.AddServerActionListener(onReceiveServerAction);
+        NetworkController.Listen(onReceiveServerAction);
         Appear();
     }
     public void SetLevel(int level)
@@ -53,7 +52,6 @@ public class GuiGoTrain : BaseGui
             }
         }
     }
-
     public void OnStartTrain()
     {
         int cost = GlobalConfigs.Training.cost[train_level];
@@ -90,7 +88,7 @@ public class GuiGoTrain : BaseGui
         var canvasGroup = background.GetComponent<CanvasGroup>();
         Sequence s = DOTween.Sequence();
         s.Append(canvasGroup.DOFade(0, 0.1f));
-        s.AppendCallback(DestroySelf);
+        s.AppendCallback(() => Destroy(gameObject));
 
         var fog = GetComponent<HaveFog>();
         if (fog) fog.FadeOut(0.1f);

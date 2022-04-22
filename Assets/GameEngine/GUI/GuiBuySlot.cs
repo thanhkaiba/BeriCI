@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiBuySlot : BaseGui
+    public class GuiBuySlot : MonoBehaviour
     {
         [SerializeField]
         private Transform background;
@@ -21,7 +21,7 @@ namespace Piratera.GUI
         private Button buttonBuy;
 
         private long cost;
-        protected override void Start()
+        protected void Start()
         {
             Appear();
         }
@@ -33,7 +33,7 @@ namespace Piratera.GUI
             buttonBuy.interactable = cost >= 0;
             textCurrentBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
             GameEvent.UserBeriChanged.AddListener(UpdateCurrentBeri);
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
 
         }
 
@@ -102,7 +102,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.2f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.2f);

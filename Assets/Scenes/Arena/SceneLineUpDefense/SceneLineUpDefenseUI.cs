@@ -20,12 +20,12 @@ public class SceneLineUpDefenseUI : MonoBehaviour
     {
         if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_DEFENSE_LINEUP)
         {
-            GuiManager.Instance.AddGui<PopupDefenseLineUpGuide>("prefap/PopupDefenseLineUpGuide");
+            GuiManager.Instance.AddGui("prefap/PopupDefenseLineUpGuide");
         }
      
         DefenseSquadContainer.Draging = false;
         TextMaxCapacity.text = "Max capacity: " + UserData.Instance.NumSlot;
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
         UpdateBattleFieldImage();
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -128,7 +128,7 @@ public class SceneLineUpDefenseUI : MonoBehaviour
         }
         else
         {
-            var gui = GuiManager.Instance.AddGui<PopupConfirmUnlockAdvantage>(popupConfirm);
+            var gui = GuiManager.Instance.AddGui(popupConfirm);
             gui.GetComponent<PopupConfirmUnlockAdvantage>().SetType(type);
         }
     }

@@ -23,6 +23,9 @@ public class SceneTransition : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+    }
+    private void Start()
+    {
         waiting.SetActive(false);
         transitions.ForEach(ani => ani.gameObject.SetActive(false));
     }

@@ -27,13 +27,12 @@ public class SceneArenaUI : MonoBehaviour
     private SpriteRenderer battleField;
     void Start()
     {
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
         UpdateTicket();
         UpdateRank();
         if (!PvPData.Instance.HaveJoin)
         {
-           
-            GuiManager.Instance.AddGui<PopupCongratJoinArena>("prefap/PopupCongratJoinArena");
+            GuiManager.Instance.AddGui("prefap/PopupCongratJoinArena");
             SceneTransition.Instance.ShowWaiting(true);
             NetworkController.Send(SFSAction.PVP_JOIN);
         } else
@@ -46,7 +45,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void SyncData()
     {
-        SceneTransition.Instance.ShowWaiting(true);
+        //SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.PVP_DATA);
     }
     private void UpdateRank()
@@ -105,7 +104,7 @@ public class SceneArenaUI : MonoBehaviour
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui<PopupTopArena>("Prefap/PopupTopArena");
+                        GameObject GO = GuiManager.Instance.AddGui("Prefap/PopupTopArena");
                         PopupTopArena popup = GO.GetComponent<PopupTopArena>();
                         popup.NewFromSFSObject(packet.GetSFSArray("list"));
                     }
@@ -116,7 +115,7 @@ public class SceneArenaUI : MonoBehaviour
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui<PopupArenaHistory>("Prefap/PopupArenaHistory");
+                        GameObject GO = GuiManager.Instance.AddGui("Prefap/PopupArenaHistory");
                         PopupArenaHistory popup = GO.GetComponent<PopupArenaHistory>();
                         popup.NewFromSFSObject(packet.GetSFSArray("history"));
                     }
@@ -130,7 +129,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowGuide()
     {
-        GuiManager.Instance.AddGui<PopupNotification>("Prefap/PopupArenaGuide");
+        GuiManager.Instance.AddGui("Prefap/PopupArenaGuide");
     }
     public void ShowTop()
     {

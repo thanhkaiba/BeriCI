@@ -5,25 +5,19 @@ using UnityEngine;
 
 namespace Piratera.GUI
 {
-    public class PopupNewVersion : BaseGui
+    public class PopupNewVersion : MonoBehaviour
     {
         [SerializeField]
         private Transform background;
         private Action OKFunc;
-        protected override void Start()
+        protected void Start()
         {
             Appear();
         }
         public void OnOK()
         {
-            if (OKFunc != null)
-            {
-                OKFunc();
-            }
+            if (OKFunc != null) OKFunc();
         }
-
-
-
         private void Appear()
         {
             Sequence s = DOTween.Sequence();
@@ -45,7 +39,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

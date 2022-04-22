@@ -359,12 +359,12 @@ public class CombatMgr : MonoBehaviour
     }
     void ShowResult(GameEndData d)
     {
-        GameObject go = GuiManager.Instance.AddGui<GuiReward>("Prefap/GuiReward", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiReward");
         go.GetComponent<GuiReward>().SetReward(d);
     }
     void ShowPvPResult(GameEndPvPData d)
     {
-        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiRewardPvP");
         go.GetComponent<GuiRewardPvP>().SetReward(d);
     }
     void GameOver(Team winTeam)
@@ -433,7 +433,7 @@ public class CombatMgr : MonoBehaviour
         actionCount = listActions.Count + 1;
         GameUtils.SetTimeScale(1);
         GameEndData data = actionProcess.gameEndData;
-        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiRewardPvP");
         go.GetComponent<GuiRewardPvP>().SetReward((GameEndPvPData)data);
         go.GetComponent<GuiRewardPvP>().isWatchReplay = true;
     }

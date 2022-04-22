@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class PopupNotification : BaseGui
+    public class PopupNotification : MonoBehaviour
     {
         [SerializeField]
         private Text textNotification;
@@ -15,7 +15,7 @@ namespace Piratera.GUI
         private Transform background;
         private Action OKFunc;
         private Action cancelFunc;
-        protected override void Start()
+        protected void Start()
         {
             Appear();
         }
@@ -59,7 +59,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

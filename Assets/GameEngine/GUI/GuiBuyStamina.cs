@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiBuyStamina : BaseGui
+    public class GuiBuyStamina : MonoBehaviour
     {
         [SerializeField]
         private Transform background;
@@ -25,7 +25,7 @@ namespace Piratera.GUI
 
         private long cost;
 
-        protected override void Start()
+        protected void Start()
         {
             Appear();
         }
@@ -37,7 +37,7 @@ namespace Piratera.GUI
             EnableButtonBuy(cost >= 0);
             textCurrentStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
 
         }
 
@@ -134,7 +134,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

@@ -40,7 +40,7 @@ public class ScenePreparePvPUI : MonoBehaviour
     {
         defenseTeamAdvantage.SetActive(false);
         Input.multiTouchEnabled = false;
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
