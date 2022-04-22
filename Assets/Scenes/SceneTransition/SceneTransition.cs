@@ -11,7 +11,10 @@ public enum TransitionType
 public class SceneTransition : MonoBehaviour
 {
     public static SceneTransition Instance;
-    public List<Animator> transitions;
+    [SerializeField]
+    private List<Animator> transitions;
+    [SerializeField]
+    private GameObject waiting;
     void Awake()
     {
         if (Instance == null)
@@ -20,6 +23,8 @@ public class SceneTransition : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
         else Destroy(gameObject);
+        waiting.SetActive(false);
+        transitions.ForEach(ani => ani.gameObject.SetActive(false));
     }
     public void LoadScene(string sceneName, TransitionType type = TransitionType.ARENA)
     {
@@ -60,5 +65,9 @@ public class SceneTransition : MonoBehaviour
                 break;
         }
         //SceneManager.LoadScene(sceneName);
+    }
+    public void ShowWaiting(bool b = true)
+    {
+        waiting.SetActive(b);
     }
 }

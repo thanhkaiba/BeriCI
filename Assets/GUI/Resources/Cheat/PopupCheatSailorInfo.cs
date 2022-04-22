@@ -50,7 +50,7 @@ namespace Piratera.Cheat
             long exp = long.Parse(textCheatSailor_exp.text);
             byte star = byte.Parse(textCheatSailor_star.text);
             int fight = int.Parse(textCheatSailor_fight.text);
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             CheatMgr.CheatSailorQuantity(sailorId, quantity, level, exp, star, fight);
         }
 
@@ -61,10 +61,10 @@ namespace Piratera.Cheat
 
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (action == SFSAction.CHEAT_SAILOR_QUANTITY)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);

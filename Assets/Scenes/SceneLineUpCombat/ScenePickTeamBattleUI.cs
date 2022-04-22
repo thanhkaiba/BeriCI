@@ -46,7 +46,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         {
             case SFSAction.PVE_SURRENDER:
             case SFSAction.PVE_CONFIRM:
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 break;
         }
     }
@@ -119,7 +119,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         }
         else
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);

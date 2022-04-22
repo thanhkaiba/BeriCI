@@ -12,10 +12,10 @@ public class SailorCollider : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (GameObject.Find("PanelFog")) return;
         mouseBeginPos = Input.mousePosition;
         selected = true;
         moved = false;
-        Debug.Log("GetGUIsNumber:" + GuiManager.Instance.GetGUIsNumber());
     }
     private void OnMouseUp()
     {

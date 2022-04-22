@@ -47,7 +47,7 @@ public class ScenePreparePvPUI : MonoBehaviour
         switch (action)
         {
             case SFSAction.PVP_CONFIRM:
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 break;
         }
     }
@@ -113,7 +113,7 @@ public class ScenePreparePvPUI : MonoBehaviour
         }
         else
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamPvPCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(SFSAction.PVP_CONFIRM, sfsObject);

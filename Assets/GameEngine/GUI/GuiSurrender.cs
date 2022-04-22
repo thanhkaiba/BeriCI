@@ -34,7 +34,7 @@ namespace Piratera.GUI
                 case SFSAction.PVE_SURRENDER:
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         float jumPower = 40;
                         Vector3 pos = beri.transform.position;
                         pos.y += jumPower;

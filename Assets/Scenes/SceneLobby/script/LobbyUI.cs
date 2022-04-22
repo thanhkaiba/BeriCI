@@ -211,7 +211,7 @@ public class LobbyUI : MonoBehaviour
 
     public void ShowStaminaPack()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.GET_STAMINA_PACK);
 
     }

@@ -34,7 +34,7 @@ public class SceneArenaUI : MonoBehaviour
         {
            
             GuiManager.Instance.AddGui<PopupCongratJoinArena>("prefap/PopupCongratJoinArena");
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             NetworkController.Send(SFSAction.PVP_JOIN);
         } else
         {
@@ -46,7 +46,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void SyncData()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.PVP_DATA);
     }
     private void UpdateRank()
@@ -75,13 +75,13 @@ public class SceneArenaUI : MonoBehaviour
                 {
                     if (errorCode != SFSErrorCode.SUCCESS)
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                     }
                     break;
                 }
             case SFSAction.PVP_DATA:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         UpdateTicket();
@@ -92,7 +92,7 @@ public class SceneArenaUI : MonoBehaviour
                 }
             case SFSAction.PVP_JOIN:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         PvPData.Instance.HaveJoin = true;
@@ -102,7 +102,7 @@ public class SceneArenaUI : MonoBehaviour
                 }
             case SFSAction.PVP_RANKING:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         GameObject GO = GuiManager.Instance.AddGui<PopupTopArena>("Prefap/PopupTopArena");
@@ -113,7 +113,7 @@ public class SceneArenaUI : MonoBehaviour
                 }
             case SFSAction.PVP_HISTORY:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         GameObject GO = GuiManager.Instance.AddGui<PopupArenaHistory>("Prefap/PopupArenaHistory");
@@ -134,7 +134,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowTop()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         SFSObject s = new SFSObject();
         s.PutInt("from", 0);
         s.PutInt("to", 10);
@@ -142,7 +142,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowHistory()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.PVP_HISTORY);
     }
     private void OnDestroy()
@@ -166,7 +166,7 @@ public class SceneArenaUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Not Enough Ticket!");
             return;
         }
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.PVP_PLAY);
     }
     private void ShowListSailors()

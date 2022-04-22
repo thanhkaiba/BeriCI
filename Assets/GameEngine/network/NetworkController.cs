@@ -286,7 +286,7 @@ namespace Piratera.Network
         {
             Debug.Log("Disconnect");
             reset();
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (reason != ClientDisconnectionReason.MANUAL)
             {
                 string text = "Server Disconnected";
@@ -359,7 +359,7 @@ namespace Piratera.Network
         }
         public static void SendSurrenderPVEToSever()
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutBool("accept", false);
             Send(SFSAction.PVE_SURRENDER, sfsObject);
@@ -507,7 +507,7 @@ namespace Piratera.Network
                     }
                 case SFSAction.GET_STAMINA_PACK:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             GameObject GO = GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
@@ -538,7 +538,7 @@ namespace Piratera.Network
                     }
                 case SFSAction.GET_LINEUP_SLOT_PACK:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             GameObject GO = GuiManager.Instance.AddGui<GuiBuySlot>("Prefap/GuiBuySlot", LayerId.GUI);
@@ -585,7 +585,7 @@ namespace Piratera.Network
                     }
                 case SFSAction.PVP_WATCH_HISTORY:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             string json = packet.GetUtfString("combat_data");
@@ -597,7 +597,7 @@ namespace Piratera.Network
                     }
                 case SFSAction.TRAIN_SAILORS_REMAIN:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             UserData.Instance.TrainedToday = packet.GetIntArray("trained_today");

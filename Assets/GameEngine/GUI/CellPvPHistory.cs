@@ -37,7 +37,7 @@ namespace Piratera.GUI
         }
         public void OnReplay()
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             SFSObject sfsObject = new();
             sfsObject.PutLong("match", data.matchId);
             NetworkController.Send(SFSAction.PVP_WATCH_HISTORY, sfsObject);

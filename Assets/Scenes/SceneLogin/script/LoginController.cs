@@ -139,7 +139,7 @@ public class LoginController : MonoBehaviour
     {
         Reset();
         enableLoginUI(true);
-        GuiManager.Instance.ShowGuiWaiting(false);
+        SceneTransition.Instance.ShowWaiting(false);
         errorText.text = error;
 
     }
@@ -155,7 +155,7 @@ public class LoginController : MonoBehaviour
     //----------------------------------------------------------
     public IEnumerator CheckInternetConnection(Action<bool> syncResult)
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         const string echoServer = "http://google.com";
         bool result;
         using (var request = UnityWebRequest.Head(echoServer))
@@ -202,7 +202,7 @@ public class LoginController : MonoBehaviour
     {
         if (true)
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             enableLoginUI(false);
             NetworkController.LoginToServer(new LoginData(username, password, loginType));
             NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
@@ -212,7 +212,7 @@ public class LoginController : MonoBehaviour
         }
         else
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             errorText.text = "Error. Check Internet connection!";
         }
     }

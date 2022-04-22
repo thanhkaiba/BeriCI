@@ -64,7 +64,7 @@ namespace Piratera.GUI
         {
             if (StaminaData.Instance.Stamina < priceStamina)
             {
-                GuiManager.Instance.ShowGuiWaiting(true);
+                SceneTransition.Instance.ShowWaiting(true);
                 NetworkController.Send(SFSAction.GET_STAMINA_PACK);
             }
             else

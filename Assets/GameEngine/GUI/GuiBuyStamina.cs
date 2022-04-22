@@ -46,7 +46,7 @@ namespace Piratera.GUI
         {
             if (action == SFSAction.BUY_STAMINA)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);
@@ -92,7 +92,7 @@ namespace Piratera.GUI
         {
             if (UserData.Instance.IsEnoughBeri(cost))
             {
-                GuiManager.Instance.ShowGuiWaiting(true);
+                SceneTransition.Instance.ShowWaiting(true);
                 NetworkController.Send(SFSAction.BUY_STAMINA);
             }
             else

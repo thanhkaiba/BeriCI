@@ -56,7 +56,7 @@ public class PickTeamUI : MonoBehaviour
     {
         if (action == SFSAction.BUY_SLOT)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 GameUtils.ShowPopupPacketError(errorCode);
@@ -110,7 +110,7 @@ public class PickTeamUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Can't buy more slot");
             return;
         }
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.GET_LINEUP_SLOT_PACK);
     }
     private void ShowTutBuildLineUp()

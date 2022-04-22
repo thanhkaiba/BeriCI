@@ -41,14 +41,14 @@ public class GuiGoTrain : BaseGui
     {
         if (action == SFSAction.TRAIN_SAILORS)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 GameUtils.ShowPopupPacketError(errorCode);
             }
             else
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 SceneTransition.Instance.LoadScene("SceneCombat2D");
             }
         }
@@ -58,7 +58,7 @@ public class GuiGoTrain : BaseGui
     {
         int cost = GlobalConfigs.Training.cost[train_level];
         UserData.Instance.Beri -= cost;
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         TempCombatData.Instance.trainingGameLevel = train_level;
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutInt("level", train_level);

@@ -37,6 +37,7 @@ public class DragableSailor : MonoBehaviour
 
     protected void OnMouseDown()
     {
+        if (GameObject.Find("PanelFog")) return;
         if (!SquadContainer.Draging || !SquadAContainer.Draging)
         {
             dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);

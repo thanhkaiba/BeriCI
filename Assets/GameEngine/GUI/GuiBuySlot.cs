@@ -52,7 +52,7 @@ namespace Piratera.GUI
         {
             if (UserData.Instance.IsEnoughBeri(cost))
             {
-                GuiManager.Instance.ShowGuiWaiting(true);
+                SceneTransition.Instance.ShowWaiting(true);
                 NetworkController.Send(SFSAction.BUY_SLOT);
             }
             else
@@ -64,10 +64,10 @@ namespace Piratera.GUI
 
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (action == SFSAction.BUY_SLOT)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);

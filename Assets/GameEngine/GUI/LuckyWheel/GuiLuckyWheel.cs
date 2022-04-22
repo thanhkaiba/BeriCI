@@ -91,9 +91,8 @@ namespace Piratera.GUI
         {
             if (action == SFSAction.PIRATE_WHEEL)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
           
-
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     OnClose();
@@ -158,7 +157,7 @@ namespace Piratera.GUI
         public void SendSpin()
         {
             buttonClose.gameObject.SetActive(false);
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             NetworkController.Send(SFSAction.PIRATE_WHEEL);
         }
 
