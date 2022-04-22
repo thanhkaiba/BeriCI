@@ -74,5 +74,9 @@ namespace Piratera.GUI
                 guis.Remove(guiId);
             }
         }
+        public int GetGuisNumber()
+        {
+            return guis.Count;
+        }
     }
 }

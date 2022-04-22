@@ -1,3 +1,4 @@
+using Piratera.GUI;
 using UnityEngine;
 
 public class SailorCollider : MonoBehaviour
@@ -14,9 +15,8 @@ public class SailorCollider : MonoBehaviour
         mouseBeginPos = Input.mousePosition;
         selected = true;
         moved = false;
-
+        Debug.Log("GetGUIsNumber:" + GuiManager.Instance.GetGUIsNumber());
     }
-
     private void OnMouseUp()
     {
         if (selected && !moved)
@@ -29,7 +29,6 @@ public class SailorCollider : MonoBehaviour
         selected = false;
         moved = false;
     }
-
     private void OnMouseDrag()
     {
         if (Vector3.Distance(mouseBeginPos, Input.mousePosition) >= MOVE_OFFSET)
@@ -40,6 +39,5 @@ public class SailorCollider : MonoBehaviour
                 TooltipSailorInfo.Instance.gameObject.SetActive(false);
             }
         }
-
     }
 }

@@ -271,15 +271,15 @@ public class GameUtils : UnityEngine.Object
         switch (type)
         {
             case HomefieldAdvantage.SWEET_HOME:
-                return "Sweet home";
+                return "Orange";
             case HomefieldAdvantage.ELECTRONIC:
-                return "Electronic";
+                return "Lab";
             case HomefieldAdvantage.ARMOR:
                 return "Armored";
             case HomefieldAdvantage.CANNON:
                 return "Canon";
             case HomefieldAdvantage.SPEED:
-                return "Moonlight";
+                return "Night";
             default:
                 return "Not exist";
         }
