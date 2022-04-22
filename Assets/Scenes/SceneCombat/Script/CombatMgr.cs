@@ -107,7 +107,7 @@ public class CombatMgr : MonoBehaviour
     }
     IEnumerator StartGame()
     {
-        //yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         ActivateAllStartPassive();
         yield return new WaitForSeconds(0.8f);
         combatState.status = CombatStatus.STARTED;
@@ -151,12 +151,12 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
-                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
-                return 1;
+                return 3;
             case HomefieldAdvantage.ELECTRONIC:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -170,12 +170,12 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
-                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
-                break;
+                return 3;
             case HomefieldAdvantage.ARMOR:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -190,19 +190,19 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
-                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
-                break;
+                return 3;
             case HomefieldAdvantage.CANNON:
                 combatState.GetAllTeamAliveSailors(Team.A).ForEach(sailor =>
                 {
                 float damageTake = sailor.CalcDamageTake(new Damage() { magic = sailor.cs.MaxHealth * config._params[0] }, null);
                     sailor.LoseHealth(new Damage() { magic = damageTake });
                 });
-                break;
+                return 3;
             case HomefieldAdvantage.SPEED:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -211,12 +211,20 @@ public class CombatMgr : MonoBehaviour
                     Sequence seq = DOTween.Sequence();
                     var pos = sailor.transform.position;
                     pos.y += 2.8f;
+                    pos.z -= 0.1f;
                     var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
                     eff.transform.localScale = Vector3.one * 1.8f;
+                    var img = (new GameObject()).AddComponent<SpriteRenderer>();
+                    img.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
+                    img.transform.localPosition = pos;
+
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(eff));
+                    seq.AppendCallback(() => Destroy(img));
                 });
-                return 1;
+                return 3;
         }
         return 1;
     }

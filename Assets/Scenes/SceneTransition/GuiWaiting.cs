@@ -26,4 +26,8 @@ public class GuiWaiting : MonoBehaviour
 
         icon.transform.DORotate(new Vector3(0, 0, 360), 2f, RotateMode.WorldAxisAdd).SetRelative().SetLoops(-1, LoopType.Incremental).SetLink(gameObject);
     }
+    public void SetTransparent(bool visible)
+    {
+        GetComponent<CanvasGroup>().alpha = visible ? 1 : 0;
+    }
 }

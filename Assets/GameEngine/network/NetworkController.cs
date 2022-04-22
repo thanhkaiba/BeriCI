@@ -443,7 +443,7 @@ namespace Piratera.Network
                         {
                             TempCombatData.Instance.LoadCombatDataFromSfs(packet);
 
-                            SceneManager.LoadScene("SceneCombat2D");
+                            SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.BATTLE);
                         }
                         break;
                     }
@@ -453,7 +453,7 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-                            SceneManager.LoadScene("SceneCombat2D");
+                            SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.BATTLE);
                         }
                         break;
                     }

@@ -13,6 +13,7 @@ namespace Piratera.Constance
         public const string TELEGRAM_URL = "https://t.me/pirateragaminggroup";
         public const string TWITTER_URL = "https://twitter.com/PirateraBay";
         public const string CUSTOMER_CARE_URL = "https://forms.gle/Vt9hcDC7WuEQHQTM8";
+        public const string FANDOM_URL = "https://piratera.fandom.com/wiki/Piratera_Wiki";
 
         public const long TIME_LOCK_SAILOR = 8 * 60 * 60 * 1000;
 

@@ -225,7 +225,10 @@ public class LobbyUI : MonoBehaviour
     {
         GuiManager.Instance.ShowPopupNotification("Coming Soon!");
     }
-
+    public void ClickGuide()
+    {
+        Application.OpenURL(GameConst.FANDOM_URL);
+    }
     public void ShowSceneCrew()
     {
         if (CrewData.Instance.IsEmpty())

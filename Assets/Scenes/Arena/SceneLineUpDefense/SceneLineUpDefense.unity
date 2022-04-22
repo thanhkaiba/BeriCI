@@ -3144,6 +3144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2285536e193a6454caf24c579263c41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layers: []
 --- !u!224 &1259725237 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2321160139256091199, guid: 54a9b9ed8fd201d4face3ea8153844d2,
