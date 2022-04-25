@@ -3444,11 +3444,13 @@ MonoBehaviour:
   - {fileID: 1101575365}
   - {fileID: 475254686}
   buttonCol: {fileID: 376344403}
-  sail: {fileID: 0}
+  sail: {fileID: 2130733648217388979, guid: 37fda10f75552a447ab740856ad13227, type: 3}
   nodeUser: {fileID: 1973126452}
   background: {fileID: 1092106887}
   royal: {fileID: 1521152366}
   buttonCheat: {fileID: 125443169}
+  popupLibrary: {fileID: 2130733648217388978, guid: 37fda10f75552a447ab740856ad13227,
+    type: 3}
 --- !u!4 &1521152365
 Transform:
   m_ObjectHideFlags: 0
