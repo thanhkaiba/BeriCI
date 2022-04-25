@@ -61,9 +61,9 @@ public class LobbyUI : MonoBehaviour
     public MultiRoyalCollectingController royal;
     [SerializeField]
     private Button buttonCheat;
-   
 
-
+    [SerializeField]
+    private GameObject popupLibrary;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -227,7 +227,7 @@ public class LobbyUI : MonoBehaviour
     }
     public void ClickGuide()
     {
-        Application.OpenURL(GameConst.FANDOM_URL);
+        GuiManager.Instance.AddGui(popupLibrary);
     }
     public void ShowSceneCrew()
     {
