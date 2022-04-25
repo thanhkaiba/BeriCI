@@ -25,6 +25,8 @@ public class SceneArenaUI : MonoBehaviour
     private Transform background;
     [SerializeField]
     private SpriteRenderer battleField;
+    [SerializeField]
+    private GameObject popupRanking, popupInfo, popupHistory;
     void Start()
     {
         NetworkController.Listen(OnReceiveServerAction);
@@ -112,7 +114,7 @@ public class SceneArenaUI : MonoBehaviour
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui("Prefap/PopupTopArena");
+                        GameObject GO = GuiManager.Instance.AddGui(popupRanking);
                         PopupTopArena popup = GO.GetComponent<PopupTopArena>();
                         popup.NewFromSFSObject(packet.GetSFSArray("list"));
                     }
@@ -123,7 +125,7 @@ public class SceneArenaUI : MonoBehaviour
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui("Prefap/PopupArenaHistory");
+                        GameObject GO = GuiManager.Instance.AddGui(popupHistory);
                         PopupArenaHistory popup = GO.GetComponent<PopupArenaHistory>();
                         popup.NewFromSFSObject(packet.GetSFSArray("history"));
                     }
@@ -137,14 +139,14 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowGuide()
     {
-        GuiManager.Instance.AddGui("Prefap/PopupArenaGuide");
+        GuiManager.Instance.AddGui(popupInfo);
     }
     public void ShowTop()
     {
         SceneTransition.Instance.ShowWaiting(true, false);
         SFSObject s = new SFSObject();
         s.PutInt("from", 0);
-        s.PutInt("to", 10);
+        s.PutInt("to", 20);
         NetworkController.Send(SFSAction.PVP_RANKING, s);
     }
     public void ShowHistory()

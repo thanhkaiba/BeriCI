@@ -119,7 +119,7 @@ public class CombatMgr : MonoBehaviour
                 GameEffMgr.Instance.CreateCanonShoot();
                 yield return new WaitForSeconds(0.5f);
                 GameEffMgr.Instance.CreateCanonExplore();
-                yield return new WaitForSeconds(0.8f);
+                yield return new WaitForSeconds(0.3f);
             }
             float delay = ActiveHomeFieldAdvantage();
             yield return new WaitForSeconds(delay);

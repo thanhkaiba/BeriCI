@@ -533,7 +533,7 @@ GameObject:
   - component: {fileID: 4675647909375804660}
   - component: {fileID: 6417276243712373540}
   m_Layer: 5
-  m_Name: PopupArenaHistory
+  m_Name: PopupHistory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

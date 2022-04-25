@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 namespace Piratera.GUI
 {
-    
     public class PopupArenaHistory : MonoBehaviour
     {
         public class PvPHistory
@@ -37,7 +36,6 @@ namespace Piratera.GUI
             {
                 get { return Position == "attacker" ? defender : attacker; }
             }
-
             public string Result { get
                 {
                     if (winner == UserData.Instance.UID)
@@ -54,7 +52,6 @@ namespace Piratera.GUI
                     }
                 } 
             }
-
             public PvPHistory(ISFSObject packet)
             {
                 NewFromSFSObject(packet);
@@ -89,8 +86,6 @@ namespace Piratera.GUI
         {
             ClosePopup();
         }
-
-        
         public void NewFromSFSObject(ISFSArray packet)
         {
             foreach (SFSObject obj in packet)
