@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Spine.Unity;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -230,5 +231,18 @@ public class GameEffMgr : MonoBehaviour
             seq.AppendInterval(s);
         }
         seq.Append(cam.transform.DOMove(new Vector3(0, 0, z), 0));
+    }
+    public void CreateCanonShoot()
+    {
+        var prefab = Resources.Load<GameObject>("Effect2D/canon/canon");
+        var go = Instantiate(prefab, GameObject.Find("nodeCanon").transform);
+        go.transform.Find("spine").GetComponent<Animator>().SetTrigger("Shoot");
+    }
+    public void CreateCanonExplore()
+    {
+        var prefab = Resources.Load<GameObject>("Effect2D/canon/canon");
+        var go = Instantiate(prefab, GameObject.Find("FieldA").transform);
+        go.transform.localScale = Vector3.one * 5;
+        go.transform.Find("spine").GetComponent<Animator>().SetTrigger("Explore");
     }
 }

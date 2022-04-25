@@ -88,8 +88,9 @@ namespace Piratera.GUI
         {
             for (int j = 0; j < slotTop.Count; j++)
             {
+                Debug.Log("Players.Count: " + Players.Count);
                 var slot = slotTop[j];
-                if (Players.Count < j)
+                if (Players.Count < j + 1)
                 {
                     slot.gameObject.SetActive(false);
                     continue;

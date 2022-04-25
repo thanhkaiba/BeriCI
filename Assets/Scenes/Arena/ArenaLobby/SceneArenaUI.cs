@@ -16,7 +16,7 @@ public class SceneArenaUI : MonoBehaviour
     [SerializeField]
     private Text LbElo;
     [SerializeField]
-    private Text LbRank;
+    private Text LbRank, LBSeason;
     [SerializeField]
     private Text LbResetTicket;
     [SerializeField]
@@ -50,8 +50,16 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void UpdateRank()
     {
-        LbRank.text = "Rank: " + PvPData.Instance.Rank;
-        LbElo.text = "Elo: " + PvPData.Instance.Elo;
+        var data = PvPData.Instance;
+        var startTime = GameUtils.FromUnixTime(data.StartSeason);
+        var endTime = GameUtils.FromUnixTime(data.EndSeason);
+        LBSeason.text = "<color=#b8daff>Season "
+            + data.SeasonId + "</color>\n<color=#dbdbdb>"
+            + startTime.ToString("dd-MM-yyyy")
+            + " - " + endTime.ToString("dd-MM-yyyy")
+            + "</color>";
+        LbRank.text = "Rank: " + data.Rank;
+        LbElo.text = "Elo: " + data.Elo;
     }
     private void UpdateTicket()
     {

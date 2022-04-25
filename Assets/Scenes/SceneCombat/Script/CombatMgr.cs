@@ -111,8 +111,16 @@ public class CombatMgr : MonoBehaviour
         ActivateAllStartPassive();
         yield return new WaitForSeconds(0.8f);
         combatState.status = CombatStatus.STARTED;
+
         if (modeId == ModeID.Arena)
         {
+            if (defenseAdvantage == HomefieldAdvantage.CANNON)
+            {
+                GameEffMgr.Instance.CreateCanonShoot();
+                yield return new WaitForSeconds(0.5f);
+                GameEffMgr.Instance.CreateCanonExplore();
+                yield return new WaitForSeconds(0.8f);
+            }
             float delay = ActiveHomeFieldAdvantage();
             yield return new WaitForSeconds(delay);
         }
@@ -152,7 +160,7 @@ public class CombatMgr : MonoBehaviour
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(img.transform.DOScale(2.5f, 3.0f));
-                    seq.Join(img.DOFade(0f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
@@ -171,7 +179,7 @@ public class CombatMgr : MonoBehaviour
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(img.transform.DOScale(2.5f, 3.0f));
-                    seq.Join(img.DOFade(0f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
@@ -191,7 +199,7 @@ public class CombatMgr : MonoBehaviour
 
                     Sequence seq = DOTween.Sequence();
                     seq.Append(img.transform.DOScale(2.5f, 3.0f));
-                    seq.Join(img.DOFade(0f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
@@ -202,7 +210,7 @@ public class CombatMgr : MonoBehaviour
                 float damageTake = sailor.CalcDamageTake(new Damage() { magic = sailor.cs.MaxHealth * config._params[0] }, null);
                     sailor.LoseHealth(new Damage() { magic = damageTake });
                 });
-                return 3;
+                return 2;
             case HomefieldAdvantage.SPEED:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -219,7 +227,7 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     seq.Append(img.transform.DOScale(2.5f, 3.0f));
-                    seq.Join(img.DOFade(0f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(eff));
                     seq.AppendCallback(() => Destroy(img));

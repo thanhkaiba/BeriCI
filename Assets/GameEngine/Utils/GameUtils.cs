@@ -304,6 +304,11 @@ public class GameUtils : UnityEngine.Object
                 return "Not exist";
         }
     }
+    public static DateTime FromUnixTime(long unixTime)
+    {
+        var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        return epoch.AddMilliseconds(unixTime);
+    }
     public static List<ClassBonusItem> lineUpSynergy = null;
     public static List<ClassBonusItem> oppLineUpSynergy = null;
 }
