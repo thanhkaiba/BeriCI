@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using Piratera.Sound;
 
 public enum ModeID
 {
@@ -119,6 +120,7 @@ public class CombatMgr : MonoBehaviour
                 GameEffMgr.Instance.CreateCanonShoot();
                 yield return new WaitForSeconds(0.5f);
                 GameEffMgr.Instance.CreateCanonExplore();
+                SoundMgr.PlaySound("Audio/Sailor/bomb");
                 yield return new WaitForSeconds(0.3f);
             }
             float delay = ActiveHomeFieldAdvantage();

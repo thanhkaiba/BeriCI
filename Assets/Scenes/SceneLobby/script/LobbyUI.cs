@@ -29,18 +29,15 @@ public class LobbyUI : MonoBehaviour
 
     [SerializeField]
     private UserAvatar userAvatar;
-
     [SerializeField]
     private Text userBeri;
-
     [SerializeField]
     private Text userStamina;
-
     [SerializeField]
     private Text userStaminaCountDown;
 
-  
-
+    [SerializeField]
+    private Text arenaSeason, areaTime;
     [SerializeField]
     private Button[] leftButtons;
 
@@ -107,10 +104,13 @@ public class LobbyUI : MonoBehaviour
                 TutorialMgr.Instance.CompleteStartUp();
             }
         }
+        var pvpData = PvPData.Instance;
+        var startTime = GameUtils.FromUnixTime(pvpData.StartSeason);
+        var endTime = GameUtils.FromUnixTime(pvpData.EndSeason);
+        arenaSeason.text = "Season " + pvpData.SeasonId;
+        areaTime.text = startTime.ToString("dd/MM")
+            + " - " + endTime.ToString("dd/MM");
     }
-
- 
-
     void UpdateMaintain()
     {
         DOTween.Kill(maintainText.gameObject);

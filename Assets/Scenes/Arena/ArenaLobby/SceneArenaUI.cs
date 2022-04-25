@@ -3,6 +3,7 @@ using DG.Tweening;
 using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
+using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ public class SceneArenaUI : MonoBehaviour
     private GameObject popupRanking, popupInfo, popupHistory;
     void Start()
     {
+        SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
         NetworkController.Listen(OnReceiveServerAction);
         UpdateTicket();
         UpdateRank();
@@ -57,8 +59,8 @@ public class SceneArenaUI : MonoBehaviour
         var endTime = GameUtils.FromUnixTime(data.EndSeason);
         LBSeason.text = "<color=#b8daff>Season "
             + data.SeasonId + "</color>\n<color=#dbdbdb>"
-            + startTime.ToString("dd-MM-yyyy")
-            + " - " + endTime.ToString("dd-MM-yyyy")
+            + startTime.ToString("dd/MM/yyyy")
+            + " - " + endTime.ToString("dd/MM/yyyy")
             + "</color>";
         LbRank.text = "Rank: " + data.Rank;
         LbElo.text = "Elo: " + data.Elo;

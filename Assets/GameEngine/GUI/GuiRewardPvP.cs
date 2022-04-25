@@ -13,7 +13,6 @@ namespace Piratera.GUI
     {
         [SerializeField]
         Text textElo;
-  
         [SerializeField]
         private Transform background;
         [SerializeField]
@@ -32,12 +31,9 @@ namespace Piratera.GUI
         {
             textElo.text = "";
             if (r.elo_delta >= 0)
-            {
-                textElo.color = Color.green;
-            } else
-            {
-                textElo.color = Color.red;
-            }
+                textElo.color = new Color32(10, 218, 255, 255);
+            else
+                textElo.color = new Color32(255, 66, 142, 255);
             var canvas = GuiManager.Instance.GetCanvas().GetComponent<Canvas>();
             Sequence seqe = DOTween.Sequence();
             coin.transform.localScale = Vector3.zero;
@@ -48,9 +44,7 @@ namespace Piratera.GUI
             {
                 DoTweenUtils.UpdateNumber(textElo, 0, r.elo_delta, x => ((x > 0 ? "+" + x : "" + x) + " ELO"));
             });
-
             seqe.SetLink(coin.gameObject).SetTarget(coin.transform);
-
             anim.initialSkinName = "";
           
             if (r.team_win == 0)
