@@ -86,7 +86,7 @@ namespace Piratera.GUI
         {
             ClosePopup();
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
         public void OnBuyStamina()
         {

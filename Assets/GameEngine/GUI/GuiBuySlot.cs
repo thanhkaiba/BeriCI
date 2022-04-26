@@ -46,7 +46,7 @@ namespace Piratera.GUI
         {
             ClosePopup();
             GameEvent.UserBeriChanged.RemoveListener(UpdateCurrentBeri);
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
         public void OnBuySlot()
         {

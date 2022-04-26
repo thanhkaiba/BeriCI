@@ -46,7 +46,7 @@ namespace Piratera.GUI
 
         private void OnDestroy()
         {
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
 
         public void ConfirmSur()

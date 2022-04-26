@@ -69,7 +69,7 @@ public class PickTeamUI : MonoBehaviour
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
         GameEvent.FlyBeri.RemoveListener(FlyBeri);
 
     }

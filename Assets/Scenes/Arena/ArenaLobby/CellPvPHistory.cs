@@ -9,6 +9,7 @@ namespace Piratera.GUI
 {
     public class CellPvPHistory : MonoBehaviour
     {
+        private string opponentUID;
         [SerializeField]
         private UserAvatar avatar;
         [SerializeField]
@@ -24,7 +25,7 @@ namespace Piratera.GUI
         {
             data = history;
             avatar.LoadAvatar(history.OpponentAvatar);
-            textName.text = history.Opponent; ;
+            textName.text = history.Opponent;
             textElo.text = (history.EloDelta > 0 ? "+" + history.EloDelta.ToString() : history.EloDelta.ToString()) + " elo";
             textElo.color = history.EloDelta < 0 ? new Color32(0, 132, 183, 255) : new Color32(123, 179, 57, 255);
 
@@ -34,6 +35,7 @@ namespace Piratera.GUI
             if (history.Result == "Victory") iconResult.sprite = iconWin;
             else if (history.Result == "Draw") iconResult.sprite = iconDraw;
             else iconResult.sprite = iconLose;
+            opponentUID = history.OpponentUID;
         }
         public void OnReplay()
         {
@@ -41,6 +43,11 @@ namespace Piratera.GUI
             SFSObject sfsObject = new();
             sfsObject.PutLong("match", data.matchId);
             NetworkController.Send(SFSAction.PVP_WATCH_HISTORY, sfsObject);
+        }
+        public void ClickOpponent()
+        {
+            var gui = GuiManager.Instance.AddGui("UserInfo/PopupUserInfo");
+            gui.GetComponent<PopupUserInfo>().SetUID(opponentUID);
         }
     }
 }

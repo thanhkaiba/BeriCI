@@ -1,5 +1,4 @@
-﻿using Piratera.Constance;
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace Piratera.GUI

@@ -53,7 +53,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
     }
 
     private void Start()

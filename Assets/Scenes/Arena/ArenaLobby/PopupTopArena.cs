@@ -13,23 +13,22 @@ namespace Piratera.GUI
         private List<Transform> slotTop;
         public class PVPRankPlayer
         {
+            public string uid;
             public string name;
             public int rank;
             public long elo;
             public string avatar;
-
             public PVPRankPlayer(ISFSObject packet)
             {
                 NewFromSFSObject(packet);
             }
-
             public void NewFromSFSObject(ISFSObject packet)
             {
+                uid = packet.GetUtfString("uid");
                 name = packet.GetUtfString("name");
                 rank = packet.GetInt("rank");
                 elo = packet.GetLong("elo");
                 avatar = packet.GetUtfString("avatar");
-                
             }
         }
 
@@ -95,18 +94,23 @@ namespace Piratera.GUI
                     slot.gameObject.SetActive(false);
                     continue;
                 }
+                var player = Players[j];
                 slot.gameObject.SetActive(true);
-                slot.Find("textName").GetComponent<Text>().text = Players[j].name;
-                slot.Find("textElo").GetComponent<Text>().text = "Elo: " + Players[j].elo;
-                slot.Find("avt").GetComponent<UserAvatar>().LoadAvatar(Players[j].avatar);
-                Debug.Log("Players[j].avatar: " + Players[j].avatar);
+                slot.Find("textName").GetComponent<Text>().text = player.name;
+                slot.Find("textElo").GetComponent<Text>().text = "Elo: " + player.elo;
+                slot.Find("avt").GetComponent<UserAvatar>().LoadAvatar(player.avatar);
+                Debug.Log("Players[j].avatar: " + player.avatar);
+                slot.gameObject.AddComponent<Button>().onClick.AddListener(() =>
+                {
+                    var gui = GuiManager.Instance.AddGui("UserInfo/PopupUserInfo");
+                    gui.GetComponent<PopupUserInfo>().SetUID(player.uid);
+                });
             }
             for (int i = 3; i < Players.Count; i++)
             {
                 GameObject imgObject = Instantiate(cellPrefap, content);
                 CellPvPRank cell = imgObject.GetComponent<CellPvPRank>();
                 cell.SetData(Players[i]);
-                
             }
         }
     }

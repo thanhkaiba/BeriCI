@@ -15,13 +15,18 @@ namespace Piratera.GUI
         private Text textRank;
         [SerializeField]
         private Text textElo;
-
         public void SetData(PopupTopArena.PVPRankPlayer player)
         {
             avatar.LoadAvatar(player.avatar);
             textName.text = player.name;
             textRank.text = "" + player.rank;
             textElo.text = "Elo: " + player.elo;
+            var btn = gameObject.AddComponent<Button>();
+            btn.onClick.AddListener(() =>
+            {
+                var gui = GuiManager.Instance.AddGui("UserInfo/PopupUserInfo");
+                gui.GetComponent<PopupUserInfo>().SetUID(player.uid);
+            });
         }
     }
 }

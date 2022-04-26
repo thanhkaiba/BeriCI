@@ -64,7 +64,7 @@ public class GuiGoTrain : MonoBehaviour
     }
     public void OnClose()
     {
-        NetworkController.RemoveServerActionListener(onReceiveServerAction);
+        NetworkController.RemoveListener(onReceiveServerAction);
         ClosePopup();
     }
     private void Appear()

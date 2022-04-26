@@ -24,14 +24,15 @@ namespace Piratera.GUI
             {
                 get { return attacker == UserData.Instance.UID ? "attacker" : "defender"; }
             }
-
+            public string OpponentUID
+            {
+                get { return Position == "attacker" ? defender : attacker; }
+            }
             public string OpponentAvatar
             {
                 get { return Position == "attacker" ? defenderAvatar : attackerAvatar; }
             }
-
             public int EloDelta { get { return Position == "attacker" ? attackerEloDelta : defenderEloDelta; } }
-
             public string Opponent
             {
                 get { return Position == "attacker" ? defender : attacker; }

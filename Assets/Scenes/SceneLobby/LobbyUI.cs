@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Cheat;
 using Piratera.Config;
-using Piratera.Constance;
 using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Network;
@@ -208,19 +207,21 @@ public class LobbyUI : MonoBehaviour
         }
         SceneManager.LoadScene("ScenePickTeam");
     }
-
+    public void AvatarClick()
+    {
+        var gui = GuiManager.Instance.AddGui("UserInfo/PopupUserInfo");
+        gui.GetComponent<PopupUserInfo>().SetUID(UserData.Instance.UID);
+    }
     public void ShowStaminaPack()
     {
         SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.GET_STAMINA_PACK);
-
     }
 
     public void OnBuyBeri()
     {
         Application.OpenURL(GameConst.MARKET_URL);
     }
-
     public void ShowCommingSoon()
     {
         GuiManager.Instance.ShowPopupNotification("Coming Soon!");
@@ -238,7 +239,6 @@ public class LobbyUI : MonoBehaviour
         }
         SceneManager.LoadScene("SceneCrew");
     }
-
     private void Update()
     {
         if (StaminaData.Instance.IsRecorveringStamina())

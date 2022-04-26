@@ -52,7 +52,7 @@ namespace Piratera.Cheat
         }
         private void OnDestroy()
         {
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
         public void DestroySelf()
         {

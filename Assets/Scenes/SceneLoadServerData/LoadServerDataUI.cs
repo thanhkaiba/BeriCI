@@ -166,7 +166,7 @@ public class LoadServerDataUI : MonoBehaviour
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
         progressBar.onValueChanged.RemoveListener(UpdateTextPercent);
     }
     private void RenderClass(List<SailorClass> classes)

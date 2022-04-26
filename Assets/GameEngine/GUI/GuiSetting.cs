@@ -1,5 +1,4 @@
-﻿using Piratera.Constance;
-using Piratera.Network;
+﻿using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using System;

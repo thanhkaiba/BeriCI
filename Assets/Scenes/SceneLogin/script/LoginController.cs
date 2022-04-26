@@ -146,7 +146,7 @@ public class LoginController : MonoBehaviour
 
     void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
         Reset();
     }
 

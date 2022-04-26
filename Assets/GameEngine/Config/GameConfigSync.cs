@@ -212,7 +212,7 @@ namespace Piratera.Config
 
         private void OnDestroy()
         {
-            NetworkController.RemoveServerActionListener(onReceiveServerAction);
+            NetworkController.RemoveListener(onReceiveServerAction);
         }
 
         public static string GetPath(string fileName)

@@ -147,7 +147,7 @@ namespace Piratera.GUI
         public void OnClose()
         {
             Destroy(gameObject);
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
         public void SendSpin()
         {

@@ -385,7 +385,6 @@ namespace Piratera.Network
 
         protected static void OnExtentionResponse(BaseEvent evt)
         {
-
             ISFSObject packet = (ISFSObject)evt.Params["params"];
             string cmd = (string)evt.Params["cmd"];
             if (cmd == CLIENT_REQUEST)
@@ -396,7 +395,7 @@ namespace Piratera.Network
                 SFSErrorCode errorCode = (SFSErrorCode)packet.GetShort(ERROR_CODE);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
-                    GameUtils.ShowPopupPacketError(errorCode);
+                    GameUtils.ShowPopupPacketError(errorCode, action);
                 }
                 OnReceiveServerAction(action, errorCode, packet);
             }
@@ -601,6 +600,19 @@ namespace Piratera.Network
                         }
                         break;
                     }
+                case SFSAction.USER_DETAIL:
+                    {
+                        SceneTransition.Instance.ShowWaiting(false);
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            UserData.Instance.TrainedToday = packet.GetIntArray("trained_today");
+                            for (int i = 0; i < UserData.Instance.TrainedToday.Length; i++)
+                            {
+                                Debug.Log("81: " + UserData.Instance.TrainedToday[i]);
+                            }
+                        }
+                        break;
+                    }
             }
 
             if (errorCode != SFSErrorCode.SUCCESS)
@@ -616,7 +628,7 @@ namespace Piratera.Network
         {
             serverActionListeners.Add(listener);
         }
-        public static void RemoveServerActionListener(NetworkActionListenerDelegate listener)
+        public static void RemoveListener(NetworkActionListenerDelegate listener)
         {
             serverActionListeners.Remove(listener);
         }

@@ -53,7 +53,7 @@ public class ScenePreparePvPUI : MonoBehaviour
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
     }
     private void Start()
     {

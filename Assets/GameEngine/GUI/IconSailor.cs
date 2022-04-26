@@ -87,7 +87,7 @@ public class IconSailor : MonoBehaviour
             starImg.sprite = starSpr;
             starObj.GetComponent<RectTransform>().SetParent(nodeStar);
             starObj.SetActive(true);
-            starObj.transform.localScale = new Vector3(0.25f, 0.25f);
+            starObj.transform.localScale = new Vector3(0.25f, 0.25f, 1f);
             starObj.transform.localPosition = new Vector3(0, -23 * i);
         }
         iconTrial.SetActive(model.IsTrial());

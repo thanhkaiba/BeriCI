@@ -158,7 +158,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
 
     }
     public void OnBackToLobby()

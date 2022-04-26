@@ -179,8 +179,13 @@ public class GameUtils : UnityEngine.Object
         return new string(chars);
     }
 
-    public static void ShowPopupPacketError(SFSErrorCode errorCode)
+    public static void ShowPopupPacketError(SFSErrorCode errorCode, SFSAction action = SFSAction.PING)
     {
+        if (
+            action == SFSAction.USER_DETAIL
+            || action == SFSAction.USER_CHANGE_NAME
+        ) return;
+        // filter error here
         string description = EnumHelper.GetDescription(errorCode);
         GuiManager.Instance.ShowPopupNotification(description);
     }

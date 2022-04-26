@@ -99,7 +99,7 @@ namespace Piratera.GUI
         public void OnClose()
         {
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
-            NetworkController.RemoveServerActionListener(onReceiveServerAction);
+            NetworkController.RemoveListener(onReceiveServerAction);
             ClosePopup();
 
         }

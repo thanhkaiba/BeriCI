@@ -38,7 +38,7 @@ public class PopupConfirmUnlockAdvantage : MonoBehaviour
     }
     public void OnClose()
     {
-        NetworkController.RemoveServerActionListener(onReceiveServerAction);
+        NetworkController.RemoveListener(onReceiveServerAction);
         Destroy(gameObject);
     }
     public void OnConfirm()
