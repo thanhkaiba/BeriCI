@@ -60,5 +60,8 @@ namespace Piratera.Network
         [Description("Lucky wheel is not ready!")]
         PIRATERA_LUCKY_WHEEL_NOT_READY = 821,
 
+        [Description("Change name: Name existed!")]
+        NICK_NAME_EXIST = 824,
+
     }
 }

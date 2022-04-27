@@ -56,14 +56,18 @@ public class PopupChangeName : MonoBehaviour
         switch (action)
         {
             case SFSAction.USER_CHANGE_NAME:
-                waitResponse = false;
-                if (errorCode != SFSErrorCode.SUCCESS)
-                {
-                    errorText.text = "Unknown Error";
-                } else
+                waitResponse = false; if (errorCode == SFSErrorCode.SUCCESS)
                 {
                     GuiManager.Instance.ShowPopupNotification("You've changed your name successfully");
-                    Close(); 
+                    Close();
+                }
+                else if (errorCode == SFSErrorCode.NICK_NAME_EXIST)
+                {
+                    errorText.text = "Name existed";
+                }
+                else 
+                {
+                    errorText.text = "Unknown Error";
                 }
                 break;
         }
