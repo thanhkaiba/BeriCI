@@ -22,7 +22,7 @@ public class PopupChangeName : MonoBehaviour
     public Transform background;
     private void Start()
     {
-        inputField.text = UserData.Instance.Username;
+        inputField.text = UserData.Instance.Username.ToLower();
         textCost.text = cost.ToString("N0");
         textTotalBeri.text = "You have " + UserData.Instance.Beri.ToString("N0") + " beri";
         errorText.text = "";
@@ -31,6 +31,10 @@ public class PopupChangeName : MonoBehaviour
     {
         NetworkController.Listen(OnReceiveServerAction);
         Appear();
+        inputField.onValueChanged.AddListener(text =>
+        {
+            inputField.text = text.ToLower();
+        });
     }
     private void Appear()
     {
@@ -78,7 +82,7 @@ public class PopupChangeName : MonoBehaviour
     }
     public void ClickBuy()
     {
-        var text = inputField.text.Trim();
+        var text = inputField.text.Trim().ToLower();
         inputField.text = text;
         if (UserData.Instance.Beri < cost)
             errorText.text = "You do not have enough beri";
@@ -106,7 +110,7 @@ public class PopupChangeName : MonoBehaviour
     private void Update()
     {
         var curText = inputField.text;
-        bool enable = curText.Trim() != UserData.Instance.Username.Trim();
+        bool enable = curText.Trim().ToLower() != UserData.Instance.Username.Trim().ToLower();
         btnChange.enabled = !waitResponse && enable;
         btnChange.GetComponent<CanvasGroup>().alpha = enable ? 1 : 0.6f;
     }
