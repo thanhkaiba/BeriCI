@@ -67,8 +67,10 @@ namespace Piratera.GUI
                 defenderEloDelta = packet.GetInt("defender_elo_delta");
                 timestamp = packet.GetLong("timestamp");
                 winner = packet.GetUtfString("winner");
-                attackerAvatar = packet.GetInt("attacker_avatar");
-                defenderAvatar = packet.GetInt("defender_avatar");
+                //attackerAvatar = packet.GetInt("attacker_avatar");
+                //defenderAvatar = packet.GetInt("defender_avatar");
+                attackerAvatar = 0;
+                defenderAvatar = 0;
             }
 
         }

@@ -28,7 +28,8 @@ namespace Piratera.GUI
                 name = packet.GetUtfString("name");
                 rank = packet.GetInt("rank");
                 elo = packet.GetLong("elo");
-                avatar = packet.GetInt("avatar");
+                //avatar = packet.GetInt("avatar");
+                avatar = 0;
             }
         }
 
