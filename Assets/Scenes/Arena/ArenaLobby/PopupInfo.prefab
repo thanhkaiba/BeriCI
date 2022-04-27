@@ -229,7 +229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 713, y: 381}
+  m_AnchoredPosition: {x: 622, y: 422}
   m_SizeDelta: {x: 100, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3026201913363289127
@@ -736,15 +736,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.76
-  m_Text: '- Arrange your defend lineup against the enemy attack.
+  m_Text: '- Arrange your defense lineup against the enemy attack.
 
-    - Use your
-    ticket to attack enemies defense team.
+    - One ticket
+    is equal to one chance to attack other users'' defense team.
 
-    - One season last 2 weeks.
+    - One season
+    lasts 2 weeks.
 
-    End
-    of the season, the prize will be given.
+    - Prize will be given at the end of the season
 
-    The value of the prize depends on
-    your ranking.'
+    - Value
+    of the prize depends on your ranking.'

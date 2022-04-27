@@ -667,7 +667,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Beri earn:'
+  m_Text: 'Beri earned:'
 --- !u!1 &2209828849380546649
 GameObject:
   m_ObjectHideFlags: 0
@@ -1722,7 +1722,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'JOIN:'
+  m_Text: 'Joined:'
 --- !u!1 &6455339871506640776
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,7 +2296,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'winrate:'
+  m_Text: 'Winrate:'
 --- !u!1 &8064568859678408371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2544,7 +2544,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: winrate
+  m_Text: 'Winrate:'
 --- !u!1 &9012227583885616505
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ namespace Piratera.GUI
             avatar.ShowAvatar(history.OpponentAvatar);
             textName.text = history.Opponent;
             textElo.text = (history.EloDelta > 0 ? "+" + history.EloDelta.ToString() : history.EloDelta.ToString()) + " elo";
-            textElo.color = history.EloDelta < 0 ? new Color32(0, 132, 183, 255) : new Color32(123, 179, 57, 255);
+            textElo.color = history.EloDelta < 0 ? new Color32(10, 218, 255, 255) : new Color32(255, 66, 142, 255);
 
             if (history.Position == "attacker") iconPos.sprite = iconAttack;
             else iconPos.sprite = iconDefense;

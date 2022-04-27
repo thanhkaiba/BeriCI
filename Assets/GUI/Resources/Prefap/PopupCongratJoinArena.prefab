@@ -394,12 +394,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.6
-  m_Text: 'Captain, you''ve been successfully join Arena
-
-    Now, you can fight
-    other crew to raise up your ranking
-
-    Another crew can also attack your crew'
+  m_Text: "Captain, you have joined Arena successfully.\r\nNow, time to beat other\u2019s
+    crews to raise your rank\r\nNotice: Other crews can also attack yours"
 --- !u!1 &7141553633996231816
 GameObject:
   m_ObjectHideFlags: 0

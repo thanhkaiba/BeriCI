@@ -104,6 +104,7 @@ public class PopupUserInfo : MonoBehaviour
         uid = _uid;
         btnChangeName.SetActive(uid == UserData.Instance.UID);
         btnChangeAvt.SetActive(uid == UserData.Instance.UID);
+        btnChangeAvt.SetActive(false);
 
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutUtfString("uid", uid);
@@ -119,9 +120,9 @@ public class PopupUserInfo : MonoBehaviour
 
         beriEarn.text = _beriEarn.ToString("N0");
         pvePlay.text = "" + pve_play;
-        pveWinrate.text = pve_play != 0 ? (Math.Round((float)pve_win / (float)pve_play * 100, 2) + "%") : "0%";
+        pveWinrate.text = pve_play != 0 ? (Math.Round((float)pve_win / (float)pve_play * 100, 1) + "%") : "0%";
         pvpPlay.text = "" + pvp_play;
-        pvpWinrate.text = pvp_play != 0 ? (Math.Round((float)pvp_win / (float)pvp_play * 100, 2) + "%") : "0%";
+        pvpWinrate.text = pvp_play != 0 ? (Math.Round((float)pvp_win / (float)pvp_play * 100, 1) + "%") : "0%";
         avatar.ShowAvatar(avt_id);
     }
     public void ShowFightingLine(List<SailorModel> sailors, FightingLine fgl)

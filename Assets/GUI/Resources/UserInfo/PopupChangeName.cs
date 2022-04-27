@@ -60,8 +60,8 @@ public class PopupChangeName : MonoBehaviour
                     errorText.text = "Unknown Error";
                 } else
                 {
-                    GuiManager.Instance.ShowPopupNotification("You've change your name success");
-                    Close();
+                    GuiManager.Instance.ShowPopupNotification("You've changed your name successfully");
+                    Close(); 
                 }
                 break;
         }
@@ -88,7 +88,7 @@ public class PopupChangeName : MonoBehaviour
             sfsObject.PutUtfString("new_name", inputField.text);
             Debug.Log("Send change name: " + inputField.text);
             NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);  
-            UserData.Instance.Beri -= 2000;
+            //UserData.Instance.Beri -= 2000;
         }
     }
     public void Close()

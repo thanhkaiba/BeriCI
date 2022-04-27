@@ -263,7 +263,7 @@ public class LobbyUI : MonoBehaviour
 
         if (UserData.Instance.NumSlot < GlobalConfigs.LineUp.max)
         {
-            GuiManager.Instance.ShowPopupNotification("You must have 5 slot to join Arena!");
+            GuiManager.Instance.ShowPopupNotification("You must have 5 slots to join Arena!");
             return;
         }
 
