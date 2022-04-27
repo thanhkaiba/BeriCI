@@ -2,6 +2,7 @@ using DG.Tweening;
 using Piratera.GUI;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,13 @@ public class PopupUserInfo : MonoBehaviour
 {
     private string uid;
     [SerializeField]
-    private Text username, userid, joinTime, beriEarn, winrateArena;
+    private Text username, userid, joinTime, beriEarn, pvePlay, pveWinrate, pvpPlay, pvpWinrate;
     [SerializeField]
     private GameObject btnChangeName, btnChangeAvt;
     [SerializeField]
     private Transform background;
+    [SerializeField]
+    private UserAvatar avatar;
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
@@ -49,9 +52,29 @@ public class PopupUserInfo : MonoBehaviour
                 Debug.Log("errorCode: " + errorCode);
                 if (errorCode == SFSErrorCode.SUCCESS)
                 {
-                    //ShowInfo();
+                    var username = packet.GetUtfString("username");
+                    var avt_id = packet.GetInt("avt_id");
+                    var account_date = packet.GetLong("account_date");
+                    var pve_count = packet.GetInt("pve_count");
+                    var pve_win = packet.GetInt("pve_win");
+                    var pvp_count = packet.GetInt("pvp_count");
+                    var pvp_win = packet.GetInt("pvp_win");
+                    var total_beri_earn = packet.GetLong("total_beri_earn");
+                    //var total_beri_earn = packet.GetLong("total_beri_earn");
+                    var sailors = new List<SailorModel>();
+                    ISFSArray sFSSailors = packet.GetSFSArray("sailors");
+                    foreach (ISFSObject obj in sFSSailors)
+                    {
+                        SailorModel model = new SailorModel(obj);
+                        sailors.Add(model);
+                    }
+
+                    var fighting_lines = new FightingLine();
+                    fighting_lines.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
+                    ShowInfo(username, uid, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
+                    ShowFightingLine(sailors, fighting_lines);
                 }
-                // else Close();
+                else Close();
                 break;
         }
     }
@@ -61,7 +84,10 @@ public class PopupUserInfo : MonoBehaviour
         userid.text = "---";
         joinTime.text = "---";
         beriEarn.text = "---";
-        winrateArena.text = "---";
+        pvePlay.text = "---";
+        pveWinrate.text = "---";
+        pvpPlay.text = "---";
+        pvpWinrate.text = "---";
         for (short x = 0; x < 3; x++)
         {
             for (short y = 0; y < 3; y++)
@@ -70,7 +96,7 @@ public class PopupUserInfo : MonoBehaviour
                 icon.gameObject.SetActive(false);
             }
         }
-        ShowFightingLine(CrewData.Instance.Sailors, CrewData.Instance.FightingTeam);
+        // ShowFightingLine(CrewData.Instance.Sailors, CrewData.Instance.FightingTeam);
     }
     public void SetUID(string _uid)
     {
@@ -78,13 +104,25 @@ public class PopupUserInfo : MonoBehaviour
         uid = _uid;
         btnChangeName.SetActive(uid == UserData.Instance.UID);
         btnChangeAvt.SetActive(uid == UserData.Instance.UID);
-        NetworkController.Send(SFSAction.USER_DETAIL);
+
+        SFSObject sfsObject = new SFSObject();
+        sfsObject.PutUtfString("uid", uid);
+        NetworkController.Send(SFSAction.USER_DETAIL, sfsObject);
     }
-    public void ShowInfo(string _username, string _userid, long _joinTime, long _beriEarn, int pvp_count, int pvp_win)
+    public void ShowInfo(string _username, string _userid, long _joinTime, long _beriEarn, int pvp_play, int pvp_win, int avt_id, int pve_play, int pve_win)
     {
         username.text = _username;
         userid.text = _userid;
-        joinTime.text = _userid;
+
+        DateTime date = (new DateTime(1970, 1, 1)).AddMilliseconds(_joinTime);
+        joinTime.text = date.ToString("MM/dd/yyyy");
+
+        beriEarn.text = _beriEarn.ToString("N0");
+        pvePlay.text = "" + pve_play;
+        pveWinrate.text = pve_play != 0 ? (Math.Round((float)pve_win / (float)pve_play * 100, 2) + "%") : "0%";
+        pvpPlay.text = "" + pvp_play;
+        pvpWinrate.text = pvp_play != 0 ? (Math.Round((float)pvp_win / (float)pvp_play * 100, 2) + "%") : "0%";
+        avatar.ShowAvatar(avt_id);
     }
     public void ShowFightingLine(List<SailorModel> sailors, FightingLine fgl)
     {

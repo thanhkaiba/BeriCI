@@ -57,10 +57,11 @@ public class PopupChangeName : MonoBehaviour
             case SFSAction.USER_CHANGE_NAME:
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
-
+                    errorText.text = "Unknown Error";
                 } else
                 {
-
+                    GuiManager.Instance.ShowPopupNotification("You've change your name success");
+                    Close();
                 }
                 break;
         }
@@ -75,14 +76,17 @@ public class PopupChangeName : MonoBehaviour
             errorText.text = "You do not have enough beri";
         else if (inputField.text == "")
             errorText.text = "Crew's name cannot be blank";
+        else if (inputField.text.Length < 2)
+            errorText.text = "Crew's name need atleast 2 characters";
         else if (!ValidateName())
-            errorText.text = "Crew's name cannot have special character";
+            errorText.text = "Crew's name cannot contain special character";
         else
         {
             SFSObject sfsObject = new SFSObject();
-            sfsObject.PutUtfString("level", inputField.text);
+            sfsObject.PutUtfString("new_name", inputField.text);
             Debug.Log("Send change name: " + inputField.text);
-            NetworkController.Send(SFSAction.TRAIN_SAILORS, sfsObject);
+            NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);
+            UserData.Instance.Beri -= 2000;
         }
     }
     public void Close()

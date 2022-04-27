@@ -17,7 +17,7 @@ namespace Piratera.GUI
             public string name;
             public int rank;
             public long elo;
-            public string avatar;
+            public int avatar;
             public PVPRankPlayer(ISFSObject packet)
             {
                 NewFromSFSObject(packet);
@@ -28,7 +28,7 @@ namespace Piratera.GUI
                 name = packet.GetUtfString("name");
                 rank = packet.GetInt("rank");
                 elo = packet.GetLong("elo");
-                avatar = packet.GetUtfString("avatar");
+                avatar = packet.GetInt("avatar");
             }
         }
 
@@ -98,7 +98,7 @@ namespace Piratera.GUI
                 slot.gameObject.SetActive(true);
                 slot.Find("textName").GetComponent<Text>().text = player.name;
                 slot.Find("textElo").GetComponent<Text>().text = "Elo: " + player.elo;
-                slot.Find("avt").GetComponent<UserAvatar>().LoadAvatar(player.avatar);
+                slot.Find("avt").GetComponent<UserAvatar>().ShowAvatar(player.avatar);
                 Debug.Log("Players[j].avatar: " + player.avatar);
                 slot.gameObject.AddComponent<Button>().onClick.AddListener(() =>
                 {

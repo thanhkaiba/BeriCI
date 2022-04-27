@@ -74,8 +74,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
             userNameA.text = data.YourName.LimitLength(30);
             userNameB.text = data.OpponentName.LimitLength(30);
 
-            avatarA.LoadAvatar(data.YourAvatar);
-            avatarB.LoadAvatar(data.OpponentAvatar);
+            avatarA.ShowAvatar(data.YourAvatar);
+            avatarB.ShowAvatar(data.OpponentAvatar);
             buttons[0].interactable = true;
             buttons[1].interactable = true;
         }

@@ -17,8 +17,8 @@ namespace Piratera.GUI
             public int defenderEloDelta;
             public long timestamp;
             public string winner = "";
-            public string attackerAvatar;
-            public string defenderAvatar;
+            public int attackerAvatar;
+            public int defenderAvatar;
             
             public string Position
             {
@@ -28,7 +28,7 @@ namespace Piratera.GUI
             {
                 get { return Position == "attacker" ? defender : attacker; }
             }
-            public string OpponentAvatar
+            public int OpponentAvatar
             {
                 get { return Position == "attacker" ? defenderAvatar : attackerAvatar; }
             }
@@ -67,8 +67,8 @@ namespace Piratera.GUI
                 defenderEloDelta = packet.GetInt("defender_elo_delta");
                 timestamp = packet.GetLong("timestamp");
                 winner = packet.GetUtfString("winner");
-                attackerAvatar = packet.GetUtfString("attacker_avatar");
-                defenderAvatar = packet.GetUtfString("defender_avatar");
+                attackerAvatar = packet.GetInt("attacker_avatar");
+                defenderAvatar = packet.GetInt("defender_avatar");
             }
 
         }

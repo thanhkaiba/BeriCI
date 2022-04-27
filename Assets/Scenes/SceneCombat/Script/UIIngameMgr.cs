@@ -104,8 +104,8 @@ public class UIIngameMgr : MonoBehaviour
     CombatSailor currentB;
     private void Start()
     {
-        avtA.LoadAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt0 : TempCombatData.Instance.avt1);
-        avtB.LoadAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt1 : TempCombatData.Instance.avt0);
+        avtA.ShowAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt0 : TempCombatData.Instance.avt1);
+        avtB.ShowAvatar(TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.avt1 : TempCombatData.Instance.avt0);
         usernameA.text = TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.userName0 : TempCombatData.Instance.userName1;
         usernameB.text = TempCombatData.Instance.yourTeamIndex == 0 ? TempCombatData.Instance.userName1 : TempCombatData.Instance.userName0;
         ShowTimeScale();

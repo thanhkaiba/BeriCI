@@ -366,23 +366,18 @@ namespace Piratera.Network
         }
         private static void OnLogin(BaseEvent evt)
         {
-
-
             Debug.Log("Login success as " + sfs.MySelf.Name);
         }
-
         private static void OnLoginError(BaseEvent evt)
         {
             string errorText = "Login failed: " + (string)evt.Params["errorMessage"];
             OnError(errorText);
         }
-
         public static void OnError(string message)
         {
             Debug.Log("Network Error: " + message);
             sfs.Disconnect();
         }
-
         protected static void OnExtentionResponse(BaseEvent evt)
         {
             ISFSObject packet = (ISFSObject)evt.Params["params"];
@@ -423,7 +418,6 @@ namespace Piratera.Network
             {
                 GuiManager.Instance.ShowPopupNotification("Server Disconnected", RunSceneLogin);
             }
-
         }
         public static void Send(SFSAction action)
         {
@@ -600,7 +594,7 @@ namespace Piratera.Network
                         }
                         break;
                     }
-                case SFSAction.USER_DETAIL:
+                case SFSAction.TRAIN_SAILORS:
                     {
                         SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
@@ -614,7 +608,6 @@ namespace Piratera.Network
                         break;
                     }
             }
-
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
@@ -657,7 +650,6 @@ namespace Piratera.Network
                 Debug.LogError("Smart Fox Connection is NULL");
             }
         }
-
         //
         // Summary:
         //     Removes a delegate registration for a given API event.

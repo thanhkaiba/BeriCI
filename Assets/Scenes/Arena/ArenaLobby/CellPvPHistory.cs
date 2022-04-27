@@ -24,7 +24,7 @@ namespace Piratera.GUI
         public void SetData(PopupArenaHistory.PvPHistory history)
         {
             data = history;
-            avatar.LoadAvatar(history.OpponentAvatar);
+            avatar.ShowAvatar(history.OpponentAvatar);
             textName.text = history.Opponent;
             textElo.text = (history.EloDelta > 0 ? "+" + history.EloDelta.ToString() : history.EloDelta.ToString()) + " elo";
             textElo.color = history.EloDelta < 0 ? new Color32(0, 132, 183, 255) : new Color32(123, 179, 57, 255);

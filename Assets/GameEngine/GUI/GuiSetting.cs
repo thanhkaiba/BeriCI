@@ -43,7 +43,7 @@ namespace Piratera.GUI
 #endif
             textName.text = UserData.Instance.Username.LimitLength(22);
             textUID.text =  UserData.Instance.UID.LimitLength(22);
-            userAvatar.LoadAvatar(UserData.Instance.Avatar);
+            userAvatar.ShowAvatar(UserData.Instance.AvtId);
 
             DateTime date = (new DateTime(1970, 1, 1)).AddMilliseconds(UserData.Instance.CreateAt);
             textCreateAt.text = date.ToString("MM/dd/yyyy");

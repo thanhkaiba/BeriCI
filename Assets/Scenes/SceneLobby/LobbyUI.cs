@@ -76,7 +76,7 @@ public class LobbyUI : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
-        userAvatar.LoadAvatar(UserData.Instance.Avatar);
+        userAvatar.ShowAvatar(UserData.Instance.AvtId);
         PresentData();
         GameEvent.UserDataChanged.AddListener(UpdateUserInfo);
         GameEvent.UserBeriChanged.AddListener(OnBeriChanged);

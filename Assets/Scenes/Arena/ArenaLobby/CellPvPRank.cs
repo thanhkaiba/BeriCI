@@ -17,7 +17,7 @@ namespace Piratera.GUI
         private Text textElo;
         public void SetData(PopupTopArena.PVPRankPlayer player)
         {
-            avatar.LoadAvatar(player.avatar);
+            avatar.ShowAvatar(player.avatar);
             textName.text = player.name;
             textRank.text = "" + player.rank;
             textElo.text = "Elo: " + player.elo;
