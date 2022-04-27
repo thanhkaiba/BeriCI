@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class PopupChangeName : MonoBehaviour
 {
     private int cost = 2000;
+    private bool waitResponse = false;
     [SerializeField]
     public Text errorText, textCost, textTotalBeri;
     [SerializeField]
@@ -55,6 +56,7 @@ public class PopupChangeName : MonoBehaviour
         switch (action)
         {
             case SFSAction.USER_CHANGE_NAME:
+                waitResponse = false;
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     errorText.text = "Unknown Error";
@@ -68,27 +70,29 @@ public class PopupChangeName : MonoBehaviour
     }
     private bool ValidateName()
     {
-        return new Regex("^[A-Za-z0-9_.]+$").IsMatch(inputField.text);
+        return new Regex("^[A-Za-z0-9_ .]+$").IsMatch(inputField.text);
     }
     public void ClickBuy()
     {
+        var text = inputField.text.Trim();
+        inputField.text = text;
         if (UserData.Instance.Beri < cost)
             errorText.text = "You do not have enough beri";
-        else if (inputField.text == "")
+        else if (text == "")
             errorText.text = "Crew's name cannot be blank";
-        else if (inputField.text.Length < 2)
+        else if (text.Length < 2)
             errorText.text = "Crew's name need atleast 2 characters";
-        else if (inputField.text.Length > 12)
+        else if (text.Length > 12)
             errorText.text = "Crew's name cannot exceed 12 characters";
         else if (!ValidateName())
             errorText.text = "Crew's name cannot contain special character";
         else
         {
             SFSObject sfsObject = new SFSObject();
-            sfsObject.PutUtfString("new_name", inputField.text);
-            Debug.Log("Send change name: " + inputField.text);
-            NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);  
-            //UserData.Instance.Beri -= 2000;
+            sfsObject.PutUtfString("new_name", text);
+            Debug.Log("Send change name: " + text);
+            NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);
+            waitResponse = true;
         }
     }
     public void Close()
@@ -98,8 +102,8 @@ public class PopupChangeName : MonoBehaviour
     private void Update()
     {
         var curText = inputField.text;
-        bool enable = curText.ToUpper() != UserData.Instance.Username.ToUpper();
-        btnChange.enabled = enable;
+        bool enable = curText.Trim() != UserData.Instance.Username.Trim();
+        btnChange.enabled = !waitResponse && enable;
         btnChange.GetComponent<CanvasGroup>().alpha = enable ? 1 : 0.6f;
     }
 }
