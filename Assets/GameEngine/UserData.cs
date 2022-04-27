@@ -48,8 +48,7 @@ public class UserData : Singleton<UserData>
         NumSlot = user.GetVariable(UserInfoPropertiesKey.NUMBER_OF_POSITIONS).GetIntValue();
         PVECount = user.GetVariable(UserInfoPropertiesKey.PVE_COUNT).GetIntValue();
         CreateAt = (long)user.GetVariable(UserInfoPropertiesKey.CREATE_AT).GetDoubleValue();
-        AvtId = 0;
-        //AvtId = user.GetVariable(UserInfoPropertiesKey.PVE_COUNT).GetIntValue();
+        AvtId = user.GetVariable(UserInfoPropertiesKey.AVATAR).GetIntValue();
         try
         {
             PVERank = user.GetVariable(UserInfoPropertiesKey.PVE_RANK).GetIntValue();

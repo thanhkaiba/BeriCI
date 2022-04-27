@@ -78,6 +78,8 @@ public class PopupChangeName : MonoBehaviour
             errorText.text = "Crew's name cannot be blank";
         else if (inputField.text.Length < 2)
             errorText.text = "Crew's name need atleast 2 characters";
+        else if (inputField.text.Length > 12)
+            errorText.text = "Crew's name cannot exceed 12 characters";
         else if (!ValidateName())
             errorText.text = "Crew's name cannot contain special character";
         else
@@ -85,7 +87,7 @@ public class PopupChangeName : MonoBehaviour
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutUtfString("new_name", inputField.text);
             Debug.Log("Send change name: " + inputField.text);
-            NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);
+            NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);  
             UserData.Instance.Beri -= 2000;
         }
     }
