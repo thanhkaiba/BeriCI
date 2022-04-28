@@ -438,6 +438,7 @@ MonoBehaviour:
   tableRow: {fileID: 3933142993000983839, guid: 4d9a5c6b652e4864086237d6a7371ba8,
     type: 3}
   avt: {fileID: 1833694011668776653}
+  background: {fileID: 8137257102488138897}
 --- !u!1 &6233769259991189516
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections;
@@ -14,11 +15,28 @@ public class PopupChangeAvatar : MonoBehaviour
     private GameObject tableRow;
     [SerializeField]
     private UserAvatar avt;
+    [SerializeField]
+    private Transform background;
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
         NetworkController.Send(SFSAction.USER_LIST_AVT);
-        // Appear();
+        Appear();
+    }
+    private void Appear()
+    {
+        Sequence s = DOTween.Sequence();
+        var canvasGroup = background.GetComponent<CanvasGroup>();
+        canvasGroup.alpha = 0;
+        canvasGroup.interactable = false;
+        canvasGroup.DOFade(1, 0.2f);
+        s.AppendCallback(() => canvasGroup.interactable = true);
+
+        background.localScale = new Vector3(0.6f, 0.6f, 0.6f);
+        background.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).SetLink(background.gameObject).SetTarget(background.transform);
+
+        var fog = GetComponent<HaveFog>();
+        if (fog) fog.FadeIn(0.3f);
     }
     private void OnDestroy()
     {
