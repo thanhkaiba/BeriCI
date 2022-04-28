@@ -52,6 +52,7 @@ public class PopupUserInfo : MonoBehaviour
                 Debug.Log("errorCode: " + errorCode);
                 if (errorCode == SFSErrorCode.SUCCESS)
                 {
+                    var unique_id = packet.GetLong("uid").ToString();
                     var username = packet.GetUtfString("username");
                     var avt_id = packet.GetInt("avt_id");
                     var account_date = packet.GetLong("account_date");
@@ -71,7 +72,7 @@ public class PopupUserInfo : MonoBehaviour
 
                     var fighting_lines = new FightingLine();
                     fighting_lines.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
-                    ShowInfo(username, uid, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
+                    ShowInfo(username, unique_id, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
                     ShowFightingLine(sailors, fighting_lines);
                 }
                 else Close();
