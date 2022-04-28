@@ -84,6 +84,7 @@ public class LobbyUI : MonoBehaviour
         GameEvent.FlyStamina.AddListener(FlyStamina);
         GameEvent.FlyBeri.AddListener(FlyBeri);
         GameEvent.MaintainDataChanged.AddListener(UpdateMaintain);
+        GameEvent.UserAvtChange.AddListener(UpdateAvatar);
         UpdateMaintain();
         RunAppearAction();
         ShowListSailors();
@@ -154,13 +155,17 @@ public class LobbyUI : MonoBehaviour
         GameEvent.FlyStamina.RemoveListener(FlyStamina);
         GameEvent.FlyBeri.RemoveListener(FlyBeri);
         GameEvent.MaintainDataChanged.RemoveListener(UpdateMaintain);
+        GameEvent.UserAvtChange.RemoveListener(UpdateAvatar);
     }
 
     void UpdateUserInfo(List<string> changedVars)
     {
         userName.DOText(UserData.Instance.Username.LimitLength(18), 0.5f).SetEase(Ease.InOutCubic);
     }
-
+    private void UpdateAvatar()
+    {
+        userAvatar.ShowAvatar(UserData.Instance.AvtId);
+    }
     void PresentData()
     {
         userName.text = UserData.Instance.Username.LimitLength(15);

@@ -105,6 +105,7 @@ public class PopupChangeName : MonoBehaviour
     }
     public void Close()
     {
+        FindObjectOfType<PopupUserInfo>().SetUID(UserData.Instance.UID);
         Destroy(gameObject);
     }
     private void Update()

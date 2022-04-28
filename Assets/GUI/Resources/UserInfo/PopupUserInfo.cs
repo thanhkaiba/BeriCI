@@ -104,7 +104,6 @@ public class PopupUserInfo : MonoBehaviour
         uid = _uid;
         btnChangeName.SetActive(uid == UserData.Instance.UID);
         btnChangeAvt.SetActive(uid == UserData.Instance.UID);
-        btnChangeAvt.SetActive(false);
 
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutUtfString("uid", uid);
@@ -140,6 +139,7 @@ public class PopupUserInfo : MonoBehaviour
                     SailorModel sailor = sailors.Find(sailor => sailor.id == sailorID);
                     var iconS = icon.GetComponent<IconSailor>();
                     iconS.PresentData(sailor);
+                    icon.name = "sailor_" + x + "_" + y;
                 }
                 else
                 {
@@ -150,7 +150,11 @@ public class PopupUserInfo : MonoBehaviour
     }
     public void ChangeName()
     {
-        GuiManager.Instance.AddGui("UserInfo/PopupChangeName");
+        var popup = GuiManager.Instance.AddGui("UserInfo/PopupChangeName");
+    }
+    public void ChangeAvatar()
+    {
+        GuiManager.Instance.AddGui("UserInfo/PopupChangeAvatar");
     }
     public void Close()
     {
