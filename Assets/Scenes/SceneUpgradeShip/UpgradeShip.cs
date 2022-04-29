@@ -4,99 +4,154 @@ using UnityEngine;
 using UnityEngine.UI;
 using Piratera.Config;
 using Piratera.Network;
+using Sfs2X.Entities.Data;
+using UnityEngine.SceneManagement;
+using DG.Tweening;
+using Piratera.Utils;
+using Piratera.GUI;
 
 public class UpgradeShip : MonoBehaviour
 {
-    [SerializeField] private GameObject sail, helm;
-    [SerializeField] private GameObject sailCanvas, helmCanvas;
-    private Text sailLevelTxt, helmLevelTxt;
-    private Text sailUpgradeBtnLabel, helmUpgradeBtnLabel;
-    private GameObject sailUpgradeBtn, helmUpgradeBtn;
+    private enum PageStatus {
+        MENU,
+        SAIL,
+        HELM,
+    }
+    [SerializeField]
+    private Camera mainCamera, sailCamera;
+    private Vector3 camOriPos;
+    private float camOriSize;
+    [SerializeField]
+    private SpriteRenderer sail, body;
+    [SerializeField]
+    private GameObject nodeMenu, nodeSail, btnUpgradeSail;
+    [SerializeField]
+    private Animator sailEffect;
+    [SerializeField]
+    private Text textSailPrice, textSailLevel, textHelmLevel, textSail, descSail;
+    [SerializeField]
+    private Text userBeri, userStamina;
 
-    private int sailLevel, helmLevel;
-    private const int MAX_SAIL_LEVEL = 7;
-    private const int MAX_HELM_LEVEL = 7;
+    private void Awake()
+    {
+        NetworkController.Listen(OnReceiveServerAction);
+        GameEvent.UserStaminaChanged.AddListener(OnStaminaChanged);
+        GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
+    }
+    private void OnDestroy()
+    {
+        NetworkController.RemoveListener(OnReceiveServerAction);
+        GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
+        GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
+    }
+    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    {
+        if (action == SFSAction.SAIL_UPGRADE)
+        {
+            SceneTransition.Instance.ShowWaiting(false);
+            if (errorCode == SFSErrorCode.SUCCESS)
+            {
+                UpgradeSailSuccess();
+            } else
+            {
 
-    // Start is called before the first frame update
+            }
+        }
+    }
     void Start()
     {
-        //NetworkController.AddServerActionListener(OnReceiveServerAction);
-        //InitData();
+        camOriPos = mainCamera.transform.position;
+        camOriSize = mainCamera.orthographicSize;
+        PresentShipWithLevel(UserData.Instance.SailLevel);
+        UpdateAllStatus();
+        OnClickMenu();
 
-        sailLevel = 1;
-        helmLevel = 1;
-
-        sailLevelTxt = sailCanvas.transform.Find("Level").gameObject.GetComponent<Text>();
-        helmLevelTxt = helmCanvas.transform.Find("Level").gameObject.GetComponent<Text>();
-
-        sailUpgradeBtn = sailCanvas.transform.Find("UpgradeSail").gameObject;
-        helmUpgradeBtn = helmCanvas.transform.Find("UpgradeHelm").gameObject;
-        sailUpgradeBtnLabel = sailUpgradeBtn.transform.Find("SailBtnLabel").gameObject.GetComponent<Text>();
-        helmUpgradeBtnLabel = helmUpgradeBtn.transform.Find("HelmBtnLabel").gameObject.GetComponent<Text>();
-
-        Debug.Log(GlobalConfigs.UpgradeShipConfig);
+        userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
+        userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnClickSail()
     {
-        
+        mainCamera.transform.DOMove(sailCamera.transform.position, 1.0f).SetEase(Ease.InOutSine);
+        mainCamera.DOOrthoSize(sailCamera.orthographicSize, 1.0f).SetEase(Ease.InOutSine);
+        nodeMenu.SetActive(false);
+        nodeSail.SetActive(true);
     }
-
-    // Upgrade Sail
-    public void upgradeSail()
+    public void OnClickMenu()
     {
-        if (sailLevel < MAX_SAIL_LEVEL)
+        mainCamera.transform.DOMove(camOriPos, 0.8f).SetEase(Ease.InOutSine);
+        mainCamera.DOOrthoSize(camOriSize, 0.8f).SetEase(Ease.InOutSine);
+        nodeMenu.SetActive(true);
+        nodeSail.SetActive(false);
+    }
+    private void PresentShipWithLevel(int level)
+    {
+        int sailImgIdx = level + 1;
+        int bodyImgIdx = level < 4 ? 1 : 2;
+        Debug.Log("level: " + level);
+        Debug.Log("sailImgIdx: " + sailImgIdx);
+        Debug.Log("bodyImgIdx: " + bodyImgIdx);
+        sail.sprite = Resources.Load<Sprite>("UI/UpgradeShip/sail_" + sailImgIdx);
+        body.sprite = Resources.Load<Sprite>("UI/UpgradeShip/ship_" + bodyImgIdx);
+    }
+    private void UpdateAllStatus()
+    {
+        var config = GlobalConfigs.UpgradeShipConfig;
+        int staminaMax = GlobalConfigs.StaminaConfig.max_stamina;
+        int sailLevel = UserData.Instance.SailLevel;
+        int maxSailLevel = config.GetMaxLevel();
+        textSailLevel.text = "level " + (sailLevel + 1);
+        textHelmLevel.text = "level " + (sailLevel + 1);
+        textSail.text = "Sail level " + (sailLevel + 1);
+        descSail.text = $"Stamina Cap: {staminaMax + config.GetStaminaCapacity(sailLevel)} ({staminaMax} + {config.GetStaminaCapacity(sailLevel)})"; 
+        if (sailLevel >= maxSailLevel)
         {
-            sailLevel++;
-            Sprite newSail = Resources.Load("UpgradeShip/sail_" + sailLevel, typeof(Sprite)) as Sprite;
-            SpriteRenderer sailRenderer = sail.GetComponent<SpriteRenderer>();
-
-            sailRenderer.sprite = newSail;
-            sailLevelTxt.text = "Sail Level " + sailLevel;
-
-            if (sailLevel == MAX_SAIL_LEVEL)
-            {
-                sailUpgradeBtnLabel.text = "MAX";
-                sailUpgradeBtnLabel.rectTransform.localPosition = new Vector3(0, 20, 0);
-                sailUpgradeBtnLabel.fontSize = 40;
-                sailUpgradeBtn.transform.Find("UpgradePrice").gameObject.SetActive(false);
-            }
+            btnUpgradeSail.SetActive(false);
+        }
+        else
+        {
+            btnUpgradeSail.SetActive(true);
+            textSailPrice.text = config.GetSailNextLevelPrice(sailLevel).ToString("N0");
         }
     }
-
-    // Upgrade Helm
-    public void upgradeHelm()
+    public void OnUpgadeSail()
     {
-        if (helmLevel < MAX_HELM_LEVEL)
+        UpgradeSailSuccess();
+        return;
+        var config = GlobalConfigs.UpgradeShipConfig;
+        if (UserData.Instance.Beri < config.GetSailNextLevelPrice(UserData.Instance.SailLevel))
         {
-            helmLevel++;
-
-            Sprite newHelm = Resources.Load("UpgradeShip/ship_1", typeof(Sprite)) as Sprite;
-            SpriteRenderer helmRenderer = helm.GetComponent<SpriteRenderer>();
-
-            if (helmLevel > 4) {
-                newHelm = Resources.Load("UpgradeShip/ship_2", typeof(Sprite)) as Sprite;
-            }
-            if (helmLevel > 6)
-            {
-                //helm.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-            }
-
-            helmRenderer.sprite = newHelm;
-            helmLevelTxt.text = "Helm Level " + helmLevel;
-
-            if (helmLevel == MAX_HELM_LEVEL)
-            {
-                helmUpgradeBtnLabel.text = "MAX";
-                helmUpgradeBtnLabel.fontSize = 40;
-                helmUpgradeBtnLabel.rectTransform.localPosition = new Vector3(0, 20, 0);
-                helmUpgradeBtn.transform.Find("UpgradePrice").gameObject.SetActive(false);
-            }
+            GuiManager.Instance.ShowPopupNotification("You do not have enough beri");
         }
+        else
+        {
+            SceneTransition.Instance.ShowWaiting(true);
+            NetworkController.Send(SFSAction.SAIL_UPGRADE);
+        }
+    }
+    private void UpgradeSailSuccess()
+    {
+        UserData.Instance.SailLevel++;
+        userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
+        PresentShipWithLevel(UserData.Instance.SailLevel);
+        UpdateAllStatus();
+
+        sailEffect.transform.Find("sail").GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("UI/UpgradeShip/sail_" + (UserData.Instance.SailLevel + 1));
+        sailEffect.SetTrigger("Trigger");
+    }
+    public void OnUpgadeHelm()
+    {
+        GuiManager.Instance.ShowPopupNotification("Coming soon!");
     }
     public void ClickBack()
     {
-
+        SceneManager.LoadScene("SceneLobby");
+    }
+    public void OnStaminaChanged(int oldValue, int newValue)
+    {
+        DoTweenUtils.UpdateNumber(userStamina, oldValue, newValue, x => StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(x, 6)));
+    }
+    private void OnBeriChanged(long oldValue, long newValue)
+    {
+        DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x, 6));
     }
 }

@@ -68,10 +68,11 @@ public class LoadServerDataUI : MonoBehaviour
     public static string NextScene = "SceneLobby";
 
     private readonly HashSet<SFSAction> ActionRequires = new HashSet<SFSAction>() { 
-        SFSAction.PIRATE_WHEEL_DATA, 
+        // SFSAction.PIRATE_WHEEL_DATA, 
         SFSAction.LOAD_LIST_HERO_INFO,
         SFSAction.TRAIN_SAILORS_REMAIN,
         SFSAction.PVP_DATA,
+        SFSAction.SHIP_DATA,
     };
     private int TotalActionRequire = 0;
     void Start()

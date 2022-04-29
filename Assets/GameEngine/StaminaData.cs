@@ -14,12 +14,12 @@ public class StaminaData : Singleton<StaminaData>
 
     public string GetStaminaFormat(int stamina)
     {
-        return $"{StringUtils.ShortNumber(stamina)}/{GlobalConfigs.StaminaConfig.max_stamina}";
+        return $"{StringUtils.ShortNumber(stamina)}/{GlobalConfigs.StaminaConfig.GetStaminaCapacity()}";
     }
 
     public string GetStaminaFormat(string stamina)
     {
-        return $"{stamina}/{GlobalConfigs.StaminaConfig.max_stamina}";
+        return $"{stamina}/{GlobalConfigs.StaminaConfig.GetStaminaCapacity()}";
     }
     public string _GetStaminaFormat(int stamina)
     {
@@ -32,12 +32,12 @@ public class StaminaData : Singleton<StaminaData>
 
     public bool IsRecorveringStamina()
     {
-        return Stamina < GlobalConfigs.StaminaConfig.max_stamina;
+        return Stamina < GlobalConfigs.StaminaConfig.GetStaminaCapacity();
     }
 
     public long TimeToHaveNewStamina()
     {
-        if (Stamina > GlobalConfigs.StaminaConfig.max_stamina || Stamina < 0)
+        if (Stamina > GlobalConfigs.StaminaConfig.GetStaminaCapacity() || Stamina < 0)
         {
             return -1;
         }

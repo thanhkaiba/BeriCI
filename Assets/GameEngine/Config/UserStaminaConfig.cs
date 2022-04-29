@@ -1,3 +1,5 @@
+using Piratera.Config;
+
 public class UserStaminaConfig
 {
     public int max_stamina = 0;
@@ -6,4 +8,8 @@ public class UserStaminaConfig
     public int recovering_time = 600;
     public int[] costs = { 10, 100, 200, 500, 1000 };
     public int statmina_buy_value = 0;
+    public int GetStaminaCapacity()
+    {
+       return max_stamina + GlobalConfigs.UpgradeShipConfig.GetStaminaCapacity(UserData.Instance.SailLevel);
+    }
 }

@@ -127,11 +127,9 @@ public class LobbyUI : MonoBehaviour
             maintainText.text = "";
         }
     }
-
     private void OnBeriChanged(long oldValue, long newValue)
     {
         DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x, 6));
-
     }
 
     public void OnStaminaChanged(int oldValue, int newValue)
@@ -290,7 +288,6 @@ public class LobbyUI : MonoBehaviour
             //SceneManager.LoadScene("SceneArena");
             SceneTransition.Instance.LoadScene("SceneArena", TransitionType.ARENA);
         }
-     
     }
 
     private void RunAppearAction()

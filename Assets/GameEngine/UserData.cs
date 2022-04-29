@@ -21,7 +21,6 @@ public class UserInfoPropertiesKey
 
 public class UserData : Singleton<UserData>
 {
-
     public string UID { get; set; }
     public string Username { get; set; }
     public long Beri { get; set; }
@@ -37,6 +36,9 @@ public class UserData : Singleton<UserData>
     public long CreateAt { get; set; }
     public int PVECount { get; set; }
     public int[] TrainedToday = new int[] { };
+
+    public int SailLevel = 0;
+    public int HelmLevel = 0;
 
     public void OnUserVariablesUpdate(User user, List<string> changedVars)
     {

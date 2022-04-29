@@ -43,6 +43,10 @@
         TRAIN_SAILORS = 80,
         TRAIN_SAILORS_REMAIN = 81,
 
+        SHIP_DATA = 90,
+        SAIL_UPGRADE = 91,
+        HELM_UPGRADE = 92,
+
         USER_DETAIL = 200,
         USER_CHANGE_NAME = 201,
         USER_LIST_AVT = 202,

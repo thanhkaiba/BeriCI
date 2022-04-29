@@ -607,6 +607,16 @@ namespace Piratera.Network
                         }
                         break;
                     }
+                case SFSAction.SHIP_DATA:
+                    {
+                        SceneTransition.Instance.ShowWaiting(false);
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            UserData.Instance.SailLevel = packet.GetInt("sail_level");
+                            UserData.Instance.HelmLevel = packet.GetInt("helm_level");
+                        }
+                        break;
+                    }
             }
             if (errorCode != SFSErrorCode.SUCCESS)
             {
