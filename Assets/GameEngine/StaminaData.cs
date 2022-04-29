@@ -5,7 +5,7 @@ using Sfs2X.Entities;
 public class StaminaData : Singleton<StaminaData>
 {
     public int Stamina = -1;
-    private long LastCountStamina;
+    public long LastCountStamina;
 
     public string GetCurrentStaminaFormat()
     {

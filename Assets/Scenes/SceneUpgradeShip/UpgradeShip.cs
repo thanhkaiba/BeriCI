@@ -12,11 +12,6 @@ using Piratera.GUI;
 
 public class UpgradeShip : MonoBehaviour
 {
-    private enum PageStatus {
-        MENU,
-        SAIL,
-        HELM,
-    }
     [SerializeField]
     private Camera mainCamera, sailCamera;
     private Vector3 camOriPos;
@@ -31,7 +26,6 @@ public class UpgradeShip : MonoBehaviour
     private Text textSailPrice, textSailLevel, textHelmLevel, textSail, descSail;
     [SerializeField]
     private Text userBeri, userStamina;
-
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
@@ -130,6 +124,9 @@ public class UpgradeShip : MonoBehaviour
     }
     private void UpgradeSailSuccess()
     {
+        if (!StaminaData.Instance.IsRecorveringStamina())
+            StaminaData.Instance.LastCountStamina = GameTimeMgr.GetCurrentTime();
+
         UserData.Instance.SailLevel++;
         userStamina.text = StaminaData.Instance.GetStaminaFormat(StringUtils.ShortNumber(StaminaData.Instance.Stamina, 6));
         PresentShipWithLevel(UserData.Instance.SailLevel);
