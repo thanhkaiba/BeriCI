@@ -167,14 +167,10 @@ namespace Piratera.Sound
         [SerializeField]
         private AudioSource musicPlayer;
         public static SoundMgr Instance;
-
-
         void Awake()
         {
-
             if (Instance == null)
             {
-
 #if UNITY_WEBGL
                 // if sound play in start game, some browser won't load game 
                 musicOn = false;
@@ -187,10 +183,7 @@ namespace Piratera.Sound
                 DontDestroyOnLoad(gameObject);
             }
             else Destroy(gameObject);
-
-
         }
-
         public static void SetSoundFxSpeed(float pitch)
         {
             if (Instance != null)
@@ -198,7 +191,6 @@ namespace Piratera.Sound
                 Instance.soundEfectPlayer.pitch = pitch;
             }
         }
-
         public static void SetSoundFxVolume(float volume)
         {
             if (Instance != null)
@@ -206,7 +198,6 @@ namespace Piratera.Sound
                 Instance.SoundVolume = volume;
             }
         }
-
         public static void PlayTabSound()
         {
             if (Instance != null)
@@ -214,7 +205,6 @@ namespace Piratera.Sound
                 Instance.PlaySoundEffect(Instance.buttonTapSound);
             }
         }
-
         public static void PlaySound(PirateraSoundEffect sound)
         {
             if (Instance != null)
@@ -243,10 +233,8 @@ namespace Piratera.Sound
                         Instance.PlaySoundEffect(Instance.wheelRunning);
                         break;
                 }
-
             }
         }
-
         public static void PlaySound(AudioClip audioClip)
         {
             if (Instance != null)

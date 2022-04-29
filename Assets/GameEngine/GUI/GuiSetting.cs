@@ -1,5 +1,4 @@
-﻿using Piratera.Constance;
-using Piratera.Network;
+﻿using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using System;
@@ -8,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiSetting : BaseGui
+    public class GuiSetting : MonoBehaviour
     {
         [SerializeField]
         private Text textName;
@@ -33,13 +32,8 @@ namespace Piratera.GUI
 
         [SerializeField]
         private Image iconMusic;
-
-
-
-
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
 #if PIRATERA_DEV
             textVersion.text = "DEV_" + Application.version;
 #elif PIRATERA_QC
@@ -49,13 +43,12 @@ namespace Piratera.GUI
 #endif
             textName.text = UserData.Instance.Username.LimitLength(22);
             textUID.text =  UserData.Instance.UID.LimitLength(22);
-            userAvatar.LoadAvatar(UserData.Instance.Avatar);
+            userAvatar.ShowAvatar(UserData.Instance.AvtId);
 
             DateTime date = (new DateTime(1970, 1, 1)).AddMilliseconds(UserData.Instance.CreateAt);
             textCreateAt.text = date.ToString("MM/dd/yyyy");
             UpdateSoundIcon();
             UpdateMusicIcon();
-
         }
 
         public void Logout()
@@ -70,7 +63,7 @@ namespace Piratera.GUI
 
         public void OnClose()
         {
-            RunDestroy();
+            Destroy(gameObject);
         }
 
 

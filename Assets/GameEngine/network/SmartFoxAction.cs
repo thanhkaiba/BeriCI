@@ -43,6 +43,11 @@
         TRAIN_SAILORS = 80,
         TRAIN_SAILORS_REMAIN = 81,
 
+        USER_DETAIL = 200,
+        USER_CHANGE_NAME = 201,
+        USER_LIST_AVT = 202,
+        USER_CHANGE_AVT = 203,
+
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat
         CHEAT_SAILOR = 101,

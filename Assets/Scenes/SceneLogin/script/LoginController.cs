@@ -11,9 +11,6 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-#if PIRATERA_LIVE
-using Piratera.Constance;
-#endif
 
 public class LoginController : MonoBehaviour
 {
@@ -44,7 +41,7 @@ public class LoginController : MonoBehaviour
     //----------------------------------------------------------
     void Awake()
     {
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
         enableLoginUI(true);
 
 
@@ -139,14 +136,14 @@ public class LoginController : MonoBehaviour
     {
         Reset();
         enableLoginUI(true);
-        GuiManager.Instance.ShowGuiWaiting(false);
+        SceneTransition.Instance.ShowWaiting(false);
         errorText.text = error;
 
     }
 
     void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
         Reset();
     }
 
@@ -155,7 +152,7 @@ public class LoginController : MonoBehaviour
     //----------------------------------------------------------
     public IEnumerator CheckInternetConnection(Action<bool> syncResult)
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         const string echoServer = "http://google.com";
         bool result;
         using (var request = UnityWebRequest.Head(echoServer))
@@ -202,7 +199,7 @@ public class LoginController : MonoBehaviour
     {
         if (true)
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             enableLoginUI(false);
             NetworkController.LoginToServer(new LoginData(username, password, loginType));
             NetworkController.AddEventListener(SFSEvent.LOGIN_ERROR, OnLoginFail);
@@ -212,7 +209,7 @@ public class LoginController : MonoBehaviour
         }
         else
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             errorText.text = "Error. Check Internet connection!";
         }
     }

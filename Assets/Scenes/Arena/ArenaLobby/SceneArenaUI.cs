@@ -3,6 +3,7 @@ using DG.Tweening;
 using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Network;
+using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,7 +17,7 @@ public class SceneArenaUI : MonoBehaviour
     [SerializeField]
     private Text LbElo;
     [SerializeField]
-    private Text LbRank;
+    private Text LbRank, LBSeason;
     [SerializeField]
     private Text LbResetTicket;
     [SerializeField]
@@ -25,16 +26,18 @@ public class SceneArenaUI : MonoBehaviour
     private Transform background;
     [SerializeField]
     private SpriteRenderer battleField;
+    [SerializeField]
+    private GameObject popupRanking, popupInfo, popupHistory;
     void Start()
     {
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
+        NetworkController.Listen(OnReceiveServerAction);
         UpdateTicket();
         UpdateRank();
         if (!PvPData.Instance.HaveJoin)
         {
-           
-            GuiManager.Instance.AddGui<PopupCongratJoinArena>("prefap/PopupCongratJoinArena");
-            GuiManager.Instance.ShowGuiWaiting(true);
+            GuiManager.Instance.AddGui("prefap/PopupCongratJoinArena");
+            SceneTransition.Instance.ShowWaiting(true, false);
             NetworkController.Send(SFSAction.PVP_JOIN);
         } else
         {
@@ -46,13 +49,21 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void SyncData()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_DATA);
     }
     private void UpdateRank()
     {
-        LbRank.text = "Rank: " + PvPData.Instance.Rank;
-        LbElo.text = "Elo: " + PvPData.Instance.Elo;
+        var data = PvPData.Instance;
+        var startTime = GameUtils.FromUnixTime(data.StartSeason);
+        var endTime = GameUtils.FromUnixTime(data.EndSeason);
+        LBSeason.text = "<color=#b8daff>Season "
+            + data.SeasonId + "</color>\n<color=#dbdbdb>"
+            + startTime.ToString("dd/MM/yyyy")
+            + " - " + endTime.ToString("dd/MM/yyyy")
+            + "</color>";
+        LbRank.text = "Rank: " + data.Rank;
+        LbElo.text = "Elo: " + data.Elo;
     }
     private void UpdateTicket()
     {
@@ -75,13 +86,13 @@ public class SceneArenaUI : MonoBehaviour
                 {
                     if (errorCode != SFSErrorCode.SUCCESS)
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                     }
                     break;
                 }
             case SFSAction.PVP_DATA:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         UpdateTicket();
@@ -92,7 +103,7 @@ public class SceneArenaUI : MonoBehaviour
                 }
             case SFSAction.PVP_JOIN:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         PvPData.Instance.HaveJoin = true;
@@ -102,10 +113,10 @@ public class SceneArenaUI : MonoBehaviour
                 }
             case SFSAction.PVP_RANKING:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui<PopupTopArena>("Prefap/PopupTopArena");
+                        GameObject GO = GuiManager.Instance.AddGui(popupRanking);
                         PopupTopArena popup = GO.GetComponent<PopupTopArena>();
                         popup.NewFromSFSObject(packet.GetSFSArray("list"));
                     }
@@ -113,10 +124,10 @@ public class SceneArenaUI : MonoBehaviour
                 }
             case SFSAction.PVP_HISTORY:
                 {
-                    GuiManager.Instance.ShowGuiWaiting(false);
+                    SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GameObject GO = GuiManager.Instance.AddGui<PopupArenaHistory>("Prefap/PopupArenaHistory");
+                        GameObject GO = GuiManager.Instance.AddGui(popupHistory);
                         PopupArenaHistory popup = GO.GetComponent<PopupArenaHistory>();
                         popup.NewFromSFSObject(packet.GetSFSArray("history"));
                     }
@@ -130,24 +141,24 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void ShowGuide()
     {
-        GuiManager.Instance.AddGui<PopupNotification>("Prefap/PopupArenaGuide");
+        GuiManager.Instance.AddGui(popupInfo);
     }
     public void ShowTop()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         SFSObject s = new SFSObject();
         s.PutInt("from", 0);
-        s.PutInt("to", 10);
+        s.PutInt("to", 20);
         NetworkController.Send(SFSAction.PVP_RANKING, s);
     }
     public void ShowHistory()
     {
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_HISTORY);
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
 
     }
     public void OnBackToLobby()
@@ -166,7 +177,7 @@ public class SceneArenaUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Not Enough Ticket!");
             return;
         }
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_PLAY);
     }
     private void ShowListSailors()

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiLuckyWheel : BaseGui
+    public class GuiLuckyWheel : MonoBehaviour
     {
         [SerializeField]
         private Transform background;
@@ -36,14 +36,9 @@ namespace Piratera.GUI
         private GameObject textSpin;
 
         private bool UpdateCountDown = false;
-
-
-
-
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
             InitData();
         }
         public void InitData()
@@ -91,9 +86,8 @@ namespace Piratera.GUI
         {
             if (action == SFSAction.PIRATE_WHEEL)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
           
-
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     OnClose();
@@ -152,13 +146,13 @@ namespace Piratera.GUI
 
         public void OnClose()
         {
-            RunDestroy();
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            Destroy(gameObject);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
         public void SendSpin()
         {
             buttonClose.gameObject.SetActive(false);
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             NetworkController.Send(SFSAction.PIRATE_WHEEL);
         }
 

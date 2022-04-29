@@ -7,13 +7,10 @@ public class CrewData : Singleton<CrewData>
 {
     public List<SailorModel> Sailors = new List<SailorModel>();
     public FightingLine FightingTeam = new FightingLine();
-
-
     public bool IsEmpty()
     {
         return Sailors.Count <= 0;
     }
-
     protected override void OnAwake()
     {
         ResetData();
@@ -23,7 +20,6 @@ public class CrewData : Singleton<CrewData>
     {
         NetworkController.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
     }
-
     public void OnConfirmSquad()
     {
         NetworkController.Send(SFSAction.CONFIRM_LINEUP, FightingTeam.ToSFSObject());

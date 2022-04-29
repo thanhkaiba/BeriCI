@@ -12,8 +12,8 @@ public class TempCombatData : Singleton<TempCombatData>
     public byte yourTeamIndex;
     public string userName0;
     public string userName1;
-    public string avt0;
-    public string avt1;
+    public int avt0;
+    public int avt1;
     public int combatId;
     public List<SailorModel> listSailor;
     public FightingLine fgl0;
@@ -32,8 +32,8 @@ public class TempCombatData : Singleton<TempCombatData>
         yourTeamIndex = packet.GetByte("your_team_idx");
         userName0 = packet.GetUtfString("username_0");
         userName1 = packet.GetUtfString("username_1");
-        avt0 = packet.GetUtfString("avt_0");
-        avt1 = packet.GetUtfString("avt_1");
+        avt0 = packet.GetInt("avt_0");
+        avt1 = packet.GetInt("avt_1");
         combatId = packet.GetInt("combat_id");
         /* ISFSArray sFSSailors = packet.GetSFSArray("sailors");
          foreach (ISFSObject obj in sFSSailors)

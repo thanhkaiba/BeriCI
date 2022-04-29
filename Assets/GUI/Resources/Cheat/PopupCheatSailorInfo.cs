@@ -8,8 +8,7 @@ using UnityEngine.UI;
 
 namespace Piratera.Cheat
 {
-
-    public class PopupCheatSailorInfo : BaseGui
+    public class PopupCheatSailorInfo : MonoBehaviour
     {
         [SerializeField]
         private Text textCheatSailor_name;
@@ -30,7 +29,7 @@ namespace Piratera.Cheat
 
         public string sailorId;
 
-        protected override void Start()
+        protected void Start()
         {
             SailorModel sailor = CrewData.Instance.GetSailorModel(sailorId);
             textCheatSailor_name.text = sailor.name;
@@ -39,10 +38,8 @@ namespace Piratera.Cheat
             textCheatSailor_exp.text = sailor.exp.ToString();
             textCheatSailor_star.text = sailor.star.ToString();
             textCheatSailor_fight.text = sailor.pve_count.ToString();
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
         }
-
-
         public void SendCheatSailor()
         {
             int quantity = int.Parse(textCheatSailor_quality.text);
@@ -50,21 +47,23 @@ namespace Piratera.Cheat
             long exp = long.Parse(textCheatSailor_exp.text);
             byte star = byte.Parse(textCheatSailor_star.text);
             int fight = int.Parse(textCheatSailor_fight.text);
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             CheatMgr.CheatSailorQuantity(sailorId, quantity, level, exp, star, fight);
         }
-
         private void OnDestroy()
         {
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
-
+        public void DestroySelf()
+        {
+            Destroy(gameObject);
+        }
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (action == SFSAction.CHEAT_SAILOR_QUANTITY)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);

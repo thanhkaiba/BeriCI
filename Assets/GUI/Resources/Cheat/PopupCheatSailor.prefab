@@ -946,7 +946,6 @@ GameObject:
   - component: {fileID: 1568954581087041504}
   - component: {fileID: 7289978779325851543}
   - component: {fileID: 2675577387835931267}
-  - component: {fileID: 590114322498375375}
   - component: {fileID: 9174606286474290454}
   m_Layer: 5
   m_Name: PopupCheatSailor
@@ -1030,22 +1029,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fogOpacity: 0.5
   blockTouchBehind: 1
---- !u!114 &590114322498375375
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3756143387663300815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearEffect: 3
-  disappearEffect: 1
-  appearTime: 0.6
-  disappearTime: 0.4
 --- !u!114 &9174606286474290454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1575,8 +1558,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 9174606286474290454}
-        m_TargetAssemblyTypeName: Piratera.GUI.BaseGui, Assembly-CSharp
-        m_MethodName: RunDestroy
+        m_TargetAssemblyTypeName: Piratera.Cheat.PopupCheatSailorInfo, Assembly-CSharp
+        m_MethodName: DestroySelf
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

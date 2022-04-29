@@ -8,8 +8,8 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
     private byte yourTeamIndex;
     private string userName0;
     private string userName1;
-    private string avt0;
-    private string avt1;
+    private int avt0;
+    private int avt1;
     public int combatId;
     public List<SailorModel> sailors_0 = new();
     public List<SailorModel> sailors_1 = new();
@@ -44,7 +44,7 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
         }
     }
 
-    public string YourAvatar
+    public int YourAvatar
     {
         get
         {
@@ -57,7 +57,7 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
         }
     }
 
-    public string OpponentAvatar
+    public int OpponentAvatar
     {
         get
         {
@@ -128,8 +128,8 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
         yourTeamIndex = 0;
         userName0 = "";
         userName1 = "";
-        avt0 = "";
-        avt1 = "";
+        avt0 = 0;
+        avt1 = 0;
         fgl0.Clean();
         fgl1.Clean();
         countdown = 0;
@@ -145,8 +145,8 @@ public class TeamPvPCombatPrepareData : Singleton<TeamPvPCombatPrepareData>
         yourTeamIndex = packet.GetByte("your_team_idx");
         userName0 = packet.GetUtfString("username_0");
         userName1 = packet.GetUtfString("username_1");
-        avt0 = packet.GetUtfString("avt_0");
-        avt1 = packet.GetUtfString("avt_1");
+        avt0 = packet.GetInt("avt_0");
+        avt1 = packet.GetInt("avt_1");
         combatId = packet.GetInt("combat_id");
         ISFSArray sFSSailors = packet.GetSFSArray("sailors_0");
         foreach (ISFSObject obj in sFSSailors)

@@ -2814,7 +2814,6 @@ GameObject:
   - component: {fileID: 698507038245314361}
   - component: {fileID: 3995793739782315075}
   - component: {fileID: 8722869545887128753}
-  - component: {fileID: 6719007460666405018}
   m_Layer: 5
   m_Name: GuiLuckyWheel
   m_TagString: Untagged
@@ -2910,22 +2909,6 @@ MonoBehaviour:
   wheelCircle: {fileID: 756458113095576511}
   textCountdown: {fileID: 8149136843738880458}
   textSpin: {fileID: 6587807827667944344}
---- !u!114 &6719007460666405018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8668211247592919436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd28ba4ee96463841810a2787b79248d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  appearEffect: 3
-  disappearEffect: 2
-  appearTime: 0.4
-  disappearTime: 0.4
 --- !u!1 &9130602917720731367
 GameObject:
   m_ObjectHideFlags: 0

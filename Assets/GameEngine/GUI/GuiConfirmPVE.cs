@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiConfirmPVE : BaseGui
+    public class GuiConfirmPVE : MonoBehaviour
     {
 
         [SerializeField]
@@ -28,16 +28,16 @@ namespace Piratera.GUI
         public LobbyUI lobby;
         private Vector3 v;
 
-        protected override void Start()
+        protected void Start()
         {
-            base.Start();
+            Appear();
             // SoundMgr.PlayFindMatchSound();
             priceStamina = GlobalConfigs.PvE.stamina_cost;
             staminaCost.text = "" + priceStamina;
 
             UpdateCurrentStamina();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
-            NetworkController.AddServerActionListener(onReceiveServerAction);
+            NetworkController.Listen(onReceiveServerAction);
             Appear();
             v = iconFind.transform.position - findTarget.transform.position;
         }
@@ -64,7 +64,7 @@ namespace Piratera.GUI
         {
             if (StaminaData.Instance.Stamina < priceStamina)
             {
-                GuiManager.Instance.ShowGuiWaiting(true);
+                SceneTransition.Instance.ShowWaiting(true);
                 NetworkController.Send(SFSAction.GET_STAMINA_PACK);
             }
             else
@@ -99,7 +99,7 @@ namespace Piratera.GUI
         public void OnClose()
         {
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
-            NetworkController.RemoveServerActionListener(onReceiveServerAction);
+            NetworkController.RemoveListener(onReceiveServerAction);
             ClosePopup();
 
         }
@@ -124,7 +124,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

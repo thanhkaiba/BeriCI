@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using Piratera.Sound;
 
 public enum ModeID
 {
@@ -107,12 +108,21 @@ public class CombatMgr : MonoBehaviour
     }
     IEnumerator StartGame()
     {
-        //yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         ActivateAllStartPassive();
         yield return new WaitForSeconds(0.8f);
         combatState.status = CombatStatus.STARTED;
+
         if (modeId == ModeID.Arena)
         {
+            if (defenseAdvantage == HomefieldAdvantage.CANNON)
+            {
+                GameEffMgr.Instance.CreateCanonShoot();
+                yield return new WaitForSeconds(0.5f);
+                GameEffMgr.Instance.CreateCanonExplore();
+                SoundMgr.PlaySound("Audio/Sailor/bomb");
+                yield return new WaitForSeconds(0.3f);
+            }
             float delay = ActiveHomeFieldAdvantage();
             yield return new WaitForSeconds(delay);
         }
@@ -151,12 +161,12 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
-                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
-                return 1;
+                return 3;
             case HomefieldAdvantage.ELECTRONIC:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -170,12 +180,12 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
-                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
-                break;
+                return 3;
             case HomefieldAdvantage.ARMOR:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -190,19 +200,19 @@ public class CombatMgr : MonoBehaviour
                     img.transform.localPosition = pos;
 
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(img.transform.DOScale(2.5f, 1.0f));
-                    seq.Join(img.DOFade(0f, 1.0f));
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(img));
                 });
-                break;
+                return 3;
             case HomefieldAdvantage.CANNON:
                 combatState.GetAllTeamAliveSailors(Team.A).ForEach(sailor =>
                 {
                 float damageTake = sailor.CalcDamageTake(new Damage() { magic = sailor.cs.MaxHealth * config._params[0] }, null);
                     sailor.LoseHealth(new Damage() { magic = damageTake });
                 });
-                break;
+                return 2;
             case HomefieldAdvantage.SPEED:
                 combatState.GetAllTeamAliveSailors(Team.B).ForEach(sailor =>
                 {
@@ -211,12 +221,20 @@ public class CombatMgr : MonoBehaviour
                     Sequence seq = DOTween.Sequence();
                     var pos = sailor.transform.position;
                     pos.y += 2.8f;
+                    pos.z -= 0.1f;
                     var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
                     eff.transform.localScale = Vector3.one * 1.8f;
+                    var img = (new GameObject()).AddComponent<SpriteRenderer>();
+                    img.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
+                    img.transform.localPosition = pos;
+
+                    seq.Append(img.transform.DOScale(2.5f, 3.0f));
+                    seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
                     seq.AppendCallback(() => Destroy(eff));
+                    seq.AppendCallback(() => Destroy(img));
                 });
-                return 1;
+                return 3;
         }
         return 1;
     }
@@ -359,12 +377,12 @@ public class CombatMgr : MonoBehaviour
     }
     void ShowResult(GameEndData d)
     {
-        GameObject go = GuiManager.Instance.AddGui<GuiReward>("Prefap/GuiReward", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiReward");
         go.GetComponent<GuiReward>().SetReward(d);
     }
     void ShowPvPResult(GameEndPvPData d)
     {
-        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiRewardPvP");
         go.GetComponent<GuiRewardPvP>().SetReward(d);
     }
     void GameOver(Team winTeam)
@@ -433,7 +451,7 @@ public class CombatMgr : MonoBehaviour
         actionCount = listActions.Count + 1;
         GameUtils.SetTimeScale(1);
         GameEndData data = actionProcess.gameEndData;
-        GameObject go = GuiManager.Instance.AddGui<GuiRewardPvP>("Prefap/GuiRewardPvP", LayerId.GUI);
+        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiRewardPvP");
         go.GetComponent<GuiRewardPvP>().SetReward((GameEndPvPData)data);
         go.GetComponent<GuiRewardPvP>().isWatchReplay = true;
     }

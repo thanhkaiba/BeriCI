@@ -2,7 +2,6 @@ using Piratera.Config;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
-using Piratera.Constance;
 
 public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 {

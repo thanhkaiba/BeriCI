@@ -32,11 +32,11 @@ public class DragableSailor : MonoBehaviour
         boxAround = GetComponent<BoxCollider>();
         sailor = GetComponent<Sailor>();
         //canvas = FindObjectOfType<Canvas>();
-        canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        canvas = GuiManager.Instance.GetCanvas().GetComponent<Canvas>();
     }
-
     protected void OnMouseDown()
     {
+        if (GameObject.Find("PanelFog")) return;
         if (!SquadContainer.Draging || !SquadAContainer.Draging)
         {
             dragImage = SubSailorIcon.CreateDragSailorImage(sailor.Model, canvas.transform);
@@ -64,14 +64,9 @@ public class DragableSailor : MonoBehaviour
         {
             draging = false;
         }
-
-
     }
-
-
     protected void OnMouseDrag()
     {
-
         if (draging)
         {
             Vector2 mousePosition = Input.mousePosition;
@@ -83,15 +78,12 @@ public class DragableSailor : MonoBehaviour
             }
             else
             {
-
                 UpdateSlots(originIndex);
                 dragImage.enabled = true;
                 ShowChild(false);
                 dragImage.transform.position = mousePosition;
             }
-
         }
-
     }
     private void ShowChild(bool isShow)
     {
@@ -99,7 +91,6 @@ public class DragableSailor : MonoBehaviour
         for (int i = 0; i < children; ++i)
             transform.GetChild(i).gameObject.SetActive(isShow);
     }
-
     protected void OnDragSailor(Vector2 mousePosition)
     {
         Vector3 movePos = Camera.main.ScreenToWorldPoint(mousePosition);

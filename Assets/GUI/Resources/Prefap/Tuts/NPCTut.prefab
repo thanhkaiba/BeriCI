@@ -197,7 +197,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.5
-  m_Text: Welcome to my pirate ship
+  m_Text: Hi captain, welcome to Piratera world!
 --- !u!1 &7617005309177739679
 GameObject:
   m_ObjectHideFlags: 0

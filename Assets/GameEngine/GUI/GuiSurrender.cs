@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiSurrender : BaseGui
+    public class GuiSurrender : MonoBehaviour
     {
 
         [SerializeField]
@@ -17,14 +17,14 @@ namespace Piratera.GUI
         [SerializeField]
         private Button btn;
 
-        protected override void Start()
+        protected void Start()
         {
             Appear();
         }
 
         private void Awake()
         {
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
         }
 
         private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
@@ -34,7 +34,7 @@ namespace Piratera.GUI
                 case SFSAction.PVE_SURRENDER:
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         float jumPower = 40;
                         Vector3 pos = beri.transform.position;
                         pos.y += jumPower;
@@ -46,7 +46,7 @@ namespace Piratera.GUI
 
         private void OnDestroy()
         {
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
 
         public void ConfirmSur()
@@ -79,7 +79,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
             s.SetTarget(transform).SetLink(gameObject);
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

@@ -36,7 +36,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     private void Awake()
     {
         Input.multiTouchEnabled = false;
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
     }
 
 
@@ -46,14 +46,14 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         {
             case SFSAction.PVE_SURRENDER:
             case SFSAction.PVE_CONFIRM:
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 break;
         }
     }
 
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
     }
 
     private void Start()
@@ -74,8 +74,8 @@ public class ScenePickTeamBattleUI : MonoBehaviour
             userNameA.text = data.YourName.LimitLength(30);
             userNameB.text = data.OpponentName.LimitLength(30);
 
-            avatarA.LoadAvatar(data.YourAvatar);
-            avatarB.LoadAvatar(data.OpponentAvatar);
+            avatarA.ShowAvatar(data.YourAvatar);
+            avatarB.ShowAvatar(data.OpponentAvatar);
             buttons[0].interactable = true;
             buttons[1].interactable = true;
         }
@@ -119,17 +119,14 @@ public class ScenePickTeamBattleUI : MonoBehaviour
         }
         else
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true, false);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
         }
-    }
-
+    }   
     public void Surrender()
     {
-        GuiManager.Instance.AddGui<GuiSurrender>("Prefap/GuiSurrender", LayerId.GUI);
+        GuiManager.Instance.AddGui("Prefap/GuiSurrender");
     }
-
-
 }

@@ -286,7 +286,7 @@ namespace Piratera.Network
         {
             Debug.Log("Disconnect");
             reset();
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (reason != ClientDisconnectionReason.MANUAL)
             {
                 string text = "Server Disconnected";
@@ -359,33 +359,27 @@ namespace Piratera.Network
         }
         public static void SendSurrenderPVEToSever()
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutBool("accept", false);
             Send(SFSAction.PVE_SURRENDER, sfsObject);
         }
         private static void OnLogin(BaseEvent evt)
         {
-
-
             Debug.Log("Login success as " + sfs.MySelf.Name);
         }
-
         private static void OnLoginError(BaseEvent evt)
         {
             string errorText = "Login failed: " + (string)evt.Params["errorMessage"];
             OnError(errorText);
         }
-
         public static void OnError(string message)
         {
             Debug.Log("Network Error: " + message);
             sfs.Disconnect();
         }
-
         protected static void OnExtentionResponse(BaseEvent evt)
         {
-
             ISFSObject packet = (ISFSObject)evt.Params["params"];
             string cmd = (string)evt.Params["cmd"];
             if (cmd == CLIENT_REQUEST)
@@ -396,7 +390,7 @@ namespace Piratera.Network
                 SFSErrorCode errorCode = (SFSErrorCode)packet.GetShort(ERROR_CODE);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
-                    GameUtils.ShowPopupPacketError(errorCode);
+                    GameUtils.ShowPopupPacketError(errorCode, action);
                 }
                 OnReceiveServerAction(action, errorCode, packet);
             }
@@ -409,8 +403,6 @@ namespace Piratera.Network
                 Debug.Log("maintain " + startTime + " " + endTime + " " + message);
                 MaintainManager.OnReceiveMaintainInfo(startTime, endTime, message);
             }
-
-
         }
         public static void Send(SFSAction action, ISFSObject data)
         {
@@ -426,7 +418,6 @@ namespace Piratera.Network
             {
                 GuiManager.Instance.ShowPopupNotification("Server Disconnected", RunSceneLogin);
             }
-
         }
         public static void Send(SFSAction action)
         {
@@ -445,7 +436,7 @@ namespace Piratera.Network
                         {
                             TempCombatData.Instance.LoadCombatDataFromSfs(packet);
 
-                            SceneManager.LoadScene("SceneCombat2D");
+                            SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.BATTLE);
                         }
                         break;
                     }
@@ -455,7 +446,7 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-                            SceneManager.LoadScene("SceneCombat2D");
+                            SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.BATTLE);
                         }
                         break;
                     }
@@ -493,6 +484,7 @@ namespace Piratera.Network
                         {
                             TeamPvPCombatPrepareData.Instance.NewFromSFSObject(packet);
                             SceneManager.LoadScene("ScenePreparePvP");
+                            SceneTransition.Instance.ShowWaiting(false);
                         }
                         break;
                     }
@@ -501,16 +493,15 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             PvPData.Instance.Ticket = packet.GetInt("ticket");
-                  
                         }
                         break;
                     }
                 case SFSAction.GET_STAMINA_PACK:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
-                            GameObject GO = GuiManager.Instance.AddGui<GuiBuyStamina>("Prefap/GuiBuyStamina", LayerId.GUI);
+                            GameObject GO = GuiManager.Instance.AddGui("Prefap/GuiBuyStamina");
                             GuiBuyStamina popup = GO.GetComponent<GuiBuyStamina>();
                             popup.InitPackData(packet.GetLong("cost"), packet.GetLong("quantity"));
                         }
@@ -522,8 +513,6 @@ namespace Piratera.Network
                         {
                             PirateWheelData.Instance.NewFromSFSObject(packet);
                         }
-
-
                         break;
                     }
                 case SFSAction.PIRATE_WHEEL:
@@ -532,16 +521,14 @@ namespace Piratera.Network
                         {
                             PirateWheelData.Instance.ReceiveGiftPack(packet);
                         }
-
-
                         break;
                     }
                 case SFSAction.GET_LINEUP_SLOT_PACK:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
-                            GameObject GO = GuiManager.Instance.AddGui<GuiBuySlot>("Prefap/GuiBuySlot", LayerId.GUI);
+                            GameObject GO = GuiManager.Instance.AddGui("Prefap/GuiBuySlot");
                             GuiBuySlot popup = GO.GetComponent<GuiBuySlot>();
                             popup.InitPackData(packet.GetLong("cost"));
                         }
@@ -557,7 +544,6 @@ namespace Piratera.Network
                         break;
                     }
 #endif
-
                 case SFSAction.GET_SERVER_TIME:
                     {
                         if (errorCode == SFSErrorCode.SUCCESS)
@@ -585,7 +571,7 @@ namespace Piratera.Network
                     }
                 case SFSAction.PVP_WATCH_HISTORY:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             string json = packet.GetUtfString("combat_data");
@@ -597,7 +583,20 @@ namespace Piratera.Network
                     }
                 case SFSAction.TRAIN_SAILORS_REMAIN:
                     {
-                        GuiManager.Instance.ShowGuiWaiting(false);
+                        SceneTransition.Instance.ShowWaiting(false);
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            UserData.Instance.TrainedToday = packet.GetIntArray("trained_today");
+                            for (int i = 0; i < UserData.Instance.TrainedToday.Length; i++)
+                            {
+                                Debug.Log("81: " + UserData.Instance.TrainedToday[i]);
+                            }
+                        }
+                        break;
+                    }
+                case SFSAction.TRAIN_SAILORS:
+                    {
+                        SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             UserData.Instance.TrainedToday = packet.GetIntArray("trained_today");
@@ -609,7 +608,6 @@ namespace Piratera.Network
                         break;
                     }
             }
-
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 Debug.LogWarning($"Packet {action} Fail, Error Code: {errorCode}");
@@ -619,27 +617,18 @@ namespace Piratera.Network
                 listener(action, errorCode, packet);
             }
         }
-
-
-
-        public static void AddServerActionListener(NetworkActionListenerDelegate listener)
+        public static void Listen(NetworkActionListenerDelegate listener)
         {
             serverActionListeners.Add(listener);
-
         }
-
-        public static void RemoveServerActionListener(NetworkActionListenerDelegate listener)
+        public static void RemoveListener(NetworkActionListenerDelegate listener)
         {
             serverActionListeners.Remove(listener);
-
         }
-
         public void GetServerTime()
         {
             Send(SFSAction.GET_SERVER_TIME);
         }
-
-
         //
         // Summary:
         //     Adds a delegate to a given API event type that will be used for callbacks.
@@ -661,7 +650,6 @@ namespace Piratera.Network
                 Debug.LogError("Smart Fox Connection is NULL");
             }
         }
-
         //
         // Summary:
         //     Removes a delegate registration for a given API event.

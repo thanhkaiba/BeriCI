@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GuiGoTrain : BaseGui
+public class GuiGoTrain : MonoBehaviour
 {
     private int train_level;
     [SerializeField]
@@ -23,10 +23,9 @@ public class GuiGoTrain : BaseGui
     [SerializeField]
     private GameObject beriMinus;
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-        NetworkController.AddServerActionListener(onReceiveServerAction);
+        NetworkController.Listen(onReceiveServerAction);
         Appear();
     }
     public void SetLevel(int level)
@@ -41,24 +40,23 @@ public class GuiGoTrain : BaseGui
     {
         if (action == SFSAction.TRAIN_SAILORS)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 GameUtils.ShowPopupPacketError(errorCode);
             }
             else
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 SceneTransition.Instance.LoadScene("SceneCombat2D");
             }
         }
     }
-
     public void OnStartTrain()
     {
         int cost = GlobalConfigs.Training.cost[train_level];
         UserData.Instance.Beri -= cost;
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         TempCombatData.Instance.trainingGameLevel = train_level;
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutInt("level", train_level);
@@ -66,7 +64,7 @@ public class GuiGoTrain : BaseGui
     }
     public void OnClose()
     {
-        NetworkController.RemoveServerActionListener(onReceiveServerAction);
+        NetworkController.RemoveListener(onReceiveServerAction);
         ClosePopup();
     }
     private void Appear()
@@ -90,7 +88,7 @@ public class GuiGoTrain : BaseGui
         var canvasGroup = background.GetComponent<CanvasGroup>();
         Sequence s = DOTween.Sequence();
         s.Append(canvasGroup.DOFade(0, 0.1f));
-        s.AppendCallback(DestroySelf);
+        s.AppendCallback(() => Destroy(gameObject));
 
         var fog = GetComponent<HaveFog>();
         if (fog) fog.FadeOut(0.1f);

@@ -18,6 +18,9 @@ public class PvPData : Singleton<PvPData>
     public HomefieldAdvantage SelectingAdvantage;
     public int Rank = 0;
     public long Elo = 0;
+    public long StartSeason = 0;
+    public long EndSeason = 0;
+    public int SeasonId = 0;
     public enum PVP_TURORIAL_STEP {
         POPUP_DEFENSE_LINEUP = 2,
         POPUP_DEFENSE_LINEUP_DONE = 3,
@@ -42,7 +45,7 @@ public class PvPData : Singleton<PvPData>
         Ticket = packet.GetInt("ticket");
         var adv_int = packet.GetIntArray("oppened_advantage");
         OpenedAdvantage = new List<HomefieldAdvantage>();
-        Debug.Log("Length: " + adv_int.Length);
+        Debug.Log("oppened_advantage Length: " + adv_int.Length);
         for (int i = 0; i < adv_int.Length; i++)
         {
             Debug.Log("(HomefieldAdvantage)adv_int[i]: " + (HomefieldAdvantage)adv_int[i]);
@@ -53,6 +56,13 @@ public class PvPData : Singleton<PvPData>
         Rank = packet.GetInt("rank");
         Elo = packet.GetLong("elo");
 
+        StartSeason = packet.GetLong("start_season");
+        EndSeason = packet.GetLong("end_season");
+        SeasonId = packet.GetInt("season_id");
+        Debug.Log("StartSeason: " + StartSeason);
+        Debug.Log("EndSeason: " + EndSeason);
+        Debug.Log("SeasonId: " + SeasonId);
+        
         DefenseCrew.NewFromSFSObject(packet);
     }
     public bool HaveEnoughSailor()

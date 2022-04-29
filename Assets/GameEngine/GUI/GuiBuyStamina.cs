@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Piratera.GUI
 {
-    public class GuiBuyStamina : BaseGui
+    public class GuiBuyStamina : MonoBehaviour
     {
         [SerializeField]
         private Transform background;
@@ -25,7 +25,7 @@ namespace Piratera.GUI
 
         private long cost;
 
-        protected override void Start()
+        protected void Start()
         {
             Appear();
         }
@@ -37,7 +37,7 @@ namespace Piratera.GUI
             EnableButtonBuy(cost >= 0);
             textCurrentStamina.text = StaminaData.Instance.GetCurrentStaminaFormat();
             GameEvent.UserStaminaChanged.AddListener(UpdateCurrentStamina);
-            NetworkController.AddServerActionListener(OnReceiveServerAction);
+            NetworkController.Listen(OnReceiveServerAction);
 
         }
 
@@ -46,7 +46,7 @@ namespace Piratera.GUI
         {
             if (action == SFSAction.BUY_STAMINA)
             {
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)
                 {
                     GameUtils.ShowPopupPacketError(errorCode);
@@ -86,13 +86,13 @@ namespace Piratera.GUI
         {
             ClosePopup();
             GameEvent.UserStaminaChanged.RemoveListener(UpdateCurrentStamina);
-            NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+            NetworkController.RemoveListener(OnReceiveServerAction);
         }
         public void OnBuyStamina()
         {
             if (UserData.Instance.IsEnoughBeri(cost))
             {
-                GuiManager.Instance.ShowGuiWaiting(true);
+                SceneTransition.Instance.ShowWaiting(true);
                 NetworkController.Send(SFSAction.BUY_STAMINA);
             }
             else
@@ -134,7 +134,7 @@ namespace Piratera.GUI
             var canvasGroup = background.GetComponent<CanvasGroup>();
             Sequence s = DOTween.Sequence();
             s.Append(canvasGroup.DOFade(0, 0.1f));
-            s.AppendCallback(DestroySelf);
+            s.AppendCallback(() => Destroy(gameObject));
 
             var fog = GetComponent<HaveFog>();
             if (fog) fog.FadeOut(0.1f);

@@ -104,10 +104,7 @@ namespace Piratera.Config
 
         private void Start()
         {
-
-            NetworkController.AddServerActionListener(onReceiveServerAction);
-
-
+            NetworkController.Listen(onReceiveServerAction);
         }
 
         public void StartFlowSync(Action<float> progressAction, Action onSuccess, Action onError)
@@ -215,7 +212,7 @@ namespace Piratera.Config
 
         private void OnDestroy()
         {
-            NetworkController.RemoveServerActionListener(onReceiveServerAction);
+            NetworkController.RemoveListener(onReceiveServerAction);
         }
 
         public static string GetPath(string fileName)

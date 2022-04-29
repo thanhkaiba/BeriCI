@@ -13,34 +13,25 @@ public class MultiRoyalCollectingController : MonoBehaviour
     [HideInInspector]
     public static MultiRoyalCollectingController _instance;
     private GameObject layer;
-
-
     private void Awake()
     {
         _instance = this;
-
     }
-
     private void Start()
     {
-        layer = GuiManager.Instance.GetLayer(LayerId.LOADING);
+        layer = GameObject.Find("Canvas");
         popPosition = layer.transform;
     }
-
     public void CollectItem(int index, int quantity)
     {
         StartCoroutine(PopItems(index, quantity));
     }
-
     public void CollectItem(int index, int quantity, int value, System.Action OnComplete)
     {
         int valueExtend = 0;
         if (quantity != 0) valueExtend = value / quantity;
         StartCoroutine(PopItems(index, quantity, valueExtend, OnComplete));
     }
-
-
-
     // Collect some items with animation at a fixed position
     public void CollectItemAtPosition(int index, int quantity, Vector3 position)
     {

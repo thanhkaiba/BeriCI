@@ -212,12 +212,12 @@ public class CrewManager : MonoBehaviour
     private void ShowCrewTut1()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/CrewTut1");
-        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
     }
     public void ShowTutOpenLineUp()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
         var pos = GameObject.Find("ButtonLineUp").transform.position;
         hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
@@ -225,7 +225,7 @@ public class CrewManager : MonoBehaviour
     public void ShowCheatSailorInfo()
     {
 #if PIRATERA_DEV || PIRATERA_QC
-        PopupCheatSailorInfo popup = GuiManager.Instance.AddGui<PopupCheatSailorInfo>("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
+        PopupCheatSailorInfo popup = GuiManager.Instance.AddGui("Cheat/PopupCheatSailor").GetComponent<PopupCheatSailorInfo>();
         popup.sailorId = curModel.id;
 #endif
     }

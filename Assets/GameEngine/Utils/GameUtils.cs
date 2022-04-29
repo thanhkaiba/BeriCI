@@ -179,8 +179,13 @@ public class GameUtils : UnityEngine.Object
         return new string(chars);
     }
 
-    public static void ShowPopupPacketError(SFSErrorCode errorCode)
+    public static void ShowPopupPacketError(SFSErrorCode errorCode, SFSAction action = SFSAction.PING)
     {
+        if (
+            action == SFSAction.USER_DETAIL
+            || action == SFSAction.USER_CHANGE_NAME
+        ) return;
+        // filter error here
         string description = EnumHelper.GetDescription(errorCode);
         GuiManager.Instance.ShowPopupNotification(description);
     }
@@ -271,15 +276,15 @@ public class GameUtils : UnityEngine.Object
         switch (type)
         {
             case HomefieldAdvantage.SWEET_HOME:
-                return "Sweet home";
+                return "Orange";
             case HomefieldAdvantage.ELECTRONIC:
-                return "Electronic";
+                return "Lab";
             case HomefieldAdvantage.ARMOR:
                 return "Armored";
             case HomefieldAdvantage.CANNON:
                 return "Canon";
             case HomefieldAdvantage.SPEED:
-                return "Moonlight";
+                return "Night";
             default:
                 return "Not exist";
         }
@@ -303,6 +308,11 @@ public class GameUtils : UnityEngine.Object
             default:
                 return "Not exist";
         }
+    }
+    public static DateTime FromUnixTime(long unixTime)
+    {
+        var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+        return epoch.AddMilliseconds(unixTime);
     }
     public static List<ClassBonusItem> lineUpSynergy = null;
     public static List<ClassBonusItem> oppLineUpSynergy = null;

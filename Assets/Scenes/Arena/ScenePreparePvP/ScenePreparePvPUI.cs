@@ -40,20 +40,20 @@ public class ScenePreparePvPUI : MonoBehaviour
     {
         defenseTeamAdvantage.SetActive(false);
         Input.multiTouchEnabled = false;
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
         {
             case SFSAction.PVP_CONFIRM:
-                GuiManager.Instance.ShowGuiWaiting(false);
+                SceneTransition.Instance.ShowWaiting(false);
                 break;
         }
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
     }
     private void Start()
     {
@@ -71,8 +71,8 @@ public class ScenePreparePvPUI : MonoBehaviour
             userNameA.text = data.YourName.LimitLength(30);
             userNameB.text = data.OpponentName.LimitLength(30);
 
-            avatarA.LoadAvatar(data.YourAvatar);
-            avatarB.LoadAvatar(data.OpponentAvatar);
+            avatarA.ShowAvatar(data.YourAvatar);
+            avatarB.ShowAvatar(data.OpponentAvatar);
             buttons[0].interactable = true;
             buttons[1].interactable = true;
         }
@@ -113,7 +113,7 @@ public class ScenePreparePvPUI : MonoBehaviour
         }
         else
         {
-            GuiManager.Instance.ShowGuiWaiting(true);
+            SceneTransition.Instance.ShowWaiting(true, false);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamPvPCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(SFSAction.PVP_CONFIRM, sfsObject);

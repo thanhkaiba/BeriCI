@@ -13,6 +13,10 @@ public class UserAvatar : MonoBehaviour
     {
         userAvatar = GetComponent<Image>();
     }
+    public void ShowAvatar(int id = 0)
+    {
+        userAvatar.sprite = Resources.Load<Sprite>("Icons/Avatar/" + id);
+    }
     public void LoadAvatar(string url)
     {
 

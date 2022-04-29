@@ -24,7 +24,7 @@ public class PickTeamUI : MonoBehaviour
     {
         SquadContainer.Draging = false;
         UpdateSlotMaxCapacity();
-        NetworkController.AddServerActionListener(OnReceiveServerAction);
+        NetworkController.Listen(OnReceiveServerAction);
         GameEvent.FlyBeri.AddListener(FlyBeri);
         if (TutorialMgr.Instance.CheckTutStartUp()) ShowTutBuildLineUp();
         if (TutorialMgr.Instance.CheckTutOpenSlot())
@@ -56,7 +56,7 @@ public class PickTeamUI : MonoBehaviour
     {
         if (action == SFSAction.BUY_SLOT)
         {
-            GuiManager.Instance.ShowGuiWaiting(false);
+            SceneTransition.Instance.ShowWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
             {
                 GameUtils.ShowPopupPacketError(errorCode);
@@ -69,7 +69,7 @@ public class PickTeamUI : MonoBehaviour
     }
     private void OnDestroy()
     {
-        NetworkController.RemoveServerActionListener(OnReceiveServerAction);
+        NetworkController.RemoveListener(OnReceiveServerAction);
         GameEvent.FlyBeri.RemoveListener(FlyBeri);
 
     }
@@ -110,20 +110,20 @@ public class PickTeamUI : MonoBehaviour
             GuiManager.Instance.ShowPopupNotification("Can't buy more slot");
             return;
         }
-        GuiManager.Instance.ShowGuiWaiting(true);
+        SceneTransition.Instance.ShowWaiting(true);
         NetworkController.Send(SFSAction.GET_LINEUP_SLOT_PACK);
     }
     private void ShowTutBuildLineUp()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/LineUpTut1");
-        GameObject tut = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject tut = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
         GameObject.Find("BgBuySlot").SetActive(false);
         GameObject.Find("ButtonCrew").SetActive(false);
     }
     public void ShowTutBackToLobby()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
         var pos = GameObject.Find("ButtonBack").transform.position;
         hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
     }
@@ -131,7 +131,7 @@ public class PickTeamUI : MonoBehaviour
     {
         TutorialMgr.Instance.CompleteOpenSlot();
         var go = Resources.Load<GameObject>("Prefap/Tuts/hand");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
         var pos = GameObject.Find("ButtonOpenSlot").transform.position;
         hand.transform.position = new Vector3(pos.x, pos.y, pos.z);
         hand.name = "hand_open_slot";
@@ -139,7 +139,7 @@ public class PickTeamUI : MonoBehaviour
     private void ShowNPCTutOpenSlot()
     {
         var go = Resources.Load<GameObject>("Prefap/Tuts/NPCTutOpenSlot");
-        GameObject hand = Instantiate(go, GuiManager.Instance.GetLayer(LayerId.LOADING).transform);
+        GameObject hand = Instantiate(go, GuiManager.Instance.GetCanvas().transform);
     }
     public void ClickOpenSlot()
     {
@@ -160,7 +160,7 @@ public class PickTeamUI : MonoBehaviour
         }
         else
         {
-            var gui = GuiManager.Instance.AddGui<GuiGoTrain>(PopupGoTrain);
+            var gui = GuiManager.Instance.AddGui(PopupGoTrain);
             gui.GetComponent<GuiGoTrain>().SetLevel(level);
         }
     }
