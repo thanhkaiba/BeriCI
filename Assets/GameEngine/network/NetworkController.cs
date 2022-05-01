@@ -593,19 +593,6 @@ namespace Piratera.Network
                         }
                         break;
                     }
-                case SFSAction.TRAIN_SAILORS:
-                    {
-                        SceneTransition.Instance.ShowWaiting(false);
-                        if (errorCode == SFSErrorCode.SUCCESS)
-                        {
-                            UserData.Instance.TrainedToday = packet.GetIntArray("trained_today");
-                            for (int i = 0; i < UserData.Instance.TrainedToday.Length; i++)
-                            {
-                                Debug.Log("81: " + UserData.Instance.TrainedToday[i]);
-                            }
-                        }
-                        break;
-                    }
             }
             if (errorCode != SFSErrorCode.SUCCESS)
             {

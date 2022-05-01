@@ -62,7 +62,7 @@ public class CombatMgr : MonoBehaviour
         {
             advantageGO.gameObject.SetActive(false);
         }
-        GameObject.Find("BtnSkip").SetActive(watchReplay);
+        GameObject.Find("BtnSkip").SetActive(watchReplay || modeId == ModeID.Challenge || modeId == ModeID.Training);
     }
 
     private void OnDestroy()
@@ -73,6 +73,7 @@ public class CombatMgr : MonoBehaviour
     {
         actionCount = 0;
         actionCountShow = 0;
+
         if (TempCombatData.Instance.waitForAServerGame)
         {
             combatState.CreateTeamFromServer();
@@ -99,6 +100,7 @@ public class CombatMgr : MonoBehaviour
             combatState.CreateChallengeGame();
             modeId = ModeID.Challenge;
             serverGame = false;
+            ChangeBattleFieldChallenge();
         }
         else
         {
@@ -449,7 +451,6 @@ public class CombatMgr : MonoBehaviour
         return Math.Max(speedAdd, 0);
     }
 
-
     CombatSailor AddCurSpeedAllSailor(int speedAdd)
     {
         combatState.GetAllAliveCombatSailors().ForEach(character => character.AddCurSpeed(speedAdd));
@@ -474,13 +475,28 @@ public class CombatMgr : MonoBehaviour
     }
     public void SkipWatch()
     {
-        CombatAction actionProcess = listActions[listActions.Count - 1];
-        actionCount = listActions.Count + 1;
-        GameUtils.SetTimeScale(1);
-        GameEndData data = actionProcess.gameEndData;
-        GameObject go = GuiManager.Instance.AddGui("Prefap/GuiRewardPvP");
-        go.GetComponent<GuiRewardPvP>().SetReward((GameEndPvPData)data);
-        go.GetComponent<GuiRewardPvP>().isWatchReplay = true;
+        if (watchReplay)
+        {
+            CombatAction actionProcess = listActions[listActions.Count - 1];
+            actionCount = listActions.Count + 1;
+            GameUtils.SetTimeScale(1);
+            GameEndData data = actionProcess.gameEndData;
+            GameObject go = GuiManager.Instance.AddGui("Prefap/GuiRewardPvP");
+            go.GetComponent<GuiRewardPvP>().SetReward((GameEndPvPData)data);
+            go.GetComponent<GuiRewardPvP>().isWatchReplay = true;
+        }
+        else if (modeId == ModeID.Challenge)
+        {
+            SceneManager.LoadScene(TempCombatData.Instance.lastScene);
+        }
+        else if (modeId == ModeID.Training)
+        {
+            combatState.ShowTrainComplete(trainLevel);
+            StartCoroutine(WaitAndDo(1.0f, () => {
+                LoadServerDataUI.NextScene = "ScenePickTeam";
+                SceneManager.LoadScene("SceneLoadServerData");
+            }));
+        }
     }
     [SerializeField]
     private SpriteRenderer battleField;
@@ -492,8 +508,10 @@ public class CombatMgr : MonoBehaviour
     }
     private void ChangeBattleFieldTraining(int trainLevel)
     {
-        var scale = battleField.transform.localScale;
         battleField.sprite = Resources.Load<Sprite>("Background/train/train_lv_"+trainLevel);
+    }private void ChangeBattleFieldChallenge()
+    {
+        battleField.sprite = Resources.Load<Sprite>("Background/battlefield/island");
     }
     [SerializeField]
     private Transform advantageGO;
