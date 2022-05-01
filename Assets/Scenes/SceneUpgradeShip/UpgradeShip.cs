@@ -109,8 +109,8 @@ public class UpgradeShip : MonoBehaviour
     }
     public void OnUpgadeSail()
     {
-        UpgradeSailSuccess();
-        return;
+        // UpgradeSailSuccess();
+        // return;
         var config = GlobalConfigs.UpgradeShipConfig;
         if (UserData.Instance.Beri < config.GetSailNextLevelPrice(UserData.Instance.SailLevel))
         {
