@@ -53,7 +53,7 @@ public class Scrub : CombatSailor
         float main_damage = cs.Power * scale_damage_ratio;
         float secondary_damage = cs.Power * behind_damage_ratio;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Melee(this, enermy);
         CombatSailor behind_target = TargetsUtils.Behind(target, enermy);
 

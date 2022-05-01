@@ -56,7 +56,7 @@ public class Zeke : CombatSailor
     // skill
     public override bool CanActiveSkill(CombatState cbState)
     {
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         return target.cs.position.x > 0;
     }
@@ -65,7 +65,7 @@ public class Zeke : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
 
         float arg0 = Model.config_stats.skill_params[0];

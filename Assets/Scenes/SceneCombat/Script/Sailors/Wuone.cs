@@ -65,7 +65,7 @@ public class Wuone : CombatSailor
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float main_damage = cs.Power * scale_damage_ratio;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
 
         targets.Add(target.Model.id);

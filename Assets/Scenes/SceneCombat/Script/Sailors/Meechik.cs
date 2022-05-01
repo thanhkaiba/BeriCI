@@ -72,7 +72,7 @@ public class Meechik : CombatSailor
         float main_damage = cs.Power * Model.config_stats.skill_params[0];
         float aoe_damage = cs.Power * Model.config_stats.skill_params[1];
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         List<CombatSailor> around_target = TargetsUtils.Around(target, enermy, false);
 

@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PopupUserInfo : MonoBehaviour
@@ -14,7 +15,7 @@ public class PopupUserInfo : MonoBehaviour
     [SerializeField]
     private Text username, userid, joinTime, beriEarn, pvePlay, pveWinrate, pvpPlay, pvpWinrate;
     [SerializeField]
-    private GameObject btnChangeName, btnChangeAvt;
+    private GameObject btnChangeName, btnChangeAvt, btnChallenge;
     [SerializeField]
     private Transform background;
     [SerializeField]
@@ -104,6 +105,7 @@ public class PopupUserInfo : MonoBehaviour
         uid = _uid;
         btnChangeName.SetActive(uid == UserData.Instance.UID);
         btnChangeAvt.SetActive(uid == UserData.Instance.UID);
+        btnChallenge.SetActive(uid != UserData.Instance.UID);
         btnChangeAvt.SetActive(false);
 
         SFSObject sfsObject = new SFSObject();
@@ -124,15 +126,19 @@ public class PopupUserInfo : MonoBehaviour
         pvpPlay.text = "" + pvp_play;
         pvpWinrate.text = pvp_play != 0 ? (Math.Round((float)pvp_win / (float)pvp_play * 100, 1) + "%") : "0%";
         avatar.ShowAvatar(avt_id);
+
+        TempCombatData.Instance.userName1 = _username;
+        TempCombatData.Instance.avt1 = avt_id;
     }
     public void ShowFightingLine(List<SailorModel> sailors, FightingLine fgl)
     {
+        TempCombatData.Instance.listSailor = sailors;
+        TempCombatData.Instance.fgl1 = fgl;
         for (short x = 0; x < 3; x++)
         {
             for (short y = 0; y < 3; y++)
             {
                 string sailorID = fgl.SailorIdAt(x, y);
-                Debug.Log("sailorID: " + sailorID);
                 var icon = transform.FindDeepChild("sailor_" + x + "_" + y);
                 if (sailorID != "")
                 {
@@ -155,5 +161,13 @@ public class PopupUserInfo : MonoBehaviour
     public void Close()
     {
         Destroy(gameObject);
+    }
+    public void Challenge()
+    {
+        TempCombatData.Instance.challengeGame = true;
+        TempCombatData.Instance.lastScene = SceneManager.GetActiveScene().name;
+        TempCombatData.Instance.userName0 = UserData.Instance.Username;
+        TempCombatData.Instance.avt0 = UserData.Instance.AvtId;
+        SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.BATTLE);
     }
 }

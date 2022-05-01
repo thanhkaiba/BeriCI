@@ -62,8 +62,8 @@ public class Camelia : CombatSailor
         main_damage *= (1f + losing_health_percent * scale_damage_per_losing_health);
         float heal = heal_percent * main_damage;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
-        CombatSailor target = TargetsUtils.Melee(this, enermy);
+        List<CombatSailor> enemies = cbState.GetAliveCharacterEnemy(cs.team);
+        CombatSailor target = TargetsUtils.Range(this, enemies);
 
         targets.Add(target.Model.id);
         float dmgDeal = target.CalcDamageTake(new Damage() { magic = main_damage }, this);

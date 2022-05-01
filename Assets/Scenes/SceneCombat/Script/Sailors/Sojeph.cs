@@ -58,7 +58,7 @@ public class Sojeph : CombatSailor
         List<float> _params = new List<float>();
         float healthGain = Model.config_stats.skill_params[0] * cs.Power;
         float main_damage = cs.Power;
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         List<CombatSailor> teams = cbState.GetAllTeamAliveExceptSelfSailors(cs.team, this);
         CombatSailor healthTarget = TargetsUtils.LowestHealth(teams);
         targets.Add(healthTarget.Model.id);

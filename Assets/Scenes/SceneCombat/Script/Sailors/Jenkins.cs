@@ -57,7 +57,7 @@ public class Jenkins : CombatSailor
         float damage;
         float dame_health = Model.config_stats.skill_params[0];
         float scale_health = Model.config_stats.skill_params[1];
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Melee(this, enermy);
         damage = (cs.Power * dame_health) + (scale_health * target.cs.MaxHealth);
         targets.Add(target.Model.id);

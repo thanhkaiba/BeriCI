@@ -62,7 +62,7 @@ public class Herminia : CombatSailor
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
 
         targets.Add(target.Model.id);

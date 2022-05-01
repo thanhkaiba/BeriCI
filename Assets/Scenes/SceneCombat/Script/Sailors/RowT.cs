@@ -41,7 +41,7 @@ public class RowT : CombatSailor
 
         float magic_damage = cs.Power * Model.config_stats.skill_params[0];
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Random(enermy);
 
         targets.Add(target.Model.id);

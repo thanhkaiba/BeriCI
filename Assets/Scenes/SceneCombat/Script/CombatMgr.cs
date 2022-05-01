@@ -16,6 +16,7 @@ public enum ModeID
     PvE,
     Arena,
     Training,
+    Challenge,
 };
 
 public enum Team
@@ -92,12 +93,20 @@ public class CombatMgr : MonoBehaviour
             serverGame = false;
             ChangeBattleFieldTraining(trainLevel);
         }
+        else if (TempCombatData.Instance.challengeGame)
+        {
+            TempCombatData.Instance.challengeGame = false;
+            combatState.CreateChallengeGame();
+            modeId = ModeID.Challenge;
+            serverGame = false;
+        }
         else
         {
             combatState.CreateDemoTeam();
             serverGame = false;
         }
 
+        if (!serverGame) ActivateSummonPassive();
         combatState.CalculateClassBonus();
         combatState.UpdateGameWithClassBonus();
         // ui
@@ -139,6 +148,19 @@ public class CombatMgr : MonoBehaviour
                 if (sailorA != null) sailorA.ActiveStartPassive();
                 var sailorB = combatState.GetSailor(Team.B, new CombatPosition(x, y));
                 if (sailorB != null) sailorB.ActiveStartPassive();
+            }
+        }
+    }
+    private void ActivateSummonPassive()
+    {
+        for (int x = 0; x < 3; x++)
+        {
+            for (int y = 0; y < 3; y++)
+            {
+                var sailorA = combatState.GetSailor(Team.A, new CombatPosition(x, y));
+                if (sailorA != null) sailorA.ActiveSummonPassive();
+                var sailorB = combatState.GetSailor(Team.B, new CombatPosition(x, y));
+                if (sailorB != null) sailorB.ActiveSummonPassive();
             }
         }
     }
@@ -398,7 +420,12 @@ public class CombatMgr : MonoBehaviour
                 LoadServerDataUI.NextScene = "ScenePickTeam";
                 SceneManager.LoadScene("SceneLoadServerData");
             }));
-        } else
+        } else if (modeId == ModeID.Challenge)
+        {
+            StartCoroutine(WaitAndDo(0.5f,
+                () => SceneManager.LoadScene(TempCombatData.Instance.lastScene)));
+        }
+        else
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("SceneLoadServerData");
         }

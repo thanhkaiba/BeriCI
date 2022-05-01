@@ -53,7 +53,7 @@ public class Scott : CombatSailor
 
         bool isCrit = IsCrit();
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.LowestHealth(enermy);
         targets.Add(target.Model.id);
         _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage * (isCrit ? cs.CritDamage : 1) }, this));
@@ -78,5 +78,30 @@ public class Scott : CombatSailor
         seq.AppendInterval(1.5f);
         seq.AppendCallback(() => target.LoseHealth(new Damage() { physics = _params[0], isCrit = _params[1] > 0 }));
         return 2.5f;
+    }
+    public override void ActiveSummonPassive()
+    {
+        SailorModel mealodo = new SailorModel(Model.id + "summoned", "Mealodo");
+        mealodo.star = Model.star;
+        mealodo.level = Model.level;
+        mealodo.quality = Model.quality;
+        CombatState.Instance.CreateCombatSailor(mealodo, GetSummonPos(), cs.team);
+    }
+    private CombatPosition GetSummonPos()
+    {
+        CombatState combatState = CombatState.Instance;
+        Team t = cs.team;
+        for (int x = 0; x < 3; x++)
+        {
+            for (int _y = 0; _y < 3; _y++)
+            {
+                int y = (cs.position.y == 2) ? (cs.position.y - _y) % 3 : (cs.position.y + _y) % 3;
+                if (!combatState.GetSailor(t, new CombatPosition(x, y)))
+                {
+                    return new CombatPosition(x, y);
+                }
+            }
+        }
+        return new CombatPosition(0, 0);
     }
 }

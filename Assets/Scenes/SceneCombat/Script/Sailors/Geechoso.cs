@@ -56,7 +56,7 @@ public class Geechoso : CombatSailor
 
         float main_damage = cs.Power * Model.config_stats.skill_params[0];
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Range(this, enermy);
         targets.Add(target.Model.id);
         _params.Add(target.CalcDamageTake(new Damage() { physics = main_damage }, this));

@@ -73,6 +73,10 @@ public class CombatSailor : Sailor
     {
         // do nothing, se say ra o 1 so tuong skill passive
     }
+    public virtual void ActiveSummonPassive()
+    {
+        // do nothing, say ra o tuong co kha nang summon dong doi
+    }
     public bool HaveStatus(SailorStatusType name)
     {
         return cs.listStatus.Find(x => x.name == name) != null;

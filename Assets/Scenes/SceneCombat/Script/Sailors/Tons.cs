@@ -92,7 +92,7 @@ public class Tons : CombatSailor
         base.CastSkill(cbState);
         float damage = cs.Power * scale_damage_ratio;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Backstab(this, enermy);
 
         targets.Add(target.Model.id);

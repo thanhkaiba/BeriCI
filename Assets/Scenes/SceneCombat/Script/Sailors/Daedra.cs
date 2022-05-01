@@ -51,7 +51,7 @@ public class Daedra : CombatSailor
 
         float main_damage = cs.Power * scale_damage_ratio;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Melee(this, enermy);
 
         int mana = target.cs.Fury;

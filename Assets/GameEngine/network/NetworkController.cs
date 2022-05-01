@@ -435,7 +435,6 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             TempCombatData.Instance.LoadCombatDataFromSfs(packet);
-
                             SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.BATTLE);
                         }
                         break;

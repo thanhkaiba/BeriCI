@@ -56,7 +56,7 @@ public class Beel : CombatSailor
         List<float> _params = new List<float>();
 
         float magic_damage = cs.Power * Model.config_stats.skill_params[0];
-        List<CombatSailor> enemies = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enemies = cbState.GetAliveCharacterEnemy(cs.team);
 
         enemies.ForEach(t =>
         {

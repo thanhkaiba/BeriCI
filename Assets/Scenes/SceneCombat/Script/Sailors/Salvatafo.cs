@@ -60,7 +60,7 @@ public class Salvatafo : CombatSailor
         float magic_damage_ratio = Model.config_stats.skill_params[0];
         float healt_ratio = Model.config_stats.skill_params[1];
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor main_target = TargetsUtils.Melee(this, enermy);
         List<CombatSailor> aroundPlusTarget = TargetsUtils.AroundPlus(main_target, enermy);
 

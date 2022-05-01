@@ -6,6 +6,9 @@ using UnityEngine;
 public class TempCombatData : Singleton<TempCombatData>
 {
     public bool waitForAServerGame = false;
+    public bool challengeGame = false;
+    public string lastScene = "";
+    public string lastChallengeUID = "";
     public int trainingGameLevel = -1;
 
     public ModeID modeID;

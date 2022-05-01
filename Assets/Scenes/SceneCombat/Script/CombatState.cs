@@ -109,7 +109,7 @@ public class CombatState : MonoBehaviour
         return sailor;
     }
 
-    CombatSailor CreateCombatSailor(SailorModel s, CombatPosition pos, Team team)
+    public CombatSailor CreateCombatSailor(SailorModel s, CombatPosition pos, Team team)
     {
         string name = s.config_stats.root_name;
         List<Item> listItem = s.items;
@@ -172,7 +172,7 @@ public class CombatState : MonoBehaviour
         });
         return result;
     }
-    public List<CombatSailor> GetAliveCharacterEnermy(Team t)
+    public List<CombatSailor> GetAliveCharacterEnemy(Team t)
     {
         List<CombatSailor> result = new List<CombatSailor>();
         List<CombatSailor> CTeam = t == Team.A ? sailorsTeamB : sailorsTeamA;
@@ -329,10 +329,18 @@ public class CombatState : MonoBehaviour
     public CombatSailor GetSailor(Team t, CombatPosition p)
     {
         var l = GetAllTeamAliveSailors(t);
-        return l.Find(sailor =>
+        var s = l.Find(sailor =>
         {
+            //Debug.Log("sailor.cs.position.x " + sailor.cs.position.x);
+            //Debug.Log("sailor.cs.position.y " + sailor.cs.position.y);
+            //Debug.Log("p.x " + p.x);
+            //Debug.Log("p.y " + p.y);
+            //Debug.Log("sailor.cs.position.x == p.x " + (sailor.cs.position.x == p.x));
+            //Debug.Log("sailor.cs.position.y == p.y " + (sailor.cs.position.y == p.y));
             return (sailor.cs.position.x == p.x && sailor.cs.position.y == p.y);
         });
+        Debug.Log("S: " + s);
+        return s;
     }
     public CombatSailor GetSailor(string id)
     {
@@ -509,5 +517,35 @@ public class CombatState : MonoBehaviour
         sailorsTeamA.ForEach(character => {
             FlyTextMgr.Instance.ShowTextAddExp(character, exp);
         });
+    }
+    public void CreateChallengeGame()
+    {
+        var listSailor = TempCombatData.Instance.listSailor;
+        var fgl1 = TempCombatData.Instance.fgl1;
+
+        var listYourSailor = CrewData.Instance.Sailors;
+        var fgl0 = CrewData.Instance.FightingTeam;
+        for (short x = 0; x < 3; x++)
+        {
+            for (short y = 0; y < 3; y++)
+            {
+                {
+                    string sailorID = fgl0.SailorIdAt(x, y);
+                    if (sailorID != "")
+                    {
+                        SailorModel sailor = listYourSailor.Find(sailor => sailor.id == sailorID);
+                        CreateCombatSailor(sailor, new CombatPosition(x, y), Team.A);
+                    }
+                }
+                {
+                    string sailorID = fgl1.SailorIdAt(x, y);
+                    if (sailorID != "")
+                    {
+                        SailorModel sailor = listSailor.Find(sailor => sailor.id == sailorID);
+                        CreateCombatSailor(sailor, new CombatPosition(x, y), Team.B);
+                    }
+                }
+            }
+        }
     }
 };

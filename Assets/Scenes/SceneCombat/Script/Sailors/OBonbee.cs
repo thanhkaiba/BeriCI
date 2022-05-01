@@ -54,7 +54,7 @@ public class OBonbee : CombatSailor
 
         float physics_damage = cs.Power * Model.config_stats.skill_params[0];
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         List<CombatSailor> listTargets = TargetsUtils.NearestColumn(enermy);
 
         listTargets.ForEach(t =>

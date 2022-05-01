@@ -55,7 +55,7 @@ public class Tad : CombatSailor
         float attackTimes = Model.config_stats.skill_params[1];
         float damage = cs.Power * scale_damage_ratio;
 
-        List<CombatSailor> enermy = cbState.GetAliveCharacterEnermy(cs.team);
+        List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor main_target = TargetsUtils.Melee(this, enermy);
 
         targets.Add(main_target.Model.id);
