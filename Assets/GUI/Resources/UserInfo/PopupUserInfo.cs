@@ -53,6 +53,7 @@ public class PopupUserInfo : MonoBehaviour
                 Debug.Log("errorCode: " + errorCode);
                 if (errorCode == SFSErrorCode.SUCCESS)
                 {
+                    var unique_id = packet.GetLong("uid").ToString();
                     var username = packet.GetUtfString("username");
                     var avt_id = packet.GetInt("avt_id");
                     var account_date = packet.GetLong("account_date");
@@ -72,7 +73,7 @@ public class PopupUserInfo : MonoBehaviour
 
                     var fighting_lines = new FightingLine();
                     fighting_lines.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
-                    ShowInfo(username, uid, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
+                    ShowInfo(username, unique_id, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
                     ShowFightingLine(sailors, fighting_lines);
                 }
                 else Close();
@@ -106,7 +107,6 @@ public class PopupUserInfo : MonoBehaviour
         btnChangeName.SetActive(uid == UserData.Instance.UID);
         btnChangeAvt.SetActive(uid == UserData.Instance.UID);
         btnChallenge.SetActive(uid != UserData.Instance.UID);
-        btnChangeAvt.SetActive(false);
 
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutUtfString("uid", uid);
@@ -146,6 +146,7 @@ public class PopupUserInfo : MonoBehaviour
                     SailorModel sailor = sailors.Find(sailor => sailor.id == sailorID);
                     var iconS = icon.GetComponent<IconSailor>();
                     iconS.PresentData(sailor);
+                    icon.name = "sailor_" + x + "_" + y;
                 }
                 else
                 {
@@ -156,7 +157,11 @@ public class PopupUserInfo : MonoBehaviour
     }
     public void ChangeName()
     {
-        GuiManager.Instance.AddGui("UserInfo/PopupChangeName");
+        var popup = GuiManager.Instance.AddGui("UserInfo/PopupChangeName");
+    }
+    public void ChangeAvatar()
+    {
+        GuiManager.Instance.AddGui("UserInfo/PopupChangeAvatar");
     }
     public void Close()
     {

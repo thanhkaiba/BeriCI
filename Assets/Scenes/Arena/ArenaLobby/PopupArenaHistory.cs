@@ -19,6 +19,8 @@ namespace Piratera.GUI
             public string winner = "";
             public int attackerAvatar;
             public int defenderAvatar;
+            public string attackerUsername;
+            public string defenderUsername;
             
             public string Position
             {
@@ -31,6 +33,10 @@ namespace Piratera.GUI
             public int OpponentAvatar
             {
                 get { return Position == "attacker" ? defenderAvatar : attackerAvatar; }
+            }
+            public string OpponentUsername
+            {
+                get { return Position == "attacker" ? defenderUsername : attackerUsername; }
             }
             public int EloDelta { get { return Position == "attacker" ? attackerEloDelta : defenderEloDelta; } }
             public string Opponent
@@ -69,8 +75,9 @@ namespace Piratera.GUI
                 winner = packet.GetUtfString("winner");
                 attackerAvatar = packet.GetInt("attacker_avatar");
                 defenderAvatar = packet.GetInt("defender_avatar");
+                attackerUsername = packet.GetUtfString("attacker_nickname");
+                defenderUsername = packet.GetUtfString("defender_nickname");
             }
-
         }
 
         List<PvPHistory> Historys = new();
