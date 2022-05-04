@@ -3751,7 +3751,7 @@ MonoBehaviour:
   background: {fileID: 1092106887}
   royal: {fileID: 1521152366}
   buttonCheat: {fileID: 125443169}
-  popupLibrary: {fileID: 2130733648217388978, guid: 37fda10f75552a447ab740856ad13227,
+  popupLibrary: {fileID: 2130733648217388978, guid: 2e8c0d07724e8cd459632896ea73e8e8,
     type: 3}
 --- !u!4 &1521152365
 Transform:
