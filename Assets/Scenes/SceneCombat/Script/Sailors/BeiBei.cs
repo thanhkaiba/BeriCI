@@ -120,7 +120,7 @@ public class BeiBei : CombatSailor
         switch(random)
         {
             case 0:
-                text = "I Love U, Mechik";
+                text = "I Love U, Meechik";
                 break;
             case 1:
                 text = "Goodbye my friend...";

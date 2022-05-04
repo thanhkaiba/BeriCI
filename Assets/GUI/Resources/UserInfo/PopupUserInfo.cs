@@ -20,6 +20,8 @@ public class PopupUserInfo : MonoBehaviour
     private Transform background;
     [SerializeField]
     private UserAvatar avatar;
+    [SerializeField]
+    private Image ship, sail;
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
@@ -62,7 +64,11 @@ public class PopupUserInfo : MonoBehaviour
                     var pvp_count = packet.GetInt("pvp_count");
                     var pvp_win = packet.GetInt("pvp_win");
                     var total_beri_earn = packet.GetLong("total_beri_earn");
-                    //var total_beri_earn = packet.GetLong("total_beri_earn");
+                    //var sail_level = packet.GetInt("sail_level");
+                    //var helm_level = packet.GetInt("helm_level");
+                    var sail_level = 5;
+                    var helm_level = 5;
+
                     var sailors = new List<SailorModel>();
                     ISFSArray sFSSailors = packet.GetSFSArray("sailors");
                     foreach (ISFSObject obj in sFSSailors)
@@ -75,6 +81,7 @@ public class PopupUserInfo : MonoBehaviour
                     fighting_lines.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
                     ShowInfo(username, unique_id, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
                     ShowFightingLine(sailors, fighting_lines);
+                    ShowSailHelm(sail_level, helm_level);
                 }
                 else Close();
                 break;
@@ -154,6 +161,13 @@ public class PopupUserInfo : MonoBehaviour
                 }
             }
         }
+    }
+    public void ShowSailHelm(int sail_level, int helm_level)
+    {
+        int sailImgIdx = sail_level + 1;
+        int bodyImgIdx = sail_level < 4 ? 1 : 2;
+        sail.sprite = Resources.Load<Sprite>("UI/UpgradeShip/sail_" + sailImgIdx);
+        ship.sprite = Resources.Load<Sprite>("UI/UpgradeShip/ship_" + bodyImgIdx);
     }
     public void ChangeName()
     {
