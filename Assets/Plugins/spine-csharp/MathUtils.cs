@@ -121,6 +121,10 @@ namespace Spine
             if (u <= (mode - min) / d) return min + (float)Math.Sqrt(u * d * (mode - min));
             return max - (float)Math.Sqrt((1 - u) * d * (max - mode));
         }
+        static public int RandomInt(int min, int max)
+        {
+            return random.Next(min, max+1);
+        }
     }
 
     public abstract class IInterpolation

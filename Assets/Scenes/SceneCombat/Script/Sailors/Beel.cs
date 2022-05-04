@@ -51,7 +51,6 @@ public class Beel : CombatSailor
     public override float CastSkill(CombatState cbState)
     {
         base.CastSkill(cbState);
-
         List<string> targets = new List<string>();
         List<float> _params = new List<float>();
 
@@ -69,9 +68,9 @@ public class Beel : CombatSailor
 
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        GameEffMgr.Instance.ShowChat(this, "Let's go Infestissue!!", 3.5f);
         var listTargets = CombatState.Instance.GetSailors(targets);
         return RunAnimation(listTargets, _params);
-
     }
     float RunAnimation(List<CombatSailor> targets, List<float> magic_damage)
     {

@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Piratera.Config;
 using Piratera.Sound;
+using Spine;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,6 +55,7 @@ public class RowT : CombatSailor
         base.ProcessSkill();
         Debug.Log("targets.Count: " + targets.Count);
         Debug.Log("_params.Count: " + _params.Count);
+        ShowRandomTalk();
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 
@@ -74,5 +76,26 @@ public class RowT : CombatSailor
         seq.AppendInterval(0.45f);
         seq.AppendCallback(() => target.LoseHealth(new Damage() { magic = loseHealth }));
         return 2.0f;
+    }
+    private void ShowRandomTalk()
+    {
+        var random = MathUtils.RandomInt(0, 3);
+        string text = "";
+        switch (random)
+        {
+            case 0:
+                text = "Take this!!";
+                break;
+            case 1:
+                text = "Head shot!";
+                break;
+            case 2:
+                text = "U la troi";
+                break;
+            case 3:
+                text = "Thunder bolt!!";
+                break;
+        }
+        GameEffMgr.Instance.ShowChat(this, text, 2.0f);
     }
 }

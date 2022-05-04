@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
+using Spine;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,12 +34,12 @@ public class BeiBei : CombatSailor
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(.7f);
         seq.Append(transform.DOMove(desPos, 0.7f).SetEase(Ease.InOutSine));
-        seq.AppendInterval(.3f);
+        seq.AppendInterval(.1f);
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySoundAttackSailor(0);
         });
-        seq.AppendInterval(0.2f);
+        seq.AppendInterval(0.4f);
         seq.Append(transform.DOMove(oriPos, 0.1f).SetEase(Ease.OutSine));
         return 1.35f;
     }
@@ -84,7 +85,7 @@ public class BeiBei : CombatSailor
         var listTargets = CombatState.Instance.GetSailors(targets);
         var mainTarget = CombatState.Instance.GetSailor(targets[0]);
 
-        CombatEvents.Instance.highlightTarget.Invoke(mainTarget);
+        ShowRandomTalk();
         Vector3 oriPos = transform.position;
 
         int offset = transform.position.x < mainTarget.transform.position.x ? -1 : 1;
@@ -95,12 +96,14 @@ public class BeiBei : CombatSailor
         );
         desPos.z -= 0.1f;
         Sequence seq = DOTween.Sequence();
+
         seq.AppendInterval(0.7f);
         seq.Append(transform.DOMove(desPos, 0.7f).SetEase(Ease.OutSine));
         seq.AppendInterval(1.6f);
         StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySound("Audio/Sailor/bomb");
             cs.CurHealth = 0;
             GameEffMgr.Instance.Shake(0.3f, 3.0f);
             for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
@@ -109,5 +112,44 @@ public class BeiBei : CombatSailor
         seq.AppendCallback(() => CheckDeath());
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
         return 4.0f;
+    }
+    private void ShowRandomTalk()
+    {
+        var random = MathUtils.RandomInt(0, 9);
+        string text = "";
+        switch(random)
+        {
+            case 0:
+                text = "I Love U, Mechik";
+                break;
+            case 1:
+                text = "Goodbye my friend...";
+                break;
+            case 2:
+                text = "sample only one time";
+                break;
+            case 3:
+                text = "I Love U, LiuHi";
+                break;
+            case 4:
+                text = "Oh, shining here";
+                break;
+            case 5:
+                text = "You are my everything";
+                break;
+            case 6:
+                text = "Don't touch my friend";
+                break;
+            case 7:
+                text = "Remember me";
+                break;
+            case 8:
+                text = "Love you all, kkk";
+                break;
+            case 9:
+                text = "I'll be back";
+                break;
+        }
+        GameEffMgr.Instance.ShowChat(this, text, 5);
     }
 }
