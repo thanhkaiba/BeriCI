@@ -64,10 +64,10 @@ public class PopupUserInfo : MonoBehaviour
                     var pvp_count = packet.GetInt("pvp_count");
                     var pvp_win = packet.GetInt("pvp_win");
                     var total_beri_earn = packet.GetLong("total_beri_earn");
-                    //var sail_level = packet.GetInt("sail_level");
-                    //var helm_level = packet.GetInt("helm_level");
-                    var sail_level = 5;
-                    var helm_level = 5;
+                    var sail_level = packet.GetInt("sail_level");
+                    var helm_level = packet.GetInt("helm_level");
+                    //var sail_level = 5;
+                    //var helm_level = 5;
 
                     var sailors = new List<SailorModel>();
                     ISFSArray sFSSailors = packet.GetSFSArray("sailors");

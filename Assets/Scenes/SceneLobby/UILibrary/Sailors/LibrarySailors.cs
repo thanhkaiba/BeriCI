@@ -50,6 +50,7 @@ public class LibrarySailors : MonoBehaviour
         "Camelia",
         "Zeke",
         "Wuone",
+        "BeiBei",
     };
     private void Start()
     {
