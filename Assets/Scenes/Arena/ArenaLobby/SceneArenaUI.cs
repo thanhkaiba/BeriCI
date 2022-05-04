@@ -91,15 +91,15 @@ public class SceneArenaUI : MonoBehaviour
     private void ShowRandomChat()
     {
         if (sailors.Count == 0) return;
-        int idx = MathUtils.RandomInt(0, 15);
+        int idx = MathUtils.RandomInt(0, 20);
         string text = "...";
         switch (idx)
         {
             case 0:
-                text = "We are protecting our ship";
+                text = "Protect our ship";
                 break;
             case 1:
-                text = "Waiting for other crew";
+                text = "Waiting for them";
                 break;
             case 2:
                 text = "Choose our homefield, captain";
@@ -126,7 +126,7 @@ public class SceneArenaUI : MonoBehaviour
                 text = "Enemies in the West!";
                 break;
             case 10:
-                text = "It's time to upgrade";
+                text = "Time to upgrade";
                 break;
             case 11:
                 text = "Training for more strength";
@@ -142,6 +142,21 @@ public class SceneArenaUI : MonoBehaviour
                 break;
             case 15:
                 text = "Take care, they're coming";
+                break;
+            case 16:
+                text = "They are coming";
+                break;
+            case 17:
+                text = "Hold the helm, we are on fire";
+                break;
+            case 18:
+                text = "Watch out!";
+                break;
+            case 19:
+                text = "Check history";
+                break;
+            case 20:
+                text = "Sorry, I've distracted";
                 break;
         }
         var sailor = sailors[MathUtils.RandomInt(0, sailors.Count - 1)];
