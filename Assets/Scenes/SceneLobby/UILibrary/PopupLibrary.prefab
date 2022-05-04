@@ -167,6 +167,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d8e1cde7db2804d823616170043883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PopupSailor: {fileID: 5416791523528209927, guid: 013595bba37fa53459edada654e6de44,
+    type: 3}
 --- !u!1 &2448148984072024360
 GameObject:
   m_ObjectHideFlags: 0

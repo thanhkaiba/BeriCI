@@ -94,7 +94,7 @@ namespace Piratera.Notification
             {
                 long remainTime = StaminaData.Instance.TimeToHaveNewStamina() / 1000;
                 int curStamina = StaminaData.Instance.Stamina;
-                int maxStamina = GlobalConfigs.StaminaConfig.max_stamina;
+                int maxStamina = GlobalConfigs.StaminaConfig.GetStaminaCapacity();
                 int countdownTime = GlobalConfigs.StaminaConfig.recovering_time;
                 if (remainTime > 0 || curStamina < maxStamina)
                 {

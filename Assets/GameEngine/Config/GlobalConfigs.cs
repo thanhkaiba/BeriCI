@@ -16,6 +16,7 @@ namespace Piratera.Config
         private static Dictionary<string, SailorConfig> SailorDic = new();
         public static SynergiesConfig Synergies;
         public static SailorStatusConfig SailorStatus;
+        public static UpgradeShipConf UpgradeShipConfig;
         public static TrainingConfig Training;
         public static PvPConfig PvP;
         public static HomefieldAdvantageConfig HomefieldAdvantage;
@@ -31,6 +32,7 @@ namespace Piratera.Config
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(GameConfigSync.GetContent("configs/ContainerClassBonus.json"));
             SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(GameConfigSync.GetContent("configs/StatusConfig.json"));
             PirateWheelConfig = JsonConvert.DeserializeObject<PirateWheelConfig>(GameConfigSync.GetContent("configs/PirateWheel.json"));
+            UpgradeShipConfig = JsonConvert.DeserializeObject<UpgradeShipConf>(GameConfigSync.GetContent("configs/UpgradeShip.json"));
             Training = JsonConvert.DeserializeObject<TrainingConfig>(GameConfigSync.GetContent("configs/Training.json"));
             PvP = JsonConvert.DeserializeObject<PvPConfig>(GameConfigSync.GetContent("configs/PvP.json"));
             HomefieldAdvantage = JsonConvert.DeserializeObject<HomefieldAdvantageConfig>(GameConfigSync.GetContent("configs/HomefieldAdvantage.json"));
@@ -69,6 +71,7 @@ namespace Piratera.Config
             Combat = JsonConvert.DeserializeObject<CombatConfig>(File.ReadAllText("DEV_CONFIG/Combat.json"));
             Synergies = JsonConvert.DeserializeObject<SynergiesConfig>(File.ReadAllText("DEV_CONFIG/ContainerClassBonus.json"));
             SailorStatus = JsonConvert.DeserializeObject<SailorStatusConfig>(File.ReadAllText("DEV_CONFIG/StatusConfig.json"));
+            UpgradeShipConfig = JsonConvert.DeserializeObject<UpgradeShipConf>(GameConfigSync.GetContent("DEV_CONFIG/UpgradeShip.json"));
 
             string[] files = Directory.GetFiles("DEV_CONFIG/Sailors");
             foreach (string file in files)

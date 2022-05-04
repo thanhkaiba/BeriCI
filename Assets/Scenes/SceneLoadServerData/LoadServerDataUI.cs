@@ -72,6 +72,7 @@ public class LoadServerDataUI : MonoBehaviour
         SFSAction.LOAD_LIST_HERO_INFO,
         SFSAction.TRAIN_SAILORS_REMAIN,
         SFSAction.PVP_DATA,
+        SFSAction.SHIP_DATA,
     };
     private int TotalActionRequire = 0;
     void Start()

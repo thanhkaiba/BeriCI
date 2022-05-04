@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Arena/ScenePreparePvP/ScenePreparePvP.unity
     guid: 43dd0df8648394d46ba56463bce2ecff
+  - enabled: 1
+    path: Assets/Scenes/SceneUpgradeShip/SceneUpgradeShip.unity
+    guid: 41244234a84db4ace8ad9204e9b80694
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 4f6052c83e7b0324198f1ce9da5fdc0e,
       type: 2}
