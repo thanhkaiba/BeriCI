@@ -88,7 +88,7 @@ public class Wuone : CombatSailor
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 
-        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 1.4f);
+        CombatState.Instance.HighlightSailor2Step(this, new List<CombatSailor> { this }, 0.5f, 0.5f);
         TriggerAnimation("Skill");
         {
             Vector3 relativePos = transform.InverseTransformPoint(target.transform.position);

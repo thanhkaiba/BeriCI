@@ -93,7 +93,7 @@ public class Scrub : CombatSailor
         seq.AppendInterval(0.35f);
         StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
         seq.AppendCallback(() =>
-        {
+        {   
             target.LoseHealth(new Damage() { physics = _params[0] });
             if (behind_target) behind_target.LoseHealth(new Damage() { physics = _params[1] });
         });

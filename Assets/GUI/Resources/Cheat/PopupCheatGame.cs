@@ -2,6 +2,7 @@ using Piratera.GUI;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -99,6 +100,10 @@ namespace Piratera.Cheat
         public void ClearCache()
         {
             PlayerPrefs.DeleteAll();
+        }
+        public void RunSceneCombat()
+        {
+            SceneManager.LoadScene("SceneCombat2D");
         }
         public void DestorySelf()
         {

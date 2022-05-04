@@ -242,6 +242,17 @@ public class GameUtils : UnityEngine.Object
                 else param = model.config_stats.skill_params[skillParamIndex];
                 oriText = oriText.Replace(subString, "" + Mathf.Round(power * param));
             }
+            else if (split[0] == "h")
+            {
+                int skillParamIndex = int.Parse(split[1]);
+                float health;
+                if (stats != null) health = stats.MaxHealth;
+                else health = model.config_stats.GetHealth(model.level, model.quality, model.star);
+                float param = 0;
+                if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
+                else param = model.config_stats.skill_params[skillParamIndex];
+                oriText = oriText.Replace(subString, "" + Mathf.Round(health * param));
+            }
             else if (split[0] == "per")
             {
                 int skillParamIndex = int.Parse(split[1]);

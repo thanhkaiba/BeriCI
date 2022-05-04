@@ -87,9 +87,9 @@ public class Alex : CombatSailor
         seq.AppendInterval(.1f);
         return 2f;
     }
-    public override float CalcDamageTake(Damage d)
+    public override float CalcDamageTake(Damage d, float iAR = 0, float iMR = 0, float piAR = 0, float piMR = 0)
     {
-        float dmg = base.CalcDamageTake(d);
+        float dmg = base.CalcDamageTake(d, iAR, iMR, piAR, piMR);
         if (cs.Shield > 0) dmg *= 1 - Model.config_stats.skill_params[2];
         return dmg;
     }

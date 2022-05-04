@@ -322,9 +322,20 @@ public class CombatSailor : Sailor
     }
     public float CalcDamageTake(Damage d, CombatSailor actor)
     {
-        float damage = CalcDamageTake(d);
         var state = CombatState.Instance;
         SynergiesConfig config = GlobalConfigs.Synergies;
+        float ignoreAR = 0, ignoreMR = 0, perIgnoreAR = 0, perIgnoreMR = 0;
+        if (actor)
+        {
+            ClassBonusItem gunpowder = state.GetTeamClassBonus(actor.cs.team, SailorClass.GUNPOWDER);
+            if (actor.cs.HaveType(SailorClass.GUNPOWDER) && gunpowder != null)
+            {
+                float percentIgnoreAR_MR = config.GetParams(gunpowder.type, gunpowder.level)[0];
+                perIgnoreAR = percentIgnoreAR_MR;
+                perIgnoreMR = percentIgnoreAR_MR;
+            }
+        }
+        float damage = CalcDamageTake(d, ignoreAR, ignoreMR, perIgnoreAR, perIgnoreMR);
         if (actor)
         {
             ClassBonusItem marksman = state.GetTeamClassBonus(actor.cs.team, SailorClass.MARKSMAN);
@@ -344,14 +355,19 @@ public class CombatSailor : Sailor
         }
         return damage;
     }
-    public virtual float CalcDamageTake(Damage d)
+    public virtual float CalcDamageTake(Damage d, float ignoreAR = 0, float ignoreMR = 0, float perIgnoreAR = 0, float perIgnoreMR = 0)
     {
         float physicTake, magicTake;
+        float AR = cs.Armor;
+        float MR = cs.MagicResist;
 
-        if (cs.Armor > 0) physicTake = d.physics * 100 / (100 + cs.Armor);
-        else physicTake = d.physics * (2 - 100 / (100 - cs.Armor));
-        if (cs.MagicResist > 0) magicTake = d.magic * 100 / (100 + cs.MagicResist);
-        else magicTake = d.magic * (2 - 100 / (100 - cs.MagicResist));
+        AR = AR * (1 - perIgnoreAR) - ignoreAR;
+        MR = MR * (1 - perIgnoreMR) - ignoreMR;
+
+        if (AR > 0) physicTake = d.physics * 100 / (100 + AR);
+        else physicTake = d.physics * (2 - 100 / (100 - AR));
+        if (MR > 0) magicTake = d.magic * 100 / (100 + MR);
+        else magicTake = d.magic * (2 - 100 / (100 - MR));
 
         return physicTake + magicTake + d.pure;
     }

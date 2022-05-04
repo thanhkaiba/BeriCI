@@ -154,3 +154,8 @@ MonoBehaviour:
     title: Ton WuOne
     skill_description: Shoot a net, deal <b><color=#5b59f0>$p_0@</color></b> and
       stun them.
+  - root_name: BeiBei
+    present_name: Bei Bei
+    title: Flower Lover
+    skill_description: If health lower than $per_0@, deal enemy <b><color=#5b59f0>$h_1@</color></b>
+      and around <b><color=#5b59f0>$h_2@</color></b>. Then gone.
