@@ -75,7 +75,7 @@ public class SceneArenaUI : MonoBehaviour
         Input.multiTouchEnabled = false;
     }
 
-    private float timeSeqChat = 6.0f;
+    private float timeSeqChat = 4.0f;
     private void Update()
     {
         System.TimeSpan remaining = System.TimeSpan.FromMilliseconds(GameTimeMgr.GetTimeToNextDayUTC());
@@ -84,7 +84,7 @@ public class SceneArenaUI : MonoBehaviour
         if (timeSeqChat < 0)
         {
             ShowRandomChat();
-            timeSeqChat = MathUtils.RandomInt(8, 10);
+            timeSeqChat = MathUtils.RandomInt(6, 10);
         }
     }
 
