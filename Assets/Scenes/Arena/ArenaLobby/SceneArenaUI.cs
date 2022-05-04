@@ -5,6 +5,7 @@ using Piratera.GUI;
 using Piratera.Network;
 using Piratera.Sound;
 using Sfs2X.Entities.Data;
+using Spine;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -73,10 +74,80 @@ public class SceneArenaUI : MonoBehaviour
     {
         Input.multiTouchEnabled = false;
     }
+
+    private float timeSeqChat = 6.0f;
     private void Update()
     {
         System.TimeSpan remaining = System.TimeSpan.FromMilliseconds(GameTimeMgr.GetTimeToNextDayUTC());
         LbResetTicket.text = $"Reset After: {string.Format("{0:00}:{1:00}:{2:00}", remaining.Hours, remaining.Minutes, remaining.Seconds)}";
+        timeSeqChat -= Time.deltaTime;
+        if (timeSeqChat < 0)
+        {
+            ShowRandomChat();
+            timeSeqChat = MathUtils.RandomInt(8, 10);
+        }
+    }
+
+    private void ShowRandomChat()
+    {
+        if (sailors.Count == 0) return;
+        int idx = MathUtils.RandomInt(0, 15);
+        string text = "...";
+        switch (idx)
+        {
+            case 0:
+                text = "We are protecting our ship";
+                break;
+            case 1:
+                text = "Waiting for other crew";
+                break;
+            case 2:
+                text = "Choose our homefield, captain";
+                break;
+            case 3:
+                text = "Save our elo";
+                break;
+            case 4:
+                text = "Go to top :D";
+                break;
+            case 5:
+                text = "New helm for more attack";
+                break;
+            case 6:
+                text = "Beat attacker and take their elo";
+                break;
+            case 7:
+                text = "Concentrate";
+                break;
+            case 8:
+                text = "I'm so confident when in my homefield";
+                break;
+            case 9:
+                text = "Enemies in the West!";
+                break;
+            case 10:
+                text = "It's time to upgrade";
+                break;
+            case 11:
+                text = "Training for more strength";
+                break;
+            case 12:
+                text = "Be calm, I'm here";
+                break;
+            case 13:
+                text = "You and me, we are family";
+                break;
+            case 14:
+                text = "Defeat them and travel the world again";
+                break;
+            case 15:
+                text = "Take care, they're coming";
+                break;
+        }
+        var sailor = sailors[MathUtils.RandomInt(0, sailors.Count - 1)];
+        var chat = GameUtils.ShowChat(sailor, text, 6);
+        chat.GetComponent<Canvas>().sortingOrder = 5;
+        chat.transform.localScale = chat.transform.localScale * 0.64f;
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
@@ -180,15 +251,18 @@ public class SceneArenaUI : MonoBehaviour
         SceneTransition.Instance.ShowWaiting(true, false);
         NetworkController.Send(SFSAction.PVP_PLAY);
     }
+    private List<Transform> sailors = new List<Transform>();
     private void ShowListSailors()
     {
         for (int i = 0; i < nodeSailors.Count; i++)
         {
             var model = PvPData.Instance.DefenseCrew.SailorAt(new CombatPosition(i % 3, i / 3));
             if (model == null) continue;
-            Transform GO = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), nodeSailors[i]).transform.FindDeepChild("model");
-            GO.GetComponent<Renderer>().sortingOrder = 3;
-            GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
+            GameObject GO = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), nodeSailors[i]);
+            Transform modelTransform = GO.transform.FindDeepChild("model");
+            modelTransform.GetComponent<Renderer>().sortingOrder = 3;
+            modelTransform.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
+            sailors.Add(GO.transform);
         }
     }
     private void ShowAppearEffect() {

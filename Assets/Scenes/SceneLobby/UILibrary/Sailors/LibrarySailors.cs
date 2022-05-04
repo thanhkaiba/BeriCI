@@ -54,6 +54,7 @@ public class LibrarySailors : MonoBehaviour
     };
     private void Start()
     {
+        System.Array.Sort(listSailors);
         ShowListSailor();
         SelectSailor(listSailors[0]);
     }
@@ -111,7 +112,10 @@ public class LibrarySailors : MonoBehaviour
         baseSpeed.text = "" + config.speed_base;
         baseAR.text = "" + config.armor;
         baseMR.text = "" + config.magic_resist;
-        mana.text = "Mana (init/cost): " + config.start_fury + "/" + config.max_fury;
+        if (config.max_fury > 0)
+            mana.text = "Mana (init/cost): " + config.start_fury + "/" + config.max_fury;
+        else
+            mana.text = "No mana";
 
         if (config.classes.Count > 0)
         {

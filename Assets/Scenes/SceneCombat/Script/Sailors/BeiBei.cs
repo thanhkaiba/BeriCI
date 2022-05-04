@@ -150,6 +150,6 @@ public class BeiBei : CombatSailor
                 text = "I'll be back";
                 break;
         }
-        GameEffMgr.Instance.ShowChat(this, text, 5);
+        GameUtils.ShowChat(transform, text, 5);
     }
 }

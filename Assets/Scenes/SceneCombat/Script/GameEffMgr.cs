@@ -245,14 +245,4 @@ public class GameEffMgr : MonoBehaviour
         go.transform.localScale = Vector3.one * 5;
         go.transform.Find("spine").GetComponent<Animator>().SetTrigger("Explore");
     }
-    public void ShowChat(CombatSailor sailor, string text, float time = 4.0f)
-    {
-        var barPrefab = Resources.Load<GameObject>("characters/Bar/BubbleSpeak");
-        var barGO = Instantiate(
-            barPrefab,
-            sailor.transform.Find("nodeBar"));
-        barGO.transform.localScale = new Vector3(0.024f, 0.024f, 1f);
-        barGO.transform.localPosition = new Vector3(0, 0, 0);
-        barGO.transform.GetComponent<BubbleSpeak>().ShowText(text, time);
-    }
 }

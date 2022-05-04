@@ -320,6 +320,17 @@ public class GameUtils : UnityEngine.Object
                 return "Not exist";
         }
     }
+    public static GameObject ShowChat(Transform sailor, string text, float time = 4.0f)
+    {
+        var barPrefab = Resources.Load<GameObject>("characters/Bar/BubbleSpeak");
+        var barGO = Instantiate(
+            barPrefab,
+            sailor.Find("nodeBar"));
+        barGO.transform.localScale = new Vector3(0.02f, 0.02f, 1f);
+        barGO.transform.localPosition = new Vector3(0, 0, 0);
+        barGO.transform.GetComponent<BubbleSpeak>().ShowText(text, time);
+        return barGO;
+    }
     public static DateTime FromUnixTime(long unixTime)
     {
         var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);

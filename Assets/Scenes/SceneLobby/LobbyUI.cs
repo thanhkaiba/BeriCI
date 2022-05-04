@@ -7,6 +7,7 @@ using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
+using Spine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -63,7 +64,6 @@ public class LobbyUI : MonoBehaviour
 
     [SerializeField]
     private GameObject popupLibrary;
-    // Start is called before the first frame update
     private void Awake()
     {
 #if PIRATERA_DEV || PIRATERA_QC
@@ -247,6 +247,7 @@ public class LobbyUI : MonoBehaviour
         }
         SceneManager.LoadScene("SceneCrew");
     }
+    private float timeSeqChat = 3.0f;
     private void Update()
     {
         if (StaminaData.Instance.IsRecorveringStamina())
@@ -257,7 +258,12 @@ public class LobbyUI : MonoBehaviour
         else
         {
             userStaminaCountDown.text = "";
-
+        }
+        timeSeqChat -= Time.deltaTime;
+        if (timeSeqChat < 0)
+        {
+            ShowRandomChat();
+            timeSeqChat = MathUtils.RandomInt(5, 7);
         }
     }
 
@@ -289,7 +295,6 @@ public class LobbyUI : MonoBehaviour
             SceneTransition.Instance.LoadScene("SceneArena", TransitionType.ARENA);
         }
     }
-
     private void RunAppearAction()
     {
         for (int i = 0; i < leftButtons.Length; i++)
@@ -312,6 +317,7 @@ public class LobbyUI : MonoBehaviour
         background.localScale += scale;
         background.DOScale(-scale, 0.8f).SetRelative().SetEase(Ease.OutCirc).SetTarget(background).SetLink(background.gameObject);
     }
+    private List<Transform> sailors = new List<Transform>(); 
     private void ShowListSailors()
     {
         var listLineUp = CrewData.Instance.GetSquadModelList();
@@ -321,10 +327,118 @@ public class LobbyUI : MonoBehaviour
         {
             if (i >= listLineUp.Count) break;
             var model = listLineUp[i];
-            Transform GO = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), nodeSailors[i]).transform.FindDeepChild("model");
-            GO.GetComponent<Renderer>().sortingOrder = 3;
-            GO.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
+            GameObject GO = Instantiate(GameUtils.GetSailorModelPrefab(model.config_stats.root_name), nodeSailors[i]);
+            Transform modelTransform = GO.transform.FindDeepChild("model");
+            modelTransform.GetComponent<Renderer>().sortingOrder = 3;
+            modelTransform.Find("shadow").GetComponent<Renderer>().sortingOrder = 3;
+            sailors.Add(GO.transform);
         }
+    }
+    private void ShowRandomChat()
+    {
+        if (sailors.Count == 0) return;
+        int idx = MathUtils.RandomInt(0, 30);
+        string text = "...";
+        switch(idx)
+        {
+            case 0:
+                text = "I want to swim...";
+                break;
+            case 1:
+                text = "The weather is so nice!";
+                break;
+            case 2:
+                text = "I saw a monster yesterday";
+                break;
+            case 3:
+                text = "Wind is blowing";
+                break;
+            case 4:
+                text = "Achoo!!";
+                break;
+            case 5:
+                text = "I love sunshine";
+                break;
+            case 6:
+                text = "Let's go";
+                break;
+            case 7:
+                text = "Who wants ice-cream?";
+                break;
+            case 8:
+                text = "Miss you so much\nmy love...";
+                break;
+            case 9:
+                text = "Oh cool";
+                break;
+            case 10:
+                text = "Today I feel so good";
+                break;
+            case 11:
+                text = "I don't want to say anything";
+                break;
+            case 12:
+                text = "I don't want to say anything";
+                break;
+            case 13:
+                text = "Make-up! We are coming to town";
+                break;
+            case 14:
+                text = "Dock to that island";
+                break;
+            case 15:
+                text = "No";
+                break;
+            case 16:
+                text = "3 days on hunger-strike. I want an octopus";
+                break;
+            case 17:
+                text = "I need vitamin C";
+                break;
+            case 18:
+                text = "Bloodthirsty";
+                break;
+            case 19:
+                text = "Taking my heart plz";
+                break;
+            case 20:
+                text = "Let's party\nI'm dying...";
+                break;
+            case 21:
+                text = "I don't feel so good";
+                break;
+            case 22:
+                text = "hmm";
+                break;
+            case 23:
+                text = "...";
+                break;
+            case 24:
+                text = "Do not copycat me";
+                break;
+            case 25:
+                text = "It's cold\nI'm sick";
+                break;
+            case 26:
+                text = "Stop saying stupid things";
+                break;
+            case 27:
+                text = "Need a bowl of Pho";
+                break;
+            case 28:
+                text = "How about Banh Mi";
+                break;
+            case 29:
+                text = "All good??";
+                break;
+            case 30:
+                text = "Is that Ha Long bay?";
+                break;
+        }
+        var sailor = sailors[MathUtils.RandomInt(0, sailors.Count - 1)];
+        var chat = GameUtils.ShowChat(sailor, text, 5);
+        chat.GetComponent<Canvas>().sortingOrder = 5;
+        chat.transform.localScale = chat.transform.localScale * 0.64f;
     }
     private void ShowNPCTut()
     {

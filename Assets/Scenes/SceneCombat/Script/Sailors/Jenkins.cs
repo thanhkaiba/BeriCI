@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Piratera.Sound;
+using Spine;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -67,6 +68,7 @@ public class Jenkins : CombatSailor
     }
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
+        ShowRandomTalk();
         base.ProcessSkill();
         TriggerAnimation("Skill");
         var target = CombatState.Instance.GetSailor(targets[0]);
@@ -110,5 +112,44 @@ public class Jenkins : CombatSailor
         seq.AppendInterval(1.2f);
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
         return 2.8f;
+    }
+    private void ShowRandomTalk()
+    {
+        var random = MathUtils.RandomInt(0, 9);
+        string text = "";
+        switch (random)
+        {
+            case 0:
+                text = "Miss Huong";
+                break;
+            case 1:
+                text = "Love Trang";
+                break;
+            case 2:
+                text = "Miss Thu";
+                break;
+            case 3:
+                text = "Love Thao";
+                break;
+            case 4:
+                text = "Lan xinh";
+                break;
+            case 5:
+                text = "Miss Phuong";
+                break;
+            case 6:
+                text = "Love Ngoc";
+                break;
+            case 7:
+                text = "Dream of Linh";
+                break;
+            case 8:
+                text = "Dream of Mai";
+                break;
+            case 9:
+                text = "Quyen\nDon't marry him";
+                break;
+        }
+        GameUtils.ShowChat(transform, text, 2.2f);
     }
 }

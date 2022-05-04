@@ -96,6 +96,6 @@ public class RowT : CombatSailor
                 text = "Thunder bolt!!";
                 break;
         }
-        GameEffMgr.Instance.ShowChat(this, text, 2.0f);
+        GameUtils.ShowChat(transform, text, 2.0f);
     }
 }

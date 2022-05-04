@@ -92,9 +92,10 @@ public class UpgradeShip : MonoBehaviour
         var config = GlobalConfigs.UpgradeShipConfig;
         int staminaMax = GlobalConfigs.StaminaConfig.max_stamina;
         int sailLevel = UserData.Instance.SailLevel;
+        int helmLevel = UserData.Instance.HelmLevel;
         int maxSailLevel = config.GetMaxLevel();
         textSailLevel.text = "level " + (sailLevel + 1);
-        textHelmLevel.text = "level " + (sailLevel + 1);
+        textHelmLevel.text = "level " + (helmLevel + 1);
         textSail.text = "Sail level " + (sailLevel + 1);
         descSail.text = $"Stamina Cap: {staminaMax + config.GetStaminaCapacity(sailLevel)} ({staminaMax} + {config.GetStaminaCapacity(sailLevel)})"; 
         if (sailLevel >= maxSailLevel)

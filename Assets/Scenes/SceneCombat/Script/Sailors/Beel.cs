@@ -68,7 +68,7 @@ public class Beel : CombatSailor
 
     public override float ProcessSkill(List<string> targets, List<float> _params)
     {
-        GameEffMgr.Instance.ShowChat(this, "Let's go Infestissue!!", 3.5f);
+        GameUtils.ShowChat(transform, "Let's go Infestissue!!", 3.5f);
         var listTargets = CombatState.Instance.GetSailors(targets);
         return RunAnimation(listTargets, _params);
     }
