@@ -161,6 +161,7 @@ public class PopupUserInfo : MonoBehaviour
                 }
             }
         }
+        if (fgl.IsEmpty() || CrewData.Instance.FightingTeam.IsEmpty()) btnChallenge.SetActive(false);
     }
     public void ShowSailHelm(int sail_level, int helm_level)
     {
