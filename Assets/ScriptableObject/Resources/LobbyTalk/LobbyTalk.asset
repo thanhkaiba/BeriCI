@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 750b4817c6057fc4e9bf3d3af908f54c, type: 3}
+  m_Name: LobbyTalk
+  m_EditorClassIdentifier: 
+  talks:
+  - I want to swim...
+  - The weather is so nice!
+  - I saw a rat yesterday
+  - Wind is blowing
+  - Achoo!!
+  - I love sunshine
+  - Let's go
+  - Who wants ice-cream?
+  - Miss you so much, my love...
+  - Oh cool
+  - Today I feel so good
+  - I don't want to say anything
+  - Make-up! We are coming to town
+  - Dock to that island
+  - No
+  - 3 days on hunger-strike. I want cola
+  - I need vitamin C
+  - Bloodthirsty
+  - Taking my heart plz
+  - Let's party. I'm dying...
+  - I don't feel so good
+  - hmm
+  - Do not copycat me
+  - It's cold. I'm sick
+  - Stop saying stupid things
+  - Need a bowl of Pho
+  - All good??
+  - Is that Ha Long bay?
+  - That's smell
+  - How about Banh Mi

@@ -16,7 +16,6 @@ using UnityEngine.UI;
 
 public class LobbyUI : MonoBehaviour
 {
-
     //----------------------------------------------------------
     // UI elements
     //----------------------------------------------------------
@@ -53,8 +52,6 @@ public class LobbyUI : MonoBehaviour
     [SerializeField]
     private Transform buttonCol;
     [SerializeField]
-    private Transform sail;
-    [SerializeField]
     private Transform nodeUser;
     [SerializeField]
     private Transform background;
@@ -64,6 +61,8 @@ public class LobbyUI : MonoBehaviour
 
     [SerializeField]
     private GameObject popupLibrary;
+    [SerializeField]
+    private LobbyTalk lobbyTalks;
     private void Awake()
     {
 #if PIRATERA_DEV || PIRATERA_QC
@@ -337,104 +336,8 @@ public class LobbyUI : MonoBehaviour
     private void ShowRandomChat()
     {
         if (sailors.Count == 0) return;
-        int idx = MathUtils.RandomInt(0, 30);
-        string text = "...";
-        switch(idx)
-        {
-            case 0:
-                text = "I want to swim...";
-                break;
-            case 1:
-                text = "The weather is so nice!";
-                break;
-            case 2:
-                text = "I saw a monster yesterday";
-                break;
-            case 3:
-                text = "Wind is blowing";
-                break;
-            case 4:
-                text = "Achoo!!";
-                break;
-            case 5:
-                text = "I love sunshine";
-                break;
-            case 6:
-                text = "Let's go";
-                break;
-            case 7:
-                text = "Who wants ice-cream?";
-                break;
-            case 8:
-                text = "Miss you so much\nmy love...";
-                break;
-            case 9:
-                text = "Oh cool";
-                break;
-            case 10:
-                text = "Today I feel so good";
-                break;
-            case 11:
-                text = "I don't want to say anything";
-                break;
-            case 12:
-                text = "I don't want to say anything";
-                break;
-            case 13:
-                text = "Make-up! We are coming to town";
-                break;
-            case 14:
-                text = "Dock to that island";
-                break;
-            case 15:
-                text = "No";
-                break;
-            case 16:
-                text = "3 days on hunger-strike. I want an octopus";
-                break;
-            case 17:
-                text = "I need vitamin C";
-                break;
-            case 18:
-                text = "Bloodthirsty";
-                break;
-            case 19:
-                text = "Taking my heart plz";
-                break;
-            case 20:
-                text = "Let's party\nI'm dying...";
-                break;
-            case 21:
-                text = "I don't feel so good";
-                break;
-            case 22:
-                text = "hmm";
-                break;
-            case 23:
-                text = "...";
-                break;
-            case 24:
-                text = "Do not copycat me";
-                break;
-            case 25:
-                text = "It's cold\nI'm sick";
-                break;
-            case 26:
-                text = "Stop saying stupid things";
-                break;
-            case 27:
-                text = "Need a bowl of Pho";
-                break;
-            case 28:
-                text = "How about Banh Mi";
-                break;
-            case 29:
-                text = "All good??";
-                break;
-            case 30:
-                text = "Is that Ha Long bay?";
-                break;
-        }
+        int idx = MathUtils.RandomInt(0, lobbyTalks.talks.Count - 1);
+        string text = lobbyTalks.talks[idx];
         var sailor = sailors[MathUtils.RandomInt(0, sailors.Count - 1)];
         var chat = GameUtils.ShowChat(sailor, text, 5);
         chat.GetComponent<Canvas>().sortingOrder = 5;

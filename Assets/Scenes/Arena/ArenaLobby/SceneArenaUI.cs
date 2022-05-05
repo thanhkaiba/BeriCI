@@ -29,6 +29,8 @@ public class SceneArenaUI : MonoBehaviour
     private SpriteRenderer battleField;
     [SerializeField]
     private GameObject popupRanking, popupInfo, popupHistory;
+    [SerializeField]
+    private ArenaTalk talks;
     void Start()
     {
         SoundMgr.PlayBGMusic(PirateraMusic.LOBBY);
@@ -91,74 +93,8 @@ public class SceneArenaUI : MonoBehaviour
     private void ShowRandomChat()
     {
         if (sailors.Count == 0) return;
-        int idx = MathUtils.RandomInt(0, 20);
-        string text = "...";
-        switch (idx)
-        {
-            case 0:
-                text = "Protect our ship";
-                break;
-            case 1:
-                text = "Waiting for them";
-                break;
-            case 2:
-                text = "Choose our homefield, captain";
-                break;
-            case 3:
-                text = "Save our elo";
-                break;
-            case 4:
-                text = "Go to top :D";
-                break;
-            case 5:
-                text = "New helm for more attack";
-                break;
-            case 6:
-                text = "Beat attacker and take their elo";
-                break;
-            case 7:
-                text = "Concentrate";
-                break;
-            case 8:
-                text = "I'm so confident when in my homefield";
-                break;
-            case 9:
-                text = "Enemies in the West!";
-                break;
-            case 10:
-                text = "Time to upgrade";
-                break;
-            case 11:
-                text = "Training for more strength";
-                break;
-            case 12:
-                text = "Be calm, I'm here";
-                break;
-            case 13:
-                text = "You and me, we are family";
-                break;
-            case 14:
-                text = "Defeat them and travel the world again";
-                break;
-            case 15:
-                text = "Take care, they're coming";
-                break;
-            case 16:
-                text = "They are coming";
-                break;
-            case 17:
-                text = "Hold the helm, we are on fire";
-                break;
-            case 18:
-                text = "Watch out!";
-                break;
-            case 19:
-                text = "Check history";
-                break;
-            case 20:
-                text = "Sorry, I've distracted";
-                break;
-        }
+        int idx = MathUtils.RandomInt(0, talks.talks.Count - 1);
+        string text = talks.talks[idx];
         var sailor = sailors[MathUtils.RandomInt(0, sailors.Count - 1)];
         var chat = GameUtils.ShowChat(sailor, text, 6);
         chat.GetComponent<Canvas>().sortingOrder = 5;

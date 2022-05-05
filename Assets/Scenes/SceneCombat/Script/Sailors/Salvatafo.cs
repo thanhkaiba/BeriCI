@@ -59,13 +59,14 @@ public class Salvatafo : CombatSailor
 
         float magic_damage_ratio = Model.config_stats.skill_params[0];
         float healt_ratio = Model.config_stats.skill_params[1];
+        float side_effect = Model.config_stats.skill_params[2];
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor main_target = TargetsUtils.Melee(this, enermy);
         List<CombatSailor> aroundPlusTarget = TargetsUtils.AroundPlus(main_target, enermy);
 
         float magic_damage = cs.Power * magic_damage_ratio;
-        float health = (1 + aroundPlusTarget.Count) * healt_ratio * cs.Power;
+        float health = (1 + aroundPlusTarget.Count * side_effect) * healt_ratio * cs.Power;
 
         targets.Add(main_target.Model.id);
         _params.Add(main_target.CalcDamageTake(new Damage() { magic = magic_damage }, this));
@@ -73,7 +74,7 @@ public class Salvatafo : CombatSailor
         aroundPlusTarget.ForEach(t =>
         {
             targets.Add(t.Model.id);
-            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage }, this));
+            _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage * side_effect }, this));
         });
 
         _params.Add(health);

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92057be29369f3f49960c96bf0718f24, type: 3}
+  m_Name: ArenaTalk
+  m_EditorClassIdentifier: 
+  talks:
+  - Protect our ship
+  - Waiting for them
+  - Choose our homefield, captain
+  - Save elo
+  - Go to top :D
+  - New helm for more attack
+  - Beat attackers and take their elo
+  - Concentrate
+  - I'm so confident when in my homefield
+  - Enemies in the West!
+  - Time to upgrade
+  - Training for more strength
+  - Be calm, I'm here
+  - You and me, we are family
+  - Defeat them and travel the world again
+  - Take care, they're coming
+  - They are coming
+  - Hold the helm, we are on fire
+  - Watch out!
+  - Check history
+  - Sorry, I've distracted

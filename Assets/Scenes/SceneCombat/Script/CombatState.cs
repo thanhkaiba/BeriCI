@@ -69,14 +69,15 @@ public class CombatState : MonoBehaviour
     }
     void CreateTeamA()
     {
-        CreateCombatSailor("BeiBei", new CombatPosition(0, 2), Team.A, 3, 20, 180);
-        CreateCombatSailor("Meechik", new CombatPosition(2, 2), Team.A);
+        CreateCombatSailor("Salvatafo", new CombatPosition(0, 0), Team.A, 3, 20, 180);
+        //CreateCombatSailor("Meechik", new CombatPosition(2, 2), Team.A);
     }
     void CreateTeamB()
     {
         //CreateCombatSailor("Zeke", new CombatPosition(1, 2), Team.B);
         CreateCombatSailor("Alex", new CombatPosition(0, 0), Team.B, 3, 20, 180);
-        CreateCombatSailor("Daedra", new CombatPosition(0, 2), Team.B, 3, 20, 180);
+        CreateCombatSailor("Daedra", new CombatPosition(0, 1), Team.B, 3, 20, 180);
+        CreateCombatSailor("Daedra", new CombatPosition(1, 0), Team.B, 3, 20, 180);
     }
 
     CombatSailor CreateCombatSailor(string sailorString, CombatPosition pos, Team team, int star = 1, int level = 1, int quality = 160)

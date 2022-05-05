@@ -700,8 +700,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 233778267}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.4, y: 0.5, z: 12}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 2.92, y: 0.5, z: 12}
+  m_LocalScale: {x: 1.68, y: 1.68, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 478212170}
@@ -2407,6 +2407,7 @@ MonoBehaviour:
     type: 3}
   popupHistory: {fileID: 6301870738865024814, guid: c054911c54f4bb341afbac338ddc4b3d,
     type: 3}
+  talks: {fileID: 11400000, guid: 3c6cfb06cb5af274b885670ff29fb7b5, type: 2}
 --- !u!1 &1122630488
 GameObject:
   m_ObjectHideFlags: 0

@@ -3753,6 +3753,7 @@ MonoBehaviour:
   buttonCheat: {fileID: 125443169}
   popupLibrary: {fileID: 2130733648217388978, guid: 2e8c0d07724e8cd459632896ea73e8e8,
     type: 3}
+  lobbyTalks: {fileID: 11400000, guid: 49cb6a45509d0a240ba91541ef95f15f, type: 2}
 --- !u!4 &1521152365
 Transform:
   m_ObjectHideFlags: 0
