@@ -65,8 +65,8 @@ MonoBehaviour:
   - root_name: Salvatafo
     present_name: Salvatafo
     title: The Salvage of the Wotafo
-    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to center and heal
-      <b><color=#228514>$p_1@</color></b>, $per_2@ affect to around
+    skill_description: Throw Sun-sword, deal <b><color=#5b59f0>$p_0@</color></b>
+      to target and heal <b><color=#228514>$p_1@</color></b>, $per_2@ affect to around
   - root_name: Tad
     present_name: Tad
     title: Kindergarten Tiger from Mohana
@@ -156,6 +156,6 @@ MonoBehaviour:
       stun them.
   - root_name: BeiBei
     present_name: Bei Bei
-    title: Flower Lover
+    title: Love Flower Warrior
     skill_description: If health lower than $per_0@, deal enemy <b><color=#5b59f0>$h_1@</color></b>
       and around <b><color=#5b59f0>$h_2@</color></b>. Then gone.

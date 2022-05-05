@@ -120,13 +120,13 @@ public class Jenkins : CombatSailor
         switch (random)
         {
             case 0:
-                text = "Miss Huong";
+                text = "Missing Huong";
                 break;
             case 1:
                 text = "Love Trang";
                 break;
             case 2:
-                text = "Miss Thu";
+                text = "Missing Thu";
                 break;
             case 3:
                 text = "Love Thao";
@@ -135,7 +135,7 @@ public class Jenkins : CombatSailor
                 text = "Lan xinh";
                 break;
             case 5:
-                text = "Miss Phuong";
+                text = "Memories with Phuong";
                 break;
             case 6:
                 text = "Love Ngoc";
