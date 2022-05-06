@@ -20,6 +20,7 @@ namespace Piratera.Config
         public static TrainingConfig Training;
         public static PvPConfig PvP;
         public static HomefieldAdvantageConfig HomefieldAdvantage;
+        public static ArenaRewardsConfig ArenaRewards;
         public static bool HaveLoaded;
 
         public static void InitSyncConfig()
@@ -36,6 +37,7 @@ namespace Piratera.Config
             Training = JsonConvert.DeserializeObject<TrainingConfig>(GameConfigSync.GetContent("configs/Training.json"));
             PvP = JsonConvert.DeserializeObject<PvPConfig>(GameConfigSync.GetContent("configs/PvP.json"));
             HomefieldAdvantage = JsonConvert.DeserializeObject<HomefieldAdvantageConfig>(GameConfigSync.GetContent("configs/HomefieldAdvantage.json"));
+            ArenaRewards = JsonConvert.DeserializeObject<ArenaRewardsConfig>(GameConfigSync.GetContent("configs/ArenaRewards.json"));
             string[] files = GameConfigSync.GetSailorFolder();
             foreach (string file in files)
             {

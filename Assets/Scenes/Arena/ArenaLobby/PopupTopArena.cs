@@ -11,6 +11,8 @@ namespace Piratera.GUI
     {
         [SerializeField]
         private List<Transform> slotTop;
+        [SerializeField]
+        private GameObject popupRewards;
         public class PVPRankPlayer
         {
             public string uid;
@@ -112,6 +114,10 @@ namespace Piratera.GUI
                 CellPvPRank cell = imgObject.GetComponent<CellPvPRank>();
                 cell.SetData(Players[i]);
             }
+        }
+        public void ShowPopupRewards()
+        {
+            GuiManager.Instance.AddGui(popupRewards);
         }
     }
 }
