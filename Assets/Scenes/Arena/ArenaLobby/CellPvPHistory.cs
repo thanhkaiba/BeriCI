@@ -25,7 +25,7 @@ namespace Piratera.GUI
         {
             data = history;
             avatar.ShowAvatar(history.OpponentAvatar);
-            textName.text = history.Opponent;
+            textName.text = history.OpponentUsername;
             textElo.text = (history.EloDelta > 0 ? "+" + history.EloDelta.ToString() : history.EloDelta.ToString()) + " elo";
             textElo.color = history.EloDelta < 0 ? new Color32(10, 218, 255, 255) : new Color32(255, 66, 142, 255);
 
