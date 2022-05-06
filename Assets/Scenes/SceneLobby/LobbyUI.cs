@@ -109,6 +109,7 @@ public class LobbyUI : MonoBehaviour
         arenaSeason.text = "Season " + pvpData.SeasonId;
         areaTime.text = startTime.ToString("dd/MM")
             + " - " + endTime.ToString("dd/MM");
+        GameObject.Find("ButtonShip").SetActive(UserData.Instance.PVECount > 10);
     }
     void UpdateMaintain()
     {
