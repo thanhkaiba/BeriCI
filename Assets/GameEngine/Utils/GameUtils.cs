@@ -23,6 +23,7 @@ public class GameUtils : UnityEngine.Object
     {
         SailorModel model = new SailorModel(RandomId(), name);
         SailorConfig config_stats = model.config_stats;
+        // Debug.Log("config_stats: " + config_stats.root_name);
 
         //if (config_stats == null) config_stats = Resources.Load<SailorConfig>("ScriptableObject/Sailors/Target");
         GameObject characterGO = Instantiate(GetSailorModelPrefab(config_stats.root_name));

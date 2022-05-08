@@ -216,6 +216,7 @@ public class CombatSailor : Sailor
             CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.CYBORG, new List<float> { furyAdd });
         }
         target.CheckActiveGrappler();
+        CheckAndActiveShipwright();
 
         // Deal damage
         float delay = RunBaseAttack(target);
@@ -554,6 +555,7 @@ public class CombatSailor : Sailor
     }
     public virtual float ProcessSkill(List<string> targets = null, List<float> _params = null)
     {
+        CheckAndActiveShipwright();
         cs.CurrentSpeed -= cs.SpeedNeed;
         cs.Fury = 0;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
@@ -626,5 +628,20 @@ public class CombatSailor : Sailor
             }
         }
         else if (excitedEff != null) excitedEff.SetActive(false);
+    }
+    public void CheckAndActiveShipwright()
+    {
+        CombatState combatState = CombatState.Instance;
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem shipwright = combatState.GetTeamClassBonus(cs.team, SailorClass.SHIPWRIGHT);
+        if (cs.HaveType(SailorClass.SHIPWRIGHT) && shipwright != null)
+        {
+            float speedUp = config.GetParams(shipwright.type, shipwright.level)[0];
+            combatState.GetAllTeamAliveExceptSelfSailors(cs.team, this).ForEach(s =>
+            {
+                if (s.cs.HaveType(SailorClass.SHIPWRIGHT))
+                    s.SpeedUp(speedUp);
+            });
+        }
     }
 };

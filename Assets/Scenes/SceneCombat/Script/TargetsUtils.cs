@@ -177,7 +177,6 @@ public class TargetsUtils
         float health = 0.0f;
         l.ForEach(character =>
         {
-            Debug.Log(character.cs.GetCurrentHealthRatio());
             if (
                 (result == null)
                 || (character.cs.GetCurrentHealthRatio() < health)
@@ -185,6 +184,23 @@ public class TargetsUtils
             {
                 result = character;
                 health = character.cs.GetCurrentHealthRatio();
+            }
+        });
+        return result;
+    }
+    public static CombatSailor Riskest(List<CombatSailor> l)
+    {
+        CombatSailor result = null;
+        float health_shield = 0.0f;
+        l.ForEach(character =>
+        {
+            if (
+                (result == null)
+                || (character.cs.CurHealth + character.cs.Shield < health_shield)
+            )
+            {
+                result = character;
+                health_shield = character.cs.CurHealth + character.cs.Shield;
             }
         });
         return result;
