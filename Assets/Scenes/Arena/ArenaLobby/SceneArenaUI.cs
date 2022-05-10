@@ -170,7 +170,7 @@ public class SceneArenaUI : MonoBehaviour
         SceneTransition.Instance.ShowWaiting(true, false);
         SFSObject s = new SFSObject();
         s.PutInt("from", 0);
-        s.PutInt("to", 20);
+        s.PutInt("to", 50);
         NetworkController.Send(SFSAction.PVP_RANKING, s);
     }
     public void ShowHistory()

@@ -90,13 +90,45 @@ public class Nael : CombatSailor
             Sequence seq2 = DOTween.Sequence();
             seq2.AppendInterval(2f);
             seq2.AppendCallback(() => Destroy(eff));
+
+            if (i == 1)
+            {
+                var startPos = transform.position;
+                var targetPos = alies[i].transform.position;
+                targetPos.y += 2f;
+                targetPos.z -= 0.2f;
+                MedicineToTarget(startPos, targetPos, 1.8f);
+            }
         }
         Sequence seq = DOTween.Sequence();
         seq.AppendInterval(0.8f);
+        seq.AppendCallback(() =>
+        {
+            alies[0].AddShield(_params[0]);
+        });
+        seq.AppendInterval(1.0f);
         seq.AppendCallback(() => {
-            for (int i = 0; i < alies.Count; i++)
-                alies[i].AddShield(_params[i]);
+            if  (alies.Count == 2) alies[1].AddShield(_params[1]);
         });
         return 2f;
+    }
+    public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
+    {
+        Debug.Log("Medicine");
+        var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/wave/Prefab/Wave_Trail"), startPos, Quaternion.identity);
+        Vector3 oriPos = transform.position;
+        float d = Vector3.Distance(oriPos, targetPos);
+        Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
+        targetPos.y += 0.75f;
+        bulletGO.transform.localScale = Vector3.one * 8;
+        bulletGO.SetActive(false);
+        Sequence seq = DOTween.Sequence();
+        seq.AppendInterval(0.5f);
+        seq.AppendCallback(() =>
+        {
+            bulletGO.SetActive(true);
+        });
+        seq.Append(bulletGO.transform.DOJump(targetPos, 2.0f, 1, flyTime - 0.75f).SetEase(Ease.InSine));
+        seq.AppendCallback(() => Destroy(bulletGO));
     }
 }

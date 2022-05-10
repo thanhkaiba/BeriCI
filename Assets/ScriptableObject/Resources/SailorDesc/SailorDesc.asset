@@ -159,3 +159,8 @@ MonoBehaviour:
     title: Love Flower Warrior
     skill_description: If health lower than $per_0@, deal enemy <b><color=#5b59f0>$h_1@</color></b>
       and around <b><color=#5b59f0>$h_2@</color></b>. Then gone.
+  - root_name: Nael
+    present_name: Nael
+    title: Brave Warrior
+    skill_description: Buff himself and an ally shield equal <b>$p_0@</b>. When have
+      shield, Nael power become x<b>$i_1@</b>

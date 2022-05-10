@@ -96,7 +96,7 @@ public class TooltipClassBonus : MonoBehaviour
                 content.text = "GUNPOWDER deal damage ignore " + (para[0] * 100) + "% armor and magic-resist";
                 break;
             case SailorClass.SHIPWRIGHT:
-                content.text = "SHIPWRIGHT gain " + (para[0] * 100) + "% power and health for each item their own";
+                content.text = "When SHIPWRIGHT action, all other SHIPWRIGHT speed-up " + (para[0] * 100) + "%";
                 break;
             case SailorClass.EPIDEMIC:
                 content.text = "EPIDEMIC base attack also place virus on victim";

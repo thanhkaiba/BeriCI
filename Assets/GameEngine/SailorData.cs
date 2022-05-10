@@ -88,8 +88,10 @@ public class CombatPosition
 
 public class CombatStats
 {
+    private SailorModel _model;
     public CombatStats(SailorModel model)
     {
+        _model = model;
         int level = model.level;
         int quality = model.quality;
         int star = model.star;
@@ -128,10 +130,13 @@ public class CombatStats
     {
         get
         {
+            float result = 0;
             float increase = 0;
             var excited = GetStatus(SailorStatusType.EXCITED);
             if (excited != null) increase += excited.stack * GlobalConfigs.SailorStatus.EXCITED * BasePower;
-            return BasePower + increase;
+            result = BasePower + increase;
+            if (_model.name == "Nael" && Shield > 0) result *= _model.config_stats.skill_params[1];
+            return result;
         }
     }
 

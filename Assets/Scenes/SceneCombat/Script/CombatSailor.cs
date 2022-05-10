@@ -639,7 +639,8 @@ public class CombatSailor : Sailor
             float speedUp = config.GetParams(shipwright.type, shipwright.level)[0];
             combatState.GetAllTeamAliveExceptSelfSailors(cs.team, this).ForEach(s =>
             {
-                if (s.cs.HaveType(SailorClass.SHIPWRIGHT))
+                // if (s.cs.HaveType(SailorClass.SHIPWRIGHT) && Model.name.Equals(s.Model.name))
+                if (s.cs.HaveType(SailorClass.SHIPWRIGHT) && Model.name.Equals(s.Model.name))
                     s.SpeedUp(speedUp);
             });
         }

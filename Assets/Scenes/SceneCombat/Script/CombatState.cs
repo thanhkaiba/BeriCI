@@ -174,7 +174,7 @@ public class CombatState : MonoBehaviour
         List<CombatSailor> CTeam = t == Team.A ? sailorsTeamA : sailorsTeamB;
         CTeam.ForEach(delegate (CombatSailor character)
         {
-            if (!character.IsDeath() && character.cs != m.cs) result.Add(character);
+            if (!character.IsDeath() && character != m) result.Add(character);
         });
         return result;
     }

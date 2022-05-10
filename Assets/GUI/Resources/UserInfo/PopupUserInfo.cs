@@ -82,6 +82,10 @@ public class PopupUserInfo : MonoBehaviour
                     ShowInfo(username, unique_id, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
                     ShowFightingLine(sailors, fighting_lines);
                     ShowSailHelm(sail_level, helm_level);
+
+                    btnChangeName.SetActive(uid == UserData.Instance.UID);
+                    btnChangeAvt.SetActive(uid == UserData.Instance.UID);
+                    btnChallenge.SetActive(uid != UserData.Instance.UID);
                 }
                 else Close();
                 break;
@@ -106,14 +110,15 @@ public class PopupUserInfo : MonoBehaviour
             }
         }
         // ShowFightingLine(CrewData.Instance.Sailors, CrewData.Instance.FightingTeam);
+
+        btnChangeName.SetActive(false);
+        btnChangeAvt.SetActive(false);
+        btnChallenge.SetActive(false);
     }
     public void SetUID(string _uid)
     {
         Debug.Log("PopupUserInfo " + _uid);
         uid = _uid;
-        btnChangeName.SetActive(uid == UserData.Instance.UID);
-        btnChangeAvt.SetActive(uid == UserData.Instance.UID);
-        btnChallenge.SetActive(uid != UserData.Instance.UID);
 
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutUtfString("uid", uid);
