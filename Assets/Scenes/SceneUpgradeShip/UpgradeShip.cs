@@ -23,7 +23,7 @@ public class UpgradeShip : MonoBehaviour
     [SerializeField]
     private Animator sailEffect;
     [SerializeField]
-    private Text textSailPrice, textSailLevel, textHelmLevel, textSail, descSail;
+    private Text textSailPrice, textSailLevel, textHelmLevel, textSail, descSail, decsNextSail;
     [SerializeField]
     private Text userBeri, userStamina;
     private void Awake()
@@ -100,10 +100,12 @@ public class UpgradeShip : MonoBehaviour
         descSail.text = $"Stamina Cap: {staminaMax + config.GetStaminaCapacity(sailLevel)} ({staminaMax} + {config.GetStaminaCapacity(sailLevel)})"; 
         if (sailLevel >= maxSailLevel)
         {
+            decsNextSail.gameObject.SetActive(false);
             btnUpgradeSail.SetActive(false);
         }
         else
         {
+            decsNextSail.text = $"Next level: +{config.GetStaminaCapacity(sailLevel + 1) - config.GetStaminaCapacity(sailLevel)}";
             btnUpgradeSail.SetActive(true);
             textSailPrice.text = config.GetSailNextLevelPrice(sailLevel).ToString("N0");
         }

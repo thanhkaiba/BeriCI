@@ -107,7 +107,7 @@ public class CombatStats
         CritDamage = GlobalConfigs.Combat.base_crit_damage;
         BaseFury = model.config_stats.max_fury;
         Fury = model.config_stats.start_fury;
-
+        Dodge = 0.5f;
         foreach (SailorClass type in model.config_stats.classes)
         {
             types.Add(type);
@@ -172,7 +172,7 @@ public class CombatStats
 
     public float CritDamage;
 
-    public float Block;
+    public float Dodge;
 
     public int BaseFury;
     public int MaxFury

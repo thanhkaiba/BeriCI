@@ -50,6 +50,8 @@ public class FlyTextMgr : MonoBehaviour
         //Debug.Log("p " + p);
         GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
         c.GetComponent<Text>().text = text;
+        c.GetComponent<Text>().color = new Color32(98, 240, 230, 255);
+        c.GetComponent<Text>().fontSize = 30;
         //c.GetComponent<Text>().fontSize = 50;
         c.transform.position = p;
         c.GetComponent<TextDamage>().iconCrit.SetActive(false);

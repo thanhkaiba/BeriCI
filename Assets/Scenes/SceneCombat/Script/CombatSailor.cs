@@ -15,6 +15,7 @@ public class Damage
     public float pure = 0;
     public int fury_gain = 0;
     public bool isCrit = false;
+    public bool isDodge = false;
     public float total
     {
         get { return physics + magic + pure; }
@@ -175,6 +176,7 @@ public class CombatSailor : Sailor
         // client auto
         CombatSailor target = GetBaseAttackTarget(combatState);
         bool isCrit = IsCrit();
+        bool isDodge = IsDodge();
         // class bonus
         SynergiesConfig config = GlobalConfigs.Synergies;
         float healthGain = 0;
@@ -193,13 +195,14 @@ public class CombatSailor : Sailor
             physics = cs.HaveType(SailorClass.MAGE) ? 0 : d,
             magic = cs.HaveType(SailorClass.MAGE) ? d : 0,
             isCrit = isCrit,
+            isDodge = target.IsDodge(),
             fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
         };
         float damageTake = target.CalcDamageTake(damage, this);
-        return BaseAttack(target, isCrit, damageTake, healthGain);
+        return BaseAttack(target, isCrit, isDodge, damageTake, healthGain);
     }
     // ... server trả 
-    public float BaseAttack(CombatSailor target, bool isCrit, float damageDeal, float wildHeal)
+    public float BaseAttack(CombatSailor target, bool isCrit, bool isDodge, float damageDeal, float wildHeal)
     {
         Debug.Log("Base Attack >>>>" + isCrit + " " + damageDeal);
         var combatState = CombatState.Instance;
@@ -225,6 +228,7 @@ public class CombatSailor : Sailor
             physics = cs.HaveType(SailorClass.MAGE) ? 0 : damageDeal,
             magic = cs.HaveType(SailorClass.MAGE) ? damageDeal : 0,
             isCrit = isCrit,
+            isDodge = isDodge,
             fury_gain = GlobalConfigs.Combat.fury_per_take_damage,
         };
         StartCoroutine(WaitAndDo(delay, () =>
@@ -264,10 +268,10 @@ public class CombatSailor : Sailor
         float r = Random.Range(0f, 1f);
         return r < cs.Crit;
     }
-    bool IsBlock()
+    bool IsDodge()
     {
         float r = Random.Range(0f, 1f);
-        return r < cs.Block;
+        return r < cs.Dodge;
     }
     CombatSailor GetBaseAttackTarget(CombatState combatState)
     {
@@ -446,22 +450,30 @@ public class CombatSailor : Sailor
     }
     public void LoseHealth(Damage d, bool checkDeath = true)
     {
-        TriggerAnimation("Hurt");
-        GainFury(d.fury_gain);
-
         float total = d.physics + d.magic + d.pure;
-        if (total < cs.Shield) cs.Shield -= total;
-        else
+
+        if (!d.isDodge)
         {
-            cs.CurHealth -= total - cs.Shield;
-            cs.Shield = 0;
+            TriggerAnimation("Hurt");
+            if (total < cs.Shield) cs.Shield -= total;
+            else
+            {
+                cs.CurHealth -= total - cs.Shield;
+                cs.Shield = 0;
+            }
+
+            if (cs.CurHealth <= 0) cs.CurHealth = 0;
+            bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
+            if (checkDeath) CheckDeath();
+
+            GainFury(d.fury_gain);
+            CombatEvents.Instance.takeDamage.Invoke(this, d);
         }
-
-        if (cs.CurHealth <= 0) cs.CurHealth = 0;
-        bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
-        if (checkDeath) CheckDeath();
-
-        CombatEvents.Instance.takeDamage.Invoke(this, d);
+        else // Dodge
+        {
+            RunDodge();
+            FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Dodge", transform.position);
+        }
     }
 
     public virtual void GainFury(int value)
@@ -523,6 +535,15 @@ public class CombatSailor : Sailor
         cs.CurrentSpeed -= cs.SpeedNeed;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
+        return 0.3f;
+    }
+    public virtual float RunDodge()
+    {
+        TriggerAnimation("Hurt");
+        Sequence seq = DOTween.Sequence();
+        seq.AppendCallback(() => DoModelColor(new Color(1, 1, 1, 0.4f)));
+        seq.AppendInterval(0.55f);
+        seq.AppendCallback(() => DoModelColor(Color.white));
         return 0.3f;
     }
     public virtual float RunBaseAttack(CombatSailor target) { return 0f; }
@@ -640,7 +661,7 @@ public class CombatSailor : Sailor
             combatState.GetAllTeamAliveExceptSelfSailors(cs.team, this).ForEach(s =>
             {
                 // if (s.cs.HaveType(SailorClass.SHIPWRIGHT) && Model.name.Equals(s.Model.name))
-                if (s.cs.HaveType(SailorClass.SHIPWRIGHT) && Model.name.Equals(s.Model.name))
+                if (s.cs.HaveType(SailorClass.SHIPWRIGHT))
                     s.SpeedUp(speedUp);
             });
         }

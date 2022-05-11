@@ -300,7 +300,7 @@ public class CombatMgr : MonoBehaviour
                     float targetHealthLose = actionProcess._params[0];
                     float healthWildGain = 0;
                     if (actionProcess._params.Count > 1) healthWildGain = actionProcess._params[1];
-                    float delayTime = actor.BaseAttack(target, actionProcess.haveCrit, targetHealthLose, healthWildGain) + 0.2f;
+                    float delayTime = actor.BaseAttack(target, actionProcess.haveCrit, actionProcess.haveDodge, targetHealthLose, healthWildGain) + 0.2f;
                     combatState.lastTeamAction = actor.cs.team;
                     StartCoroutine(EndLoop(actor, delayTime, mapStatus));
                     return delayTime;

@@ -88,7 +88,7 @@ public class Zeke : CombatSailor
         CombatSailor target = CombatState.Instance.GetSailor(targets[0]);
         float loseHealth = _params[0];
 
-        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 1.4f);
+        CombatState.Instance.HighlightListSailor(new List<CombatSailor> { this }, 1.0f);
 
         target.cs.position.x = 0;
         var newTargetPos = target.GetScenePosition();

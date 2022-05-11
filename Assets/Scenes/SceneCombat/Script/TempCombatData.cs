@@ -110,6 +110,7 @@ public class CombatAction
     public List<string> targets;
     public List<float> _params;
     public bool haveCrit;
+    public bool haveDodge;
 
 
 
@@ -127,6 +128,7 @@ public class CombatAction
                 actor = detail.GetUtfString("actor");
                 target = detail.GetUtfString("target");
                 haveCrit = detail.GetBool("have_crit");
+                haveDodge = detail.GetBool("have_dodge");
                 _params = detail.GetFloatArray("params").OfType<float>().ToList();
                 break;
             case CombatAcionType.UseSkill:

@@ -101,12 +101,14 @@ public class Nael : CombatSailor
             }
         }
         Sequence seq = DOTween.Sequence();
-        seq.AppendInterval(0.8f);
+        seq.AppendInterval(0.85f);
         seq.AppendCallback(() =>
         {
+            SoundMgr.PlaySoundAttackSailor(0);
             alies[0].AddShield(_params[0]);
+            SoundMgr.PlaySound("Audio/Sailor/water_move");
         });
-        seq.AppendInterval(1.0f);
+        seq.AppendInterval(0.7f);
         seq.AppendCallback(() => {
             if  (alies.Count == 2) alies[1].AddShield(_params[1]);
         });
