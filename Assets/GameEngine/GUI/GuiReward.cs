@@ -21,6 +21,8 @@ namespace Piratera.GUI
         private Image coin;
         [SerializeField]
         private SkeletonGraphic anim;
+        [SerializeField]
+        private ItemRewards beri, sailor_piece;
 
         protected void Start()
         {
@@ -29,27 +31,14 @@ namespace Piratera.GUI
 
         public void SetReward(GameEndData r)
         {
-            texts[0].text = "";
-            var canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-            Sequence seqe = DOTween.Sequence();
-            coin.transform.localScale = Vector3.zero;
-            //seqe.Append(coin.rectTransform.DOMoveY(50 * canvas.transform.localScale.x, 0.25f).From());
-            coin.transform.localScale = Vector3.zero;
-            seqe.AppendInterval(0.2f);
-            seqe.Join(coin.DOFade(1, 0.2f));
-            seqe.Join(coin.transform.DOScale(Vector3.one, 0.4f).SetEase(Ease.OutBack));
-            seqe.AppendCallback(() =>
-            {
-                DoTweenUtils.UpdateNumber(texts[0], 0, r.mode_reward + r.hard_bonus + r.win_rank_bonus + r.team_bonus, x => $"x{x}");
-            });
-
-            seqe.SetLink(coin.gameObject).SetTarget(coin.transform);
-
+            int total = r.mode_reward + r.hard_bonus + r.win_rank_bonus + r.team_bonus;
+            beri.ShowBeri(total);
+            sailor_piece.gameObject.SetActive(false);
             anim.initialSkinName = "";
-            texts[1].text = r.mode_reward.ToString();
-            texts[2].text = r.win_rank_bonus.ToString();
-            texts[3].text = r.hard_bonus.ToString();
-            texts[4].text = r.team_bonus.ToString();
+            texts[0].text = r.mode_reward.ToString();
+            texts[1].text = r.win_rank_bonus.ToString();
+            texts[2].text = r.hard_bonus.ToString();
+            texts[3].text = r.team_bonus.ToString();
             if (r.team_win == 0)
             {
                 SoundMgr.PlaySound(PirateraSoundEffect.WIN);

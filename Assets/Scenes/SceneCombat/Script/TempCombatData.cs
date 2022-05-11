@@ -181,7 +181,6 @@ public class GameEndData
         hard_bonus = detail.GetInt("hard_bonus");
         team_bonus = detail.GetInt("team_bonus");
         team_win = detail.GetByte("team_win");
-        
     }
 
     
