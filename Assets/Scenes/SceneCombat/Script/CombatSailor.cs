@@ -475,7 +475,8 @@ public class CombatSailor : Sailor
         else // Dodge
         {
             RunDodge();
-            FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Dodge", transform.position);
+            GameEffMgr.Instance.CreateAbsorbEffect(transform.position, 2.5f);
+            FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Miss", transform.position, 2);
         }
     }
 
@@ -537,16 +538,16 @@ public class CombatSailor : Sailor
 
         cs.CurrentSpeed -= cs.SpeedNeed;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
-        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position);
+        FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position, 2);
         return 0.3f;
     }
     public virtual float RunDodge()
     {
-        TriggerAnimation("Hurt");
-        Sequence seq = DOTween.Sequence();
-        seq.AppendCallback(() => DoModelColor(new Color(1, 1, 1, 0.4f)));
-        seq.AppendInterval(0.55f);
-        seq.AppendCallback(() => DoModelColor(Color.white));
+        //TriggerAnimation("Hurt");
+        //Sequence seq = DOTween.Sequence();
+        //seq.AppendCallback(() => DoModelColor(new Color(1, 1, 1, 0.4f)));
+        //seq.AppendInterval(0.55f);
+        //seq.AppendCallback(() => DoModelColor(Color.white));
         return 0.3f;
     }
     public virtual float RunBaseAttack(CombatSailor target) { return 0f; }
@@ -567,7 +568,11 @@ public class CombatSailor : Sailor
         ShowInExcited(listStatus.Find(x => x.name == SailorStatusType.EXCITED));
     }
     GameObject shieldEff;
-    private void DisplayShield()
+    public void HideShield()
+    {
+        if (shieldEff != null) shieldEff.SetActive(false);
+    }
+    public void DisplayShield()
     {
         if (cs.Shield > 0)
         {

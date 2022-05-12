@@ -38,9 +38,10 @@ public class FlyTextMgr : MonoBehaviour
         }
     }
 
-    public void CreateFlyTextWith3DPosition(string text, Vector3 p)
+    public void CreateFlyTextWith3DPosition(string text, Vector3 p, float offsetY = 0)
     {
         //Debug.Log("=>>>>>>>p " + p);
+        p.y += offsetY;
         Vector3 v3 = Camera.main.GetComponent<Camera>().WorldToScreenPoint(p);
         CreateFlyText(text, v3);
     }

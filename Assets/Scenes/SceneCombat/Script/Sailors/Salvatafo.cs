@@ -115,6 +115,7 @@ public class Salvatafo : CombatSailor
         {
             shadow.SetActive(false);
             bar.gameObject.SetActive(false);
+            HideShield();
         });
         seq.AppendInterval(1.5f);
         seq.AppendCallback(() =>
@@ -158,6 +159,7 @@ public class Salvatafo : CombatSailor
             GainHealth(_params[listTargets.Count]);
             shadow.SetActive(true);
             bar.gameObject.SetActive(true);
+            DisplayShield();
         });
         seq.AppendInterval(0.7f);
         return 3.2f;

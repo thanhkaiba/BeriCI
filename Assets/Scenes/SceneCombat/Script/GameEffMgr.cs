@@ -254,4 +254,14 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendCallback(() => Destroy(eff));
         return eff;
     }
+    public GameObject CreateAbsorbEffect(Vector3 pos, float offsetY)
+    {
+        pos.y += offsetY;
+        pos.z -= 0.5f;
+        Sequence seq = DOTween.Sequence();
+        var eff = Instantiate(Resources.Load<GameObject>("Effect2D/absorb/absorb"), pos, Quaternion.identity);
+        seq.AppendInterval(5f);
+        seq.AppendCallback(() => Destroy(eff));
+        return eff;
+    }
 }

@@ -111,12 +111,14 @@ public class Nael : CombatSailor
     }
     public void MedicineToTarget(Vector3 startPos, Vector3 targetPos, float flyTime)
     {
-        Debug.Log("Medicine");
+        startPos.z -= 0.5f;
+        startPos.y += 1f;
         var bulletGO = Instantiate(Resources.Load<GameObject>("Effect2D/wave/Prefab/Wave_Trail"), startPos, Quaternion.identity);
         Vector3 oriPos = transform.position;
         float d = Vector3.Distance(oriPos, targetPos);
         Vector3 desPos = Vector3.MoveTowards(oriPos, targetPos, d - 1.4f);
-        targetPos.y += 0.75f;
+        targetPos.y += 1.5f;
+        targetPos.z -= 0.5f;
         bulletGO.transform.localScale = Vector3.one * 8;
         bulletGO.SetActive(false);
         Sequence seq = DOTween.Sequence();

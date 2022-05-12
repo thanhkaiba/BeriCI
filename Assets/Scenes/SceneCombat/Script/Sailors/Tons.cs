@@ -124,6 +124,7 @@ public class Tons : CombatSailor
         seq.AppendCallback(() =>
         {
             bar.gameObject.SetActive(false);
+            HideShield();
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/Impact/Impact"),
                posEnemy, modelObject.transform.rotation);
@@ -148,6 +149,7 @@ public class Tons : CombatSailor
         seq.AppendCallback(() =>
         {
             bar.gameObject.SetActive(true);
+            DisplayShield();
             GameObject ex = Instantiate(
                 Resources.Load<GameObject>("Effect2D/tele/tele"),
                 Vector3.MoveTowards(transform.position, posEnemy, -1), new Quaternion());
