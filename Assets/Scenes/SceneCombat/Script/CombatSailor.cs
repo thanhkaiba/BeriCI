@@ -49,6 +49,7 @@ public class CombatSailor : Sailor
         cs.UpdateStatsWithSynergy(ownTeam, oppTeam);
         bar.SetFuryBar(cs.MaxFury, cs.Fury);
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
+        DisplayShield();
         /*
         Debug.Log("-----------------------------------" +
         "\n > Model.id: " + Model.id +
@@ -443,6 +444,7 @@ public class CombatSailor : Sailor
         }
         cs.Shield += shield;
         bar.SetHealthBar(cs.MaxHealth, cs.CurHealth, cs.Shield);
+        DisplayShield();
     }
     public void GainArmor(float armor)
     {
@@ -468,6 +470,7 @@ public class CombatSailor : Sailor
 
             GainFury(d.fury_gain);
             CombatEvents.Instance.takeDamage.Invoke(this, d);
+            DisplayShield();
         }
         else // Dodge
         {
@@ -562,6 +565,21 @@ public class CombatSailor : Sailor
         var listStatus = cs.listStatus;
         ShowInStun(listStatus.Find(x => x.name == SailorStatusType.STUN) != null);
         ShowInExcited(listStatus.Find(x => x.name == SailorStatusType.EXCITED));
+    }
+    GameObject shieldEff;
+    private void DisplayShield()
+    {
+        if (cs.Shield > 0)
+        {
+            if (shieldEff == null)
+            {
+                var prefab = Resources.Load<GameObject>("Effect2D/shield/shield");
+                shieldEff = Instantiate(prefab, transform);
+            }
+            shieldEff.SetActive(true);
+            shieldEff.transform.localPosition = new Vector3(0, 2.6f, -0.1f);
+        }
+        else if (shieldEff != null) shieldEff.SetActive(false);
     }
     public virtual void SetFaceDirection()
     {

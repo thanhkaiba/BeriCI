@@ -84,12 +84,7 @@ public class Nael : CombatSailor
             var pos = alies[i].transform.position;
             pos.y += 2.8f;
             pos.z -= 0.1f;
-
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
-            eff.transform.localScale = Vector3.one * 1.8f;
-            Sequence seq2 = DOTween.Sequence();
-            seq2.AppendInterval(2f);
-            seq2.AppendCallback(() => Destroy(eff));
+            GameEffMgr.Instance.CreateSpeedEffect(pos);
 
             if (i == 1)
             {

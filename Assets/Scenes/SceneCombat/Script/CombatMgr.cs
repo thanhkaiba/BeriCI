@@ -246,8 +246,7 @@ public class CombatMgr : MonoBehaviour
                     var pos = sailor.transform.position;
                     pos.y += 2.8f;
                     pos.z -= 0.1f;
-                    var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
-                    eff.transform.localScale = Vector3.one * 1.8f;
+                    GameEffMgr.Instance.CreateSpeedEffect(pos);
                     var img = (new GameObject()).AddComponent<SpriteRenderer>();
                     img.sprite = Resources.Load<Sprite>("UI/Arena/advantage/ad_" + defenseAdvantage.ToString());
                     img.transform.localPosition = pos;
@@ -255,7 +254,6 @@ public class CombatMgr : MonoBehaviour
                     seq.Append(img.transform.DOScale(2.5f, 3.0f));
                     seq.Join(img.DOFade(0f, 3.0f).SetEase(Ease.InQuint));
                     seq.AppendInterval(2f);
-                    seq.AppendCallback(() => Destroy(eff));
                     seq.AppendCallback(() => Destroy(img));
                 });
                 return 3;

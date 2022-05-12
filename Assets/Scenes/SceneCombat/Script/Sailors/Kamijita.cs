@@ -103,10 +103,7 @@ public class Kamijita : CombatSailor
             target.SpeedUp(speedUp);
             var pos = target.transform.position;
             pos.y += 2.8f;
-            var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
-            eff.transform.localScale = Vector3.one * 1.8f;
-            seq.AppendInterval(2f);
-            seq.AppendCallback(() => Destroy(eff));
+            GameEffMgr.Instance.CreateSpeedEffect(pos);
         });
     }
     public void StartEffDame(CombatSailor target, float damage)

@@ -245,4 +245,13 @@ public class GameEffMgr : MonoBehaviour
         go.transform.localScale = Vector3.one * 5;
         go.transform.Find("spine").GetComponent<Animator>().SetTrigger("Explore");
     }
+    public GameObject CreateSpeedEffect(Vector3 pos)
+    {
+        Sequence seq = DOTween.Sequence();
+        var eff = Instantiate(Resources.Load<GameObject>("Effect2D/Duong_FX/VFX_Piratera/fx_speed"), pos, Quaternion.identity);
+        eff.transform.localScale = Vector3.one * 1.8f;
+        seq.AppendInterval(2f);
+        seq.AppendCallback(() => Destroy(eff));
+        return eff;
+    }
 }
