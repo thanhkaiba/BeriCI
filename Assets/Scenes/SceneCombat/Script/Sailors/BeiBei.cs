@@ -120,34 +120,19 @@ public class BeiBei : CombatSailor
         switch(random)
         {
             case 0:
-                text = "I Love U, Meechik";
+                text = "I need use magic bomb";
                 break;
             case 1:
-                text = "Goodbye my friend...";
+                text = "I'm comming home";
                 break;
             case 2:
-                text = "sample only one time";
+                text = "See you next game";
                 break;
             case 3:
-                text = "I Love U, LiuHi";
+                text = "I'll be back";
                 break;
             case 4:
-                text = "Oh, shining here";
-                break;
-            case 5:
-                text = "You are my everything";
-                break;
-            case 6:
-                text = "Don't touch my friend";
-                break;
-            case 7:
-                text = "Remember me";
-                break;
-            case 8:
-                text = "Love you all, kkk";
-                break;
-            case 9:
-                text = "I'll be back";
+                text = "It's time to do this";
                 break;
         }
         GameUtils.ShowChat(transform, text, 5);

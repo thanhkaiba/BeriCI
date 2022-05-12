@@ -1,0 +1,111 @@
+
+Kiwi_separated.png
+size: 1848,544
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ARM 1
+  rotate: true
+  xy: 242, 5
+  size: 144, 232
+  orig: 144, 232
+  offset: 0, 0
+  index: -1
+ARM 2
+  rotate: true
+  xy: 705, 25
+  size: 124, 222
+  orig: 124, 222
+  offset: 0, 0
+  index: -1
+Body
+  rotate: true
+  xy: 2, 2
+  size: 147, 238
+  orig: 147, 238
+  offset: 0, 0
+  index: -1
+HEAD
+  rotate: true
+  xy: 1632, 214
+  size: 327, 212
+  orig: 327, 212
+  offset: 0, 0
+  index: -1
+LEG 1
+  rotate: true
+  xy: 476, 21
+  size: 128, 227
+  orig: 128, 227
+  offset: 0, 0
+  index: -1
+LEG 2
+  rotate: true
+  xy: 929, 29
+  size: 120, 221
+  orig: 120, 221
+  offset: 0, 0
+  index: -1
+Layer 23
+  rotate: true
+  xy: 476, 3
+  size: 16, 27
+  orig: 16, 27
+  offset: 0, 0
+  index: -1
+NAILS
+  rotate: false
+  xy: 1261, 43
+  size: 90, 106
+  orig: 90, 106
+  offset: 0, 0
+  index: -1
+NAILS copy
+  rotate: false
+  xy: 1152, 32
+  size: 107, 117
+  orig: 107, 117
+  offset: 0, 0
+  index: -1
+Slash/Slash0
+  rotate: true
+  xy: 2, 151
+  size: 390, 324
+  orig: 390, 324
+  offset: 0, 0
+  index: -1
+Slash/Slash1
+  rotate: true
+  xy: 328, 151
+  size: 390, 324
+  orig: 390, 324
+  offset: 0, 0
+  index: -1
+Slash/Slash2
+  rotate: true
+  xy: 654, 151
+  size: 390, 324
+  orig: 390, 324
+  offset: 0, 0
+  index: -1
+Slash/Slash3
+  rotate: true
+  xy: 980, 151
+  size: 390, 324
+  orig: 390, 324
+  offset: 0, 0
+  index: -1
+Slash/Slash4
+  rotate: true
+  xy: 1306, 151
+  size: 390, 324
+  orig: 390, 324
+  offset: 0, 0
+  index: -1
+TAIL
+  rotate: false
+  xy: 1632, 15
+  size: 193, 197
+  orig: 193, 197
+  offset: 0, 0
+  index: -1

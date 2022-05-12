@@ -264,4 +264,14 @@ public class GameEffMgr : MonoBehaviour
         seq.AppendCallback(() => Destroy(eff));
         return eff;
     }
+    public GameObject CreateHealthEffect(Vector3 pos)
+    {
+        pos.y += 4;
+        pos.z -= 0.5f;
+        Sequence seq = DOTween.Sequence();
+        var eff = Instantiate(Resources.Load<GameObject>("Effect2D/buff/ef_24_green"), pos, Quaternion.identity);
+        seq.AppendInterval(0.3f);
+        seq.AppendCallback(() => Destroy(eff));
+        return eff;
+    }
 }

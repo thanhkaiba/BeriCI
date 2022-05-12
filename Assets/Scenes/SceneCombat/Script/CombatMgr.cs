@@ -437,7 +437,7 @@ public class CombatMgr : MonoBehaviour
         action();
     }
 
-    int CalculateSpeedAddThisLoop()
+    public int CalculateSpeedAddThisLoop()
     {
         int speedAdd = 99999999;
         combatState.GetAllAliveCombatSailors().ForEach(character =>

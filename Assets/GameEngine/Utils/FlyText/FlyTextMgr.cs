@@ -12,6 +12,7 @@ public class FlyTextMgr : MonoBehaviour
     private void Start()
     {
         CombatEvents.Instance.takeDamage.AddListener(ShowTextTakeDamage);
+        CombatEvents.Instance.gainHealth.AddListener(ShowTextHeal);
     }
     public void ShowTextTakeDamage(CombatSailor s, Damage damage)
     {
@@ -21,21 +22,29 @@ public class FlyTextMgr : MonoBehaviour
         {
             v3.x -= 40;
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
-            c.GetComponent<TextDamage>().Present(damage.physics, v3, damage.isCrit, new Color(0.93f, 0.18f, 0.24f));
+            c.GetComponent<TextDamage>().Present(-damage.physics, v3, damage.isCrit, new Color(0.93f, 0.18f, 0.24f));
         }
         if (damage.magic > 0)
         {
             v3.x += 40;
             v3.y += 20;
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
-            c.GetComponent<TextDamage>().Present(damage.magic, v3, damage.isCrit, new Color(0.58f, 0.72f, 0.92f));
+            c.GetComponent<TextDamage>().Present(-damage.magic, v3, damage.isCrit, new Color(0.58f, 0.72f, 0.92f));
         }
         if (damage.pure > 0)
         {
             v3.y -= 20;
             GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
-            c.GetComponent<TextDamage>().Present(damage.pure, v3, damage.isCrit, Color.white);
+            c.GetComponent<TextDamage>().Present(-damage.pure, v3, damage.isCrit, Color.white);
         }
+    }
+    public void ShowTextHeal(CombatSailor s, float heal) {
+        if (heal <= 0) return;
+        Vector3 v3 = Camera.main.WorldToScreenPoint(s.transform.position);
+        v3.y += 40;
+        v3.x -= 20;
+        GameObject c = Instantiate(damageText, Vector3.zero, Quaternion.identity, transform);
+        c.GetComponent<TextDamage>().Present(heal, v3, false, new Color(130/255f, 255/255f, 163/255f), 30);
     }
 
     public void CreateFlyTextWith3DPosition(string text, Vector3 p, float offsetY = 0)

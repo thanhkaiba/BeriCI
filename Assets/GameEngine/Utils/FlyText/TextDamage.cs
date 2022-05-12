@@ -15,11 +15,14 @@ public class TextDamage : MonoBehaviour
         seq.SetTarget(transform).SetLink(gameObject);
     }
 
-    public void Present(float damage, Vector3 p, bool isCrit, Color color)
+    public void Present(float damage, Vector3 p, bool isCrit, Color color, int size = 40)
     {
-        GetComponent<Text>().text = "-" + (int)damage;
+        if (damage < 0)
+            GetComponent<Text>().text = "" + (int)damage;
+        else
+            GetComponent<Text>().text = "+" + (int)damage;
         transform.position = p;
-        GetComponent<Text>().fontSize = isCrit ? 45 : 40;
+        GetComponent<Text>().fontSize = isCrit ? (int)(size*1.1f) : size;
         GetComponent<Text>().color = color;
         if (iconCrit != null) iconCrit.SetActive(isCrit);
     }

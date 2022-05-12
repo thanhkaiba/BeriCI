@@ -10,9 +10,10 @@ public class ItemRewards : MonoBehaviour
     private Image icon;
     [SerializeField]
     private Text title, quantity;
-    public void ShowBeri(int quanity)
+    public void ShowBeri(int _quantity)
     {
-        quantity.text = StringUtils.ShortNumber(quanity);
+        if (_quantity >= 100000) quantity.text = StringUtils.ShortNumber(_quantity);
+        else quantity.text = _quantity.ToString("N0");
     }
     public void ShowAvatar(int id)
     {

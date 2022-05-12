@@ -177,7 +177,7 @@ public class CombatSailor : Sailor
         // client auto
         CombatSailor target = GetBaseAttackTarget(combatState);
         bool isCrit = IsCrit();
-        bool isDodge = IsDodge();
+        bool isDodge = target.IsDodge();
         // class bonus
         SynergiesConfig config = GlobalConfigs.Synergies;
         float healthGain = 0;
@@ -236,7 +236,7 @@ public class CombatSailor : Sailor
         {
             GainHealth(wildHeal);
             GainFury(GlobalConfigs.Combat.fury_per_base_attack);
-            target.LoseHealth(damage);
+            target.LoseHealth(damage, true, this);
         }));
         return delay + 0.8f;
     }
@@ -269,12 +269,13 @@ public class CombatSailor : Sailor
         float r = Random.Range(0f, 1f);
         return r < cs.Crit;
     }
-    bool IsDodge()
+    public bool IsDodge()
     {
+        if (HaveStatus(SailorStatusType.STUN)) return false;
         float r = Random.Range(0f, 1f);
         return r < cs.Dodge;
     }
-    CombatSailor GetBaseAttackTarget(CombatState combatState)
+    protected virtual CombatSailor GetBaseAttackTarget(CombatState combatState)
     {
         switch (Model.config_stats.attack_type)
         {
@@ -450,7 +451,7 @@ public class CombatSailor : Sailor
     {
         cs.BaseArmor += armor;
     }
-    public void LoseHealth(Damage d, bool checkDeath = true)
+    public void LoseHealth(Damage d, bool checkDeath = true, CombatSailor attacker = null)
     {
         float total = d.physics + d.magic + d.pure;
 
@@ -474,8 +475,7 @@ public class CombatSailor : Sailor
         }
         else // Dodge
         {
-            RunDodge();
-            GameEffMgr.Instance.CreateAbsorbEffect(transform.position, 2.5f);
+            RunDodge(attacker, total);
             FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Miss", transform.position, 2);
         }
     }
@@ -509,7 +509,7 @@ public class CombatSailor : Sailor
         cs.CurrentSpeed += value;
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
     }
-    public virtual void SpeedUp(float percent)
+    public void SpeedUp(float percent)
     {
         cs.CurrentSpeed += (int)(percent * cs.SpeedNeed);
         bar.SetSpeedBar(cs.SpeedNeed, cs.CurrentSpeed);
@@ -541,13 +541,9 @@ public class CombatSailor : Sailor
         FlyTextMgr.Instance.CreateFlyTextWith3DPosition("Immobile", transform.position, 2);
         return 0.3f;
     }
-    public virtual float RunDodge()
+    public virtual float RunDodge(CombatSailor attacker, float damageDodge)
     {
-        //TriggerAnimation("Hurt");
-        //Sequence seq = DOTween.Sequence();
-        //seq.AppendCallback(() => DoModelColor(new Color(1, 1, 1, 0.4f)));
-        //seq.AppendInterval(0.55f);
-        //seq.AppendCallback(() => DoModelColor(Color.white));
+        GameEffMgr.Instance.CreateAbsorbEffect(transform.position, 2.5f);
         return 0.3f;
     }
     public virtual float RunBaseAttack(CombatSailor target) { return 0f; }
@@ -615,6 +611,7 @@ public class CombatSailor : Sailor
     public virtual void Awake()
     {
         modelColor = Color.white;
+        modelObject = transform.Find("model").gameObject;
     }
     public void DoModelColor(Color color)
     {
