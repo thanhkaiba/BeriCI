@@ -26,6 +26,8 @@ public class UpgradeShip : MonoBehaviour
     private Text textSailPrice, textSailLevel, textHelmLevel, textSail, descSail, decsNextSail;
     [SerializeField]
     private Text userBeri, userStamina;
+    [SerializeField]
+    private GameObject popupHelm;
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
@@ -140,7 +142,8 @@ public class UpgradeShip : MonoBehaviour
     }
     public void OnUpgadeHelm()
     {
-        GuiManager.Instance.ShowPopupNotification("Coming soon!");
+        //GuiManager.Instance.ShowPopupNotification("Coming soon!");
+        GuiManager.Instance.AddGui(popupHelm);
     }
     public void ClickBack()
     {

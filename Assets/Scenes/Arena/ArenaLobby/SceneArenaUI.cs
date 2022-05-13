@@ -70,7 +70,7 @@ public class SceneArenaUI : MonoBehaviour
     }
     private void UpdateTicket()
     {
-        LbTicket.text = PvPData.Instance.Ticket + "/" + GlobalConfigs.PvP.max_ticket;
+        LbTicket.text = PvPData.Instance.Ticket + "/" + PvPData.Instance.GetTicketCap();
     }
     void Awake()
     {

@@ -115,7 +115,7 @@ public class BeiBei : CombatSailor
     }
     private void ShowRandomTalk()
     {
-        var random = MathUtils.RandomInt(0, 9);
+        var random = MathUtils.RandomInt(0, 5);
         string text = "";
         switch(random)
         {

@@ -1,4 +1,5 @@
-﻿using Sfs2X.Entities.Data;
+﻿using Piratera.Config;
+using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
 public enum HomefieldAdvantage
@@ -99,6 +100,10 @@ public class PvPData : Singleton<PvPData>
     public Sprite GetAdvantageBackgroundSprite()
     {
         return GetAdvantageBackgroundSprite(SelectingAdvantage);
+    }
+    public int GetTicketCap()
+    {
+        return GlobalConfigs.PvP.max_ticket + GlobalConfigs.UpgradeShipConfig.GetTicketCapacity(UserData.Instance.HelmLevel);
     }
 }
 

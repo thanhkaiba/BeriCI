@@ -3206,7 +3206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1571172673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4133,6 +4133,8 @@ MonoBehaviour:
   decsNextSail: {fileID: 1646824025}
   userBeri: {fileID: 960937034}
   userStamina: {fileID: 1370261714}
+  popupHelm: {fileID: 2130733648217388978, guid: 351efedd137ecf94dac12e9b23dfd9f2,
+    type: 3}
 --- !u!4 &1845194990
 Transform:
   m_ObjectHideFlags: 0

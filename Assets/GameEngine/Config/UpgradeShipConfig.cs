@@ -19,4 +19,17 @@ public class UpgradeShipConf
     {
         return sail_stamina_capacity[level];
     }
+    // helm
+    public int GetHelmMaxLevel()
+    {
+        return helm_pvp_ticket_capacity.Count - 1;
+    }
+    public int GetHelmNextLevelPrice(int level)
+    {
+        return helm_cost[level];
+    }
+    public int GetTicketCapacity(int level)
+    {
+        return helm_pvp_ticket_capacity[level];
+    }
 }
