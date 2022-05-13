@@ -164,8 +164,8 @@ MonoBehaviour:
     title: Brave Warrior
     skill_description: Buff himself and an ally shield equal <b>$p_0@</b>. When have
       shield, Nael power become x<b>$i_1@</b>
-  - root_name: MUN
-    present_name: MUN
+  - root_name: Mun
+    present_name: Mun
     title: Beel's underling
     skill_description: Have <b>$perT_0_1@</b> dodge chance. When MUN dodges successfully,
       she attacks that enemy.

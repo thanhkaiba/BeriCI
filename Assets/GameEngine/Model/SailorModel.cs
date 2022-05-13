@@ -2,6 +2,7 @@ using Piratera.Config;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 {
@@ -88,6 +89,10 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     int IComparable<SailorModel>.CompareTo(SailorModel other)
     {
         //if (IsTrial()) return 1;
+        Debug.Log("config_stats.rank: " + config_stats.rank);
+        Debug.Log("config_stats.name: " + config_stats.root_name);
+        Debug.Log("other.config_stats.rank: " + other.config_stats.rank);
+        Debug.Log("other.config_stats.root_name: " + other.config_stats.root_name);
         if (config_stats.rank.Equals(other.config_stats.rank))
         {
             if (star == other.star)

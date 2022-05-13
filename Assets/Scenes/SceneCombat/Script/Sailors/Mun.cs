@@ -64,7 +64,7 @@ public class Mun : CombatSailor
         {
             int speedNeed = character.GetSpeedNeeded();
             speedAllNeed = Math.Min(speedAllNeed, speedNeed);
-        });
+        });     
 
         var speedMUNNeed = GetSpeedNeeded();
         if (speedAllNeed <= 0) return speedMUNNeed - speedAllNeed + 1;

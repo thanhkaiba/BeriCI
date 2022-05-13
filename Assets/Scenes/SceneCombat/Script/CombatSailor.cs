@@ -349,7 +349,7 @@ public class CombatSailor : Sailor
             if (actor.cs.HaveType(SailorClass.MARKSMAN) && marksman != null)
             {
                 float bonusDamagePerTile = config.GetParams(marksman.type, marksman.level)[0];
-                damage += damage * bonusDamagePerTile * (actor.cs.position.x + cs.position.x + 1);
+                damage += damage * bonusDamagePerTile * (actor.cs.position.x + cs.position.x);
             }
             ClassBonusItem criminal = state.GetTeamClassBonus(actor.cs.team, SailorClass.CRIMINAL);
             if (actor.cs.HaveType(SailorClass.CRIMINAL) && criminal != null)
