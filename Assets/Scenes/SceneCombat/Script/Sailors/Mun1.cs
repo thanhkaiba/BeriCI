@@ -6,9 +6,9 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MUN : CombatSailor
+public class Mun : CombatSailor
 {
-    public MUN()
+    public Mun()
     {
     }
     public override void Awake()
