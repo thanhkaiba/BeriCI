@@ -19,6 +19,8 @@ namespace Piratera.GUI
         private Image coin;
         [SerializeField]
         private SkeletonGraphic anim;
+        [SerializeField]
+        private ItemRewards sailor_piece;
 
         public bool isWatchReplay = false;
 
@@ -46,7 +48,8 @@ namespace Piratera.GUI
             });
             seqe.SetLink(coin.gameObject).SetTarget(coin.transform);
             anim.initialSkinName = "";
-          
+            ShowBonus(r.bonus);
+
             if (r.team_win == 0)
             {
                 SoundMgr.PlaySound(PirateraSoundEffect.WIN);
@@ -109,6 +112,15 @@ namespace Piratera.GUI
             }
             SceneManager.LoadScene("SceneLoadServerData");
         }
-
+        private void ShowBonus(Rewards rewards)
+        {
+            if (rewards.type.Equals("PIECE_SAILOR"))
+            {
+                sailor_piece.gameObject.SetActive(true);
+                sailor_piece.ShowSailorPiece(rewards.meta, (int)rewards.amount);
+                return;
+            }
+            sailor_piece.gameObject.SetActive(false);
+        }
     }
 }

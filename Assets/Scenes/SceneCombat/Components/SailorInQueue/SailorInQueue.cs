@@ -10,7 +10,8 @@ public class SailorInQueue : MonoBehaviour
     public Text level;
     public Text quality;
     public Image colorTeam;
-    public Sprite starSpr;
+    [SerializeField]
+    private Sprite starSpr, starSprRed, starSprPurple;
     public Transform nodeStar;
     public Text textSpeed;
     public void SetData(CombatSailor s)
@@ -20,16 +21,7 @@ public class SailorInQueue : MonoBehaviour
         speedSlider.speed = 2.4f;
 
         var model = sailorData.Model;
-        for (int i = 0; i < model.star; i++)
-        {
-            GameObject starObj = new GameObject();
-            Image starImg = starObj.AddComponent<Image>();
-            starImg.sprite = starSpr;
-            starObj.GetComponent<RectTransform>().SetParent(nodeStar);
-            starObj.SetActive(true);
-            starObj.transform.localScale = new Vector3(0.2f, 0.2f, 1);
-            starObj.transform.localPosition = new Vector3(-6.5f * i, -18 * i);
-        }
+        ShowStar(model.star);
         if (sailorData.cs.team == Team.A)
         {
             icon.transform.localScale = new Vector3(-1, 1, 1);
@@ -57,5 +49,47 @@ public class SailorInQueue : MonoBehaviour
     public void OnClick()
     {
         TooltipSailorInfo.Instance.ShowTooltip(sailorData.gameObject);
+    }
+    private void ShowStar(int star)
+    {
+        if (star <= 5)
+        {
+            for (int i = 0; i < star; i++)
+            {
+                GameObject starObj = new GameObject();
+                Image starImg = starObj.AddComponent<Image>();
+                starImg.sprite = starSpr;
+                starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+                starObj.SetActive(true);
+                starObj.transform.localScale = new Vector3(0.2f, 0.2f, 1);
+                starObj.transform.localPosition = new Vector3(-6.5f * i, -18 * i);
+            }
+        }
+        else if (star <= 8)
+        {
+            for (int i = 5; i < star; i++)
+            {
+                GameObject starObj = new GameObject();
+                Image starImg = starObj.AddComponent<Image>();
+                starImg.sprite = starSprRed;
+                starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+                starObj.SetActive(true);
+                starObj.transform.localScale = new Vector3(0.3f, 0.3f, 1);
+                starObj.transform.localPosition = new Vector3(-6.5f * 1.25f * (i-5) - 2, -18 * 1.25f * (i - 5) - 2);
+            }
+        }
+        else
+        {
+            for (int i = 8; i < star; i++)
+            {
+                GameObject starObj = new GameObject();
+                Image starImg = starObj.AddComponent<Image>();
+                starImg.sprite = starSprPurple;
+                starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+                starObj.SetActive(true);
+                starObj.transform.localScale = new Vector3(0.4f, 0.4f, 1);
+                starObj.transform.localPosition = new Vector3(-6.5f * 2f * (i - 8) - 8, -18 * 2f * (i - 8) - 8);
+            }   
+        }
     }
 }

@@ -14,7 +14,7 @@ public class CharBarControl : MonoBehaviour
     public Image iconSkill;
     public Text textName, textLevel, textQuality;
     [SerializeField]
-    private Sprite starSpr;
+    private Sprite starSpr, starSprRed, starSprPurple;
     [SerializeField]
     private Transform nodeStar;
     private void Awake()
@@ -27,18 +27,51 @@ public class CharBarControl : MonoBehaviour
     }
     public void Init(SailorModel model)
     {
-        for (int i = 0; i < model.star; i++)
-        {
-            GameObject starObj = new GameObject();
-            Image starImg = starObj.AddComponent<Image>();
-            starImg.sprite = starSpr;
-            starObj.GetComponent<RectTransform>().SetParent(nodeStar);
-            starObj.SetActive(true);
-            starObj.transform.localScale = new Vector3(0.1f, 0.1f);
-            starObj.transform.localPosition = new Vector3(i * 10, 0);
-        }
+        ShowStar(model.star);
         textLevel.text = "" + model.level;
         textQuality.text = "" + model.quality;
+    }
+    private void ShowStar(int star)
+    {
+        if (star <= 5)
+        {
+            for (int i = 0; i < star; i++)
+            {
+                GameObject starObj = new GameObject();
+                Image starImg = starObj.AddComponent<Image>();
+                starImg.sprite = starSpr;
+                starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+                starObj.SetActive(true);
+                starObj.transform.localScale = new Vector3(0.1f, 0.1f);
+                starObj.transform.localPosition = new Vector3(i * 10, 0);
+            }
+        }
+        else if (star <= 8)
+        {
+            for (int i = 5; i < star; i++)
+            {
+                GameObject starObj = new GameObject();
+                Image starImg = starObj.AddComponent<Image>();
+                starImg.sprite = starSprRed;
+                starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+                starObj.SetActive(true);
+                starObj.transform.localScale = new Vector3(0.15f, 0.15f);
+                starObj.transform.localPosition = new Vector3((i-5) * 14 + 2, 2);
+            }
+        }
+        else
+        {
+            for (int i = 8; i < star; i++)
+            {
+                GameObject starObj = new GameObject();
+                Image starImg = starObj.AddComponent<Image>();
+                starImg.sprite = starSprPurple;
+                starObj.GetComponent<RectTransform>().SetParent(nodeStar);
+                starObj.SetActive(true);
+                starObj.transform.localScale = new Vector3(0.2f, 0.2f);
+                starObj.transform.localPosition = new Vector3((i-8) * 18 + 3, 3);
+            }
+        }
     }
     public void SetName(string name)
     {

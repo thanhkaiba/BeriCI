@@ -732,6 +732,8 @@ MonoBehaviour:
   quality: {fileID: 829750981612375267}
   qualitySlider: {fileID: 1653932781202055841}
   starSpr: {fileID: 21300000, guid: 6f0dc4b2191f9384aa9bbdb99b0ca9e6, type: 3}
+  starSprRed: {fileID: 21300000, guid: 655ea0a8874350348864ea15cc7447ce, type: 3}
+  starSprPurple: {fileID: 21300000, guid: 10a13db1c6e301c4cabbc4485c73e45e, type: 3}
   nodeStar: {fileID: 3982340174134956242}
   iconAttackType: {fileID: 3389346896300593568}
 --- !u!223 &1993676621387484039

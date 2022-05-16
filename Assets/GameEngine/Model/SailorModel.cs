@@ -89,13 +89,9 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
     int IComparable<SailorModel>.CompareTo(SailorModel other)
     {
         //if (IsTrial()) return 1;
-        Debug.Log("config_stats.rank: " + config_stats.rank);
-        Debug.Log("config_stats.name: " + config_stats.root_name);
-        Debug.Log("other.config_stats.rank: " + other.config_stats.rank);
-        Debug.Log("other.config_stats.root_name: " + other.config_stats.root_name);
-        if (config_stats.rank.Equals(other.config_stats.rank))
+        if (star == other.star)
         {
-            if (star == other.star)
+            if (config_stats.rank.Equals(other.config_stats.rank))
             {
                 if (level == other.level)
                 {
@@ -115,12 +111,12 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
             }
             else
             {
-                return star.CompareTo(other.star);
+                return config_stats.rank.CompareTo(other.config_stats.rank);
             }
         }
         else
         {
-            return config_stats.rank.CompareTo(other.config_stats.rank);
+            return star.CompareTo(other.star);
         }
     }
 }

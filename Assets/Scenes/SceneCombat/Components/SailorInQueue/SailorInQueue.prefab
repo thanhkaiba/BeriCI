@@ -544,6 +544,8 @@ MonoBehaviour:
   quality: {fileID: 6078792197623954427}
   colorTeam: {fileID: 2699640881739248087}
   starSpr: {fileID: 21300000, guid: 6f0dc4b2191f9384aa9bbdb99b0ca9e6, type: 3}
+  starSprRed: {fileID: 21300000, guid: 655ea0a8874350348864ea15cc7447ce, type: 3}
+  starSprPurple: {fileID: 21300000, guid: 10a13db1c6e301c4cabbc4485c73e45e, type: 3}
   nodeStar: {fileID: 5714183275802029053}
   textSpeed: {fileID: 7068290890425333468}
 --- !u!1 &3437186739991661116

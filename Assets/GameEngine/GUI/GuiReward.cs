@@ -28,7 +28,6 @@ namespace Piratera.GUI
         {
             Appear();
         }
-
         public void SetReward(GameEndData r)
         {
             int total = r.mode_reward + r.hard_bonus + r.win_rank_bonus + r.team_bonus;
