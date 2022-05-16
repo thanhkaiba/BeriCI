@@ -33,7 +33,7 @@ namespace Piratera.GUI
         {
             int total = r.mode_reward + r.hard_bonus + r.win_rank_bonus + r.team_bonus;
             beri.ShowBeri(total);
-            sailor_piece.gameObject.SetActive(false);
+            ShowBonus(r.bonus);
             anim.initialSkinName = "";
             texts[0].text = r.mode_reward.ToString();
             texts[1].text = r.win_rank_bonus.ToString();
@@ -78,7 +78,18 @@ namespace Piratera.GUI
             }
 
         }
-
+        private void ShowBonus(Rewards rewards)
+        {
+            Debug.Log("rewards.type: " + rewards.type);
+            Debug.Log("rewards.type.Equals(PIECE_SAILOR): " + rewards.type.Equals("PIECE_SAILOR"));
+            if (rewards.type.Equals("PIECE_SAILOR"))
+            {
+                sailor_piece.gameObject.SetActive(true);
+                sailor_piece.ShowSailorPiece(rewards.meta, (int)rewards.amount);
+                return;
+            }
+            sailor_piece.gameObject.SetActive(false);
+        }
         private void Appear()
         {
             Sequence s = DOTween.Sequence();

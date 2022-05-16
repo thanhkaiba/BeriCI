@@ -68,8 +68,8 @@ public class PopupHelm : MonoBehaviour
     }
     public void OnUpgadeHelm()
     {
-        UpgradeHelmSuccess();
-        return;
+        //UpgradeHelmSuccess();
+        //return;
         var config = GlobalConfigs.UpgradeShipConfig;
         if (UserData.Instance.Beri < config.GetHelmNextLevelPrice(UserData.Instance.HelmLevel))
         {

@@ -112,8 +112,6 @@ public class CombatAction
     public bool haveCrit;
     public bool haveDodge;
 
-
-
     public List<MapStatusItem> mapStatus;
 
     public GameEndData gameEndData;
@@ -170,7 +168,7 @@ public class GameEndData
     public int hard_bonus;
     public int team_bonus;
     public byte team_win;
-
+    public Rewards bonus;
     public GameEndData(ISFSObject packet)
     {
         ISFSObject detail = packet.GetSFSObject("detail");
@@ -181,11 +179,25 @@ public class GameEndData
         hard_bonus = detail.GetInt("hard_bonus");
         team_bonus = detail.GetInt("team_bonus");
         team_win = detail.GetByte("team_win");
+        bonus = new Rewards(detail.GetSFSObject("bonus"));
     }
-
-    
 }
-
+public class Rewards
+{
+    public string type;
+    public string meta;
+    public long amount;
+    public Rewards(ISFSObject packet)
+    {
+        Read(packet);
+    }
+    public void Read(ISFSObject packet)
+    {
+        type = packet.GetUtfString("type");
+        meta = packet.GetUtfString("meta");
+        amount = packet.GetLong("amount");
+    }
+}
 public class GameEndPvPData : GameEndData
 {
     public int elo_delta;
