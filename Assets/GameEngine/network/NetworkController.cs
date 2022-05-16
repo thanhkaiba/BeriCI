@@ -603,6 +603,17 @@ namespace Piratera.Network
                         }
                         break;
                     }
+                case SFSAction.USER_LIST_ARENA_REWARD:
+                    {
+                        SceneTransition.Instance.ShowWaiting(false);
+                        if (errorCode == SFSErrorCode.SUCCESS)
+                        {
+                            var gui = GuiManager.Instance.AddGui("ArenaReceiveRewards/GuiArenaReceiveRewards");
+                            var listRewards = packet.GetSFSArray("rewards");
+                            if (listRewards.Count > 0) gui.GetComponent<GuiArenaReceiveRewards>().ShowGift(listRewards);
+                        }
+                        break;
+                    }
             }
             if (errorCode != SFSErrorCode.SUCCESS)
             {

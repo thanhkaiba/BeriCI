@@ -158,7 +158,6 @@ namespace Piratera.Config
                                         meta.RequestDowload();
                                     }
                                 }
-
                             }
                             CheckSuccess();
 

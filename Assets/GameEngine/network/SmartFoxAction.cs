@@ -52,6 +52,8 @@
         USER_LIST_AVT = 202,
         USER_CHANGE_AVT = 203,
 
+        USER_LIST_ARENA_REWARD = 304,
+
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat
         CHEAT_SAILOR = 101,

@@ -110,6 +110,8 @@ public class LobbyUI : MonoBehaviour
         areaTime.text = startTime.ToString("dd/MM")
             + " - " + endTime.ToString("dd/MM");
         GameObject.Find("ButtonShip").SetActive(UserData.Instance.PVECount > 10);
+
+        NetworkController.Send(SFSAction.USER_LIST_ARENA_REWARD);
     }
     void UpdateMaintain()
     {
