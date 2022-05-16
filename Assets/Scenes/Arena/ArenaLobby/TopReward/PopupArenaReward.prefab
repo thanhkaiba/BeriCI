@@ -365,6 +365,7 @@ MonoBehaviour:
   itemBeri: {fileID: 8604007864517539155, guid: 9f8c47b6e94e02249a3f7a61d58060a1,
     type: 3}
   content: {fileID: 4674405399301493429}
+  title: {fileID: 8569580199275723702}
 --- !u!1 &6455339871506640776
 GameObject:
   m_ObjectHideFlags: 0

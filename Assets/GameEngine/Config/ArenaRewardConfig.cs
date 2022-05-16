@@ -20,7 +20,7 @@ public class ArenaRewardsConfig
     public Season GetSeason(int seasonId)
     {
         return list.Find(i => {
-            return i.season_index == seasonId;
+            return i.season_index == seasonId%2;
         });
     }
 }

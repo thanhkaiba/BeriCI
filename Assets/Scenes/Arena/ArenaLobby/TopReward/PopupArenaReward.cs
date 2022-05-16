@@ -10,9 +10,13 @@ public class PopupArenaReward : MonoBehaviour
     private GameObject cellTop, itemAvt, itemSailorPiece, itemPosterPiece, itemBeri;
     [SerializeField]
     private Transform content;
+    [SerializeField]
+    private Text title;
     private void Start()
     {
-        var config = GlobalConfigs.ArenaRewards.GetSeason(0);
+        int ssId = PvPData.Instance.SeasonId;
+        title.text = $"Season {ssId} - rewards";
+        var config = GlobalConfigs.ArenaRewards.GetSeason(ssId);
         for (int i = 0; i < config.top_rewards.Length; i++)
         {
             var data = config.top_rewards[i];
@@ -27,6 +31,19 @@ public class PopupArenaReward : MonoBehaviour
                 if (i > 4) textPosition.fontSize = 48;
                 else if (i > 5) textPosition.fontSize = 42;
             }
+            var slot_top = cell.transform.FindDeepChild("slot_top").GetComponent<RawImage>();
+            var slot_gift = cell.transform.FindDeepChild("slot_gift").GetComponent<Image>();
+            if (PvPData.Instance.Rank >= data.from && PvPData.Instance.Rank <= data.to)
+            {
+                slot_top.color = new Color32(255, 255, 0, 255);
+                slot_gift.color = new Color32(255, 255, 0, 255);
+            }
+            else
+            {
+                slot_top.color = new Color32(255, 255, 255, 255);
+                slot_gift.color = new Color32(255, 255, 255, 255);
+            }
+
             for (int j = 0; j < data.list.Length; j++)
             {
                 var stringReward = data.list[j];
@@ -38,21 +55,19 @@ public class PopupArenaReward : MonoBehaviour
                 }
                 else if (stringReward.StartsWith("piece_sailor"))
                 {
-                    var split1 = stringReward.Split(":");
-                    var split2 = split1[0].Split("_");
+                    var split = stringReward.Split(":");
                     var item = Instantiate(itemSailorPiece, cell.transform);
-                    item.GetComponent<ItemRewards>().ShowSailorPiece(split2[2], int.Parse(split1[1]));
+                    item.GetComponent<ItemRewards>().ShowSailorPiece(split[1], int.Parse(split[2]));
                 }
                 else if (stringReward.StartsWith("piece_poster"))
                 {
-                    var split1 = stringReward.Split(":");
-                    var split2 = split1[0].Split("_");
+                    var split = stringReward.Split(":");
                     var item = Instantiate(itemPosterPiece, cell.transform);
-                    item.GetComponent<ItemRewards>().ShowPosterPiece(split2[2], int.Parse(split1[1]));
+                    item.GetComponent<ItemRewards>().ShowPosterPiece(split[1], int.Parse(split[2]));
                 }
                 else if (stringReward.StartsWith("ava"))
                 {
-                    var split = stringReward.Split("_");
+                    var split = stringReward.Split(":");
                     var item = Instantiate(itemAvt, cell.transform);
                     item.GetComponent<ItemRewards>().ShowAvatar(int.Parse(split[1]));
                 }
