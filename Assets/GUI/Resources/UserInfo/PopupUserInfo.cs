@@ -21,7 +21,7 @@ public class PopupUserInfo : MonoBehaviour
     [SerializeField]
     private UserAvatar avatar;
     [SerializeField]
-    private Image ship, sail;
+    private Image ship, sail, helm;
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
@@ -174,6 +174,9 @@ public class PopupUserInfo : MonoBehaviour
         int bodyImgIdx = sail_level < 4 ? 1 : 2;
         sail.sprite = Resources.Load<Sprite>("UI/UpgradeShip/sail_" + sailImgIdx);
         ship.sprite = Resources.Load<Sprite>("UI/UpgradeShip/ship_" + bodyImgIdx);
+
+        int helmImgIdx = helm_level + 1;
+        helm.sprite = Resources.Load<Sprite>("UI/UpgradeShip/helm/helm_" + helmImgIdx);
     }
     public void ChangeName()
     {

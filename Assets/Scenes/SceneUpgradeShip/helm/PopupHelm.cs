@@ -28,7 +28,7 @@ public class PopupHelm : MonoBehaviour
     }
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.SAIL_UPGRADE)
+        if (action == SFSAction.HELM_UPGRADE)
         {
             SceneTransition.Instance.ShowWaiting(false);
             if (errorCode == SFSErrorCode.SUCCESS)
