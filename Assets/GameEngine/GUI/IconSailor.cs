@@ -109,7 +109,7 @@ public class IconSailor : MonoBehaviour
                 starObj.GetComponent<RectTransform>().SetParent(nodeStar);
                 starObj.SetActive(true);
                 starObj.transform.localScale = new Vector3(0.35f, 0.35f, 1f);
-                starObj.transform.localPosition = new Vector3(0, -30 * (i - 5));
+                starObj.transform.localPosition = new Vector3(-4, -30 * (i - 5) - 4);
             }
         }
         else
@@ -122,7 +122,7 @@ public class IconSailor : MonoBehaviour
                 starObj.GetComponent<RectTransform>().SetParent(nodeStar);
                 starObj.SetActive(true);
                 starObj.transform.localScale = new Vector3(0.45f, 0.45f, 1f);
-                starObj.transform.localPosition = new Vector3(-4, -32 * (i - 8) - 6);
+                starObj.transform.localPosition = new Vector3(-8, -32 * (i - 8) - 8);
             }
         }
     }
