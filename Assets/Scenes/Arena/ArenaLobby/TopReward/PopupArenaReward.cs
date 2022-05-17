@@ -43,35 +43,45 @@ public class PopupArenaReward : MonoBehaviour
                 slot_top.color = new Color32(255, 255, 255, 255);
                 slot_gift.color = new Color32(255, 255, 255, 255);
             }
-
-            for (int j = 0; j < data.list.Length; j++)
+            ShowListRewards(data.list, cell.transform);
+        }
+        {
+            var cell = Instantiate(cellTop, content);
+            ShowListRewards(config.general_rewards, cell.transform);
+            var textPosition = cell.transform.FindDeepChild("textRank").GetComponent<Text>();
+            cell.transform.FindDeepChild("top").gameObject.SetActive(false);
+            textPosition.text = "...";
+            textPosition.fontSize = 42;
+        }
+    }
+    public void ShowListRewards(string[] list, Transform cell)
+    {
+        for (int j = 0; j < list.Length; j++)
+        {
+            var stringReward = list[j];
+            if (stringReward.StartsWith("beri"))
             {
-                var stringReward = data.list[j];
-                if (stringReward.StartsWith("beri"))
-                {
-                    var split = stringReward.Split(":");
-                    var item = Instantiate(itemBeri, cell.transform);
-                    item.GetComponent<ItemRewards>().ShowBeri(int.Parse(split[1]));
-                }
-                else if (stringReward.StartsWith("piece_sailor"))
-                {
-                    var split = stringReward.Split(":");
-                    var item = Instantiate(itemSailorPiece, cell.transform);
-                    item.GetComponent<ItemRewards>().ShowSailorPiece(split[1], int.Parse(split[2]));
-                }
-                else if (stringReward.StartsWith("piece_poster"))
-                {
-                    var split = stringReward.Split(":");
-                    var item = Instantiate(itemPosterPiece, cell.transform);
-                    item.GetComponent<ItemRewards>().ShowPosterPiece(split[1], int.Parse(split[2]));
-                }
-                else if (stringReward.StartsWith("ava"))
-                {
-                    var split = stringReward.Split(":");
-                    var item = Instantiate(itemAvt, cell.transform);
-                    item.GetComponent<ItemRewards>().ShowAvatar(int.Parse(split[1]));
-                }
-                //ItemRewards
+                var split = stringReward.Split(":");
+                var item = Instantiate(itemBeri, cell);
+                item.GetComponent<ItemRewards>().ShowBeri(int.Parse(split[1]));
+            }
+            else if (stringReward.StartsWith("piece_sailor"))
+            {
+                var split = stringReward.Split(":");
+                var item = Instantiate(itemSailorPiece, cell);
+                item.GetComponent<ItemRewards>().ShowSailorPiece(split[1], int.Parse(split[2]));
+            }
+            else if (stringReward.StartsWith("piece_poster"))
+            {
+                var split = stringReward.Split(":");
+                var item = Instantiate(itemPosterPiece, cell);
+                item.GetComponent<ItemRewards>().ShowPosterPiece(split[1], int.Parse(split[2]));
+            }
+            else if (stringReward.StartsWith("ava"))
+            {
+                var split = stringReward.Split(":");
+                var item = Instantiate(itemAvt, cell);
+                item.GetComponent<ItemRewards>().ShowAvatar(int.Parse(split[1]));
             }
         }
     }

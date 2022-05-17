@@ -83,8 +83,11 @@ public class PopupHelm : MonoBehaviour
     }
     private void UpgradeHelmSuccess()
     {
+        int lastCap = PvPData.Instance.GetTicketCap();
         UserData.Instance.HelmLevel++;
         PresentHelmWithLevel(UserData.Instance.HelmLevel);
+        int curCap = PvPData.Instance.GetTicketCap();
+        PvPData.Instance.Ticket += curCap - lastCap;
         UpdateAllStatus();
     }
     private void PresentHelmWithLevel(int level)

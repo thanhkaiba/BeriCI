@@ -15,7 +15,6 @@ public class GuiArenaReceiveRewards : MonoBehaviour
     private GameObject itemAvt, itemSailorPiece, itemPosterPiece, itemBeri;
     public void ShowGift(ISFSArray data)
     {
-        var config = GlobalConfigs.ArenaRewards.GetSeason(0);
         var length = data.Count;
         int row_num = (int)Mathf.Ceil(length / 5);
         int idx = 0;
