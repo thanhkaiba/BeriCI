@@ -1,4 +1,5 @@
 using Piratera.Config;
+using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections;
@@ -61,6 +62,7 @@ public class GuiArenaReceiveRewards : MonoBehaviour
     }
     public void ClickReceive()
     {
+        NetworkController.Send(SFSAction.USER_CLAIM_ARENA_REWARD);
         Close();
     }
     public void Close()

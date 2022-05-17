@@ -53,6 +53,7 @@
         USER_CHANGE_AVT = 203,
 
         USER_LIST_ARENA_REWARD = 304,
+        USER_CLAIM_ARENA_REWARD = 305,
 
 #if PIRATERA_DEV || PIRATERA_QC
         // cheat

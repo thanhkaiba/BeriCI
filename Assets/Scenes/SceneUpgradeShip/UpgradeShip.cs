@@ -50,7 +50,7 @@ public class UpgradeShip : MonoBehaviour
                 UpgradeSailSuccess();
             } else
             {
-
+                GuiManager.Instance.ShowPopupNotification("An error happened: " + errorCode);
             }
         }
     }
@@ -156,5 +156,10 @@ public class UpgradeShip : MonoBehaviour
     private void OnBeriChanged(long oldValue, long newValue)
     {
         DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x, 6));
+    }
+    private void Update()
+    {
+        int helmLevel = UserData.Instance.HelmLevel;
+        textHelmLevel.text = "level " + (helmLevel + 1);
     }
 }

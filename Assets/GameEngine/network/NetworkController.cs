@@ -608,9 +608,13 @@ namespace Piratera.Network
                         SceneTransition.Instance.ShowWaiting(false);
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
-                            var gui = GuiManager.Instance.AddGui("ArenaReceiveRewards/GuiArenaReceiveRewards");
                             var listRewards = packet.GetSFSArray("rewards");
-                            if (listRewards.Count > 0) gui.GetComponent<GuiArenaReceiveRewards>().ShowGift(listRewards);
+                            if (listRewards.Count > 0)
+                            {
+                                var gui = GuiManager.Instance.AddGui("ArenaReceiveRewards/GuiArenaReceiveRewards");
+                                gui.GetComponent<GuiArenaReceiveRewards>().ShowGift(listRewards);
+                            }
+                                
                         }
                         break;
                     }
