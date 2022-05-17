@@ -21,6 +21,8 @@ namespace Piratera.GUI
         private SkeletonGraphic anim;
         [SerializeField]
         private ItemRewards sailor_piece;
+        [SerializeField]
+        private GameObject panel_gift;
 
         public bool isWatchReplay = false;
 
@@ -114,6 +116,7 @@ namespace Piratera.GUI
         }
         private void ShowBonus(Rewards rewards)
         {
+            panel_gift.SetActive(true);
             if (rewards.type.Equals("PIECE_SAILOR"))
             {
                 sailor_piece.gameObject.SetActive(true);
@@ -121,6 +124,8 @@ namespace Piratera.GUI
                 return;
             }
             sailor_piece.gameObject.SetActive(false);
+            panel_gift.SetActive(false);
+            textElo.transform.position -= new Vector3(0, 100, 0);
         }
     }
 }

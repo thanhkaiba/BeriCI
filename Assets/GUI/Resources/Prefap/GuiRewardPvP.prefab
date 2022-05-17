@@ -176,6 +176,7 @@ MonoBehaviour:
   coin: {fileID: 2663988508363445501}
   anim: {fileID: 9165214087401290714}
   sailor_piece: {fileID: 776438128288677030}
+  panel_gift: {fileID: 1456789541962607555}
   isWatchReplay: 0
 --- !u!1 &1456789541962607555
 GameObject:
