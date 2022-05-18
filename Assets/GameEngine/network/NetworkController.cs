@@ -609,6 +609,7 @@ namespace Piratera.Network
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
                             var listRewards = packet.GetSFSArray("rewards");
+                            Debug.Log("listRewards.Count: " + listRewards.Count);
                             if (listRewards.Count > 0)
                             {
                                 var gui = GuiManager.Instance.AddGui("ArenaReceiveRewards/GuiArenaReceiveRewards");
