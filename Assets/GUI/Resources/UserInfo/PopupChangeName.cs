@@ -22,7 +22,7 @@ public class PopupChangeName : MonoBehaviour
     public Transform background;
     private void Start()
     {
-        inputField.text = UserData.Instance.Username.ToLower();
+        inputField.text = UserData.Instance.Username;
         textCost.text = cost.ToString("N0");
         textTotalBeri.text = "You have " + UserData.Instance.Beri.ToString("N0") + " beri";
         errorText.text = "";
@@ -33,7 +33,7 @@ public class PopupChangeName : MonoBehaviour
         Appear();
         inputField.onValueChanged.AddListener(text =>
         {
-            inputField.text = text.ToLower();
+            inputField.text = text;
         });
     }
     private void Appear()
@@ -82,7 +82,7 @@ public class PopupChangeName : MonoBehaviour
     }
     public void ClickBuy()
     {
-        var text = inputField.text.Trim().ToLower();
+        var text = inputField.text.Trim();
         inputField.text = text;
         if (UserData.Instance.Beri < cost)
             errorText.text = "You do not have enough beri";

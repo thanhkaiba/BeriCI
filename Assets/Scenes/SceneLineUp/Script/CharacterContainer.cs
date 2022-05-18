@@ -20,13 +20,13 @@ public class CharacterContainer : BaseCharacterContainer
     List<SailorModel> GetListSailor()
     {
         List<SailorModel> result = new List<SailorModel>();
-        bool isShowAll = PlayerPrefs.GetInt("is_show_all", 0) == 1;
+        bool isShowFav = PlayerPrefs.GetInt("is_show_fav", 0) == 1;
         foreach (SailorModel model in CrewData.Instance.Sailors)
         {
             if (!CrewData.Instance.FightingTeam.IsInSquad(model.id))
             {
-                if (isShowAll) result.Add(model);
-                else if (!GameUtils.IsSailorIdInListHide(model.id)) result.Add(model);
+                if (!isShowFav) result.Add(model);
+                else if (GameUtils.IsSailorFavorite(model.id)) result.Add(model);
             }   
         }
         result.Sort();

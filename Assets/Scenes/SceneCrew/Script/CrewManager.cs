@@ -195,19 +195,7 @@ public class CrewManager : MonoBehaviour
         }
         else furySlider.gameObject.SetActive(false);
         UpdateRankIconPosition();
-
-        //string listNotShow = PlayerPrefs.GetString("listNotShow", "");
-        //var split = listNotShow.Split("|");
-        //toggleShowInLineUp.isOn = true;
-        //for (int i = 0; i < split.Length; i++)
-        //{
-        //    if (model.id == split[i])
-        //    {
-        //        toggleShowInLineUp.isOn = false;
-        //        break;
-        //    }
-        //}
-        toggleShowInLineUp.isOn = !GameUtils.IsSailorIdInListHide(model.id);
+        toggleShowInLineUp.isOn = GameUtils.IsSailorFavorite(model.id);
     }
     public void BackToLobby()
     {
@@ -258,7 +246,7 @@ public class CrewManager : MonoBehaviour
     public void OnToggleChange()
     {
         toggleShowInLineUp.isOn = !toggleShowInLineUp.isOn;
-        GameUtils.ToggleShowHideSailor(curModel.id, toggleShowInLineUp.isOn);
+        GameUtils.ToggleFavoriteSailor(curModel.id, toggleShowInLineUp.isOn);
     }
 }
 

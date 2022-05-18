@@ -341,23 +341,23 @@ public class GameUtils : UnityEngine.Object
     public static List<ClassBonusItem> lineUpSynergy = null;
     public static List<ClassBonusItem> oppLineUpSynergy = null;
 
-    public static bool IsSailorIdInListHide(string id)
+    public static bool IsSailorFavorite(string id)
     {
-        string listNotShow = PlayerPrefs.GetString("listNotShow", "");
-        var split = listNotShow.Split("|");
+        string listFavorite = PlayerPrefs.GetString("listFavorite", "");
+        var split = listFavorite.Split("|");
         for (int i = 0; i < split.Length; i++)
         {
             if (split[i].Equals(id)) return true;
         }
         return false;
     }
-    public static void ToggleShowHideSailor(string id, bool isShow)
+    public static void ToggleFavoriteSailor(string id, bool isFav)
     {
-        string listNotShow = PlayerPrefs.GetString("listNotShow", "");
-        var split = listNotShow.Split("|");
+        string listFavorite = PlayerPrefs.GetString("listFavorite", "");
+        var split = listFavorite.Split("|");
         split = Filter(split, id);
-        if (!isShow) split = split.Concat(new string[] { id }).ToArray();
-        PlayerPrefs.SetString("listNotShow", string.Join("|", split));
+        if (isFav) split = split.Concat(new string[] { id }).ToArray();
+        PlayerPrefs.SetString("listFavorite", string.Join("|", split));
     }
     public static string[] Filter(string[] input, string s)
     {

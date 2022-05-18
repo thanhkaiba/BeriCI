@@ -7,10 +7,10 @@ public class ToggleShowAll : MonoBehaviour
 {
     void Start()
     {
-        GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("is_show_all", 0) == 1;
+        GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("is_show_fav", 0) == 1;
     }
     public void OnChange()
     {
-        PlayerPrefs.SetInt("is_show_all", GetComponent<Toggle>().isOn ? 1 : 0);
+        PlayerPrefs.SetInt("is_show_fav", GetComponent<Toggle>().isOn ? 1 : 0);
     }
 }
