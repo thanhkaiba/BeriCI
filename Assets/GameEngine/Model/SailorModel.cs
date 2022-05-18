@@ -88,35 +88,52 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
 
     int IComparable<SailorModel>.CompareTo(SailorModel other)
     {
-        //if (IsTrial()) return 1;
-        if (star == other.star)
+        int sortType = PlayerPrefs.GetInt("sort_type", 0);
+        switch(sortType)
         {
-            if (config_stats.rank.Equals(other.config_stats.rank))
-            {
-                if (level == other.level)
-                {
-                    if (name.Equals(other.name))
-                    {
-                        return quality.CompareTo(other.quality);
-                    }
+            case 0: // rank
+                if (config_stats.rank.Equals(other.config_stats.rank))
+                    if (star == other.star)
+                        if (level == other.level)
+                            if (name.Equals(other.name))
+                                return quality.CompareTo(other.quality);
+                            else
+                                return name.CompareTo(other.name);
+                        else
+                            return level.CompareTo(other.level);
                     else
-                    {
-                        return name.CompareTo(other.name);
-                    }
-                }
+                        return star.CompareTo(other.star);
                 else
-                {
+                    return config_stats.rank.CompareTo(other.config_stats.rank);
+            case 1: // star
+                if (star == other.star)
+                    if (config_stats.rank.Equals(other.config_stats.rank))
+                        if (level == other.level)
+                            if (name.Equals(other.name))
+                                return quality.CompareTo(other.quality);
+                            else
+                                return name.CompareTo(other.name);
+                        else
+                            return level.CompareTo(other.level);
+                    else
+                        return config_stats.rank.CompareTo(other.config_stats.rank);
+                else
+                    return star.CompareTo(other.star);
+            default: // level
+                if (level == other.level)
+                    if (star == other.star)
+                        if (config_stats.rank.Equals(other.config_stats.rank))
+                            if (name.Equals(other.name))
+                                return quality.CompareTo(other.quality);
+                            else
+                                return name.CompareTo(other.name);
+                        else
+                            return config_stats.rank.CompareTo(other.config_stats.rank);
+                    else
+                        return star.CompareTo(other.star);
+                else
                     return level.CompareTo(other.level);
-                }
-            }
-            else
-            {
-                return config_stats.rank.CompareTo(other.config_stats.rank);
-            }
         }
-        else
-        {
-            return star.CompareTo(other.star);
-        }
+        //if (IsTrial()) return 1;
     }
 }

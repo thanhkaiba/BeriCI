@@ -339,4 +339,9 @@ public class GameUtils : UnityEngine.Object
     }
     public static List<ClassBonusItem> lineUpSynergy = null;
     public static List<ClassBonusItem> oppLineUpSynergy = null;
+
+    //public List<SailorModel> SortSailorModel(List<SailorModel> l, int sortType)
+    //{
+    //    List<SailorModel>
+    //}
 }

@@ -61,6 +61,7 @@ public class CrewManager : MonoBehaviour
         buttonCheat.SetActive(false);
 #endif
         if (TutorialMgr.Instance.CheckTutStartUp()) ShowCrewTut1();
+        ShowTextSortType();
     }
 
     private void OnSailorInfoChanged(SailorModel model)
@@ -75,6 +76,8 @@ public class CrewManager : MonoBehaviour
     void RenderListSubSailor()
     {
         sailors = CrewData.Instance.Sailors;
+        sailors.Sort();
+        sailors.Reverse();
         listIcon = new List<IconSailor>();
 
         foreach (Transform child in listSailors)
@@ -95,13 +98,16 @@ public class CrewManager : MonoBehaviour
             icon.PresentData(sailors[i]);
             listIcon.Add(icon);
         }
-        if (sailors.Count > 0)
+        if (sailors.Count > 0 && curModel == null)
         {
             SetData(sailors[0]);
             listIcon[0].ShowFocus(true);
         }
     }
-
+    private void FocusSailor(SailorModel s)
+    {
+        listIcon.ForEach(_icon => _icon.ShowFocus(s == _icon.sailorModel));
+    }
     public void SetData(SailorModel model)
     {
         curModel = model;
@@ -229,5 +235,48 @@ public class CrewManager : MonoBehaviour
         popup.sailorId = curModel.id;
 #endif
     }
-
+    public void SortListSailor()
+    {
+        int sortType = PlayerPrefs.GetInt("sort_type", 0);
+        sortType = (sortType + 1) % 3;
+        PlayerPrefs.SetInt("sort_type", sortType);
+        RenderListSubSailor();
+        FocusSailor(curModel);
+        ShowTextSortType();
+    }
+    private void ShowTextSortType()
+    {
+        int sortType = PlayerPrefs.GetInt("sort_type", 0);
+        var text = GameObject.Find("textSort").GetComponent<Text>();
+        switch (sortType)
+        {
+            case 0:
+                text.text = "Rank";
+                break;
+            case 1:
+                text.text = "Star";
+                break;
+            default:
+                text.text = "Level";
+                break;
+        }
+    }
 }
+
+//int sortType = UserData.Instance.ChangeSortType();
+//var text = GameObject.Find("textSort").GetComponent<Text>();
+
+//switch (sortType)
+//{
+//    case 0:
+//        text.text = "Rank";
+//        break;
+//    case 1:
+//        text.text = "Star";
+//        break;
+//    default:
+//        text.text = "Level";
+//        break;
+//}
+//PlayerPrefs.SetInt("sort_type", sortType);
+//RenderListSubSailor();
