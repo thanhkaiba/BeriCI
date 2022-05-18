@@ -357,7 +357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Show All
+  m_Text: Favorite
 --- !u!114 &5333689768809163541
 MonoBehaviour:
   m_ObjectHideFlags: 0
