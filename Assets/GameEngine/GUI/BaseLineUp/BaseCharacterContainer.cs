@@ -19,7 +19,7 @@ public abstract class BaseCharacterContainer : MonoBehaviour
         RenderListSubSailor();
     }
    
-    protected void RenderListSubSailor()
+    public void RenderListSubSailor()
     {
         substituteSailors = getSubstituteSailors();
         int childCount = transform.childCount;

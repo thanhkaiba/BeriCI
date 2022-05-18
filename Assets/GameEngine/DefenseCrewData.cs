@@ -1,6 +1,7 @@
 using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class DefenseCrewData
 {
@@ -100,11 +101,13 @@ public class DefenseCrewData
     public List<SailorModel> GetSubstituteSailors()
     {
         List<SailorModel> result = new();
+        bool isShowAll = PlayerPrefs.GetInt("is_show_all", 0) == 1;
         foreach (SailorModel model in CrewData.Instance.Sailors)
         {
             if (!FightingTeam.IsInSquad(model.id) && !model.IsTrial())
             {
-                result.Add(model);
+                if (isShowAll) result.Add(model);
+                else if (!GameUtils.IsSailorIdInListHide(model.id)) result.Add(model);
             }
         }
         result.Sort();

@@ -2,6 +2,7 @@ using Piratera.Cheat;
 using Piratera.Config;
 using Piratera.GUI;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -45,6 +46,8 @@ public class CrewManager : MonoBehaviour
     private Text TextTeamBonus;
     [SerializeField]
     private Text TextLockTrade;
+    [SerializeField]
+    private Toggle toggleShowInLineUp;
 
     private Transform canvas;
 
@@ -61,7 +64,6 @@ public class CrewManager : MonoBehaviour
         buttonCheat.SetActive(false);
 #endif
         if (TutorialMgr.Instance.CheckTutStartUp()) ShowCrewTut1();
-        ShowTextSortType();
     }
 
     private void OnSailorInfoChanged(SailorModel model)
@@ -193,6 +195,19 @@ public class CrewManager : MonoBehaviour
         }
         else furySlider.gameObject.SetActive(false);
         UpdateRankIconPosition();
+
+        //string listNotShow = PlayerPrefs.GetString("listNotShow", "");
+        //var split = listNotShow.Split("|");
+        //toggleShowInLineUp.isOn = true;
+        //for (int i = 0; i < split.Length; i++)
+        //{
+        //    if (model.id == split[i])
+        //    {
+        //        toggleShowInLineUp.isOn = false;
+        //        break;
+        //    }
+        //}
+        toggleShowInLineUp.isOn = !GameUtils.IsSailorIdInListHide(model.id);
     }
     public void BackToLobby()
     {
@@ -237,29 +252,13 @@ public class CrewManager : MonoBehaviour
     }
     public void SortListSailor()
     {
-        int sortType = PlayerPrefs.GetInt("sort_type", 0);
-        sortType = (sortType + 1) % 3;
-        PlayerPrefs.SetInt("sort_type", sortType);
         RenderListSubSailor();
         FocusSailor(curModel);
-        ShowTextSortType();
     }
-    private void ShowTextSortType()
+    public void OnToggleChange()
     {
-        int sortType = PlayerPrefs.GetInt("sort_type", 0);
-        var text = GameObject.Find("textSort").GetComponent<Text>();
-        switch (sortType)
-        {
-            case 0:
-                text.text = "Rank";
-                break;
-            case 1:
-                text.text = "Star";
-                break;
-            default:
-                text.text = "Level";
-                break;
-        }
+        toggleShowInLineUp.isOn = !toggleShowInLineUp.isOn;
+        GameUtils.ToggleShowHideSailor(curModel.id, toggleShowInLineUp.isOn);
     }
 }
 

@@ -6,6 +6,7 @@ using Piratera.Sound;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameUtils : UnityEngine.Object
@@ -340,8 +341,26 @@ public class GameUtils : UnityEngine.Object
     public static List<ClassBonusItem> lineUpSynergy = null;
     public static List<ClassBonusItem> oppLineUpSynergy = null;
 
-    //public List<SailorModel> SortSailorModel(List<SailorModel> l, int sortType)
-    //{
-    //    List<SailorModel>
-    //}
+    public static bool IsSailorIdInListHide(string id)
+    {
+        string listNotShow = PlayerPrefs.GetString("listNotShow", "");
+        var split = listNotShow.Split("|");
+        var result = Array.Find(split, _id => _id.Equals(id));
+        return result != null;
+    }
+    public static void ToggleShowHideSailor(string id, bool isShow)
+    {
+        string listNotShow = PlayerPrefs.GetString("listNotShow", "");
+        var split = listNotShow.Split("|");
+        split = Filter(split, id);
+        if (!isShow) split = split.Concat(new string[] { id }).ToArray();
+        PlayerPrefs.SetString("listNotShow", string.Join("|", split));
+    }
+    public static string[] Filter(string[] input, string s)
+    {
+        List<string> result = new List<string>();
+        foreach (string c in input)
+            if (!c.Equals(s)) result.Add(c);
+        return result.ToArray();
+    }
 }
