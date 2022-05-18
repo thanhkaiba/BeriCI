@@ -49,7 +49,7 @@ public class SceneLineUpDefenseUI : MonoBehaviour
     {
         if (PvPData.Instance.DefenseCrew.IsFightingLineEmpty())
         {
-            GuiManager.Instance.ShowPopupNotification("You must select at least one fighter");
+            GuiManager.Instance.ShowPopupNotification("You must select at least one sailor");
             return;
         }
         PvPData.Instance.DefenseCrew.OnConfirmSquad();

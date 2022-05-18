@@ -10,6 +10,8 @@ using UnityEngine.UI;
 public class ScenePickTeamBattleUI : MonoBehaviour
 {
     [SerializeField]
+    private Text textTeamBonus;
+    [SerializeField]
     private Text textCountDown;
     [SerializeField]
     private Slider sliderCountDown;
@@ -37,8 +39,11 @@ public class ScenePickTeamBattleUI : MonoBehaviour
     {
         Input.multiTouchEnabled = false;
         NetworkController.Listen(OnReceiveServerAction);
-    }
 
+        textTeamBonus.text = "Your team bonus: " + GameUtils.GetTeamBonus(TeamCombatPrepareData.Instance.YourFightingLine).ToString("N0");
+        GameEvent.PrepareSquadChanged.AddListener(() =>
+            textTeamBonus.text = "Your team bonus: " + GameUtils.GetTeamBonus(TeamCombatPrepareData.Instance.YourFightingLine).ToString("N0"));
+    }
 
     private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
     {
