@@ -125,7 +125,7 @@ namespace Piratera.GUI
             }
             sailor_piece.gameObject.SetActive(false);
             panel_gift.SetActive(false);
-            textElo.transform.position -= new Vector3(0, 100, 0);
+            textElo.transform.position -= new Vector3(0, textElo.rectTransform.rect.height/4, 0);
         }
     }
 }
