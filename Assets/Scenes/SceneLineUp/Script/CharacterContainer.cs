@@ -21,6 +21,7 @@ public class CharacterContainer : BaseCharacterContainer
     {
         List<SailorModel> result = new List<SailorModel>();
         bool isShowFav = PlayerPrefs.GetInt("is_show_fav", 0) == 1;
+        Debug.Log("isShowFav: " + isShowFav);
         foreach (SailorModel model in CrewData.Instance.Sailors)
         {
             if (!CrewData.Instance.FightingTeam.IsInSquad(model.id))

@@ -19,6 +19,6 @@ public class ToggleShowAll : MonoBehaviour
     }
     public void OnChange()
     {
-        PlayerPrefs.SetInt("is_show_fav" + UserData.Instance.UID, GetComponent<Toggle>().isOn ? 1 : 0);
+        PlayerPrefs.SetInt("is_show_fav", GetComponent<Toggle>().isOn ? 1 : 0);
     }
 }
