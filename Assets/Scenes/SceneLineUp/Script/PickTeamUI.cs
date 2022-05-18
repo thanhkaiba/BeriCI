@@ -12,7 +12,7 @@ public class PickTeamUI : MonoBehaviour
 {
     [Header("Slot Capacity")]
     [SerializeField]
-    private Text TextMaxCapacity;
+    private Text TextMaxCapacity, textTeamBonus;
     [SerializeField]
     private Button ButtonBuySlot;
     [SerializeField]
@@ -31,6 +31,9 @@ public class PickTeamUI : MonoBehaviour
         {
             ShowNPCTutOpenSlot();
         }
+        textTeamBonus.text = "Your team bonus: " + GameUtils.GetTeamBonus(CrewData.Instance.FightingTeam);
+        GameEvent.SquadChanged.AddListener(() =>
+            textTeamBonus.text = "Your team bonus: " + GameUtils.GetTeamBonus(CrewData.Instance.FightingTeam));
     }
     void Awake()
     {

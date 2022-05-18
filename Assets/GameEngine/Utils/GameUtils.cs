@@ -345,8 +345,11 @@ public class GameUtils : UnityEngine.Object
     {
         string listNotShow = PlayerPrefs.GetString("listNotShow", "");
         var split = listNotShow.Split("|");
-        var result = Array.Find(split, _id => _id.Equals(id));
-        return result != null;
+        for (int i = 0; i < split.Length; i++)
+        {
+            if (split[i].Equals(id)) return true;
+        }
+        return false;
     }
     public static void ToggleShowHideSailor(string id, bool isShow)
     {
@@ -362,5 +365,21 @@ public class GameUtils : UnityEngine.Object
         foreach (string c in input)
             if (!c.Equals(s)) result.Add(c);
         return result.ToArray();
+    }
+    public static int GetTeamBonus(FightingLine fgl)
+    {
+        int total = 0;
+        fgl.GetListId().ForEach(id =>
+        {
+            var model = CrewData.Instance.GetSailorModel(id);
+            if (model != null)
+            {
+                bool isTrial = model.id.StartsWith("trial-");
+                var maxEF = isTrial ? GlobalConfigs.SailorGeneral.TRIAL_EARNABLE_FIGHT : GlobalConfigs.SailorGeneral.EARNABLE_FIGHT;
+                var EF_remain = (maxEF - model.pve_count);
+                if (EF_remain > 0) total += GlobalConfigs.PvE.sailor_rank_bonus[(int)model.config_stats.rank] * (int)Math.Pow(2, model.star);
+            }
+        });
+        return total;
     }
 }

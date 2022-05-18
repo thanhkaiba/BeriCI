@@ -25,7 +25,7 @@ public abstract class BaseCharacterContainer : MonoBehaviour
         int childCount = transform.childCount;
         if (substituteSailors.Count < childCount)
         {
-            for (int i = substituteSailors.Count + 1; i < childCount; i++)
+            for (int i = substituteSailors.Count; i < childCount; i++)
             {
                 Destroy(transform.GetChild(i).gameObject);
             }

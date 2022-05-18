@@ -234,7 +234,6 @@ public class FightingLine
             }
         }
         return fighting_lines;
-
     }
 
     public FightingLine NewFromSFSObject(ISFSArray sFSArray)
@@ -255,7 +254,6 @@ public class FightingLine
        
         return this;
     }
-
     public void Clean()
     {
         for (short i = 0; i < MAX_SQUAD_SLOT; i++)
@@ -263,5 +261,15 @@ public class FightingLine
             slots[i] = "";
         }
         NumSlot = -1;
+    }
+    public List<string> GetListId()
+    {
+        List<string> result = new List<string>();
+        foreach (KeyValuePair<short, string> slot in slots)
+        {
+            if (slot.Value != "" && slot.Value != null)
+                result.Add(slot.Value);
+        }
+        return result;
     }
 }
