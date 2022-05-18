@@ -231,7 +231,7 @@ public class GameUtils : UnityEngine.Object
                 float power;
                 if (stats != null) power = stats.Power;
                 else power = model.config_stats.GetPower(model.level, model.quality, model.star);
-                oriText = oriText.Replace(subString, "" + Mathf.Round(power));
+                oriText = oriText.Replace(subString, "" + Mathf.Round(power).ToString("N0"));
             }
             else if (split[0] == "p")
             {
@@ -242,7 +242,7 @@ public class GameUtils : UnityEngine.Object
                 float param = 0;
                 if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
                 else param = model.config_stats.skill_params[skillParamIndex];
-                oriText = oriText.Replace(subString, "" + Mathf.Round(power * param));
+                oriText = oriText.Replace(subString, "" + Mathf.Round(power * param).ToString("N0"));
             }
             else if (split[0] == "h")
             {
@@ -253,7 +253,7 @@ public class GameUtils : UnityEngine.Object
                 float param = 0;
                 if (skillParamIndex >= model.config_stats.skill_params.Count) param = 1;
                 else param = model.config_stats.skill_params[skillParamIndex];
-                oriText = oriText.Replace(subString, "" + Mathf.Round(health * param));
+                oriText = oriText.Replace(subString, "" + Mathf.Round(health * param).ToString("N0"));
             }
             else if (split[0] == "per")
             {

@@ -150,11 +150,11 @@ public class TooltipSailorInfo : MonoBehaviour
         shield.rectTransform.sizeDelta = new Vector2(cs.Shield / realMax * maxWidth, curY);
 
         healthSlider.transform.Find("Text").GetComponent<Text>().text =
-            Mathf.Round(cs.CurHealth).ToString()
-            + "/" + Mathf.Round(cs.MaxHealth).ToString()
-            + (cs.Shield > 0.5f ? " | " + Mathf.Round(cs.Shield).ToString() : "");
+            Mathf.Round(cs.CurHealth).ToString("N0")
+            + "/" + Mathf.Round(cs.MaxHealth).ToString("N0")
+            + (cs.Shield > 0.5f ? " | " + Mathf.Round(cs.Shield).ToString("N0") : "");
         
-        textPower.text = Mathf.Round(cs.Power).ToString();
+        textPower.text = Mathf.Round(cs.Power).ToString("N0");
         textSpeed.text = Mathf.Round(cs.Speed).ToString();
         textArmor.text = Mathf.Round(cs.Armor).ToString();
         textMagicResist.text = Mathf.Round(cs.MagicResist).ToString();

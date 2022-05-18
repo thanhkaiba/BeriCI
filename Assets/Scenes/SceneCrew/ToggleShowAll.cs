@@ -5,12 +5,20 @@ using UnityEngine.UI;
 
 public class ToggleShowAll : MonoBehaviour
 {
-    void Start()
+    public Toggle toggle;
+    void Awake()
     {
-        GetComponent<Toggle>().isOn = PlayerPrefs.GetInt("is_show_fav", 0) == 1;
+        try
+        {
+            toggle.isOn = PlayerPrefs.GetInt("is_show_fav" + UserData.Instance.UID, 0) == 1;
+        }
+        catch
+        {
+
+        }
     }
     public void OnChange()
     {
-        PlayerPrefs.SetInt("is_show_fav", GetComponent<Toggle>().isOn ? 1 : 0);
+        PlayerPrefs.SetInt("is_show_fav" + UserData.Instance.UID, GetComponent<Toggle>().isOn ? 1 : 0);
     }
 }

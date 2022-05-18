@@ -18,9 +18,9 @@ public class TextDamage : MonoBehaviour
     public void Present(float damage, Vector3 p, bool isCrit, Color color, int size = 40)
     {
         if (damage < 0)
-            GetComponent<Text>().text = "" + (int)damage;
+            GetComponent<Text>().text = ((int)damage).ToString("N0");
         else
-            GetComponent<Text>().text = "+" + (int)damage;
+            GetComponent<Text>().text = "+" + ((int)damage).ToString("N0");
         transform.position = p;
         GetComponent<Text>().fontSize = isCrit ? (int)(size*1.1f) : size;
         GetComponent<Text>().color = color;
