@@ -101,21 +101,31 @@ public class BeiBei : CombatSailor
         seq.Append(transform.DOMove(desPos, 0.7f).SetEase(Ease.OutSine));
         seq.AppendInterval(1.6f);
         StartCoroutine(GameUtils.WaitAndDo(0.8f, () => SoundMgr.PlaySoundSkillSailor(10)));
+        GameObject goFly = null;
         seq.AppendCallback(() =>
         {
             SoundMgr.PlaySound("Audio/Sailor/bomb");
             cs.CurHealth = 0;
             GameEffMgr.Instance.Shake(0.3f, 3.0f);
             for (int i = 0; i < targets.Count; i++) listTargets[i].LoseHealth(new Damage() { magic = _params[i] });
+
+            goFly = Instantiate(Resources.Load<GameObject>("Characters/BeiBei/beibei_fly"));
+            var curPos = transform.position;
+            curPos.z += 0.5f;
+            goFly.transform.position = curPos;
         });
         seq.AppendInterval(5f); 
-        seq.AppendCallback(() => CheckDeath());
+        seq.AppendCallback(() =>
+        {
+            CheckDeath();
+            if (goFly != null) Destroy(goFly);
+        });
         seq.Append(transform.DOMove(oriPos, 0.15f).SetEase(Ease.OutSine));
         return 4.0f;
     }
     private void ShowRandomTalk()
     {
-        var random = MathUtils.RandomInt(0, 5);
+        var random = MathUtils.RandomInt(0, 4);
         string text = "";
         switch(random)
         {

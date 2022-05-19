@@ -154,7 +154,11 @@ public class TooltipSailorInfo : MonoBehaviour
             + "/" + Mathf.Round(cs.MaxHealth).ToString("N0")
             + (cs.Shield > 0.5f ? " | " + Mathf.Round(cs.Shield).ToString("N0") : "");
         
-        textPower.text = Mathf.Round(cs.Power).ToString("N0");
+        if (cs.Power >= 1000)
+        {
+            int afterK = (int)Mathf.Floor((cs.Power % 1000) / 100);
+            textPower.text = Mathf.Floor(cs.Power / 1000) + "k" + (afterK > 0 ? afterK : "");
+        } else textPower.text = Mathf.Round(cs.Power).ToString("N0");
         textSpeed.text = Mathf.Round(cs.Speed).ToString();
         textArmor.text = Mathf.Round(cs.Armor).ToString();
         textMagicResist.text = Mathf.Round(cs.MagicResist).ToString();

@@ -46,7 +46,8 @@ MonoBehaviour:
     present_name: Scrub
     title: The guard of Haisan
     skill_description: Stab his weapon, deal <b><color=#f06060>$p_0@</color></b>
-      to enemy and <b><color=#f06060>$p_1@</color></b> to behind.
+      to enemy and <b><color=#f06060>$p_1@</color></b> to behind, increase $per_2@
+      per each AR.
   - root_name: RowT
     present_name: RowT
     title: Thunder wizard
