@@ -189,18 +189,36 @@ public class SceneArenaUI : MonoBehaviour
     }
     public void OpenSceneLineUp()
     {
-        CrewData.Instance.OnConfirmSquad();
-        SceneManager.LoadScene("SceneLineUpDefense");
+        if (!CheckTimeNewSeason())
+        {
+            CrewData.Instance.OnConfirmSquad();
+            SceneManager.LoadScene("SceneLineUpDefense");
+        }
     }
     public void OnFight()
     {
-        if (PvPData.Instance.Ticket <= 0)
+        var data = PvPData.Instance;
+        if (data.Ticket <= 0)
         {
             GuiManager.Instance.ShowPopupNotification("Not Enough Ticket!");
             return;
         }
-        SceneTransition.Instance.ShowWaiting(true, false);
-        NetworkController.Send(SFSAction.PVP_PLAY);
+        if (!CheckTimeNewSeason())
+        {
+            SceneTransition.Instance.ShowWaiting(true, false);
+            NetworkController.Send(SFSAction.PVP_PLAY);
+        }
+    }
+    private bool CheckTimeNewSeason()
+    {
+        var data = PvPData.Instance;
+        if (Mathf.Abs(GameTimeMgr.GetCurrentTime() - data.StartSeason) < 1000 * 60 * 15
+            || Mathf.Abs(GameTimeMgr.GetCurrentTime() - data.EndSeason) < 1000 * 60 * 15)
+        {
+            GuiManager.Instance.ShowPopupNotification("New season is setting up...\nCan't do it now");
+            return true;
+        }
+        return false;
     }
     private List<Transform> sailors = new List<Transform>();
     private void ShowListSailors()

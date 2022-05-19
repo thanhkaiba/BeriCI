@@ -31,9 +31,9 @@ public class PickTeamUI : MonoBehaviour
         {
             ShowNPCTutOpenSlot();
         }
-        textTeamBonus.text = "Your team bonus: " + GameUtils.GetTeamBonus(CrewData.Instance.FightingTeam).ToString("N0");
+        textTeamBonus.text = "Team bonus: " + GameUtils.GetTeamBonus(CrewData.Instance.FightingTeam).ToString("N0");
         GameEvent.SquadChanged.AddListener(() =>
-            textTeamBonus.text = "Your team bonus: " + GameUtils.GetTeamBonus(CrewData.Instance.FightingTeam).ToString("N0"));
+            textTeamBonus.text = "Team bonus: " + GameUtils.GetTeamBonus(CrewData.Instance.FightingTeam).ToString("N0"));
     }
     void Awake()
     {
