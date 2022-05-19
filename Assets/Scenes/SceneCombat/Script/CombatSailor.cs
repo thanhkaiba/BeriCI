@@ -686,4 +686,15 @@ public class CombatSailor : Sailor
             });
         }
     }
+    public float CalcHealFromWild()
+    {
+        SynergiesConfig config = GlobalConfigs.Synergies;
+        ClassBonusItem wild = CombatState.Instance.GetTeamClassBonus(cs.team, SailorClass.WILD);
+        if (cs.HaveType(SailorClass.WILD) && wild != null)
+        {
+            float percentHealthGain = config.GetParams(wild.type, wild.level)[0];
+            return percentHealthGain * cs.MaxHealth;
+        }
+        return 0;
+    }
 };

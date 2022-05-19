@@ -1,0 +1,153 @@
+
+Macay_Tree.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+images/ATTACK
+  rotate: false
+  xy: 2, 177
+  size: 118, 767
+  orig: 118, 767
+  offset: 0, 0
+  index: -1
+images/ATTACK _1
+  rotate: false
+  xy: 122, 177
+  size: 118, 767
+  orig: 118, 767
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks10
+  rotate: false
+  xy: 1556, 728
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks11
+  rotate: false
+  xy: 1170, 292
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks12
+  rotate: false
+  xy: 1556, 510
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks13
+  rotate: false
+  xy: 1556, 292
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks14
+  rotate: false
+  xy: 398, 74
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks15
+  rotate: false
+  xy: 784, 74
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks16
+  rotate: false
+  xy: 1170, 74
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks17
+  rotate: false
+  xy: 1556, 74
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks2
+  rotate: false
+  xy: 398, 728
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks3
+  rotate: false
+  xy: 398, 510
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks4
+  rotate: false
+  xy: 784, 728
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks5
+  rotate: false
+  xy: 398, 292
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks6
+  rotate: false
+  xy: 784, 510
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks7
+  rotate: false
+  xy: 1170, 728
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks8
+  rotate: false
+  xy: 784, 292
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/Rocks/Rocks9
+  rotate: false
+  xy: 1170, 510
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+images/SKILL
+  rotate: false
+  xy: 242, 195
+  size: 76, 749
+  orig: 76, 749
+  offset: 0, 0
+  index: -1
+images/SKILL_1
+  rotate: false
+  xy: 320, 195
+  size: 76, 749
+  orig: 76, 749
+  offset: 0, 0
+  index: -1
+images/crack-3
+  rotate: false
+  xy: 2, 2
+  size: 200, 173
+  orig: 200, 173
+  offset: 0, 0
+  index: -1

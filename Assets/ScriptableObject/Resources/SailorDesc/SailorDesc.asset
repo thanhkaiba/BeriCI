@@ -169,3 +169,8 @@ MonoBehaviour:
     title: Beel's underling
     skill_description: Have <b>$perT_0_1@</b> dodge chance. When MUN dodges successfully,
       she attacks that enemy.
+  - root_name: Macay
+    present_name: Macay
+    title: Green guy
+    skill_description: Deal <b><color=#5b59f0>$p_0@</color></b> to all enemies at
+      the behind each row and STUN them.

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Piratera.Config;
 using Piratera.Sound;
 using Spine.Unity;
 using System.Collections.Generic;
@@ -66,7 +67,6 @@ public class Salvatafo : CombatSailor
         List<CombatSailor> aroundPlusTarget = TargetsUtils.AroundPlus(main_target, enermy);
 
         float magic_damage = cs.Power * magic_damage_ratio;
-        float health = (1 + aroundPlusTarget.Count * side_effect) * healt_ratio * cs.Power;
 
         targets.Add(main_target.Model.id);
         _params.Add(main_target.CalcDamageTake(new Damage() { magic = magic_damage }, this));
@@ -76,7 +76,9 @@ public class Salvatafo : CombatSailor
             targets.Add(t.Model.id);
             _params.Add(t.CalcDamageTake(new Damage() { magic = magic_damage * side_effect }, this));
         });
-
+        // calc health
+        float health = (1 + aroundPlusTarget.Count * side_effect) * healt_ratio * cs.Power;
+        health += CalcHealFromWild();
         _params.Add(health);
 
         return ProcessSkill(targets, _params);
