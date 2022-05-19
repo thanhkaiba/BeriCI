@@ -55,7 +55,7 @@ public class CharBarControl : MonoBehaviour
                 starImg.sprite = starSprRed;
                 starObj.GetComponent<RectTransform>().SetParent(nodeStar);
                 starObj.SetActive(true);
-                starObj.transform.localScale = new Vector3(0.15f, 0.15f);
+                starObj.transform.localScale = new Vector3(0.22f, 0.22f);
                 starObj.transform.localPosition = new Vector3((i-5) * 14 + 2, 2);
             }
         }
@@ -68,8 +68,8 @@ public class CharBarControl : MonoBehaviour
                 starImg.sprite = starSprPurple;
                 starObj.GetComponent<RectTransform>().SetParent(nodeStar);
                 starObj.SetActive(true);
-                starObj.transform.localScale = new Vector3(0.2f, 0.2f);
-                starObj.transform.localPosition = new Vector3((i-8) * 18 + 3, 3);
+                starObj.transform.localScale = new Vector3(0.26f, 0.26f);
+                starObj.transform.localPosition = new Vector3((i-8) * 18 + 6, 4);
             }
         }
     }
