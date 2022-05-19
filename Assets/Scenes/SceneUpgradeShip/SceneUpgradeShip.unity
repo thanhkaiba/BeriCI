@@ -4480,7 +4480,7 @@ GameObject:
   - component: {fileID: 1985360314}
   - component: {fileID: 1985360313}
   m_Layer: 5
-  m_Name: Image
+  m_Name: iconLockHelm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

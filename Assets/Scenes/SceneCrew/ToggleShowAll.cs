@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class ToggleShowAll : MonoBehaviour
 {
     public Toggle toggle;
-    void Awake()
+    void Start()
     {
         try
         {
-            toggle.isOn = PlayerPrefs.GetInt("is_show_fav" + UserData.Instance.UID, 0) == 1;
+            toggle.isOn = PlayerPrefs.GetInt("is_show_fav", 0) == 1;
         }
         catch
         {

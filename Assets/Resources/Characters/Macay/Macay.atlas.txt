@@ -1,0 +1,293 @@
+
+Macay.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Layer 1
+  rotate: false
+  xy: 1373, 72
+  size: 122, 121
+  orig: 122, 121
+  offset: 0, 0
+  index: -1
+Layer 2
+  rotate: true
+  xy: 1865, 767
+  size: 37, 65
+  orig: 37, 65
+  offset: 0, 0
+  index: -1
+Layer 3
+  rotate: true
+  xy: 516, 44
+  size: 30, 93
+  orig: 30, 93
+  offset: 0, 0
+  index: -1
+Layer 4
+  rotate: true
+  xy: 728, 77
+  size: 73, 170
+  orig: 73, 170
+  offset: 0, 0
+  index: -1
+Rocks/Rocks10
+  rotate: false
+  xy: 774, 588
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks11
+  rotate: false
+  xy: 1160, 806
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks12
+  rotate: false
+  xy: 388, 152
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks13
+  rotate: false
+  xy: 774, 370
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks14
+  rotate: false
+  xy: 1160, 588
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks15
+  rotate: false
+  xy: 1546, 806
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks16
+  rotate: false
+  xy: 774, 152
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks17
+  rotate: false
+  xy: 1160, 370
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks2
+  rotate: false
+  xy: 2, 806
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks3
+  rotate: false
+  xy: 2, 588
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks4
+  rotate: false
+  xy: 388, 806
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks5
+  rotate: false
+  xy: 2, 370
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks6
+  rotate: false
+  xy: 388, 588
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks7
+  rotate: false
+  xy: 774, 806
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks8
+  rotate: false
+  xy: 2, 152
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+Rocks/Rocks9
+  rotate: false
+  xy: 388, 370
+  size: 384, 216
+  orig: 384, 216
+  offset: 0, 0
+  index: -1
+arm1
+  rotate: true
+  xy: 1546, 391
+  size: 63, 98
+  orig: 63, 98
+  offset: 0, 0
+  index: -1
+arm1_1
+  rotate: true
+  xy: 2, 29
+  size: 121, 308
+  orig: 121, 308
+  offset: 0, 0
+  index: -1
+arm2
+  rotate: true
+  xy: 312, 42
+  size: 108, 202
+  orig: 108, 202
+  offset: 0, 0
+  index: -1
+arm2_1
+  rotate: false
+  xy: 1546, 456
+  size: 149, 348
+  orig: 149, 348
+  offset: 0, 0
+  index: -1
+body
+  rotate: true
+  xy: 1160, 200
+  size: 168, 220
+  orig: 168, 220
+  offset: 0, 0
+  index: -1
+crack-3
+  rotate: false
+  xy: 1382, 195
+  size: 200, 173
+  orig: 200, 173
+  offset: 0, 0
+  index: -1
+day leo
+  rotate: true
+  xy: 1865, 682
+  size: 83, 78
+  orig: 83, 78
+  offset: 0, 0
+  index: -1
+flower
+  rotate: true
+  xy: 1313, 2
+  size: 58, 86
+  orig: 58, 86
+  offset: 0, 0
+  index: -1
+glow_yellow
+  rotate: false
+  xy: 1945, 730
+  size: 50, 50
+  orig: 50, 50
+  offset: 0, 0
+  index: -1
+hair
+  rotate: true
+  xy: 1932, 782
+  size: 122, 108
+  orig: 122, 108
+  offset: 0, 0
+  index: -1
+hand1
+  rotate: false
+  xy: 1865, 605
+  size: 50, 75
+  orig: 50, 75
+  offset: 0, 0
+  index: -1
+hand2
+  rotate: false
+  xy: 1932, 906
+  size: 114, 116
+  orig: 114, 116
+  offset: 0, 0
+  index: -1
+head
+  rotate: true
+  xy: 900, 43
+  size: 107, 138
+  orig: 107, 138
+  offset: 0, 0
+  index: -1
+hip
+  rotate: true
+  xy: 1040, 15
+  size: 135, 116
+  orig: 135, 116
+  offset: 0, 0
+  index: -1
+leg1
+  rotate: false
+  xy: 1160, 2
+  size: 151, 196
+  orig: 151, 196
+  offset: 0, 0
+  index: -1
+leg2
+  rotate: false
+  xy: 1697, 594
+  size: 166, 210
+  orig: 166, 210
+  offset: 0, 0
+  index: -1
+neck
+  rotate: false
+  xy: 1401, 2
+  size: 72, 68
+  orig: 72, 68
+  offset: 0, 0
+  index: -1
+shoulder1
+  rotate: false
+  xy: 1313, 62
+  size: 58, 136
+  orig: 58, 136
+  offset: 0, 0
+  index: -1
+shoulder2
+  rotate: true
+  xy: 1697, 451
+  size: 141, 170
+  orig: 141, 170
+  offset: 0, 0
+  index: -1
+thigh1
+  rotate: false
+  xy: 1497, 57
+  size: 102, 136
+  orig: 102, 136
+  offset: 0, 0
+  index: -1
+thigh2
+  rotate: true
+  xy: 516, 76
+  size: 74, 210
+  orig: 74, 210
+  offset: 0, 0
+  index: -1
