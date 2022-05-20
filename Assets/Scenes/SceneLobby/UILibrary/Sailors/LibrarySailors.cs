@@ -51,6 +51,9 @@ public class LibrarySailors : MonoBehaviour
         "Zeke",
         "Wuone",
         "BeiBei",
+        "Mun",
+        "Macay",
+        "Nael",
     };
     private void Start()
     {
