@@ -80,12 +80,12 @@ public class PopupUserInfo : MonoBehaviour
                     var fighting_lines = new FightingLine();
                     fighting_lines.NewFromSFSObject(packet.GetSFSArray("fighting_lines"));
                     ShowInfo(username, unique_id, account_date, total_beri_earn, pvp_count, pvp_win, avt_id, pve_count, pve_win);
-                    ShowFightingLine(sailors, fighting_lines);
                     ShowSailHelm(sail_level, helm_level);
 
                     btnChangeName.SetActive(uid == UserData.Instance.UID);
                     btnChangeAvt.SetActive(uid == UserData.Instance.UID);
                     btnChallenge.SetActive(uid != UserData.Instance.UID);
+                    ShowFightingLine(sailors, fighting_lines);
                 }
                 else Close();
                 break;

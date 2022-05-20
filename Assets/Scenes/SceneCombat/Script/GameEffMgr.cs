@@ -243,6 +243,7 @@ public class GameEffMgr : MonoBehaviour
         var prefab = Resources.Load<GameObject>("Effect2D/canon/canon");
         var go = Instantiate(prefab, GameObject.Find("FieldA").transform);
         go.transform.localScale = Vector3.one * 5;
+        go.transform.localPosition = go.transform.localPosition + new Vector3(0, 0, -5);
         go.transform.Find("spine").GetComponent<Animator>().SetTrigger("Explore");
     }
     public GameObject CreateSpeedEffect(Vector3 pos)

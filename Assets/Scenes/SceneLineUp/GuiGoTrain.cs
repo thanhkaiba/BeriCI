@@ -48,7 +48,7 @@ public class GuiGoTrain : MonoBehaviour
             else
             {
                 SceneTransition.Instance.ShowWaiting(false);
-                SceneTransition.Instance.LoadScene("SceneCombat2D");
+                SceneTransition.Instance.LoadScene("SceneCombat2D", TransitionType.FADE);
             }
         }
     }

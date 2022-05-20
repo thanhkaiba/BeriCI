@@ -93,16 +93,16 @@ public class SailorModel : IEquatable<SailorModel>, IComparable<SailorModel>
         {
             case 0: // rank
                 if (config_stats.rank.Equals(other.config_stats.rank))
-                    if (star == other.star)
-                        if (level == other.level)
-                            if (name.Equals(other.name))
+                    if (name.Equals(other.name))
+                        if (star == other.star)
+                            if (level == other.level)
                                 return quality.CompareTo(other.quality);
                             else
-                                return name.CompareTo(other.name);
+                                return level.CompareTo(other.level);
                         else
-                            return level.CompareTo(other.level);
+                            return star.CompareTo(other.star);
                     else
-                        return star.CompareTo(other.star);
+                        return name.CompareTo(other.name);
                 else
                     return config_stats.rank.CompareTo(other.config_stats.rank);
             case 1: // star
