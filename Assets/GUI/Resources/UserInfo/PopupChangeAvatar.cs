@@ -53,6 +53,7 @@ public class PopupChangeAvatar : MonoBehaviour
                 if (errorCode == SFSErrorCode.SUCCESS)
                 {
                     var listAvatar = packet.GetIntArray("list_avt");
+                    System.Array.Sort(listAvatar);
                     ShowListAvt(listAvatar);
                 }
                 break;
