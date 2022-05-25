@@ -85,12 +85,30 @@ public class SceneTransition : MonoBehaviour
         }
         //SceneManager.LoadScene(sceneName);
     }
+    private GameObject fog;
     public void ShowWaiting(bool b = true, bool visible = true)
     {
         waiting.SetActive(b);
         if (b)
         {
-            waiting.GetComponent<GuiWaiting>().SetTransparent(visible);
+            if (!fog)
+            {
+                fog = new GameObject("PanelFog");
+                fog.transform.SetParent(GameObject.Find("Canvas").transform);
+                fog.transform.localPosition = Vector3.zero;
+                fog.AddComponent<CanvasRenderer>();
+                RectTransform rectTransform = fog.AddComponent<RectTransform>();
+                rectTransform.sizeDelta = new Vector2(Screen.width * 2, Screen.height * 2);
+                Image image = fog.AddComponent<Image>();
+                image.color = new Color(0, 0, 0, 0);
+                image.raycastTarget = true;
+            }
+            fog.transform.SetAsLastSibling();
+            fog.SetActive(true);
+        }
+        else
+        {
+            if (fog) fog.SetActive(false);
         }
     }
     public void SetTransitionTheme(TransitionType type)

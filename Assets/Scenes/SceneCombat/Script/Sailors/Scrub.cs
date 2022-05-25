@@ -49,10 +49,9 @@ public class Scrub : CombatSailor
 
         float scale_damage_ratio = Model.config_stats.skill_params[0];
         float behind_damage_ratio = Model.config_stats.skill_params[1];
-        float inc_with_armor = 1 + Model.config_stats.skill_params[1] * cs.Armor;
 
-        float main_damage = cs.Power * scale_damage_ratio * inc_with_armor;
-        float secondary_damage = cs.Power * behind_damage_ratio + inc_with_armor;
+        float main_damage = cs.Power * scale_damage_ratio * (1 + Model.config_stats.skill_params[2] * cs.Armor);
+        float secondary_damage = cs.Power * behind_damage_ratio * (1 + Model.config_stats.skill_params[2] * cs.Armor);
 
         List<CombatSailor> enermy = cbState.GetAliveCharacterEnemy(cs.team);
         CombatSailor target = TargetsUtils.Melee(this, enermy);

@@ -277,12 +277,6 @@ public class LobbyUI : MonoBehaviour
             return;
         }
 
-        if (UserData.Instance.NumSlot < GlobalConfigs.LineUp.max)
-        {
-            GuiManager.Instance.ShowPopupNotification("You must have 5 slots to join Arena!");
-            return;
-        }
-
         if (PvPData.Instance.ShowedTutorial < PvPData.PVP_TURORIAL_STEP.POPUP_WELCOME_ARENA)
         {
             GuiManager.Instance.AddGui("Prefap/PopupWelcomeArena");

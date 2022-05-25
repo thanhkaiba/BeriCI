@@ -20,7 +20,7 @@ namespace Piratera.GUI
         [SerializeField]
         private SkeletonGraphic anim;
         [SerializeField]
-        private ItemRewards sailor_piece;
+        private ItemRewards sailor_piece, beri;
         [SerializeField]
         private GameObject panel_gift;
 
@@ -50,7 +50,7 @@ namespace Piratera.GUI
             });
             seqe.SetLink(coin.gameObject).SetTarget(coin.transform);
             anim.initialSkinName = "";
-            ShowBonus(r.bonus);
+            ShowBonus(r.bonus, r.team_bonus);
 
             if (r.team_win == 0)
             {
@@ -114,18 +114,29 @@ namespace Piratera.GUI
             }
             SceneManager.LoadScene("SceneLoadServerData");
         }
-        private void ShowBonus(Rewards rewards)
+        private void ShowBonus(Rewards rewards, int beriQuantity)
         {
+            bool no_reward = true;
             panel_gift.SetActive(true);
+            sailor_piece.gameObject.SetActive(false);
+            beri.gameObject.SetActive(false);
             if (rewards.type.Equals("PIECE_SAILOR"))
             {
                 sailor_piece.gameObject.SetActive(true);
                 sailor_piece.ShowSailorPiece(rewards.meta, (int)rewards.amount);
-                return;
+                no_reward = false;
             }
-            sailor_piece.gameObject.SetActive(false);
-            panel_gift.SetActive(false);
-            textElo.transform.position -= new Vector3(0, textElo.rectTransform.rect.height/4, 0);
+            if (beriQuantity > 0)
+            {
+                beri.gameObject.SetActive(true);
+                beri.ShowBeri(beriQuantity, "team bonus");
+                no_reward = false;
+            }
+            if (no_reward)
+            {
+                panel_gift.SetActive(false);
+                textElo.transform.position -= new Vector3(0, textElo.rectTransform.rect.height / 4, 0);
+            }
         }
     }
 }

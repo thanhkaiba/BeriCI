@@ -52,11 +52,14 @@ public class GuiGoTrain : MonoBehaviour
             }
         }
     }
+    private bool haveClick = false;
     public void OnStartTrain()
     {
+        if (haveClick) return;
+        haveClick = true;
+        SceneTransition.Instance.ShowWaiting(true);
         int cost = GlobalConfigs.Training.cost[train_level];
         UserData.Instance.Beri -= cost;
-        SceneTransition.Instance.ShowWaiting(true);
         TempCombatData.Instance.trainingGameLevel = train_level;
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutInt("level", train_level);
