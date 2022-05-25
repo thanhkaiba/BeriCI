@@ -176,6 +176,7 @@ MonoBehaviour:
   coin: {fileID: 2663988508363445501}
   anim: {fileID: 9165214087401290714}
   sailor_piece: {fileID: 776438128288677030}
+  beri: {fileID: 7733110927002848957}
   panel_gift: {fileID: 1456789541962607555}
   isWatchReplay: 0
 --- !u!1 &1456789541962607555
@@ -937,6 +938,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2280841328135258400}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7733110927002848957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8428111151022870429, guid: 9f8c47b6e94e02249a3f7a61d58060a1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2280841328135258400}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd7c7ad060108594c9edc0fea764573d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3122700733856212209
 PrefabInstance:
   m_ObjectHideFlags: 0
