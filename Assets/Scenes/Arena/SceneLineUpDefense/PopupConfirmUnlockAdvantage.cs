@@ -1,6 +1,5 @@
 using Piratera.Config;
 using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,9 +19,9 @@ public class PopupConfirmUnlockAdvantage : MonoBehaviour
     {
         NetworkController.Listen(onReceiveServerAction);
     }
-    private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void onReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.PVP_OPEN_HOME_ADVANTAGE)
+        if (action == Action.PVP_OPEN_HOME_ADVANTAGE)
         {
             OnClose();
         }
@@ -54,7 +53,7 @@ public class PopupConfirmUnlockAdvantage : MonoBehaviour
             PvPData.Instance.OpenedAdvantage.Add(type);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutInt("advantage_idx", (int)type);
-            NetworkController.Send(SFSAction.PVP_OPEN_HOME_ADVANTAGE, sfsObject);
+            NetworkController.Send(Action.PVP_OPEN_HOME_ADVANTAGE, sfsObject);
         }
     }
 }

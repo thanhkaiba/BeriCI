@@ -1,5 +1,4 @@
-﻿using Piratera.Network;
-using Sfs2X.Entities.Data;
+﻿using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -63,7 +62,7 @@ namespace Piratera.Config
             {
                 SFSObject data = new SFSObject();
                 data.PutUtfString("path", FileName);
-                NetworkController.Send(SFSAction.GET_CONFIG, data);
+                NetworkController.Send(Action.GET_CONFIG, data);
             }
 
             private static string CalculateMD5(string filename)
@@ -93,8 +92,8 @@ namespace Piratera.Config
 
         private static Dictionary<string, ConfigFileMeta> manifest = new Dictionary<string, ConfigFileMeta>();
         private Action<float> UpdateProgressBar;
-        private Action OnSuccess;
-        private Action OnError;
+        private System.Action OnSuccess;
+        private System.Action OnError;
         private int TotalUnSync = 0;
         private int TotalSynced = 0;
 
@@ -107,7 +106,7 @@ namespace Piratera.Config
             NetworkController.Listen(onReceiveServerAction);
         }
 
-        public void StartFlowSync(Action<float> progressAction, Action onSuccess, Action onError)
+        public void StartFlowSync(Action<float> progressAction, System.Action onSuccess, System.Action onError)
         {
 
             UpdateProgressBar = progressAction;
@@ -124,7 +123,7 @@ namespace Piratera.Config
 
             SFSObject data = new SFSObject();
             data.PutUtfString("path", "");
-            NetworkController.Send(SFSAction.GET_CONFIG_MANIFEST, data);
+            NetworkController.Send(Action.GET_CONFIG_MANIFEST, data);
             manifest.Clear();
         }
 
@@ -135,11 +134,11 @@ namespace Piratera.Config
         }
 
 
-        private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        private void onReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
         {
             switch (action)
             {
-                case SFSAction.GET_CONFIG_MANIFEST:
+                case Action.GET_CONFIG_MANIFEST:
                     {
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {
@@ -168,7 +167,7 @@ namespace Piratera.Config
                         }
                         break;
                     }
-                case SFSAction.GET_CONFIG:
+                case Action.GET_CONFIG:
                     {
                         if (errorCode == SFSErrorCode.SUCCESS)
                         {

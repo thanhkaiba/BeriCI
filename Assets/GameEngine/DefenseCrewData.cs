@@ -1,4 +1,3 @@
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,7 +22,7 @@ public class DefenseCrewData
 
     public void OnConfirmSquad()
     {
-        NetworkController.Send(SFSAction.PVP_UPDATE_FIGHTING_LINE, FightingTeam.ToSFSObject());
+        NetworkController.Send(Action.PVP_UPDATE_FIGHTING_LINE, FightingTeam.ToSFSObject());
     }
     private void ResetData()
     {

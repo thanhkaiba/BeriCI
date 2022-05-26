@@ -1,7 +1,6 @@
 using DG.Tweening;
 using Piratera.Config;
 using Piratera.GUI;
-using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
@@ -36,9 +35,9 @@ public class GuiGoTrain : MonoBehaviour
         textDescription.text = "All sailors in your line-up will receive <color=#695f01>" + config.exp_receive[level].ToString("N0") + "</color> EXP";
         textYourBeri.text = UserData.Instance.Beri.ToString("N0");
     }
-    private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void onReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.TRAIN_SAILORS)
+        if (action == Action.TRAIN_SAILORS)
         {
             SceneTransition.Instance.ShowWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
@@ -63,7 +62,7 @@ public class GuiGoTrain : MonoBehaviour
         TempCombatData.Instance.trainingGameLevel = train_level;
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutInt("level", train_level);
-        NetworkController.Send(SFSAction.TRAIN_SAILORS, sfsObject);
+        NetworkController.Send(Action.TRAIN_SAILORS, sfsObject);
     }
     public void OnClose()
     {

@@ -1,7 +1,6 @@
 
 using DG.Tweening;
 using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
@@ -28,9 +27,9 @@ public class SceneLineUpDefenseUI : MonoBehaviour
         NetworkController.Listen(OnReceiveServerAction);
         UpdateBattleFieldImage();
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.PVP_OPEN_HOME_ADVANTAGE)
+        if (action == Action.PVP_OPEN_HOME_ADVANTAGE)
         {
             PresentListAdvantage();
         }
@@ -122,7 +121,7 @@ public class SceneLineUpDefenseUI : MonoBehaviour
             PvPData.Instance.SelectingAdvantage = type;
             SFSObject sfsObj = new SFSObject();
             sfsObj.PutInt("advantage_idx", (int)type);
-            NetworkController.Send(SFSAction.PVP_SELECT_HOME_ADVANTAGE, sfsObj);
+            NetworkController.Send(Action.PVP_SELECT_HOME_ADVANTAGE, sfsObj);
             UpdateBattleFieldImage();
             PresentListAdvantage();
         }

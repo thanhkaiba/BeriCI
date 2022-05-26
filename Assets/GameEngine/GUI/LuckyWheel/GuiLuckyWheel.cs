@@ -1,6 +1,5 @@
 ﻿using DG.Tweening;
 using Piratera.Config;
-using Piratera.Network;
 using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using System;
@@ -82,9 +81,9 @@ namespace Piratera.GUI
         }
 
 
-        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            if (action == SFSAction.PIRATE_WHEEL)
+            if (action == Action.PIRATE_WHEEL)
             {
                 SceneTransition.Instance.ShowWaiting(false);
           
@@ -153,7 +152,7 @@ namespace Piratera.GUI
         {
             buttonClose.gameObject.SetActive(false);
             SceneTransition.Instance.ShowWaiting(true);
-            NetworkController.Send(SFSAction.PIRATE_WHEEL);
+            NetworkController.Send(Action.PIRATE_WHEEL);
         }
 
         private void Update()

@@ -138,7 +138,7 @@ public class CrewManager : MonoBehaviour
             + (EF_remain < 0 ? 0 : EF_remain)
             +"</color>";
         var teamBonus = GlobalConfigs.PvE.sailor_rank_bonus[(int)model.config_stats.rank] * Mathf.Pow(2, model.star);
-        TextTeamBonus.text = "(*) You'll get <color=#e6e9ff>" + teamBonus + "</color> more win Beri as \"Team Bonus\" if this sailor have EF point.";
+        TextTeamBonus.text = "(*) Your \"Team Bonus\" increase <color=#e6e9ff>" + teamBonus + "</color> and this sailor lose 1 EF when you win.";
         if (!model.IsAvaiable())
         {
             TextLockTrade.gameObject.SetActive(true);
@@ -204,6 +204,10 @@ public class CrewManager : MonoBehaviour
     public void GoToLineup()
     {
         SceneManager.LoadScene("ScenePickTeam");
+    }
+    public void RunSceneCraft()
+    {
+        SceneManager.LoadScene("SceneCraft");
     }
 
     public void UpdateRankIconPosition()

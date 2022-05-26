@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -27,11 +26,11 @@ namespace Piratera.GUI
             NetworkController.Listen(OnReceiveServerAction);
         }
 
-        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
         {
             switch (action)
             {
-                case SFSAction.PVE_SURRENDER:
+                case Action.PVE_SURRENDER:
                     if (errorCode == SFSErrorCode.SUCCESS)
                     {
                         SceneTransition.Instance.ShowWaiting(false);

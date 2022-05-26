@@ -431,7 +431,7 @@ public class CombatMgr : MonoBehaviour
         }
     }
     // end client game
-    IEnumerator WaitAndDo(float time, Action action)
+    IEnumerator WaitAndDo(float time, System.Action action)
     {
         yield return new WaitForSeconds(time);
         action();

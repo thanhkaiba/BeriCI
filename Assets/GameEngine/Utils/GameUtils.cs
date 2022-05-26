@@ -1,7 +1,6 @@
 using Piratera.Config;
 using Piratera.GUI;
 using Piratera.Lib;
-using Piratera.Network;
 using Piratera.Sound;
 using System;
 using System.Collections;
@@ -181,17 +180,17 @@ public class GameUtils : UnityEngine.Object
         return new string(chars);
     }
 
-    public static void ShowPopupPacketError(SFSErrorCode errorCode, SFSAction action = SFSAction.PING)
+    public static void ShowPopupPacketError(SFSErrorCode errorCode, Action action = Action.PING)
     {
         if (
-            action == SFSAction.USER_DETAIL
-            || action == SFSAction.USER_CHANGE_NAME
+            action == Action.USER_DETAIL
+            || action == Action.USER_CHANGE_NAME
         ) return;
         // filter error here
         string description = EnumHelper.GetDescription(errorCode);
         GuiManager.Instance.ShowPopupNotification(description);
     }
-    public static IEnumerator WaitAndDo(float time, Action action)
+    public static IEnumerator WaitAndDo(float time, System.Action action)
     {
         yield return new WaitForSeconds(time);
         action();

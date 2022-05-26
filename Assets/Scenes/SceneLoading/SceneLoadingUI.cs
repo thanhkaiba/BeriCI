@@ -5,7 +5,6 @@ using Facebook.Unity;
 using Piratera.Engine;
 using Piratera.GUI;
 using Piratera.Log;
-using Piratera.Network;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;

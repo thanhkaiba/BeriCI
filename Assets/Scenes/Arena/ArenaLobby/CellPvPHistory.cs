@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Linq;
 using UnityEngine;
@@ -42,7 +41,7 @@ namespace Piratera.GUI
             SceneTransition.Instance.ShowWaiting(true);
             SFSObject sfsObject = new();
             sfsObject.PutLong("match", data.matchId);
-            NetworkController.Send(SFSAction.PVP_WATCH_HISTORY, sfsObject);
+            NetworkController.Send(Action.PVP_WATCH_HISTORY, sfsObject);
         }
         public void ClickOpponent()
         {

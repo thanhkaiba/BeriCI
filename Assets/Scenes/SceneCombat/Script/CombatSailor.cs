@@ -251,7 +251,7 @@ public class CombatSailor : Sailor
             CombatEvents.Instance.activeClassBonus.Invoke(this, SailorClass.GRAPPLER, new List<float> { speedUpPercent });
         }
     }
-    IEnumerator WaitAndDo(float time, Action action)
+    IEnumerator WaitAndDo(float time, System.Action action)
     {
         yield return new WaitForSeconds(time);
         action();

@@ -2,7 +2,6 @@
 using DG.Tweening;
 using Piratera.Config;
 using Piratera.GUI;
-using Piratera.Network;
 using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using Spine;
@@ -41,7 +40,7 @@ public class SceneArenaUI : MonoBehaviour
         {
             GuiManager.Instance.AddGui("prefap/PopupCongratJoinArena");
             SceneTransition.Instance.ShowWaiting(true, false);
-            NetworkController.Send(SFSAction.PVP_JOIN);
+            NetworkController.Send(Action.PVP_JOIN);
         } else
         {
             SyncData();
@@ -53,7 +52,7 @@ public class SceneArenaUI : MonoBehaviour
     private void SyncData()
     {
         SceneTransition.Instance.ShowWaiting(true, false);
-        NetworkController.Send(SFSAction.PVP_DATA);
+        NetworkController.Send(Action.PVP_DATA);
     }
     private void UpdateRank()
     {
@@ -100,11 +99,11 @@ public class SceneArenaUI : MonoBehaviour
         chat.GetComponent<Canvas>().sortingOrder = 5;
         chat.transform.localScale = chat.transform.localScale * 0.64f;
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
         {
-            case SFSAction.PVP_PLAY:
+            case Action.PVP_PLAY:
                 {
                     if (errorCode != SFSErrorCode.SUCCESS)
                     {
@@ -112,7 +111,7 @@ public class SceneArenaUI : MonoBehaviour
                     }
                     break;
                 }
-            case SFSAction.PVP_DATA:
+            case Action.PVP_DATA:
                 {
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
@@ -123,7 +122,7 @@ public class SceneArenaUI : MonoBehaviour
                     }
                     break;
                 }
-            case SFSAction.PVP_JOIN:
+            case Action.PVP_JOIN:
                 {
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
@@ -133,7 +132,7 @@ public class SceneArenaUI : MonoBehaviour
                     }
                     break;
                 }
-            case SFSAction.PVP_RANKING:
+            case Action.PVP_RANKING:
                 {
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
@@ -144,7 +143,7 @@ public class SceneArenaUI : MonoBehaviour
                     }
                     break;
                 }
-            case SFSAction.PVP_HISTORY:
+            case Action.PVP_HISTORY:
                 {
                     SceneTransition.Instance.ShowWaiting(false);
                     if (errorCode == SFSErrorCode.SUCCESS)
@@ -171,12 +170,12 @@ public class SceneArenaUI : MonoBehaviour
         SFSObject s = new SFSObject();
         s.PutInt("from", 0);
         s.PutInt("to", 50);
-        NetworkController.Send(SFSAction.PVP_RANKING, s);
+        NetworkController.Send(Action.PVP_RANKING, s);
     }
     public void ShowHistory()
     {
         SceneTransition.Instance.ShowWaiting(true, false);
-        NetworkController.Send(SFSAction.PVP_HISTORY);
+        NetworkController.Send(Action.PVP_HISTORY);
     }
     private void OnDestroy()
     {
@@ -206,7 +205,7 @@ public class SceneArenaUI : MonoBehaviour
         if (!CheckTimeNewSeason())
         {
             SceneTransition.Instance.ShowWaiting(true, false);
-            NetworkController.Send(SFSAction.PVP_PLAY);
+            NetworkController.Send(Action.PVP_PLAY);
         }
     }
     private bool CheckTimeNewSeason()

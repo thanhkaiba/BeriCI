@@ -1,8 +1,5 @@
-﻿namespace Piratera.Network
+﻿public enum GameLoginType
 {
-    public enum GameLoginType
-    {
-        AUTHENTICATON = 0,
-        DUMMY = 1,
-    }
+    AUTHENTICATON = 0,
+    DUMMY = 1,
 }

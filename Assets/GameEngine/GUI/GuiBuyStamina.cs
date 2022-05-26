@@ -1,5 +1,4 @@
 ﻿using DG.Tweening;
-using Piratera.Network;
 using Piratera.Sound;
 using Sfs2X.Entities.Data;
 using System;
@@ -42,9 +41,9 @@ namespace Piratera.GUI
         }
 
 
-        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            if (action == SFSAction.BUY_STAMINA)
+            if (action == Action.BUY_STAMINA)
             {
                 SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)
@@ -93,7 +92,7 @@ namespace Piratera.GUI
             if (UserData.Instance.IsEnoughBeri(cost))
             {
                 SceneTransition.Instance.ShowWaiting(true);
-                NetworkController.Send(SFSAction.BUY_STAMINA);
+                NetworkController.Send(Action.BUY_STAMINA);
             }
             else
             {

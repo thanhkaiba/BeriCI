@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Piratera.Config;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
@@ -40,9 +39,9 @@ public class UpgradeShip : MonoBehaviour
         GameEvent.UserStaminaChanged.RemoveListener(OnStaminaChanged);
         GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.SAIL_UPGRADE)
+        if (action == Action.SAIL_UPGRADE)
         {
             SceneTransition.Instance.ShowWaiting(false);
             if (errorCode == SFSErrorCode.SUCCESS)
@@ -124,7 +123,7 @@ public class UpgradeShip : MonoBehaviour
         else
         {
             SceneTransition.Instance.ShowWaiting(true);
-            NetworkController.Send(SFSAction.SAIL_UPGRADE);
+            NetworkController.Send(Action.SAIL_UPGRADE);
         }
     }
     private void UpgradeSailSuccess()

@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Piratera.Config;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections.Generic;
@@ -63,16 +62,16 @@ public class LoadServerDataUI : MonoBehaviour
     [SerializeField]
     private GameConfigSync ConfigSync;
 
-    private Action ReloadFunc;
+    private System.Action ReloadFunc;
 
     public static string NextScene = "SceneLobby";
 
-    private readonly HashSet<SFSAction> ActionRequires = new HashSet<SFSAction>() { 
-        SFSAction.PIRATE_WHEEL_DATA, 
-        SFSAction.LOAD_LIST_HERO_INFO,
-        SFSAction.TRAIN_SAILORS_REMAIN,
-        SFSAction.PVP_DATA,
-        SFSAction.SHIP_DATA,
+    private readonly HashSet<Action> ActionRequires = new HashSet<Action>() { 
+        Action.PIRATE_WHEEL_DATA, 
+        Action.LOAD_LIST_HERO_INFO,
+        Action.TRAIN_SAILORS_REMAIN,
+        Action.PVP_DATA,
+        Action.SHIP_DATA,
     };
     private int TotalActionRequire = 0;
     void Start()
@@ -160,7 +159,7 @@ public class LoadServerDataUI : MonoBehaviour
         progressBar.value = startingPoint + 0.3f;
         RandomTip();
         TotalActionRequire = ActionRequires.Count;
-        foreach (SFSAction action in ActionRequires)
+        foreach (Action action in ActionRequires)
         {
             NetworkController.Send(action);
         }
@@ -197,7 +196,7 @@ public class LoadServerDataUI : MonoBehaviour
         }
     }
 
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
         if (errorCode == SFSErrorCode.SUCCESS)
         {
@@ -234,7 +233,7 @@ public class LoadServerDataUI : MonoBehaviour
     {
         NetworkController.Logout();
     }
-    public void ShowLoading(float actionTime, float value, Action callback)
+    public void ShowLoading(float actionTime, float value, System.Action callback)
     {
         Sequence seq = DOTween.Sequence();
         seq.Append(progressBar.DOValue(value, actionTime).SetRelative());

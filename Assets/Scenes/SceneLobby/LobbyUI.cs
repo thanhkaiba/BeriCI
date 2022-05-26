@@ -3,7 +3,6 @@ using Piratera.Cheat;
 using Piratera.Config;
 using Piratera.Engine;
 using Piratera.GUI;
-using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
@@ -111,7 +110,7 @@ public class LobbyUI : MonoBehaviour
             + " - " + endTime.ToString("dd/MM");
         GameObject.Find("ButtonShip").SetActive(UserData.Instance.PVECount > 10);
 
-        NetworkController.Send(SFSAction.USER_LIST_ARENA_REWARD);
+        NetworkController.Send(Action.USER_LIST_ARENA_REWARD);
     }
     void UpdateMaintain()
     {
@@ -225,7 +224,7 @@ public class LobbyUI : MonoBehaviour
     public void ShowStaminaPack()
     {
         SceneTransition.Instance.ShowWaiting(true);
-        NetworkController.Send(SFSAction.GET_STAMINA_PACK);
+        NetworkController.Send(Action.GET_STAMINA_PACK);
     }
 
     public void OnBuyBeri()

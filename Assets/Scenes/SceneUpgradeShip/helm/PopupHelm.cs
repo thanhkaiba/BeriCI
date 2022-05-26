@@ -1,6 +1,5 @@
 using Piratera.Config;
 using Piratera.GUI;
-using Piratera.Network;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
 using System.Collections;
@@ -26,9 +25,9 @@ public class PopupHelm : MonoBehaviour
     {
         NetworkController.RemoveListener(OnReceiveServerAction);
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.HELM_UPGRADE)
+        if (action == Action.HELM_UPGRADE)
         {
             SceneTransition.Instance.ShowWaiting(false);
             if (errorCode == SFSErrorCode.SUCCESS)
@@ -78,7 +77,7 @@ public class PopupHelm : MonoBehaviour
         else
         {
             SceneTransition.Instance.ShowWaiting(true);
-            NetworkController.Send(SFSAction.HELM_UPGRADE);
+            NetworkController.Send(Action.HELM_UPGRADE);
         }
     }
     private void UpgradeHelmSuccess()

@@ -1,5 +1,4 @@
 ﻿#if PIRATERA_DEV || PIRATERA_QC
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 
 namespace Piratera.Cheat
@@ -8,7 +7,7 @@ namespace Piratera.Cheat
     {
         public static void CheatBotAndPlay(SFSObject sailorCheatData)
         {
-            NetworkController.Send(SFSAction.COMBAT_BOT, sailorCheatData);
+            NetworkController.Send(Action.COMBAT_BOT, sailorCheatData);
         }
 
         public static void CheatSailor(string name, string quality = "0", string level = "0")
@@ -18,8 +17,8 @@ namespace Piratera.Cheat
                   name + "|"
                 + level + "|"
                 + quality);
-            NetworkController.Send(SFSAction.CHEAT_SAILOR, data);
-            NetworkController.Send(SFSAction.LOAD_LIST_HERO_INFO);
+            NetworkController.Send(Action.CHEAT_SAILOR, data);
+            NetworkController.Send(Action.LOAD_LIST_HERO_INFO);
         }
 
         public static void CheatResource(string resource, int quantity)
@@ -27,14 +26,14 @@ namespace Piratera.Cheat
             SFSObject data = new SFSObject();
             data.PutUtfString("resource", resource);
             data.PutInt("quantity", quantity);
-            NetworkController.Send(SFSAction.CHEAT_RESOURCE, data);
+            NetworkController.Send(Action.CHEAT_RESOURCE, data);
         }
 
         public static void CheatRank(int rank)
         {
             SFSObject data = new SFSObject();
             data.PutInt("rank", rank);
-            NetworkController.Send(SFSAction.CHEAT_RANK, data);
+            NetworkController.Send(Action.CHEAT_RANK, data);
         }
 
         public static void CheatSailorQuantity(string sid, int quality, int level, long exp, byte star, int fight)
@@ -46,7 +45,7 @@ namespace Piratera.Cheat
             data.PutLong("exp", exp);
             data.PutByte("star", star);
             data.PutInt("pve_count", fight);
-            NetworkController.Send(SFSAction.CHEAT_SAILOR_QUANTITY, data);
+            NetworkController.Send(Action.CHEAT_SAILOR_QUANTITY, data);
         }
     }
 }

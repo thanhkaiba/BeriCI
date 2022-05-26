@@ -1,5 +1,4 @@
 ﻿using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -58,10 +57,10 @@ namespace Piratera.Cheat
         {
             Destroy(gameObject);
         }
-        private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
         {
             SceneTransition.Instance.ShowWaiting(false);
-            if (action == SFSAction.CHEAT_SAILOR_QUANTITY)
+            if (action == Action.CHEAT_SAILOR_QUANTITY)
             {
                 SceneTransition.Instance.ShowWaiting(false);
                 if (errorCode != SFSErrorCode.SUCCESS)

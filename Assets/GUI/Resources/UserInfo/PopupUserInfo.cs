@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System;
 using System.Collections;
@@ -46,12 +45,12 @@ public class PopupUserInfo : MonoBehaviour
         var fog = GetComponent<HaveFog>();
         if (fog) fog.FadeIn(0.3f);
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        Debug.Log("SFSAction.USER_DETAIL: " + SFSAction.USER_DETAIL);
+        Debug.Log("SFSAction.USER_DETAIL: " + Action.USER_DETAIL);
         switch (action)
         {
-            case SFSAction.USER_DETAIL:
+            case Action.USER_DETAIL:
                 Debug.Log("errorCode: " + errorCode);
                 if (errorCode == SFSErrorCode.SUCCESS)
                 {
@@ -122,7 +121,7 @@ public class PopupUserInfo : MonoBehaviour
 
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutUtfString("uid", uid);
-        NetworkController.Send(SFSAction.USER_DETAIL, sfsObject);
+        NetworkController.Send(Action.USER_DETAIL, sfsObject);
     }
     public void ShowInfo(string _username, string _userid, long _joinTime, long _beriEarn, int pvp_play, int pvp_win, int avt_id, int pve_play, int pve_win)
     {

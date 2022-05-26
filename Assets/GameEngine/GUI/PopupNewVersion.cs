@@ -9,7 +9,7 @@ namespace Piratera.GUI
     {
         [SerializeField]
         private Transform background;
-        private Action OKFunc;
+        private System.Action OKFunc;
         protected void Start()
         {
             Appear();
@@ -45,7 +45,7 @@ namespace Piratera.GUI
             if (fog) fog.FadeOut(0.1f);
         }
 
-        public void SetData(Action okFunc)
+        public void SetData(System.Action okFunc)
         {
             OKFunc = okFunc;
         }

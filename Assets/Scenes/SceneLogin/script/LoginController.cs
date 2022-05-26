@@ -1,6 +1,5 @@
 using Piratera.GUI;
 using Piratera.Lib;
-using Piratera.Network;
 using Sfs2X.Core;
 using Sfs2X.Entities;
 using Sfs2X.Entities.Data;
@@ -274,11 +273,11 @@ public class LoginController : MonoBehaviour
         }
     }
 
-    public void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    public void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
         {
-            case SFSAction.JOIN_ZONE_SUCCESS:
+            case Action.JOIN_ZONE_SUCCESS:
                 {
                     ReceiveJoinZoneSuccess(errorCode, packet);
                     break;

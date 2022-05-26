@@ -126,7 +126,7 @@ namespace Piratera.Build
             }
         }
 
-        public static void OnPreprocessBuild(Action increaseAction)
+        public static void OnPreprocessBuild(System.Action increaseAction)
         {
             bool shouldIncrement = EditorUtility.DisplayDialog(
                 "Increment Version?",

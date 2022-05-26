@@ -24,21 +24,21 @@ namespace Piratera.GUI
             popup.SetData(text);
             return gameObject;
         }
-        public GameObject ShowPopupNotification(string text, Action okAction)
+        public GameObject ShowPopupNotification(string text, System.Action okAction)
         {
             GameObject gameObject = AddGui("Prefap/PopupNotification");
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text, okAction);
             return gameObject;
         }
-        public GameObject ShowPopupNotification(string text, string okText, Action okAction)
+        public GameObject ShowPopupNotification(string text, string okText, System.Action okAction)
         {
             GameObject gameObject = AddGui("Prefap/PopupNotification");
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();
             popup.SetData(text, okText, okAction);
             return gameObject;
         }
-        public GameObject ShowPopupNotification(string text, string okText, Action okAction, Action cancelAction)
+        public GameObject ShowPopupNotification(string text, string okText, System.Action okAction, System.Action cancelAction)
         {
             GameObject gameObject = AddGui("Prefap/PopupNotification");
             PopupNotification popup = gameObject.GetComponent<PopupNotification>();

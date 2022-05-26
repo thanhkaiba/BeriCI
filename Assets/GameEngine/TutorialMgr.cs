@@ -1,5 +1,4 @@
 using Piratera.Config;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;

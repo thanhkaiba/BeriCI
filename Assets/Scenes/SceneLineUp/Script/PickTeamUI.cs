@@ -2,7 +2,6 @@
 using DG.Tweening;
 using Piratera.Config;
 using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -55,9 +54,9 @@ public class PickTeamUI : MonoBehaviour
             btn.interactable = times < config.limit_day;
         }
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        if (action == SFSAction.BUY_SLOT)
+        if (action == Action.BUY_SLOT)
         {
             SceneTransition.Instance.ShowWaiting(false);
             if (errorCode != SFSErrorCode.SUCCESS)
@@ -114,7 +113,7 @@ public class PickTeamUI : MonoBehaviour
             return;
         }
         SceneTransition.Instance.ShowWaiting(true);
-        NetworkController.Send(SFSAction.GET_LINEUP_SLOT_PACK);
+        NetworkController.Send(Action.GET_LINEUP_SLOT_PACK);
     }
     private void ShowTutBuildLineUp()
     {

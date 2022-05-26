@@ -1,5 +1,4 @@
 using DG.Tweening;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ public class PopupChangeAvatar : MonoBehaviour
     private void Awake()
     {
         NetworkController.Listen(OnReceiveServerAction);
-        NetworkController.Send(SFSAction.USER_LIST_AVT);
+        NetworkController.Send(Action.USER_LIST_AVT);
         Appear();
     }
     private void Appear()
@@ -42,13 +41,13 @@ public class PopupChangeAvatar : MonoBehaviour
     {
         NetworkController.RemoveListener(OnReceiveServerAction);
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
-        Debug.Log("SFSAction.USER_DETAIL: " + SFSAction.USER_DETAIL);
+        Debug.Log("SFSAction.USER_DETAIL: " + Action.USER_DETAIL);
         avt.ShowAvatar(UserData.Instance.AvtId);
         switch (action)
         {
-            case SFSAction.USER_LIST_AVT:
+            case Action.USER_LIST_AVT:
                 Debug.Log("errorCode: " + errorCode);
                 if (errorCode == SFSErrorCode.SUCCESS)
                 {
@@ -87,7 +86,7 @@ public class PopupChangeAvatar : MonoBehaviour
         UserData.Instance.AvtId = avt_id;
         SFSObject sfsObject = new SFSObject();
         sfsObject.PutInt("avt_id", avt_id);
-        NetworkController.Send(SFSAction.USER_CHANGE_AVT, sfsObject);
+        NetworkController.Send(Action.USER_CHANGE_AVT, sfsObject);
         GameEvent.UserAvtChange.Invoke();
     }
     public void Close()

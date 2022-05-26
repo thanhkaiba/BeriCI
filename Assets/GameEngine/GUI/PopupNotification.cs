@@ -13,8 +13,8 @@ namespace Piratera.GUI
         private Text textOk;
         [SerializeField]
         private Transform background;
-        private Action OKFunc;
-        private Action cancelFunc;
+        private System.Action OKFunc;
+        private System.Action cancelFunc;
         protected void Start()
         {
             Appear();
@@ -68,14 +68,14 @@ namespace Piratera.GUI
         {
             textNotification.text = text;
         }
-        public void SetData(string text, Action okFunc)
+        public void SetData(string text, System.Action okFunc)
         {
             SetData(text);
             OKFunc = okFunc;
             cancelFunc = okFunc;
         }
 
-        public void SetData(string text, string okText, Action okFunc)
+        public void SetData(string text, string okText, System.Action okFunc)
         {
             SetData(text);
             OKFunc = okFunc;
@@ -83,7 +83,7 @@ namespace Piratera.GUI
             cancelFunc = okFunc;
         }
 
-        public void SetData(string text, string okText, Action okAction, Action cancelAction)
+        public void SetData(string text, string okText, System.Action okAction, System.Action cancelAction)
         {
             SetData(text);
             OKFunc = okAction;

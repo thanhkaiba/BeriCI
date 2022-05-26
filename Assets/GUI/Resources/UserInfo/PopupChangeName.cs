@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Piratera.GUI;
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections;
 using System.Collections.Generic;
@@ -55,11 +54,11 @@ public class PopupChangeName : MonoBehaviour
     {
         NetworkController.RemoveListener(OnReceiveServerAction);
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
         {
-            case SFSAction.USER_CHANGE_NAME:
+            case Action.USER_CHANGE_NAME:
                 waitResponse = false; if (errorCode == SFSErrorCode.SUCCESS)
                 {
                     GuiManager.Instance.ShowPopupNotification("You've changed your name successfully");
@@ -99,7 +98,7 @@ public class PopupChangeName : MonoBehaviour
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutUtfString("new_name", text);
             Debug.Log("Send change name: " + text);
-            NetworkController.Send(SFSAction.USER_CHANGE_NAME, sfsObject);
+            NetworkController.Send(Action.USER_CHANGE_NAME, sfsObject);
             waitResponse = true;
         }
     }

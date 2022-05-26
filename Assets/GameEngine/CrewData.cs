@@ -1,4 +1,3 @@
-using Piratera.Network;
 using Sfs2X.Entities.Data;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,11 +17,11 @@ public class CrewData : Singleton<CrewData>
     }
     private void OnUpdateSquad()
     {
-        NetworkController.Send(SFSAction.TEAM_COMMIT, FightingTeam.ToSFSObject());
+        NetworkController.Send(Action.TEAM_COMMIT, FightingTeam.ToSFSObject());
     }
     public void OnConfirmSquad()
     {
-        NetworkController.Send(SFSAction.CONFIRM_LINEUP, FightingTeam.ToSFSObject());
+        NetworkController.Send(Action.CONFIRM_LINEUP, FightingTeam.ToSFSObject());
     }
     private void ResetData()
     {

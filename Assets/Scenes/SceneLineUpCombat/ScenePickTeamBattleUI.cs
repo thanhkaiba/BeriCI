@@ -1,5 +1,4 @@
 using Piratera.GUI;
-using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
@@ -45,12 +44,12 @@ public class ScenePickTeamBattleUI : MonoBehaviour
             textTeamBonus.text = "Team bonus: " + GameUtils.GetTeamBonus(TeamCombatPrepareData.Instance.YourFightingLine).ToString("N0"));
     }
 
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
         {
-            case SFSAction.PVE_SURRENDER:
-            case SFSAction.PVE_CONFIRM:
+            case Action.PVE_SURRENDER:
+            case Action.PVE_CONFIRM:
                 SceneTransition.Instance.ShowWaiting(false);
                 break;
         }
@@ -127,7 +126,7 @@ public class ScenePickTeamBattleUI : MonoBehaviour
             SceneTransition.Instance.ShowWaiting(true, false);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-            NetworkController.Send(SFSAction.PVE_CONFIRM, sfsObject);
+            NetworkController.Send(Action.PVE_CONFIRM, sfsObject);
         }
     }   
     public void Surrender()

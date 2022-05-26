@@ -1,6 +1,5 @@
 using DG.Tweening;
 using Piratera.Config;
-using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
@@ -42,9 +41,9 @@ namespace Piratera.GUI
             v = iconFind.transform.position - findTarget.transform.position;
         }
 
-        private void onReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+        private void onReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
         {
-            if ((action == SFSAction.PVE_PLAY || action == SFSAction.COMBAT_PREPARE) && errorCode != SFSErrorCode.SUCCESS)
+            if ((action == Action.PVE_PLAY || action == Action.COMBAT_PREPARE) && errorCode != SFSErrorCode.SUCCESS)
             {
                 lobby.OnStaminaChanged(StaminaData.Instance.Stamina, StaminaData.Instance.Stamina);
                 OnClose();
@@ -65,7 +64,7 @@ namespace Piratera.GUI
             if (StaminaData.Instance.Stamina < priceStamina)
             {
                 SceneTransition.Instance.ShowWaiting(true);
-                NetworkController.Send(SFSAction.GET_STAMINA_PACK);
+                NetworkController.Send(Action.GET_STAMINA_PACK);
             }
             else
             {
@@ -92,7 +91,7 @@ namespace Piratera.GUI
                     find.SetActive(true);
                 });
                 s.AppendInterval(1.5f);
-                s.AppendCallback(() => NetworkController.Send(SFSAction.PVE_PLAY));
+                s.AppendCallback(() => NetworkController.Send(Action.PVE_PLAY));
                 s.SetLink(gameObject).SetTarget(transform);
             }
         }

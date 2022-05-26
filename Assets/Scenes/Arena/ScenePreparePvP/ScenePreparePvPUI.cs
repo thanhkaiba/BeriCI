@@ -1,5 +1,4 @@
 using Piratera.GUI;
-using Piratera.Network;
 using Piratera.Sound;
 using Piratera.Utils;
 using Sfs2X.Entities.Data;
@@ -42,11 +41,11 @@ public class ScenePreparePvPUI : MonoBehaviour
         Input.multiTouchEnabled = false;
         NetworkController.Listen(OnReceiveServerAction);
     }
-    private void OnReceiveServerAction(SFSAction action, SFSErrorCode errorCode, ISFSObject packet)
+    private void OnReceiveServerAction(Action action, SFSErrorCode errorCode, ISFSObject packet)
     {
         switch (action)
         {
-            case SFSAction.PVP_CONFIRM:
+            case Action.PVP_CONFIRM:
                 SceneTransition.Instance.ShowWaiting(false);
                 break;
         }
@@ -116,7 +115,7 @@ public class ScenePreparePvPUI : MonoBehaviour
             SceneTransition.Instance.ShowWaiting(true, false);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamPvPCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
-            NetworkController.Send(SFSAction.PVP_CONFIRM, sfsObject);
+            NetworkController.Send(Action.PVP_CONFIRM, sfsObject);
         }
     }
     private void UpdateBattleFieldImage()

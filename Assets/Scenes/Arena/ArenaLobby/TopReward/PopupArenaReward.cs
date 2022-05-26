@@ -16,7 +16,7 @@ public class PopupArenaReward : MonoBehaviour
     {
         int ssId = PvPData.Instance.SeasonId;
         title.text = $"Season {ssId} - rewards";
-        var config = GlobalConfigs.ArenaRewards.GetSeason(ssId);
+        var config = GlobalConfigs.ArenaRewards.GetSeason(ssId+1);
         for (int i = 0; i < config.top_rewards.Length; i++)
         {
             var data = config.top_rewards[i];
