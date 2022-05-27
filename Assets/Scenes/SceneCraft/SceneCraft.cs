@@ -14,8 +14,7 @@ public class SceneCraft : MonoBehaviour
     int FRAG_NUM = 10;
     string focus_meta = "";
     string focus_type = ""; // sailor_fragment/poster_fragment
-
-    bool isCrafting = false; // wait response
+    int cache_cost = 0;
 
     [SerializeField]
     private Transform tableContent;
@@ -57,16 +56,13 @@ public class SceneCraft : MonoBehaviour
     {
         NetworkController.Send(Action.GET_USER_CLAIMED_FRAGMENTS);
         userBeri.text = StringUtils.ShortNumber(UserData.Instance.Beri, 6);
-        GameEvent.UserBeriChanged.AddListener(OnBeriChanged);
         Unfocus();
     }
-    private void OnDestroy()
+    private void DecreaseBeri(long decrease)
     {
-        GameEvent.UserBeriChanged.RemoveListener(OnBeriChanged);
-    }
-    private void OnBeriChanged(long oldValue, long newValue)
-    {
-        DoTweenUtils.UpdateNumber(userBeri, oldValue, newValue, x => StringUtils.ShortNumber(x, 6));
+        var oldValue = UserData.Instance.Beri;
+        UserData.Instance.Beri -= decrease;
+        DoTweenUtils.UpdateNumber(userBeri, oldValue, UserData.Instance.Beri, x => StringUtils.ShortNumber(x, 6));
     }
     public void ReceivedData(ISFSObject packet)
     {
@@ -188,10 +184,10 @@ public class SceneCraft : MonoBehaviour
         buttonCraft.SetActive(true);
         textUnfocus.SetActive(false);
 
-        var _cost = GetSailorCost(sailorName);
-        cost.text = _cost.ToString("N0");
-        cost.color = UserData.Instance.Beri >= _cost ? new Color(1, 1f, 1f, 1) : new Color(1, 0.6f, 0.6f, 1);
-        buttonCraft.GetComponent<Button>().interactable = UserData.Instance.Beri >= _cost && quantity >= FRAG_NUM;
+        cache_cost = GetSailorCost(sailorName);
+        cost.text = cache_cost.ToString("N0");
+        cost.color = UserData.Instance.Beri >= cache_cost ? new Color(1, 1f, 1f, 1) : new Color(1, 0.6f, 0.6f, 1);
+        buttonCraft.GetComponent<Button>().interactable = UserData.Instance.Beri >= cache_cost && quantity >= FRAG_NUM;
         focus_meta = sailorName;
         focus_type = "sailor_fragment";
     }
@@ -218,10 +214,10 @@ public class SceneCraft : MonoBehaviour
         }
         fragment.ShowInfocus(true);
         buttonCraft.SetActive(true);
-        var _cost = GetPosterCost(posterName);
-        cost.text = _cost.ToString("N0");
-        cost.color = UserData.Instance.Beri >= _cost ? new Color(1, 1f, 1f, 1) : new Color(1, 0.6f, 0.6f, 1);
-        buttonCraft.GetComponent<Button>().interactable = UserData.Instance.Beri >= _cost && quantity >= FRAG_NUM;
+        cache_cost = GetPosterCost(posterName);
+        cost.text = cache_cost.ToString("N0");
+        cost.color = UserData.Instance.Beri >= cache_cost ? new Color(1, 1f, 1f, 1) : new Color(1, 0.6f, 0.6f, 1);
+        buttonCraft.GetComponent<Button>().interactable = UserData.Instance.Beri >= cache_cost && quantity >= FRAG_NUM;
         focus_meta = posterName;
         focus_type = "poster_fragment";
     }
@@ -283,6 +279,8 @@ public class SceneCraft : MonoBehaviour
     }
     public void CraftSuccess(string sailorName, int quality)
     {
+        DecreaseBeri(cache_cost);
+
         SceneTransition.Instance.ShowWaiting(false);
         for (int i = 0; i < FRAG_NUM; i++)
         {
