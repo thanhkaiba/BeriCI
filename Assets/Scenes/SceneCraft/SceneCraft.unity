@@ -159,6 +159,7 @@ MonoBehaviour:
   focusing_frag: {fileID: 617625815}
   cost: {fileID: 979966484}
   userBeri: {fileID: 225556553}
+  textError: {fileID: 443780674}
   buttonCraft: {fileID: 2108787208}
   textUnfocus: {fileID: 234110595}
   focusing_poster: {fileID: 103550115}
