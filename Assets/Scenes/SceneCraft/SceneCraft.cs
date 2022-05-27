@@ -27,7 +27,7 @@ public class SceneCraft : MonoBehaviour
     [SerializeField]
     private Text cost, userBeri, textError;
     [SerializeField]
-    private GameObject buttonCraft, textUnfocus;
+    private GameObject buttonCraft, textUnfocus, textBlank;
     [SerializeField]
     private SpriteRenderer focusing_poster;
     public class SailorFragmentData
@@ -146,6 +146,7 @@ public class SceneCraft : MonoBehaviour
                 }
             }
         }
+        textBlank.SetActive(totalRow == 0);
     }
     public void BackToCrew()
     {
@@ -346,5 +347,10 @@ public class SceneCraft : MonoBehaviour
     public void CloseCongrat()
     {
         panelCongrat.SetActive(false);
+        foreach (Transform child in nodeSailor)
+            Destroy(child.gameObject);
+        focusing_frag.gameObject.SetActive(false);
+        buttonCraft.gameObject.SetActive(false);
+        textUnfocus.SetActive(true);
     }
 }
