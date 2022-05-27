@@ -40,7 +40,7 @@ namespace Piratera.GUI
 #else
             textVersion.text = "LIVE_" + Application.version;
 #endif
-            textName.text = UserData.Instance.Username.LimitLength(22);
+            textName.text = UserData.Instance.PVERank + UserData.Instance.Username.LimitLength(22);
             textUID.text =  UserData.Instance.UID.LimitLength(22);
             userAvatar.ShowAvatar(UserData.Instance.AvtId);
 

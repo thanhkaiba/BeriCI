@@ -117,17 +117,10 @@ public class ScenePickTeamBattleUI : MonoBehaviour
 
     public void SendStartCombat()
     {
-        if (!squaA.HaveSailor())
-        {
-            GuiManager.Instance.ShowPopupNotification("Need at least one Sailor");
-        }
-        else
-        {
             SceneTransition.Instance.ShowWaiting(true, false);
             SFSObject sfsObject = new SFSObject();
             sfsObject.PutSFSArray("fgl", TeamCombatPrepareData.Instance.YourFightingLine.ToSFSArray());
             NetworkController.Send(Action.PVE_CONFIRM, sfsObject);
-        }
     }   
     public void Surrender()
     {
