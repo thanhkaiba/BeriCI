@@ -185,6 +185,7 @@ public class GameUtils : UnityEngine.Object
         if (
             action == Action.USER_DETAIL
             || action == Action.USER_CHANGE_NAME
+            || action == Action.MERGE_FRAGMENTS
         ) return;
         // filter error here
         string description = EnumHelper.GetDescription(errorCode);

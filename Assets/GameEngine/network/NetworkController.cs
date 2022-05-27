@@ -622,6 +622,23 @@ public class NetworkController : MonoBehaviour
                     if (scene != null) scene.ReceivedData(packet);
                     break;
                 }
+            case Action.MERGE_FRAGMENTS:
+                {
+                    var scene = FindObjectOfType<SceneCraft>();
+                    if (errorCode == SFSErrorCode.SUCCESS)
+                    {
+                        if (scene != null) scene.CraftSuccess(
+                            packet.GetUtfString("name"),
+                            packet.GetInt("quality")
+                        );
+                        break;
+                    }
+                    else
+                    {
+                        if (scene != null) scene.CraftFail();
+                    }
+                    break;
+                }
         }
         if (errorCode != SFSErrorCode.SUCCESS)
         {

@@ -10,6 +10,8 @@ public class ItemRewards : MonoBehaviour
     private Image icon;
     [SerializeField]
     private Text title, quantity;
+    [SerializeField]
+    private GameObject focusing;
     public void ShowBeri(int _quantity, string _title = "")
     {
         if (_quantity >= 100000) quantity.text = StringUtils.ShortNumber(_quantity);
@@ -29,5 +31,26 @@ public class ItemRewards : MonoBehaviour
     {
         icon.sprite = Resources.Load<Sprite>("Icons/Poster/" + posterType);
         quantity.text = "x" + _quantity;
+    }
+    // craft
+    public void ShowSailorPiece(string root_name, string text, Color32 color)
+    {
+        icon.sprite = GameUtils.GetSailorAvt(root_name);
+        quantity.text = text;
+        quantity.color = color;
+    }
+    public void ShowPosterPiece(string posterType, string text, Color32 color)
+    {
+        icon.sprite = Resources.Load<Sprite>("Icons/Poster/" + posterType);
+        quantity.text = text;
+        quantity.color = color;
+    }
+    public void ShowInfocus(bool a = true)
+    {
+        focusing.SetActive(a);
+    }
+    public void SetQuantity(string t)
+    {
+        quantity.text = t;
     }
 }
