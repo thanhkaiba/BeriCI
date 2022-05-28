@@ -26,8 +26,8 @@ public class SceneLoadingUI : MonoBehaviour
         Debug.unityLogger.logEnabled = false;
 #endif
         LogServiceManager.Instance.SendLog(LogEvent.OPEN_GAME);
-
-        StartCoroutine(GetUrlAndPort());
+        
+        //StartCoroutine(GetUrlAndPort());
 
         if (!FB.IsInitialized)
         {
@@ -39,6 +39,8 @@ public class SceneLoadingUI : MonoBehaviour
             // Already initialized, signal an app activation App Event
             FB.ActivateApp();
         }
+        OnLoadSuccess();
+
 
     }
 
@@ -102,6 +104,7 @@ public class SceneLoadingUI : MonoBehaviour
 
     public void OnNeedUpdate(string url)
     {
+        OnLoadSuccess();
         DOTween.Kill(textInfo.transform);
         textInfo.gameObject.SetActive(false);
         PopupNewVersion popup = GuiManager.Instance.AddGui("Prefap/PopupNewVersion").GetComponent<PopupNewVersion>();
